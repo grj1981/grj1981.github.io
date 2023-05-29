@@ -21,20 +21,20 @@
     var CONFIG = {"hostname":"www.ai-fish.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="- Github使用之git回退到某个历史版本:1. 查找历史版本 &gt; 使用git log命令查看所有的历史版本，获取你git的某个历史版本的id,假设查到历史版本的id &gt; 是:fae6966548e3ae76cfa7f38a461c438cf75ba965  2. 恢复到历史版本 &gt; $ git reset --hard fae6966548e3ae76cfa7f38a46">
+  <meta name="description" content="- Python3 元组Python 的元组与列表类似，不同之处在于元组的元素不能修改。 元组使用小括号 ( )，列表使用方括号 [ ]。 元组创建很简单，只需要在括号中添加元素，并使用逗号隔开即可。  实例:  &gt;&gt;&gt; tup1 &#x3D; (&#39;Google&#39;, &#39;Runoob&#39;, 1997, 2000) &gt;&gt;&gt; tup2 &#x3D; (1,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git相关操作整理">
-<meta property="og:url" content="https://www.ai-fish.top/2023/05/16/git%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/index.html">
+<meta property="og:title" content="Python学习笔记【元组】">
+<meta property="og:url" content="https://www.ai-fish.top/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/index.html">
 <meta property="og:site_name" content="鱼乐无穷">
-<meta property="og:description" content="- Github使用之git回退到某个历史版本:1. 查找历史版本 &gt; 使用git log命令查看所有的历史版本，获取你git的某个历史版本的id,假设查到历史版本的id &gt; 是:fae6966548e3ae76cfa7f38a461c438cf75ba965  2. 恢复到历史版本 &gt; $ git reset --hard fae6966548e3ae76cfa7f38a46">
+<meta property="og:description" content="- Python3 元组Python 的元组与列表类似，不同之处在于元组的元素不能修改。 元组使用小括号 ( )，列表使用方括号 [ ]。 元组创建很简单，只需要在括号中添加元素，并使用逗号隔开即可。  实例:  &gt;&gt;&gt; tup1 &#x3D; (&#39;Google&#39;, &#39;Runoob&#39;, 1997, 2000) &gt;&gt;&gt; tup2 &#x3D; (1,">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-05-16T15:27:48.000Z">
-<meta property="article:modified_time" content="2023-05-23T04:04:48.356Z">
+<meta property="article:published_time" content="2023-05-29T06:02:36.000Z">
+<meta property="article:modified_time" content="2023-05-29T06:20:15.127Z">
 <meta property="article:author" content="淡水鱼">
-<meta property="article:tag" content="git操作">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://www.ai-fish.top/2023/05/16/git%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/">
+<link rel="canonical" href="https://www.ai-fish.top/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/">
 
 
 <script id="page-configurations">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>git相关操作整理 | 鱼乐无穷</title>
+  <title>Python学习笔记【元组】 | 鱼乐无穷</title>
   
 
 
@@ -182,7 +182,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.ai-fish.top/2023/05/16/git%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="https://www.ai-fish.top/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -195,7 +195,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          git相关操作整理
+          Python学习笔记【元组】
         </h1>
 
         <div class="post-meta">
@@ -204,19 +204,13 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-05-16 23:27:48" itemprop="dateCreated datePublished" datetime="2023-05-16T23:27:48+08:00">2023-05-16</time>
+              <time title="创建时间：2023-05-29 14:02:36 / 修改时间：14:20:15" itemprop="dateCreated datePublished" datetime="2023-05-29T14:02:36+08:00">2023-05-29</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-23 12:04:48" itemprop="dateModified" datetime="2023-05-23T12:04:48+08:00">2023-05-23</time>
-              </span>
 
           
-            <span id="/2023/05/16/git%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="git相关操作整理" title="阅读次数">
+            <span id="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【元组】" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -231,8 +225,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/05/16/git%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/05/16/git%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -247,122 +241,171 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <hr>
-<h2 id="Github使用之git回退到某个历史版本"><a href="#Github使用之git回退到某个历史版本" class="headerlink" title="- Github使用之git回退到某个历史版本:"></a>- Github使用之git回退到某个历史版本:</h2><p><strong>1. 查找历史版本</strong></p>
-<pre><code>&gt; 使用git log命令查看所有的历史版本，获取你git的某个历史版本的id,假设查到历史版本的id
-&gt; 是:fae6966548e3ae76cfa7f38a461c438cf75ba965
+        <h2 id="Python3-元组"><a href="#Python3-元组" class="headerlink" title="- Python3 元组"></a>- Python3 元组</h2><p>Python 的元组与列表类似，不同之处在于元组的元素不能修改。</p>
+<p>元组使用小括号 ( )，列表使用方括号 [ ]。</p>
+<p>元组创建很简单，只需要在括号中添加元素，并使用逗号隔开即可。</p>
+<blockquote>
+<p><strong>实例:</strong></p>
+</blockquote>
+<pre><code>&gt;&gt;&gt; tup1 = (&#39;Google&#39;, &#39;Runoob&#39;, 1997, 2000)
+&gt;&gt;&gt; tup2 = (1, 2, 3, 4, 5 )
+&gt;&gt;&gt; tup3 = &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;   #  不需要括号也可以
+&gt;&gt;&gt; type(tup3)
+&lt;class &#39;tuple&#39;&gt;
 </code></pre>
-<p><strong>2. 恢复到历史版本</strong></p>
-<pre><code>&gt; $ git reset --hard fae6966548e3ae76cfa7f38a461c438cf75ba965
+<p>创建空元组</p>
+<pre><code>tup1 = ()
 </code></pre>
-<p><strong>3. 把修改推到远程服务器</strong></p>
-<pre><code>&gt; $ git push -f -u origin master
+<p>元组中只包含一个元素时，需要在元素后面添加逗号 , ，否则括号会被当作运算符使用：</p>
+<blockquote>
+<p><strong>实例:</strong></p>
+</blockquote>
+<pre><code>&gt;&gt;&gt; tup1 = (50)
+&gt;&gt;&gt; type(tup1)     # 不加逗号，类型为整型
+&lt;class &#39;int&#39;&gt;
+
+&gt;&gt;&gt; tup1 = (50,)
+&gt;&gt;&gt; type(tup1)     # 加上逗号，类型为元组
+&lt;class &#39;tuple&#39;&gt;
+</code></pre>
+<p>元组与字符串类似，下标索引从 0 开始，可以进行截取，组合等。</p>
+<h2 id="访问元组"><a href="#访问元组" class="headerlink" title="- 访问元组"></a>- 访问元组</h2><p>元组可以使用下标索引来访问元组中的值，如下实例:</p>
+<blockquote>
+<p><strong>实例:</strong></p>
+</blockquote>
+<pre><code>tup1 = (&#39;Google&#39;, &#39;Runoob&#39;, 1997, 2000)
+tup2 = (1, 2, 3, 4, 5, 6, 7 )
  
+print (&quot;tup1[0]: &quot;, tup1[0])
+print (&quot;tup2[1:5]: &quot;, tup2[1:5])
 </code></pre>
-<hr>
-<h2 id="git如何避免”warning-LF-will-be-replaced-by-CRLF“提示？"><a href="#git如何避免”warning-LF-will-be-replaced-by-CRLF“提示？" class="headerlink" title="- git如何避免”warning: LF will be replaced by CRLF“提示？"></a>- git如何避免”warning: LF will be replaced by CRLF“提示？</h2><blockquote>
-<p>在Windows下使用Git进行修改提交时，控制台显示了如下输出内容：1warning: in the working copy of ‘styles&#x2F;global.css’, CRLF will be replaced by LF the next time Git touches it这是因为目前的Git仓库由于跨操作系统操作而引发了部分文件的换行符转换问题。具体来说，Linux、macOS、Windows操作系统对于文本文件的换行符有不同的标准，因此一个文件如果与上次操作的系统环境不同，Git自然会在文件对比时识别到标识符被修改，从而引发提示。LF和CR字符在不同的操作系统中被用作操作符，其中LF（0x0A, \n）的初始定义是将光标从当前位置下移一行，不涉及移动到该行行首位置的动作，而CR（0x0D, \r）的原始含义则是将光标前移到当前行的行首，不涉及下移的动作。Linux系操作系统（含macOS，虽然它在OSX时期曾经使用过CR）使用LF直接表示光标换行+移到行首；Windows组合使用了CRLF（0x0D 0x0A, \r\n），无疑是符合标准语义的做法。尽管这不是一个Bug或错误，但还是可以通过如下方式对Git进行配置，以避免在每次提交代码时显示：</p>
-</blockquote>
-<p> <strong>Linux&#x2F;macOS系统下在提交代码时自动将CRLF转换为LF</strong></p>
-<blockquote>
-</blockquote>
-<pre><code>&gt; $ git config --global core.autocrlf input
+<p>以上实例输出结果：</p>
+<pre><code>tup1[0]:  Google
+tup2[1:5]:  (2, 3, 4, 5)
 </code></pre>
-<p><strong>Windows系统下在提交代码时自动将LF转换为CRLF</strong></p>
-<blockquote>
-</blockquote>
-<pre><code>&gt; git config --global core.autocrlf true
-</code></pre>
-<hr>
 <span id="more"></span>
-
-
-<h2 id="git-remote-远程仓库介绍和用法"><a href="#git-remote-远程仓库介绍和用法" class="headerlink" title="- git remote 远程仓库介绍和用法:"></a>- git remote 远程仓库介绍和用法:</h2><ol>
-<li><p>远程仓库的作用</p>
+<h2 id="修改元组"><a href="#修改元组" class="headerlink" title="- 修改元组"></a>- 修改元组</h2><p>元组中的元素值是不允许修改的，但我们可以对元组进行连接组合，如下实例:</p>
 <blockquote>
-<p>使用Git的远程仓库可以实现团队协作开发。</p>
+<p><strong>实例：</strong></p>
 </blockquote>
-</li>
-<li><p>远程仓库的使用介绍</p>
+<pre><code>tup1 = (12, 34.56)
+tup2 = (&#39;abc&#39;, &#39;xyz&#39;)
+ 
+# 以下修改元组元素操作是非法的。
+# tup1[0] = 100
+ 
+# 创建一个新的元组
+tup3 = tup1 + tup2
+print (tup3)
+</code></pre>
+<p>以上实例输出结果：</p>
+<pre><code>(12, 34.56, &#39;abc&#39;, &#39;xyz&#39;)
+</code></pre>
+<h2 id="删除元组"><a href="#删除元组" class="headerlink" title="- 删除元组"></a>- 删除元组</h2><p>元组中的元素值是不允许删除的，但我们可以使用del语句来删除整个元组，如下实例:</p>
 <blockquote>
-<p>假设我们已经有了一个远程仓库，地址是：<a target="_blank" rel="noopener" href="https://github.com/CnPeng/test.git">https://github.com/CnPeng/test.git</a></p>
+<p><strong>实例:</strong></p>
 </blockquote>
-<ol>
-<li><p>克隆远程版本仓库到本地：</p>
-<p> git clone <a target="_blank" rel="noopener" href="https://github.com/CnPeng/test.git">https://github.com/CnPeng/test.git</a></p>
-</li>
-</ol>
-<p> 将<a target="_blank" rel="noopener" href="https://github.com/CnPeng/test.git%E7%89%88%E6%9C%AC%E5%BA%93%E4%B8%AD%E7%9A%84%E4%BB%A3%E7%A0%81%E5%85%8B%E9%9A%86%E5%88%B0%E6%9C%AC%E5%9C%B0">https://github.com/CnPeng/test.git版本库中的代码克隆到本地</a></p>
-<ol start="2">
-<li><p>查看远程仓库的信息</p>
-<p> git remote -v<br> git remote</p>
-</li>
-</ol>
-<p> 执行 git remote 命令之后 ，只是会单纯的列出所有远程仓库的名字，不会展示远程仓库的地址</p>
-</li>
-<li><p>将远程版本库中的最新代码同步到本地</p>
-<p> Git 提供了两种命令来完成此功能，分别是 fetch 和 pull，它们区别及用法如下所示:</p>
-<pre><code> git fetch origin master      
+<pre><code>tup = (&#39;Google&#39;, &#39;Runoob&#39;, 1997, 2000)
+ 
+print (tup)
+del tup
+print (&quot;删除后的元组 tup : &quot;)
+print (tup)
 </code></pre>
-<p> 执行这个命令后，就会将远程版本库上的代码同步到本地某个地方，不过同步下来的代码并不会 合并到任何分支上去，而是会存放在到一个 origin&#x2F;master 分支上,之后再调用 merge 命令将 origin&#x2F;master 分支上的修改合并到主分支上即可</p>
-<pre><code> git merge origin/master
- git pull origin master      
+<p>以上实例元组被删除后，输出变量会有异常信息，输出如下所示：</p>
+<pre><code>删除后的元组 tup : 
+Traceback (most recent call last):
+  File &quot;test.py&quot;, line 8, in &lt;module&gt;
+    print (tup)
+NameError: name &#39;tup&#39; is not defined
 </code></pre>
-<p> pull 命令则是相当于将 fetch 和 merge 这两个命令放在一起执行了，它可以从远程版 本库上获取最新的代码并且合并到本地，<br> 将远程的某个分支上的代码拉到本地 </p>
-<pre><code> git pull [remote-name] [branch-name] 
+<h2 id="元组运算符"><a href="#元组运算符" class="headerlink" title="- 元组运算符"></a>- 元组运算符</h2><p>与字符串一样，元组之间可以使用 +、+&#x3D;和 * 号进行运算。这就意味着他们可以组合和复制，运算后会生成一个新的元组。</p>
+<p>Python 表达式	结果	描述</p>
+<pre><code>len((1, 2, 3))	3	计算元素个数
+
+&gt;&gt;&gt; a = (1, 2, 3)
+&gt;&gt;&gt; b = (4, 5, 6)
+&gt;&gt;&gt; c = a+b
+&gt;&gt;&gt; c
+(1, 2, 3, 4, 5, 6)	(1, 2, 3, 4, 5, 6)	连接，c 就是一个新的元组，它包含了 a 和 b 中的所有元素。
+
+&gt;&gt;&gt; a = (1, 2, 3)
+&gt;&gt;&gt; b = (4, 5, 6)
+&gt;&gt;&gt; a += b
+&gt;&gt;&gt; a
+(1, 2, 3, 4, 5, 6)	(1, 2, 3, 4, 5, 6)	连接，a 就变成了一个新的元组，它包含了 a 和 b 中的所有元素。
+
+(&#39;Hi!&#39;,) * 4	(&#39;Hi!&#39;, &#39;Hi!&#39;, &#39;Hi!&#39;, &#39;Hi!&#39;)	复制
+
+3 in (1, 2, 3)	True	元素是否存在
+
+for x in (1, 2, 3): 
+    print (x, end=&quot; &quot;)	1 2 3	迭代
 </code></pre>
-<p> 这个 remote-name 是远程仓库的代名称，branch-name 是分支名<br> 实际使用中，需要先通过pull将代码拉到本地，处理完冲突之后，再执行push</p>
-</li>
-<li><p>将修改后的代码同步到远程版本库</p>
-<pre><code> git push origin master      
+<h2 id="元组索引，截取"><a href="#元组索引，截取" class="headerlink" title="- 元组索引，截取"></a>- 元组索引，截取</h2><p>因为元组也是一个序列，所以我们可以访问元组中的指定位置的元素，也可以截取索引中的一段元素，如下所示：</p>
+<p>元组：</p>
+<p>tup &#x3D; (‘Google’, ‘Runoob’, ‘Taobao’, ‘Wiki’, ‘Weibo’,’Weixin’)</p>
+<p>Python 表达式	结果	描述</p>
+<pre><code>tup[1]	&#39;Runoob&#39;	读取第二个元素
+tup[-2]	&#39;Weibo&#39;	反向读取，读取倒数第二个元素
+tup[1:]	(&#39;Runoob&#39;, &#39;Taobao&#39;, &#39;Wiki&#39;, &#39;Weibo&#39;, &#39;Weixin&#39;)	截取元素，从第二个开始后的所有元素。
+tup[1:4]	(&#39;Runoob&#39;, &#39;Taobao&#39;, &#39;Wiki&#39;)	截取元素，从第二个开始到第四个元素（索引为 3）。
 </code></pre>
-<p> 其中 origin 是远程版本库的 Git 地址的代名称，master 部分指定的是同步到哪一个分 支上，上述命令就完成了将本地代码同步到 <a target="_blank" rel="noopener" href="https://github.com/CnPeng/test.git">https://github.com/CnPeng/test.git</a> 这个版本库的 master 分支上的功能。</p>
-<p> 将远程的某个分支上的代码拉到本地 </p>
-<pre><code> git pull [remote-name] [branch-name] 
+<p>运行实例如下：</p>
+<blockquote>
+<p><strong>实例：</strong></p>
+</blockquote>
+<pre><code>&gt;&gt;&gt; tup = (&#39;Google&#39;, &#39;Runoob&#39;, &#39;Taobao&#39;, &#39;Wiki&#39;, &#39;Weibo&#39;,&#39;Weixin&#39;)
+&gt;&gt;&gt; tup[1]
+&#39;Runoob&#39;
+&gt;&gt;&gt; tup[-2]
+&#39;Weibo&#39;
+&gt;&gt;&gt; tup[1:]
+(&#39;Runoob&#39;, &#39;Taobao&#39;, &#39;Wiki&#39;, &#39;Weibo&#39;, &#39;Weixin&#39;)
+&gt;&gt;&gt; tup[1:4]
+(&#39;Runoob&#39;, &#39;Taobao&#39;, &#39;Wiki&#39;)
+&gt;&gt;&gt;
 </code></pre>
-<p> 这个 remote-name 是远程仓库的代名称，branch-name 是分支名</p>
-</li>
-<li><p>添加远程仓库</p>
-<pre><code> git remote add [shortname] [url]
+<h2 id="元组内置函数"><a href="#元组内置函数" class="headerlink" title="- 元组内置函数"></a>- 元组内置函数</h2><p>Python元组包含了以下内置函数</p>
+<p>序号	方法及描述	实例</p>
+<pre><code>1	len(tuple)
+计算元组元素个数。	
+&gt;&gt;&gt; tuple1 = (&#39;Google&#39;, &#39;Runoob&#39;, &#39;Taobao&#39;)
+&gt;&gt;&gt; len(tuple1)
+3
+&gt;&gt;&gt; 
+2	max(tuple)
+返回元组中元素最大值。	
+&gt;&gt;&gt; tuple2 = (&#39;5&#39;, &#39;4&#39;, &#39;8&#39;)
+&gt;&gt;&gt; max(tuple2)
+&#39;8&#39;
+&gt;&gt;&gt; 
+3	min(tuple)
+返回元组中元素最小值。	
+&gt;&gt;&gt; tuple2 = (&#39;5&#39;, &#39;4&#39;, &#39;8&#39;)
+&gt;&gt;&gt; min(tuple2)
+&#39;4&#39;
+&gt;&gt;&gt; 
+4	tuple(iterable)
+将可迭代系列转换为元组。	
+&gt;&gt;&gt; list1= [&#39;Google&#39;, &#39;Taobao&#39;, &#39;Runoob&#39;, &#39;Baidu&#39;]
+&gt;&gt;&gt; tuple1=tuple(list1)
+&gt;&gt;&gt; tuple1
+(&#39;Google&#39;, &#39;Taobao&#39;, &#39;Runoob&#39;, &#39;Baidu&#39;)
 </code></pre>
-<p> 如：git remote add dev git:&#x2F;&#x2F;github.com&#x2F;CnPeng&#x2F;test.git ,这样，就可以用字符串 dev 来代指该仓库地址。在使用 git remote -v 查看仓库列表的时候，就会有一个 dev 的仓库列表。</p>
-</li>
-<li><p>查看远程仓库信息</p>
-<pre><code> git remote show [shortname] 
+<h2 id="关于元组是不可变的"><a href="#关于元组是不可变的" class="headerlink" title="- 关于元组是不可变的"></a>- 关于元组是不可变的</h2><p>所谓元组的不可变指的是元组所指向的内存中的内容不可变。</p>
+<pre><code>&gt;&gt;&gt; tup = (&#39;r&#39;, &#39;u&#39;, &#39;n&#39;, &#39;o&#39;, &#39;o&#39;, &#39;b&#39;)
+&gt;&gt;&gt; tup[0] = &#39;g&#39;     # 不支持修改元素
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: &#39;tuple&#39; object does not support item assignment
+&gt;&gt;&gt; id(tup)     # 查看内存地址
+4440687904
+&gt;&gt;&gt; tup = (1,2,3)
+&gt;&gt;&gt; id(tup)
+4441088800    # 内存地址不一样了
 </code></pre>
-<p> 查看某个远程仓库的详细信息,如：git remote show origin 将会显示出shortname为origin的远程仓库的详信息</p>
-</li>
-<li><p>重命名远程仓库</p>
-<pre><code> git remote rename [old-name] [new-name] 
-</code></pre>
-<p> 将远程仓库重新命名，如：git remote dev cnpeng ,执行这句代码之后，就会将shortname为dev的远程仓库重新命名为 cnpeng</p>
-</li>
-<li><p>删除远程仓库（解除与远程仓库的关系）</p>
-<pre><code> git remote rm [shortname]
-</code></pre>
-</li>
-</ol>
-<hr>
-<h2 id="连接Github与本地"><a href="#连接Github与本地" class="headerlink" title="- 连接Github与本地"></a>- 连接Github与本地</h2><p>首先右键打开git bash，用户名和邮箱根据你注册github的信息自行修改，然后输入下面命令：</p>
-<pre><code>git config --global user.name &quot;godweiyang&quot;
-git config --global user.email &quot;792321264@qq.com&quot;
-</code></pre>
-<p>然后生成密钥SSH key：</p>
-<pre><code>ssh-keygen -t rsa -C &quot;792321264@qq.com&quot;
-</code></pre>
-<p>git bash中输入</p>
-<pre><code>cat ~/.ssh/id_rsa.pub
-</code></pre>
-<p>打开github，在头像下面点击settings，再点击SSH and GPG keys，新建一个SSH，名字随便。将输出的内容复制到框中，点击确定保存。</p>
-<p>输入ssh -T <a href="mailto:&#x67;&#105;&#x74;&#x40;&#x67;&#x69;&#116;&#x68;&#x75;&#x62;&#46;&#x63;&#111;&#109;">&#x67;&#105;&#x74;&#x40;&#x67;&#x69;&#116;&#x68;&#x75;&#x62;&#46;&#x63;&#111;&#109;</a>，如果出现你的用户名，验证成功。</p>
-<p>打开博客根目录下的_config.yml文件，这是博客的配置文件，在这里你可以修改与博客相关的各种信息。</p>
-<p>修改最后一行的配置：</p>
-<pre><code>deploy:
-  type: git
-  repository: https://github.com/godweiyang/godweiyang.github.io
-  branch: master
-</code></pre>
-<p>repository修改为你自己的github项目地址。</p>
+<p>从以上实例可以看出，重新赋值的元组 tup，绑定到新的对象了，不是修改了原来的对象。</p>
 
     </div>
 
@@ -372,7 +415,7 @@ git config --global user.email &quot;792321264@qq.com&quot;
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/git%E6%93%8D%E4%BD%9C/" rel="tag"># git操作</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
           </div>
 
         
@@ -381,12 +424,12 @@ git config --global user.email &quot;792321264@qq.com&quot;
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/05/11/%E6%80%8E%E4%B9%88%E9%81%BF%E5%85%8D%E8%9E%83%E8%9F%B9%E9%97%B9%E7%AA%9D/" rel="prev" title="怎么避免螃蟹闹窝">
-      <i class="fa fa-chevron-left"></i> 怎么避免螃蟹闹窝
+    <a href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%88%97%E8%A1%A8%E3%80%91/" rel="prev" title="Python学习笔记【列表】">
+      <i class="fa fa-chevron-left"></i> Python学习笔记【列表】
     </a></div>
       <div class="post-nav-item">
-    <a href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/" rel="next" title="Python学习笔记【字符串】">
-      Python学习笔记【字符串】 <i class="fa fa-chevron-right"></i>
+    <a href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E5%85%B8%E3%80%91/" rel="next" title="Python学习笔记【字典】">
+      Python学习笔记【字典】 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -447,7 +490,7 @@ git config --global user.email &quot;792321264@qq.com&quot;
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Github%E4%BD%BF%E7%94%A8%E4%B9%8Bgit%E5%9B%9E%E9%80%80%E5%88%B0%E6%9F%90%E4%B8%AA%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">- Github使用之git回退到某个历史版本:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E2%80%9Dwarning-LF-will-be-replaced-by-CRLF%E2%80%9C%E6%8F%90%E7%A4%BA%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">- git如何避免”warning: LF will be replaced by CRLF“提示？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-remote-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E4%BB%8B%E7%BB%8D%E5%92%8C%E7%94%A8%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">- git remote 远程仓库介绍和用法:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5Github%E4%B8%8E%E6%9C%AC%E5%9C%B0"><span class="nav-number">4.</span> <span class="nav-text">- 连接Github与本地</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python3-%E5%85%83%E7%BB%84"><span class="nav-number">1.</span> <span class="nav-text">- Python3 元组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E5%85%83%E7%BB%84"><span class="nav-number">2.</span> <span class="nav-text">- 访问元组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%85%83%E7%BB%84"><span class="nav-number">3.</span> <span class="nav-text">- 修改元组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%85%83%E7%BB%84"><span class="nav-number">4.</span> <span class="nav-text">- 删除元组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E7%BB%84%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.</span> <span class="nav-text">- 元组运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E7%BB%84%E7%B4%A2%E5%BC%95%EF%BC%8C%E6%88%AA%E5%8F%96"><span class="nav-number">6.</span> <span class="nav-text">- 元组索引，截取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E7%BB%84%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="nav-number">7.</span> <span class="nav-text">- 元组内置函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%85%83%E7%BB%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84"><span class="nav-number">8.</span> <span class="nav-text">- 关于元组是不可变的</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
