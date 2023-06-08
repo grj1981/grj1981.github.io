@@ -20,15 +20,15 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"www.ai-fish.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
-  <meta name="description" content="- Python3 元组Python 的元组与列表类似，不同之处在于元组的元素不能修改。 元组使用小括号 ( )，列表使用方括号 [ ]。 元组创建很简单，只需要在括号中添加元素，并使用逗号隔开即可。  实例:  &gt;&gt;&gt; tup1 &#x3D; (&#39;Google&#39;, &#39;Runoob&#39;, 1997, 2000) &gt;&gt;&gt; tup2 &#x3D; (1,">
+  <meta name="description" content="- Python3 元组Python 的元组与列表类似，不同之处在于元组的元素不能修改。 元组使用小括号 ( )，列表使用方括号 [ ]。 元组创建很简单，只需要在括号中添加元素，并使用逗号隔开即可。  实例:  12345&gt;&gt;&gt; tup1 &#x3D; (&amp;#x27;Google&amp;#x27;, &amp;#x27;Runoob&amp;#x27;, 1997, 2000)&gt;&gt;&gt; tup">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python学习笔记【元组】">
 <meta property="og:url" content="https://www.ai-fish.top/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/index.html">
 <meta property="og:site_name" content="鱼乐无穷">
-<meta property="og:description" content="- Python3 元组Python 的元组与列表类似，不同之处在于元组的元素不能修改。 元组使用小括号 ( )，列表使用方括号 [ ]。 元组创建很简单，只需要在括号中添加元素，并使用逗号隔开即可。  实例:  &gt;&gt;&gt; tup1 &#x3D; (&#39;Google&#39;, &#39;Runoob&#39;, 1997, 2000) &gt;&gt;&gt; tup2 &#x3D; (1,">
+<meta property="og:description" content="- Python3 元组Python 的元组与列表类似，不同之处在于元组的元素不能修改。 元组使用小括号 ( )，列表使用方括号 [ ]。 元组创建很简单，只需要在括号中添加元素，并使用逗号隔开即可。  实例:  12345&gt;&gt;&gt; tup1 &#x3D; (&amp;#x27;Google&amp;#x27;, &amp;#x27;Runoob&amp;#x27;, 1997, 2000)&gt;&gt;&gt; tup">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-29T06:02:36.000Z">
-<meta property="article:modified_time" content="2023-06-01T03:43:41.068Z">
+<meta property="article:modified_time" content="2023-06-08T10:09:52.860Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -208,7 +208,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-01 11:43:41" itemprop="dateModified" datetime="2023-06-01T11:43:41+08:00">2023-06-01</time>
+                <time title="修改时间：2023-06-08 18:09:52" itemprop="dateModified" datetime="2023-06-08T18:09:52+08:00">2023-06-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -258,11 +258,7 @@
 <blockquote>
 <p><strong>实例:</strong></p>
 </blockquote>
-<pre><code>&gt;&gt;&gt; tup1 = (&#39;Google&#39;, &#39;Runoob&#39;, 1997, 2000)
-&gt;&gt;&gt; tup2 = (1, 2, 3, 4, 5 )
-&gt;&gt;&gt; tup3 = &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;   #  不需要括号也可以
-&gt;&gt;&gt; type(tup3)
-&lt;class &#39;tuple&#39;&gt;
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tup1 = (&#x27;Google&#x27;, &#x27;Runoob&#x27;, 1997, 2000)</span><br><span class="line">&gt;&gt;&gt; tup2 = (1, 2, 3, 4, 5 )</span><br><span class="line">&gt;&gt;&gt; tup3 = &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;   #  不需要括号也可以</span><br><span class="line">&gt;&gt;&gt; type(tup3)</span><br><span class="line">&lt;class &#x27;tuple&#x27;&gt;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>创建空元组</p>
 <pre><code>tup1 = ()
@@ -271,24 +267,14 @@
 <blockquote>
 <p><strong>实例:</strong></p>
 </blockquote>
-<pre><code>&gt;&gt;&gt; tup1 = (50)
-&gt;&gt;&gt; type(tup1)     # 不加逗号，类型为整型
-&lt;class &#39;int&#39;&gt;
-
-&gt;&gt;&gt; tup1 = (50,)
-&gt;&gt;&gt; type(tup1)     # 加上逗号，类型为元组
-&lt;class &#39;tuple&#39;&gt;
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tup1 = (50)</span><br><span class="line">&gt;&gt;&gt; type(tup1)     # 不加逗号，类型为整型</span><br><span class="line">&lt;class &#x27;int&#x27;&gt;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; tup1 = (50,)</span><br><span class="line">&gt;&gt;&gt; type(tup1)     # 加上逗号，类型为元组</span><br><span class="line">&lt;class &#x27;tuple&#x27;&gt;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>元组与字符串类似，下标索引从 0 开始，可以进行截取，组合等。</p>
 <h2 id="访问元组"><a href="#访问元组" class="headerlink" title="- 访问元组"></a>- 访问元组</h2><p>元组可以使用下标索引来访问元组中的值，如下实例:</p>
 <blockquote>
 <p><strong>实例:</strong></p>
 </blockquote>
-<pre><code>tup1 = (&#39;Google&#39;, &#39;Runoob&#39;, 1997, 2000)
-tup2 = (1, 2, 3, 4, 5, 6, 7 )
- 
-print (&quot;tup1[0]: &quot;, tup1[0])
-print (&quot;tup2[1:5]: &quot;, tup2[1:5])
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tup1 = (&#x27;Google&#x27;, &#x27;Runoob&#x27;, 1997, 2000)</span><br><span class="line">tup2 = (1, 2, 3, 4, 5, 6, 7 )</span><br><span class="line"> </span><br><span class="line">print (&quot;tup1[0]: &quot;, tup1[0])</span><br><span class="line">print (&quot;tup2[1:5]: &quot;, tup2[1:5])</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>以上实例输出结果：</p>
 <pre><code>tup1[0]:  Google
@@ -299,15 +285,7 @@ tup2[1:5]:  (2, 3, 4, 5)
 <blockquote>
 <p><strong>实例：</strong></p>
 </blockquote>
-<pre><code>tup1 = (12, 34.56)
-tup2 = (&#39;abc&#39;, &#39;xyz&#39;)
- 
-# 以下修改元组元素操作是非法的。
-# tup1[0] = 100
- 
-# 创建一个新的元组
-tup3 = tup1 + tup2
-print (tup3)
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tup1 = (12, 34.56)</span><br><span class="line">tup2 = (&#x27;abc&#x27;, &#x27;xyz&#x27;)</span><br><span class="line"> </span><br><span class="line"># 以下修改元组元素操作是非法的。</span><br><span class="line"># tup1[0] = 100</span><br><span class="line"> </span><br><span class="line"># 创建一个新的元组</span><br><span class="line">tup3 = tup1 + tup2</span><br><span class="line">print (tup3)</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>以上实例输出结果：</p>
 <pre><code>(12, 34.56, &#39;abc&#39;, &#39;xyz&#39;)
@@ -316,12 +294,7 @@ print (tup3)
 <blockquote>
 <p><strong>实例:</strong></p>
 </blockquote>
-<pre><code>tup = (&#39;Google&#39;, &#39;Runoob&#39;, 1997, 2000)
- 
-print (tup)
-del tup
-print (&quot;删除后的元组 tup : &quot;)
-print (tup)
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tup = (&#x27;Google&#x27;, &#x27;Runoob&#x27;, 1997, 2000)</span><br><span class="line"> </span><br><span class="line">print (tup)</span><br><span class="line">del tup</span><br><span class="line">print (&quot;删除后的元组 tup : &quot;)</span><br><span class="line">print (tup)</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>以上实例元组被删除后，输出变量会有异常信息，输出如下所示：</p>
 <pre><code>删除后的元组 tup : 
@@ -366,16 +339,7 @@ tup[1:4]	(&#39;Runoob&#39;, &#39;Taobao&#39;, &#39;Wiki&#39;)	截取元素，从
 <blockquote>
 <p><strong>实例：</strong></p>
 </blockquote>
-<pre><code>&gt;&gt;&gt; tup = (&#39;Google&#39;, &#39;Runoob&#39;, &#39;Taobao&#39;, &#39;Wiki&#39;, &#39;Weibo&#39;,&#39;Weixin&#39;)
-&gt;&gt;&gt; tup[1]
-&#39;Runoob&#39;
-&gt;&gt;&gt; tup[-2]
-&#39;Weibo&#39;
-&gt;&gt;&gt; tup[1:]
-(&#39;Runoob&#39;, &#39;Taobao&#39;, &#39;Wiki&#39;, &#39;Weibo&#39;, &#39;Weixin&#39;)
-&gt;&gt;&gt; tup[1:4]
-(&#39;Runoob&#39;, &#39;Taobao&#39;, &#39;Wiki&#39;)
-&gt;&gt;&gt;
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tup = (&#x27;Google&#x27;, &#x27;Runoob&#x27;, &#x27;Taobao&#x27;, &#x27;Wiki&#x27;, &#x27;Weibo&#x27;,&#x27;Weixin&#x27;)</span><br><span class="line">&gt;&gt;&gt; tup[1]</span><br><span class="line">&#x27;Runoob&#x27;</span><br><span class="line">&gt;&gt;&gt; tup[-2]</span><br><span class="line">&#x27;Weibo&#x27;</span><br><span class="line">&gt;&gt;&gt; tup[1:]</span><br><span class="line">(&#x27;Runoob&#x27;, &#x27;Taobao&#x27;, &#x27;Wiki&#x27;, &#x27;Weibo&#x27;, &#x27;Weixin&#x27;)</span><br><span class="line">&gt;&gt;&gt; tup[1:4]</span><br><span class="line">(&#x27;Runoob&#x27;, &#x27;Taobao&#x27;, &#x27;Wiki&#x27;)</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <h2 id="元组内置函数"><a href="#元组内置函数" class="headerlink" title="- 元组内置函数"></a>- 元组内置函数</h2><p>Python元组包含了以下内置函数</p>
 <p>序号	方法及描述	实例</p>
@@ -405,16 +369,7 @@ tup[1:4]	(&#39;Runoob&#39;, &#39;Taobao&#39;, &#39;Wiki&#39;)	截取元素，从
 (&#39;Google&#39;, &#39;Taobao&#39;, &#39;Runoob&#39;, &#39;Baidu&#39;)
 </code></pre>
 <h2 id="关于元组是不可变的"><a href="#关于元组是不可变的" class="headerlink" title="- 关于元组是不可变的"></a>- 关于元组是不可变的</h2><p>所谓元组的不可变指的是元组所指向的内存中的内容不可变。</p>
-<pre><code>&gt;&gt;&gt; tup = (&#39;r&#39;, &#39;u&#39;, &#39;n&#39;, &#39;o&#39;, &#39;o&#39;, &#39;b&#39;)
-&gt;&gt;&gt; tup[0] = &#39;g&#39;     # 不支持修改元素
-Traceback (most recent call last):
-  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
-TypeError: &#39;tuple&#39; object does not support item assignment
-&gt;&gt;&gt; id(tup)     # 查看内存地址
-4440687904
-&gt;&gt;&gt; tup = (1,2,3)
-&gt;&gt;&gt; id(tup)
-4441088800    # 内存地址不一样了
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tup = (&#x27;r&#x27;, &#x27;u&#x27;, &#x27;n&#x27;, &#x27;o&#x27;, &#x27;o&#x27;, &#x27;b&#x27;)</span><br><span class="line">&gt;&gt;&gt; tup[0] = &#x27;g&#x27;     # 不支持修改元素</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">TypeError: &#x27;tuple&#x27; object does not support item assignment</span><br><span class="line">&gt;&gt;&gt; id(tup)     # 查看内存地址</span><br><span class="line">4440687904</span><br><span class="line">&gt;&gt;&gt; tup = (1,2,3)</span><br><span class="line">&gt;&gt;&gt; id(tup)</span><br><span class="line">4441088800    # 内存地址不一样了</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>从以上实例可以看出，重新赋值的元组 tup，绑定到新的对象了，不是修改了原来的对象。</p>
 

@@ -28,7 +28,7 @@
 <meta property="og:description" content="- Python3 数字(Number)Python 数字数据类型用于存储数值。 数据类型是不允许改变的,这就意味着如果改变数字数据类型的值，将重新分配内存空间。 以下实例在变量赋值时 Number 对象将被创建： var1 &#x3D; 1 var2 &#x3D; 10  您也可以使用del语句删除一些数字对象的引用。 del语句的语法是： del var1[,var2[,var3[....,varN]]]  您可">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-29T07:27:55.000Z">
-<meta property="article:modified_time" content="2023-06-01T03:43:45.835Z">
+<meta property="article:modified_time" content="2023-06-08T10:12:59.320Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -208,7 +208,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-01 11:43:45" itemprop="dateModified" datetime="2023-06-01T11:43:45+08:00">2023-06-01</time>
+                <time title="修改时间：2023-06-08 18:12:59" itemprop="dateModified" datetime="2023-06-08T18:12:59+08:00">2023-06-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -276,22 +276,7 @@ del var_a, var_b
 </li>
 </ul>
 <p>我们可以使用十六进制和八进制来代表整数：</p>
-<pre><code>&gt;&gt;&gt; number = 0xA0F # 十六进制
-&gt;&gt;&gt; number
-2575
-
-&gt;&gt;&gt; number=0o37 # 八进制
-&gt;&gt;&gt; number
-31
-
-int	float	complex
-10	0.0	3.14j
-100	15.20	45.j
--786	-21.9	9.322e-36j
-080	32.3e+18	.876j
--0490	-90.	-.6545+0J
--0x260	-32.54e100	3e+26J
-0x69	70.2E-12	4.53e-7j
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; number = 0xA0F # 十六进制</span><br><span class="line">&gt;&gt;&gt; number</span><br><span class="line">2575</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; number=0o37 # 八进制</span><br><span class="line">&gt;&gt;&gt; number</span><br><span class="line">31</span><br><span class="line"></span><br><span class="line">int	float	complex</span><br><span class="line">10	0.0	3.14j</span><br><span class="line">100	15.20	45.j</span><br><span class="line">-786	-21.9	9.322e-36j</span><br><span class="line">080	32.3e+18	.876j</span><br><span class="line">-0490	-90.	-.6545+0J</span><br><span class="line">-0x260	-32.54e100	3e+26J</span><br><span class="line">0x69	70.2E-12	4.53e-7j</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>Python支持复数，复数由实数部分和虚数部分构成，可以用a + bj,或者complex(a,b)表示， 复数的实部a和虚部b都是浮点型。</p>
 <span id="more"></span>
@@ -307,53 +292,24 @@ int	float	complex
 </li>
 </ul>
 <p>以下实例将浮点数变量 a 转换为整数：</p>
-<pre><code>&gt;&gt;&gt; a = 1.0
-&gt;&gt;&gt; int(a)
-1
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a = 1.0</span><br><span class="line">&gt;&gt;&gt; int(a)</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
 </code></pre>
 <h2 id="Python-数字运算"><a href="#Python-数字运算" class="headerlink" title="- Python 数字运算"></a>- Python 数字运算</h2><p>Python 解释器可以作为一个简单的计算器，您可以在解释器里输入一个表达式，它将输出表达式的值。</p>
 <p>表达式的语法很直白： +, -, * 和 &#x2F;, 和其它语言（如Pascal或C）里一样。例如：</p>
-<pre><code>&gt;&gt;&gt; 2 + 2
-4
-&gt;&gt;&gt; 50 - 5*6
-20
-&gt;&gt;&gt; (50 - 5*6) / 4
-5.0
-&gt;&gt;&gt; 8 / 5  # 总是返回一个浮点数
-1.6
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 2 + 2</span><br><span class="line">4</span><br><span class="line">&gt;&gt;&gt; 50 - 5*6</span><br><span class="line">20</span><br><span class="line">&gt;&gt;&gt; (50 - 5*6) / 4</span><br><span class="line">5.0</span><br><span class="line">&gt;&gt;&gt; 8 / 5  # 总是返回一个浮点数</span><br><span class="line">1.6</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>注意：在不同的机器上浮点运算的结果可能会不一样。</p>
 <p>在整数除法中，除法 &#x2F; 总是返回一个浮点数，如果只想得到整数的结果，丢弃可能的分数部分，可以使用运算符 &#x2F;&#x2F; ：</p>
-<pre><code>&gt;&gt;&gt; 17 / 3  # 整数除法返回浮点型
-5.666666666666667
-&gt;&gt;&gt;
-&gt;&gt;&gt; 17 // 3  # 整数除法返回向下取整后的结果
-5
-&gt;&gt;&gt; 17 % 3  # ％操作符返回除法的余数
-2
-&gt;&gt;&gt; 5 * 3 + 2 
-17
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 17 / 3  # 整数除法返回浮点型</span><br><span class="line">5.666666666666667</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">&gt;&gt;&gt; 17 // 3  # 整数除法返回向下取整后的结果</span><br><span class="line">5</span><br><span class="line">&gt;&gt;&gt; 17 % 3  # ％操作符返回除法的余数</span><br><span class="line">2</span><br><span class="line">&gt;&gt;&gt; 5 * 3 + 2 </span><br><span class="line">17</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>注意：&#x2F;&#x2F; 得到的并不一定是整数类型的数，它与分母分子的数据类型有关系。</p>
-<pre><code>&gt;&gt;&gt; 7//2
-3
-&gt;&gt;&gt; 7.0//2
-3.0
-&gt;&gt;&gt; 7//2.0
-3.0
-&gt;&gt;&gt; 
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 7//2</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; 7.0//2</span><br><span class="line">3.0</span><br><span class="line">&gt;&gt;&gt; 7//2.0</span><br><span class="line">3.0</span><br><span class="line">&gt;&gt;&gt; </span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>等号 &#x3D; 用于给变量赋值。赋值之后，除了下一个提示符，解释器不会显示任何结果。</p>
-<pre><code>&gt;&gt;&gt; width = 20
-&gt;&gt;&gt; height = 5*9
-&gt;&gt;&gt; width * height
-900
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; width = 20</span><br><span class="line">&gt;&gt;&gt; height = 5*9</span><br><span class="line">&gt;&gt;&gt; width * height</span><br><span class="line">900</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>Python 可以使用 ** 操作来进行幂运算：</p>
-<pre><code>&gt;&gt;&gt; 5 ** 2  # 5 的平方
-25
-&gt;&gt;&gt; 2 ** 7  # 2的7次方
-128
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 5 ** 2  # 5 的平方</span><br><span class="line">25</span><br><span class="line">&gt;&gt;&gt; 2 ** 7  # 2的7次方</span><br><span class="line">128</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>变量在使用前必须先”定义”（即赋予变量一个值），否则会出现错误：</p>
 <pre><code>&gt;&gt;&gt; n   # 尝试访问一个未定义的变量
@@ -362,20 +318,10 @@ Traceback (most recent call last):
 NameError: name &#39;n&#39; is not defined
 </code></pre>
 <p>不同类型的数混合运算时会将整数转换为浮点数：</p>
-<pre><code>&gt;&gt;&gt; 3 * 3.75 / 1.5
-7.5
-&gt;&gt;&gt; 7.0 / 2
-3.5
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 3 * 3.75 / 1.5</span><br><span class="line">7.5</span><br><span class="line">&gt;&gt;&gt; 7.0 / 2</span><br><span class="line">3.5</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>在交互模式中，最后被输出的表达式结果被赋值给变量 _ 。例如：</p>
-<pre><code>&gt;&gt;&gt; tax = 12.5 / 100
-&gt;&gt;&gt; price = 100.50
-&gt;&gt;&gt; price * tax
-12.5625
-&gt;&gt;&gt; price + _
-113.0625
-&gt;&gt;&gt; round(_, 2)
-113.06
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tax = 12.5 / 100</span><br><span class="line">&gt;&gt;&gt; price = 100.50</span><br><span class="line">&gt;&gt;&gt; price * tax</span><br><span class="line">12.5625</span><br><span class="line">&gt;&gt;&gt; price + _</span><br><span class="line">113.0625</span><br><span class="line">&gt;&gt;&gt; round(_, 2)</span><br><span class="line">113.06</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>此处， _ 变量应被用户视为只读变量。</p>
 <h2 id="数学函数"><a href="#数学函数" class="headerlink" title="- 数学函数"></a>- 数学函数</h2><p>函数	返回值 ( 描述 )</p>

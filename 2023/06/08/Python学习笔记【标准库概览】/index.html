@@ -28,7 +28,7 @@
 <meta property="og:description" content="- Python3 标准库概览Python 标准库非常庞大，所提供的组件涉及范围十分广泛，使用标准库我们可以让您轻松地完成各种任务。 以下是一些 Python3 标准库中的模块：  os 模块：os 模块提供了许多与操作系统交互的函数，例如创建、移动和删除文件和目录，以及访问环境变量等。  sys 模块：sys 模块提供了与 Python 解释器和系统相关的功能，例如解释器的版本和路径，以及与 s">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-08T02:42:07.000Z">
-<meta property="article:modified_time" content="2023-06-08T08:06:30.604Z">
+<meta property="article:modified_time" content="2023-06-08T08:57:01.363Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -202,7 +202,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-06-08 10:42:07 / 修改时间：16:06:30" itemprop="dateCreated datePublished" datetime="2023-06-08T10:42:07+08:00">2023-06-08</time>
+              <time title="创建时间：2023-06-08 10:42:07 / 修改时间：16:57:01" itemprop="dateCreated datePublished" datetime="2023-06-08T10:42:07+08:00">2023-06-08</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,157 +269,53 @@
 </li>
 </ul>
 <h2 id="操作系统接口"><a href="#操作系统接口" class="headerlink" title="- 操作系统接口"></a>- 操作系统接口</h2><p>os模块提供了不少与操作系统相关联的函数。</p>
-<pre><code>&gt;&gt;&gt; import os
-&gt;&gt;&gt; os.getcwd()      # 返回当前的工作目录
-&#39;C:\\Python34&#39;
-&gt;&gt;&gt; os.chdir(&#39;/server/accesslogs&#39;)   # 修改当前的工作目录
-&gt;&gt;&gt; os.system(&#39;mkdir today&#39;)   # 执行系统命令 mkdir 
-0
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import os</span><br><span class="line">&gt;&gt;&gt; os.getcwd()      # 返回当前的工作目录</span><br><span class="line">&#x27;C:\\Python34&#x27;</span><br><span class="line">&gt;&gt;&gt; os.chdir(&#x27;/server/accesslogs&#x27;)   # 修改当前的工作目录</span><br><span class="line">&gt;&gt;&gt; os.system(&#x27;mkdir today&#x27;)   # 执行系统命令 mkdir </span><br><span class="line">0</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>建议使用 “import os” 风格而非 “from os import *”。这样可以保证随操作系统不同而有所变化的 os.open() 不会覆盖内置函数 open()。</p>
-<p>在使用 os 这样的大型模块时内置的 dir() 和 help() 函数非常有用:</p>
-<pre><code>&gt;&gt;&gt; import os
-&gt;&gt;&gt; dir(os)
-&lt;returns a list of all module functions&gt;
-&gt;&gt;&gt; help(os)
-&lt;returns an extensive manual page created from the module&#39;s docstrings&gt;
-</code></pre>
-<p>针对日常的文件和目录管理任务，:mod:shutil 模块提供了一个易于使用的高级接口:</p>
-<pre><code>&gt;&gt;&gt; import shutil
-&gt;&gt;&gt; shutil.copyfile(&#39;data.db&#39;, &#39;archive.db&#39;)
-&gt;&gt;&gt; shutil.move(&#39;/build/executables&#39;, &#39;installdir&#39;)
+<p>在使用 os 这样的大型模块时内置的 dir() 和 help() 函数非常有用:<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import os</span><br><span class="line">&gt;&gt;&gt; dir(os)</span><br><span class="line">&lt;returns a list of all module functions&gt;</span><br><span class="line">&gt;&gt;&gt; help(os)</span><br><span class="line">&lt;returns an extensive manual page created from the module&#x27;s docstrings&gt;</span><br></pre></td></tr></table></figure><br>针对日常的文件和目录管理任务，:mod:shutil 模块提供了一个易于使用的高级接口:</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import shutil</span><br><span class="line">&gt;&gt;&gt; shutil.copyfile(&#x27;data.db&#x27;, &#x27;archive.db&#x27;)</span><br><span class="line">&gt;&gt;&gt; shutil.move(&#x27;/build/executables&#x27;, &#x27;installdir&#x27;)</span><br></pre></td></tr></table></figure>
 </code></pre>
 <span id="more"></span>
 <h2 id="文件通配符"><a href="#文件通配符" class="headerlink" title="- 文件通配符"></a>- 文件通配符</h2><p>glob模块提供了一个函数用于从目录通配符搜索中生成文件列表:</p>
-<pre><code>&gt;&gt;&gt; import glob
-&gt;&gt;&gt; glob.glob(&#39;*.py&#39;)
-[&#39;primes.py&#39;, &#39;random.py&#39;, &#39;quote.py&#39;]
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import glob</span><br><span class="line">&gt;&gt;&gt; glob.glob(&#x27;*.py&#x27;)</span><br><span class="line">[&#x27;primes.py&#x27;, &#x27;random.py&#x27;, &#x27;quote.py&#x27;]</span><br></pre></td></tr></table></figure>
 </code></pre>
-<h2 id="命令行参数"><a href="#命令行参数" class="headerlink" title="- 命令行参数"></a>- 命令行参数</h2><p>通用工具脚本经常调用命令行参数。这些命令行参数以链表形式存储于 sys 模块的 argv 变量。例如在命令行中执行 “python demo.py one two three” 后可以得到以下输出结果:</p>
-<pre><code>&gt;&gt;&gt; import sys
-&gt;&gt;&gt; print(sys.argv)
-[&#39;demo.py&#39;, &#39;one&#39;, &#39;two&#39;, &#39;three&#39;]
-</code></pre>
-<h2 id="错误输出重定向和程序终止"><a href="#错误输出重定向和程序终止" class="headerlink" title="- 错误输出重定向和程序终止"></a>- 错误输出重定向和程序终止</h2><p>sys 还有 stdin，stdout 和 stderr 属性，即使在 stdout 被重定向时，后者也可以用于显示警告和错误信息。</p>
-<pre><code>&gt;&gt;&gt; sys.stderr.write(&#39;Warning, log file not found starting a new one\n&#39;)
-Warning, log file not found starting a new one
-</code></pre>
-<p>大多脚本的定向终止都使用 “sys.exit()”。</p>
+<h2 id="命令行参数"><a href="#命令行参数" class="headerlink" title="- 命令行参数"></a>- 命令行参数</h2><p>通用工具脚本经常调用命令行参数。这些命令行参数以链表形式存储于 sys 模块的 argv 变量。例如在命令行中执行 “python demo.py one two three” 后可以得到以下输出结果:<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import sys</span><br><span class="line">&gt;&gt;&gt; print(sys.argv)</span><br><span class="line">[&#x27;demo.py&#x27;, &#x27;one&#x27;, &#x27;two&#x27;, &#x27;three&#x27;]</span><br></pre></td></tr></table></figure></p>
+<h2 id="错误输出重定向和程序终止"><a href="#错误输出重定向和程序终止" class="headerlink" title="- 错误输出重定向和程序终止"></a>- 错误输出重定向和程序终止</h2><p>sys 还有 stdin，stdout 和 stderr 属性，即使在 stdout 被重定向时，后者也可以用于显示警告和错误信息。<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; sys.stderr.write(&#x27;Warning, log file not found starting a new one\n&#x27;)</span><br><span class="line">Warning, log file not found starting a new one</span><br></pre></td></tr></table></figure><br>大多脚本的定向终止都使用 “sys.exit()”。</p>
 <h2 id="字符串正则匹配"><a href="#字符串正则匹配" class="headerlink" title="- 字符串正则匹配"></a>- 字符串正则匹配</h2><p>re模块为高级字符串处理提供了正则表达式工具。对于复杂的匹配和处理，正则表达式提供了简洁、优化的解决方案:</p>
-<pre><code>&gt;&gt;&gt; import re
-&gt;&gt;&gt; re.findall(r&#39;\bf[a-z]*&#39;, &#39;which foot or hand fell fastest&#39;)
-[&#39;foot&#39;, &#39;fell&#39;, &#39;fastest&#39;]
-&gt;&gt;&gt; re.sub(r&#39;(\b[a-z]+) \1&#39;, r&#39;\1&#39;, &#39;cat in the the hat&#39;)
-&#39;cat in the hat&#39;
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import re</span><br><span class="line">&gt;&gt;&gt; re.findall(r&#x27;\bf[a-z]*&#x27;, &#x27;which foot or hand fell fastest&#x27;)</span><br><span class="line">[&#x27;foot&#x27;, &#x27;fell&#x27;, &#x27;fastest&#x27;]</span><br><span class="line">&gt;&gt;&gt; re.sub(r&#x27;(\b[a-z]+) \1&#x27;, r&#x27;\1&#x27;, &#x27;cat in the the hat&#x27;)</span><br><span class="line">&#x27;cat in the hat&#x27;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>如果只需要简单的功能，应该首先考虑字符串方法，因为它们非常简单，易于阅读和调试:</p>
-<pre><code>&gt;&gt;&gt; &#39;tea for too&#39;.replace(&#39;too&#39;, &#39;two&#39;)
-&#39;tea for two&#39;
-</code></pre>
+<p>如果只需要简单的功能，应该首先考虑字符串方法，因为它们非常简单，易于阅读和调试:<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &#x27;tea for too&#x27;.replace(&#x27;too&#x27;, &#x27;two&#x27;)</span><br><span class="line">&#x27;tea for two&#x27;</span><br></pre></td></tr></table></figure></p>
 <h2 id="数学"><a href="#数学" class="headerlink" title="- 数学"></a>- 数学</h2><p>math模块为浮点运算提供了对底层C函数库的访问:</p>
-<pre><code>&gt;&gt;&gt; import math
-&gt;&gt;&gt; math.cos(math.pi / 4)
-0.70710678118654757
-&gt;&gt;&gt; math.log(1024, 2)
-10.0
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import math</span><br><span class="line">&gt;&gt;&gt; math.cos(math.pi / 4)</span><br><span class="line">0.70710678118654757</span><br><span class="line">&gt;&gt;&gt; math.log(1024, 2)</span><br><span class="line">10.0</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>random提供了生成随机数的工具。</p>
-<pre><code>&gt;&gt;&gt; import random
-&gt;&gt;&gt; random.choice([&#39;apple&#39;, &#39;pear&#39;, &#39;banana&#39;])
-&#39;apple&#39;
-&gt;&gt;&gt; random.sample(range(100), 10)   # sampling without replacement
-[30, 83, 16, 4, 8, 81, 41, 50, 18, 33]
-&gt;&gt;&gt; random.random()    # random float
-0.17970987693706186
-&gt;&gt;&gt; random.randrange(6)    # random integer chosen from range(6)
-4
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import random</span><br><span class="line">&gt;&gt;&gt; random.choice([&#x27;apple&#x27;, &#x27;pear&#x27;, &#x27;banana&#x27;])</span><br><span class="line">&#x27;apple&#x27;</span><br><span class="line">&gt;&gt;&gt; random.sample(range(100), 10)   # sampling without replacement</span><br><span class="line">[30, 83, 16, 4, 8, 81, 41, 50, 18, 33]</span><br><span class="line">&gt;&gt;&gt; random.random()    # random float</span><br><span class="line">0.17970987693706186</span><br><span class="line">&gt;&gt;&gt; random.randrange(6)    # random integer chosen from range(6)</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
 </code></pre>
 <h2 id="访问-互联网"><a href="#访问-互联网" class="headerlink" title="- 访问 互联网"></a>- 访问 互联网</h2><p>有几个模块用于访问互联网以及处理网络通信协议。其中最简单的两个是用于处理从 urls 接收的数据的 urllib.request 以及用于发送电子邮件的 smtplib:</p>
-<pre><code>&gt;&gt;&gt; from urllib.request import urlopen
-&gt;&gt;&gt; for line in urlopen(&#39;http://tycho.usno.navy.mil/cgi-bin/timer.pl&#39;):
-...     line = line.decode(&#39;utf-8&#39;)  # Decoding the binary data to text.
-...     if &#39;EST&#39; in line or &#39;EDT&#39; in line:  # look for Eastern Time
-...         print(line)
-
-&lt;BR&gt;Nov. 25, 09:43:32 PM EST
-
-&gt;&gt;&gt; import smtplib
-&gt;&gt;&gt; server = smtplib.SMTP(&#39;localhost&#39;)
-&gt;&gt;&gt; server.sendmail(&#39;soothsayer@example.org&#39;, &#39;jcaesar@example.org&#39;,
-... &quot;&quot;&quot;To: jcaesar@example.org
-... From: soothsayer@example.org
-...
-... Beware the Ides of March.
-... &quot;&quot;&quot;)
-&gt;&gt;&gt; server.quit()
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from urllib.request import urlopen</span><br><span class="line">&gt;&gt;&gt; for line in urlopen(&#x27;http://tycho.usno.navy.mil/cgi-bin/timer.pl&#x27;):</span><br><span class="line">...     line = line.decode(&#x27;utf-8&#x27;)  # Decoding the binary data to text.</span><br><span class="line">...     if &#x27;EST&#x27; in line or &#x27;EDT&#x27; in line:  # look for Eastern Time</span><br><span class="line">...         print(line)</span><br><span class="line"></span><br><span class="line">&lt;BR&gt;Nov. 25, 09:43:32 PM EST</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; import smtplib</span><br><span class="line">&gt;&gt;&gt; server = smtplib.SMTP(&#x27;localhost&#x27;)</span><br><span class="line">&gt;&gt;&gt; server.sendmail(&#x27;soothsayer@example.org&#x27;, &#x27;jcaesar@example.org&#x27;,</span><br><span class="line">... &quot;&quot;&quot;To: jcaesar@example.org</span><br><span class="line">... From: soothsayer@example.org</span><br><span class="line">...</span><br><span class="line">... Beware the Ides of March.</span><br><span class="line">... &quot;&quot;&quot;)</span><br><span class="line">&gt;&gt;&gt; server.quit()</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>注意第二个例子需要本地有一个在运行的邮件服务器。</p>
 <h2 id="日期和时间"><a href="#日期和时间" class="headerlink" title="- 日期和时间"></a>- 日期和时间</h2><p>datetime模块为日期和时间处理同时提供了简单和复杂的方法。</p>
 <p>支持日期和时间算法的同时，实现的重点放在更有效的处理和格式化输出。</p>
 <p>该模块还支持时区处理:</p>
-<pre><code>&gt;&gt;&gt; # dates are easily constructed and formatted
-&gt;&gt;&gt; from datetime import date
-&gt;&gt;&gt; now = date.today()
-&gt;&gt;&gt; now
-datetime.date(2003, 12, 2)
-&gt;&gt;&gt; now.strftime(&quot;%m-%d-%y. %d %b %Y is a %A on the %d day of %B.&quot;)
-&#39;12-02-03. 02 Dec 2003 is a Tuesday on the 02 day of December.&#39;
-
-&gt;&gt;&gt; # dates support calendar arithmetic
-&gt;&gt;&gt; birthday = date(1964, 7, 31)
-&gt;&gt;&gt; age = now - birthday
-&gt;&gt;&gt; age.days
-14368
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; # dates are easily constructed and formatted</span><br><span class="line">&gt;&gt;&gt; from datetime import date</span><br><span class="line">&gt;&gt;&gt; now = date.today()</span><br><span class="line">&gt;&gt;&gt; now</span><br><span class="line">datetime.date(2003, 12, 2)</span><br><span class="line">&gt;&gt;&gt; now.strftime(&quot;%m-%d-%y. %d %b %Y is a %A on the %d day of %B.&quot;)</span><br><span class="line">&#x27;12-02-03. 02 Dec 2003 is a Tuesday on the 02 day of December.&#x27;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; # dates support calendar arithmetic</span><br><span class="line">&gt;&gt;&gt; birthday = date(1964, 7, 31)</span><br><span class="line">&gt;&gt;&gt; age = now - birthday</span><br><span class="line">&gt;&gt;&gt; age.days</span><br><span class="line">14368</span><br></pre></td></tr></table></figure>
 </code></pre>
 <h2 id="数据压缩"><a href="#数据压缩" class="headerlink" title="- 数据压缩"></a>- 数据压缩</h2><p>以下模块直接支持通用的数据打包和压缩格式：zlib，gzip，bz2，zipfile，以及 tarfile。</p>
-<pre><code>&gt;&gt;&gt; import zlib
-&gt;&gt;&gt; s = b&#39;witch which has which witches wrist watch&#39;
-&gt;&gt;&gt; len(s)
-41
-&gt;&gt;&gt; t = zlib.compress(s)
-&gt;&gt;&gt; len(t)
-37
-&gt;&gt;&gt; zlib.decompress(t)
-b&#39;witch which has which witches wrist watch&#39;
-&gt;&gt;&gt; zlib.crc32(s)
-226805979
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import zlib</span><br><span class="line">&gt;&gt;&gt; s = b&#x27;witch which has which witches wrist watch&#x27;</span><br><span class="line">&gt;&gt;&gt; len(s)</span><br><span class="line">41</span><br><span class="line">&gt;&gt;&gt; t = zlib.compress(s)</span><br><span class="line">&gt;&gt;&gt; len(t)</span><br><span class="line">37</span><br><span class="line">&gt;&gt;&gt; zlib.decompress(t)</span><br><span class="line">b&#x27;witch which has which witches wrist watch&#x27;</span><br><span class="line">&gt;&gt;&gt; zlib.crc32(s)</span><br><span class="line">226805979</span><br></pre></td></tr></table></figure>
 </code></pre>
 <h2 id="性能度量"><a href="#性能度量" class="headerlink" title="- 性能度量"></a>- 性能度量</h2><p>有些用户对了解解决同一问题的不同方法之间的性能差异很感兴趣。Python 提供了一个度量工具，为这些问题提供了直接答案。</p>
 <p>例如，使用元组封装和拆封来交换元素看起来要比使用传统的方法要诱人的多,timeit 证明了现代的方法更快一些。</p>
-<pre><code>&gt;&gt;&gt; from timeit import Timer
-&gt;&gt;&gt; Timer(&#39;t=a; a=b; b=t&#39;, &#39;a=1; b=2&#39;).timeit()
-0.57535828626024577
-&gt;&gt;&gt; Timer(&#39;a,b = b,a&#39;, &#39;a=1; b=2&#39;).timeit()
-0.54962537085770791
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from timeit import Timer</span><br><span class="line">&gt;&gt;&gt; Timer(&#x27;t=a; a=b; b=t&#x27;, &#x27;a=1; b=2&#x27;).timeit()</span><br><span class="line">0.57535828626024577</span><br><span class="line">&gt;&gt;&gt; Timer(&#x27;a,b = b,a&#x27;, &#x27;a=1; b=2&#x27;).timeit()</span><br><span class="line">0.54962537085770791</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>相对于 timeit 的细粒度，:mod:profile 和 pstats 模块提供了针对更大代码块的时间度量工具。</p>
 <h2 id="测试模块"><a href="#测试模块" class="headerlink" title="- 测试模块"></a>- 测试模块</h2><p>开发高质量软件的方法之一是为每一个函数开发测试代码，并且在开发过程中经常进行测试</p>
 <p>doctest模块提供了一个工具，扫描模块并根据程序中内嵌的文档字符串执行测试。</p>
 <p>测试构造如同简单的将它的输出结果剪切并粘贴到文档字符串中。</p>
 <p>通过用户提供的例子，它强化了文档，允许 doctest 模块确认代码的结果是否与文档一致:</p>
-<pre><code>def average(values):
-    &quot;&quot;&quot;Computes the arithmetic mean of a list of numbers.
-
-    &gt;&gt;&gt; print(average([20, 30, 70]))
-    40.0
-    &quot;&quot;&quot;
-    return sum(values) / len(values)
-
-import doctest
-doctest.testmod()   # 自动验证嵌入测试
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def average(values):</span><br><span class="line">    &quot;&quot;&quot;Computes the arithmetic mean of a list of numbers.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; print(average([20, 30, 70]))</span><br><span class="line">    40.0</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    return sum(values) / len(values)</span><br><span class="line"></span><br><span class="line">import doctest</span><br><span class="line">doctest.testmod()   # 自动验证嵌入测试</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>unittest模块不像 doctest模块那么容易使用，不过它可以在一个独立的文件里提供一个更全面的测试集:</p>
-<pre><code>import unittest
-
-class TestStatisticalFunctions(unittest.TestCase):
-
-    def test_average(self):
-        self.assertEqual(average([20, 30, 70]), 40.0)
-        self.assertEqual(round(average([1, 5, 7]), 1), 4.3)
-        self.assertRaises(ZeroDivisionError, average, [])
-        self.assertRaises(TypeError, average, 20, 30, 70)
-
-unittest.main() # Calling from the command line invokes all tests
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import unittest</span><br><span class="line"></span><br><span class="line">class TestStatisticalFunctions(unittest.TestCase):</span><br><span class="line"></span><br><span class="line">    def test_average(self):</span><br><span class="line">        self.assertEqual(average([20, 30, 70]), 40.0)</span><br><span class="line">        self.assertEqual(round(average([1, 5, 7]), 1), 4.3)</span><br><span class="line">        self.assertRaises(ZeroDivisionError, average, [])</span><br><span class="line">        self.assertRaises(TypeError, average, 20, 30, 70)</span><br><span class="line"></span><br><span class="line">unittest.main() # Calling from the command line invokes all tests</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>以上我们看到的只是 Python3 标准库中的一部分模块，还有很多其他模块可以在官方文档中查看完整的标准库文档：<a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/index.html">https://docs.python.org/zh-cn/3/library/index.html</a></p>
 
