@@ -14,7 +14,6 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"www.ai-fish.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
@@ -29,8 +28,8 @@
 <meta property="article:published_time" content="2023-05-16T15:27:48.000Z">
 <meta property="article:modified_time" content="2023-06-26T10:30:15.991Z">
 <meta property="article:author" content="淡水鱼">
-<meta property="article:tag" content="git操作">
 <meta property="article:tag" content="IT">
+<meta property="article:tag" content="git操作">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://www.ai-fish.top/2023/05/16/git%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/">
@@ -133,7 +132,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">11</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">12</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -143,7 +142,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">26</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -216,11 +215,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">Hexo博客搭建</span></a>
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                  <a href="/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">Hexo博客搭建</span></a>
                 </span>
             </span>
 
@@ -327,7 +326,7 @@
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>打开github，在头像下面点击settings，再点击SSH and GPG keys，新建一个SSH，名字随便。将输出的内容复制到框中，点击确定保存。</p>
-<p>输入ssh -T <a href="mailto:&#103;&#x69;&#116;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#111;&#x6d;">&#103;&#x69;&#116;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#111;&#x6d;</a>，如果出现你的用户名，验证成功。</p>
+<p>输入ssh -T <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#x67;&#105;&#x74;&#x68;&#x75;&#x62;&#46;&#x63;&#x6f;&#x6d;">&#x67;&#x69;&#x74;&#x40;&#x67;&#105;&#x74;&#x68;&#x75;&#x62;&#46;&#x63;&#x6f;&#x6d;</a>，如果出现你的用户名，验证成功。</p>
 <p>打开博客根目录下的_config.yml文件，这是博客的配置文件，在这里你可以修改与博客相关的各种信息。</p>
 <p>修改最后一行的配置：</p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">	type: git</span><br><span class="line">	repository: https://github.com/godweiyang/godweiyang.github.io</span><br><span class="line">	branch: master</span><br></pre></td></tr></table></figure>
@@ -346,8 +345,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/git%E6%93%8D%E4%BD%9C/" rel="tag"># git操作</a>
               <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/git%E6%93%8D%E4%BD%9C/" rel="tag"># git操作</a>
           </div>
 
         
@@ -419,13 +418,13 @@
           站点概览
         </li>
       </ul>
-
+	  
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Github%E4%BD%BF%E7%94%A8%E4%B9%8Bgit%E5%9B%9E%E9%80%80%E5%88%B0%E6%9F%90%E4%B8%AA%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">- Github使用之git回退到某个历史版本:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E2%80%9Dwarning-LF-will-be-replaced-by-CRLF%E2%80%9C%E6%8F%90%E7%A4%BA%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">- git如何避免”warning: LF will be replaced by CRLF“提示？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-remote-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E4%BB%8B%E7%BB%8D%E5%92%8C%E7%94%A8%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">- git remote 远程仓库介绍和用法:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5Github%E4%B8%8E%E6%9C%AC%E5%9C%B0"><span class="nav-number">4.</span> <span class="nav-text">- 连接Github与本地</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitHub%E4%BB%93%E5%BA%93%E9%87%8D%E5%91%BD%E5%90%8D%E7%9B%AE%E5%BD%95-x2F-%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">5.</span> <span class="nav-text">- GitHub仓库重命名目录&#x2F;文件夹</span></a></li></ol></div>
       </div>
       <!--/noindex-->
-
+	  
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="淡水鱼"
@@ -438,7 +437,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -451,7 +450,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -474,8 +473,12 @@
 
 
       </div>
-
 	  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
         <div class="back-to-top motion-element">
           <i class="fa fa-arrow-up"></i>
           <span>0%</span>
