@@ -139,7 +139,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">32</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">34</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -169,6 +169,243 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.ai-fish.top/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【继承】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-06 17:04:31 / 修改时间：17:24:38" itemprop="dateCreated datePublished" datetime="2023-07-06T17:04:31+08:00">2023-07-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【继承】" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="C-继承"><a href="#C-继承" class="headerlink" title="- C# 继承"></a>- C# 继承</h2><p>继承是面向对象程序设计中最重要的概念之一。继承允许我们根据一个类来定义另一个类，这使得创建和维护应用程序变得更容易。同时也有利于重用代码和节省开发时间。</p>
+<p>当创建一个类时，程序员不需要完全重新编写新的数据成员和成员函数，只需要设计一个新的类，继承了已有的类的成员即可。这个已有的类被称为的基类，这个新的类被称为派生类。</p>
+<p>继承的思想实现了 属于（IS-A） 关系。例如，哺乳动物 属于（IS-A） 动物，狗 属于（IS-A） 哺乳动物，因此狗 属于（IS-A） 动物。</p>
+<h2 id="基类和派生类"><a href="#基类和派生类" class="headerlink" title="- 基类和派生类"></a>- 基类和派生类</h2><p>一个类可以派生自多个类或接口，这意味着它可以从多个基类或接口继承数据和函数。</p>
+<p>C# 中创建派生类的语法如下：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;访问修饰符&gt; class &lt;基类&gt;</span><br><span class="line">&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br><span class="line">class &lt;派生类&gt; : &lt;基类&gt;</span><br><span class="line">&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>假设，有一个基类 Shape，它的派生类是 Rectangle：</p>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace InheritanceApplication</span><br><span class="line">&#123;</span><br><span class="line">   class Shape</span><br><span class="line">   &#123;</span><br><span class="line">      public void setWidth(int w)</span><br><span class="line">      &#123;</span><br><span class="line">         width = w;</span><br><span class="line">      &#125;</span><br><span class="line">      public void setHeight(int h)</span><br><span class="line">      &#123;</span><br><span class="line">         height = h;</span><br><span class="line">      &#125;</span><br><span class="line">      protected int width;</span><br><span class="line">      protected int height;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   // 派生类</span><br><span class="line">   class Rectangle: Shape</span><br><span class="line">   &#123;</span><br><span class="line">      public int getArea()</span><br><span class="line">      &#123;</span><br><span class="line">         return (width * height);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   class RectangleTester</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         Rectangle Rect = new Rectangle();</span><br><span class="line"></span><br><span class="line">         Rect.setWidth(5);</span><br><span class="line">         Rect.setHeight(7);</span><br><span class="line"></span><br><span class="line">         // 打印对象的面积</span><br><span class="line">         Console.WriteLine(&quot;总面积： &#123;0&#125;&quot;,  Rect.getArea());</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<pre><code>总面积： 35
+</code></pre>
+<h2 id="基类的初始化"><a href="#基类的初始化" class="headerlink" title="- 基类的初始化"></a>- 基类的初始化</h2><p>派生类继承了基类的成员变量和成员方法。因此父类对象应在子类对象创建之前被创建。您可以在成员初始化列表中进行父类的初始化。</p>
+<p>下面的程序演示了这点：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.ai-fish.top/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B1%BB%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B1%BB%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【类】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-06 14:53:51 / 修改时间：15:10:18" itemprop="dateCreated datePublished" datetime="2023-07-06T14:53:51+08:00">2023-07-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B1%BB%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【类】" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B1%BB%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B1%BB%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="C-类（Class）"><a href="#C-类（Class）" class="headerlink" title="- C# 类（Class）"></a>- C# 类（Class）</h2><p>当你定义一个类时，你定义了一个数据类型的蓝图。这实际上并没有定义任何的数据，但它定义了类的名称意味着什么，也就是说，类的对象由什么组成及在这个对象上可执行什么操作。对象是类的实例。构成类的方法和变量称为类的成员。</p>
+<h2 id="类的定义"><a href="#类的定义" class="headerlink" title="- 类的定义"></a>- 类的定义</h2><p>类的定义是以关键字 class 开始，后跟类的名称。类的主体，包含在一对花括号内。下面是类定义的一般形式：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;access specifier&gt; class  class_name</span><br><span class="line">&#123;</span><br><span class="line">    // member variables</span><br><span class="line">    &lt;access specifier&gt; &lt;data type&gt; variable1;</span><br><span class="line">    &lt;access specifier&gt; &lt;data type&gt; variable2;</span><br><span class="line">    ...</span><br><span class="line">    &lt;access specifier&gt; &lt;data type&gt; variableN;</span><br><span class="line">    // member methods</span><br><span class="line">    &lt;access specifier&gt; &lt;return type&gt; method1(parameter_list)</span><br><span class="line">    &#123;</span><br><span class="line">        // method body</span><br><span class="line">    &#125;</span><br><span class="line">    &lt;access specifier&gt; &lt;return type&gt; method2(parameter_list)</span><br><span class="line">    &#123;</span><br><span class="line">        // method body</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">    &lt;access specifier&gt; &lt;return type&gt; methodN(parameter_list)</span><br><span class="line">    &#123;</span><br><span class="line">        // method body</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>请注意：</p>
+<ul>
+<li><p>访问标识符 <access specifier> 指定了对类及其成员的访问规则。如果没有指定，则使用默认的访问标识符。类的默认访问标识符是 internal，成员的默认访问标识符是 private。</p>
+</li>
+<li><p>数据类型 <data type> 指定了变量的类型，返回类型 <return type> 指定了返回的方法返回的数据类型。</p>
+</li>
+<li><p>如果要访问类的成员，你要使用点（.）运算符。</p>
+</li>
+<li><p>点运算符链接了对象的名称和成员的名称。</p>
+</li>
+</ul>
+<p>下面的实例说明了目前为止所讨论的概念：</p>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace BoxApplication</span><br><span class="line">&#123;</span><br><span class="line">    class Box</span><br><span class="line">    &#123;</span><br><span class="line">       public double length;   // 长度</span><br><span class="line">       public double breadth;  // 宽度</span><br><span class="line">       public double height;   // 高度</span><br><span class="line">    &#125;</span><br><span class="line">    class Boxtester</span><br><span class="line">    &#123;</span><br><span class="line">        static void Main(string[] args)</span><br><span class="line">        &#123;</span><br><span class="line">            Box Box1 = new Box();        // 声明 Box1，类型为 Box</span><br><span class="line">            Box Box2 = new Box();        // 声明 Box2，类型为 Box</span><br><span class="line">            double volume = 0.0;         // 体积</span><br><span class="line"></span><br><span class="line">            // Box1 详述</span><br><span class="line">            Box1.height = 5.0;</span><br><span class="line">            Box1.length = 6.0;</span><br><span class="line">            Box1.breadth = 7.0;</span><br><span class="line"></span><br><span class="line">            // Box2 详述</span><br><span class="line">            Box2.height = 10.0;</span><br><span class="line">            Box2.length = 12.0;</span><br><span class="line">            Box2.breadth = 13.0;</span><br><span class="line">           </span><br><span class="line">            // Box1 的体积</span><br><span class="line">            volume = Box1.height * Box1.length * Box1.breadth;</span><br><span class="line">            Console.WriteLine(&quot;Box1 的体积： &#123;0&#125;&quot;,  volume);</span><br><span class="line"></span><br><span class="line">            // Box2 的体积</span><br><span class="line">            volume = Box2.height * Box2.length * Box2.breadth;</span><br><span class="line">            Console.WriteLine(&quot;Box2 的体积： &#123;0&#125;&quot;, volume);</span><br><span class="line">            Console.ReadKey();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B1%BB%E3%80%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -652,189 +889,6 @@ Message: Message sent at 17:58 on Wednesday, 10 October 2012
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.ai-fish.top/2023/07/03/%E8%B7%AF%E4%BA%9A%E5%BC%80%E5%85%89%E4%B8%8A%E8%B4%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/03/%E8%B7%AF%E4%BA%9A%E5%BC%80%E5%85%89%E4%B8%8A%E8%B4%A7/" class="post-title-link" itemprop="url">路亚开光上货</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-03 14:20:17 / 修改时间：14:43:12" itemprop="dateCreated datePublished" datetime="2023-07-03T14:20:17+08:00">2023-07-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/07/03/%E8%B7%AF%E4%BA%9A%E5%BC%80%E5%85%89%E4%B8%8A%E8%B4%A7/" class="post-meta-item leancloud_visitors" data-flag-title="路亚开光上货" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/07/03/%E8%B7%AF%E4%BA%9A%E5%BC%80%E5%85%89%E4%B8%8A%E8%B4%A7/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/03/%E8%B7%AF%E4%BA%9A%E5%BC%80%E5%85%89%E4%B8%8A%E8%B4%A7/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>(佐大师164L-BFS + 阿德BFS + 飞蝇)<br><img src="https://iili.io/Hijrtd7.md.jpg"></p>
-<p>今天周六，准备去狮子水库大干一天。早早地起床收拾好装备，各种饵料，窝料，钓箱，钓伞，竿包，活鱼筒满满一后背箱。到水库9点左右，开饵打窝地摊摆好9点半了。满怀信心等待上鱼，结果一直到下午3点，又晒又热不说，关键一口没有，这谁受的了，果断收竿回家。路过西来大桥发现河里好多钓鱼佬在玩溪流钓，才反应过来今天禁鱼期结束可以钓鱼了。虽然刚刚空军但钓鱼人就是这样看到水就走不动。马上车停路边去探查一下鱼情，乖乖不得了，每个人都钓了好多马口，桃花，大白条。可惜我没带溪流钓装备，今天的台钓装备都是干大鱼的。在后备箱一通乱翻，找到一套路亚微物装备，结果到河边接连三个炒粉，第四竿成功抛出大概十米，慢慢收线突然竿尖一颤，开光上鱼小马口，玩了两个小时上了两个马口，感觉路亚比台钓好玩</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.ai-fish.top/2023/06/29/Next%E4%B8%BB%E9%A2%98%E6%96%B0%E5%A2%9E%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E4%BA%8C%E7%BB%B4%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/29/Next%E4%B8%BB%E9%A2%98%E6%96%B0%E5%A2%9E%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E4%BA%8C%E7%BB%B4%E7%A0%81/" class="post-title-link" itemprop="url">Next主题新增微信公众号二维码</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-06-29 18:04:52 / 修改时间：18:28:06" itemprop="dateCreated datePublished" datetime="2023-06-29T18:04:52+08:00">2023-06-29</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">Hexo博客搭建</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/06/29/Next%E4%B8%BB%E9%A2%98%E6%96%B0%E5%A2%9E%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E4%BA%8C%E7%BB%B4%E7%A0%81/" class="post-meta-item leancloud_visitors" data-flag-title="Next主题新增微信公众号二维码" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/06/29/Next%E4%B8%BB%E9%A2%98%E6%96%B0%E5%A2%9E%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E4%BA%8C%E7%BB%B4%E7%A0%81/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/29/Next%E4%B8%BB%E9%A2%98%E6%96%B0%E5%A2%9E%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E4%BA%8C%E7%BB%B4%E7%A0%81/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="获取微信公众号二维码图片"><a href="#获取微信公众号二维码图片" class="headerlink" title="- 获取微信公众号二维码图片"></a>- 获取微信公众号二维码图片</h2><p>从公众号管理后台下载公众号二维码图片，如下图所示。将选中的图片放入主题目录下的.&#x2F;themes&#x2F;next&#x2F;source&#x2F;images&#x2F;目录中，并将图片改名为wechat-qcode.jpg。<br><img src="https://iili.io/HiKoygV.png"></p>
-<h2 id="设置微信公众号二维码在侧边栏显示"><a href="#设置微信公众号二维码在侧边栏显示" class="headerlink" title="- 设置微信公众号二维码在侧边栏显示"></a>- 设置微信公众号二维码在侧边栏显示</h2><p>编辑 themes&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;sidebar.swig 文件，在自己觉得排版合适的位置插入以下代码：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wechat_OA&quot;&gt;</span><br><span class="line">	&lt;span&gt;欢迎关注我的公众号&lt;/span&gt;</span><br><span class="line">	&lt;!-- 这里添加你的二维码图片 --&gt;</span><br><span class="line">	&lt;img src =&quot;/images/wechat-qcode.jpg&quot;&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>如下图所示<br><img src="https://iili.io/HiKoKKl.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -906,7 +960,7 @@ Message: Message sent at 17:58 on Wednesday, 10 October 2012
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

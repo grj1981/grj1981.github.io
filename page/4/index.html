@@ -139,7 +139,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">32</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">34</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -169,6 +169,274 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.ai-fish.top/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【标准库概览】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-08 10:42:07" itemprop="dateCreated datePublished" datetime="2023-06-08T10:42:07+08:00">2023-06-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-26 18:31:25" itemprop="dateModified" datetime="2023-06-26T18:31:25+08:00">2023-06-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【标准库概览】" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Python3-标准库概览"><a href="#Python3-标准库概览" class="headerlink" title="- Python3 标准库概览"></a>- Python3 标准库概览</h2><p>Python 标准库非常庞大，所提供的组件涉及范围十分广泛，使用标准库我们可以让您轻松地完成各种任务。</p>
+<p>以下是一些 Python3 标准库中的模块：</p>
+<ul>
+<li><p>os 模块：os 模块提供了许多与操作系统交互的函数，例如创建、移动和删除文件和目录，以及访问环境变量等。</p>
+</li>
+<li><p>sys 模块：sys 模块提供了与 Python 解释器和系统相关的功能，例如解释器的版本和路径，以及与 stdin、stdout 和 stderr 相关的信息。</p>
+</li>
+<li><p>time 模块：time 模块提供了处理时间的函数，例如获取当前时间、格式化日期和时间、计时等。</p>
+</li>
+<li><p>datetime 模块：datetime 模块提供了更高级的日期和时间处理函数，例如处理时区、计算时间差、计算日期差等。</p>
+</li>
+<li><p>random 模块：random 模块提供了生成随机数的函数，例如生成随机整数、浮点数、序列等。</p>
+</li>
+<li><p>math 模块：math 模块提供了数学函数，例如三角函数、对数函数、指数函数、常数等。</p>
+</li>
+<li><p>re 模块：re 模块提供了正则表达式处理函数，可以用于文本搜索、替换、分割等。</p>
+</li>
+<li><p>json 模块：json 模块提供了 JSON 编码和解码函数，可以将 Python 对象转换为 JSON 格式，并从 JSON 格式中解析出 Python 对象。</p>
+</li>
+<li><p>urllib 模块：urllib 模块提供了访问网页和处理 URL 的功能，包括下载文件、发送 POST 请求、处理 cookies 等。</p>
+</li>
+</ul>
+<h2 id="操作系统接口"><a href="#操作系统接口" class="headerlink" title="- 操作系统接口"></a>- 操作系统接口</h2><p>os模块提供了不少与操作系统相关联的函数。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import os</span><br><span class="line">&gt;&gt;&gt; os.getcwd()      # 返回当前的工作目录</span><br><span class="line">&#x27;C:\\Python34&#x27;</span><br><span class="line">&gt;&gt;&gt; os.chdir(&#x27;/server/accesslogs&#x27;)   # 修改当前的工作目录</span><br><span class="line">&gt;&gt;&gt; os.system(&#x27;mkdir today&#x27;)   # 执行系统命令 mkdir </span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>建议使用 “import os” 风格而非 “from os import *”。这样可以保证随操作系统不同而有所变化的 os.open() 不会覆盖内置函数 open()。</p>
+<p>在使用 os 这样的大型模块时内置的 dir() 和 help() 函数非常有用:<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import os</span><br><span class="line">&gt;&gt;&gt; dir(os)</span><br><span class="line">&lt;returns a list of all module functions&gt;</span><br><span class="line">&gt;&gt;&gt; help(os)</span><br><span class="line">&lt;returns an extensive manual page created from the module&#x27;s docstrings&gt;</span><br></pre></td></tr></table></figure><br>针对日常的文件和目录管理任务，:mod:shutil 模块提供了一个易于使用的高级接口:</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import shutil</span><br><span class="line">&gt;&gt;&gt; shutil.copyfile(&#x27;data.db&#x27;, &#x27;archive.db&#x27;)</span><br><span class="line">&gt;&gt;&gt; shutil.move(&#x27;/build/executables&#x27;, &#x27;installdir&#x27;)</span><br></pre></td></tr></table></figure>
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.ai-fish.top/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【面向对向】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-06 14:43:17" itemprop="dateCreated datePublished" datetime="2023-06-06T14:43:17+08:00">2023-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-26 18:32:10" itemprop="dateModified" datetime="2023-06-26T18:32:10+08:00">2023-06-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【面向对向】" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Python3-面向对象"><a href="#Python3-面向对象" class="headerlink" title="Python3 面向对象"></a>Python3 面向对象</h2><p>Python从设计之初就已经是一门面向对象的语言，正因为如此，在Python中创建一个类和对象是很容易的。本章节我们将详细介绍Python的面向对象编程。</p>
+<p>如果你以前没有接触过面向对象的编程语言，那你可能需要先了解一些面向对象语言的一些基本特征，在头脑里头形成一个基本的面向对象的概念，这样有助于你更容易的学习Python的面向对象编程。</p>
+<p>接下来我们先来简单的了解下面向对象的一些基本特征。</p>
+<h2 id="面向对象技术简介"><a href="#面向对象技术简介" class="headerlink" title="- 面向对象技术简介"></a>- 面向对象技术简介</h2><ul>
+<li><p>类(Class): 用来描述具有相同的属性和方法的对象的集合。它定义了该集合中每个对象所共有的属性和方法。对象是类的实例。<br>方法：类中定义的函数。</p>
+</li>
+<li><p>类变量：类变量在整个实例化的对象中是公用的。类变量定义在类中且在函数体之外。类变量通常不作为实例变量使用。</p>
+</li>
+<li><p>数据成员：类变量或者实例变量用于处理类及其实例对象的相关的数据。</p>
+</li>
+<li><p>方法重写：如果从父类继承的方法不能满足子类的需求，可以对其进行改写，这个过程叫方法的覆盖（override），也称为方法的重写。</p>
+</li>
+<li><p>局部变量：定义在方法中的变量，只作用于当前实例的类。</p>
+</li>
+<li><p>实例变量：在类的声明中，属性是用变量来表示的，这种变量就称为实例变量，实例变量就是一个用 self 修饰的变量。</p>
+</li>
+<li><p>继承：即一个派生类（derived class）继承基类（base class）的字段和方法。继承也允许把一个派生类的对象作为一个基类对象对待。例如，有这样一个设计：一个Dog类型的对象派生自Animal类，这是模拟”是一个（is-a）”关系（例图，Dog是一个Animal）。</p>
+</li>
+<li><p>实例化：创建一个类的实例，类的具体对象。</p>
+</li>
+<li><p>对象：通过类定义的数据结构实例。对象包括两个数据成员（类变量和实例变量）和方法。<br>和其它编程语言相比，Python 在尽可能不增加新的语法和语义的情况下加入了类机制。</p>
+</li>
+</ul>
+<p>Python中的类提供了面向对象编程的所有基本功能：类的继承机制允许多个基类，派生类可以覆盖基类中的任何方法，方法中可以调用基类中的同名方法。</p>
+<p>对象可以包含任意数量和类型的数据。</p>
+<h2 id="类定义"><a href="#类定义" class="headerlink" title="- 类定义"></a>- 类定义</h2><p>语法格式如下：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class ClassName:</span><br><span class="line">    &lt;statement-1&gt;</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    &lt;statement-N&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>类实例化后，可以使用其属性，实际上，创建一个类之后，可以通过类名访问其属性。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -687,257 +955,6 @@ del var_a, var_b
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.ai-fish.top/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【集合】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-05-29 15:00:04" itemprop="dateCreated datePublished" datetime="2023-05-29T15:00:04+08:00">2023-05-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-26 18:31:49" itemprop="dateModified" datetime="2023-06-26T18:31:49+08:00">2023-06-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【集合】" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Python3-集合"><a href="#Python3-集合" class="headerlink" title="- Python3 集合"></a>- Python3 集合</h2><p>集合（set）是一个无序的不重复元素序列。</p>
-<p>可以使用大括号 { } 或者 set() 函数创建集合，注意：创建一个空集合必须用 set() 而不是 { }，因为 { } 是用来创建一个空字典。</p>
-<p>创建格式：</p>
-<pre><code>parame = &#123;value01,value02,...&#125;
-或者
-set(value)
-</code></pre>
-<blockquote>
-<p><strong>实例:</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; basket = &#123;&#x27;apple&#x27;, &#x27;orange&#x27;, &#x27;apple&#x27;, &#x27;pear&#x27;, &#x27;orange&#x27;, &#x27;banana&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; print(basket)                      # 这里演示的是去重功能</span><br><span class="line">&#123;&#x27;orange&#x27;, &#x27;banana&#x27;, &#x27;pear&#x27;, &#x27;apple&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; &#x27;orange&#x27; in basket                 # 快速判断元素是否在集合内</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; &#x27;crabgrass&#x27; in basket</span><br><span class="line">False</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; # 下面展示两个集合间的运算.</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; a = set(&#x27;abracadabra&#x27;)</span><br><span class="line">&gt;&gt;&gt; b = set(&#x27;alacazam&#x27;)</span><br><span class="line">&gt;&gt;&gt; a                                  </span><br><span class="line">&#123;&#x27;a&#x27;, &#x27;r&#x27;, &#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; a - b                              # 集合a中包含而集合b中不包含的元素</span><br><span class="line">&#123;&#x27;r&#x27;, &#x27;d&#x27;, &#x27;b&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; a | b                              # 集合a或b中包含的所有元素</span><br><span class="line">&#123;&#x27;a&#x27;, &#x27;c&#x27;, &#x27;r&#x27;, &#x27;d&#x27;, &#x27;b&#x27;, &#x27;m&#x27;, &#x27;z&#x27;, &#x27;l&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; a &amp; b                              # 集合a和b中都包含了的元素</span><br><span class="line">&#123;&#x27;a&#x27;, &#x27;c&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; a ^ b                              # 不同时包含于a和b的元素</span><br><span class="line">&#123;&#x27;r&#x27;, &#x27;d&#x27;, &#x27;b&#x27;, &#x27;m&#x27;, &#x27;z&#x27;, &#x27;l&#x27;&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>类似列表推导式，同样集合支持集合推导式(Set comprehension):</p>
-<blockquote>
-<p><strong>实例:</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a = &#123;x for x in &#x27;abracadabra&#x27; if x not in &#x27;abc&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; a</span><br><span class="line">&#123;&#x27;r&#x27;, &#x27;d&#x27;&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88%E3%80%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.ai-fish.top/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E5%85%B8%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E5%85%B8%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【字典】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-05-29 14:25:04" itemprop="dateCreated datePublished" datetime="2023-05-29T14:25:04+08:00">2023-05-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-26 18:33:04" itemprop="dateModified" datetime="2023-06-26T18:33:04+08:00">2023-06-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E5%85%B8%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【字典】" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E5%85%B8%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E5%85%B8%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Python3-字典"><a href="#Python3-字典" class="headerlink" title="- Python3 字典"></a>- Python3 字典</h2><p>字典是另一种可变容器模型，且可存储任意类型对象。</p>
-<p>字典的每个键值 key&#x3D;&gt;value 对用冒号 : 分割，每个对之间用逗号(,)分割，整个字典包括在花括号 {} 中 ,格式如下所示：</p>
-<p>d &#x3D; {key1 : value1, key2 : value2, key3 : value3 }<br>注意：dict 作为 Python 的关键字和内置函数，变量名不建议命名为 dict。</p>
-<p>键必须是唯一的，但值则不必。</p>
-<p>值可以取任何数据类型，但键必须是不可变的，如字符串，数字。</p>
-<p>一个简单的字典实例：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tinydict = &#123;&#x27;name&#x27;: &#x27;runoob&#x27;, &#x27;likes&#x27;: 123, &#x27;url&#x27;: &#x27;www.runoob.com&#x27;&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>也可如此创建字典：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tinydict1 = &#123; &#x27;abc&#x27;: 456 &#125;</span><br><span class="line">tinydict2 = &#123; &#x27;abc&#x27;: 123, 98.6: 37 &#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="创建空字典"><a href="#创建空字典" class="headerlink" title="- 创建空字典"></a>- 创建空字典</h2><p>使用大括号 { } 创建空字典：</p>
-<blockquote>
-<p><strong>实例:</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 使用大括号 &#123;&#125; 来创建空字典</span><br><span class="line">emptyDict = &#123;&#125;</span><br><span class="line"> </span><br><span class="line"># 打印字典</span><br><span class="line">print(emptyDict)</span><br><span class="line"> </span><br><span class="line"># 查看字典的数量</span><br><span class="line">print(&quot;Length:&quot;, len(emptyDict))</span><br><span class="line"> </span><br><span class="line"># 查看类型</span><br><span class="line">print(type(emptyDict))</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>以上实例输出结果：</p>
-<pre><code>&#123;&#125;
-Length: 0
-&lt;class &#39;dict&#39;&gt;
-</code></pre>
-<p>使用内建函数 dict() 创建字典：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E5%85%B8%E3%80%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1009,7 +1026,7 @@ Length: 0
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
