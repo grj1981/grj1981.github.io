@@ -1287,7 +1287,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #a8ff45;
+  background: #9490ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2584,11 +2584,11 @@ body {
   align-items: flex-start;
 }
 .photos-column {
-  margin: 4px;
+  margin: 8px;
   margin-bottom: 15px;
 }
 .photos-item {
-  margin-bottom: 0px;
+  margin-bottom: 10px;
 }
 /*相册标题样式*/
 .photos-item p {
@@ -2598,20 +2598,16 @@ body {
   font-size: 15px;
   color: #222;
   background: rgba(255,255,255,0.3);
-  border-radius: 7px;
+  border-radius: 20px;
   border: 1px solid #222;
   box-shadow: 0 8px 20px -8px rgba(0,0,0,0.3);
 }
-/*相册描述样式*/
-.photos-des {
-  margin-bottom: 0px;
-}
 /*相册封面显示以及点击面积*/
 .photos-column a img {
-  height: 250px;
-  width: 300px;
+  height: 280px;
+  width: 330px;
   object-fit: cover;
-  margin-bottom: 30px;
+  margin-bottom: 32px;
 }
 .img-list {
   display: flex;
