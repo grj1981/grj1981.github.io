@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+  <meta name="description" content="- Python3 多线程多线程类似于同时执行多个不同程序，多线程运行有如下优点：  使用线程可以把占据长时间的程序中的任务放到后台去处理。  用户界面可以更加吸引人，比如用户点击了一个按钮去触发某些事件的处理，可以弹出一个进度条来显示处理的进度。  程序的运行速度可能加快。  在一些等待的任务实现上如用户输入、文件读写和网络收发数据等，线程就比较有用了。在这种情况下我们可以释放一些珍贵的资源如内">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python学习笔记【多线程】">
+<meta property="og:url" content="https://www.bytefisher.top/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%91/index.html">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="- Python3 多线程多线程类似于同时执行多个不同程序，多线程运行有如下优点：  使用线程可以把占据长时间的程序中的任务放到后台去处理。  用户界面可以更加吸引人，比如用户点击了一个按钮去触发某些事件的处理，可以弹出一个进度条来显示处理的进度。  程序的运行速度可能加快。  在一些等待的任务实现上如用户输入、文件读写和网络收发数据等，线程就比较有用了。在这种情况下我们可以释放一些珍贵的资源如内">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-25T07:17:32.000Z">
+<meta property="article:modified_time" content="2024-08-26T09:55:57.310Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="IT">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.bytefisher.top/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Python学习笔记【多线程】 | ByteFisher</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <!--相册弹出js-->
+  <script type="text/javascript" src="/js/lightbox-plus-jquery.min.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">65</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python学习笔记【多线程】
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-25 15:17:32" itemprop="dateCreated datePublished" datetime="2023-06-25T15:17:32+08:00">2023-06-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【多线程】" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Python3-多线程"><a href="#Python3-多线程" class="headerlink" title="- Python3 多线程"></a>- Python3 多线程</h2><p>多线程类似于同时执行多个不同程序，多线程运行有如下优点：</p>
+<ul>
+<li><p>使用线程可以把占据长时间的程序中的任务放到后台去处理。</p>
+</li>
+<li><p>用户界面可以更加吸引人，比如用户点击了一个按钮去触发某些事件的处理，可以弹出一个进度条来显示处理的进度。</p>
+</li>
+<li><p>程序的运行速度可能加快。</p>
+</li>
+<li><p>在一些等待的任务实现上如用户输入、文件读写和网络收发数据等，线程就比较有用了。在这种情况下我们可以释放一些珍贵的资源如内存占用等等。<br>每个独立的线程有一个程序运行的入口、顺序执行序列和程序的出口。但是线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制。</p>
+</li>
+</ul>
+<p>每个线程都有他自己的一组CPU寄存器，称为线程的上下文，该上下文反映了线程上次运行该线程的CPU寄存器的状态。</p>
+<p>指令指针和堆栈指针寄存器是线程上下文中两个最重要的寄存器，线程总是在进程得到上下文中运行的，这些地址都用于标志拥有线程的进程地址空间中的内存。</p>
+<ul>
+<li><p>线程可以被抢占（中断）。</p>
+</li>
+<li><p>在其他线程正在运行时，线程可以暂时搁置（也称为睡眠） – 这就是线程的退让。<br>线程可以分为:</p>
+</li>
+<li><p><strong>内核线程</strong>：由操作系统内核创建和撤销。</p>
+</li>
+<li><p><strong>用户线程</strong>：不需要内核支持而在用户程序中实现的线程。<br>Python3 线程中常用的两个模块为：</p>
+</li>
+<li><p>_thread</p>
+</li>
+<li><p>threading(推荐使用)<br>thread 模块已被废弃。用户可以使用 threading 模块代替。所以，在 Python3 中不能再使用”thread” 模块。为了兼容性，Python3 将 thread 重命名为 “_thread”。</p>
+</li>
+</ul>
+<h2 id="开始学习Python线程"><a href="#开始学习Python线程" class="headerlink" title="- 开始学习Python线程"></a>- 开始学习Python线程</h2><p>Python中使用线程有两种方式：函数或者用类来包装线程对象。</p>
+<p>函数式：调用 _thread 模块中的start_new_thread()函数来产生新线程。语法如下:</p>
+<pre><code>_thread.start_new_thread ( function, args[, kwargs] )
+</code></pre>
+<p>参数说明:</p>
+<ul>
+<li><p>function - 线程函数。</p>
+</li>
+<li><p>args - 传递给线程函数的参数,他必须是个tuple类型。</p>
+</li>
+<li><p>kwargs - 可选参数。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python3</span><br><span class="line"></span><br><span class="line">import _thread</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line"># 为线程定义一个函数</span><br><span class="line">def print_time( threadName, delay):</span><br><span class="line">   count = 0</span><br><span class="line">   while count &lt; 5:</span><br><span class="line">      time.sleep(delay)</span><br><span class="line">      count += 1</span><br><span class="line">      print (&quot;%s: %s&quot; % ( threadName, time.ctime(time.time()) ))</span><br><span class="line"></span><br><span class="line"># 创建两个线程</span><br><span class="line">try:</span><br><span class="line">   _thread.start_new_thread( print_time, (&quot;Thread-1&quot;, 2, ) )</span><br><span class="line">   _thread.start_new_thread( print_time, (&quot;Thread-2&quot;, 4, ) )</span><br><span class="line">except:</span><br><span class="line">   print (&quot;Error: 无法启动线程&quot;)</span><br><span class="line"></span><br><span class="line">while 1:</span><br><span class="line">   pass</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>执行以上程序输出结果如下：</p>
+<pre><code>Thread-1: Wed Jan  5 17:38:08 2022
+Thread-2: Wed Jan  5 17:38:10 2022
+Thread-1: Wed Jan  5 17:38:10 2022
+Thread-1: Wed Jan  5 17:38:12 2022
+Thread-2: Wed Jan  5 17:38:14 2022
+Thread-1: Wed Jan  5 17:38:14 2022
+Thread-1: Wed Jan  5 17:38:16 2022
+Thread-2: Wed Jan  5 17:38:18 2022
+Thread-2: Wed Jan  5 17:38:22 2022
+Thread-2: Wed Jan  5 17:38:26 2022
+</code></pre>
+<p>执行以上程后可以按下 ctrl-c 退出。</p>
+<span id="more"></span>
+<h2 id="线程模块"><a href="#线程模块" class="headerlink" title="- 线程模块"></a>- 线程模块</h2><p>Python3 通过两个标准库 _thread 和 threading 提供对线程的支持。</p>
+<p>_thread 提供了低级别的、原始的线程以及一个简单的锁，它相比于 threading 模块的功能还是比较有限的。</p>
+<p>threading 模块除了包含 _thread 模块中的所有方法外，还提供的其他方法：</p>
+<ul>
+<li><p>threading.currentThread(): 返回当前的线程变量。</p>
+</li>
+<li><p>threading.enumerate(): 返回一个包含正在运行的线程的list。正在运行指线程启动后、结束前，不包括启动前和终止后的线程。</p>
+</li>
+<li><p>threading.activeCount(): 返回正在运行的线程数量，与len(threading.enumerate())有相同的结果。</p>
+</li>
+</ul>
+<p>除了使用方法外，线程模块同样提供了Thread类来处理线程，Thread类提供了以下方法:</p>
+<ul>
+<li><p>run(): 用以表示线程活动的方法。</p>
+</li>
+<li><p>start():启动线程活动。</p>
+</li>
+<li><p>join([time]): 等待至线程中止。这阻塞调用线程直至线程的join() 方法被调用中止-正常退出或者抛出未处理的异常-或者是可选的超时发生。</p>
+</li>
+<li><p>isAlive(): 返回线程是否活动的。</p>
+</li>
+<li><p>getName(): 返回线程名。</p>
+</li>
+<li><p>setName(): 设置线程名。</p>
+</li>
+</ul>
+<h2 id="使用-threading-模块创建线程"><a href="#使用-threading-模块创建线程" class="headerlink" title="- 使用 threading 模块创建线程"></a>- 使用 threading 模块创建线程</h2><p>我们可以通过直接从 threading.Thread 继承创建一个新的子类，并实例化后调用 start() 方法启动新线程，即它调用了线程的 run() 方法：</p>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python3</span><br><span class="line"></span><br><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">exitFlag = 0</span><br><span class="line"></span><br><span class="line">class myThread (threading.Thread):</span><br><span class="line">    def __init__(self, threadID, name, delay):</span><br><span class="line">        threading.Thread.__init__(self)</span><br><span class="line">        self.threadID = threadID</span><br><span class="line">        self.name = name</span><br><span class="line">        self.delay = delay</span><br><span class="line">    def run(self):</span><br><span class="line">        print (&quot;开始线程：&quot; + self.name)</span><br><span class="line">        print_time(self.name, self.delay, 5)</span><br><span class="line">        print (&quot;退出线程：&quot; + self.name)</span><br><span class="line"></span><br><span class="line">def print_time(threadName, delay, counter):</span><br><span class="line">    while counter:</span><br><span class="line">        if exitFlag:</span><br><span class="line">            threadName.exit()</span><br><span class="line">        time.sleep(delay)</span><br><span class="line">        print (&quot;%s: %s&quot; % (threadName, time.ctime(time.time())))</span><br><span class="line">        counter -= 1</span><br><span class="line"></span><br><span class="line"># 创建新线程</span><br><span class="line">thread1 = myThread(1, &quot;Thread-1&quot;, 1)</span><br><span class="line">thread2 = myThread(2, &quot;Thread-2&quot;, 2)</span><br><span class="line"></span><br><span class="line"># 开启新线程</span><br><span class="line">thread1.start()</span><br><span class="line">thread2.start()</span><br><span class="line">thread1.join()</span><br><span class="line">thread2.join()</span><br><span class="line">print (&quot;退出主线程&quot;)</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>以上程序执行结果如下；</p>
+<pre><code>开始线程：Thread-1
+开始线程：Thread-2
+Thread-1: Wed Jan  5 17:34:54 2022
+Thread-2: Wed Jan  5 17:34:55 2022
+Thread-1: Wed Jan  5 17:34:55 2022
+Thread-1: Wed Jan  5 17:34:56 2022
+Thread-2: Wed Jan  5 17:34:57 2022
+Thread-1: Wed Jan  5 17:34:57 2022
+Thread-1: Wed Jan  5 17:34:58 2022
+退出线程：Thread-1
+Thread-2: Wed Jan  5 17:34:59 2022
+Thread-2: Wed Jan  5 17:35:01 2022
+Thread-2: Wed Jan  5 17:35:03 2022
+退出线程：Thread-2
+退出主线程
+</code></pre>
+<h2 id="线程同步"><a href="#线程同步" class="headerlink" title="- 线程同步"></a>- 线程同步</h2><p>如果多个线程共同对某个数据修改，则可能出现不可预料的结果，为了保证数据的正确性，需要对多个线程进行同步。</p>
+<p>使用 Thread 对象的 Lock 和 Rlock 可以实现简单的线程同步，这两个对象都有 acquire 方法和 release 方法，对于那些需要每次只允许一个线程操作的数据，可以将其操作放到 acquire 和 release 方法之间。如下：</p>
+<p>多线程的优势在于可以同时运行多个任务（至少感觉起来是这样）。但是当线程需要共享数据时，可能存在数据不同步的问题。</p>
+<p>考虑这样一种情况：一个列表里所有元素都是0，线程”set”从后向前把所有元素改成1，而线程”print”负责从前往后读取列表并打印。</p>
+<p>那么，可能线程”set”开始改的时候，线程”print”便来打印列表了，输出就成了一半0一半1，这就是数据的不同步。为了避免这种情况，引入了锁的概念。</p>
+<p>锁有两种状态——锁定和未锁定。每当一个线程比如”set”要访问共享数据时，必须先获得锁定；如果已经有别的线程比如”print”获得锁定了，那么就让线程”set”暂停，也就是同步阻塞；等到线程”print”访问完毕，释放锁以后，再让线程”set”继续。</p>
+<p>经过这样的处理，打印列表时要么全部输出0，要么全部输出1，不会再出现一半0一半1的尴尬场面。</p>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python3</span><br><span class="line"></span><br><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">class myThread (threading.Thread):</span><br><span class="line">    def __init__(self, threadID, name, delay):</span><br><span class="line">        threading.Thread.__init__(self)</span><br><span class="line">        self.threadID = threadID</span><br><span class="line">        self.name = name</span><br><span class="line">        self.delay = delay</span><br><span class="line">    def run(self):</span><br><span class="line">        print (&quot;开启线程： &quot; + self.name)</span><br><span class="line">        # 获取锁，用于线程同步</span><br><span class="line">        threadLock.acquire()</span><br><span class="line">        print_time(self.name, self.delay, 3)</span><br><span class="line">        # 释放锁，开启下一个线程</span><br><span class="line">        threadLock.release()</span><br><span class="line"></span><br><span class="line">def print_time(threadName, delay, counter):</span><br><span class="line">    while counter:</span><br><span class="line">        time.sleep(delay)</span><br><span class="line">        print (&quot;%s: %s&quot; % (threadName, time.ctime(time.time())))</span><br><span class="line">        counter -= 1</span><br><span class="line"></span><br><span class="line">threadLock = threading.Lock()</span><br><span class="line">threads = []</span><br><span class="line"></span><br><span class="line"># 创建新线程</span><br><span class="line">thread1 = myThread(1, &quot;Thread-1&quot;, 1)</span><br><span class="line">thread2 = myThread(2, &quot;Thread-2&quot;, 2)</span><br><span class="line"></span><br><span class="line"># 开启新线程</span><br><span class="line">thread1.start()</span><br><span class="line">thread2.start()</span><br><span class="line"></span><br><span class="line"># 添加线程到线程列表</span><br><span class="line">threads.append(thread1)</span><br><span class="line">threads.append(thread2)</span><br><span class="line"></span><br><span class="line"># 等待所有线程完成</span><br><span class="line">for t in threads:</span><br><span class="line">    t.join()</span><br><span class="line">print (&quot;退出主线程&quot;)</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>执行以上程序，输出结果为：</p>
+<pre><code>开启线程： Thread-1
+开启线程： Thread-2
+Thread-1: Wed Jan  5 17:36:50 2022
+Thread-1: Wed Jan  5 17:36:51 2022
+Thread-1: Wed Jan  5 17:36:52 2022
+Thread-2: Wed Jan  5 17:36:54 2022
+Thread-2: Wed Jan  5 17:36:56 2022
+Thread-2: Wed Jan  5 17:36:58 2022
+退出主线程
+</code></pre>
+<h2 id="线程优先级队列（-Queue）"><a href="#线程优先级队列（-Queue）" class="headerlink" title="- 线程优先级队列（ Queue）"></a>- 线程优先级队列（ Queue）</h2><p>Python 的 Queue 模块中提供了同步的、线程安全的队列类，包括FIFO（先入先出)队列Queue，LIFO（后入先出）队列LifoQueue，和优先级队列 PriorityQueue。</p>
+<p>这些队列都实现了锁原语，能够在多线程中直接使用，可以使用队列来实现线程间的同步。</p>
+<p>Queue 模块中的常用方法:</p>
+<ul>
+<li><p>Queue.qsize() 返回队列的大小</p>
+</li>
+<li><p>Queue.empty() 如果队列为空，返回True,反之False</p>
+</li>
+<li><p>Queue.full() 如果队列满了，返回True,反之False</p>
+</li>
+<li><p>Queue.full 与 maxsize 大小对应</p>
+</li>
+<li><p>Queue.get([block[, timeout]])获取队列，timeout等待时间</p>
+</li>
+<li><p>Queue.get_nowait() 相当Queue.get(False)</p>
+</li>
+<li><p>Queue.put(item) 写入队列，timeout等待时间</p>
+</li>
+<li><p>Queue.put_nowait(item) 相当Queue.put(item, False)</p>
+</li>
+<li><p>Queue.task_done() 在完成一项工作之后，Queue.task_done()函数向任务已经完成的队列发送一个信号</p>
+</li>
+<li><p>Queue.join() 实际上意味着等到队列为空，再执行别的操作</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python3</span><br><span class="line"></span><br><span class="line">import queue</span><br><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">exitFlag = 0</span><br><span class="line"></span><br><span class="line">class myThread (threading.Thread):</span><br><span class="line">    def __init__(self, threadID, name, q):</span><br><span class="line">        threading.Thread.__init__(self)</span><br><span class="line">        self.threadID = threadID</span><br><span class="line">        self.name = name</span><br><span class="line">        self.q = q</span><br><span class="line">    def run(self):</span><br><span class="line">        print (&quot;开启线程：&quot; + self.name)</span><br><span class="line">        process_data(self.name, self.q)</span><br><span class="line">        print (&quot;退出线程：&quot; + self.name)</span><br><span class="line"></span><br><span class="line">def process_data(threadName, q):</span><br><span class="line">    while not exitFlag:</span><br><span class="line">        queueLock.acquire()</span><br><span class="line">        if not workQueue.empty():</span><br><span class="line">            data = q.get()</span><br><span class="line">            queueLock.release()</span><br><span class="line">            print (&quot;%s processing %s&quot; % (threadName, data))</span><br><span class="line">        else:</span><br><span class="line">            queueLock.release()</span><br><span class="line">        time.sleep(1)</span><br><span class="line"></span><br><span class="line">threadList = [&quot;Thread-1&quot;, &quot;Thread-2&quot;, &quot;Thread-3&quot;]</span><br><span class="line">nameList = [&quot;One&quot;, &quot;Two&quot;, &quot;Three&quot;, &quot;Four&quot;, &quot;Five&quot;]</span><br><span class="line">queueLock = threading.Lock()</span><br><span class="line">workQueue = queue.Queue(10)</span><br><span class="line">threads = []</span><br><span class="line">threadID = 1</span><br><span class="line"></span><br><span class="line"># 创建新线程</span><br><span class="line">for tName in threadList:</span><br><span class="line">    thread = myThread(threadID, tName, workQueue)</span><br><span class="line">    thread.start()</span><br><span class="line">    threads.append(thread)</span><br><span class="line">    threadID += 1</span><br><span class="line"></span><br><span class="line"># 填充队列</span><br><span class="line">queueLock.acquire()</span><br><span class="line">for word in nameList:</span><br><span class="line">    workQueue.put(word)</span><br><span class="line">queueLock.release()</span><br><span class="line"></span><br><span class="line"># 等待队列清空</span><br><span class="line">while not workQueue.empty():</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line"># 通知线程是时候退出</span><br><span class="line">exitFlag = 1</span><br><span class="line"></span><br><span class="line"># 等待所有线程完成</span><br><span class="line">for t in threads:</span><br><span class="line">    t.join()</span><br><span class="line">print (&quot;退出主线程&quot;)</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>以上程序执行结果：</p>
+<pre><code>开启线程：Thread-1
+开启线程：Thread-2
+开启线程：Thread-3
+Thread-3 processing One
+Thread-1 processing Two
+Thread-2 processing Three
+Thread-3 processing Four
+Thread-1 processing Five
+退出线程：Thread-3
+退出线程：Thread-2
+退出线程：Thread-1
+退出主线程
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/06/21/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%91/" rel="prev" title="Python学习笔记【正则表达式】">
+      <i class="fa fa-chevron-left"></i> Python学习笔记【正则表达式】
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90XML%E8%A7%A3%E6%9E%90%E3%80%91/" rel="next" title="Python学习笔记【XML解析】">
+      Python学习笔记【XML解析】 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python3-%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">- Python3 多线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0Python%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">- 开始学习Python线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9D%97"><span class="nav-number">3.</span> <span class="nav-text">- 线程模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-threading-%E6%A8%A1%E5%9D%97%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">- 使用 threading 模块创建线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5"><span class="nav-number">5.</span> <span class="nav-text">- 线程同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97%EF%BC%88-Queue%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">- 线程优先级队列（ Queue）</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Weibo → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8SGHVqNSzlIvUsQekb6EVL2z-gzGzoHsz',
+      appKey     : 'kM6zUKBTanjH10n2gcXV8OTE',
+      placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+      avatar     : 'retro',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

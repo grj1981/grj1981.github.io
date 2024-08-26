@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+  <meta name="description" content="- Python3 字符串字符串是 Python 中最常用的数据类型。我们可以使用引号( ‘ 或 “ )来创建字符串。创建字符串很简单，只要为变量分配一个值即可。例如： 12var1 &#x3D; &#x27;Hello World!&#x27;var2 &#x3D; &quot;Runoob&quot;  - Python 访问字符串中的值Python 不支持单字符类型，单字符在 Python 中也是作为一个字符串">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python学习笔记【字符串】">
+<meta property="og:url" content="https://www.bytefisher.top/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/index.html">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="- Python3 字符串字符串是 Python 中最常用的数据类型。我们可以使用引号( ‘ 或 “ )来创建字符串。创建字符串很简单，只要为变量分配一个值即可。例如： 12var1 &#x3D; &#x27;Hello World!&#x27;var2 &#x3D; &quot;Runoob&quot;  - Python 访问字符串中的值Python 不支持单字符类型，单字符在 Python 中也是作为一个字符串">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-29T02:32:43.000Z">
+<meta property="article:modified_time" content="2024-08-26T09:55:57.311Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="IT">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.bytefisher.top/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Python学习笔记【字符串】 | ByteFisher</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <!--相册弹出js-->
+  <script type="text/javascript" src="/js/lightbox-plus-jquery.min.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">65</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python学习笔记【字符串】
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-29 10:32:43" itemprop="dateCreated datePublished" datetime="2023-05-29T10:32:43+08:00">2023-05-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【字符串】" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Python3-字符串"><a href="#Python3-字符串" class="headerlink" title="- Python3 字符串"></a>- Python3 字符串</h2><p>字符串是 Python 中最常用的数据类型。我们可以使用引号( ‘ 或 “ )来创建字符串。<br>创建字符串很简单，只要为变量分配一个值即可。例如：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27;</span><br><span class="line">var2 = &quot;Runoob&quot;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="Python-访问字符串中的值"><a href="#Python-访问字符串中的值" class="headerlink" title="- Python 访问字符串中的值"></a>- Python 访问字符串中的值</h2><p>Python 不支持单字符类型，单字符在 Python 中也是作为一个字符串使用。<br>Python 访问子字符串，可以使用方括号 [] 来截取字符串，字符串的截取的语法格式如下：</p>
+<pre><code>变量[头下标:尾下标]
+</code></pre>
+<p>索引值以 0 为开始值，-1 为从末尾的开始位置。</p>
+<p>如下实例：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27;</span><br><span class="line">var2 = &quot;Runoob&quot;</span><br><span class="line"> </span><br><span class="line">print (&quot;var1[0]: &quot;, var1[0])</span><br><span class="line">print (&quot;var2[1:5]: &quot;, var2[1:5])</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>以上实例执行结果：</p>
+<pre><code>var1[0]:  H
+var2[1:5]:  unoo
+</code></pre>
+<h2 id="Python-字符串更新"><a href="#Python-字符串更新" class="headerlink" title="- Python 字符串更新"></a>- Python 字符串更新</h2><p>你可以截取字符串的一部分并与其他字段拼接，如下实例：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27; </span><br><span class="line">print (&quot;已更新字符串 : &quot;, var1[:6] + &#x27;Runoob!&#x27;)</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>以上实例执行结果</p>
+<pre><code>已更新字符串 :  Hello Runoob!
+</code></pre>
+<span id="more"></span>
+<h2 id="Python-转义字符"><a href="#Python-转义字符" class="headerlink" title="- Python 转义字符"></a>- Python 转义字符</h2><p>在需要在字符中使用特殊字符时，python 用反斜杠 \ 转义字符。如下表：</p>
+<pre><code>\(在行尾时)	续行符	
+&gt;&gt;&gt; print(&quot;line1 \
+... line2 \
+... line3&quot;)
+line1 line2 line3
+&gt;&gt;&gt; 
+</code></pre>
+<hr>
+<pre><code>\\	反斜杠符号	
+&gt;&gt;&gt; print(&quot;\\&quot;)
+\
+&gt;&gt;&gt;
+</code></pre>
+<hr>
+<pre><code>\&#39;	单引号	
+&gt;&gt;&gt; print(&#39;\&#39;&#39;)
+&#39;
+</code></pre>
+<hr>
+<pre><code>\&quot;	双引号	
+&gt;&gt;&gt; print(&quot;\&quot;&quot;)
+&quot;
+</code></pre>
+<hr>
+<pre><code>\a	响铃	
+&gt;&gt;&gt; print(&quot;\a&quot;)执行后电脑有响声。
+</code></pre>
+<hr>
+<pre><code>\b	退格(Backspace)	
+&gt;&gt;&gt; print(&quot;Hello \b World!&quot;)
+Hello World!
+</code></pre>
+<hr>
+<pre><code>\000	空	
+&gt;&gt;&gt; print(&quot;\000&quot;)
+</code></pre>
+<hr>
+<pre><code>&gt;&gt;&gt; 
+\n	换行	
+&gt;&gt;&gt; print(&quot;\n&quot;)
+</code></pre>
+<hr>
+<pre><code>&gt;&gt;&gt;
+\v	纵向制表符	
+&gt;&gt;&gt; print(&quot;Hello \v World!&quot;)
+Hello 
+       World!
+&gt;&gt;&gt;
+</code></pre>
+<hr>
+<pre><code>\t	横向制表符	
+&gt;&gt;&gt; print(&quot;Hello \t World!&quot;)
+Hello      World!
+&gt;&gt;&gt;
+</code></pre>
+<hr>
+<pre><code>\r	回车，将 \r 后面的内容移到字符串开头，并逐一替换开头部分的字符，直至将 \r 后面的内容完全替换完成。	
+&gt;&gt;&gt; print(&quot;Hello\rWorld!&quot;)
+World!
+&gt;&gt;&gt; print(&#39;google runoob taobao\r123456&#39;)
+123456 runoob taobao
+</code></pre>
+<hr>
+<pre><code>\f	换页	
+&gt;&gt;&gt; print(&quot;Hello \f World!&quot;)
+Hello 
+       World!
+&gt;&gt;&gt; 
+</code></pre>
+<hr>
+<pre><code>\yyy	八进制数，y 代表 0~7 的字符，例如：\012 代表换行。	
+&gt;&gt;&gt; print(&quot;\110\145\154\154\157\40\127\157\162\154\144\41&quot;)
+Hello World!
+</code></pre>
+<hr>
+<pre><code>\xyy	十六进制数，以 \x 开头，y 代表的字符，例如：\x0a 代表换行	
+&gt;&gt;&gt; print(&quot;\x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64\x21&quot;)
+Hello World!
+</code></pre>
+<hr>
+<pre><code>\other	其它的字符以普通格式输出	 
+</code></pre>
+<p><strong>使用 \r 实现百分比进度实例：</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line"></span><br><span class="line">for i in range(101):</span><br><span class="line">    print(&quot;\r&#123;:3&#125;%&quot;.format(i),end=&#x27; &#x27;)</span><br><span class="line">    time.sleep(0.05)</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>以下实例，我们使用了不同的转义字符来演示单引号、换行符、制表符、退格符、换页符、ASCII、二进制、八进制数和十六进制数的效果：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">print(&#x27;\&#x27;Hello, world!\&#x27;&#x27;)  # 输出：&#x27;Hello, world!&#x27;</span><br><span class="line"></span><br><span class="line">print(&quot;Hello, world!\nHow are you?&quot;)  # 输出：Hello, world!</span><br><span class="line">                                        #       How are you?</span><br><span class="line"></span><br><span class="line">print(&quot;Hello, world!\tHow are you?&quot;)  # 输出：Hello, world!    How are you?</span><br><span class="line"></span><br><span class="line">print(&quot;Hello,\b world!&quot;)  # 输出：Hello world!</span><br><span class="line"></span><br><span class="line">print(&quot;Hello,\f world!&quot;)  # 输出：</span><br><span class="line">                           # Hello,</span><br><span class="line">                           #  world!</span><br><span class="line"></span><br><span class="line">print(&quot;A 对应的 ASCII 值为：&quot;, ord(&#x27;A&#x27;))  # 输出：A 对应的 ASCII 值为： 65</span><br><span class="line"></span><br><span class="line">print(&quot;\x41 为 A 的 ASCII 代码&quot;)  # 输出：A 为 A 的 ASCII 代码</span><br><span class="line"></span><br><span class="line">decimal_number = 42</span><br><span class="line">binary_number = bin(decimal_number)  # 十进制转换为二进制</span><br><span class="line">print(&#x27;转换为二进制:&#x27;, binary_number)  # 转换为二进制: 0b101010</span><br><span class="line"></span><br><span class="line">octal_number = oct(decimal_number)  # 十进制转换为八进制</span><br><span class="line">print(&#x27;转换为八进制:&#x27;, octal_number)  # 转换为八进制: 0o52</span><br><span class="line"></span><br><span class="line">hexadecimal_number = hex(decimal_number)  # 十进制转换为十六进制</span><br><span class="line">print(&#x27;转换为十六进制:&#x27;, hexadecimal_number) # 转换为十六进制: 0x2a</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="Python-字符串运算符"><a href="#Python-字符串运算符" class="headerlink" title="- Python 字符串运算符"></a>- Python 字符串运算符</h2><p>下表实例变量 a 值为字符串 “Hello”，b 变量值为 “Python”：</p>
+<p>操作符 描述 实例</p>
+<pre><code>+	字符串连接	a + b 输出结果： HelloPython
+*	重复输出字符串	a*2 输出结果：HelloHello
+[]	通过索引获取字符串中字符	a[1] 输出结果 e
+[ : ]	截取字符串中的一部分，遵循左闭右开原则，str[0:2] 是不包含第 3 个字符的。	a[1:4] 输出结果 ell
+in	成员运算符 - 如果字符串中包含给定的字符返回 True	&#39;H&#39; in a 输出结果 True
+not in	成员运算符 - 如果字符串中不包含给定的字符返回 True	&#39;M&#39; not in a 输出结果 True
+r/R	原始字符串 - 原始字符串：所有的字符串都是直接按照字面的意思来使用，没有转义特殊或不能打印的字符。 
+        原始字符串除在字符串的第一个引号前加上字母 r（可以大小写）以外，与普通字符串有着几乎完全相同的语法。	
+print( r&#39;\n&#39; )
+print( R&#39;\n&#39; )
+%	格式字符串 请看下一节内容。
+</code></pre>
+<p>**实例(Python 3.0+)**：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">a = &quot;Hello&quot;</span><br><span class="line">b = &quot;Python&quot;</span><br><span class="line"> </span><br><span class="line">print(&quot;a + b 输出结果：&quot;, a + b)</span><br><span class="line">print(&quot;a * 2 输出结果：&quot;, a * 2)</span><br><span class="line">print(&quot;a[1] 输出结果：&quot;, a[1])</span><br><span class="line">print(&quot;a[1:4] 输出结果：&quot;, a[1:4])</span><br><span class="line"> </span><br><span class="line">if( &quot;H&quot; in a) :</span><br><span class="line">    print(&quot;H 在变量 a 中&quot;)</span><br><span class="line">else :</span><br><span class="line">    print(&quot;H 不在变量 a 中&quot;)</span><br><span class="line"> </span><br><span class="line">if( &quot;M&quot; not in a) :</span><br><span class="line">    print(&quot;M 不在变量 a 中&quot;)</span><br><span class="line">else :</span><br><span class="line">    print(&quot;M 在变量 a 中&quot;)</span><br><span class="line"> </span><br><span class="line">print (r&#x27;\n&#x27;)</span><br><span class="line">print (R&#x27;\n&#x27;)</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>以上实例输出结果为：</p>
+<pre><code>a + b 输出结果： HelloPython
+a * 2 输出结果： HelloHello
+a[1] 输出结果： e
+a[1:4] 输出结果： ell
+H 在变量 a 中
+M 不在变量 a 中
+\n
+\n
+</code></pre>
+<h2 id="Python-字符串格式化"><a href="#Python-字符串格式化" class="headerlink" title="- Python 字符串格式化"></a>- Python 字符串格式化</h2><p>Python 支持格式化字符串的输出 。尽管这样可能会用到非常复杂的表达式，但最基本的用法是将一个值插入到一个有字符串格式符 %s<br>的字符串中。</p>
+<p>在 Python 中，字符串格式化使用与 C 中 sprintf 函数一样的语法。</p>
+<p><strong>实例(Python 3.0+)：</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print (&quot;我叫 %s 今年 %d 岁!&quot; % (&#x27;小明&#x27;, 10))</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>以上实例输出结果：</p>
+<pre><code>我叫 小明 今年 10 岁!
+</code></pre>
+<p><strong>python字符串格式化符号:</strong></p>
+<pre><code>符   号	描述
+  %c	 格式化字符及其ASCII码
+  %s	 格式化字符串
+  %d	 格式化整数
+  %u	 格式化无符号整型
+  %o	 格式化无符号八进制数
+  %x	 格式化无符号十六进制数
+  %X	 格式化无符号十六进制数（大写）
+  %f	 格式化浮点数字，可指定小数点后的精度
+  %e	 用科学计数法格式化浮点数
+  %E	 作用同%e，用科学计数法格式化浮点数
+  %g	 %f和%e的简写
+  %G	 %f 和 %E 的简写
+  %p	 用十六进制数格式化变量的地址
+</code></pre>
+<p><strong>格式化操作符辅助指令:</strong></p>
+<p>符号	功能</p>
+<pre><code>*	定义宽度或者小数点精度
+-	用做左对齐
++	在正数前面显示加号( + )
+&lt;sp&gt;	在正数前面显示空格
+#	在八进制数前面显示零(&#39;0&#39;)，在十六进制前面显示&#39;0x&#39;或者&#39;0X&#39;(取决于用的是&#39;x&#39;还是&#39;X&#39;)
+0	显示的数字前面填充&#39;0&#39;而不是默认的空格
+%	&#39;%%&#39;输出一个单一的&#39;%&#39;
+(var)	映射变量(字典参数)
+m.n.	m 是显示的最小总宽度,n 是小数点后的位数(如果可用的话)
+Python2.6 开始，新增了一种格式化字符串的函数 str.format()，它增强了字符串格式化的功能。
+</code></pre>
+<h2 id="Python三引号"><a href="#Python三引号" class="headerlink" title="- Python三引号"></a>- Python三引号</h2><p>python三引号允许一个字符串跨多行，字符串中可以包含换行符、制表符以及其他特殊字符。实例如下</p>
+<p><strong>实例(Python 3.0+)：</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">para_str = &quot;&quot;&quot;这是一个多行字符串的实例</span><br><span class="line">多行字符串可以使用制表符</span><br><span class="line">TAB ( \t )。</span><br><span class="line">也可以使用换行符 [ \n ]。</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">print (para_str)</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>以上实例执行结果为：</p>
+<pre><code>这是一个多行字符串的实例
+多行字符串可以使用制表符
+TAB (    )。
+也可以使用换行符 [ 
+ ]。
+</code></pre>
+<p>三引号让程序员从引号和特殊字符串的泥潭里面解脱出来，自始至终保持一小块字符串的格式是所谓的WYSIWYG（所见即所得）格式的。</p>
+<p>一个典型的用例是，当你需要一块HTML或者SQL时，这时用字符串组合，特殊字符串转义将会非常的繁琐。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">errHTML = &#x27;&#x27;&#x27;</span><br><span class="line">&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;</span><br><span class="line">Friends CGI Demo&lt;/TITLE&gt;&lt;/HEAD&gt;</span><br><span class="line">&lt;BODY&gt;&lt;H3&gt;ERROR&lt;/H3&gt;</span><br><span class="line">&lt;B&gt;%s&lt;/B&gt;&lt;P&gt;</span><br><span class="line">&lt;FORM&gt;&lt;INPUT TYPE=button VALUE=Back</span><br><span class="line">ONCLICK=&quot;window.history.back()&quot;&gt;&lt;/FORM&gt;</span><br><span class="line">&lt;/BODY&gt;&lt;/HTML&gt;</span><br><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line">cursor.execute(&#x27;&#x27;&#x27;</span><br><span class="line">CREATE TABLE users (  </span><br><span class="line">login VARCHAR(8), </span><br><span class="line">uid INTEGER,</span><br><span class="line">prid INTEGER)</span><br><span class="line">&#x27;&#x27;&#x27;)</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p><strong>f-string</strong><br>f-string 是 python3.6 之后版本添加的，称之为字面量格式化字符串，是新的格式化字符串的语法。</p>
+<p>之前我们习惯用百分号 (%):</p>
+<p>实例：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; name = &#x27;Runoob&#x27;</span><br><span class="line">&gt;&gt;&gt; &#x27;Hello %s&#x27; % name</span><br><span class="line">&#x27;Hello Runoob&#x27;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>f-string 格式化字符串以 f 开头，后面跟着字符串，字符串中的表达式用大括号 {} 包起来，它会将变量或表达式计算后的值替换进去，实例如下：</p>
+<p><strong>实例</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; name = &#x27;Runoob&#x27;</span><br><span class="line">&gt;&gt;&gt; f&#x27;Hello &#123;name&#125;&#x27;  # 替换变量</span><br><span class="line">&#x27;Hello Runoob&#x27;</span><br><span class="line">&gt;&gt;&gt; f&#x27;&#123;1+2&#125;&#x27;         # 使用表达式</span><br><span class="line">&#x27;3&#x27;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; w = &#123;&#x27;name&#x27;: &#x27;Runoob&#x27;, &#x27;url&#x27;: &#x27;www.runoob.com&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; f&#x27;&#123;w[&quot;name&quot;]&#125;: &#123;w[&quot;url&quot;]&#125;&#x27;</span><br><span class="line">&#x27;Runoob: www.runoob.com&#x27;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>用了这种方式明显更简单了，不用再去判断使用 %s，还是 %d。</p>
+<p>在 Python 3.8 的版本中可以使用 &#x3D; 符号来拼接运算表达式与结果：</p>
+<p><strong>实例</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; x = 1</span><br><span class="line">&gt;&gt;&gt; print(f&#x27;&#123;x+1&#125;&#x27;)   # Python 3.6</span><br><span class="line">2</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; x = 1</span><br><span class="line">&gt;&gt;&gt; print(f&#x27;&#123;x+1=&#125;&#x27;)   # Python 3.8</span><br><span class="line">x+1=2</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p><strong>Unicode 字符串</strong><br>在Python2中，普通字符串是以8位ASCII码进行存储的，而Unicode字符串则存储为16位unicode字符串，这样能够表示更多的字符集。使用的语法是在字符串前面加上前缀 u。</p>
+<p>在Python3中，所有的字符串都是Unicode字符串。</p>
+<h2 id="Python-的字符串内建函数"><a href="#Python-的字符串内建函数" class="headerlink" title="- Python 的字符串内建函数"></a>- Python 的字符串内建函数</h2><p>Python 的字符串常用内建函数如下：</p>
+<p>序号	方法及描述</p>
+<pre><code>1	
+capitalize()
+将字符串的第一个字符转换为大写
+</code></pre>
+<hr>
+<pre><code>2	
+center(width, fillchar)
+
+返回一个指定的宽度 width 居中的字符串，fillchar 为填充的字符，默认为空格。
+</code></pre>
+<hr>
+<pre><code>3	
+count(str, beg= 0,end=len(string))
+
+
+返回 str 在 string 里面出现的次数，如果 beg 或者 end 指定则返回指定范围内 str 出现的次数
+</code></pre>
+<hr>
+<pre><code>4	
+bytes.decode(encoding=&quot;utf-8&quot;, errors=&quot;strict&quot;)
+
+
+Python3 中没有 decode 方法，但我们可以使用 bytes 对象的 decode() 方法来解码给定的 bytes 对象，这个 bytes 
+对象可以由 str.encode() 来编码返回。
+</code></pre>
+<hr>
+<pre><code>5	
+encode(encoding=&#39;UTF-8&#39;,errors=&#39;strict&#39;)
+
+
+以 encoding 指定的编码格式编码字符串，如果出错默认报一个ValueError 的异常，除非 errors 指定的是&#39;ignore&#39;
+或者&#39;replace&#39;
+</code></pre>
+<hr>
+<pre><code>6	
+endswith(suffix, beg=0, end=len(string))
+检查字符串是否以 suffix 结束，如果 beg 或者 end 指定则检查指定的范围内是否以 suffix 结束，如果是，返回 True,
+否则返回 False。
+</code></pre>
+<hr>
+<pre><code>7	
+expandtabs(tabsize=8)
+
+
+把字符串 string 中的 tab 符号转为空格，tab 符号默认的空格数是 8 。
+</code></pre>
+<hr>
+<pre><code>8	
+find(str, beg=0, end=len(string))
+
+
+检测 str 是否包含在字符串中，如果指定范围 beg 和 end ，则检查是否包含在指定范围内，如果包含返回开始的索引值，
+否则返回-1
+</code></pre>
+<hr>
+<pre><code>9	
+index(str, beg=0, end=len(string))
+
+
+跟find()方法一样，只不过如果str不在字符串中会报一个异常。
+</code></pre>
+<hr>
+<pre><code>10	
+isalnum()
+
+
+如果字符串至少有一个字符并且所有字符都是字母或数字则返 回 True，否则返回 False
+</code></pre>
+<hr>
+<pre><code>11	
+isalpha()
+
+
+如果字符串至少有一个字符并且所有字符都是字母或中文字则返回 True, 否则返回 False
+</code></pre>
+<hr>
+<pre><code>12	
+isdigit()
+
+
+如果字符串只包含数字则返回 True 否则返回 False..
+</code></pre>
+<hr>
+<pre><code>13	
+islower()
+
+
+如果字符串中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是小写，则返回 True，否则返回 False
+</code></pre>
+<hr>
+<pre><code>14	
+isnumeric()
+
+
+如果字符串中只包含数字字符，则返回 True，否则返回 False
+</code></pre>
+<hr>
+<pre><code>15	
+isspace()
+
+
+如果字符串中只包含空白，则返回 True，否则返回 False.
+</code></pre>
+<hr>
+<pre><code>16	
+istitle()
+
+
+如果字符串是标题化的(见 title())则返回 True，否则返回 False
+</code></pre>
+<hr>
+<pre><code>17	
+isupper()
+
+
+如果字符串中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是大写，则返回 True，否则返回 False
+</code></pre>
+<hr>
+<pre><code>18	
+join(seq)
+
+
+以指定字符串作为分隔符，将 seq 中所有的元素(的字符串表示)合并为一个新的字符串
+</code></pre>
+<hr>
+<pre><code>19	
+len(string)
+
+
+返回字符串长度
+</code></pre>
+<hr>
+<pre><code>20	
+ljust(width[, fillchar])
+
+
+返回一个原字符串左对齐,并使用 fillchar 填充至长度 width 的新字符串，fillchar 默认为空格。
+</code></pre>
+<hr>
+<pre><code>21	
+lower()
+
+
+转换字符串中所有大写字符为小写.
+</code></pre>
+<hr>
+<pre><code>22	
+lstrip()
+
+
+截掉字符串左边的空格或指定字符。
+</code></pre>
+<hr>
+<pre><code>23	
+maketrans()
+
+
+创建字符映射的转换表，对于接受两个参数的最简单的调用方式，第一个参数是字符串，表示需要转换的字符，第二个参数也
+是字符串表示转换的目标。
+</code></pre>
+<hr>
+<pre><code>24	
+max(str)
+
+
+返回字符串 str 中最大的字母。
+</code></pre>
+<hr>
+<pre><code>25	
+min(str)
+
+
+返回字符串 str 中最小的字母。
+</code></pre>
+<hr>
+<pre><code>26	
+replace(old, new [, max])
+
+
+把 将字符串中的 old 替换成 new,如果 max 指定，则替换不超过 max 次。
+</code></pre>
+<hr>
+<pre><code>27	
+rfind(str, beg=0,end=len(string))
+
+
+类似于 find()函数，不过是从右边开始查找.
+</code></pre>
+<hr>
+<pre><code>28	
+rindex( str, beg=0, end=len(string))
+
+
+类似于 index()，不过是从右边开始.
+</code></pre>
+<hr>
+<pre><code>29	
+rjust(width,[, fillchar])
+
+
+返回一个原字符串右对齐,并使用fillchar(默认空格）填充至长度 width 的新字符串
+</code></pre>
+<hr>
+<pre><code>30	
+rstrip()
+
+
+删除字符串末尾的空格或指定字符。
+</code></pre>
+<hr>
+<pre><code>31	
+split(str=&quot;&quot;, num=string.count(str))
+
+
+以 str 为分隔符截取字符串，如果 num 有指定值，则仅截取 num+1 个子字符串
+</code></pre>
+<hr>
+<pre><code>32	
+splitlines([keepends])
+
+
+按照行(&#39;\r&#39;, &#39;\r\n&#39;, \n&#39;)分隔，返回一个包含各行作为元素的列表，如果参数 keepends 为 False，不包含换行
+符，如果为 True，则保留换行符。
+</code></pre>
+<hr>
+<pre><code>33	
+startswith(substr, beg=0,end=len(string))
+
+
+检查字符串是否是以指定子字符串 substr 开头，是则返回 True，否则返回 False。如果beg 和 end 指定值，则在指定
+范围内检查。
+</code></pre>
+<hr>
+<pre><code>34	
+strip([chars])
+
+
+在字符串上执行 lstrip()和 rstrip()
+</code></pre>
+<hr>
+<pre><code>35	
+swapcase()
+
+
+将字符串中大写转换为小写，小写转换为大写
+</code></pre>
+<hr>
+<pre><code>36	
+title()
+
+
+返回&quot;标题化&quot;的字符串,就是说所有单词都是以大写开始，其余字母均为小写(见 istitle())
+</code></pre>
+<hr>
+<pre><code>37	
+translate(table, deletechars=&quot;&quot;)
+
+
+根据 table 给出的表(包含 256 个字符)转换 string 的字符, 要过滤掉的字符放到 deletechars 参数中
+</code></pre>
+<hr>
+<pre><code>38	
+upper()
+
+
+转换字符串中的小写字母为大写
+</code></pre>
+<hr>
+<pre><code>39	
+zfill (width)
+
+
+返回长度为 width 的字符串，原字符串右对齐，前面填充0
+</code></pre>
+<hr>
+<pre><code>40	
+isdecimal()
+
+
+检查字符串是否只包含十进制字符，如果是返回 true，否则返回 false。
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/05/16/git%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/" rel="prev" title="git相关操作整理">
+      <i class="fa fa-chevron-left"></i> git相关操作整理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%88%97%E8%A1%A8%E3%80%91/" rel="next" title="Python学习笔记【列表】">
+      Python学习笔记【列表】 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python3-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.</span> <span class="nav-text">- Python3 字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-%E8%AE%BF%E9%97%AE%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%80%BC"><span class="nav-number">2.</span> <span class="nav-text">- Python 访问字符串中的值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9B%B4%E6%96%B0"><span class="nav-number">3.</span> <span class="nav-text">- Python 字符串更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="nav-number">4.</span> <span class="nav-text">- Python 转义字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.</span> <span class="nav-text">- Python 字符串运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="nav-number">6.</span> <span class="nav-text">- Python 字符串格式化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python%E4%B8%89%E5%BC%95%E5%8F%B7"><span class="nav-number">7.</span> <span class="nav-text">- Python三引号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0"><span class="nav-number">8.</span> <span class="nav-text">- Python 的字符串内建函数</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Weibo → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8SGHVqNSzlIvUsQekb6EVL2z-gzGzoHsz',
+      appKey     : 'kM6zUKBTanjH10n2gcXV8OTE',
+      placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+      avatar     : 'retro',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

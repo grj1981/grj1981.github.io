@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+  <meta name="description" content="Lua实现Unity堆叠消除小游戏，游戏功能每次随机生成四个不同形状的方块，将方块拖入10*10的格子棋盘，如果放入的棋盘格都有空格则可以放入方块，当放满一行或者一列时，消除满行满列的放入格。 - 创建拼图地图格数据123456789101112131415161718192021222324252627---拼图地图格数据---@class ROPuzzleMapTileDatalocal m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua实现Unity堆叠消除小游戏摘要">
+<meta property="og:url" content="https://www.bytefisher.top/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/index.html">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="Lua实现Unity堆叠消除小游戏，游戏功能每次随机生成四个不同形状的方块，将方块拖入10*10的格子棋盘，如果放入的棋盘格都有空格则可以放入方块，当放满一行或者一列时，消除满行满列的放入格。 - 创建拼图地图格数据123456789101112131415161718192021222324252627---拼图地图格数据---@class ROPuzzleMapTileDatalocal m">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-01-31T10:11:16.000Z">
+<meta property="article:modified_time" content="2024-08-26T09:55:57.307Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="Unity3D">
+<meta property="article:tag" content="IT">
+<meta property="article:tag" content="Lua">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.bytefisher.top/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Lua实现Unity堆叠消除小游戏摘要 | ByteFisher</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <!--相册弹出js-->
+  <script type="text/javascript" src="/js/lightbox-plus-jquery.min.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">65</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Lua实现Unity堆叠消除小游戏摘要
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-31 18:11:16" itemprop="dateCreated datePublished" datetime="2024-01-31T18:11:16+08:00">2024-01-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity堆叠消除小游戏摘要" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Lua实现Unity堆叠消除小游戏，游戏功能每次随机生成四个不同形状的方块，将方块拖入10*10的格子棋盘，如果放入的棋盘格都有空格则可以放入方块，当放满一行或者一列时，消除满行满列的放入格。</p>
+<h2 id="创建拼图地图格数据"><a href="#创建拼图地图格数据" class="headerlink" title="- 创建拼图地图格数据"></a>- 创建拼图地图格数据</h2><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">---拼图地图格数据</span><br><span class="line">---@class ROPuzzleMapTileData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type number 位置标记</span><br><span class="line">    index = 0,</span><br><span class="line">    ---@type number 所在行</span><br><span class="line">    x = 0,</span><br><span class="line">    ---@type number 所在列</span><br><span class="line">    y = 0,</span><br><span class="line">    ---@type number 地图格上放置的方块ID  为0 表示空格</span><br><span class="line">    blockId = 0,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(index,x,y,id)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(index,x,y,id)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(index,x,y,id)</span><br><span class="line">    self.index = index</span><br><span class="line">    self.x = x</span><br><span class="line">    self.y = y</span><br><span class="line">    self.blockId = id</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="创建拼图游戏数据结构"><a href="#创建拼图游戏数据结构" class="headerlink" title="- 创建拼图游戏数据结构"></a>- 创建拼图游戏数据结构</h2><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line">---@class ROPuzzleGameData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type CfgRestaurantOperationPuzzleControlData</span><br><span class="line">    cfgPuzzleGameControlData = nil,</span><br><span class="line">    ---@type number 当前积分</span><br><span class="line">    score = 0,</span><br><span class="line">    ---@type ROPuzzleMapTileData[]</span><br><span class="line">    tileMaps = &#123;&#125;,</span><br><span class="line">    ---@type number 最大行数</span><br><span class="line">    maxLine = 10,</span><br><span class="line">    ---@type number 最大列数</span><br><span class="line">    maxColumn = 10,</span><br><span class="line">    ---@type number 单次生成的方块数量(上限为4)</span><br><span class="line">    randomBlock = &#123;&#125;,</span><br><span class="line">    ---@type boolean 游戏是否已经开始（点了开始按钮视为游戏开始）</span><br><span class="line">    isGameStart = false,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">local ROPuzzleMapTileData = require(&quot;IQIGame.Module.CommonActivity.RestaurantOperation.ROPuzzleGame.ROPuzzleMapTileData&quot;)</span><br><span class="line"></span><br><span class="line">function m.New(cfgData)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(cfgData)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(cfgData)</span><br><span class="line">    self.score = 0</span><br><span class="line">    self.cfgPuzzleGameControlData = cfgData</span><br><span class="line">    self.tileMaps = self:CreateTiles()</span><br><span class="line">    self.isGameStart = true</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---开始新游戏，创建拼图地图</span><br><span class="line">function m:CreateTiles()</span><br><span class="line">    local tab = &#123;&#125;</span><br><span class="line">    local index = 0</span><br><span class="line">    for line = 1, self.maxLine do</span><br><span class="line">        for column = 1, self.maxColumn do</span><br><span class="line">            index = index + 1</span><br><span class="line">            local tileData = ROPuzzleMapTileData.New(index,line,column,0)</span><br><span class="line">            tab[index] = tileData</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    return tab</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---随机生成四个方块</span><br><span class="line">function m:RefreshRandomBlock()</span><br><span class="line">    self.randomBlock = &#123;&#125;</span><br><span class="line">    local blockGroup = table.clone(self.cfgPuzzleGameControlData.BlockGroup)</span><br><span class="line">    ---洗牌操作</span><br><span class="line">    for i = #blockGroup, 2, -1 do</span><br><span class="line">        local random_index = math.random(i)</span><br><span class="line">        blockGroup[i], blockGroup[random_index] = blockGroup[random_index],blockGroup[i]</span><br><span class="line">    end</span><br><span class="line">    ---根据配置数据取方块</span><br><span class="line">    for i = 1, self.cfgPuzzleGameControlData.BlockNum do</span><br><span class="line">        local id = blockGroup[i]</span><br><span class="line">        table.insert(self.randomBlock,id)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---消除满行满列，并返回消除的行列</span><br><span class="line">---@return number, number[],number[] 消除的总行数，同时消除的行和列</span><br><span class="line">function m:Eliminate()</span><br><span class="line">    local lines = &#123;&#125;</span><br><span class="line">    local columns = &#123;&#125;</span><br><span class="line">    ---行检测</span><br><span class="line">    for i = 1, self.maxLine do</span><br><span class="line">        local isFull = true</span><br><span class="line">        for j = 1, self.maxColumn do</span><br><span class="line">            local pos = (i-1) * self.maxLine + j</span><br><span class="line">            if self.tileMaps[pos].blockId == 0 then</span><br><span class="line">                isFull = false</span><br><span class="line">                break</span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">        if isFull then</span><br><span class="line">            table.insert(lines,i)</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    ---列检测</span><br><span class="line">    for j = 1, self.maxColumn do</span><br><span class="line">        local isFull = true</span><br><span class="line">        for i = 1, self.maxLine do</span><br><span class="line">            local pos = (i-1) * self.maxLine + j</span><br><span class="line">            if self.tileMaps[pos].blockId == 0 then</span><br><span class="line">                isFull = false</span><br><span class="line">                break</span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">        if isFull then</span><br><span class="line">            table.insert(columns,j)</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    local totalNum = #lines + #columns</span><br><span class="line">    return totalNum,lines,columns</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---增加积分</span><br><span class="line">---@param score number</span><br><span class="line">function m:AddScore(score)</span><br><span class="line">    self.score = self.score + score</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---检测方块还有没有空地能放下</span><br><span class="line">---@param blockCell PuzzleGameBlockCell</span><br><span class="line">---@return boolean</span><br><span class="line">function m:CheckBlockCellCanPutDown(blockCell)</span><br><span class="line">    local posTab = blockCell.blockData</span><br><span class="line">    for i, tileData in pairs(self.tileMaps) do</span><br><span class="line">        ---找到了一个空格子</span><br><span class="line">        local canPutDown = false</span><br><span class="line">        if tileData.blockId == 0 then</span><br><span class="line">            ---所有检测点都满足返回true</span><br><span class="line">            for j, pos in pairs(posTab) do</span><br><span class="line"></span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    return false</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>通过调用RefreshRandomBlock()方法，每次随机生成不重复的四个方块</p>
+<span id="more"></span>
+
+<h2 id="创建地图格控件"><a href="#创建地图格控件" class="headerlink" title="- 创建地图格控件"></a>- 创建地图格控件</h2><p>根据ROPuzzleMapTileData数据生成地图格PuzzleGameMapTileCell。地图格包含背景，拖动经过效果，放入拖动方块三个节点，根据不同状态显示不同节点表现</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">---@class PuzzleGameMapTileCell</span><br><span class="line">local m = &#123;</span><br><span class="line">    View = nil,</span><br><span class="line">    ---@type ROPuzzleMapTileData</span><br><span class="line">    tileData = nil,</span><br><span class="line">    ---@type UnityEngine.Collider2D</span><br><span class="line">    collider2D = nil</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(view)</span><br><span class="line">    local obj = Clone(m)</span><br><span class="line">    obj:Init(view)</span><br><span class="line">    return obj</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(view)</span><br><span class="line">    self.View = view</span><br><span class="line">    LuaCodeInterface.BindOutlet(self.View, self)</span><br><span class="line"></span><br><span class="line">    self.Effect:SetActive(false)</span><br><span class="line"></span><br><span class="line">    self.collider2D = self.View:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line"></span><br><span class="line">    self:AddListener()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:AddListener()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:RemoveListener()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@param data ROPuzzleMapTileData</span><br><span class="line">function m:SetData(data)</span><br><span class="line">    self.tileData = data</span><br><span class="line">    self.View.name = self.tileData.index</span><br><span class="line">    self:UpdateView()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:ShowPassNode(top)</span><br><span class="line">    self.PassNode:SetActive(top)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:UpdateView()</span><br><span class="line">    self:ShowPassNode(false)</span><br><span class="line">    self.ImgBlock:SetActive(self.tileData.blockId &gt; 0)</span><br><span class="line">    if self.tileData.blockId &gt; 0 then</span><br><span class="line">        ---@type CfgRestaurantOperationBlockListData</span><br><span class="line">        local cfgData = CfgRestaurantOperationBlockListTable[self.tileData.blockId]</span><br><span class="line">        local path = UIGlobalApi.GetImagePath(cfgData.ImageRes)</span><br><span class="line">        AssetUtil.LoadImage(self,path,self.ImgBlock:GetComponent(&quot;Image&quot;))</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---播放成功消除特效</span><br><span class="line">function m:PlayEffect()</span><br><span class="line">    if self.timer then</span><br><span class="line">        self.timer:Stop()</span><br><span class="line">    end</span><br><span class="line">    self.Effect:SetActive(true)</span><br><span class="line">    self.timer = Timer.New(function ()</span><br><span class="line">        self.Effect:SetActive(false)</span><br><span class="line">    end,0.5)</span><br><span class="line">    self.timer:Start()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Dispose()</span><br><span class="line">    AssetUtil.UnloadAsset(self)</span><br><span class="line">    self:RemoveListener()</span><br><span class="line">    if self.timer then</span><br><span class="line">        self.timer:Stop()</span><br><span class="line">    end</span><br><span class="line">    self.timer = nil</span><br><span class="line"></span><br><span class="line">    LuaCodeInterface.ClearOutlet(self.View, self)</span><br><span class="line">    UnityEngine.Object.Destroy(self.View)</span><br><span class="line">    self.collider2D = nil</span><br><span class="line">    self.View = nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="创建随机生成的方块控件"><a href="#创建随机生成的方块控件" class="headerlink" title="- 创建随机生成的方块控件"></a>- 创建随机生成的方块控件</h2><p>通过prefab实例化不同的方块控件，每个方块包含多个小方格，每个小方格通过name属性标记位置，布置成各种形状。小方格挂Collider2D组件，用来检测拖动过程中和地图格进行碰撞检测</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">---拼图游戏随机生的方块格</span><br><span class="line">---@class PuzzleGameBlockCell</span><br><span class="line">local m = &#123;</span><br><span class="line">    View = nil,</span><br><span class="line">    ---@type number</span><br><span class="line">    cid = nil,</span><br><span class="line">    ---@type function</span><br><span class="line">    onDrag = nil,</span><br><span class="line">    ---@type function</span><br><span class="line">    endDrag = nil,</span><br><span class="line">    ---@type UnityEngine.Collider2D</span><br><span class="line">    collider2DList = &#123;&#125;,</span><br><span class="line">    ---@type number 方块的组成格数量</span><br><span class="line">    blockNum = 0,</span><br><span class="line">    ---@type boolean 是否被成功放入棋盘</span><br><span class="line">    isPutDown = false,</span><br><span class="line">    ---@type table&lt;number,number&gt; []方块模型的占位信息</span><br><span class="line">    blockData = &#123;&#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(view)</span><br><span class="line">    local obj = Clone(m)</span><br><span class="line">    obj:Init(view)</span><br><span class="line">    return obj</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(view)</span><br><span class="line">    self.View = view</span><br><span class="line">    LuaCodeInterface.BindOutlet(self.View, self)</span><br><span class="line"></span><br><span class="line">    self.blockData = &#123;&#125;</span><br><span class="line">    self.blockNum = self.View.transform.childCount</span><br><span class="line">    for i = 0, self.View.transform.childCount - 1 do</span><br><span class="line">        local childObj = self.View.transform:GetChild(i).gameObject</span><br><span class="line">        local collider = childObj:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line">        self.collider2DList[i] = collider</span><br><span class="line"></span><br><span class="line">        local nameStr = childObj.name</span><br><span class="line">        local posTab = string.split(nameStr,&quot;_&quot;)</span><br><span class="line">        table.insert(self.blockData,&#123;tonumber(posTab[1]),tonumber(posTab[2])&#125;)</span><br><span class="line">    end</span><br><span class="line"></span><br><span class="line">    self.View:GetComponent(&quot;UIDrag&quot;).onBeginDrag = function(eventData) self:OnBeginDrag(eventData) end</span><br><span class="line">    self.View:GetComponent(&quot;UIDrag&quot;).onDrag = function(pointerEventData) self:OnDrag(pointerEventData) end</span><br><span class="line">    self.View:GetComponent(&quot;UIDrag&quot;).onReachTargetSuccess = function(eventData) self:OnDragSuccess(eventData) end</span><br><span class="line">    self.View:GetComponent(&quot;UIDrag&quot;).onReachTargetFailure = function(eventData) self:OnFailure(eventData) end</span><br><span class="line"></span><br><span class="line">    self:AddListener()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:AddListener()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:RemoveListener()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnBeginDrag()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnDrag(eventData)</span><br><span class="line">    if self.onDrag then</span><br><span class="line">        self.onDrag(self)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnDragSuccess(eventData)</span><br><span class="line">    if self.endDrag then</span><br><span class="line">        self.endDrag(self)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnFailure(eventData)</span><br><span class="line">    self.View.transform.position = self.startPos</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---成功放入棋盘准备回收</span><br><span class="line">function m:PutDownMap()</span><br><span class="line">    self.isPutDown = true</span><br><span class="line">    self.View:SetActive(false)</span><br><span class="line">    self.View.transform.position = self.startPos</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@param id number</span><br><span class="line">function m:SetData(id)</span><br><span class="line">    self.isPutDown = false</span><br><span class="line">    self.cid = id</span><br><span class="line">    self.startPos = self.View.transform.position</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Dispose()</span><br><span class="line">    self.collider2DList = &#123;&#125;</span><br><span class="line">    AssetUtil.UnloadAsset(self)</span><br><span class="line">    self:RemoveListener()</span><br><span class="line"></span><br><span class="line">    LuaCodeInterface.ClearOutlet(self.View, self)</span><br><span class="line">    UnityEngine.Object.Destroy(self.View)</span><br><span class="line">    self.View = nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="游戏流程实现"><a href="#游戏流程实现" class="headerlink" title="- 游戏流程实现"></a>- 游戏流程实现</h2><p>点击开始游戏，根据游戏数据创建地图，生成随机方块，拖动方块放入地图，检测方块能不能正确放入地图。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br></pre></td><td class="code"><pre><span class="line">---拖动方块</span><br><span class="line">---@param cell PuzzleGameBlockCell</span><br><span class="line">function RestaurantGameBlocksUI:OnDrag(cell)</span><br><span class="line">    local tab = self:GetBlockOccupiedAreas(cell)</span><br><span class="line">    for i, v in pairs(self.mapTileCells) do</span><br><span class="line">        local isShow = table.indexOf(tab,v.tileData.index) ~= -1</span><br><span class="line">        v:ShowPassNode(isShow)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---成功将方块拖入目标区域</span><br><span class="line">---@param cell PuzzleGameBlockCell</span><br><span class="line">function RestaurantGameBlocksUI:OnEndDrag(cell)</span><br><span class="line">    for i, mapTile in pairs(self.mapTileCells) do</span><br><span class="line">        mapTile:ShowPassNode(false)</span><br><span class="line">    end</span><br><span class="line">    ---拖放结束后,在棋盘区域所占据的地图格</span><br><span class="line">    local tab = self:GetBlockOccupiedAreas(cell)</span><br><span class="line">    ---判断能否成功放入,方块内所有格子都能放入棋盘空格中</span><br><span class="line">    local emptyTileNum = 0</span><br><span class="line">    for i, v in ipairs(tab) do</span><br><span class="line">        if self.mapTileCells[v].tileData.blockId == 0 then</span><br><span class="line">            emptyTileNum = emptyTileNum + 1</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    ---能成功放下</span><br><span class="line">    if emptyTileNum == cell.blockNum then</span><br><span class="line">        for i, v in ipairs(tab) do</span><br><span class="line">            ---将方块所携带的格子数据赋值地图格</span><br><span class="line">            self.mapTileCells[v].tileData.blockId = cell.cid</span><br><span class="line">            ---更新地图显示</span><br><span class="line">            self.mapTileCells[v]:UpdateView()</span><br><span class="line">            ---将拖放的格子隐藏等待回收</span><br><span class="line">            cell:PutDownMap()</span><br><span class="line">        end</span><br><span class="line">        ---检测要不要生成新的方块</span><br><span class="line">        self:CheckBlocksNum()</span><br><span class="line">        ---检测能否消除满行满列的格子</span><br><span class="line">        self:CheckEliminate()</span><br><span class="line">    else</span><br><span class="line">        cell:OnFailure() ---不能成功放入，方块回位</span><br><span class="line">    end</span><br><span class="line">    ---检测游戏结束</span><br><span class="line">    self:CheckEndGame()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---检测能否消除满行满列的格子</span><br><span class="line">function RestaurantGameBlocksUI:CheckEliminate()</span><br><span class="line">    local totalNum,lines,columns = ROPuzzleGameModule.roPuzzleGameData:Eliminate()</span><br><span class="line">    ---消除棋盘上对应的格子显示</span><br><span class="line">    ---消除行</span><br><span class="line">    for i, v in ipairs(lines) do</span><br><span class="line">        for col = 1, ROPuzzleGameModule.roPuzzleGameData.maxColumn do</span><br><span class="line">            local pos = (v-1)*ROPuzzleGameModule.roPuzzleGameData.maxColumn + col</span><br><span class="line">            self.mapTileCells[pos]:PlayEffect()</span><br><span class="line">            self.mapTileCells[pos].tileData.blockId = 0</span><br><span class="line">            self.mapTileCells[pos]:UpdateView()</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    ---消除列</span><br><span class="line">    for i, col in ipairs(columns) do</span><br><span class="line">        for line = 1, ROPuzzleGameModule.roPuzzleGameData.maxLine do</span><br><span class="line">            local pos = (line - 1)*ROPuzzleGameModule.roPuzzleGameData.maxLine + col</span><br><span class="line">            self.mapTileCells[pos]:PlayEffect()</span><br><span class="line">            self.mapTileCells[pos].tileData.blockId = 0</span><br><span class="line">            self.mapTileCells[pos]:UpdateView()</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    local isPlaySound = totalNum &gt; 0</span><br><span class="line">    if isPlaySound then</span><br><span class="line">        GameEntry.Sound:PlaySound(10802, Constant.SoundGroup.ENVIRONMENT)</span><br><span class="line">    end</span><br><span class="line">    ---加积分</span><br><span class="line">    local addScore = ROPuzzleGameModule.GetAddScore(totalNum)</span><br><span class="line">    ROPuzzleGameModule.roPuzzleGameData:AddScore(addScore)</span><br><span class="line">    ROPuzzleGameModule.Puzzle()</span><br><span class="line">    self:RefreshScore()</span><br><span class="line">end</span><br><span class="line">	</span><br><span class="line">---获取剩下的方块</span><br><span class="line">---@return PuzzleGameBlockCell[]</span><br><span class="line">function RestaurantGameBlocksUI:GetRemainingBlocks()</span><br><span class="line">    local blockTab = &#123;&#125;</span><br><span class="line">    for i, blocks in pairs(self.blockCells) do</span><br><span class="line">        for j, blockCell in pairs(blocks) do</span><br><span class="line">            if not blockCell.isPutDown then</span><br><span class="line">                table.insert(blockTab,blockCell)</span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    return blockTab</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---检测方块数量 如果没有方块创建新的方块</span><br><span class="line">function RestaurantGameBlocksUI:CheckBlocksNum()</span><br><span class="line">    local blocks = self:GetRemainingBlocks()</span><br><span class="line">    if #blocks == 0 then</span><br><span class="line">        ROPuzzleGameModule.roPuzzleGameData:RefreshRandomBlock()</span><br><span class="line">        self:CreateBlocks()</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---检测格子能否成功放入棋盘</span><br><span class="line">---@param cell PuzzleGameBlockCell</span><br><span class="line">function RestaurantGameBlocksUI:CheckPutDownBlock(cell)</span><br><span class="line">    local tab = &#123;&#125;</span><br><span class="line">    for i, collider in pairs(cell.collider2DList) do</span><br><span class="line">        for j, mapTile in pairs(self.mapTileCells) do</span><br><span class="line">            local res = self:CheckBoundsIntersects(collider,mapTile.collider2D)</span><br><span class="line">            if res then</span><br><span class="line">                table.insert(tab,mapTile.tileData.index)</span><br><span class="line">            end</span><br><span class="line">            mapTile:ShowPassNode(false)</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    for i, v in pairs(tab) do</span><br><span class="line">        self.mapTileCells[v]:ShowPassNode(true)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---返回方块格所占的棋盘区域</span><br><span class="line">---@param cell PuzzleGameBlockCell</span><br><span class="line">---@return number[] 对应的棋盘区域格</span><br><span class="line">function RestaurantGameBlocksUI:GetBlockOccupiedAreas(cell)</span><br><span class="line">    local tab = &#123;&#125;</span><br><span class="line">    for i, collider in pairs(cell.collider2DList) do</span><br><span class="line">        for j, mapTile in pairs(self.mapTileCells) do</span><br><span class="line">            local res = self:CheckBoundsIntersects(collider,mapTile.collider2D)</span><br><span class="line">            if res then</span><br><span class="line">                table.insert(tab,mapTile.tileData.index)</span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    return tab</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---检测两个格子是否有交集</span><br><span class="line">---@return boolean</span><br><span class="line">function RestaurantGameBlocksUI:CheckBoundsIntersects(collider2D1,collider2D2)</span><br><span class="line">    return collider2D1.bounds:Intersects(collider2D2.bounds)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
+              <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/Lua/" rel="tag"># Lua</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" rel="prev" title="Lua实现Unity连连看小游戏摘要">
+      <i class="fa fa-chevron-left"></i> Lua实现Unity连连看小游戏摘要
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/02/25/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-24-02-24/" rel="next" title="钓鱼日记[24.02.24]">
+      钓鱼日记[24.02.24] <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%8B%BC%E5%9B%BE%E5%9C%B0%E5%9B%BE%E6%A0%BC%E6%95%B0%E6%8D%AE"><span class="nav-number">1.</span> <span class="nav-text">- 创建拼图地图格数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">- 创建拼图游戏数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%9C%B0%E5%9B%BE%E6%A0%BC%E6%8E%A7%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">- 创建地图格控件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E7%9A%84%E6%96%B9%E5%9D%97%E6%8E%A7%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">- 创建随机生成的方块控件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E6%B5%81%E7%A8%8B%E5%AE%9E%E7%8E%B0"><span class="nav-number">5.</span> <span class="nav-text">- 游戏流程实现</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Weibo → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8SGHVqNSzlIvUsQekb6EVL2z-gzGzoHsz',
+      appKey     : 'kM6zUKBTanjH10n2gcXV8OTE',
+      placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+      avatar     : 'retro',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

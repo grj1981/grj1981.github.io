@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+  <meta name="description" content="正交相机（Orthographic Camera）Unity3D中的正交相机（Orthographic Camera）是一种投影方式，它不同于透视相机（Perspective Camera）的投影方式。在正交相机中，物体在视野中的大小与其与相机的距离无关，也就是说，所有物体在相机视野中呈现的大小是相同的。 Unity3D的正交相机可以看作是一个在固定位置的照相机，它将三维空间中的物体投影到一个二维">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity3D正交相机视野控制">
+<meta property="og:url" content="https://www.bytefisher.top/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/index.html">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="正交相机（Orthographic Camera）Unity3D中的正交相机（Orthographic Camera）是一种投影方式，它不同于透视相机（Perspective Camera）的投影方式。在正交相机中，物体在视野中的大小与其与相机的距离无关，也就是说，所有物体在相机视野中呈现的大小是相同的。 Unity3D的正交相机可以看作是一个在固定位置的照相机，它将三维空间中的物体投影到一个二维">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-03T03:52:16.000Z">
+<meta property="article:modified_time" content="2024-08-26T09:55:57.314Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="Unity3D">
+<meta property="article:tag" content="IT">
+<meta property="article:tag" content="Lua">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.bytefisher.top/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Unity3D正交相机视野控制 | ByteFisher</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <!--相册弹出js-->
+  <script type="text/javascript" src="/js/lightbox-plus-jquery.min.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">65</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Unity3D正交相机视野控制
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-03 11:52:16" itemprop="dateCreated datePublished" datetime="2024-07-03T11:52:16+08:00">2024-07-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3D正交相机视野控制" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="正交相机（Orthographic-Camera）"><a href="#正交相机（Orthographic-Camera）" class="headerlink" title="正交相机（Orthographic Camera）"></a>正交相机（Orthographic Camera）</h1><p>Unity3D中的正交相机（Orthographic Camera）是一种投影方式，它不同于透视相机（Perspective Camera）的投影方式。在正交相机中，物体在视野中的大小与其与相机的距离无关，也就是说，所有物体在相机视野中呈现的大小是相同的。</p>
+<p>Unity3D的正交相机可以看作是一个在固定位置的照相机，它将三维空间中的物体投影到一个二维图像平面上，而不考虑物体到相机的距离。因此，在正交投影中，无论物体离相机多远，它们在二维图像平面上的大小都不会改变。</p>
+<p>正交相机的投影方式是通过一个虚拟的长方体来取景，并将场景投影到这个长方体的前面。在Unity中，可以通过更改相机参数来调整这个长方体的尺寸，进而影响相机视野中物体的显示大小。</p>
+<h1 id="主要特点和应用场景"><a href="#主要特点和应用场景" class="headerlink" title="主要特点和应用场景"></a>主要特点和应用场景</h1><h2 id="物体大小不变"><a href="#物体大小不变" class="headerlink" title="物体大小不变"></a>物体大小不变</h2><pre><code>由于正交相机不考虑物体到相机的距离，所以物体在相机视野中的大小是固定的，这使得在2D游戏或者UI设计中非常方便。
+</code></pre>
+<h2 id="无透视收缩效果"><a href="#无透视收缩效果" class="headerlink" title="无透视收缩效果"></a>无透视收缩效果</h2><pre><code>在正交投影中，远处的物体和近处的物体在图像平面上的大小是相同的，不会有透视收缩效果，这使得场景中的物体之间的相对距离
+保持不变。
+</code></pre>
+<h2 id="适用于2D游戏和UI设计"><a href="#适用于2D游戏和UI设计" class="headerlink" title="适用于2D游戏和UI设计"></a>适用于2D游戏和UI设计</h2><pre><code>正交相机由于其特殊的投影方式，非常适合用于2D游戏和UI设计，可以很容易地实现平铺纹理或者背景等效果。
+</code></pre>
+<h2 id="易于实现像素化效果"><a href="#易于实现像素化效果" class="headerlink" title="易于实现像素化效果"></a>易于实现像素化效果</h2><pre><code>正交相机由于物体大小固定，所以可以很容易地实现像素化效果，这在一些复古风格的2D游戏中非常常见。
+</code></pre>
+<p>总的来说，Unity3D的正交相机通过忽略物体到相机的距离，实现了一种特殊的投影方式，这种方式在2D游戏和UI设计中有广泛的应用。</p>
+<h1 id="正交相机的主要属性"><a href="#正交相机的主要属性" class="headerlink" title="正交相机的主要属性"></a>正交相机的主要属性</h1><p><strong>- 投影模式（Projection Type）</strong></p>
+<pre><code>这是设置相机投影方式的属性，Unity中提供了多种投影模式，但对于正交相机来说，通常只会选择“正交（Orthographic）”这一项。
+选择正交投影后，相机的视野不会因物体距离的增加而产生大小变化。
+</code></pre>
+<p><strong>- 视野大小（Field of View）</strong></p>
+<pre><code>在正交投影中，视野大小实际上定义了相机的视锥体的大小，它决定了相机的可视范围。Unity中是以角度来定义的，数值越大，
+视野范围越宽。
+</code></pre>
+<p><strong>- 近平面（Near Plane）和远平面（Far Plane）</strong></p>
+<pre><code>这两个属性定义了相机视锥体的近边界和远边界。在正交相机中，这两个平面是固定垂直于相机前后的，不会因为相机的移动而改变。
+近平面和远平面的距离决定了相机的深度范围。
+</code></pre>
+<p><strong>- 正交尺寸（Orthographic Size）</strong></p>
+<pre><code>这个属性定义了相机的虚拟长方体视野的尺寸。相机将场景投影到一个虚拟的长方体上，这个长方体的长、宽、高分别由正交尺寸的
+X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个长方体的尺寸决定的。例如，如果正交尺寸的X为10，Y为5，那么相机视野
+的宽高比就是2:1。
+</code></pre>
+<p><strong>- 平移（Position）</strong></p>
+<pre><code>这是相机在三维空间中的位置，可以自由设置。
+</code></pre>
+<p><strong>- 旋转（Rotation）</strong></p>
+<pre><code>这是相机在三维空间中的旋转，同样可以自由设置。旋转会影响相机的朝向，从而改变拍摄的视角。
+</code></pre>
+<p><strong>- 缩放（Scale）</strong></p>
+<pre><code>在Unity中，相机也有缩放属性，但这通常指的是相机视锥体的缩放，而不是像物体一样改变大小。这个属性在正交相机中不太常用。
+</code></pre>
+<span id="more"></span>
+
+<h1 id="实例应用"><a href="#实例应用" class="headerlink" title="实例应用"></a>实例应用</h1><p>Lua实现Unity3D正交相机镜头缩放及视野范围控制。</p>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">---@class AmusementParkCameraCtrl</span><br><span class="line">local m = &#123;</span><br><span class="line">    camera = nil,</span><br><span class="line">    ---@type Vector3 相机最左侧视野位置</span><br><span class="line">    limitLeftPos = 0,</span><br><span class="line">    ---@type Vector3 相机最右边视野位置</span><br><span class="line">    limitRightPos = 0,</span><br><span class="line">    ---@type Vector3 相机最上边视野位置</span><br><span class="line">    limitUpPos = 0,</span><br><span class="line">    ---@type Vector3 相机最下边视野位置</span><br><span class="line">    limitDownPos = 0,</span><br><span class="line">    ---@type number 目标镜头大小</span><br><span class="line">    targetSize = 0,</span><br><span class="line">    ---@type Vector3 目标位置</span><br><span class="line">    targetPos = Vector3.New(0,0,0),</span><br><span class="line">    ---@type number 相机移动速度</span><br><span class="line">    moveSpeed = 5,</span><br><span class="line">    ---@type number 相机放大速度</span><br><span class="line">    zoomSpeed = 2,</span><br><span class="line">    ---相机最小的视野大小</span><br><span class="line">    minSize = 3.75,</span><br><span class="line">    ---相机最大的视野大小</span><br><span class="line">    maxSize = 1.5,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(camera)</span><br><span class="line">    local obj = Clone(m)</span><br><span class="line">    obj:Init(camera)</span><br><span class="line">    return obj</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(camera)</span><br><span class="line">    self.camera = camera</span><br><span class="line"></span><br><span class="line">    self:AddListeners()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Refresh(limitLeftPos,limitRightPos,limitUpPos,limitDownPos)</span><br><span class="line">    self.limitUpPos = limitUpPos</span><br><span class="line">    self.limitLeftPos = limitLeftPos</span><br><span class="line">    self.limitRightPos = limitRightPos</span><br><span class="line">    self.limitDownPos = limitDownPos</span><br><span class="line">    self.targetSize = self.minSize</span><br><span class="line">    self.camera.orthographicSize = self.targetSize</span><br><span class="line">    self.targetPos = self.camera.transform.position</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnUpdate()</span><br><span class="line">    if self.camera.orthographicSize ~= self.targetSize then</span><br><span class="line">        if self.camera.orthographicSize &gt; self.targetSize then</span><br><span class="line">            self.camera.orthographicSize = self.camera.orthographicSize - self.zoomSpeed * </span><br><span class="line">				UnityEngine.Time.deltaTime</span><br><span class="line">        else</span><br><span class="line">            self.camera.orthographicSize = self.camera.orthographicSize + self.zoomSpeed * </span><br><span class="line">				UnityEngine.Time.deltaTime</span><br><span class="line">        end</span><br><span class="line">        self.camera.orthographicSize = Mathf.Clamp(self.camera.orthographicSize,self.maxSize,self.minSize)</span><br><span class="line">        self.targetPos = self:CheckCameraLimitPos(self.targetPos)</span><br><span class="line">    end</span><br><span class="line"></span><br><span class="line">    local direction = self.targetPos - self.camera.transform.position</span><br><span class="line">    if direction.magnitude &gt; 0.2 then</span><br><span class="line">        self.camera.transform:Translate(direction.normalized * self.moveSpeed * UnityEngine.Time.deltaTime)</span><br><span class="line">    else</span><br><span class="line">        self.camera.transform.position = self.targetPos</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:AddListeners()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:RemoveListeners()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---放大/缩小镜头</span><br><span class="line">---@param type number type 1 放大; 2 缩小</span><br><span class="line">function m:ChangeCameraSize(type)</span><br><span class="line">    if type == 1 then</span><br><span class="line">        self.targetSize = self.maxSize</span><br><span class="line">    else</span><br><span class="line">        self.targetSize = self.minSize</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---移动相机位置</span><br><span class="line">---@param dx number</span><br><span class="line">---@param dy number</span><br><span class="line">function m:MoveCamera(dx,dy)</span><br><span class="line">    if self.camera == nil or LuaCodeInterface.GameObjIsDestroy(self.camera) then</span><br><span class="line">        return</span><br><span class="line">    end</span><br><span class="line">    local pos = self.camera.transform.position</span><br><span class="line">    self.targetPos = self:CheckCameraLimitPos(pos + Vector3.New(dx,dy,0))</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---检测相机移动范围</span><br><span class="line">---@param pos Vector3</span><br><span class="line">function m:CheckCameraLimitPos(pos)</span><br><span class="line">    ---边界判断</span><br><span class="line">    local cameraWidth = self.camera.orthographicSize * self.camera.aspect * 2</span><br><span class="line">    local cameraHeight = self.camera.orthographicSize * 2</span><br><span class="line">    local tempPos =  pos:Clone()</span><br><span class="line">    tempPos.x = Mathf.Clamp(tempPos.x,self.limitLeftPos.x + cameraWidth / 2,</span><br><span class="line">				self.limitRightPos.x - cameraWidth / 2)</span><br><span class="line">    tempPos.y = Mathf.Clamp(tempPos.y,self.limitDownPos.y + cameraHeight / 2,</span><br><span class="line">				self.limitUpPos.y - cameraHeight / 2)</span><br><span class="line">    return tempPos</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Dispose()</span><br><span class="line">    AssetUtil.UnloadAsset(self)</span><br><span class="line">    self:RemoveListeners()</span><br><span class="line">    self.camera = nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
+              <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/Lua/" rel="tag"># Lua</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/06/21/Unity3D%E8%BE%93%E5%85%A5%E6%8E%A7%E5%88%B6/" rel="prev" title="Unity3D输入控制">
+      <i class="fa fa-chevron-left"></i> Unity3D输入控制
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" rel="next" title="Lua实现Unity一笔画小游戏摘要">
+      Lua实现Unity一笔画小游戏摘要 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%EF%BC%88Orthographic-Camera%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">正交相机（Orthographic Camera）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E7%89%B9%E7%82%B9%E5%92%8C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">主要特点和应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%A9%E4%BD%93%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98"><span class="nav-number">2.1.</span> <span class="nav-text">物体大小不变</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E9%80%8F%E8%A7%86%E6%94%B6%E7%BC%A9%E6%95%88%E6%9E%9C"><span class="nav-number">2.2.</span> <span class="nav-text">无透视收缩效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E4%BA%8E2D%E6%B8%B8%E6%88%8F%E5%92%8CUI%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.3.</span> <span class="nav-text">适用于2D游戏和UI设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%93%E4%BA%8E%E5%AE%9E%E7%8E%B0%E5%83%8F%E7%B4%A0%E5%8C%96%E6%95%88%E6%9E%9C"><span class="nav-number">2.4.</span> <span class="nav-text">易于实现像素化效果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E7%9A%84%E4%B8%BB%E8%A6%81%E5%B1%9E%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">正交相机的主要属性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E5%BA%94%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">实例应用</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Weibo → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8SGHVqNSzlIvUsQekb6EVL2z-gzGzoHsz',
+      appKey     : 'kM6zUKBTanjH10n2gcXV8OTE',
+      placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+      avatar     : 'retro',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

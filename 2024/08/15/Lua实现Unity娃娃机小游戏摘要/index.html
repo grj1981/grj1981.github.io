@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+  <meta name="description" content="游戏说明游戏开始，下方随机生成不同品质小人，在场景中来回走动，不同品质的小人，移动速度不一样，被抓到后获得的积分也不一样。按住移动按钮，上方机械手臂会左右来回移动，当松开按钮，机械手臂会掉下来，当手臂下落碰到场景中小人时，检测当前手臂抓取范围内的小人，在抓取范围内的小人会被抓走。然后计算获得分数，如果机械手臂抓空，则碰到地面后手臂也会自动回弹，每轮游戏有4次抓取机会。 功能实现移动的小人创建移动小">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua实现Unity娃娃机小游戏摘要">
+<meta property="og:url" content="https://www.bytefisher.top/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/index.html">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="游戏说明游戏开始，下方随机生成不同品质小人，在场景中来回走动，不同品质的小人，移动速度不一样，被抓到后获得的积分也不一样。按住移动按钮，上方机械手臂会左右来回移动，当松开按钮，机械手臂会掉下来，当手臂下落碰到场景中小人时，检测当前手臂抓取范围内的小人，在抓取范围内的小人会被抓走。然后计算获得分数，如果机械手臂抓空，则碰到地面后手臂也会自动回弹，每轮游戏有4次抓取机会。 功能实现移动的小人创建移动小">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-08-15T09:22:54.000Z">
+<meta property="article:modified_time" content="2024-08-26T09:55:57.307Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="Unity3D">
+<meta property="article:tag" content="IT">
+<meta property="article:tag" content="Lua">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.bytefisher.top/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Lua实现Unity娃娃机小游戏摘要 | ByteFisher</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <!--相册弹出js-->
+  <script type="text/javascript" src="/js/lightbox-plus-jquery.min.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">65</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Lua实现Unity娃娃机小游戏摘要
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-08-15 17:22:54" itemprop="dateCreated datePublished" datetime="2024-08-15T17:22:54+08:00">2024-08-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity娃娃机小游戏摘要" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="游戏说明"><a href="#游戏说明" class="headerlink" title="游戏说明"></a>游戏说明</h1><p>游戏开始，下方随机生成不同品质小人，在场景中来回走动，不同品质的小人，移动速度不一样，被抓到后获得的积分也不一样。按住移动按钮，上方机械手臂会左右来回移动，当松开按钮，机械手臂会掉下来，当手臂下落碰到场景中小人时，检测当前手臂抓取范围内的小人，在抓取范围内的小人会被抓走。然后计算获得分数，如果机械手臂抓空，则碰到地面后手臂也会自动回弹，每轮游戏有4次抓取机会。</p>
+<h1 id="功能实现"><a href="#功能实现" class="headerlink" title="功能实现"></a>功能实现</h1><h2 id="移动的小人"><a href="#移动的小人" class="headerlink" title="移动的小人"></a>移动的小人</h2><p>创建移动小人AmusementParkDollMachineGameRole,跟据不同品质小人，移动速度不同实现小人在可控范围内随机位置移动。在移动过程中通过修改sortingOrder值来调整小人在不同位置的层级显示。小人在移动是播放walk动作，被抓住时拖放drag动作，同时将小人从场景节点移动到机械手臂抓取小人的节点内，当手臂上升时，小人跟着手臂一起向上移动，抓取结束移除被抓取的小人。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br></pre></td><td class="code"><pre><span class="line">---待抓取的游戏小人</span><br><span class="line">---@class AmusementParkDollMachineGameRole</span><br><span class="line">local m = &#123;</span><br><span class="line">    View = nil,</span><br><span class="line">    ---@type AmusementParkDollMachineRoleData</span><br><span class="line">    RoleData = nil,</span><br><span class="line">    ---@type Spine.Unity.SkeletonGraphic</span><br><span class="line">    Animation = nil,</span><br><span class="line">    ---@type number</span><br><span class="line">    EntityId = 0,</span><br><span class="line">    ---@type Vector3 下一个移动位置</span><br><span class="line">    NextPos = Vector3.New(0,0,0),</span><br><span class="line">    ---@type boolean 是否在移动中</span><br><span class="line">    IsMoving = false,</span><br><span class="line">    ---@type number 下一次开始移动的时间</span><br><span class="line">    NextMovieTimer = 0,</span><br><span class="line">    ---@type boolean 小人是否已成功创建</span><br><span class="line">    IsCreateRole = false,</span><br><span class="line">    ---@type boolean 小人是否被抓住</span><br><span class="line">    IsCatch = false,</span><br><span class="line">    ---@type UnityEngine.Collider2D 小人Collider</span><br><span class="line">    RoleCollider = nil,</span><br><span class="line">    RoleObj = nil,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(view)</span><br><span class="line">    local obj = Clone(m)</span><br><span class="line">    obj:Init(view)</span><br><span class="line">    return obj</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(view)</span><br><span class="line">    self.View = view</span><br><span class="line">    LuaCodeInterface.BindOutlet(self.View, self)</span><br><span class="line">    self.OnShowSpineSuccessDelegate = function(sender, args) self:OnShowSpineSuccess(sender, args) end</span><br><span class="line"></span><br><span class="line">    self.RoleCollider = self.View:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line"></span><br><span class="line">    self:AddListener()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:AddListener()</span><br><span class="line">    GameEntry.LuaEvent:Subscribe(UnityGameFramework.Runtime.ShowEntitySuccessEventArgs.EventId, self.OnShowSpineSuccessDelegate)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:RemoveListener()</span><br><span class="line">    GameEntry.LuaEvent:Unsubscribe(UnityGameFramework.Runtime.ShowEntitySuccessEventArgs.EventId, self.OnShowSpineSuccessDelegate)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---界面轮询。</span><br><span class="line">---@param elapseSeconds number</span><br><span class="line">---@param realElapseSeconds number</span><br><span class="line">---@return void</span><br><span class="line">function m:OnUpdate(elapseSeconds, realElapseSeconds)</span><br><span class="line">    if not self.IsCreateRole then</span><br><span class="line">        return</span><br><span class="line">    end</span><br><span class="line">    if self.RoleData == nil then</span><br><span class="line">        return</span><br><span class="line">    end</span><br><span class="line">    if self.IsCatch then</span><br><span class="line">        return</span><br><span class="line">    end</span><br><span class="line">    if not self.IsMoving then</span><br><span class="line">        if PlayerModule.GetServerTime() &gt; self.NextMovieTimer then</span><br><span class="line">            self:StartMove()</span><br><span class="line">        end</span><br><span class="line">        return</span><br><span class="line">    end</span><br><span class="line">    local direction = self.NextPos - self.View.transform.localPosition</span><br><span class="line">    if direction.magnitude &gt; self.RoleData.roleRareSpeed then</span><br><span class="line">        self.View.transform:Translate(direction.normalized * self.RoleData.roleRareSpeed * UnityEngine.Time.deltaTime)</span><br><span class="line">        self:ChangeRoleOrderZ()</span><br><span class="line">    else</span><br><span class="line">        self:StopMove()</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:ChangeOrder()</span><br><span class="line">    if self.RoleObj then</span><br><span class="line">        local canvas = self.View:GetComponentInParent(typeof(UnityEngine.Canvas))</span><br><span class="line">        setGameObjectLayers(self.RoleObj.transform, &quot;UI&quot;)</span><br><span class="line">        local renderers = self.RoleObj:GetComponentsInChildren(typeof(UnityEngine.Renderer))</span><br><span class="line">        for i = 0, renderers.Length - 1 do</span><br><span class="line">            renderers[i].sortingLayerID = LuaCodeInterface.SortingLayerNameToID(&quot;Default&quot;)</span><br><span class="line">            renderers[i].sortingOrder = canvas.sortingOrder + 1</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnShowSpineSuccess(sender, args)</span><br><span class="line">    if self.EntityId == args.Entity.Id then</span><br><span class="line">        self.RoleObj = args.Entity.gameObject</span><br><span class="line">        self.Animation = args.Entity.gameObject:GetComponentInChildren(typeof(Spine.Unity.SkeletonAnimation))</span><br><span class="line">        self.Animation.state:SetAnimation(0,&quot;idle&quot;, true)</span><br><span class="line">        self:StartMove()</span><br><span class="line">        self.IsCreateRole = true</span><br><span class="line">        self:ChangeOrder()</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---获取一个随机位置 坐标Z控制小人显示层级</span><br><span class="line">function m:GetRandomPos()</span><br><span class="line">    local rx = math.random(-self.View.transform.parent.rect.w/2,self.View.transform.parent.rect.w/2)</span><br><span class="line">    local ry = math.random(-self.View.transform.parent.rect.h/2,self.View.transform.parent.rect.h/2)</span><br><span class="line">    return Vector3.New(rx,ry,0)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---开始移动</span><br><span class="line">function m:StartMove()</span><br><span class="line">    self.IsMoving = true</span><br><span class="line">    self.NextPos = self:GetRandomPos()</span><br><span class="line">    if self.Animation then</span><br><span class="line">        self.Animation.state:SetEmptyAnimation(0, 0)</span><br><span class="line">        self.Animation.state:SetAnimation(0, &quot;walk&quot;, true)</span><br><span class="line">    end</span><br><span class="line">    self:RefreshWalkFaceTo()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---移动到目标位置停止移动</span><br><span class="line">function m:StopMove()</span><br><span class="line">    self.IsMoving = false</span><br><span class="line">    self.View.transform.localPosition = self.NextPos</span><br><span class="line">    self.NextMovieTimer = math.random(0,4) + PlayerModule.GetServerTime()</span><br><span class="line">    if self.Animation then</span><br><span class="line">        self.Animation.state:SetAnimation(0,&quot;idle&quot;, true)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---播放抓住状态</span><br><span class="line">function m:CatchState()</span><br><span class="line">    self.IsMoving = false</span><br><span class="line">    self.IsCatch = true</span><br><span class="line">    if self.Animation then</span><br><span class="line">        self.Animation.AnimationName = nil</span><br><span class="line">        self.Animation.state:SetEmptyAnimation(0, 0)</span><br><span class="line">        self.Animation.state:SetAnimation(0,&quot;drag&quot;, true)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---刷新移动朝向</span><br><span class="line">function m:RefreshWalkFaceTo()</span><br><span class="line">    local checkRet = self.NextPos.x - self.View.transform.localPosition.x</span><br><span class="line">    local localScale = self.View.transform.localScale</span><br><span class="line">    if checkRet &gt; 0 then</span><br><span class="line">        localScale.x = -math.abs(localScale.x)</span><br><span class="line">    else</span><br><span class="line">        localScale.x = math.abs(localScale.x)</span><br><span class="line">    end</span><br><span class="line">    self.View.transform.localScale = localScale</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@param roleData AmusementParkDollMachineRoleData</span><br><span class="line">function m:SetData(roleData)</span><br><span class="line">    self.RoleData = roleData</span><br><span class="line">    self.IsCreateRole = false</span><br><span class="line">    self.IsCatch = false</span><br><span class="line">    for i = 1, 4 do</span><br><span class="line">        self[&quot;Quality&quot;..i]:SetActive(self.RoleData.roleRare == i)</span><br><span class="line">    end</span><br><span class="line">    self.View.name = self.RoleData.cid</span><br><span class="line">    local pos = self:GetRandomPos()</span><br><span class="line">    self.View.transform.localPosition = pos</span><br><span class="line">    self:ChangeRoleOrderZ()</span><br><span class="line">    self.NextPos = self:GetRandomPos()</span><br><span class="line">    self:ShowSpine()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---改变小人移动Z值(移动是层级关系)</span><br><span class="line">function m:ChangeRoleOrderZ()</span><br><span class="line">    local pos =  self.View.transform.localPosition</span><br><span class="line">    ---设置小人移动的Z值</span><br><span class="line">    self.OrderZ.transform.localPosition = Vector3.New(0,0,(pos.y + 150)/100)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:ShowSpine()</span><br><span class="line">    self:HideEntity()</span><br><span class="line">    self.EntityId = GameEntry.Entity:GenerateEntityID()</span><br><span class="line">    GameEntry.Entity:ShowUIElement(self.EntityId, self.RoleData:GetCfgData().PlayerSpine, 0, self.SpineRoot.transform, Vector3.zero)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:HideEntity()</span><br><span class="line">    if self.EntityId ~= 0 then</span><br><span class="line">        GameEntry.Entity:HideEntity(self.EntityId)</span><br><span class="line">        self.EntityId = 0</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Dispose()</span><br><span class="line">    AssetUtil.UnloadAsset(self)</span><br><span class="line">    self:RemoveListener()</span><br><span class="line">    self:HideEntity()</span><br><span class="line"></span><br><span class="line">    LuaCodeInterface.ClearOutlet(self.View, self)</span><br><span class="line">    UnityEngine.Object.Destroy(self.View)</span><br><span class="line">    self.View = nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+</code></pre>
+<span id="more"></span>
+
+<h2 id="机械手臂"><a href="#机械手臂" class="headerlink" title="机械手臂"></a>机械手臂</h2><p>创建AmusementParkDollMachineArm实现机械手臂功能。机械手臂有两个不同的Collider2D，向下抓取移动时的碰撞检测Collider2D和抓取小人范围Collider2D。碰撞检测Collider2D小于抓取范围的Collider2D。通过transform.Translate()方法，实现手臂左右移动和抓取操作。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">---界面轮询。</span><br><span class="line">---@param elapseSeconds number</span><br><span class="line">---@param realElapseSeconds number</span><br><span class="line">---@return void</span><br><span class="line">function m:OnUpdate(elapseSeconds, realElapseSeconds)</span><br><span class="line">    if self.IsCatching then</span><br><span class="line">        self.CollisionNode.transform:Translate(Vector3.New(0,self.CatchSpeed * self.CatchDir * UnityEngine.Time.deltaTime, 0))</span><br><span class="line">        local top = self:CheckCatch()</span><br><span class="line">        ---碰到小人或者地面手臂上升</span><br><span class="line">        if top then</span><br><span class="line">            self.CatchDir = 1</span><br><span class="line">            if not self.CatchEnd then</span><br><span class="line">                self.CatchEnd = true</span><br><span class="line">                self.CatchRoles = self:CheckCatchRoleResult()</span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">        if self.CollisionNode.transform.localPosition.y &gt;= 0 then</span><br><span class="line">            self.CollisionNode.transform.localPosition = Vector3.New(0,0,0)</span><br><span class="line">            self.IsCatching = false</span><br><span class="line">            self.CatchEnd = false</span><br><span class="line">            self.RootUI:CleanRoles(self.CatchRoles)</span><br><span class="line">        end</span><br><span class="line">    else</span><br><span class="line">        if self.IsMove then</span><br><span class="line">            if self.View.transform.localPosition.x &gt;= self.MaxPosX then</span><br><span class="line">                self.Dir = -1</span><br><span class="line">            elseif self.View.transform.localPosition.x &lt;= self.MinPosX then</span><br><span class="line">                self.Dir = 1</span><br><span class="line">            end</span><br><span class="line">            self.View.transform:Translate(Vector3.New(self.MoveSpeed * self.Dir * UnityEngine.Time.deltaTime, 0, 0))</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="抓取小人"><a href="#抓取小人" class="headerlink" title="抓取小人"></a>抓取小人</h2><p>机械手臂下降过程中，通过CollisionNode节点上的Collider2D检测碰撞结果，如果成功碰撞到小人，则启用GrabItNode节点下的Collider2D检测抓取范围内的小人。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">---检测抓子抓到的小人</span><br><span class="line">---@return AmusementParkDollMachineRoleData []</span><br><span class="line">function m:CheckCatchRoleResult()</span><br><span class="line">    local roles = &#123;&#125;</span><br><span class="line">    for i, v in pairs(self.RootUI.GameRoles) do</span><br><span class="line">        local top = self.HandGrabCollider2D.bounds:Intersects(v.RoleCollider.bounds)</span><br><span class="line">        if top then</span><br><span class="line">            v.View.transform:SetParent(self.RolesNode.transform,false)</span><br><span class="line">            v.View.transform.localPosition = Vector3.New(0,0,0)</span><br><span class="line">            table.insert(roles,v.RoleData)</span><br><span class="line">            v:CatchState()</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    return roles</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---检测机器手臂下降过程中碰撞</span><br><span class="line">---@param collider2D UnityEngine.Collider2D 目标对象collider2D</span><br><span class="line">---@return boolean</span><br><span class="line">function m:CheckArmBoundsIntersects(collider2D)</span><br><span class="line">    return self.ArmCollider2D.bounds:Intersects(collider2D.bounds)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+</code></pre>
+<blockquote>
+<p><strong>实例：</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br></pre></td><td class="code"><pre><span class="line">---@class AmusementParkDollMachineArm</span><br><span class="line">local m = &#123;</span><br><span class="line">    View = nil,</span><br><span class="line">    ---@type AmusementParkGamePrizeClawUI</span><br><span class="line">    RootUI = nil,</span><br><span class="line">    ---@type boolean 是否在移动中 按下按钮开始移动，抬起停止移动</span><br><span class="line">    IsMove = false,</span><br><span class="line">    ---@type number 横向移动最小值</span><br><span class="line">    MinPosX = -425,</span><br><span class="line">    ---@type number 横向移动最大值</span><br><span class="line">    MaxPosX = 425,</span><br><span class="line">    ---@type number 横向移动速度</span><br><span class="line">    MoveSpeed = 6,</span><br><span class="line">    ---@type number 移动方向 向右为正</span><br><span class="line">    Dir = 1,</span><br><span class="line">    ---@type boolean 正在向下抓取中</span><br><span class="line">    IsCatching = false,</span><br><span class="line">    ---@type number 抓取速度</span><br><span class="line">    CatchSpeed = 9,</span><br><span class="line">    ---@type number 抓取移动方向 向下</span><br><span class="line">    CatchDir = -1,</span><br><span class="line">    ---@type AmusementParkDollMachineRoleData 成功抓到的小人</span><br><span class="line">    CatchRoles = &#123;&#125;,</span><br><span class="line">    ---@type UnityEngine.Collider2D 机器臂下降Collider</span><br><span class="line">    ArmCollider2D = nil,</span><br><span class="line">    ---@type UnityEngine.Collider2D 手抓Collider</span><br><span class="line">    HandGrabCollider2D = nil,</span><br><span class="line">    ---@type boolean</span><br><span class="line">    CatchEnd = false,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(view,rootUI)</span><br><span class="line">    local obj = Clone(m)</span><br><span class="line">    obj:Init(view,rootUI)</span><br><span class="line">    return obj</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(view,rootUI)</span><br><span class="line">    self.View = view</span><br><span class="line">    self.RootUI = rootUI</span><br><span class="line">    LuaCodeInterface.BindOutlet(self.View, self)</span><br><span class="line"></span><br><span class="line">    self.ArmCollider2D = self.CollisionNode:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line">    self.HandGrabCollider2D = self.GrabItNode:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line"></span><br><span class="line">    self:AddListener()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---界面轮询。</span><br><span class="line">---@param elapseSeconds number</span><br><span class="line">---@param realElapseSeconds number</span><br><span class="line">---@return void</span><br><span class="line">function m:OnUpdate(elapseSeconds, realElapseSeconds)</span><br><span class="line">    if self.IsCatching then</span><br><span class="line">        self.CollisionNode.transform:Translate(Vector3.New(0,self.CatchSpeed * self.CatchDir * UnityEngine.Time.deltaTime, 0))</span><br><span class="line">        local top = self:CheckCatch()</span><br><span class="line">        ---碰到小人或者地面手臂上升</span><br><span class="line">        if top then</span><br><span class="line">            self.CatchDir = 1</span><br><span class="line">            if not self.CatchEnd then</span><br><span class="line">                self.CatchEnd = true</span><br><span class="line">                self.CatchRoles = self:CheckCatchRoleResult()</span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">        if self.CollisionNode.transform.localPosition.y &gt;= 0 then</span><br><span class="line">            self.CollisionNode.transform.localPosition = Vector3.New(0,0,0)</span><br><span class="line">            self.IsCatching = false</span><br><span class="line">            self.CatchEnd = false</span><br><span class="line">            self.RootUI:CleanRoles(self.CatchRoles)</span><br><span class="line">        end</span><br><span class="line">    else</span><br><span class="line">        if self.IsMove then</span><br><span class="line">            if self.View.transform.localPosition.x &gt;= self.MaxPosX then</span><br><span class="line">                self.Dir = -1</span><br><span class="line">            elseif self.View.transform.localPosition.x &lt;= self.MinPosX then</span><br><span class="line">                self.Dir = 1</span><br><span class="line">            end</span><br><span class="line">            self.View.transform:Translate(Vector3.New(self.MoveSpeed * self.Dir * UnityEngine.Time.deltaTime, 0, 0))</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:AddListener()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:RemoveListener()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---重游戏</span><br><span class="line">function m:ResetGame()</span><br><span class="line">    self.IsMove = false</span><br><span class="line">    self.Dir = 1</span><br><span class="line">    self.View.transform.localPosition = Vector3.New(self.MinPosX,self.View.transform.localPosition.y,self.View.transform.localPosition.z)</span><br><span class="line">    self.IsCatching = false</span><br><span class="line">    self.CatchEnd = false</span><br><span class="line">    self.CatchDir = -1</span><br><span class="line">    self.CollisionNode.transform.localPosition = Vector3.New(0,0,0)</span><br><span class="line">    self.CatchRoles = &#123;&#125;</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---开始移动位置</span><br><span class="line">function m:StartMoveArm()</span><br><span class="line">    if self.IsCatching then</span><br><span class="line">        return</span><br><span class="line">    end</span><br><span class="line">    self.IsMove = true</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---开始抓取</span><br><span class="line">function m:StopMoveAndStartCatch()</span><br><span class="line">    self.IsMove = false</span><br><span class="line">    self.IsCatching = true</span><br><span class="line">    self.CatchDir = -1</span><br><span class="line">    self.CollisionNode.transform.localPosition = Vector3.New(0,0,0)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---检测手臂碰撞结果(如果有成功碰到小人或者地面返回true)</span><br><span class="line">---@return boolean</span><br><span class="line">function m:CheckCatch()</span><br><span class="line">    local top = false</span><br><span class="line">    ---先检测小人</span><br><span class="line">    for i, v in pairs(self.RootUI.GameRoles) do</span><br><span class="line">        top = self:CheckArmBoundsIntersects(v.RoleCollider)</span><br><span class="line">        if top then</span><br><span class="line">            return top</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    ---再检测地面</span><br><span class="line">    top = self:CheckArmBoundsIntersects(self.RootUI.GroundCollider)</span><br><span class="line">    return top</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---检测抓子抓到的小人</span><br><span class="line">---@return AmusementParkDollMachineRoleData []</span><br><span class="line">function m:CheckCatchRoleResult()</span><br><span class="line">    local roles = &#123;&#125;</span><br><span class="line">    for i, v in pairs(self.RootUI.GameRoles) do</span><br><span class="line">        local top = self.HandGrabCollider2D.bounds:Intersects(v.RoleCollider.bounds)</span><br><span class="line">        if top then</span><br><span class="line">            v.View.transform:SetParent(self.RolesNode.transform,false)</span><br><span class="line">            v.View.transform.localPosition = Vector3.New(0,0,0)</span><br><span class="line">            table.insert(roles,v.RoleData)</span><br><span class="line">            v:CatchState()</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    return roles</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---检测机器手臂下降过程中碰撞</span><br><span class="line">---@param collider2D UnityEngine.Collider2D 目标对象collider2D</span><br><span class="line">---@return boolean</span><br><span class="line">function m:CheckArmBoundsIntersects(collider2D)</span><br><span class="line">    return self.ArmCollider2D.bounds:Intersects(collider2D.bounds)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Dispose()</span><br><span class="line">    AssetUtil.UnloadAsset(self)</span><br><span class="line">    self:RemoveListener()</span><br><span class="line">    self.IsMove = false</span><br><span class="line">    self.CatchRoles = &#123;&#125;</span><br><span class="line">    self.IsCatching = false</span><br><span class="line"></span><br><span class="line">    LuaCodeInterface.ClearOutlet(self.View, self)</span><br><span class="line">    UnityEngine.Object.Destroy(self.View)</span><br><span class="line">    self.View = nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
+              <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/Lua/" rel="tag"># Lua</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" rel="prev" title="Lua实现Unity象素鸟小游戏摘要">
+      <i class="fa fa-chevron-left"></i> Lua实现Unity象素鸟小游戏摘要
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">游戏说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">功能实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E7%9A%84%E5%B0%8F%E4%BA%BA"><span class="nav-number">2.1.</span> <span class="nav-text">移动的小人</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%BA%E6%A2%B0%E6%89%8B%E8%87%82"><span class="nav-number">2.2.</span> <span class="nav-text">机械手臂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%93%E5%8F%96%E5%B0%8F%E4%BA%BA"><span class="nav-number">2.3.</span> <span class="nav-text">抓取小人</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Weibo → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8SGHVqNSzlIvUsQekb6EVL2z-gzGzoHsz',
+      appKey     : 'kM6zUKBTanjH10n2gcXV8OTE',
+      placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+      avatar     : 'retro',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

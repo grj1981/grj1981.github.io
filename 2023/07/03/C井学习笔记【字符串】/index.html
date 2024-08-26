@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+  <meta name="description" content="- C# 字符串（String）在 C# 中，您可以使用字符数组来表示字符串，但是，更常见的做法是使用 string 关键字来声明一个字符串变量。string 关键字是 System.String 类的别名。 - 创建 String 对象您可以使用以下方法之一来创建 string 对象：  通过给 String 变量指定一个字符串  通过使用 String 类构造函数  通过使用字符串串联运算符（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C#学习笔记【C#字符串】">
+<meta property="og:url" content="https://www.bytefisher.top/2023/07/03/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/index.html">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="- C# 字符串（String）在 C# 中，您可以使用字符数组来表示字符串，但是，更常见的做法是使用 string 关键字来声明一个字符串变量。string 关键字是 System.String 类的别名。 - 创建 String 对象您可以使用以下方法之一来创建 string 对象：  通过给 String 变量指定一个字符串  通过使用 String 类构造函数  通过使用字符串串联运算符（">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-07-03T09:32:57.000Z">
+<meta property="article:modified_time" content="2024-08-26T09:55:57.302Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="IT">
+<meta property="article:tag" content="C#">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.bytefisher.top/2023/07/03/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>C#学习笔记【C#字符串】 | ByteFisher</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <!--相册弹出js-->
+  <script type="text/javascript" src="/js/lightbox-plus-jquery.min.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">65</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/07/03/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C#学习笔记【C#字符串】
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-03 17:32:57" itemprop="dateCreated datePublished" datetime="2023-07-03T17:32:57+08:00">2023-07-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/07/03/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【C#字符串】" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/07/03/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/03/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="C-字符串（String）"><a href="#C-字符串（String）" class="headerlink" title="- C# 字符串（String）"></a>- C# 字符串（String）</h2><p>在 C# 中，您可以使用字符数组来表示字符串，但是，更常见的做法是使用 string 关键字来声明一个字符串变量。string 关键字是 System.String 类的别名。</p>
+<h2 id="创建-String-对象"><a href="#创建-String-对象" class="headerlink" title="- 创建 String 对象"></a>- 创建 String 对象</h2><p>您可以使用以下方法之一来创建 string 对象：</p>
+<ul>
+<li><p>通过给 String 变量指定一个字符串</p>
+</li>
+<li><p>通过使用 String 类构造函数</p>
+</li>
+<li><p>通过使用字符串串联运算符（ + ）</p>
+</li>
+<li><p>通过检索属性或调用一个返回字符串的方法</p>
+</li>
+<li><p>通过格式化方法来转换一个值或对象为它的字符串表示形式</p>
+</li>
+</ul>
+<p>下面的实例演示了这点：</p>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">namespace StringApplication</span><br><span class="line">&#123;</span><br><span class="line">    class Program</span><br><span class="line">    &#123;</span><br><span class="line">        static void Main(string[] args)</span><br><span class="line">        &#123;</span><br><span class="line">           //字符串，字符串连接</span><br><span class="line">            string fname, lname;</span><br><span class="line">            fname = &quot;Rowan&quot;;</span><br><span class="line">            lname = &quot;Atkinson&quot;;</span><br><span class="line"></span><br><span class="line">            string fullname = fname + lname;</span><br><span class="line">            Console.WriteLine(&quot;Full Name: &#123;0&#125;&quot;, fullname);</span><br><span class="line"></span><br><span class="line">            //通过使用 string 构造函数</span><br><span class="line">            char[] letters = &#123; &#x27;H&#x27;, &#x27;e&#x27;, &#x27;l&#x27;, &#x27;l&#x27;,&#x27;o&#x27; &#125;;</span><br><span class="line">            string greetings = new string(letters);</span><br><span class="line">            Console.WriteLine(&quot;Greetings: &#123;0&#125;&quot;, greetings);</span><br><span class="line"></span><br><span class="line">            //方法返回字符串</span><br><span class="line">            string[] sarray = &#123; &quot;Hello&quot;, &quot;From&quot;, &quot;Tutorials&quot;, &quot;Point&quot; &#125;;</span><br><span class="line">            string message = String.Join(&quot; &quot;, sarray);</span><br><span class="line">            Console.WriteLine(&quot;Message: &#123;0&#125;&quot;, message);</span><br><span class="line"></span><br><span class="line">            //用于转化值的格式化方法</span><br><span class="line">            DateTime waiting = new DateTime(2012, 10, 10, 17, 58, 1);</span><br><span class="line">            string chat = String.Format(&quot;Message sent at &#123;0:t&#125; on &#123;0:D&#125;&quot;,</span><br><span class="line">            waiting);</span><br><span class="line">            Console.WriteLine(&quot;Message: &#123;0&#125;&quot;, chat);</span><br><span class="line">            Console.ReadKey() ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<pre><code>Full Name: RowanAtkinson
+Greetings: Hello
+Message: Hello From Tutorials Point
+Message: Message sent at 17:58 on Wednesday, 10 October 2012
+</code></pre>
+<h2 id="String-类的属性"><a href="#String-类的属性" class="headerlink" title="- String 类的属性"></a>- String 类的属性</h2><p>String 类有以下两个属性：</p>
+<pre><code>序号	 属性名称 &amp; 描述
+1	Chars 在当前 String 对象中获取 Char 对象的指定位置。
+2	Length 在当前的 String 对象中获取字符数。
+</code></pre>
+<span id="more"></span>
+<h2 id="String-类的方法"><a href="#String-类的方法" class="headerlink" title="- String 类的方法"></a>- String 类的方法</h2><p>String 类有许多方法用于 string 对象的操作。下面的表格提供了一些最常用的方法：</p>
+<pre><code>序号	方法名称 &amp; 描述
+1	public static int Compare( string strA, string strB )
+    比较两个指定的 string 对象，并返回一个表示它们在排列顺序中相对位置的整数。该方法区分大小写。
+2	public static int Compare( string strA, string strB, bool ignoreCase )
+    比较两个指定的 string 对象，并返回一个表示它们在排列顺序中相对位置的整数。但是，如果布尔参数为真时，该方法
+    不区分大小写。
+3	public static string Concat( string str0, string str1 )
+    连接两个 string 对象。
+4	public static string Concat( string str0, string str1, string str2 )
+    连接三个 string 对象。
+5	public static string Concat( string str0, string str1, string str2, string str3 )
+    连接四个 string 对象。
+6	public bool Contains( string value )
+    返回一个表示指定 string 对象是否出现在字符串中的值。
+7	public static string Copy( string str )
+    创建一个与指定字符串具有相同值的新的 String 对象。
+8	public void CopyTo( int sourceIndex, char[] destination, int destinationIndex, int count )
+    从 string 对象的指定位置开始复制指定数量的字符到 Unicode 字符数组中的指定位置。
+9	public bool EndsWith( string value )
+    判断 string 对象的结尾是否匹配指定的字符串。
+10	public bool Equals( string value )
+    判断当前的 string 对象是否与指定的 string 对象具有相同的值。
+11	public static bool Equals( string a, string b )
+    判断两个指定的 string 对象是否具有相同的值。
+12	public static string Format( string format, Object arg0 )
+    把指定字符串中一个或多个格式项替换为指定对象的字符串表示形式。
+13	public int IndexOf( char value )
+    返回指定 Unicode 字符在当前字符串中第一次出现的索引，索引从 0 开始。
+14	public int IndexOf( string value )
+    返回指定字符串在该实例中第一次出现的索引，索引从 0 开始。
+15	public int IndexOf( char value, int startIndex )
+    返回指定 Unicode 字符从该字符串中指定字符位置开始搜索第一次出现的索引，索引从 0 开始。
+16	public int IndexOf( string value, int startIndex )
+    返回指定字符串从该实例中指定字符位置开始搜索第一次出现的索引，索引从 0 开始。
+17	public int IndexOfAny( char[] anyOf )
+    返回某一个指定的 Unicode 字符数组中任意字符在该实例中第一次出现的索引，索引从 0 开始。
+18	public int IndexOfAny( char[] anyOf, int startIndex )
+    返回某一个指定的 Unicode 字符数组中任意字符从该实例中指定字符位置开始搜索第一次出现的索引，索引从 0 开始。
+19	public string Insert( int startIndex, string value )
+    返回一个新的字符串，其中，指定的字符串被插入在当前 string 对象的指定索引位置。
+20	public static bool IsNullOrEmpty( string value )
+    指示指定的字符串是否为 null 或者是否为一个空的字符串。
+21	public static string Join( string separator, string[] value )
+    连接一个字符串数组中的所有元素，使用指定的分隔符分隔每个元素。
+22	public static string Join( string separator, string[] value, int startIndex, int count )
+    连接一个字符串数组中的指定位置开始的指定元素，使用指定的分隔符分隔每个元素。
+23	public int LastIndexOf( char value )
+    返回指定 Unicode 字符在当前 string 对象中最后一次出现的索引位置，索引从 0 开始。
+24	public int LastIndexOf( string value )
+    返回指定字符串在当前 string 对象中最后一次出现的索引位置，索引从 0 开始。
+25	public string Remove( int startIndex )
+    移除当前实例中的所有字符，从指定位置开始，一直到最后一个位置为止，并返回字符串。
+26	public string Remove( int startIndex, int count )
+    从当前字符串的指定位置开始移除指定数量的字符，并返回字符串。
+27	public string Replace( char oldChar, char newChar )
+    把当前 string 对象中，所有指定的 Unicode 字符替换为另一个指定的 Unicode 字符，并返回新的字符串。
+28	public string Replace( string oldValue, string newValue )
+    把当前 string 对象中，所有指定的字符串替换为另一个指定的字符串，并返回新的字符串。
+29	public string[] Split( params char[] separator )
+    返回一个字符串数组，包含当前的 string 对象中的子字符串，子字符串是使用指定的 Unicode 字符数组中的元素进
+    行分隔的。
+30	public string[] Split( char[] separator, int count )
+    返回一个字符串数组，包含当前的 string 对象中的子字符串，子字符串是使用指定的 Unicode 字符数组中的元素进
+    行分隔的。int 参数指定要返回的子字符串的最大数目。
+31	public bool StartsWith( string value )
+    判断字符串实例的开头是否匹配指定的字符串。
+32	public char[] ToCharArray()
+    返回一个带有当前 string 对象中所有字符的 Unicode 字符数组。
+33	public char[] ToCharArray( int startIndex, int length )
+    返回一个带有当前 string 对象中所有字符的 Unicode 字符数组，从指定的索引开始，直到指定的长度为止。
+34	public string ToLower()
+    把字符串转换为小写并返回。
+35	public string ToUpper()
+    把字符串转换为大写并返回。
+36	public string Trim()
+    移除当前 String 对象中的所有前导空白字符和后置空白字符。
+</code></pre>
+<h2 id="实例"><a href="#实例" class="headerlink" title="- 实例"></a>- 实例</h2><p>下面的实例演示了上面提到的一些方法：</p>
+<h3 id="比较字符串"><a href="#比较字符串" class="headerlink" title="比较字符串"></a>比较字符串</h3><blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">namespace StringApplication</span><br><span class="line">&#123;</span><br><span class="line">   class StringProg</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         string str1 = &quot;This is test&quot;;</span><br><span class="line">         string str2 = &quot;This is text&quot;;</span><br><span class="line"></span><br><span class="line">         if (String.Compare(str1, str2) == 0)</span><br><span class="line">         &#123;</span><br><span class="line">            Console.WriteLine(str1 + &quot; and &quot; + str2 +  &quot; are equal.&quot;);</span><br><span class="line">         &#125;</span><br><span class="line">         else</span><br><span class="line">         &#123;</span><br><span class="line">            Console.WriteLine(str1 + &quot; and &quot; + str2 + &quot; are not equal.&quot;);</span><br><span class="line">         &#125;</span><br><span class="line">         Console.ReadKey() ;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<pre><code>This is test and This is text are not equal.
+</code></pre>
+<h3 id="字符串包含字符串"><a href="#字符串包含字符串" class="headerlink" title="字符串包含字符串"></a>字符串包含字符串</h3><blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">namespace StringApplication</span><br><span class="line">&#123;</span><br><span class="line">   class StringProg</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         string str = &quot;This is test&quot;;</span><br><span class="line">         if (str.Contains(&quot;test&quot;))</span><br><span class="line">         &#123;</span><br><span class="line">            Console.WriteLine(&quot;The sequence &#x27;test&#x27; was found.&quot;);</span><br><span class="line">         &#125;</span><br><span class="line">         Console.ReadKey() ;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<pre><code>The sequence &#39;test&#39; was found.
+</code></pre>
+<h3 id="获取子字符串"><a href="#获取子字符串" class="headerlink" title="获取子字符串"></a>获取子字符串</h3><blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace StringApplication</span><br><span class="line">&#123;</span><br><span class="line">        class StringProg</span><br><span class="line">        &#123;</span><br><span class="line">                static void Main(string[] args)</span><br><span class="line">                &#123;</span><br><span class="line">                        string str = &quot;Last night I dreamt of San Pedro&quot;;</span><br><span class="line">                        Console.WriteLine(str);</span><br><span class="line">                        string substr = str.Substring(23);</span><br><span class="line">                        Console.WriteLine(substr);</span><br><span class="line">                        Console.ReadKey() ;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<pre><code>Last night I dreamt of San Pedro
+San Pedro
+</code></pre>
+<h3 id="连接字符串"><a href="#连接字符串" class="headerlink" title="连接字符串"></a>连接字符串</h3><blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">namespace StringApplication</span><br><span class="line">&#123;</span><br><span class="line">   class StringProg</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         string[] starray = new string[]&#123;&quot;Down the way nights are dark&quot;,</span><br><span class="line">         &quot;And the sun shines daily on the mountain top&quot;,</span><br><span class="line">         &quot;I took a trip on a sailing ship&quot;,</span><br><span class="line">         &quot;And when I reached Jamaica&quot;,</span><br><span class="line">         &quot;I made a stop&quot;&#125;;</span><br><span class="line"></span><br><span class="line">         string str = String.Join(&quot;\n&quot;, starray);</span><br><span class="line">         Console.WriteLine(str);</span><br><span class="line">         Console.ReadKey() ;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<pre><code>Down the way nights are dark
+And the sun shines daily on the mountain top
+I took a trip on a sailing ship
+And when I reached Jamaica
+I made a stop
+</code></pre>
+<h2 id="string-Format格式化日期"><a href="#string-Format格式化日期" class="headerlink" title="- string.Format格式化日期"></a>- string.Format格式化日期</h2><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">DateTime dt = new DateTime(2017,4,1,13,16,32,108);</span><br><span class="line">string.Format(&quot;&#123;0:y yy yyy yyyy&#125;&quot;,dt); //17 17 2017 2017</span><br><span class="line">string.Format(&quot;&#123;0:M MM MMM MMMM&#125;&quot;, dt);//4  04 四月 四月</span><br><span class="line">string.Format(&quot;&#123;0:d dd ddd dddd&#125;&quot;, dt);//1  01 周六 星期六</span><br><span class="line">string.Format(&quot;&#123;0:t tt&#125;&quot;, dt);//下 下午</span><br><span class="line">string.Format(&quot;&#123;0:H HH&#125;&quot;, dt);//13 13</span><br><span class="line">string.Format(&quot;&#123;0:h hh&#125;&quot;, dt);//1  01</span><br><span class="line">string.Format(&quot;&#123;0:m mm&#125;&quot;, dt);//16 16</span><br><span class="line">string.Format(&quot;&#123;0:s ss&#125;&quot;, dt);//32 32</span><br><span class="line">string.Format(&quot;&#123;0:F FF FFF FFFF FFFFF FFFFFF FFFFFFF&#125;&quot;, dt);//1 1  108 108  108   108    108</span><br><span class="line">string.Format(&quot;&#123;0:f ff fff ffff fffff ffffff fffffff&#125;&quot;, dt);//1 10 108 1080 10800 108000 1080000</span><br><span class="line">string.Format(&quot;&#123;0:z zz zzz&#125;&quot;, dt);//+8 +08 +08:00</span><br><span class="line"></span><br><span class="line">string.Format(&quot;&#123;0:yyyy/MM/dd HH:mm:ss.fff&#125;&quot;,dt);　　//2017/04/01 13:16:32.108</span><br><span class="line">string.Format(&quot;&#123;0:yyyy/MM/dd dddd&#125;&quot;, dt);　　　　　　//2017/04/01 星期六</span><br><span class="line">string.Format(&quot;&#123;0:yyyy/MM/dd dddd tt hh:mm&#125;&quot;, dt); //2017/04/01 星期六 下午 01:16</span><br><span class="line">string.Format(&quot;&#123;0:yyyyMMdd&#125;&quot;, dt);　　　　　　　　　//20170401</span><br><span class="line">string.Format(&quot;&#123;0:yyyy-MM-dd HH:mm:ss.fff&#125;&quot;, dt);　//2017-04-01 13:16:32.108</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>除去string.Format()可以对日期进行格式化之外，*.ToString()也可以实现相同的效果：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">DateTime dt = new DateTime(2017,4,1,13,16,32,108);</span><br><span class="line">dt.ToString(&quot;y yy yyy yyyy&quot;);//17 17 2017 2017</span><br><span class="line">dt.ToString(&quot;M MM MMM MMMM&quot;);//4  04 四月 四月</span><br><span class="line">dt.ToString(&quot;d dd ddd dddd&quot;);//1  01 周六 星期六</span><br><span class="line">dt.ToString(&quot;t tt&quot;);//下 下午</span><br><span class="line">dt.ToString(&quot;H HH&quot;);//13 13</span><br><span class="line">dt.ToString(&quot;h hh&quot;);//1  01</span><br><span class="line">dt.ToString(&quot;m mm&quot;);//16 16</span><br><span class="line">dt.ToString(&quot;s ss&quot;);//32 32</span><br><span class="line">dt.ToString(&quot;F FF FFF FFFF FFFFF FFFFFF FFFFFFF&quot;);//1 1  108 108  108   108    108</span><br><span class="line">dt.ToString(&quot;f ff fff ffff fffff ffffff fffffff&quot;);//1 10 108 1080 10800 108000 1080000</span><br><span class="line">dt.ToString(&quot;z zz zzz&quot;);//+8 +08 +08:00</span><br><span class="line"></span><br><span class="line">dt.ToString(&quot;yyyy/MM/dd HH:mm:ss.fff&quot;);　//2017/04/01 13:16:32.108</span><br><span class="line">dt.ToString(&quot;yyyy/MM/dd dddd&quot;);　　　　　　//2017/04/01 星期六</span><br><span class="line">dt.ToString(&quot;yyyy/MM/dd dddd tt hh:mm&quot;); //2017/04/01 星期六 下午 01:16</span><br><span class="line">dt.ToString(&quot;yyyyMMdd&quot;);　　　　　　　　　//20170401</span><br><span class="line">dt.ToString(&quot;yyyy-MM-dd HH:mm:ss.fff&quot;);　//2017-04-01 13:16:32.108</span><br></pre></td></tr></table></figure>
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/C/" rel="tag"># C#</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/07/03/%E6%89%8B%E7%AB%BF%E6%8A%BD%E7%99%BD%E6%9D%A1/" rel="prev" title="手竿抽白条">
+      <i class="fa fa-chevron-left"></i> 手竿抽白条
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%93%E6%9E%84%E4%BD%93Struct%E3%80%91/" rel="next" title="C#学习笔记【结构体Struct】">
+      C#学习笔记【结构体Struct】 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88String%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">- C# 字符串（String）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-String-%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text">- 创建 String 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String-%E7%B1%BB%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">- String 类的属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String-%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">- String 类的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">5.</span> <span class="nav-text">- 实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">5.1.</span> <span class="nav-text">比较字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%85%E5%90%AB%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">5.2.</span> <span class="nav-text">字符串包含字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">5.3.</span> <span class="nav-text">获取子字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">5.4.</span> <span class="nav-text">连接字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#string-Format%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%97%A5%E6%9C%9F"><span class="nav-number">6.</span> <span class="nav-text">- string.Format格式化日期</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Weibo → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8SGHVqNSzlIvUsQekb6EVL2z-gzGzoHsz',
+      appKey     : 'kM6zUKBTanjH10n2gcXV8OTE',
+      placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+      avatar     : 'retro',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

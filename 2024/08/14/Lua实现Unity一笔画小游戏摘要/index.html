@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+  <meta name="description" content="用Lua实现Unity一笔画小游戏要点记录： 游戏玩法简介选择不同难度关卡开始游戏，每一关有多个方块小格，可以从任意一个方块格作为起点开始连接到下一个方块格，下一个方块格必须与起始格上下左右相邻。同一个方块格不能重复连接，成功连接后，目标方块格又成为新的起始方块格。以此类推直至将所有方块格连完。 功能实现简述关卡难度关卡难度选择，不同关卡制作不同prefab预设。prefab预设摆放所有要连接的格">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua实现Unity一笔画小游戏摘要">
+<meta property="og:url" content="https://www.bytefisher.top/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/index.html">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="用Lua实现Unity一笔画小游戏要点记录： 游戏玩法简介选择不同难度关卡开始游戏，每一关有多个方块小格，可以从任意一个方块格作为起点开始连接到下一个方块格，下一个方块格必须与起始格上下左右相邻。同一个方块格不能重复连接，成功连接后，目标方块格又成为新的起始方块格。以此类推直至将所有方块格连完。 功能实现简述关卡难度关卡难度选择，不同关卡制作不同prefab预设。prefab预设摆放所有要连接的格">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-08-14T11:12:39.000Z">
+<meta property="article:modified_time" content="2024-08-26T09:55:57.306Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="Unity3D">
+<meta property="article:tag" content="IT">
+<meta property="article:tag" content="Lua">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.bytefisher.top/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Lua实现Unity一笔画小游戏摘要 | ByteFisher</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <!--相册弹出js-->
+  <script type="text/javascript" src="/js/lightbox-plus-jquery.min.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">65</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Lua实现Unity一笔画小游戏摘要
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-08-14 19:12:39" itemprop="dateCreated datePublished" datetime="2024-08-14T19:12:39+08:00">2024-08-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity一笔画小游戏摘要" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>用Lua实现Unity一笔画小游戏要点记录：</p>
+<h1 id="游戏玩法简介"><a href="#游戏玩法简介" class="headerlink" title="游戏玩法简介"></a>游戏玩法简介</h1><p>选择不同难度关卡开始游戏，每一关有多个方块小格，可以从任意一个方块格作为起点开始连接到下一个方块格，下一个方块格必须与起始格上下左右相邻。同一个方块格不能重复连接，成功连接后，目标方块格又成为新的起始方块格。以此类推直至将所有方块格连完。</p>
+<h1 id="功能实现简述"><a href="#功能实现简述" class="headerlink" title="功能实现简述"></a>功能实现简述</h1><h2 id="关卡难度"><a href="#关卡难度" class="headerlink" title="关卡难度"></a>关卡难度</h2><p>关卡难度选择，不同关卡制作不同prefab预设。prefab预设摆放所有要连接的格子位置信息节点。选择关卡开始游戏时，在每一个位置信息节点下生成一个游戏连接格实例对象。创建方格数据结构 AmusementParkOneConnectBlockData 和 视图显示控件AmusementParkOneConnectBlockCell</p>
+<p><strong>AmusementParkOneConnectBlockData</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">---@class AmusementParkOneConnectBlockData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type number</span><br><span class="line">    Index = 0,</span><br><span class="line">    ---@type number</span><br><span class="line">    X = 0,</span><br><span class="line">    ---@type number</span><br><span class="line">    Y = 0,</span><br><span class="line">    ---@type number 0 未连接,1 已连接</span><br><span class="line">    State = 0,</span><br><span class="line">    ---@type boolean 最新连通</span><br><span class="line">    IsFirst = false,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(index,x,y)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(index,x,y)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(index,x,y)</span><br><span class="line">    self.Index = index</span><br><span class="line">    self.X = tonumber(x)</span><br><span class="line">    self.Y = tonumber(y)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m	</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p><strong>AmusementParkOneConnectBlockCell</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">---@class AmusementParkOneConnectBlockCell</span><br><span class="line">local m = &#123;</span><br><span class="line">    View = nil,</span><br><span class="line">    ---@type AmusementParkOneConnectBlockData</span><br><span class="line">    BlockData = nil,</span><br><span class="line">    ---@type Vector3</span><br><span class="line">    StartPos = nil,</span><br><span class="line">    ---@type function</span><br><span class="line">    OnBeginDragCallBack = nil,</span><br><span class="line">    ---@type function</span><br><span class="line">    OnDragCallBack = nil,</span><br><span class="line">    ---@type UnityEngine.Collider2D</span><br><span class="line">    BlockCollider = nil,</span><br><span class="line">    ---@type UnityEngine.Collider2D</span><br><span class="line">    DrgCollider = nil,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(view)</span><br><span class="line">    local obj = Clone(m)</span><br><span class="line">    obj:Init(view)</span><br><span class="line">    return obj</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(view)</span><br><span class="line">    self.View = view</span><br><span class="line">    LuaCodeInterface.BindOutlet(self.View, self)</span><br><span class="line"></span><br><span class="line">    self.DelegateBtnSelf = function() self:OnClickBtnSelf() end</span><br><span class="line"></span><br><span class="line">    self.BlockCollider = self.View:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line">    self.DrgCollider = self.ImgDrag:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line"></span><br><span class="line">    self.StartPos = self.ImgDrag.transform.position</span><br><span class="line">    self.ImgDrag:GetComponent(&quot;UIDrag&quot;).onBeginDrag = function(eventData) self:OnBeginDrag(eventData) end</span><br><span class="line">    self.ImgDrag:GetComponent(&quot;UIDrag&quot;).onDrag = function(pointerEventData) self:OnDrag(pointerEventData) end</span><br><span class="line">    self.ImgDrag:GetComponent(&quot;UIDrag&quot;).onReachTargetSuccess = function(eventData) self:OnDragSuccess(eventData) end</span><br><span class="line">    self.ImgDrag:GetComponent(&quot;UIDrag&quot;).onReachTargetFailure = function(eventData) self:OnFailure(eventData) end</span><br><span class="line"></span><br><span class="line">    self:AddListener()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:AddListener()</span><br><span class="line">    self.View:GetComponent(&quot;Button&quot;).onClick:AddListener(self.DelegateBtnSelf)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:RemoveListener()</span><br><span class="line">    self.View:GetComponent(&quot;Button&quot;).onClick:RemoveListener(self.DelegateBtnSelf)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnClickBtnSelf()</span><br><span class="line">    if self.OnBeginDragCallBack then</span><br><span class="line">        self.OnBeginDragCallBack(self)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnBeginDrag()</span><br><span class="line">    if self.OnBeginDragCallBack then</span><br><span class="line">        self.OnBeginDragCallBack(self)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnDrag(eventData)</span><br><span class="line">    if self.OnDragCallBack then</span><br><span class="line">        self.OnDragCallBack(self)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnDragSuccess(eventData)</span><br><span class="line">    self.ImgDrag.transform.position = self.StartPos</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnFailure(eventData)</span><br><span class="line">    self.ImgDrag.transform.position = self.StartPos</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:UpdateView()</span><br><span class="line">    self.ImgDefault:SetActive(self.BlockData.State == 0)</span><br><span class="line">    self.ImgCheck:SetActive(self.BlockData.State == 1)</span><br><span class="line">    self.ImgTag:SetActive(self.BlockData.IsFirst)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@param blockData AmusementParkOneConnectBlockData</span><br><span class="line">function m:SetData(blockData)</span><br><span class="line">    self.BlockData = blockData</span><br><span class="line">    self.View.name = self.BlockData.Index</span><br><span class="line">    self:UpdateView()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Dispose()</span><br><span class="line">    AssetUtil.UnloadAsset(self)</span><br><span class="line">    self:RemoveListener()</span><br><span class="line">    self.OnBeginDragCallBack = nil</span><br><span class="line">    self.OnDragCallBack = nil</span><br><span class="line"></span><br><span class="line">    LuaCodeInterface.ClearOutlet(self.View, self)</span><br><span class="line">    UnityEngine.Object.Destroy(self.View)</span><br><span class="line">    self.View = nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</code></pre>
+<span id="more"></span>
+
+<h2 id="连接功能实现"><a href="#连接功能实现" class="headerlink" title="连接功能实现"></a>连接功能实现</h2><p>方格连接有两种连接方式，点击目标格或者从起始格位置在屏幕上向目标格连续拖动。</p>
+<p>AmusementParkOneConnectBlockCell 控件包含 Button 组件，且子节点”ImgDrag”包含 UIDrag 组件 和 Collider2D，分别实现点击，和拖动操作。当拖动ImgDrag节点时，通过Collider2D检测，有没有接接到其它方块格上。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br></pre></td><td class="code"><pre><span class="line">---@class AmusementParkGameConnectUI</span><br><span class="line">local AmusementParkGameConnectUI = &#123;</span><br><span class="line">    ---@type UnityEngine.Canvas</span><br><span class="line">    UICanvas = nil,</span><br><span class="line">    ---@type AmusementParkOneConnectBlockCell[]</span><br><span class="line">    OneConnectBlockCells = &#123;&#125;,</span><br><span class="line">&#125;</span><br><span class="line">AmusementParkGameConnectUI = Base:Extend(&quot;AmusementParkGameConnectUI&quot;, &quot;IQIGame.Onigao.UI.AmusementParkGameConnectUI&quot;, AmusementParkGameConnectUI)</span><br><span class="line"></span><br><span class="line">local AmusementParkOneConnectBlockData = require(&quot;IQIGame.Module.CommonActivity.AmusementPark.AmusementParkOneConnectGame.AmusementParkOneConnectBlockData&quot;)</span><br><span class="line">local AmusementParkOneConnectBlockCell = require(&quot;IQIGame.UI.ExploreHall.AmusementPark.AmusementParkOneConnectGame.AmusementParkOneConnectBlockCell&quot;)</span><br><span class="line"></span><br><span class="line">---界面初始化。</span><br><span class="line">---@return void</span><br><span class="line">function AmusementParkGameConnectUI:OnInit()</span><br><span class="line">    self.UICanvas = self.UIController:GetComponent(typeof(UnityEngine.Canvas))</span><br><span class="line"></span><br><span class="line">    self.DelegateOnClickBtnClose = function() self:OnClickBtnClose() end</span><br><span class="line">    self.DelegateOnClickBtnRest = function() self:OnClickBtnRest() end</span><br><span class="line">    self.DelegateOnClickBtnChooseLevel = function() self:OnClickBtnChooseLevel() end</span><br><span class="line">    self.DelegateUpdateOneConnectGame = function() self:OnUpdateOneConnectGame() end</span><br><span class="line">    self.DelegateOnGameEnd = function() self:OnGameEnd() end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---OnInit预加载资源路径列表。</span><br><span class="line">---@return table</span><br><span class="line">function AmusementParkGameConnectUI:GetPreloadAssetPaths()</span><br><span class="line">    return nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---OnOpen预加载资源路径列表。</span><br><span class="line">---@return table</span><br><span class="line">function AmusementParkGameConnectUI:GetOpenPreloadAssetPaths(userData)</span><br><span class="line">    return nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---OnOpen时调用，判断当前UI是否在卡顿结束后手动显示</span><br><span class="line">---@return boolean</span><br><span class="line">function AmusementParkGameConnectUI:IsManualShowOnOpen(userData)</span><br><span class="line">    return false</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---UI是否有独立的背景音乐，如果有则返回，否则返回nil，注意一个UI同时只能有一个背景音乐，如果需要切换，调用self.UIController:ChangeBGM()方法</span><br><span class="line">---@return number @SoundCid</span><br><span class="line">function AmusementParkGameConnectUI:GetBGM(userData)</span><br><span class="line">	return nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---界面打开。</span><br><span class="line">---@param userData table</span><br><span class="line">---@return void</span><br><span class="line">function AmusementParkGameConnectUI:OnOpen(userData)</span><br><span class="line">    AmusementParkModule.SetAmusementParkSceneActive(false)</span><br><span class="line">    self:CreateGameMap()</span><br><span class="line">    self:UpdateView()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---界面关闭。</span><br><span class="line">---@param userData table</span><br><span class="line">---@return void</span><br><span class="line">function AmusementParkGameConnectUI:OnClose(userData)</span><br><span class="line">    AmusementParkModule.SetAmusementParkSceneActive(true)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---添加侦听。</span><br><span class="line">---@return void</span><br><span class="line">function AmusementParkGameConnectUI:OnAddListeners()</span><br><span class="line">    self.BtnClose:GetComponent(&quot;Button&quot;).onClick:AddListener(self.DelegateOnClickBtnClose)</span><br><span class="line">    self.BtnRest:GetComponent(&quot;Button&quot;).onClick:AddListener(self.DelegateOnClickBtnRest)</span><br><span class="line">    self.BtnChooseLevel:GetComponent(&quot;Button&quot;).onClick:AddListener(self.DelegateOnClickBtnChooseLevel)</span><br><span class="line">    self.ResultView:GetComponent(&quot;Button&quot;).onClick:AddListener(self.DelegateOnGameEnd)</span><br><span class="line"></span><br><span class="line">    EventDispatcher.AddEventListener(EventID.APUpdateOneConnectGameEvent,self.DelegateUpdateOneConnectGame)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---移除侦听。</span><br><span class="line">---@return void</span><br><span class="line">function AmusementParkGameConnectUI:OnRemoveListeners()</span><br><span class="line">    self.BtnClose:GetComponent(&quot;Button&quot;).onClick:RemoveListener(self.DelegateOnClickBtnClose)</span><br><span class="line">    self.BtnRest:GetComponent(&quot;Button&quot;).onClick:RemoveListener(self.DelegateOnClickBtnRest)</span><br><span class="line">    self.BtnChooseLevel:GetComponent(&quot;Button&quot;).onClick:RemoveListener(self.DelegateOnClickBtnChooseLevel)</span><br><span class="line">    self.ResultView:GetComponent(&quot;Button&quot;).onClick:RemoveListener(self.DelegateOnGameEnd)</span><br><span class="line"></span><br><span class="line">    EventDispatcher.RemoveEventListener(EventID.APUpdateOneConnectGameEvent,self.DelegateUpdateOneConnectGame)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---界面暂停。</span><br><span class="line">---@return void</span><br><span class="line">function AmusementParkGameConnectUI:OnPause()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---界面暂停恢复。</span><br><span class="line">---@return void</span><br><span class="line">function AmusementParkGameConnectUI:OnResume()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---界面遮挡。</span><br><span class="line">---@return void</span><br><span class="line">function AmusementParkGameConnectUI:OnCover()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---界面遮挡恢复。</span><br><span class="line">---@return void</span><br><span class="line">function AmusementParkGameConnectUI:OnReveal()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---界面激活。</span><br><span class="line">---@param userData table</span><br><span class="line">---@return void</span><br><span class="line">function AmusementParkGameConnectUI:OnRefocus(userData)</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---界面轮询。</span><br><span class="line">---@param elapseSeconds number</span><br><span class="line">---@param realElapseSeconds number</span><br><span class="line">---@return void</span><br><span class="line">function AmusementParkGameConnectUI:OnUpdate(elapseSeconds, realElapseSeconds)</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---界面深度改变。</span><br><span class="line">---@param uiGroupDepth number</span><br><span class="line">---@param depthInUIGroup number</span><br><span class="line">---@return void</span><br><span class="line">function AmusementParkGameConnectUI:OnDepthChanged(uiGroupDepth, depthInUIGroup)</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---加载资源成功</span><br><span class="line">---该方法委托类型为底层框架类型</span><br><span class="line">---@param assetName string</span><br><span class="line">---@param asset table</span><br><span class="line">---@param duration number</span><br><span class="line">---@param userData table</span><br><span class="line">---@return void</span><br><span class="line">function AmusementParkGameConnectUI:OnLoadSucceed(assetName, asset, duration, userData)</span><br><span class="line">    local type = userData.type</span><br><span class="line">    if type == &quot;LoadMap&quot; then</span><br><span class="line">       self:CleanBlocks()</span><br><span class="line">        AmusementParkOneConnectGameModule.oneConnectGameData.LevelData:RestLevelBlock()</span><br><span class="line">        local mapObj = UnityEngine.Object.Instantiate(asset)</span><br><span class="line">        mapObj.transform:SetParent(self.RootLevel.transform, false)</span><br><span class="line">        for i = 0, mapObj.transform.childCount - 1 do</span><br><span class="line">            local node = mapObj.transform:GetChild(i)</span><br><span class="line">            local posTab = string.split(node.gameObject.name,&quot;_&quot;)</span><br><span class="line">            local blockObj = UnityEngine.Object.Instantiate(self.BlockMould)</span><br><span class="line">            blockObj:SetActive(true)</span><br><span class="line">            blockObj.transform:SetParent(node,false)</span><br><span class="line">            local blockData = AmusementParkOneConnectBlockData.New(i+1,posTab[1],posTab[2])</span><br><span class="line">            ---@type AmusementParkOneConnectBlockCell</span><br><span class="line">            local blockCell = AmusementParkOneConnectBlockCell.New(blockObj)</span><br><span class="line">            blockCell.OnBeginDragCallBack = function(cell) self:StartDrag(cell) end</span><br><span class="line">            blockCell.OnDragCallBack = function(cell) self:OnDrag(cell) end</span><br><span class="line">            blockCell:SetData(blockData)</span><br><span class="line">            table.insert(self.OneConnectBlockCells,blockCell)</span><br><span class="line">            AmusementParkOneConnectGameModule.oneConnectGameData.LevelData:Create(blockData)</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---加载资源失败</span><br><span class="line">---该方法委托类型为底层框架类型</span><br><span class="line">---@param assetName string</span><br><span class="line">---@param status number</span><br><span class="line">---@param errorMessage string</span><br><span class="line">---@param userData table</span><br><span class="line">---@return void</span><br><span class="line">function AmusementParkGameConnectUI:OnLoadFailed(assetName, status, errorMessage, userData)</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---销毁</span><br><span class="line">function AmusementParkGameConnectUI:OnDestroy()</span><br><span class="line">    AssetUtil.UnloadAsset(self)</span><br><span class="line">    self:CleanBlocks()</span><br><span class="line">    if self.oneConnectGameMapView then</span><br><span class="line">        self.oneConnectGameMapView:Dispose()</span><br><span class="line">    end</span><br><span class="line">    self.oneConnectGameMapView = nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function AmusementParkGameConnectUI:OnClickBtnClose()</span><br><span class="line">    UIModule.CloseSelf(self)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function AmusementParkGameConnectUI:RefreshMap()</span><br><span class="line">    for i, v in pairs(self.OneConnectBlockCells) do</span><br><span class="line">        v:UpdateView()</span><br><span class="line">    end</span><br><span class="line">    local result = AmusementParkOneConnectGameModule.oneConnectGameData:CheckComplete()</span><br><span class="line">    if result then</span><br><span class="line">        AmusementParkOneConnectGameModule.OneStroke(AmusementParkOneConnectGameModule.oneConnectGameData.LevelData.cid)</span><br><span class="line">        self.ResultView:SetActive(true)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---开始连格子</span><br><span class="line">---@param cell AmusementParkOneConnectBlockCell</span><br><span class="line">function AmusementParkGameConnectUI:StartDrag(cell)</span><br><span class="line">    local blockData = cell.BlockData</span><br><span class="line">    local result = AmusementParkOneConnectGameModule.oneConnectGameData:CheckIsConnect(blockData)</span><br><span class="line">    if result then</span><br><span class="line">        AmusementParkOneConnectGameModule.oneConnectGameData:AddBlockData(blockData)</span><br><span class="line">        self:RefreshMap()</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---拖动方块位置连续连接</span><br><span class="line">---@param cell AmusementParkOneConnectBlockCell</span><br><span class="line">function AmusementParkGameConnectUI:OnDrag(cell)</span><br><span class="line">    local top,blockData = self:GetBlockOccupiedAreas(cell)</span><br><span class="line">    if top then</span><br><span class="line">        local result = AmusementParkOneConnectGameModule.oneConnectGameData:CheckIsConnect(blockData)</span><br><span class="line">        if result then</span><br><span class="line">            AmusementParkOneConnectGameModule.oneConnectGameData:AddBlockData(blockData)</span><br><span class="line">            self:RefreshMap()</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---检测两个格子是否有交集</span><br><span class="line">---@return boolean</span><br><span class="line">---@param collider2D1 UnityEngine.Collider2D 初拖动的格子</span><br><span class="line">---@param collider2D2 UnityEngine.Collider2D 要检测的目标格</span><br><span class="line">function AmusementParkGameConnectUI:CheckBoundsIntersects(collider2D1,collider2D2)</span><br><span class="line">    return collider2D1.bounds:Intersects(collider2D2.bounds)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---返回方块格经过的格子</span><br><span class="line">---@param cell AmusementParkOneConnectBlockCell</span><br><span class="line">---@return boolean,AmusementParkOneConnectBlockData</span><br><span class="line">function AmusementParkGameConnectUI:GetBlockOccupiedAreas(cell)</span><br><span class="line">    local res = false</span><br><span class="line">    for i, v in pairs(self.OneConnectBlockCells) do</span><br><span class="line">        if v.BlockData.Index ~= cell.BlockData.Index then</span><br><span class="line">            res = self:CheckBoundsIntersects(cell.DrgCollider,v.BlockCollider)</span><br><span class="line">            if res then</span><br><span class="line">                return true,v.BlockData</span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    return false,nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function AmusementParkGameConnectUI:OnUpdateOneConnectGame()</span><br><span class="line">    self:ResetGame()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function AmusementParkGameConnectUI:ResetGame()</span><br><span class="line">    self.ResultView:SetActive(false)</span><br><span class="line">    AmusementParkOneConnectGameModule.oneConnectGameData:RestGame()</span><br><span class="line">    self:CreateGameMap()</span><br><span class="line">    self:UpdateView()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function AmusementParkGameConnectUI:UpdateView()</span><br><span class="line">    UGUIUtil.SetText(self.TextLevel,AmusementParkOneConnectGameModule.oneConnectGameData.LevelData:GetCfgData().Level)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---创建游戏</span><br><span class="line">function AmusementParkGameConnectUI:CreateGameMap()</span><br><span class="line">    local levelMap = AmusementParkOneConnectGameModule.oneConnectGameData.LevelData:GetCfgData().GamePrefab</span><br><span class="line">    local path = UIGlobalApi.UIPath..levelMap</span><br><span class="line">    AssetUtil.LoadAsset(self,path,self.OnLoadSucceed,nil,&#123;type = &quot;LoadMap&quot;&#125;)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function AmusementParkGameConnectUI:CleanBlocks()</span><br><span class="line">    for i, v in pairs(self.OneConnectBlockCells) do</span><br><span class="line">        v:Dispose()</span><br><span class="line">    end</span><br><span class="line">    self.OneConnectBlockCells = &#123;&#125;</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function AmusementParkGameConnectUI:OnClickBtnRest()</span><br><span class="line">    self:ResetGame()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---点击关闭结算界面自动开启下一关</span><br><span class="line">function AmusementParkGameConnectUI:OnGameEnd()</span><br><span class="line">    self.ResultView:SetActive(false)</span><br><span class="line">    AmusementParkOneConnectGameModule.CreateNewGame()</span><br><span class="line">    self:CreateGameMap()</span><br><span class="line">    self:UpdateView()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function AmusementParkGameConnectUI:OnClickBtnChooseLevel()</span><br><span class="line">    UIModule.Open(Constant.UIControllerName.AmusementParkGameSelectLevelUI,Constant.UILayer.UI)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return AmusementParkGameConnectUI</span><br></pre></td></tr></table></figure>
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
+              <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/Lua/" rel="tag"># Lua</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/" rel="prev" title="Unity3D正交相机视野控制">
+      <i class="fa fa-chevron-left"></i> Unity3D正交相机视野控制
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" rel="next" title="Lua实现Unity象素鸟小游戏摘要">
+      Lua实现Unity象素鸟小游戏摘要 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E7%8E%A9%E6%B3%95%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">游戏玩法简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%AE%80%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">功能实现简述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E5%8D%A1%E9%9A%BE%E5%BA%A6"><span class="nav-number">2.1.</span> <span class="nav-text">关卡难度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.2.</span> <span class="nav-text">连接功能实现</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Weibo → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8SGHVqNSzlIvUsQekb6EVL2z-gzGzoHsz',
+      appKey     : 'kM6zUKBTanjH10n2gcXV8OTE',
+      placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+      avatar     : 'retro',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

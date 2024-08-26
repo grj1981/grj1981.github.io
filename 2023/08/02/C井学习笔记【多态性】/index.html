@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+  <meta name="description" content="- C# 多态性多态是同一个行为具有多个不同表现形式或形态的能力。 多态性意味着有多重形式。在面向对象编程范式中，多态性往往表现为”一个接口，多个功能”。 多态性可以是静态的或动态的。在静态多态性中，函数的响应是在编译时发生的。在动态多态性中，函数的响应是在运行时发生的。 在 C# 中，每个类型都是多态的，因为包括用户定义类型在内的所有类型都继承自 Object。 多态就是同一个接口，使用不同的实">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C#学习笔记【多态性】">
+<meta property="og:url" content="https://www.bytefisher.top/2023/08/02/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E6%80%81%E6%80%A7%E3%80%91/index.html">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="- C# 多态性多态是同一个行为具有多个不同表现形式或形态的能力。 多态性意味着有多重形式。在面向对象编程范式中，多态性往往表现为”一个接口，多个功能”。 多态性可以是静态的或动态的。在静态多态性中，函数的响应是在编译时发生的。在动态多态性中，函数的响应是在运行时发生的。 在 C# 中，每个类型都是多态的，因为包括用户定义类型在内的所有类型都继承自 Object。 多态就是同一个接口，使用不同的实">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2013/12/dt-java.png">
+<meta property="article:published_time" content="2023-08-02T06:52:07.000Z">
+<meta property="article:modified_time" content="2024-08-26T09:55:57.302Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="IT">
+<meta property="article:tag" content="C#">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.runoob.com/wp-content/uploads/2013/12/dt-java.png">
+
+<link rel="canonical" href="https://www.bytefisher.top/2023/08/02/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E6%80%81%E6%80%A7%E3%80%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>C#学习笔记【多态性】 | ByteFisher</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <!--相册弹出js-->
+  <script type="text/javascript" src="/js/lightbox-plus-jquery.min.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">65</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/08/02/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E6%80%81%E6%80%A7%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C#学习笔记【多态性】
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-08-02 14:52:07" itemprop="dateCreated datePublished" datetime="2023-08-02T14:52:07+08:00">2023-08-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/08/02/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E6%80%81%E6%80%A7%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【多态性】" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/08/02/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E6%80%81%E6%80%A7%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/08/02/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E6%80%81%E6%80%A7%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="C-多态性"><a href="#C-多态性" class="headerlink" title="- C# 多态性"></a>- C# 多态性</h2><p>多态是同一个行为具有多个不同表现形式或形态的能力。</p>
+<p>多态性意味着有多重形式。在面向对象编程范式中，多态性往往表现为”一个接口，多个功能”。</p>
+<p>多态性可以是静态的或动态的。在静态多态性中，函数的响应是在编译时发生的。在动态多态性中，函数的响应是在运行时发生的。</p>
+<p>在 C# 中，每个类型都是多态的，因为包括用户定义类型在内的所有类型都继承自 Object。</p>
+<p>多态就是同一个接口，使用不同的实例而执行不同操作，如图所示：</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2013/12/dt-java.png"></p>
+<p>现实中，比如我们按下 F1 键这个动作：</p>
+<ul>
+<li><p>如果当前在 Flash 界面下弹出的就是 AS 3 的帮助文档；</p>
+</li>
+<li><p>如果当前在 Word 下弹出的就是 Word 帮助；</p>
+</li>
+<li><p>在 Windows 下弹出的就是 Windows 帮助和支持。<br>同一个事件发生在不同的对象上会产生不同的结果。</p>
+</li>
+</ul>
+<h2 id="静态多态性"><a href="#静态多态性" class="headerlink" title="- 静态多态性"></a>- 静态多态性</h2><p>在编译时，函数和对象的连接机制被称为早期绑定，也被称为静态绑定。C# 提供了两种技术来实现静态多态性。分别为：</p>
+<ul>
+<li><p>函数重载</p>
+</li>
+<li><p>运算符重载</p>
+</li>
+<li><p>运算符重载将在下一章节讨论，接下来我们将讨论函数重载。</p>
+</li>
+</ul>
+<h2 id="函数重载"><a href="#函数重载" class="headerlink" title="- 函数重载"></a>- 函数重载</h2><p>您可以在同一个范围内对相同的函数名有多个定义。函数的定义必须彼此不同，可以是参数列表中的参数类型不同，也可以是参数个数不同。不能重载只有返回类型不同的函数声明。</p>
+<p>下面的实例演示了几个相同的函数 Add()，用于对不同个数参数进行相加处理：</p>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace PolymorphismApplication</span><br><span class="line">&#123;</span><br><span class="line">    public class TestData  </span><br><span class="line">    &#123;  </span><br><span class="line">        public int Add(int a, int b, int c)  </span><br><span class="line">        &#123;  </span><br><span class="line">            return a + b + c;  </span><br><span class="line">        &#125;  </span><br><span class="line">        public int Add(int a, int b)  </span><br><span class="line">        &#123;  </span><br><span class="line">            return a + b;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    class Program  </span><br><span class="line">    &#123;  </span><br><span class="line">        static void Main(string[] args)  </span><br><span class="line">        &#123;  </span><br><span class="line">            TestData dataClass = new TestData();</span><br><span class="line">            int add1 = dataClass.Add(1, 2);  </span><br><span class="line">            int add2 = dataClass.Add(1, 2, 3);</span><br><span class="line"></span><br><span class="line">            Console.WriteLine(&quot;add1 :&quot; + add1);</span><br><span class="line">            Console.WriteLine(&quot;add2 :&quot; + add2);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>下面的实例演示了几个相同的函数 print()，用于打印不同的数据类型：</p>
+<span id="more"></span>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace PolymorphismApplication</span><br><span class="line">&#123;</span><br><span class="line">   class Printdata</span><br><span class="line">   &#123;</span><br><span class="line">      void print(int i)</span><br><span class="line">      &#123;</span><br><span class="line">         Console.WriteLine(&quot;输出整型: &#123;0&#125;&quot;, i );</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      void print(double f)</span><br><span class="line">      &#123;</span><br><span class="line">         Console.WriteLine(&quot;输出浮点型: &#123;0&#125;&quot; , f);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      void print(string s)</span><br><span class="line">      &#123;</span><br><span class="line">         Console.WriteLine(&quot;输出字符串: &#123;0&#125;&quot;, s);</span><br><span class="line">      &#125;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         Printdata p = new Printdata();</span><br><span class="line">         // 调用 print 来打印整数</span><br><span class="line">         p.print(1);</span><br><span class="line">         // 调用 print 来打印浮点数</span><br><span class="line">         p.print(1.23);</span><br><span class="line">         // 调用 print 来打印字符串</span><br><span class="line">         p.print(&quot;Hello Runoob&quot;);</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<pre><code>输出整型: 1
+输出浮点型: 1.23
+输出字符串: Hello Runoob
+</code></pre>
+<h2 id="动态多态性"><a href="#动态多态性" class="headerlink" title="- 动态多态性"></a>- 动态多态性</h2><p>C# 允许您使用关键字 <strong>abstract</strong> 创建抽象类，用于提供接口的部分类的实现。当一个派生类继承自该抽象类时，实现即完成。抽象类包含抽象方法，抽象方法可被派生类实现。派生类具有更专业的功能。</p>
+<p>请注意，下面是有关抽象类的一些规则：</p>
+<ul>
+<li><p>您不能创建一个抽象类的实例。</p>
+</li>
+<li><p>您不能在一个抽象类外部声明一个抽象方法。</p>
+</li>
+<li><p>通过在类定义前面放置关键字 <strong>sealed</strong>，可以将类声明为<strong>密封类</strong>。当一个类被声明为 sealed 时，它不能被继承。抽象类不能被声明为 sealed。<br>下面的程序演示了一个抽象类：</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace PolymorphismApplication</span><br><span class="line">&#123;</span><br><span class="line">   abstract class Shape</span><br><span class="line">   &#123;</span><br><span class="line">       abstract public int area();</span><br><span class="line">   &#125;</span><br><span class="line">   class Rectangle:  Shape</span><br><span class="line">   &#123;</span><br><span class="line">      private int length;</span><br><span class="line">      private int width;</span><br><span class="line">      public Rectangle( int a=0, int b=0)</span><br><span class="line">      &#123;</span><br><span class="line">         length = a;</span><br><span class="line">         width = b;</span><br><span class="line">      &#125;</span><br><span class="line">      public override int area ()</span><br><span class="line">      &#123;</span><br><span class="line">         Console.WriteLine(&quot;Rectangle 类的面积：&quot;);</span><br><span class="line">         return (width * length);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   class RectangleTester</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         Rectangle r = new Rectangle(10, 7);</span><br><span class="line">         double a = r.area();</span><br><span class="line">         Console.WriteLine(&quot;面积： &#123;0&#125;&quot;,a);</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<pre><code>Rectangle 类的面积：
+面积： 70
+</code></pre>
+<p>当有一个定义在类中的函数需要在继承类中实现时，可以使用<strong>虚方法</strong>。</p>
+<p>虚方法是使用关键字 <strong>virtual</strong> 声明的。</p>
+<p>虚方法可以在不同的继承类中有不同的实现。</p>
+<p>对虚方法的调用是在运行时发生的。</p>
+<p>动态多态性是通过 <strong>抽象类</strong> 和 <strong>虚方法</strong> 实现的。</p>
+<p>以下实例创建了 Shape 基类，并创建派生类 Circle、 Rectangle、Triangle， Shape 类提供一个名为 Draw 的虚拟方法，在每个派生类中重写该方法以绘制该类的指定形状。</p>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line"></span><br><span class="line">public class Shape</span><br><span class="line">&#123;</span><br><span class="line">    public int X &#123; get; private set; &#125;</span><br><span class="line">    public int Y &#123; get; private set; &#125;</span><br><span class="line">    public int Height &#123; get; set; &#125;</span><br><span class="line">    public int Width &#123; get; set; &#125;</span><br><span class="line">   </span><br><span class="line">    // 虚方法</span><br><span class="line">    public virtual void Draw()</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(&quot;执行基类的画图任务&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Circle : Shape</span><br><span class="line">&#123;</span><br><span class="line">    public override void Draw()</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(&quot;画一个圆形&quot;);</span><br><span class="line">        base.Draw();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Rectangle : Shape</span><br><span class="line">&#123;</span><br><span class="line">    public override void Draw()</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(&quot;画一个长方形&quot;);</span><br><span class="line">        base.Draw();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Triangle : Shape</span><br><span class="line">&#123;</span><br><span class="line">    public override void Draw()</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(&quot;画一个三角形&quot;);</span><br><span class="line">        base.Draw();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Program</span><br><span class="line">&#123;</span><br><span class="line">    static void Main(string[] args)</span><br><span class="line">    &#123;</span><br><span class="line">        // 创建一个 List&lt;Shape&gt; 对象，并向该对象添加 Circle、Triangle 和 Rectangle</span><br><span class="line">        var shapes = new List&lt;Shape&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            new Rectangle(),</span><br><span class="line">            new Triangle(),</span><br><span class="line">            new Circle()</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        // 使用 foreach 循环对该列表的派生类进行循环访问，并对其中的每个 Shape 对象调用 Draw 方法</span><br><span class="line">        foreach (var shape in shapes)</span><br><span class="line">        &#123;</span><br><span class="line">            shape.Draw();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Console.WriteLine(&quot;按下任意键退出。&quot;);</span><br><span class="line">        Console.ReadKey();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<pre><code>画一个长方形
+执行基类的画图任务
+画一个三角形
+执行基类的画图任务
+画一个圆形
+执行基类的画图任务
+按下任意键退出。
+</code></pre>
+<p>下面的程序演示通过虚方法 area() 来计算不同形状图像的面积：</p>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace PolymorphismApplication</span><br><span class="line">&#123;</span><br><span class="line">   class Shape</span><br><span class="line">   &#123;</span><br><span class="line">      protected int width, height;</span><br><span class="line">      public Shape( int a=0, int b=0)</span><br><span class="line">      &#123;</span><br><span class="line">         width = a;</span><br><span class="line">         height = b;</span><br><span class="line">      &#125;</span><br><span class="line">      public virtual int area()</span><br><span class="line">      &#123;</span><br><span class="line">         Console.WriteLine(&quot;父类的面积：&quot;);</span><br><span class="line">         return 0;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   class Rectangle: Shape</span><br><span class="line">   &#123;</span><br><span class="line">      public Rectangle( int a=0, int b=0): base(a, b)</span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">      public override int area ()</span><br><span class="line">      &#123;</span><br><span class="line">         Console.WriteLine(&quot;Rectangle 类的面积：&quot;);</span><br><span class="line">         return (width * height);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   class Triangle: Shape</span><br><span class="line">   &#123;</span><br><span class="line">      public Triangle(int a = 0, int b = 0): base(a, b)</span><br><span class="line">      &#123;</span><br><span class="line">     </span><br><span class="line">      &#125;</span><br><span class="line">      public override int area()</span><br><span class="line">      &#123;</span><br><span class="line">         Console.WriteLine(&quot;Triangle 类的面积：&quot;);</span><br><span class="line">         return (width * height / 2);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   class Caller</span><br><span class="line">   &#123;</span><br><span class="line">      public void CallArea(Shape sh)</span><br><span class="line">      &#123;</span><br><span class="line">         int a;</span><br><span class="line">         a = sh.area();</span><br><span class="line">         Console.WriteLine(&quot;面积： &#123;0&#125;&quot;, a);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;  </span><br><span class="line">   class Tester</span><br><span class="line">   &#123;</span><br><span class="line">     </span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         Caller c = new Caller();</span><br><span class="line">         Rectangle r = new Rectangle(10, 7);</span><br><span class="line">         Triangle t = new Triangle(10, 5);</span><br><span class="line">         c.CallArea(r);</span><br><span class="line">         c.CallArea(t);</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<pre><code>Rectangle 类的面积：
+面积：70
+Triangle 类的面积：
+面积：25
+</code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="- 总结"></a>- 总结</h2><p><strong>多态</strong>：一个接口多个功能。</p>
+<p><strong>静态多态性</strong>：编译时发生函数响应（调用）；</p>
+<p><strong>动态多态性</strong>：运行时发生函数响应。</p>
+<p><strong>静态绑定（早期绑定）</strong>：编译时函数和对象的连接机制。 两种技术实现静态多态性：函数重载&#x2F;运算符重载。</p>
+<p><strong>函数重载</strong>：在同一范围内对相同函数名有多个定义，可以是参数类型或参数个数的不同，但不许只有返回值类型不同。</p>
+<p><strong>运算符重载</strong>：</p>
+<p>关键字 abstract 声明抽象类：用于接口部分类的实现（派生类继承抽象类时，实现完成）。抽象类包含抽象方法，抽象方法可被派生类实现。</p>
+<p>抽象类规则：</p>
+<ol>
+<li><p>不能创建抽象类的实例</p>
+</li>
+<li><p>不能在抽象类外定义抽象方法</p>
+</li>
+<li><p>不能把抽象类声明为sealed（类前带关键字sealed代表该类是密封类，不能被继承）</p>
+</li>
+</ol>
+<p>关键字virtual声明虚方法:用于方法在继承类中的实现（在不同的继承类中有不同的实现）。</p>
+<p>抽象类和虚方法共同实现动态多态性。</p>
+<p>注：继承类中的重写虚函数需要声明关键字 override，在方法参数传入中写（类名 形参名）例如 public void CallArea(Shape sh)，意思是传入一个 shape 类型的类。</p>
+<p>virtual和abstract都是用来修饰父类的，通过覆盖父类的定义，让子类重新定义。</p>
+<ol>
+<li><p>virtual修饰的方法必须有实现（哪怕是仅仅添加一对大括号),而abstract修饰的方法一定不能实现。</p>
+</li>
+<li><p>virtual可以被子类重写，而abstract必须被子类重写。</p>
+</li>
+<li><p>如果类成员被abstract修饰，则该类前必须添加abstract，因为只有抽象类才可以有抽象方法。</p>
+</li>
+<li><p>无法创建abstract类的实例，只能被继承无法实例化。</p>
+</li>
+</ol>
+<p>重载(overload)是提供了一种机制, 相同函数名通过不同的返回值类型以及参数来表来区分的机制。</p>
+<p>重写(override)是用于重写基类的虚方法,这样在派生类中提供一个新的方法。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/C/" rel="tag"># C#</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/07/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-22/" rel="prev" title="钓鱼日记[23.07.22]">
+      <i class="fa fa-chevron-left"></i> 钓鱼日记[23.07.22]
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/08/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-08-06/" rel="next" title="钓鱼日记[23.08.06]">
+      钓鱼日记[23.08.06] <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E5%A4%9A%E6%80%81%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">- C# 多态性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%A4%9A%E6%80%81%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">- 静态多态性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD"><span class="nav-number">3.</span> <span class="nav-text">- 函数重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%A4%9A%E6%80%81%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">- 动态多态性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">- 总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Weibo → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8SGHVqNSzlIvUsQekb6EVL2z-gzGzoHsz',
+      appKey     : 'kM6zUKBTanjH10n2gcXV8OTE',
+      placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+      avatar     : 'retro',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

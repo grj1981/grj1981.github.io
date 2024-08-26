@@ -1,0 +1,20 @@
+//背景图片设置
+body {
+	font-family: sans-serif;
+}
+
+.gallery{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+.gallery img{
+	width: 200px;
+	margin: 4px;
+	filter: grayscale(100%);
+	transition: 1s;
+}
+.gallery img:hover{
+	filter: grayscale(0%);
+	transform: scale(1.1);
+}
