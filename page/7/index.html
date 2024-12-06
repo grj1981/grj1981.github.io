@@ -139,7 +139,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">65</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">67</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -169,6 +169,279 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%93%E6%9E%84%E4%BD%93Struct%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%93%E6%9E%84%E4%BD%93Struct%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【结构体Struct】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-04 15:36:43" itemprop="dateCreated datePublished" datetime="2023-07-04T15:36:43+08:00">2023-07-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%93%E6%9E%84%E4%BD%93Struct%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【结构体Struct】" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%93%E6%9E%84%E4%BD%93Struct%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%93%E6%9E%84%E4%BD%93Struct%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="C-结构体（Struct）"><a href="#C-结构体（Struct）" class="headerlink" title="- C# 结构体（Struct）"></a>- C# 结构体（Struct）</h2><p>在 C# 中，结构体是值类型数据结构。它使得一个单一变量可以存储各种数据类型的相关数据。struct 关键字用于创建结构体。</p>
+<p>结构体是用来代表一个记录。假设您想跟踪图书馆中书的动态。您可能想跟踪每本书的以下属性：</p>
+<ul>
+<li><p>Title</p>
+</li>
+<li><p>Author</p>
+</li>
+<li><p>Subject</p>
+</li>
+<li><p>Book ID</p>
+</li>
+</ul>
+<h2 id="定义结构体"><a href="#定义结构体" class="headerlink" title="- 定义结构体"></a>- 定义结构体</h2><p>为了定义一个结构体，您必须使用 struct 语句。struct 语句为程序定义了一个带有多个成员的新的数据类型。</p>
+<p>例如，您可以按照如下的方式声明 Book 结构：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct Books</span><br><span class="line">&#123;</span><br><span class="line">   public string title;</span><br><span class="line">   public string author;</span><br><span class="line">   public string subject;</span><br><span class="line">   public int book_id;</span><br><span class="line">&#125;;  </span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>下面的程序演示了结构的用法：</p>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.Text;</span><br><span class="line">     </span><br><span class="line">struct Books</span><br><span class="line">&#123;</span><br><span class="line">   public string title;</span><br><span class="line">   public string author;</span><br><span class="line">   public string subject;</span><br><span class="line">   public int book_id;</span><br><span class="line">&#125;;  </span><br><span class="line"></span><br><span class="line">public class testStructure</span><br><span class="line">&#123;</span><br><span class="line">   public static void Main(string[] args)</span><br><span class="line">   &#123;</span><br><span class="line"></span><br><span class="line">      Books Book1;        /* 声明 Book1，类型为 Books */</span><br><span class="line">      Books Book2;        /* 声明 Book2，类型为 Books */</span><br><span class="line"></span><br><span class="line">      /* book 1 详述 */</span><br><span class="line">      Book1.title = &quot;C Programming&quot;;</span><br><span class="line">      Book1.author = &quot;Nuha Ali&quot;;</span><br><span class="line">      Book1.subject = &quot;C Programming Tutorial&quot;;</span><br><span class="line">      Book1.book_id = 6495407;</span><br><span class="line"></span><br><span class="line">      /* book 2 详述 */</span><br><span class="line">      Book2.title = &quot;Telecom Billing&quot;;</span><br><span class="line">      Book2.author = &quot;Zara Ali&quot;;</span><br><span class="line">      Book2.subject =  &quot;Telecom Billing Tutorial&quot;;</span><br><span class="line">      Book2.book_id = 6495700;</span><br><span class="line"></span><br><span class="line">      /* 打印 Book1 信息 */</span><br><span class="line">      Console.WriteLine( &quot;Book 1 title : &#123;0&#125;&quot;, Book1.title);</span><br><span class="line">      Console.WriteLine(&quot;Book 1 author : &#123;0&#125;&quot;, Book1.author);</span><br><span class="line">      Console.WriteLine(&quot;Book 1 subject : &#123;0&#125;&quot;, Book1.subject);</span><br><span class="line">      Console.WriteLine(&quot;Book 1 book_id :&#123;0&#125;&quot;, Book1.book_id);</span><br><span class="line"></span><br><span class="line">      /* 打印 Book2 信息 */</span><br><span class="line">      Console.WriteLine(&quot;Book 2 title : &#123;0&#125;&quot;, Book2.title);</span><br><span class="line">      Console.WriteLine(&quot;Book 2 author : &#123;0&#125;&quot;, Book2.author);</span><br><span class="line">      Console.WriteLine(&quot;Book 2 subject : &#123;0&#125;&quot;, Book2.subject);</span><br><span class="line">      Console.WriteLine(&quot;Book 2 book_id : &#123;0&#125;&quot;, Book2.book_id);      </span><br><span class="line"></span><br><span class="line">      Console.ReadKey();</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<pre><code>Book 1 title : C Programming
+Book 1 author : Nuha Ali
+Book 1 subject : C Programming Tutorial
+Book 1 book_id : 6495407
+Book 2 title : Telecom Billing
+Book 2 author : Zara Ali
+Book 2 subject : Telecom Billing Tutorial
+Book 2 book_id : 6495700
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%93%E6%9E%84%E4%BD%93Struct%E3%80%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/07/03/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/03/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【C#字符串】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-03 17:32:57" itemprop="dateCreated datePublished" datetime="2023-07-03T17:32:57+08:00">2023-07-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/07/03/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【C#字符串】" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/07/03/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/03/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="C-字符串（String）"><a href="#C-字符串（String）" class="headerlink" title="- C# 字符串（String）"></a>- C# 字符串（String）</h2><p>在 C# 中，您可以使用字符数组来表示字符串，但是，更常见的做法是使用 string 关键字来声明一个字符串变量。string 关键字是 System.String 类的别名。</p>
+<h2 id="创建-String-对象"><a href="#创建-String-对象" class="headerlink" title="- 创建 String 对象"></a>- 创建 String 对象</h2><p>您可以使用以下方法之一来创建 string 对象：</p>
+<ul>
+<li><p>通过给 String 变量指定一个字符串</p>
+</li>
+<li><p>通过使用 String 类构造函数</p>
+</li>
+<li><p>通过使用字符串串联运算符（ + ）</p>
+</li>
+<li><p>通过检索属性或调用一个返回字符串的方法</p>
+</li>
+<li><p>通过格式化方法来转换一个值或对象为它的字符串表示形式</p>
+</li>
+</ul>
+<p>下面的实例演示了这点：</p>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">namespace StringApplication</span><br><span class="line">&#123;</span><br><span class="line">    class Program</span><br><span class="line">    &#123;</span><br><span class="line">        static void Main(string[] args)</span><br><span class="line">        &#123;</span><br><span class="line">           //字符串，字符串连接</span><br><span class="line">            string fname, lname;</span><br><span class="line">            fname = &quot;Rowan&quot;;</span><br><span class="line">            lname = &quot;Atkinson&quot;;</span><br><span class="line"></span><br><span class="line">            string fullname = fname + lname;</span><br><span class="line">            Console.WriteLine(&quot;Full Name: &#123;0&#125;&quot;, fullname);</span><br><span class="line"></span><br><span class="line">            //通过使用 string 构造函数</span><br><span class="line">            char[] letters = &#123; &#x27;H&#x27;, &#x27;e&#x27;, &#x27;l&#x27;, &#x27;l&#x27;,&#x27;o&#x27; &#125;;</span><br><span class="line">            string greetings = new string(letters);</span><br><span class="line">            Console.WriteLine(&quot;Greetings: &#123;0&#125;&quot;, greetings);</span><br><span class="line"></span><br><span class="line">            //方法返回字符串</span><br><span class="line">            string[] sarray = &#123; &quot;Hello&quot;, &quot;From&quot;, &quot;Tutorials&quot;, &quot;Point&quot; &#125;;</span><br><span class="line">            string message = String.Join(&quot; &quot;, sarray);</span><br><span class="line">            Console.WriteLine(&quot;Message: &#123;0&#125;&quot;, message);</span><br><span class="line"></span><br><span class="line">            //用于转化值的格式化方法</span><br><span class="line">            DateTime waiting = new DateTime(2012, 10, 10, 17, 58, 1);</span><br><span class="line">            string chat = String.Format(&quot;Message sent at &#123;0:t&#125; on &#123;0:D&#125;&quot;,</span><br><span class="line">            waiting);</span><br><span class="line">            Console.WriteLine(&quot;Message: &#123;0&#125;&quot;, chat);</span><br><span class="line">            Console.ReadKey() ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<pre><code>Full Name: RowanAtkinson
+Greetings: Hello
+Message: Hello From Tutorials Point
+Message: Message sent at 17:58 on Wednesday, 10 October 2012
+</code></pre>
+<h2 id="String-类的属性"><a href="#String-类的属性" class="headerlink" title="- String 类的属性"></a>- String 类的属性</h2><p>String 类有以下两个属性：</p>
+<pre><code>序号	 属性名称 &amp; 描述
+1	Chars 在当前 String 对象中获取 Char 对象的指定位置。
+2	Length 在当前的 String 对象中获取字符数。
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/07/03/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -592,292 +865,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%AF%E7%A9%BA%E7%B1%BB%E5%9E%8BNullable%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%AF%E7%A9%BA%E7%B1%BB%E5%9E%8BNullable%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【C#可空类型Nullable】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-27 16:59:12" itemprop="dateCreated datePublished" datetime="2023-06-27T16:59:12+08:00">2023-06-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%AF%E7%A9%BA%E7%B1%BB%E5%9E%8BNullable%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【C#可空类型Nullable】" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%AF%E7%A9%BA%E7%B1%BB%E5%9E%8BNullable%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%AF%E7%A9%BA%E7%B1%BB%E5%9E%8BNullable%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="C-可空类型（Nullable）"><a href="#C-可空类型（Nullable）" class="headerlink" title="- C# 可空类型（Nullable）"></a>- C# 可空类型（Nullable）</h2><h2 id="C-单问号-与-双问号"><a href="#C-单问号-与-双问号" class="headerlink" title="- C# 单问号 ? 与 双问号 ??"></a>- C# 单问号 ? 与 双问号 ??</h2><p>? 单问号用于对 int、double、bool 等无法直接赋值为 null 的数据类型进行 null 的赋值，意思是这个数据类型是 Nullable 类型的。</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int? i = 3;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>等同于：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Nullable&lt;int&gt; i = new Nullable&lt;int&gt;(3);</span><br></pre></td></tr></table></figure>
-
-int i; //默认值0
-int? ii; //默认值null
-</code></pre>
-<p>?? 双问号用于判断一个变量在为 null 的时候返回一个指定的值。</p>
-<p>接下来我们详细说明。</p>
-<h2 id="C-可空类型（Nullable）-1"><a href="#C-可空类型（Nullable）-1" class="headerlink" title="- C# 可空类型（Nullable）"></a>- C# 可空类型（Nullable）</h2><p>C# 提供了一个特殊的数据类型，nullable 类型（可空类型），可空类型可以表示其基础值类型正常范围内的值，再加上一个 null 值。</p>
-<p>例如，Nullable&lt; Int32 &gt;，读作”可空的 Int32”，可以被赋值为 -2,147,483,648 到 2,147,483,647 之间的任意值，也可以被赋值为 null 值。类似的，Nullable&lt; bool &gt; 变量可以被赋值为 true 或 false 或 null。</p>
-<p>在处理数据库和其他包含可能未赋值的元素的数据类型时，将 null 赋值给数值类型或布尔型的功能特别有用。例如，数据库中的布尔型字段可以存储值 true 或 false，或者，该字段也可以未定义。</p>
-<p>声明一个 nullable 类型（可空类型）的语法如下：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt; data_type&gt; ? &lt;variable_name&gt; = null;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>下面的实例演示了可空数据类型的用法：</p>
-<blockquote>
-<p><strong>实例</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace CalculatorApplication</span><br><span class="line">&#123;</span><br><span class="line">   class NullablesAtShow</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         int? num1 = null;</span><br><span class="line">         int? num2 = 45;</span><br><span class="line">         double? num3 = new double?();</span><br><span class="line">         double? num4 = 3.14157;</span><br><span class="line">         </span><br><span class="line">         bool? boolval = new bool?();</span><br><span class="line"></span><br><span class="line">         // 显示值</span><br><span class="line">         </span><br><span class="line">         Console.WriteLine(&quot;显示可空类型的值： &#123;0&#125;, &#123;1&#125;, &#123;2&#125;, &#123;3&#125;&quot;,</span><br><span class="line">                            num1, num2, num3, num4);</span><br><span class="line">         Console.WriteLine(&quot;一个可空的布尔值： &#123;0&#125;&quot;, boolval);</span><br><span class="line">         Console.ReadLine();</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
-<pre><code>显示可空类型的值： , 45,  , 3.14157
-一个可空的布尔值：
-</code></pre>
-<h2 id="Null-合并运算符（-）"><a href="#Null-合并运算符（-）" class="headerlink" title="- Null 合并运算符（ ?? ）"></a>- Null 合并运算符（ ?? ）</h2><p>Null 合并运算符用于定义可空类型和引用类型的默认值。Null 合并运算符为类型转换定义了一个预设值，以防可空类型的值为 Null。Null 合并运算符把操作数类型隐式转换为另一个可空（或不可空）的值类型的操作数的类型。</p>
-<p>如果第一个操作数的值为 null，则运算符返回第二个操作数的值，否则返回第一个操作数的值。下面的实例演示了这点：</p>
-<blockquote>
-<p><strong>实例</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace CalculatorApplication</span><br><span class="line">&#123;</span><br><span class="line">   class NullablesAtShow</span><br><span class="line">   &#123;</span><br><span class="line">         </span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         </span><br><span class="line">         double? num1 = null;</span><br><span class="line">         double? num2 = 3.14157;</span><br><span class="line">         double num3;</span><br><span class="line">         num3 = num1 ?? 5.34;      // num1 如果为空值则返回 5.34</span><br><span class="line">         Console.WriteLine(&quot;num3 的值： &#123;0&#125;&quot;, num3);</span><br><span class="line">         num3 = num2 ?? 5.34;</span><br><span class="line">         Console.WriteLine(&quot;num3 的值： &#123;0&#125;&quot;, num3);</span><br><span class="line">         Console.ReadLine();</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
-<pre><code>num3 的值： 5.34
-num3 的值： 3.14157
-</code></pre>
-<p>说明：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">num3 = num1 ?? 5.34;      // num1 如果为空值则返回 5.34</span><br><span class="line">Console.WriteLine(&quot;num3 的值： &#123;0&#125;&quot;, num3);</span><br><span class="line">num3 = num2 ?? 5.34;</span><br><span class="line">Console.WriteLine(&quot;num3 的值： &#123;0&#125;&quot;, num3);</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>C# 中两个问号的作用是判断??左边的对象是否为 null，如果不为 null 则使用 ?? 左边的对象，如果为 null 则使用 ?? 右边的对象。</p>
-<p>比如：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = b ?? </span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>如果 b 为 null，则 a &#x3D; c，如果 b 不为 null，则 a &#x3D; b。</p>
-<p>?? 可以理解为三元运算符的简化形式：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num3 = num1 ?? 5.34;</span><br><span class="line">num3 = (num1 == null) ? 5.34 : num1;</span><br></pre></td></tr></table></figure>
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%96%B9%E6%B3%95-foreach%E9%81%8D%E5%8E%86%E7%9A%84%E7%94%A8%E6%B3%95%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%96%B9%E6%B3%95-foreach%E9%81%8D%E5%8E%86%E7%9A%84%E7%94%A8%E6%B3%95%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【C#方法,foreach遍历的用法】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-27 16:27:22" itemprop="dateCreated datePublished" datetime="2023-06-27T16:27:22+08:00">2023-06-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%96%B9%E6%B3%95-foreach%E9%81%8D%E5%8E%86%E7%9A%84%E7%94%A8%E6%B3%95%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【C#方法,foreach遍历的用法】" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%96%B9%E6%B3%95-foreach%E9%81%8D%E5%8E%86%E7%9A%84%E7%94%A8%E6%B3%95%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%96%B9%E6%B3%95-foreach%E9%81%8D%E5%8E%86%E7%9A%84%E7%94%A8%E6%B3%95%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="C-方法"><a href="#C-方法" class="headerlink" title="- C# 方法"></a>- C# 方法</h2><p>一个方法是把一些相关的语句组织在一起，用来执行一个任务的语句块。每一个 C# 程序至少有一个带有 Main 方法的类。</p>
-<p>要使用一个方法，您需要：</p>
-<ul>
-<li><p>定义方法</p>
-</li>
-<li><p>调用方法</p>
-</li>
-</ul>
-<h2 id="C-中定义方法"><a href="#C-中定义方法" class="headerlink" title="- C# 中定义方法"></a>- C# 中定义方法</h2><p>当定义一个方法时，从根本上说是在声明它的结构的元素。在 C# 中，定义方法的语法如下：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Access Specifier&gt; &lt;Return Type&gt; &lt;Method Name&gt;(Parameter List)</span><br><span class="line">&#123;</span><br><span class="line">   Method Body</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>下面是方法的各个元素：</p>
-<ul>
-<li><p>Access Specifier：访问修饰符，这个决定了变量或方法对于另一个类的可见性。</p>
-</li>
-<li><p>Return type：返回类型，一个方法可以返回一个值。返回类型是方法返回的值的数据类型。如果方法不返回任何值，则返回类型为 void。</p>
-</li>
-<li><p>Method name：方法名称，是一个唯一的标识符，且是大小写敏感的。它不能与类中声明的其他标识符相同。</p>
-</li>
-<li><p>Parameter list：参数列表，使用圆括号括起来，该参数是用来传递和接收方法的数据。参数列表是指方法的参数类型、顺序和数量。参数是可选的，也就是说，一个方法可能不包含参数。</p>
-</li>
-<li><p>Method body：方法主体，包含了完成任务所需的指令集。</p>
-</li>
-</ul>
-<p>下面的代码片段显示一个函数 FindMax，它接受两个整数值，并返回两个中的较大值。它有 public 访问修饰符，所以它可以使用类的实例从类的外部进行访问。</p>
-<blockquote>
-<p><strong>实例</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class NumberManipulator</span><br><span class="line">&#123;</span><br><span class="line">   public int FindMax(int num1, int num2)</span><br><span class="line">   &#123;</span><br><span class="line">      /* 局部变量声明 */</span><br><span class="line">      int result;</span><br><span class="line"></span><br><span class="line">      if (num1 &gt; num2)</span><br><span class="line">         result = num1;</span><br><span class="line">      else</span><br><span class="line">         result = num2;</span><br><span class="line"></span><br><span class="line">      return result;</span><br><span class="line">   &#125;</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%96%B9%E6%B3%95-foreach%E9%81%8D%E5%8E%86%E7%9A%84%E7%94%A8%E6%B3%95%E3%80%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -945,7 +936,7 @@ num3 的值： 3.14157
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
