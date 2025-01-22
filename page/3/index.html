@@ -139,7 +139,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">67</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">68</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -169,6 +169,121 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity堆叠消除小游戏摘要</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-31 18:11:16" itemprop="dateCreated datePublished" datetime="2024-01-31T18:11:16+08:00">2024-01-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity堆叠消除小游戏摘要" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Lua实现Unity堆叠消除小游戏，游戏功能每次随机生成四个不同形状的方块，将方块拖入10*10的格子棋盘，如果放入的棋盘格都有空格则可以放入方块，当放满一行或者一列时，消除满行满列的放入格。</p>
+<h2 id="创建拼图地图格数据"><a href="#创建拼图地图格数据" class="headerlink" title="- 创建拼图地图格数据"></a>- 创建拼图地图格数据</h2><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">---拼图地图格数据</span><br><span class="line">---@class ROPuzzleMapTileData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type number 位置标记</span><br><span class="line">    index = 0,</span><br><span class="line">    ---@type number 所在行</span><br><span class="line">    x = 0,</span><br><span class="line">    ---@type number 所在列</span><br><span class="line">    y = 0,</span><br><span class="line">    ---@type number 地图格上放置的方块ID  为0 表示空格</span><br><span class="line">    blockId = 0,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(index,x,y,id)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(index,x,y,id)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(index,x,y,id)</span><br><span class="line">    self.index = index</span><br><span class="line">    self.x = x</span><br><span class="line">    self.y = y</span><br><span class="line">    self.blockId = id</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="创建拼图游戏数据结构"><a href="#创建拼图游戏数据结构" class="headerlink" title="- 创建拼图游戏数据结构"></a>- 创建拼图游戏数据结构</h2><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line">---@class ROPuzzleGameData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type CfgRestaurantOperationPuzzleControlData</span><br><span class="line">    cfgPuzzleGameControlData = nil,</span><br><span class="line">    ---@type number 当前积分</span><br><span class="line">    score = 0,</span><br><span class="line">    ---@type ROPuzzleMapTileData[]</span><br><span class="line">    tileMaps = &#123;&#125;,</span><br><span class="line">    ---@type number 最大行数</span><br><span class="line">    maxLine = 10,</span><br><span class="line">    ---@type number 最大列数</span><br><span class="line">    maxColumn = 10,</span><br><span class="line">    ---@type number 单次生成的方块数量(上限为4)</span><br><span class="line">    randomBlock = &#123;&#125;,</span><br><span class="line">    ---@type boolean 游戏是否已经开始（点了开始按钮视为游戏开始）</span><br><span class="line">    isGameStart = false,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">local ROPuzzleMapTileData = require(&quot;IQIGame.Module.CommonActivity.RestaurantOperation.ROPuzzleGame.ROPuzzleMapTileData&quot;)</span><br><span class="line"></span><br><span class="line">function m.New(cfgData)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(cfgData)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(cfgData)</span><br><span class="line">    self.score = 0</span><br><span class="line">    self.cfgPuzzleGameControlData = cfgData</span><br><span class="line">    self.tileMaps = self:CreateTiles()</span><br><span class="line">    self.isGameStart = true</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---开始新游戏，创建拼图地图</span><br><span class="line">function m:CreateTiles()</span><br><span class="line">    local tab = &#123;&#125;</span><br><span class="line">    local index = 0</span><br><span class="line">    for line = 1, self.maxLine do</span><br><span class="line">        for column = 1, self.maxColumn do</span><br><span class="line">            index = index + 1</span><br><span class="line">            local tileData = ROPuzzleMapTileData.New(index,line,column,0)</span><br><span class="line">            tab[index] = tileData</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    return tab</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---随机生成四个方块</span><br><span class="line">function m:RefreshRandomBlock()</span><br><span class="line">    self.randomBlock = &#123;&#125;</span><br><span class="line">    local blockGroup = table.clone(self.cfgPuzzleGameControlData.BlockGroup)</span><br><span class="line">    ---洗牌操作</span><br><span class="line">    for i = #blockGroup, 2, -1 do</span><br><span class="line">        local random_index = math.random(i)</span><br><span class="line">        blockGroup[i], blockGroup[random_index] = blockGroup[random_index],blockGroup[i]</span><br><span class="line">    end</span><br><span class="line">    ---根据配置数据取方块</span><br><span class="line">    for i = 1, self.cfgPuzzleGameControlData.BlockNum do</span><br><span class="line">        local id = blockGroup[i]</span><br><span class="line">        table.insert(self.randomBlock,id)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---消除满行满列，并返回消除的行列</span><br><span class="line">---@return number, number[],number[] 消除的总行数，同时消除的行和列</span><br><span class="line">function m:Eliminate()</span><br><span class="line">    local lines = &#123;&#125;</span><br><span class="line">    local columns = &#123;&#125;</span><br><span class="line">    ---行检测</span><br><span class="line">    for i = 1, self.maxLine do</span><br><span class="line">        local isFull = true</span><br><span class="line">        for j = 1, self.maxColumn do</span><br><span class="line">            local pos = (i-1) * self.maxLine + j</span><br><span class="line">            if self.tileMaps[pos].blockId == 0 then</span><br><span class="line">                isFull = false</span><br><span class="line">                break</span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">        if isFull then</span><br><span class="line">            table.insert(lines,i)</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    ---列检测</span><br><span class="line">    for j = 1, self.maxColumn do</span><br><span class="line">        local isFull = true</span><br><span class="line">        for i = 1, self.maxLine do</span><br><span class="line">            local pos = (i-1) * self.maxLine + j</span><br><span class="line">            if self.tileMaps[pos].blockId == 0 then</span><br><span class="line">                isFull = false</span><br><span class="line">                break</span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">        if isFull then</span><br><span class="line">            table.insert(columns,j)</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    local totalNum = #lines + #columns</span><br><span class="line">    return totalNum,lines,columns</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---增加积分</span><br><span class="line">---@param score number</span><br><span class="line">function m:AddScore(score)</span><br><span class="line">    self.score = self.score + score</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---检测方块还有没有空地能放下</span><br><span class="line">---@param blockCell PuzzleGameBlockCell</span><br><span class="line">---@return boolean</span><br><span class="line">function m:CheckBlockCellCanPutDown(blockCell)</span><br><span class="line">    local posTab = blockCell.blockData</span><br><span class="line">    for i, tileData in pairs(self.tileMaps) do</span><br><span class="line">        ---找到了一个空格子</span><br><span class="line">        local canPutDown = false</span><br><span class="line">        if tileData.blockId == 0 then</span><br><span class="line">            ---所有检测点都满足返回true</span><br><span class="line">            for j, pos in pairs(posTab) do</span><br><span class="line"></span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    return false</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>通过调用RefreshRandomBlock()方法，每次随机生成不重复的四个方块</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -718,114 +833,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/11/26/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-26/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/11/26/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-26/" class="post-title-link" itemprop="url">钓鱼日记[23.11.26]</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-11-26 19:34:01" itemprop="dateCreated datePublished" datetime="2023-11-26T19:34:01+08:00">2023-11-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/11/26/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-26/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.11.26]" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/11/26/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-26/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/11/26/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-26/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>11月26日</p>
-<p>周日，今天阳光明媚，我决定下午去固驿砂坑钓鲫鱼。吃过午饭，驾车出发。在即将到达钓点的时候，遇到了一个经常去那钓鱼的钓友。他向我透露，前天有一个钓友不小心掉进砂坑的水里，结果不幸遇难了。这突如其来的消息让我感到非常吃惊，心情也变得沉重起来。面对这样的意外，我的内心也难以平静。于是我临时改变主意，决定不再前往砂坑，而是前往常去的三一水库垂钓。</p>
-<p><img src="https://iili.io/Jot5ONe.md.jpg"></p>
-<p>冬日的阳光难得，当阳光洒落在身上时，仿佛整个人都被温柔的光芒所包裹，带来一种温馨和安心的感觉。水库周围的游玩者很多，有的人携家人前来野外烧烤，也有不少钓鱼的爱好者在水库四周垂钓。</p>
-<p><img src="https://iili.io/Jot5Xl2.md.jpg"></p>
-<p>水面上，不知哪儿来的一群野鸭，它们成群结队地在水中嬉戏着，有的振翅飞翔，有的戏水追逐着彼此。它们那叽叽喳喳的叫声回荡在整个水库，充满了生机和活力。它们仿佛无忧无虑，没有任何包袱，就在这个美丽的冬日里，尽情享受着水中的快乐。这景象让人感到无比的自在和惬意，也给了我一些安抚，让我暂时忘却了刚刚得知的那个不幸的消息，让我懂得了生活中美好的一面，生命的宝贵以及它的脆弱。</p>
-<p><img src="https://iili.io/Jot5eDu.md.jpg"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/11/26/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-26/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -897,7 +904,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -960,7 +967,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

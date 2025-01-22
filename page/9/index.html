@@ -139,7 +139,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">67</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">68</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -169,6 +169,147 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90JSON%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90JSON%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【JSON】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-25 18:03:08" itemprop="dateCreated datePublished" datetime="2023-06-25T18:03:08+08:00">2023-06-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90JSON%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【JSON】" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90JSON%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90JSON%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Python3-JSON-数据解析"><a href="#Python3-JSON-数据解析" class="headerlink" title="- Python3 JSON 数据解析"></a>- Python3 JSON 数据解析</h2><p>JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。</p>
+<p>Python3 中可以使用 json 模块来对 JSON 数据进行编解码，它包含了两个函数：</p>
+<p>json.dumps(): 对数据进行编码。<br>json.loads(): 对数据进行解码。</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2016/04/json-dumps-loads.png"><br>在 json 的编解码过程中，Python 的原始类型与 json 类型会相互转换，具体的转化对照如下：</p>
+<p><strong>Python 编码为 JSON 类型转换对应表：</strong></p>
+<pre><code>Python	JSON
+dict	object
+list, tuple	array
+str	string
+int, float, int- &amp; float-derived Enums	number
+True	true
+False	false
+None	null
+</code></pre>
+<p><strong>JSON 解码为 Python 类型转换对应表：</strong></p>
+<pre><code>JSON	Python
+object	dict
+array	list
+string	str
+number (int)	int
+number (real)	float
+true	True
+false	False
+null	None
+</code></pre>
+<p><strong>json.dumps 与 json.loads 实例</strong></p>
+<p>以下实例演示了 Python 数据结构转换为JSON：</p>
+<blockquote>
+<p><strong>实例(Python 3.0+)</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python3</span><br><span class="line"> </span><br><span class="line">import json</span><br><span class="line"> </span><br><span class="line"># Python 字典类型转换为 JSON 对象</span><br><span class="line">data = &#123;</span><br><span class="line">    &#x27;no&#x27; : 1,</span><br><span class="line">    &#x27;name&#x27; : &#x27;Runoob&#x27;,</span><br><span class="line">    &#x27;url&#x27; : &#x27;http://www.runoob.com&#x27;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">json_str = json.dumps(data)</span><br><span class="line">print (&quot;Python 原始数据：&quot;, repr(data))</span><br><span class="line">print (&quot;JSON 对象：&quot;, json_str)</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>执行以上代码输出结果为：</p>
+<pre><code>Python 原始数据： &#123;&#39;url&#39;: &#39;http://www.runoob.com&#39;, &#39;no&#39;: 1, &#39;name&#39;: &#39;Runoob&#39;&#125;
+JSON 对象： &#123;&quot;url&quot;: &quot;http://www.runoob.com&quot;, &quot;no&quot;: 1, &quot;name&quot;: &quot;Runoob&quot;&#125;
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90JSON%E3%80%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -901,130 +1042,6 @@ None
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/02/%E5%A4%8F%E5%AD%A3%E5%AB%A9%E7%8E%89%E7%B1%B3%E9%92%93%E8%8D%89%E9%B1%BC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/02/%E5%A4%8F%E5%AD%A3%E5%AB%A9%E7%8E%89%E7%B1%B3%E9%92%93%E8%8D%89%E9%B1%BC/" class="post-title-link" itemprop="url">夏季嫩玉米钓草鱼技巧</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-02 14:52:54" itemprop="dateCreated datePublished" datetime="2023-06-02T14:52:54+08:00">2023-06-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%92%93%E9%B1%BC/" itemprop="url" rel="index"><span itemprop="name">钓鱼</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/06/02/%E5%A4%8F%E5%AD%A3%E5%AB%A9%E7%8E%89%E7%B1%B3%E9%92%93%E8%8D%89%E9%B1%BC/" class="post-meta-item leancloud_visitors" data-flag-title="夏季嫩玉米钓草鱼技巧" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/06/02/%E5%A4%8F%E5%AD%A3%E5%AB%A9%E7%8E%89%E7%B1%B3%E9%92%93%E8%8D%89%E9%B1%BC/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/02/%E5%A4%8F%E5%AD%A3%E5%AB%A9%E7%8E%89%E7%B1%B3%E9%92%93%E8%8D%89%E9%B1%BC/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>夏天已经来了，天气一热，很多大鱼都会上钩，比如鲤鱼、草鱼、青鱼等。</p>
-<p>想要钓到这些大鱼，有一种食物是必不可少的，那就是玉米。</p>
-<p>玉米被称为“素饵之王”，在野外垂钓中，不管是新鲜的，还是发酵的，都是用来垂钓的。</p>
-<p>但玉米在水里不会形成雾气，所以口感很淡，而且玉米的个头很大，而且野生的大鱼不多，用玉米钓鱼很难成功。</p>
-<p>我们要理智的使用玉米，在垂钓中没有什么鱼饵是万能的，玉米好不好，关键就在于我们用的好不好。想要用玉米钓到大鱼，必须要有三样东西。</p>
-<p><strong>- 第一，看鱼的情况，看是不是要用玉米</strong></p>
-<p>以上所述，即使是“万能饵”，也不是每一种饵料都能得到鱼儿的喜爱，一种饵料好不好，要看鱼儿在用的时候情况。</p>
-<p>我们要钓鱼的是一条警惕性很高的野生大鱼，在自然的环境下，他们会以草籽、水草、水果和谷物等天然的食物为食，所以他们更喜欢吃一些味道比较淡的天然食物。因此，用玉米来钓鱼并不是什么难事。</p>
-<p>不过，野外的大鱼并不多，要想钓到大鱼，就得用诱饵，而玉米又不是雾化的，所以我们要用粉末状的诱饵。</p>
-<p>所以，我们不能只用玉米粒来打窝，可以在窝料里加点玉米粉，也可以加点鱼饵。</p>
-<p><strong>- 第二，你买到的东西，未必就有你自己做的好</strong></p>
-<p>在许多情况下，我们都会使用到发酵的玉米，特别是在垂钓鲤鱼时，更是如此。这是因为，在夏季，锦鲤的食物会沉入水中，由于温度高，会迅速发酵，散发出酒香。鲤鱼习惯于食用发酵食品，所以我们用发酵过的玉米来钓鱼，很合他们的胃口。</p>
-<p>很多垂钓爱好者都觉得，他们卖的是老玉米，味道更好。</p>
-<p>但是实际上，我们自己煮出来的玉米往往比从外面买来的玉米更有效。由于自家煮制的玉米面，可以根据本地鱼肉的味道来调配，所用的玉米面和其他食材，都更新鲜。</p>
-<p>许多人不想自己煮，一方面是因为加工过程繁琐，还不如买两包，动动手指头就能送到；二是他自己做的玉米面没有经过任何处理，在夏天的高温下，玉米面煮的太久就会坏掉，而在夏天煮的太久又太麻烦。</p>
-<p>因此，有时间的垂钓朋友，我觉得自己可以用自己浸泡的玉米粒，与买来的玉米粒进行比较，看看鱼儿们更喜欢哪个。</p>
-<p>如果水温超过25℃，应该果断地改用嫩玉米粒，因为在水温较暖和时，使用嫩玉米钓草鱼的效果非常好，如果水域中的草鱼较多，很容易钓到爆护。下面，我们就讲下夏季用嫩玉米钓草鱼的4个技巧。</p>
-<p><strong>- 第三，使用嫩玉米</strong></p>
-<p>一、使用新鲜的甜玉米或水果玉米</p>
-<p>草鱼在高温天气时，非常喜欢吃嫩玉米，对嫩玉米中的甜玉米更为喜欢，甜玉米中的水果玉米则最好用。在用刀削玉米粒时，尽量削的深一些，让玉米粒成块地粘在一起，打窝诱鱼的效果更好。</p>
-<p>二、玉米中要加白酒和糖</p>
-<p>在夏季的炎热天气，嫩玉米粒很容易发酵变酸，垂钓效果就会大打折扣。为了防止嫩玉米粒发酵变质，可以在其中添加少量的白酒，保鲜效果很好。此外，还可以在嫩玉米中添加少量的糖，用来增加甜度，提高鱼饵的适口性，果葡糖浆或者蜂蜜都可以。</p>
-<p>三、在玉米中添加诱食剂</p>
-<p>每500克嫩玉米粒，可以添加1毫升的多巴盐和0.5毫升的鱼阿法，对草鱼的诱食效果非常好，能够增加窝子里草鱼的饥饿感和兴奋程度，让鱼口变得更好。</p>
-<p>四、正确的打窝方法</p>
-<p>草鱼是中下层鱼类，但不是底栖鱼类，不会老老实实底部窝子里吃食。想要把很多的草鱼诱到钓点里，钓鱼人需要持续地打窝，每分钟打一勺嫩玉米粒下去，每勺10~20粒嫩玉米，只要保持住较高的打窝频率，就能够钓到较多的草鱼。</p>
-<p><img src="http://iili.io/HSg1Je9.md.jpg"></p>
-<p>图1（水库环境）</p>
-<p><img src="http://iili.io/HSglL6Q.md.jpg"></p>
-<p>图2（22年夏天三一水库用嫩玉米连竿小草鱼）</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1096,7 +1113,7 @@ None
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1159,7 +1176,7 @@ None
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

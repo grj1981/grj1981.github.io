@@ -139,7 +139,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">67</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">68</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -169,6 +169,139 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【元组】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-29 14:02:36" itemprop="dateCreated datePublished" datetime="2023-05-29T14:02:36+08:00">2023-05-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【元组】" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Python3-元组"><a href="#Python3-元组" class="headerlink" title="- Python3 元组"></a>- Python3 元组</h2><p>Python 的元组与列表类似，不同之处在于元组的元素不能修改。</p>
+<p>元组使用小括号 ( )，列表使用方括号 [ ]。</p>
+<p>元组创建很简单，只需要在括号中添加元素，并使用逗号隔开即可。</p>
+<blockquote>
+<p><strong>实例:</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tup1 = (&#x27;Google&#x27;, &#x27;Runoob&#x27;, 1997, 2000)</span><br><span class="line">&gt;&gt;&gt; tup2 = (1, 2, 3, 4, 5 )</span><br><span class="line">&gt;&gt;&gt; tup3 = &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;   #  不需要括号也可以</span><br><span class="line">&gt;&gt;&gt; type(tup3)</span><br><span class="line">&lt;class &#x27;tuple&#x27;&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>创建空元组</p>
+<pre><code>tup1 = ()
+</code></pre>
+<p>元组中只包含一个元素时，需要在元素后面添加逗号 , ，否则括号会被当作运算符使用：</p>
+<blockquote>
+<p><strong>实例:</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tup1 = (50)</span><br><span class="line">&gt;&gt;&gt; type(tup1)     # 不加逗号，类型为整型</span><br><span class="line">&lt;class &#x27;int&#x27;&gt;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; tup1 = (50,)</span><br><span class="line">&gt;&gt;&gt; type(tup1)     # 加上逗号，类型为元组</span><br><span class="line">&lt;class &#x27;tuple&#x27;&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>元组与字符串类似，下标索引从 0 开始，可以进行截取，组合等。</p>
+<h2 id="访问元组"><a href="#访问元组" class="headerlink" title="- 访问元组"></a>- 访问元组</h2><p>元组可以使用下标索引来访问元组中的值，如下实例:</p>
+<blockquote>
+<p><strong>实例:</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tup1 = (&#x27;Google&#x27;, &#x27;Runoob&#x27;, 1997, 2000)</span><br><span class="line">tup2 = (1, 2, 3, 4, 5, 6, 7 )</span><br><span class="line"> </span><br><span class="line">print (&quot;tup1[0]: &quot;, tup1[0])</span><br><span class="line">print (&quot;tup2[1:5]: &quot;, tup2[1:5])</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>以上实例输出结果：</p>
+<pre><code>tup1[0]:  Google
+tup2[1:5]:  (2, 3, 4, 5)
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -757,128 +890,6 @@ var2[1:5]:  unoo
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/04/27/A-%E5%AF%BB%E8%B7%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/27/A-%E5%AF%BB%E8%B7%AF/" class="post-title-link" itemprop="url">A*寻路</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-04-27 18:17:20" itemprop="dateCreated datePublished" datetime="2023-04-27T18:17:20+08:00">2023-04-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/04/27/A-%E5%AF%BB%E8%B7%AF/" class="post-meta-item leancloud_visitors" data-flag-title="A*寻路" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/04/27/A-%E5%AF%BB%E8%B7%AF/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/04/27/A-%E5%AF%BB%E8%B7%AF/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>A*寻路算法是一种常用的路径规划算法，用于在图或者网格中找到最短路径。它基于启发式搜索，综合了Dijkstra算法和贪心算法的优点，通过估算当前节点到目标节点的代价，选择最合适的节点进行探索。</p>
-<p>具体原理如下：</p>
-<ol>
-<li><p>创建一个起点节点和一个目标节点。从起点开始探索，并将起点加入开放列表。</p>
-</li>
-<li><p>对于当前节点，计算该节点到目标节点的估算成本（一般使用曼哈顿距离或欧几里得距离），并将其加入已探索列表。</p>
-</li>
-<li><p>探索当前节点相邻的节点，对于每个相邻节点，计算从起点到该节点的实际成本（一般指每个节点的移动代价，也可以考虑更复杂的因素如地形、距离等），将该节点加入开放列表。</p>
-</li>
-<li><p>对于开放列表中的节点，按照实际成本和估算成本的总和排序，选择代价最小的节点作为下一个探索的节点，并将其从开放列表中移除。</p>
-</li>
-<li><p>重复步骤3和4，直到目标节点被加入已探索列表或开放列表为空。</p>
-</li>
-<li><p>如果目标节点被加入已探索列表中，则路径已经找到，从目标节点出发回溯到起点即可；否则，路径不存在。</p>
-</li>
-</ol>
-<p>A<em>寻路算法通过估算代价，减少了搜索的空间，大大提高了搜索效率，同时保证了找到的路径是最短的。因此在实际应用中，A</em>寻路算法广泛应用于游戏、机器人等领域。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/04/27/A-%E5%AF%BB%E8%B7%AF/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -950,7 +961,7 @@ var2[1:5]:  unoo
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1013,7 +1024,7 @@ var2[1:5]:  unoo
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

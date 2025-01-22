@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+  <meta name="description" content="await 关键字在C#编程中，await 关键字用于异步编程，它通常与 async 关键字一起使用。await 用于暂停当前方法的执行，直到等待的异步任务完成。这样可以在不阻塞主线程的情况下执行耗时操作，如I&#x2F;O操作或网络请求。 例如，假设有一个异步方法 GetDataAsync()，你可以这样使用 await： 123456public async Task&lt;string&amp;gt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity3D游戏开发异步编程UniTask和Task">
+<meta property="og:url" content="https://www.bytefisher.top/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/index.html">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="await 关键字在C#编程中，await 关键字用于异步编程，它通常与 async 关键字一起使用。await 用于暂停当前方法的执行，直到等待的异步任务完成。这样可以在不阻塞主线程的情况下执行耗时操作，如I&#x2F;O操作或网络请求。 例如，假设有一个异步方法 GetDataAsync()，你可以这样使用 await： 123456public async Task&lt;string&amp;gt">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-01-22T03:11:59.000Z">
+<meta property="article:modified_time" content="2025-01-22T05:05:24.149Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="Unity3D">
+<meta property="article:tag" content="IT">
+<meta property="article:tag" content="C#">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.bytefisher.top/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Unity3D游戏开发异步编程UniTask和Task | ByteFisher</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <!--相册弹出js-->
+  <script type="text/javascript" src="/js/lightbox-plus-jquery.min.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">68</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Unity3D游戏开发异步编程UniTask和Task
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-01-22 11:11:59 / 修改时间：13:05:24" itemprop="dateCreated datePublished" datetime="2025-01-22T11:11:59+08:00">2025-01-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3D游戏开发异步编程UniTask和Task" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="await-关键字"><a href="#await-关键字" class="headerlink" title="await 关键字"></a><strong>await 关键字</strong></h1><p>在C#编程中，await 关键字用于异步编程，它通常与 async 关键字一起使用。await 用于暂停当前方法的执行，直到等待的异步任务完成。这样可以在不阻塞主线程的情况下执行耗时操作，如I&#x2F;O操作或网络请求。</p>
+<p>例如，假设有一个异步方法 GetDataAsync()，你可以这样使用 await：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public async Task&lt;string&gt; FetchDataAsync()</span><br><span class="line">&#123;</span><br><span class="line">    // 假设 GetDataAsync 是一个返回 Task&lt;string&gt; 的异步方法</span><br><span class="line">    string data = await GetDataAsync();</span><br><span class="line">    return data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>在这个例子中，await GetDataAsync() 会暂停 FetchDataAsync 方法的执行，直到 GetDataAsync 完成并返回结果。同时，控制权会返回给调用者，允许程序继续执行其他操作。</p>
+<p>在C#中使用await时，有几个关键要点需要注意，以确保异步代码的正确性和高效性：</p>
+<h2 id="async-方法必须返回-Task-或-Task"><a href="#async-方法必须返回-Task-或-Task" class="headerlink" title="async 方法必须返回 Task 或 Task&lt;T&gt;"></a>async 方法必须返回 Task 或 Task&lt;T&gt;</h2><p>使用 await 的方法必须标记为 async，并且返回类型应为 Task（无返回值）或 Task&lt;T&gt;（有返回值）。</p>
+<p>例如：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public async Task&lt;int&gt; CalculateAsync()</span><br><span class="line">&#123;</span><br><span class="line">    await Task.Delay(1000); // 模拟耗时操作</span><br><span class="line">    return 42;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="避免阻塞调用"><a href="#避免阻塞调用" class="headerlink" title="避免阻塞调用"></a>避免阻塞调用</h2><p>不要在 async 方法中使用 .Result 或 .Wait()，这会导致死锁或阻塞线程。</p>
+<p>例如，避免以下写法：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var result = SomeAsyncMethod().Result; // 错误：可能导致死锁</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="正确处理异常"><a href="#正确处理异常" class="headerlink" title="正确处理异常"></a>正确处理异常</h2><p>异步方法中的异常会被包装在 Task 中，可以通过 try-catch 捕获。</p>
+<p>例如：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">try</span><br><span class="line">&#123;</span><br><span class="line">    await SomeAsyncMethod();</span><br><span class="line">&#125;</span><br><span class="line">catch (Exception ex)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine($&quot;Error: &#123;ex.Message&#125;&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<span id="more"></span>
+<h2 id="避免-async-void"><a href="#避免-async-void" class="headerlink" title="避免 async void"></a>避免 async void</h2><p>除了事件处理程序外，尽量避免使用 async void 方法，因为无法捕获其异常，且无法等待其完成。</p>
+<p>例如：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public async void BadPracticeAsync() // 不推荐</span><br><span class="line">&#123;</span><br><span class="line">    await Task.Delay(1000);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="注意线程上下文"><a href="#注意线程上下文" class="headerlink" title="注意线程上下文"></a>注意线程上下文</h2><p>在 UI 应用程序（如 WPF 或 WinForms）中，await 默认会返回到 UI 线程。如果需要避免上下文切换，可以使用 ConfigureAwait(false)。</p>
+<p>例如：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var result = await SomeAsyncMethod().ConfigureAwait(false);</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="避免过度异步化"><a href="#避免过度异步化" class="headerlink" title="避免过度异步化"></a>避免过度异步化</h2><p>不是所有方法都需要异步化。对于简单的、非耗时的操作，直接同步执行可能更高效。</p>
+<h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><p>在高性能场景中，避免频繁创建 Task 对象，可以使用 ValueTask 或缓存任务结果。</p>
+<h2 id="取消操作"><a href="#取消操作" class="headerlink" title="取消操作"></a>取消操作</h2><p>使用 CancellationToken 来支持异步操作的取消。</p>
+<p>示例：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public async Task&lt;string&gt; FetchDataAsync(CancellationToken cancellationToken)</span><br><span class="line">&#123;</span><br><span class="line">    try</span><br><span class="line">    &#123;</span><br><span class="line">        string data = await GetDataAsync().ConfigureAwait(false);</span><br><span class="line">        return data;</span><br><span class="line">    &#125;</span><br><span class="line">    catch (OperationCanceledException)</span><br><span class="line">    &#123;</span><br><span class="line">        // 处理取消操作</span><br><span class="line">        return &quot;Operation was canceled.&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    catch (Exception ex)</span><br><span class="line">    &#123;</span><br><span class="line">        // 处理其他异常</span><br><span class="line">        return $&quot;Error: &#123;ex.Message&#125;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>遵循这些要点可以确保异步代码的高效性和可维护性。</p>
+<h1 id="UniTask-和-Task区别"><a href="#UniTask-和-Task区别" class="headerlink" title="UniTask 和 Task区别"></a><strong>UniTask 和 Task区别</strong></h1><p>UniTask 和 Task 是两种用于异步编程的类型，主要区别在于它们的应用场景和性能优化。以下是它们的详细对比：</p>
+<h2 id="来源与适用场景"><a href="#来源与适用场景" class="headerlink" title="来源与适用场景"></a>来源与适用场景</h2><p><strong>Task：</strong></p>
+<pre><code>是 .NET 标准库的一部分，适用于所有 .NET 平台（如 .NET Core、.NET Framework）。
+通用性强，适合大多数异步编程场景。
+</code></pre>
+<p><strong>UniTask：</strong></p>
+<pre><code>是 Unity 社区开发的库（由 Cysharp 提供），专为 Unity 游戏引擎优化。
+针对 Unity 的单线程架构和游戏开发需求进行了深度优化。
+</code></pre>
+<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><p><strong>Task：</strong></p>
+<pre><code>基于多线程和线程池，适合 CPU 密集型任务。
+在 Unity 中可能会产生额外的开销（如线程切换、GC 压力）。
+对于 Unity 的单线程架构（主线程渲染和逻辑更新），Task 的多线程特性可能并不适合。
+每次创建 Task 或 Task&amp;lt;T&amp;gt; 时，都会在堆上分配内存，导致 GC 压力增加。
+在高频调用的异步操作中（如每帧更新），Task 的 GC 压力会显著影响性能。
+</code></pre>
+<p><strong>UniTask：</strong></p>
+<pre><code>针对 Unity 的单线程架构优化，避免了线程切换的开销。
+减少了 GC（垃圾回收）压力，适合高频调用的异步操作（如帧更新、动画、网络请求）。
+支持零分配（Zero Allocation）模式，进一步优化性能。
+</code></pre>
+<h2 id="功能与特性"><a href="#功能与特性" class="headerlink" title="功能与特性"></a>功能与特性</h2><p><strong>Task：</strong></p>
+<pre><code>支持多线程和并行计算。
+提供了丰富的 API（如 Task.Run、Task.WhenAll、Task.Delay 等）。
+需要显式处理线程上下文（如 ConfigureAwait(false)）。
+</code></pre>
+<p><strong>UniTask：</strong></p>
+<pre><code>提供了 Unity 专用的 API（如 UniTask.Yield、UniTask.DelayFrame 等），方便与 Unity 的生命周期和帧更新集成。
+支持取消操作（CancellationToken）和超时控制。
+提供了更轻量级的 UniTask&amp;lt;T&amp;gt; 和 UniTaskVoid，减少内存分配。
+</code></pre>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p><strong>Task：</strong></p>
+<pre><code>适用于通用 .NET 应用程序（如 Web 服务、桌面应用）。
+在 Unity 中也可以使用，但性能不如 UniTask。
+</code></pre>
+<p><strong>UniTask：</strong></p>
+<pre><code>专为 Unity 游戏开发设计，适合以下场景：
+帧更新（如 UniTask.Yield）。
+动画、资源加载、网络请求。
+高频调用的异步操作（如每帧更新 UI）。
+</code></pre>
+<h2 id="示例对比"><a href="#示例对比" class="headerlink" title="示例对比"></a>示例对比</h2><p><strong>使用 Task</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public async Task UpdateEveryFrame()</span><br><span class="line">&#123;</span><br><span class="line">    while (true)</span><br><span class="line">    &#123;</span><br><span class="line">        await Task.Yield(); // 每帧等待，但会触发线程切换</span><br><span class="line">        Debug.Log(&quot;Frame updated!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>问题：Task.Yield() 会导致线程切换，增加性能开销。</p>
+<p><strong>使用 UniTask</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public async UniTask UpdateEveryFrame()</span><br><span class="line">&#123;</span><br><span class="line">    while (true)</span><br><span class="line">    &#123;</span><br><span class="line">        await UniTask.Yield(); // 每帧等待，无线程切换</span><br><span class="line">        Debug.Log(&quot;Frame updated!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>优势：UniTask.Yield() 直接在 Unity 主线程上运行，无额外开销。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><pre><code>| 特性               | Task                          | UniTask                      |
+------------------------------------------------------------------------------------
+| 适用平台           | 所有 .NET 平台                 | Unity 游戏引擎                |
+| 性能               | 通用，可能有额外开销           | 针对 Unity 优化，性能更高     |
+| GC 压力            | 较高                           | 较低（支持零分配）            |
+| 线程模型           | 多线程                         | 单线程（Unity 主线程）        |
+| 集成 Unity 生命周期 | 需要额外处理                   | 原生支持                      |
+| 使用场景           | 通用 .NET 应用                 | Unity 游戏开发                |
+</code></pre>
+<p>如果你在 Unity 中进行开发，UniTask 是更好的选择，尤其是在性能敏感的场景中。如果是通用 .NET 应用，Task 是标准选择。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
+              <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/C/" rel="tag"># C#</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/12/06/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%BB%84%E4%BB%B6/" rel="prev" title="Unity3D游戏引擎组件">
+      <i class="fa fa-chevron-left"></i> Unity3D游戏引擎组件
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#await-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">1.</span> <span class="nav-text">await 关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#async-%E6%96%B9%E6%B3%95%E5%BF%85%E9%A1%BB%E8%BF%94%E5%9B%9E-Task-%E6%88%96-Task"><span class="nav-number">1.1.</span> <span class="nav-text">async 方法必须返回 Task 或 Task&lt;T&gt;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E9%98%BB%E5%A1%9E%E8%B0%83%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">避免阻塞调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E7%A1%AE%E5%A4%84%E7%90%86%E5%BC%82%E5%B8%B8"><span class="nav-number">1.3.</span> <span class="nav-text">正确处理异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%BF%E5%85%8D-async-void"><span class="nav-number">1.4.</span> <span class="nav-text">避免 async void</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E7%BA%BF%E7%A8%8B%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">1.5.</span> <span class="nav-text">注意线程上下文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E8%BF%87%E5%BA%A6%E5%BC%82%E6%AD%A5%E5%8C%96"><span class="nav-number">1.6.</span> <span class="nav-text">避免过度异步化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-number">1.7.</span> <span class="nav-text">性能优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%96%E6%B6%88%E6%93%8D%E4%BD%9C"><span class="nav-number">1.8.</span> <span class="nav-text">取消操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UniTask-%E5%92%8C-Task%E5%8C%BA%E5%88%AB"><span class="nav-number">2.</span> <span class="nav-text">UniTask 和 Task区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A5%E6%BA%90%E4%B8%8E%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.1.</span> <span class="nav-text">来源与适用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD"><span class="nav-number">2.2.</span> <span class="nav-text">性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E4%B8%8E%E7%89%B9%E6%80%A7"><span class="nav-number">2.3.</span> <span class="nav-text">功能与特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.4.</span> <span class="nav-text">使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E5%AF%B9%E6%AF%94"><span class="nav-number">2.5.</span> <span class="nav-text">示例对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.6.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Weibo → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8SGHVqNSzlIvUsQekb6EVL2z-gzGzoHsz',
+      appKey     : 'kM6zUKBTanjH10n2gcXV8OTE',
+      placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+      avatar     : 'retro',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

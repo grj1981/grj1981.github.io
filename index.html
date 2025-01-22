@@ -139,7 +139,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">67</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">68</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -169,6 +169,127 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/" class="post-title-link" itemprop="url">Unity3D游戏开发异步编程UniTask和Task</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-01-22 11:11:59 / 修改时间：13:05:24" itemprop="dateCreated datePublished" datetime="2025-01-22T11:11:59+08:00">2025-01-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3D游戏开发异步编程UniTask和Task" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="await-关键字"><a href="#await-关键字" class="headerlink" title="await 关键字"></a><strong>await 关键字</strong></h1><p>在C#编程中，await 关键字用于异步编程，它通常与 async 关键字一起使用。await 用于暂停当前方法的执行，直到等待的异步任务完成。这样可以在不阻塞主线程的情况下执行耗时操作，如I&#x2F;O操作或网络请求。</p>
+<p>例如，假设有一个异步方法 GetDataAsync()，你可以这样使用 await：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public async Task&lt;string&gt; FetchDataAsync()</span><br><span class="line">&#123;</span><br><span class="line">    // 假设 GetDataAsync 是一个返回 Task&lt;string&gt; 的异步方法</span><br><span class="line">    string data = await GetDataAsync();</span><br><span class="line">    return data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>在这个例子中，await GetDataAsync() 会暂停 FetchDataAsync 方法的执行，直到 GetDataAsync 完成并返回结果。同时，控制权会返回给调用者，允许程序继续执行其他操作。</p>
+<p>在C#中使用await时，有几个关键要点需要注意，以确保异步代码的正确性和高效性：</p>
+<h2 id="async-方法必须返回-Task-或-Task"><a href="#async-方法必须返回-Task-或-Task" class="headerlink" title="async 方法必须返回 Task 或 Task&lt;T&gt;"></a>async 方法必须返回 Task 或 Task&lt;T&gt;</h2><p>使用 await 的方法必须标记为 async，并且返回类型应为 Task（无返回值）或 Task&lt;T&gt;（有返回值）。</p>
+<p>例如：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public async Task&lt;int&gt; CalculateAsync()</span><br><span class="line">&#123;</span><br><span class="line">    await Task.Delay(1000); // 模拟耗时操作</span><br><span class="line">    return 42;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="避免阻塞调用"><a href="#避免阻塞调用" class="headerlink" title="避免阻塞调用"></a>避免阻塞调用</h2><p>不要在 async 方法中使用 .Result 或 .Wait()，这会导致死锁或阻塞线程。</p>
+<p>例如，避免以下写法：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var result = SomeAsyncMethod().Result; // 错误：可能导致死锁</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="正确处理异常"><a href="#正确处理异常" class="headerlink" title="正确处理异常"></a>正确处理异常</h2><p>异步方法中的异常会被包装在 Task 中，可以通过 try-catch 捕获。</p>
+<p>例如：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">try</span><br><span class="line">&#123;</span><br><span class="line">    await SomeAsyncMethod();</span><br><span class="line">&#125;</span><br><span class="line">catch (Exception ex)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine($&quot;Error: &#123;ex.Message&#125;&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -753,154 +874,6 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/" class="post-title-link" itemprop="url">Unity3D正交相机视野控制</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-07-03 11:52:16" itemprop="dateCreated datePublished" datetime="2024-07-03T11:52:16+08:00">2024-07-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3D正交相机视野控制" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="正交相机（Orthographic-Camera）"><a href="#正交相机（Orthographic-Camera）" class="headerlink" title="正交相机（Orthographic Camera）"></a>正交相机（Orthographic Camera）</h1><p>Unity3D中的正交相机（Orthographic Camera）是一种投影方式，它不同于透视相机（Perspective Camera）的投影方式。在正交相机中，物体在视野中的大小与其与相机的距离无关，也就是说，所有物体在相机视野中呈现的大小是相同的。</p>
-<p>Unity3D的正交相机可以看作是一个在固定位置的照相机，它将三维空间中的物体投影到一个二维图像平面上，而不考虑物体到相机的距离。因此，在正交投影中，无论物体离相机多远，它们在二维图像平面上的大小都不会改变。</p>
-<p>正交相机的投影方式是通过一个虚拟的长方体来取景，并将场景投影到这个长方体的前面。在Unity中，可以通过更改相机参数来调整这个长方体的尺寸，进而影响相机视野中物体的显示大小。</p>
-<h1 id="主要特点和应用场景"><a href="#主要特点和应用场景" class="headerlink" title="主要特点和应用场景"></a>主要特点和应用场景</h1><h2 id="物体大小不变"><a href="#物体大小不变" class="headerlink" title="物体大小不变"></a>物体大小不变</h2><pre><code>由于正交相机不考虑物体到相机的距离，所以物体在相机视野中的大小是固定的，这使得在2D游戏或者UI设计中非常方便。
-</code></pre>
-<h2 id="无透视收缩效果"><a href="#无透视收缩效果" class="headerlink" title="无透视收缩效果"></a>无透视收缩效果</h2><pre><code>在正交投影中，远处的物体和近处的物体在图像平面上的大小是相同的，不会有透视收缩效果，这使得场景中的物体之间的相对距离
-保持不变。
-</code></pre>
-<h2 id="适用于2D游戏和UI设计"><a href="#适用于2D游戏和UI设计" class="headerlink" title="适用于2D游戏和UI设计"></a>适用于2D游戏和UI设计</h2><pre><code>正交相机由于其特殊的投影方式，非常适合用于2D游戏和UI设计，可以很容易地实现平铺纹理或者背景等效果。
-</code></pre>
-<h2 id="易于实现像素化效果"><a href="#易于实现像素化效果" class="headerlink" title="易于实现像素化效果"></a>易于实现像素化效果</h2><pre><code>正交相机由于物体大小固定，所以可以很容易地实现像素化效果，这在一些复古风格的2D游戏中非常常见。
-</code></pre>
-<p>总的来说，Unity3D的正交相机通过忽略物体到相机的距离，实现了一种特殊的投影方式，这种方式在2D游戏和UI设计中有广泛的应用。</p>
-<h1 id="正交相机的主要属性"><a href="#正交相机的主要属性" class="headerlink" title="正交相机的主要属性"></a>正交相机的主要属性</h1><p><strong>- 投影模式（Projection Type）</strong></p>
-<pre><code>这是设置相机投影方式的属性，Unity中提供了多种投影模式，但对于正交相机来说，通常只会选择“正交（Orthographic）”这一项。
-选择正交投影后，相机的视野不会因物体距离的增加而产生大小变化。
-</code></pre>
-<p><strong>- 视野大小（Field of View）</strong></p>
-<pre><code>在正交投影中，视野大小实际上定义了相机的视锥体的大小，它决定了相机的可视范围。Unity中是以角度来定义的，数值越大，
-视野范围越宽。
-</code></pre>
-<p><strong>- 近平面（Near Plane）和远平面（Far Plane）</strong></p>
-<pre><code>这两个属性定义了相机视锥体的近边界和远边界。在正交相机中，这两个平面是固定垂直于相机前后的，不会因为相机的移动而改变。
-近平面和远平面的距离决定了相机的深度范围。
-</code></pre>
-<p><strong>- 正交尺寸（Orthographic Size）</strong></p>
-<pre><code>这个属性定义了相机的虚拟长方体视野的尺寸。相机将场景投影到一个虚拟的长方体上，这个长方体的长、宽、高分别由正交尺寸的
-X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个长方体的尺寸决定的。例如，如果正交尺寸的X为10，Y为5，那么相机视野
-的宽高比就是2:1。
-</code></pre>
-<p><strong>- 平移（Position）</strong></p>
-<pre><code>这是相机在三维空间中的位置，可以自由设置。
-</code></pre>
-<p><strong>- 旋转（Rotation）</strong></p>
-<pre><code>这是相机在三维空间中的旋转，同样可以自由设置。旋转会影响相机的朝向，从而改变拍摄的视角。
-</code></pre>
-<p><strong>- 缩放（Scale）</strong></p>
-<pre><code>在Unity中，相机也有缩放属性，但这通常指的是相机视锥体的缩放，而不是像物体一样改变大小。这个属性在正交相机中不太常用。
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -972,7 +945,7 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1035,7 +1008,7 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

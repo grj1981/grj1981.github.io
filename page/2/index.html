@@ -139,7 +139,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">67</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">68</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -169,6 +169,154 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/" class="post-title-link" itemprop="url">Unity3D正交相机视野控制</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-03 11:52:16" itemprop="dateCreated datePublished" datetime="2024-07-03T11:52:16+08:00">2024-07-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3D正交相机视野控制" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="正交相机（Orthographic-Camera）"><a href="#正交相机（Orthographic-Camera）" class="headerlink" title="正交相机（Orthographic Camera）"></a>正交相机（Orthographic Camera）</h1><p>Unity3D中的正交相机（Orthographic Camera）是一种投影方式，它不同于透视相机（Perspective Camera）的投影方式。在正交相机中，物体在视野中的大小与其与相机的距离无关，也就是说，所有物体在相机视野中呈现的大小是相同的。</p>
+<p>Unity3D的正交相机可以看作是一个在固定位置的照相机，它将三维空间中的物体投影到一个二维图像平面上，而不考虑物体到相机的距离。因此，在正交投影中，无论物体离相机多远，它们在二维图像平面上的大小都不会改变。</p>
+<p>正交相机的投影方式是通过一个虚拟的长方体来取景，并将场景投影到这个长方体的前面。在Unity中，可以通过更改相机参数来调整这个长方体的尺寸，进而影响相机视野中物体的显示大小。</p>
+<h1 id="主要特点和应用场景"><a href="#主要特点和应用场景" class="headerlink" title="主要特点和应用场景"></a>主要特点和应用场景</h1><h2 id="物体大小不变"><a href="#物体大小不变" class="headerlink" title="物体大小不变"></a>物体大小不变</h2><pre><code>由于正交相机不考虑物体到相机的距离，所以物体在相机视野中的大小是固定的，这使得在2D游戏或者UI设计中非常方便。
+</code></pre>
+<h2 id="无透视收缩效果"><a href="#无透视收缩效果" class="headerlink" title="无透视收缩效果"></a>无透视收缩效果</h2><pre><code>在正交投影中，远处的物体和近处的物体在图像平面上的大小是相同的，不会有透视收缩效果，这使得场景中的物体之间的相对距离
+保持不变。
+</code></pre>
+<h2 id="适用于2D游戏和UI设计"><a href="#适用于2D游戏和UI设计" class="headerlink" title="适用于2D游戏和UI设计"></a>适用于2D游戏和UI设计</h2><pre><code>正交相机由于其特殊的投影方式，非常适合用于2D游戏和UI设计，可以很容易地实现平铺纹理或者背景等效果。
+</code></pre>
+<h2 id="易于实现像素化效果"><a href="#易于实现像素化效果" class="headerlink" title="易于实现像素化效果"></a>易于实现像素化效果</h2><pre><code>正交相机由于物体大小固定，所以可以很容易地实现像素化效果，这在一些复古风格的2D游戏中非常常见。
+</code></pre>
+<p>总的来说，Unity3D的正交相机通过忽略物体到相机的距离，实现了一种特殊的投影方式，这种方式在2D游戏和UI设计中有广泛的应用。</p>
+<h1 id="正交相机的主要属性"><a href="#正交相机的主要属性" class="headerlink" title="正交相机的主要属性"></a>正交相机的主要属性</h1><p><strong>- 投影模式（Projection Type）</strong></p>
+<pre><code>这是设置相机投影方式的属性，Unity中提供了多种投影模式，但对于正交相机来说，通常只会选择“正交（Orthographic）”这一项。
+选择正交投影后，相机的视野不会因物体距离的增加而产生大小变化。
+</code></pre>
+<p><strong>- 视野大小（Field of View）</strong></p>
+<pre><code>在正交投影中，视野大小实际上定义了相机的视锥体的大小，它决定了相机的可视范围。Unity中是以角度来定义的，数值越大，
+视野范围越宽。
+</code></pre>
+<p><strong>- 近平面（Near Plane）和远平面（Far Plane）</strong></p>
+<pre><code>这两个属性定义了相机视锥体的近边界和远边界。在正交相机中，这两个平面是固定垂直于相机前后的，不会因为相机的移动而改变。
+近平面和远平面的距离决定了相机的深度范围。
+</code></pre>
+<p><strong>- 正交尺寸（Orthographic Size）</strong></p>
+<pre><code>这个属性定义了相机的虚拟长方体视野的尺寸。相机将场景投影到一个虚拟的长方体上，这个长方体的长、宽、高分别由正交尺寸的
+X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个长方体的尺寸决定的。例如，如果正交尺寸的X为10，Y为5，那么相机视野
+的宽高比就是2:1。
+</code></pre>
+<p><strong>- 平移（Position）</strong></p>
+<pre><code>这是相机在三维空间中的位置，可以自由设置。
+</code></pre>
+<p><strong>- 旋转（Rotation）</strong></p>
+<pre><code>这是相机在三维空间中的旋转，同样可以自由设置。旋转会影响相机的朝向，从而改变拍摄的视角。
+</code></pre>
+<p><strong>- 缩放（Scale）</strong></p>
+<pre><code>在Unity中，相机也有缩放属性，但这通常指的是相机视锥体的缩放，而不是像物体一样改变大小。这个属性在正交相机中不太常用。
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -782,121 +930,6 @@ C:/Users/GONGRE~1/AppData/Local/Temp/DefaultCompany/New Unity Project
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity堆叠消除小游戏摘要</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-01-31 18:11:16" itemprop="dateCreated datePublished" datetime="2024-01-31T18:11:16+08:00">2024-01-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity堆叠消除小游戏摘要" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Lua实现Unity堆叠消除小游戏，游戏功能每次随机生成四个不同形状的方块，将方块拖入10*10的格子棋盘，如果放入的棋盘格都有空格则可以放入方块，当放满一行或者一列时，消除满行满列的放入格。</p>
-<h2 id="创建拼图地图格数据"><a href="#创建拼图地图格数据" class="headerlink" title="- 创建拼图地图格数据"></a>- 创建拼图地图格数据</h2><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">---拼图地图格数据</span><br><span class="line">---@class ROPuzzleMapTileData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type number 位置标记</span><br><span class="line">    index = 0,</span><br><span class="line">    ---@type number 所在行</span><br><span class="line">    x = 0,</span><br><span class="line">    ---@type number 所在列</span><br><span class="line">    y = 0,</span><br><span class="line">    ---@type number 地图格上放置的方块ID  为0 表示空格</span><br><span class="line">    blockId = 0,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(index,x,y,id)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(index,x,y,id)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(index,x,y,id)</span><br><span class="line">    self.index = index</span><br><span class="line">    self.x = x</span><br><span class="line">    self.y = y</span><br><span class="line">    self.blockId = id</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="创建拼图游戏数据结构"><a href="#创建拼图游戏数据结构" class="headerlink" title="- 创建拼图游戏数据结构"></a>- 创建拼图游戏数据结构</h2><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line">---@class ROPuzzleGameData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type CfgRestaurantOperationPuzzleControlData</span><br><span class="line">    cfgPuzzleGameControlData = nil,</span><br><span class="line">    ---@type number 当前积分</span><br><span class="line">    score = 0,</span><br><span class="line">    ---@type ROPuzzleMapTileData[]</span><br><span class="line">    tileMaps = &#123;&#125;,</span><br><span class="line">    ---@type number 最大行数</span><br><span class="line">    maxLine = 10,</span><br><span class="line">    ---@type number 最大列数</span><br><span class="line">    maxColumn = 10,</span><br><span class="line">    ---@type number 单次生成的方块数量(上限为4)</span><br><span class="line">    randomBlock = &#123;&#125;,</span><br><span class="line">    ---@type boolean 游戏是否已经开始（点了开始按钮视为游戏开始）</span><br><span class="line">    isGameStart = false,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">local ROPuzzleMapTileData = require(&quot;IQIGame.Module.CommonActivity.RestaurantOperation.ROPuzzleGame.ROPuzzleMapTileData&quot;)</span><br><span class="line"></span><br><span class="line">function m.New(cfgData)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(cfgData)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(cfgData)</span><br><span class="line">    self.score = 0</span><br><span class="line">    self.cfgPuzzleGameControlData = cfgData</span><br><span class="line">    self.tileMaps = self:CreateTiles()</span><br><span class="line">    self.isGameStart = true</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---开始新游戏，创建拼图地图</span><br><span class="line">function m:CreateTiles()</span><br><span class="line">    local tab = &#123;&#125;</span><br><span class="line">    local index = 0</span><br><span class="line">    for line = 1, self.maxLine do</span><br><span class="line">        for column = 1, self.maxColumn do</span><br><span class="line">            index = index + 1</span><br><span class="line">            local tileData = ROPuzzleMapTileData.New(index,line,column,0)</span><br><span class="line">            tab[index] = tileData</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    return tab</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---随机生成四个方块</span><br><span class="line">function m:RefreshRandomBlock()</span><br><span class="line">    self.randomBlock = &#123;&#125;</span><br><span class="line">    local blockGroup = table.clone(self.cfgPuzzleGameControlData.BlockGroup)</span><br><span class="line">    ---洗牌操作</span><br><span class="line">    for i = #blockGroup, 2, -1 do</span><br><span class="line">        local random_index = math.random(i)</span><br><span class="line">        blockGroup[i], blockGroup[random_index] = blockGroup[random_index],blockGroup[i]</span><br><span class="line">    end</span><br><span class="line">    ---根据配置数据取方块</span><br><span class="line">    for i = 1, self.cfgPuzzleGameControlData.BlockNum do</span><br><span class="line">        local id = blockGroup[i]</span><br><span class="line">        table.insert(self.randomBlock,id)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---消除满行满列，并返回消除的行列</span><br><span class="line">---@return number, number[],number[] 消除的总行数，同时消除的行和列</span><br><span class="line">function m:Eliminate()</span><br><span class="line">    local lines = &#123;&#125;</span><br><span class="line">    local columns = &#123;&#125;</span><br><span class="line">    ---行检测</span><br><span class="line">    for i = 1, self.maxLine do</span><br><span class="line">        local isFull = true</span><br><span class="line">        for j = 1, self.maxColumn do</span><br><span class="line">            local pos = (i-1) * self.maxLine + j</span><br><span class="line">            if self.tileMaps[pos].blockId == 0 then</span><br><span class="line">                isFull = false</span><br><span class="line">                break</span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">        if isFull then</span><br><span class="line">            table.insert(lines,i)</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    ---列检测</span><br><span class="line">    for j = 1, self.maxColumn do</span><br><span class="line">        local isFull = true</span><br><span class="line">        for i = 1, self.maxLine do</span><br><span class="line">            local pos = (i-1) * self.maxLine + j</span><br><span class="line">            if self.tileMaps[pos].blockId == 0 then</span><br><span class="line">                isFull = false</span><br><span class="line">                break</span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">        if isFull then</span><br><span class="line">            table.insert(columns,j)</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    local totalNum = #lines + #columns</span><br><span class="line">    return totalNum,lines,columns</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---增加积分</span><br><span class="line">---@param score number</span><br><span class="line">function m:AddScore(score)</span><br><span class="line">    self.score = self.score + score</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---检测方块还有没有空地能放下</span><br><span class="line">---@param blockCell PuzzleGameBlockCell</span><br><span class="line">---@return boolean</span><br><span class="line">function m:CheckBlockCellCanPutDown(blockCell)</span><br><span class="line">    local posTab = blockCell.blockData</span><br><span class="line">    for i, tileData in pairs(self.tileMaps) do</span><br><span class="line">        ---找到了一个空格子</span><br><span class="line">        local canPutDown = false</span><br><span class="line">        if tileData.blockId == 0 then</span><br><span class="line">            ---所有检测点都满足返回true</span><br><span class="line">            for j, pos in pairs(posTab) do</span><br><span class="line"></span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    return false</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>通过调用RefreshRandomBlock()方法，每次随机生成不重复的四个方块</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -968,7 +1001,7 @@ C:/Users/GONGRE~1/AppData/Local/Temp/DefaultCompany/New Unity Project
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1031,7 +1064,7 @@ C:/Users/GONGRE~1/AppData/Local/Temp/DefaultCompany/New Unity Project
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
