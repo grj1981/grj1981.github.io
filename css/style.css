@@ -6,11 +6,11 @@ body {
 .gallery{
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: left;
+	justify-content: space-evenly;
 }
 .gallery img{
 	width: 200px;
-	margin: 5px;
+	margin: 4px;
 	filter: grayscale(100%);
 	transition: 1s;
 }

@@ -139,7 +139,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">54</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">76</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -173,7 +173,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/07/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-16/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -187,7 +187,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/07/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-16/" class="post-title-link" itemprop="url">钓鱼日记[23.07.16]</a>
+            <a href="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/" class="post-title-link" itemprop="url">Unity3D路径权限</a>
         </h2>
 
         <div class="post-meta">
@@ -197,7 +197,567 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-07-16 18:25:27" itemprop="dateCreated datePublished" datetime="2023-07-16T18:25:27+08:00">2023-07-16</time>
+              <time title="创建时间：2024-06-19 14:25:43" itemprop="dateCreated datePublished" datetime="2024-06-19T14:25:43+08:00">2024-06-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-02-05 20:16:10" itemprop="dateModified" datetime="2025-02-05T20:16:10+08:00">2025-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3D路径权限" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Application"><a href="#Application" class="headerlink" title="Application"></a><strong>Application</strong></h1><h2 id="游戏数据文件夹路径-只读，打包加密压缩"><a href="#游戏数据文件夹路径-只读，打包加密压缩" class="headerlink" title="- 游戏数据文件夹路径(只读，打包加密压缩)"></a>- 游戏数据文件夹路径(只读，打包加密压缩)</h2><pre><code>Debug.Log(Application.dataPath);  
+D:/UnityTest/TestUnity2021Project/New Unity Project/Assets
+</code></pre>
+<h2 id="持久化文件夹路径"><a href="#持久化文件夹路径" class="headerlink" title="- 持久化文件夹路径"></a>- 持久化文件夹路径</h2><pre><code>Debug.Log(Application.persistentDataPath);
+C:/Users/gongrenjun/AppData/LocalLow/DefaultCompany/New Unity Project
+</code></pre>
+<h2 id="StreamingAssets文件夹路径-只读，配置文件-打包后不会加密压缩"><a href="#StreamingAssets文件夹路径-只读，配置文件-打包后不会加密压缩" class="headerlink" title="- StreamingAssets文件夹路径(只读，配置文件,打包后不会加密压缩)"></a>- StreamingAssets文件夹路径(只读，配置文件,打包后不会加密压缩)</h2><pre><code>Debug.Log(Application.streamingAssetsPath);
+D:/UnityTest/TestUnity2021Project/New Unity Project/Assets/StreamingAssets
+</code></pre>
+<h2 id="临时文件夹"><a href="#临时文件夹" class="headerlink" title="- 临时文件夹"></a>- 临时文件夹</h2><pre><code>Debug.Log(Application.temporaryCachePath);
+C:/Users/GONGRE~1/AppData/Local/Temp/DefaultCompany/New Unity Project
+</code></pre>
+<h2 id="是否在后台运行-可在Projectt-Settins-Player-选项中设置"><a href="#是否在后台运行-可在Projectt-Settins-Player-选项中设置" class="headerlink" title="- 是否在后台运行 可在Projectt Settins -&gt; Player 选项中设置"></a>- 是否在后台运行 可在Projectt Settins -&gt; Player 选项中设置</h2><pre><code>Debug.Log(Application.runInBackground);
+</code></pre>
+<h2 id="打开URL"><a href="#打开URL" class="headerlink" title="- 打开URL"></a>- 打开URL</h2><pre><code>Application.OpenURL(&quot;http://www.bytefisher.top&quot;);
+</code></pre>
+<h2 id="退出游戏"><a href="#退出游戏" class="headerlink" title="- 退出游戏"></a>- 退出游戏</h2><pre><code>Application.Quit();
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/02/25/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-24-02-24/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/02/25/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-24-02-24/" class="post-title-link" itemprop="url">钓鱼日记[24.02.24]</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-02-25 19:21:05" itemprop="dateCreated datePublished" datetime="2024-02-25T19:21:05+08:00">2024-02-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-02-05 20:16:10" itemprop="dateModified" datetime="2025-02-05T20:16:10+08:00">2025-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/02/25/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-24-02-24/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[24.02.24]" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/02/25/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-24-02-24/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/02/25/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-24-02-24/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2月24日，星期六</p>
+<p>元宵节，气温骤降。在这样的日子里，我选择前往三一水库挑战红尾。为了应对可能的挑战，跟据以往的经验，由于水库红尾比较小，我准备选择软竿，搭配小钩，细线，希望能提高鱼儿的咬钩。于是我携带了特作伊吹12尺钓竿，搭配0.6主线，0.3子线以及2号无倒刺轻口袖进行作钓。</p>
+<p><img src="https://iili.io/JGhuM6F.md.jpg"></p>
+<p><img src="https://iili.io/JGhueZN.md.jpg"></p>
+<p>虽然降温，但鱼口异常的好，仿佛在庆祝元宵节的热闹。到达水库开始作钓不久，就开始上鱼。红尾虽然小，但数量众多，鱼情爆躁。然而，特作伊吹钓竿在这个时候却显得有些不适应，小鱼刺鱼过程中手感模糊，虽然是胴调钓竿，但鱼太小又发挥不了鱼竿的腰力，轻轻发力就变成了飞磕，体现不出伊吹的特性。然而，尽管有这些不足，我依然享受着双飞，连竿上鱼的快感，这正是钓鱼的魅力所在。</p>
+<p><img src="https://iili.io/JGhuiu4.md.jpg"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/02/25/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-24-02-24/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity堆叠消除小游戏摘要</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-31 18:11:16" itemprop="dateCreated datePublished" datetime="2024-01-31T18:11:16+08:00">2024-01-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-02-05 20:16:10" itemprop="dateModified" datetime="2025-02-05T20:16:10+08:00">2025-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity堆叠消除小游戏摘要" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Lua实现Unity堆叠消除小游戏，游戏功能每次随机生成四个不同形状的方块，将方块拖入10*10的格子棋盘，如果放入的棋盘格都有空格则可以放入方块，当放满一行或者一列时，消除满行满列的放入格。</p>
+<h2 id="创建拼图地图格数据"><a href="#创建拼图地图格数据" class="headerlink" title="- 创建拼图地图格数据"></a>- 创建拼图地图格数据</h2><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">---拼图地图格数据</span><br><span class="line">---@class ROPuzzleMapTileData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type number 位置标记</span><br><span class="line">    index = 0,</span><br><span class="line">    ---@type number 所在行</span><br><span class="line">    x = 0,</span><br><span class="line">    ---@type number 所在列</span><br><span class="line">    y = 0,</span><br><span class="line">    ---@type number 地图格上放置的方块ID  为0 表示空格</span><br><span class="line">    blockId = 0,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(index,x,y,id)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(index,x,y,id)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(index,x,y,id)</span><br><span class="line">    self.index = index</span><br><span class="line">    self.x = x</span><br><span class="line">    self.y = y</span><br><span class="line">    self.blockId = id</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="创建拼图游戏数据结构"><a href="#创建拼图游戏数据结构" class="headerlink" title="- 创建拼图游戏数据结构"></a>- 创建拼图游戏数据结构</h2><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line">---@class ROPuzzleGameData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type CfgRestaurantOperationPuzzleControlData</span><br><span class="line">    cfgPuzzleGameControlData = nil,</span><br><span class="line">    ---@type number 当前积分</span><br><span class="line">    score = 0,</span><br><span class="line">    ---@type ROPuzzleMapTileData[]</span><br><span class="line">    tileMaps = &#123;&#125;,</span><br><span class="line">    ---@type number 最大行数</span><br><span class="line">    maxLine = 10,</span><br><span class="line">    ---@type number 最大列数</span><br><span class="line">    maxColumn = 10,</span><br><span class="line">    ---@type number 单次生成的方块数量(上限为4)</span><br><span class="line">    randomBlock = &#123;&#125;,</span><br><span class="line">    ---@type boolean 游戏是否已经开始（点了开始按钮视为游戏开始）</span><br><span class="line">    isGameStart = false,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">local ROPuzzleMapTileData = require(&quot;IQIGame.Module.CommonActivity.RestaurantOperation.ROPuzzleGame.ROPuzzleMapTileData&quot;)</span><br><span class="line"></span><br><span class="line">function m.New(cfgData)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(cfgData)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(cfgData)</span><br><span class="line">    self.score = 0</span><br><span class="line">    self.cfgPuzzleGameControlData = cfgData</span><br><span class="line">    self.tileMaps = self:CreateTiles()</span><br><span class="line">    self.isGameStart = true</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---开始新游戏，创建拼图地图</span><br><span class="line">function m:CreateTiles()</span><br><span class="line">    local tab = &#123;&#125;</span><br><span class="line">    local index = 0</span><br><span class="line">    for line = 1, self.maxLine do</span><br><span class="line">        for column = 1, self.maxColumn do</span><br><span class="line">            index = index + 1</span><br><span class="line">            local tileData = ROPuzzleMapTileData.New(index,line,column,0)</span><br><span class="line">            tab[index] = tileData</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    return tab</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---随机生成四个方块</span><br><span class="line">function m:RefreshRandomBlock()</span><br><span class="line">    self.randomBlock = &#123;&#125;</span><br><span class="line">    local blockGroup = table.clone(self.cfgPuzzleGameControlData.BlockGroup)</span><br><span class="line">    ---洗牌操作</span><br><span class="line">    for i = #blockGroup, 2, -1 do</span><br><span class="line">        local random_index = math.random(i)</span><br><span class="line">        blockGroup[i], blockGroup[random_index] = blockGroup[random_index],blockGroup[i]</span><br><span class="line">    end</span><br><span class="line">    ---根据配置数据取方块</span><br><span class="line">    for i = 1, self.cfgPuzzleGameControlData.BlockNum do</span><br><span class="line">        local id = blockGroup[i]</span><br><span class="line">        table.insert(self.randomBlock,id)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---消除满行满列，并返回消除的行列</span><br><span class="line">---@return number, number[],number[] 消除的总行数，同时消除的行和列</span><br><span class="line">function m:Eliminate()</span><br><span class="line">    local lines = &#123;&#125;</span><br><span class="line">    local columns = &#123;&#125;</span><br><span class="line">    ---行检测</span><br><span class="line">    for i = 1, self.maxLine do</span><br><span class="line">        local isFull = true</span><br><span class="line">        for j = 1, self.maxColumn do</span><br><span class="line">            local pos = (i-1) * self.maxLine + j</span><br><span class="line">            if self.tileMaps[pos].blockId == 0 then</span><br><span class="line">                isFull = false</span><br><span class="line">                break</span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">        if isFull then</span><br><span class="line">            table.insert(lines,i)</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    ---列检测</span><br><span class="line">    for j = 1, self.maxColumn do</span><br><span class="line">        local isFull = true</span><br><span class="line">        for i = 1, self.maxLine do</span><br><span class="line">            local pos = (i-1) * self.maxLine + j</span><br><span class="line">            if self.tileMaps[pos].blockId == 0 then</span><br><span class="line">                isFull = false</span><br><span class="line">                break</span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">        if isFull then</span><br><span class="line">            table.insert(columns,j)</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    local totalNum = #lines + #columns</span><br><span class="line">    return totalNum,lines,columns</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---增加积分</span><br><span class="line">---@param score number</span><br><span class="line">function m:AddScore(score)</span><br><span class="line">    self.score = self.score + score</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---检测方块还有没有空地能放下</span><br><span class="line">---@param blockCell PuzzleGameBlockCell</span><br><span class="line">---@return boolean</span><br><span class="line">function m:CheckBlockCellCanPutDown(blockCell)</span><br><span class="line">    local posTab = blockCell.blockData</span><br><span class="line">    for i, tileData in pairs(self.tileMaps) do</span><br><span class="line">        ---找到了一个空格子</span><br><span class="line">        local canPutDown = false</span><br><span class="line">        if tileData.blockId == 0 then</span><br><span class="line">            ---所有检测点都满足返回true</span><br><span class="line">            for j, pos in pairs(posTab) do</span><br><span class="line"></span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    return false</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>通过调用RefreshRandomBlock()方法，每次随机生成不重复的四个方块</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity连连看小游戏摘要</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-31 16:48:39" itemprop="dateCreated datePublished" datetime="2024-01-31T16:48:39+08:00">2024-01-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-02-05 20:16:10" itemprop="dateModified" datetime="2025-02-05T20:16:10+08:00">2025-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity连连看小游戏摘要" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>用Lua实现Unity连连看游戏要点记录：</p>
+<p>游戏功能描述，通过游戏关卡配置从水果类型中，生成指定类型水果及其数量，位置随机。连线要求最多支持两个拐点，三段线相连通才能消除。</p>
+<h2 id="创建游戏关卡数据结构"><a href="#创建游戏关卡数据结构" class="headerlink" title="- 创建游戏关卡数据结构"></a>- 创建游戏关卡数据结构</h2><p>创建关卡水果数据结构 ROFruitData</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">---水果连连看水果数据</span><br><span class="line">---@class ROFruitData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type number 配置ID</span><br><span class="line">    cid = nil,</span><br><span class="line">    ---@type boolean 是否消除</span><br><span class="line">    isClean = false,</span><br><span class="line">    ---@type number 所在位置</span><br><span class="line">    pos = 0,</span><br><span class="line">    ---@type number 行</span><br><span class="line">    x = 0,</span><br><span class="line">    ---@type number 列</span><br><span class="line">    y = 0,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(cid,clean)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(cid,clean)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(cid,clean)</span><br><span class="line">    self.cid = cid</span><br><span class="line">    self.isClean = clean</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@param pos number</span><br><span class="line">function m:SetPos(pos)</span><br><span class="line">    self.pos = pos</span><br><span class="line">    local x,y = self:GetX_Y()</span><br><span class="line">    self.x = x</span><br><span class="line">    self.y = y</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@return CfgRestaurantOperationFruitListData</span><br><span class="line">function m:GetCfgData()</span><br><span class="line">    if self.cid &gt; 0 then</span><br><span class="line">        return CfgRestaurantOperationFruitListTable[self.cid]</span><br><span class="line">    end</span><br><span class="line">    return nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---通过Pos获取格子位置 (每行10个格子)</span><br><span class="line">---@return number,number  行，列</span><br><span class="line">function m:GetX_Y()</span><br><span class="line">    local x = math.ceil(self.pos / 10)</span><br><span class="line">    local y = self.pos - 10 * (x-1)</span><br><span class="line">    return x,y</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/" class="post-title-link" itemprop="url">钓鱼日记[23.12.16]</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-12-16 20:21:05" itemprop="dateCreated datePublished" datetime="2023-12-16T20:21:05+08:00">2023-12-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-20 22:26:37" itemprop="dateModified" datetime="2023-12-20T22:26:37+08:00">2023-12-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.12.16]" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>12月16日，星期六</p>
+<p>今天是大降温的头一天，寒潮来袭。气温明显比昨天低了好几度，最高温度仅有7度。办完上午的事情后，我决定去河边钓鱼，看看这个寒冷的天气对鱼情的影响。</p>
+<p><img src="https://iili.io/JAcANwl.md.jpg"></p>
+<p><img src="https://iili.io/JAcAcjp.md.jpg"></p>
+<p>来到西来河边，我发现河水已经干涸了。回忆起夏天的时候，河里马口特别多，当时我玩路亚微物，钓上了好多美丽的马口。但是现在水太浅，温度又低，估计没有鱼儿了。况且，上周河边野钓，那么好的环境，水比较深，都没钓到鱼，这让我有些犹豫。于是，我决定改变原计划，去水库钓小红尾。 </p>
+<p><img src="https://iili.io/JAcAX8G.md.jpg"></p>
+<p>到了水库已经过了中午12点。虽然温度很低，但是水温并没有那么冷，感觉还可以。我打开包装袋，准备使用新买的虾拉饵料作钓。钓具方面，我选择了15尺的枯法师，配以小钩和细线。寒风迎面吹来，非常寒冷，水面波浪也相对较大。然而，令我欣喜的是，鱼儿们的咬口非常好。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/" class="post-title-link" itemprop="url">钓鱼日记[23.12.10]</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-12-10 21:01:05" itemprop="dateCreated datePublished" datetime="2023-12-10T21:01:05+08:00">2023-12-10</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -217,7 +777,7 @@
             </span>
 
           
-            <span id="/2023/07/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-16/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.07.16]" title="阅读次数">
+            <span id="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.12.10]" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -232,8 +792,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/07/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-16/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-16/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -248,639 +808,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>又到了令人开心和愉快的周末时光！原本计划这个周末去河边玩路亚微物钓鱼，不过上周下了几天雨，导致河水暴涨，无法安全地玩耍。为了保证安全，我决定改去三一水库钓小鱼，毕竟水库的深度只有大约1.5米，环境也很舒适。</p>
-<p>钓位环境<br><img src="https://iili.io/JH6bHmB.md.jpg"></p>
-<p>我准备了一根6.3米长的钓竿，上面挂玉米，打算用来钓鲤鱼；另外还有一根3.6米短竿，用来钓小鲫鱼。<br><img src="https://iili.io/JH6Dtqu.md.jpg"></p>
+          <p>12月10日，星期天</p>
+<p>今天是一个悠闲的周末，在寿安镇参加完一场热闹的酒席后，午后与表弟满怀期待地踏上了一段探秘之旅，我们的目标是一直传说中的南河旧沙场，那里据说是个钓鱼的好地方。从网络上朋友们晒出的满载而归的照片就可以看出，这里的鱼种颇为丰富。因为距离比较远，一直没有机会前往，幸运的是今天结束酒席我们便在附近，于是决定去实地探探。</p>
+<p><img src="https://iili.io/JuqGTBa.md.jpg"></p>
+<p>第一次踏上这片朴实的乡间，对于指向南河边的路途，我们了解甚少，我与表弟开车沿着曲折蜿蜒的小路前行，朝着心中模糊的目标寻找。沿路的风景如同幅幅静谧的田园画卷，然而美丽背后却隐藏着迷宫般的复杂，好几次我们信心满满地沿一条道路驶入，却不料终结于荒郊的尽头，只得无奈掉头，重新寻找踪迹。我们一次又一次地尝试，转进又转出, 终于在曲折迂回后，一条幽深的小径映入眼帘。摇晃的车辆随着小径的痕迹颠簸前行，终于我们抵达了心中期待已久的钓鱼之地。</p>
+<p><img src="https://iili.io/JuqGCmP.md.jpg"></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/07/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-16/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/07/07/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%9A%E9%A1%B9%E7%9B%AE%E9%87%8D%E5%AE%9A%E5%90%91%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E9%A1%B6%E7%BA%A7%E5%9F%9F%E5%90%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/07/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%9A%E9%A1%B9%E7%9B%AE%E9%87%8D%E5%AE%9A%E5%90%91%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E9%A1%B6%E7%BA%A7%E5%9F%9F%E5%90%8D/" class="post-title-link" itemprop="url">Hexo博客多项目重定向配置多个顶级域名</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-07-07 17:59:34" itemprop="dateCreated datePublished" datetime="2023-07-07T17:59:34+08:00">2023-07-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-20 22:13:48" itemprop="dateModified" datetime="2023-12-20T22:13:48+08:00">2023-12-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">Hexo博客搭建</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/07/07/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%9A%E9%A1%B9%E7%9B%AE%E9%87%8D%E5%AE%9A%E5%90%91%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E9%A1%B6%E7%BA%A7%E5%9F%9F%E5%90%8D/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo博客多项目重定向配置多个顶级域名" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/07/07/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%9A%E9%A1%B9%E7%9B%AE%E9%87%8D%E5%AE%9A%E5%90%91%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E9%A1%B6%E7%BA%A7%E5%9F%9F%E5%90%8D/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/07/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%9A%E9%A1%B9%E7%9B%AE%E9%87%8D%E5%AE%9A%E5%90%91%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E9%A1%B6%E7%BA%A7%E5%9F%9F%E5%90%8D/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="【Hexo】GitHub博客多项目重定向配置多个顶级域名"><a href="#【Hexo】GitHub博客多项目重定向配置多个顶级域名" class="headerlink" title="- 【Hexo】GitHub博客多项目重定向配置多个顶级域名"></a>- 【Hexo】GitHub博客多项目重定向配置多个顶级域名</h2><p>闲来无事用博客名新注册了一个域名：<a href="http://www.bytefisher.top/">www.bytefisher.top</a> 刚开通博客的时候随便注册了一个: <a target="_blank" rel="noopener" href="http://www.ai-fish.top/">www.ai-fish.top</a> 想着新域名和博客名称一致要好记一些，但是也不想直接替换原来的域名，毕竟花了钱买的，不能浪费。就想着给博客同时绑定两个顶级域名，然而GitHub Pages 只支持一个自定义域名，为了要兼容旧域名的访问，在网上一翻搜索查找，还真找到了一些方案：</p>
-<ul>
-<li><p>301重定向</p>
-</li>
-<li><p>服务器重定向</p>
-</li>
-<li><p>GitHub多项目重定向</p>
-</li>
-<li><p>域名注册商重定向</p>
-</li>
-</ul>
-<p>大概看了一下，对于向我这种新手小白，还是觉得GitHub多项目重定向这一方案要简单一些。那就先折腾简单的吧，另外几种方案有机会再尝试。</p>
-<h2 id="建立中转仓库"><a href="#建立中转仓库" class="headerlink" title="- 建立中转仓库"></a>- 建立中转仓库</h2><p>需要在 GitHub 上再新建一个仓库，用来中转旧域名 <a target="_blank" rel="noopener" href="http://www.ai-fish.top/">www.ai-fish.top</a> 中的访问到新的域名 <a href="http://www.bytefisher.top/">www.bytefisher.top</a> 中转仓库里面不会有过多内容。创建它只是为了存放 CNAME 文件 和 404.html文件，告诉 GitHub Pages 我们有两个域名而已。我创建了一个名为ByteFisher的仓库，正常情况下，访问这个仓库 GitHub Pages 的域名前缀为 用户名.github.io&#x2F;ByteFisher<br>图1 创建中转仓库 ByteFisher<br><img src="https://iili.io/HsjuVu1.png"></p>
-<h2 id="添加-GitHub-Pages-服务"><a href="#添加-GitHub-Pages-服务" class="headerlink" title="- 添加 GitHub Pages 服务"></a>- 添加 GitHub Pages 服务</h2><p>图2 中转仓库CNAME文件中填写旧的域名 ：<a target="_blank" rel="noopener" href="http://www.ai-fish.top/">www.ai-fish.top</a><br><img src="https://iili.io/HsjuN6v.png"><br>图3 修改博客主仓库中CNAME文件，填写新的域名：<a href="http://www.bytefisher.top/">www.bytefisher.top</a><br><img src="https://iili.io/Hsjuv8N.png"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/07/07/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%9A%E9%A1%B9%E7%9B%AE%E9%87%8D%E5%AE%9A%E5%90%91%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E9%A1%B6%E7%BA%A7%E5%9F%9F%E5%90%8D/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【继承】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-07-06 17:04:31" itemprop="dateCreated datePublished" datetime="2023-07-06T17:04:31+08:00">2023-07-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-20 22:13:48" itemprop="dateModified" datetime="2023-12-20T22:13:48+08:00">2023-12-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【继承】" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="C-继承"><a href="#C-继承" class="headerlink" title="- C# 继承"></a>- C# 继承</h2><p>继承是面向对象程序设计中最重要的概念之一。继承允许我们根据一个类来定义另一个类，这使得创建和维护应用程序变得更容易。同时也有利于重用代码和节省开发时间。</p>
-<p>当创建一个类时，程序员不需要完全重新编写新的数据成员和成员函数，只需要设计一个新的类，继承了已有的类的成员即可。这个已有的类被称为的基类，这个新的类被称为派生类。</p>
-<p>继承的思想实现了 属于（IS-A） 关系。例如，哺乳动物 属于（IS-A） 动物，狗 属于（IS-A） 哺乳动物，因此狗 属于（IS-A） 动物。</p>
-<h2 id="基类和派生类"><a href="#基类和派生类" class="headerlink" title="- 基类和派生类"></a>- 基类和派生类</h2><p>一个类可以派生自多个类或接口，这意味着它可以从多个基类或接口继承数据和函数。</p>
-<p>C# 中创建派生类的语法如下：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;访问修饰符&gt; class &lt;基类&gt;</span><br><span class="line">&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br><span class="line">class &lt;派生类&gt; : &lt;基类&gt;</span><br><span class="line">&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>假设，有一个基类 Shape，它的派生类是 Rectangle：</p>
-<blockquote>
-<p><strong>实例</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace InheritanceApplication</span><br><span class="line">&#123;</span><br><span class="line">   class Shape</span><br><span class="line">   &#123;</span><br><span class="line">      public void setWidth(int w)</span><br><span class="line">      &#123;</span><br><span class="line">         width = w;</span><br><span class="line">      &#125;</span><br><span class="line">      public void setHeight(int h)</span><br><span class="line">      &#123;</span><br><span class="line">         height = h;</span><br><span class="line">      &#125;</span><br><span class="line">      protected int width;</span><br><span class="line">      protected int height;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   // 派生类</span><br><span class="line">   class Rectangle: Shape</span><br><span class="line">   &#123;</span><br><span class="line">      public int getArea()</span><br><span class="line">      &#123;</span><br><span class="line">         return (width * height);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   class RectangleTester</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         Rectangle Rect = new Rectangle();</span><br><span class="line"></span><br><span class="line">         Rect.setWidth(5);</span><br><span class="line">         Rect.setHeight(7);</span><br><span class="line"></span><br><span class="line">         // 打印对象的面积</span><br><span class="line">         Console.WriteLine(&quot;总面积： &#123;0&#125;&quot;,  Rect.getArea());</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
-<pre><code>总面积： 35
-</code></pre>
-<h2 id="基类的初始化"><a href="#基类的初始化" class="headerlink" title="- 基类的初始化"></a>- 基类的初始化</h2><p>派生类继承了基类的成员变量和成员方法。因此父类对象应在子类对象创建之前被创建。您可以在成员初始化列表中进行父类的初始化。</p>
-<p>下面的程序演示了这点：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B1%BB%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B1%BB%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【类】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-07-06 14:53:51" itemprop="dateCreated datePublished" datetime="2023-07-06T14:53:51+08:00">2023-07-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-20 22:13:48" itemprop="dateModified" datetime="2023-12-20T22:13:48+08:00">2023-12-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B1%BB%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【类】" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B1%BB%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B1%BB%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="C-类（Class）"><a href="#C-类（Class）" class="headerlink" title="- C# 类（Class）"></a>- C# 类（Class）</h2><p>当你定义一个类时，你定义了一个数据类型的蓝图。这实际上并没有定义任何的数据，但它定义了类的名称意味着什么，也就是说，类的对象由什么组成及在这个对象上可执行什么操作。对象是类的实例。构成类的方法和变量称为类的成员。</p>
-<h2 id="类的定义"><a href="#类的定义" class="headerlink" title="- 类的定义"></a>- 类的定义</h2><p>类的定义是以关键字 class 开始，后跟类的名称。类的主体，包含在一对花括号内。下面是类定义的一般形式：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;access specifier&gt; class  class_name</span><br><span class="line">&#123;</span><br><span class="line">    // member variables</span><br><span class="line">    &lt;access specifier&gt; &lt;data type&gt; variable1;</span><br><span class="line">    &lt;access specifier&gt; &lt;data type&gt; variable2;</span><br><span class="line">    ...</span><br><span class="line">    &lt;access specifier&gt; &lt;data type&gt; variableN;</span><br><span class="line">    // member methods</span><br><span class="line">    &lt;access specifier&gt; &lt;return type&gt; method1(parameter_list)</span><br><span class="line">    &#123;</span><br><span class="line">        // method body</span><br><span class="line">    &#125;</span><br><span class="line">    &lt;access specifier&gt; &lt;return type&gt; method2(parameter_list)</span><br><span class="line">    &#123;</span><br><span class="line">        // method body</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">    &lt;access specifier&gt; &lt;return type&gt; methodN(parameter_list)</span><br><span class="line">    &#123;</span><br><span class="line">        // method body</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>请注意：</p>
-<ul>
-<li><p>访问标识符 <access specifier> 指定了对类及其成员的访问规则。如果没有指定，则使用默认的访问标识符。类的默认访问标识符是 internal，成员的默认访问标识符是 private。</p>
-</li>
-<li><p>数据类型 <data type> 指定了变量的类型，返回类型 <return type> 指定了返回的方法返回的数据类型。</p>
-</li>
-<li><p>如果要访问类的成员，你要使用点（.）运算符。</p>
-</li>
-<li><p>点运算符链接了对象的名称和成员的名称。</p>
-</li>
-</ul>
-<p>下面的实例说明了目前为止所讨论的概念：</p>
-<blockquote>
-<p><strong>实例</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace BoxApplication</span><br><span class="line">&#123;</span><br><span class="line">    class Box</span><br><span class="line">    &#123;</span><br><span class="line">       public double length;   // 长度</span><br><span class="line">       public double breadth;  // 宽度</span><br><span class="line">       public double height;   // 高度</span><br><span class="line">    &#125;</span><br><span class="line">    class Boxtester</span><br><span class="line">    &#123;</span><br><span class="line">        static void Main(string[] args)</span><br><span class="line">        &#123;</span><br><span class="line">            Box Box1 = new Box();        // 声明 Box1，类型为 Box</span><br><span class="line">            Box Box2 = new Box();        // 声明 Box2，类型为 Box</span><br><span class="line">            double volume = 0.0;         // 体积</span><br><span class="line"></span><br><span class="line">            // Box1 详述</span><br><span class="line">            Box1.height = 5.0;</span><br><span class="line">            Box1.length = 6.0;</span><br><span class="line">            Box1.breadth = 7.0;</span><br><span class="line"></span><br><span class="line">            // Box2 详述</span><br><span class="line">            Box2.height = 10.0;</span><br><span class="line">            Box2.length = 12.0;</span><br><span class="line">            Box2.breadth = 13.0;</span><br><span class="line">           </span><br><span class="line">            // Box1 的体积</span><br><span class="line">            volume = Box1.height * Box1.length * Box1.breadth;</span><br><span class="line">            Console.WriteLine(&quot;Box1 的体积： &#123;0&#125;&quot;,  volume);</span><br><span class="line"></span><br><span class="line">            // Box2 的体积</span><br><span class="line">            volume = Box2.height * Box2.length * Box2.breadth;</span><br><span class="line">            Console.WriteLine(&quot;Box2 的体积： &#123;0&#125;&quot;, volume);</span><br><span class="line">            Console.ReadKey();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B1%BB%E3%80%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%9E%9A%E4%B8%BE%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%9E%9A%E4%B8%BE%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【枚举】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-07-04 16:43:12" itemprop="dateCreated datePublished" datetime="2023-07-04T16:43:12+08:00">2023-07-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-20 22:13:48" itemprop="dateModified" datetime="2023-12-20T22:13:48+08:00">2023-12-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%9E%9A%E4%B8%BE%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【枚举】" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%9E%9A%E4%B8%BE%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%9E%9A%E4%B8%BE%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="C-枚举（Enum）"><a href="#C-枚举（Enum）" class="headerlink" title="- C# 枚举（Enum）"></a>- C# 枚举（Enum）</h2><p>枚举是一组命名整型常量。枚举类型是使用 enum 关键字声明的。</p>
-<p>C# 枚举是值类型。换句话说，枚举包含自己的值，且不能继承或传递继承。</p>
-<p>枚举类名建议带上 Enum 后缀，枚举成员名称需要全大写，单词间用下划线隔开。</p>
-<p>说明： 枚举其实就是特殊的常量类，且构造方法被默认强制是私有。</p>
-<p>正例： 枚举名字： DealStatusEnum， 成员名称： SUCCESS &#x2F; UNKOWN_REASON</p>
-<h2 id="声明-enum-变量"><a href="#声明-enum-变量" class="headerlink" title="- 声明 enum 变量"></a>- 声明 enum 变量</h2><p>声明枚举的一般语法：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">enum &lt;enum_name&gt;</span><br><span class="line">&#123; </span><br><span class="line">    enumeration list </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>其中，</p>
-<pre><code>enum_name 指定枚举的类型名称。
-enumeration list 是一个用逗号分隔的标识符列表。
-</code></pre>
-<p>枚举列表中的每个符号代表一个整数值，一个比它前面的符号大的整数值。默认情况下，第一个枚举符号的值是 0.例如：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">enum Days &#123; Sun, Mon, tue, Wed, thu, Fri, Sat &#125;;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>下面的实例演示了枚举变量的用法：</p>
-<blockquote>
-<p><strong>实例</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">public class EnumTest</span><br><span class="line">&#123;</span><br><span class="line">    enum Day &#123; Sun, Mon, Tue, Wed, Thu, Fri, Sat &#125;;</span><br><span class="line"></span><br><span class="line">    static void Main()</span><br><span class="line">    &#123;</span><br><span class="line">        int x = (int)Day.Sun;</span><br><span class="line">        int y = (int)Day.Fri;</span><br><span class="line">        Console.WriteLine(&quot;Sun = &#123;0&#125;&quot;, x);</span><br><span class="line">        Console.WriteLine(&quot;Fri = &#123;0&#125;&quot;, y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%9E%9A%E4%B8%BE%E3%80%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%93%E6%9E%84%E4%BD%93Struct%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%93%E6%9E%84%E4%BD%93Struct%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【结构体Struct】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-07-04 15:36:43" itemprop="dateCreated datePublished" datetime="2023-07-04T15:36:43+08:00">2023-07-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-20 22:13:48" itemprop="dateModified" datetime="2023-12-20T22:13:48+08:00">2023-12-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%93%E6%9E%84%E4%BD%93Struct%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【结构体Struct】" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%93%E6%9E%84%E4%BD%93Struct%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%93%E6%9E%84%E4%BD%93Struct%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="C-结构体（Struct）"><a href="#C-结构体（Struct）" class="headerlink" title="- C# 结构体（Struct）"></a>- C# 结构体（Struct）</h2><p>在 C# 中，结构体是值类型数据结构。它使得一个单一变量可以存储各种数据类型的相关数据。struct 关键字用于创建结构体。</p>
-<p>结构体是用来代表一个记录。假设您想跟踪图书馆中书的动态。您可能想跟踪每本书的以下属性：</p>
-<ul>
-<li><p>Title</p>
-</li>
-<li><p>Author</p>
-</li>
-<li><p>Subject</p>
-</li>
-<li><p>Book ID</p>
-</li>
-</ul>
-<h2 id="定义结构体"><a href="#定义结构体" class="headerlink" title="- 定义结构体"></a>- 定义结构体</h2><p>为了定义一个结构体，您必须使用 struct 语句。struct 语句为程序定义了一个带有多个成员的新的数据类型。</p>
-<p>例如，您可以按照如下的方式声明 Book 结构：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct Books</span><br><span class="line">&#123;</span><br><span class="line">   public string title;</span><br><span class="line">   public string author;</span><br><span class="line">   public string subject;</span><br><span class="line">   public int book_id;</span><br><span class="line">&#125;;  </span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>下面的程序演示了结构的用法：</p>
-<blockquote>
-<p><strong>实例</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.Text;</span><br><span class="line">     </span><br><span class="line">struct Books</span><br><span class="line">&#123;</span><br><span class="line">   public string title;</span><br><span class="line">   public string author;</span><br><span class="line">   public string subject;</span><br><span class="line">   public int book_id;</span><br><span class="line">&#125;;  </span><br><span class="line"></span><br><span class="line">public class testStructure</span><br><span class="line">&#123;</span><br><span class="line">   public static void Main(string[] args)</span><br><span class="line">   &#123;</span><br><span class="line"></span><br><span class="line">      Books Book1;        /* 声明 Book1，类型为 Books */</span><br><span class="line">      Books Book2;        /* 声明 Book2，类型为 Books */</span><br><span class="line"></span><br><span class="line">      /* book 1 详述 */</span><br><span class="line">      Book1.title = &quot;C Programming&quot;;</span><br><span class="line">      Book1.author = &quot;Nuha Ali&quot;;</span><br><span class="line">      Book1.subject = &quot;C Programming Tutorial&quot;;</span><br><span class="line">      Book1.book_id = 6495407;</span><br><span class="line"></span><br><span class="line">      /* book 2 详述 */</span><br><span class="line">      Book2.title = &quot;Telecom Billing&quot;;</span><br><span class="line">      Book2.author = &quot;Zara Ali&quot;;</span><br><span class="line">      Book2.subject =  &quot;Telecom Billing Tutorial&quot;;</span><br><span class="line">      Book2.book_id = 6495700;</span><br><span class="line"></span><br><span class="line">      /* 打印 Book1 信息 */</span><br><span class="line">      Console.WriteLine( &quot;Book 1 title : &#123;0&#125;&quot;, Book1.title);</span><br><span class="line">      Console.WriteLine(&quot;Book 1 author : &#123;0&#125;&quot;, Book1.author);</span><br><span class="line">      Console.WriteLine(&quot;Book 1 subject : &#123;0&#125;&quot;, Book1.subject);</span><br><span class="line">      Console.WriteLine(&quot;Book 1 book_id :&#123;0&#125;&quot;, Book1.book_id);</span><br><span class="line"></span><br><span class="line">      /* 打印 Book2 信息 */</span><br><span class="line">      Console.WriteLine(&quot;Book 2 title : &#123;0&#125;&quot;, Book2.title);</span><br><span class="line">      Console.WriteLine(&quot;Book 2 author : &#123;0&#125;&quot;, Book2.author);</span><br><span class="line">      Console.WriteLine(&quot;Book 2 subject : &#123;0&#125;&quot;, Book2.subject);</span><br><span class="line">      Console.WriteLine(&quot;Book 2 book_id : &#123;0&#125;&quot;, Book2.book_id);      </span><br><span class="line"></span><br><span class="line">      Console.ReadKey();</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
-<pre><code>Book 1 title : C Programming
-Book 1 author : Nuha Ali
-Book 1 subject : C Programming Tutorial
-Book 1 book_id : 6495407
-Book 2 title : Telecom Billing
-Book 2 author : Zara Ali
-Book 2 subject : Telecom Billing Tutorial
-Book 2 book_id : 6495700
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%93%E6%9E%84%E4%BD%93Struct%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -903,7 +838,7 @@ Book 2 book_id : 6495700
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -971,7 +906,7 @@ Book 2 book_id : 6495700
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">76</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1034,7 +969,7 @@ Book 2 book_id : 6495700
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
