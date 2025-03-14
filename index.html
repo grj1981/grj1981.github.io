@@ -139,7 +139,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">68</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">77</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -173,7 +173,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/03/14/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90DOTween%E5%BA%93%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -187,7 +187,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/" class="post-title-link" itemprop="url">Unity3D游戏开发异步编程UniTask和Task</a>
+            <a href="/2025/03/14/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90DOTween%E5%BA%93%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【DOTween库】</a>
         </h2>
 
         <div class="post-meta">
@@ -198,17 +198,13 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-01-22 11:11:59 / 修改时间：13:14:24" itemprop="dateCreated datePublished" datetime="2025-01-22T11:11:59+08:00">2025-01-22</time>
+              <time title="创建时间：2025-03-14 16:52:24 / 修改时间：17:13:41" itemprop="dateCreated datePublished" datetime="2025-03-14T16:52:24+08:00">2025-03-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
-                </span>
-                  ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
@@ -219,7 +215,7 @@
             </span>
 
           
-            <span id="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3D游戏开发异步编程UniTask和Task" title="阅读次数">
+            <span id="/2025/03/14/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90DOTween%E5%BA%93%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【DOTween库】" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -234,8 +230,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/" itemprop="commentCount"></span>
+    <a title="valine" href="/2025/03/14/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90DOTween%E5%BA%93%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/03/14/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90DOTween%E5%BA%93%E3%80%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -250,27 +246,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="await-关键字"><a href="#await-关键字" class="headerlink" title="await 关键字"></a><strong>await 关键字</strong></h1><p>在C#编程中，await 关键字用于异步编程，它通常与 async 关键字一起使用。await 用于暂停当前方法的执行，直到等待的异步任务完成。这样可以在不阻塞主线程的情况下执行耗时操作，如I&#x2F;O操作或网络请求。</p>
-<p>例如，假设有一个异步方法 GetDataAsync()，你可以这样使用 await：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public async Task&lt;string&gt; FetchDataAsync()</span><br><span class="line">&#123;</span><br><span class="line">    // 假设 GetDataAsync 是一个返回 Task&lt;string&gt; 的异步方法</span><br><span class="line">    string data = await GetDataAsync();</span><br><span class="line">    return data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="DOTween-库详细用法教程"><a href="#DOTween-库详细用法教程" class="headerlink" title="DOTween 库详细用法教程"></a>DOTween 库详细用法教程</h1><p>DOTween 是一个用于 Unity 的强大且灵活的动画库，它使用链式语法来创建和控制动画，使得代码更加简洁和易读。下面详细介绍 DOTween 的用法。</p>
+<h1 id="安装-DOTween"><a href="#安装-DOTween" class="headerlink" title="安装 DOTween"></a>安装 DOTween</h1><p>你可以通过 Unity 的包管理器来安装 DOTween。步骤如下：</p>
+<p>打开 Unity 的 Package Manager（可以通过 Window -&gt; Package Manager 打开）。<br>点击左上角的 “+” 按钮，然后选择 Add package from git URL。<br>在弹出的窗口中输入 DOTween 的 Git URL：<a target="_blank" rel="noopener" href="https://github.com/Demigiant/dotween.git%E3%80%82">https://github.com/Demigiant/dotween.git。</a><br>点击 Add 按钮完成安装。</p>
+<h1 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h1><h2 id="插值动画（Tweening）"><a href="#插值动画（Tweening）" class="headerlink" title="插值动画（Tweening）"></a>插值动画（Tweening）</h2><p>使用 DOTween.To、DOTween.From、DOTween.ToX 等方法来创建动画，这些方法通常需要起始值、结束值、动画持续时间和更新频率。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DOTween.To(() =&gt; ump.fValue, fv =&gt; ump.fValue = fv, 1f, 3f);</span><br><span class="line">DiffCopyInsert</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>在这个例子中，await GetDataAsync() 会暂停 FetchDataAsync 方法的执行，直到 GetDataAsync 完成并返回结果。同时，控制权会返回给调用者，允许程序继续执行其他操作。</p>
-<p>在C#中使用await时，有几个关键要点需要注意，以确保异步代码的正确性和高效性：</p>
-<h2 id="async-方法必须返回-Task-或-Task"><a href="#async-方法必须返回-Task-或-Task" class="headerlink" title="async 方法必须返回 Task 或 Task&lt;T&gt;"></a>async 方法必须返回 Task 或 Task&lt;T&gt;</h2><p>使用 await 的方法必须标记为 async，并且返回类型应为 Task（无返回值）或 Task&lt;T&gt;（有返回值）。</p>
-<p>例如：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public async Task&lt;int&gt; CalculateAsync()</span><br><span class="line">&#123;</span><br><span class="line">    await Task.Delay(1000); // 模拟耗时操作</span><br><span class="line">    return 42;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这行代码的意思是从 ump.fValue 的当前值开始到 1f 的值，持续时间为 3 秒，每帧更新。ump.fValue 是一个属性或字段，fv &#x3D;&gt; ump.fValue &#x3D; fv 是一个回调函数，用于设置 ump.fValue 的值为动画计算出的新值。</p>
+<h2 id="链式语法"><a href="#链式语法" class="headerlink" title="链式语法"></a>链式语法</h2><p>DOTween 的动画可以使用链式语法来添加更多的配置，例如 SetTarget、SetLink 等。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">await tweener.SetTarget(ump).SetLink(fog).GetAwaiter();</span><br></pre></td></tr></table></figure>
 </code></pre>
-<h2 id="避免阻塞调用"><a href="#避免阻塞调用" class="headerlink" title="避免阻塞调用"></a>避免阻塞调用</h2><p>不要在 async 方法中使用 .Result 或 .Wait()，这会导致死锁或阻塞线程。</p>
-<p>例如，避免以下写法：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var result = SomeAsyncMethod().Result; // 错误：可能导致死锁</span><br></pre></td></tr></table></figure>
+<p>这行代码首先设置了动画的目标对象为 ump，然后设置了动画的链接对象为 fog。链接对象的作用是当链接对象被销毁时，动画也会自动停止。GetAwaiter() 用于将动画变为异步等待对象。</p>
+<h2 id="等待动画完成"><a href="#等待动画完成" class="headerlink" title="等待动画完成"></a>等待动画完成</h2><p>你可以使用 await 来等待动画完成。AwaitForComplete() 是一个扩展方法，用于等待 DOTween 动画完成。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">await td.AwaitForComplete();</span><br></pre></td></tr></table></figure>
 </code></pre>
-<h2 id="正确处理异常"><a href="#正确处理异常" class="headerlink" title="正确处理异常"></a>正确处理异常</h2><p>异步方法中的异常会被包装在 Task 中，可以通过 try-catch 捕获。</p>
-<p>例如：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">try</span><br><span class="line">&#123;</span><br><span class="line">    await SomeAsyncMethod();</span><br><span class="line">&#125;</span><br><span class="line">catch (Exception ex)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine($&quot;Error: &#123;ex.Message&#125;&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
+<p>这行代码会暂停当前协程，直到动画 td 完成。</p>
+<h2 id="销毁对象"><a href="#销毁对象" class="headerlink" title="销毁对象"></a>销毁对象</h2>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/#more" rel="contents">
+              <a class="btn" href="/2025/03/14/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90DOTween%E5%BA%93%E3%80%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -294,7 +288,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/12/06/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%BB%84%E4%BB%B6/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -308,7 +302,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/12/06/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%BB%84%E4%BB%B6/" class="post-title-link" itemprop="url">Unity3D游戏引擎组件</a>
+            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【集合Collection】</a>
         </h2>
 
         <div class="post-meta">
@@ -319,7 +313,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-12-06 11:59:03 / 修改时间：18:09:57" itemprop="dateCreated datePublished" datetime="2024-12-06T11:59:03+08:00">2024-12-06</time>
+              <time title="创建时间：2025-02-05 17:46:14 / 修改时间：18:54:48" itemprop="dateCreated datePublished" datetime="2025-02-05T17:46:14+08:00">2025-02-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -327,7 +321,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -336,7 +330,7 @@
             </span>
 
           
-            <span id="/2024/12/06/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%BB%84%E4%BB%B6/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3D游戏引擎组件" title="阅读次数">
+            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【集合Collection】" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -351,8 +345,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2024/12/06/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%BB%84%E4%BB%B6/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/12/06/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%BB%84%E4%BB%B6/" itemprop="commentCount"></span>
+    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -367,26 +361,85 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Mesh-网格"><a href="#Mesh-网格" class="headerlink" title="Mesh 网格"></a>Mesh 网格</h1><h2 id="Mesh-Filter"><a href="#Mesh-Filter" class="headerlink" title="Mesh Filter"></a>Mesh Filter</h2><p>官方手册地址：<a target="_blank" rel="noopener" href="https://docs.unity3d.com/cn/current/Manual/class-MeshFilter.html">Mesh Filter</a></p>
-<p>Mesh Filter 组件包含对网格的引用。该组件与同一个游戏对象上的 Mesh Renderer 组件配合使用；Mesh Renderer 组件渲染 Mesh Filt组件引用的网格。用于将网格数据应用到 3D 模型上。它是实现 3D 模型的重要组成部分之一，可以定义模型的形状和结构。</p>
-<p>Mesh Filter 可以将网格数据应用到 3D 模型上，从而定义模型的形状和结构。它通过读取网格数据，包括顶点、三角形面片等信息，来定义模的形状和结构。这些网格数据可以通过外部工具（例如 Blender、Maya 等）创建，也可以通过代码动态生成。</p>
-<p>Mesh Filter 提供了许多属性和方法，例如网格数据、法线、UV 坐标等，可以用来控制模型的形状和结构。另外，Mesh Filter<br>还支持动态修改网格数据，从而实现更加灵活的模型变形效果。</p>
-<h2 id="Mesh-Renderer"><a href="#Mesh-Renderer" class="headerlink" title="Mesh Renderer"></a>Mesh Renderer</h2><p>官方手册地址：<a target="_blank" rel="noopener" href="https://docs.unity3d.com/cn/current/Manual/class-MeshRenderer.html">Mesh Renderer</a></p>
-<p>Mesh Renderer 组件用于渲染网格。该组件与同一个游戏对象上的 Mesh Filter 组件配合使用；Mesh Renderer 组件渲染 Mesh Filter 组件引用的网格。</p>
-<p>用于将 3D 模型渲染到屏幕上。它是游戏中 3D 模型的重要组成部分之一，可以让游戏中的角色、场景和物品等立体化呈现。</p>
-<h2 id="Skinned-Mesh-Renderer"><a href="#Skinned-Mesh-Renderer" class="headerlink" title="Skinned Mesh Renderer"></a>Skinned Mesh Renderer</h2><p>官方手册地址：<a target="_blank" rel="noopener" href="https://docs.unity3d.com/cn/current/Manual/class-SkinnedMeshRenderer.html">Skinned Mesh Renderer</a></p>
-<p>Skinned Mesh Renderer 组件渲染一个可变形的网格。可变形网格包括蒙皮网格（具有骨骼和绑定姿势的网格）、具有混合形状的网格和运行布料模拟的网格。用于将骨骼动画应用到 3D 模型上。它是实现角色动画的重要组件之一，可以让游戏角色在运动中更加自然和流畅。</p>
-<p>Skinned Mesh Renderer 可以在 3D 模型上应用骨骼动画，使得模型能够根据动画数据进行变形，从而实现角色的动画效果。它使用骨骼系统来管理骨骼和骨骼权重，并将这些信息应用到 3D 模型上，从而实现动画的变形效果。</p>
-<p>Skinned Mesh Renderer 提供了许多属性和方法，例如骨骼系统、骨骼权重、动画剪辑、动画速度等，可以用来控制动画的播放和效果。另外，Skinned Mesh Renderer 还支持动态修改骨骼权重，从而实现更加灵活的动画效果。</p>
-<p>Skinned Mesh Renderer 是 Unity 中实现角色动画的重要组件之一，可以让游戏角色在运动中更加自然和流畅。它是游戏开发中不可或缺的工具，可以提高游戏的可玩性和视觉效果。</p>
-<h2 id="Text-Mesh"><a href="#Text-Mesh" class="headerlink" title="Text Mesh"></a>Text Mesh</h2><p>官方手册地址：<a target="_blank" rel="noopener" href="https://docs.unity3d.com/cn/current/Manual/class-TextMesh.html">Text Mesh</a></p>
-<p>用于将文本转换为 3D 网格，以便进行高效的渲染和交互。与 Unity 自带的 Text 组件和 TextMeshPro-Text 组件相比，Text Mesh 更加轻量级和高效，适用于需要大量文本渲染的场景。</p>
-<p>Text Mesh 可以用来渲染各种文本内容，例如游戏中的标签、计分板、物品名称等等。它能够将文本转换为 3D 网格，并使用 GPU 进行加速渲染，从而能够高效地处理大量文本内容。</p>
-<p>Text Mesh 组件提供了许多属性，例如字体、字体大小、颜色、对齐方式、行距、字间距等，可以用来调整文本的排版和格式化。另外，Text Mesh 还支持动态生成文本，可以通过代码来实现动态更新文本内容，从而满足游戏中各种动态文本渲染需求。</p>
-<p>Text Mesh 是 Unity 中非常高效的文本渲染组件，适用于需要大量文本渲染的场景，例如大量的标签、计分板、物品名称等等。</p>
+          <h1 id="C-集合（Collection）"><a href="#C-集合（Collection）" class="headerlink" title="C# 集合（Collection）"></a><strong>C# 集合（Collection）</strong></h1><p>集合（Collection）类是专门用于数据存储和检索的类。这些类提供了对栈（stack）、队列（queue）、列表（list）和哈希表（hash table）的支持。大多数集合类实现了相同的接口。</p>
+<p>集合（Collection）类服务于不同的目的，如为元素动态分配内存，基于索引访问列表项等等。这些类创建 Object 类的对象的集合。在 C# 中，Object 类是所有数据类型的基类。</p>
+<h1 id="动态数组（ArrayList）"><a href="#动态数组（ArrayList）" class="headerlink" title="动态数组（ArrayList）"></a><strong>动态数组（ArrayList）</strong></h1><p>它代表了可被单独索引的对象的有序集合。<br>它基本上可以替代一个数组。但是，与数组不同的是，您可以使用索引在指定的位置添加和移除项目，动态数组会自动重新调整它的大小。它也允许在列表中进行动态内存分配、增加、搜索、排序各项。</p>
+<h2 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h2><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayList : ICollection, IEnumerable, IList, ICloneable</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>实现接口：</p>
+<ul>
+<li><p>IList：支持按索引访问元素。</p>
+</li>
+<li><p>ICollection：支持集合基本操作，如添加、删除和计数。</p>
+</li>
+<li><p>IEnumerable：支持通过枚举器遍历元素。</p>
+</li>
+<li><p>ICloneable：支持克隆 ArrayList。</p>
+</li>
+</ul>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><h3 id="动态扩展"><a href="#动态扩展" class="headerlink" title="动态扩展"></a>动态扩展</h3><ul>
+<li><p>ArrayList 的容量可以根据需要自动调整，不需要指定固定大小。</p>
+</li>
+<li><p>当添加的元素超过当前容量时，ArrayList 会自动增加容量（通常是原容量的两倍）。</p>
+</li>
+</ul>
+<h3 id="非泛型集合"><a href="#非泛型集合" class="headerlink" title="非泛型集合"></a>非泛型集合</h3><ul>
+<li>ArrayList 是非泛型集合，所有元素被存储为 object 类型。这意味着它可以存储任意类型的对象，但需要注意装箱（boxing）和拆箱（unboxing）的性能影响。</li>
+</ul>
+<h3 id="无序操作"><a href="#无序操作" class="headerlink" title="无序操作"></a>无序操作</h3><ul>
+<li>虽然元素存储顺序与添加顺序一致，但它并不提供内置排序功能。</li>
+</ul>
+<h3 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h3><ul>
+<li>默认不是线程安全的。如果需要线程安全的 ArrayList，可以使用 ArrayList.Synchronized 方法生成一个线程安全的版本。<br>ArrayList 类的方法和属性</li>
+</ul>
+<p>下表列出了 ArrayList 类的一些常用的 属性：</p>
+<pre><code>属性名称	类型	描述
+
+Count	int	获取 ArrayList 中包含的元素数量。
+Capacity	int	获取或设置 ArrayList 的容量（存储空间）。
+IsFixedSize	bool	指示 ArrayList 是否具有固定大小。
+IsReadOnly	bool	指示 ArrayList 是否为只读。
+IsSynchronized	bool	指示 ArrayList 是否线程安全。
+SyncRoot	object	获取可用于同步访问的对象。
+</code></pre>
+<p>下表列出了 ArrayList 类的一些常用的 方法：</p>
+<p>方法名称	返回类型	描述</p>
+<pre><code>添加与插入	
+ 
+Add(object value)	int	将对象添加到 ArrayList 的末尾，返回新元素的索引。
+AddRange(ICollection c)	void	将指定集合的所有元素添加到 ArrayList 的末尾。
+Insert(int index, object value)	void	在指定索引处插入对象。
+InsertRange(int index, ICollection c)	void	在指定索引处插入指定集合的所有元素。
+
+删除		
+
+Remove(object value)	void	移除首次出现的指定对象。
+RemoveAt(int index)	void	移除指定索引处的元素。
+RemoveRange(int index, int count)	void	移除从指定索引开始的指定数量的元素。
+Clear()	void	移除所有元素。
+
+访问与查询		
+
+Contains(object item)	bool	判断 ArrayList 是否包含指定对象。
+IndexOf(object value)	int	获取指定对象首次出现的索引。
+LastIndexOf(object value)	int	获取指定对象最后一次出现的索引。
+
+排序与复制		
+
+Sort()	void	按照默认顺序排序 ArrayList 中的元素。
+Sort(IComparer comparer)	void	按照自定义比较器排序。
+Reverse()	void	反转 ArrayList 中元素的顺序。
+CopyTo(Array array)	void	将 ArrayList 的元素复制到指定数组中。
+
+其他
+    
+GetRange(int index, int count)	ArrayList	获取从指定索引开始的指定数量的元素子集。
+ToArray()	object[]	将 ArrayList 中的元素复制到数组中。
+TrimToSize()	void	将容量调整为实际元素数量以节省内存。
+</code></pre>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/12/06/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%BB%84%E4%BB%B6/#more" rel="contents">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -410,7 +463,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%BA%8B%E4%BB%B6Event%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -424,7 +477,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/" class="post-title-link" itemprop="url">Unity3DRigidbody2D使用与优化</a>
+            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%BA%8B%E4%BB%B6Event%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【事件Event】</a>
         </h2>
 
         <div class="post-meta">
@@ -435,7 +488,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-12-06 11:09:12 / 修改时间：11:37:51" itemprop="dateCreated datePublished" datetime="2024-12-06T11:09:12+08:00">2024-12-06</time>
+              <time title="创建时间：2025-02-05 16:43:10 / 修改时间：17:44:00" itemprop="dateCreated datePublished" datetime="2025-02-05T16:43:10+08:00">2025-02-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -443,7 +496,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -452,7 +505,7 @@
             </span>
 
           
-            <span id="/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3DRigidbody2D使用与优化" title="阅读次数">
+            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%BA%8B%E4%BB%B6Event%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【事件Event】" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -467,8 +520,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/" itemprop="commentCount"></span>
+    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%BA%8B%E4%BB%B6Event%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%BA%8B%E4%BB%B6Event%E3%80%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -483,32 +536,38 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="移动"><a href="#移动" class="headerlink" title="移动"></a>移动</h1><p>当gameobject被加上rigidbody2d组件时，如果想移动它，不要这样写：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">void Update()</span><br><span class="line">&#123;</span><br><span class="line">	this.transform.Translate (Vector3.left * speed * Time.deltaTime);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="C-事件（Event）"><a href="#C-事件（Event）" class="headerlink" title="C# 事件（Event）"></a><strong>C# 事件（Event）</strong></h1><p>C# 事件（Event）是一种成员，用于将特定的事件通知发送给订阅者。事件通常用于实现观察者模式，它允许一个对象将状态的变化通知其他对象，而不需要知道这些对象的细节。</p>
+<p><strong>事件（Event）</strong> </p>
+<p>基本上说是一个用户操作，如按键、点击、鼠标移动等等，或者是一些提示信息，如系统生成的通知。应用程序需要在事件发生时响应事件。例如，中断。</p>
+<p>C# 中使用事件机制实现线程间的通信。</p>
+<p><strong>关键点</strong></p>
+<ul>
+<li><p>声明委托：定义事件将使用的委托类型。委托是一个函数签名。</p>
+</li>
+<li><p>声明事件：使用 event 关键字声明一个事件。</p>
+</li>
+<li><p>触发事件：在适当的时候调用事件，通知所有订阅者。</p>
+</li>
+<li><p>订阅和取消订阅事件：其他类可以通过 +&#x3D; 和 -&#x3D; 运算符订阅和取消订阅事件。</p>
+</li>
+</ul>
+<h1 id="通过事件使用委托"><a href="#通过事件使用委托" class="headerlink" title="通过事件使用委托"></a><strong>通过事件使用委托</strong></h1><p>事件在类中声明且生成，且通过使用同一个类或其他类中的委托与事件处理程序关联。包含事件的类用于发布事件。这被称为 发布器（publisher） 类。其他接受该事件的类被称为 订阅器（subscriber） 类。事件使用 发布-订阅（publisher-subscriber） 模型。</p>
+<p><strong>发布器（publisher）</strong> 是一个包含事件和委托定义的对象。事件和委托之间的联系也定义在这个对象中。发布器（publisher）类的对象调用这个事件，并通知其他的对象。</p>
+<p><strong>订阅器（subscriber）</strong> 是一个接受事件并提供事件处理程序的对象。在发布器（publisher）类中的委托调用订阅器（subscriber）类中的方法（事件处理程序）。</p>
+<h1 id="声明事件（Event）"><a href="#声明事件（Event）" class="headerlink" title="声明事件（Event）"></a><strong>声明事件（Event）</strong></h1><p>在类的内部声明事件，首先必须声明该事件的委托类型。例如：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public delegate void BoilerLogHandler(string status);</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>这种写法，主要针对无rigidbody2d的gameobject对象，否则，性能很差。<br>正确的写法：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void FixedUpdate()</span><br><span class="line">&#123;</span><br><span class="line">	rigidbody2D.MovePosition (rigidbody2D.position + Vector2.left * speed * Time.fixedDeltaTime);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void Start () </span><br><span class="line">&#123;</span><br><span class="line">	rigidbody2D.velocity = Vector2.left * speed;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后，声明事件本身，使用 event 关键字：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 基于上面的委托定义事件</span><br><span class="line">public event BoilerLogHandler BoilerEventLog;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<h1 id="Body-Type属性"><a href="#Body-Type属性" class="headerlink" title="Body Type属性"></a>Body Type属性</h1><p>rigidbody2d最为重要的一个属性，不同的选项，不同的物理效果：</p>
-<h2 id="Dynamic（动态的）"><a href="#Dynamic（动态的）" class="headerlink" title="Dynamic（动态的）"></a>Dynamic（动态的）</h2><pre><code>具有完全的物理特性；
-会与所有类型的Rigidbody2D进行碰撞；
-是最常用的Rigidbody2D类型、也是默认的类型；
-是最耗费性能的类型；
+<p>上面的代码定义了一个名为 BoilerLogHandler 的委托和一个名为 BoilerEventLog 的事件，该事件在生成的时候会调用委托。</p>
+<p>以下示例展示了如何在 C# 中使用事件：</p>
+<p><strong>&gt; 实例:</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">namespace EventDemo</span><br><span class="line">&#123;</span><br><span class="line">    // 定义一个委托类型，用于事件处理程序</span><br><span class="line">    public delegate void NotifyEventHandler(object sender, EventArgs e);</span><br><span class="line"></span><br><span class="line">    // 发布者类</span><br><span class="line">    public class ProcessBusinessLogic</span><br><span class="line">    &#123;</span><br><span class="line">        // 声明事件</span><br><span class="line">        public event NotifyEventHandler ProcessCompleted;</span><br><span class="line"></span><br><span class="line">        // 触发事件的方法</span><br><span class="line">        protected virtual void OnProcessCompleted(EventArgs e)</span><br><span class="line">        &#123;</span><br><span class="line">            ProcessCompleted?.Invoke(this, e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 模拟业务逻辑过程并触发事件</span><br><span class="line">        public void StartProcess()</span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(&quot;Process Started!&quot;);</span><br><span class="line"></span><br><span class="line">            // 这里可以加入实际的业务逻辑</span><br><span class="line"></span><br><span class="line">            // 业务逻辑完成，触发事件</span><br><span class="line">            OnProcessCompleted(EventArgs.Empty);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 订阅者类</span><br><span class="line">    public class EventSubscriber</span><br><span class="line">    &#123;</span><br><span class="line">        public void Subscribe(ProcessBusinessLogic process)</span><br><span class="line">        &#123;</span><br><span class="line">            process.ProcessCompleted += Process_ProcessCompleted;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        private void Process_ProcessCompleted(object sender, EventArgs e)</span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(&quot;Process Completed!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    class Program</span><br><span class="line">    &#123;</span><br><span class="line">        static void Main(string[] args)</span><br><span class="line">        &#123;</span><br><span class="line">            ProcessBusinessLogic process = new ProcessBusinessLogic();</span><br><span class="line">            EventSubscriber subscriber = new EventSubscriber();</span><br><span class="line"></span><br><span class="line">            // 订阅事件</span><br><span class="line">            subscriber.Subscribe(process);</span><br><span class="line"></span><br><span class="line">            // 启动过程</span><br><span class="line">            process.StartProcess();</span><br><span class="line"></span><br><span class="line">            Console.ReadLine();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<h2 id="Kinematic（运动学）"><a href="#Kinematic（运动学）" class="headerlink" title="Kinematic（运动学）"></a>Kinematic（运动学）</h2><pre><code>仅在用户控制下运动，不会受到重力和AddForce等力相关函数的影响;
-只与Dynamic的Rigidbody2D发生碰撞（不勾选Use Full Kinematic Contacts）；
-不能通过力或碰撞改变速度，但是可以设置其速度和位置、旋转；
-比Dynamic性能高；
-</code></pre>
-<h2 id="Static-静态的"><a href="#Static-静态的" class="headerlink" title="Static (静态的)"></a>Static (静态的)</h2><pre><code>具有无限质量、不可移动的物体;
-velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
-只与Dynamic的Rigidbody2D发生碰撞;
-性能最高；
-</code></pre>
-<h1 id="Simulated-物理模拟"><a href="#Simulated-物理模拟" class="headerlink" title="Simulated 物理模拟"></a>Simulated 物理模拟</h1>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/#more" rel="contents">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%BA%8B%E4%BB%B6Event%E3%80%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -532,7 +591,7 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -546,7 +605,7 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity娃娃机小游戏摘要</a>
+            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【委托Delegate】</a>
         </h2>
 
         <div class="post-meta">
@@ -555,36 +614,26 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2024-08-15 17:22:54" itemprop="dateCreated datePublished" datetime="2024-08-15T17:22:54+08:00">2024-08-15</time>
+              <time title="创建时间：2025-02-05 15:39:03 / 修改时间：16:41:10" itemprop="dateCreated datePublished" datetime="2025-02-05T15:39:03+08:00">2025-02-05</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
                 </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
-                </span>
             </span>
 
           
-            <span id="/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity娃娃机小游戏摘要" title="阅读次数">
+            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【委托Delegate】" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -599,8 +648,8 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -615,13 +664,37 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="游戏说明"><a href="#游戏说明" class="headerlink" title="游戏说明"></a>游戏说明</h1><p>游戏开始，下方随机生成不同品质小人，在场景中来回走动，不同品质的小人，移动速度不一样，被抓到后获得的积分也不一样。按住移动按钮，上方机械手臂会左右来回移动，当松开按钮，机械手臂会掉下来，当手臂下落碰到场景中小人时，检测当前手臂抓取范围内的小人，在抓取范围内的小人会被抓走。然后计算获得分数，如果机械手臂抓空，则碰到地面后手臂也会自动回弹，每轮游戏有4次抓取机会。</p>
-<h1 id="功能实现"><a href="#功能实现" class="headerlink" title="功能实现"></a>功能实现</h1><h2 id="移动的小人"><a href="#移动的小人" class="headerlink" title="移动的小人"></a>移动的小人</h2><p>创建移动小人AmusementParkDollMachineGameRole,跟据不同品质小人，移动速度不同实现小人在可控范围内随机位置移动。在移动过程中通过修改sortingOrder值来调整小人在不同位置的层级显示。小人在移动是播放walk动作，被抓住时拖放drag动作，同时将小人从场景节点移动到机械手臂抓取小人的节点内，当手臂上升时，小人跟着手臂一起向上移动，抓取结束移除被抓取的小人。</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br></pre></td><td class="code"><pre><span class="line">---待抓取的游戏小人</span><br><span class="line">---@class AmusementParkDollMachineGameRole</span><br><span class="line">local m = &#123;</span><br><span class="line">    View = nil,</span><br><span class="line">    ---@type AmusementParkDollMachineRoleData</span><br><span class="line">    RoleData = nil,</span><br><span class="line">    ---@type Spine.Unity.SkeletonGraphic</span><br><span class="line">    Animation = nil,</span><br><span class="line">    ---@type number</span><br><span class="line">    EntityId = 0,</span><br><span class="line">    ---@type Vector3 下一个移动位置</span><br><span class="line">    NextPos = Vector3.New(0,0,0),</span><br><span class="line">    ---@type boolean 是否在移动中</span><br><span class="line">    IsMoving = false,</span><br><span class="line">    ---@type number 下一次开始移动的时间</span><br><span class="line">    NextMovieTimer = 0,</span><br><span class="line">    ---@type boolean 小人是否已成功创建</span><br><span class="line">    IsCreateRole = false,</span><br><span class="line">    ---@type boolean 小人是否被抓住</span><br><span class="line">    IsCatch = false,</span><br><span class="line">    ---@type UnityEngine.Collider2D 小人Collider</span><br><span class="line">    RoleCollider = nil,</span><br><span class="line">    RoleObj = nil,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(view)</span><br><span class="line">    local obj = Clone(m)</span><br><span class="line">    obj:Init(view)</span><br><span class="line">    return obj</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(view)</span><br><span class="line">    self.View = view</span><br><span class="line">    LuaCodeInterface.BindOutlet(self.View, self)</span><br><span class="line">    self.OnShowSpineSuccessDelegate = function(sender, args) self:OnShowSpineSuccess(sender, args) end</span><br><span class="line"></span><br><span class="line">    self.RoleCollider = self.View:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line"></span><br><span class="line">    self:AddListener()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:AddListener()</span><br><span class="line">    GameEntry.LuaEvent:Subscribe(UnityGameFramework.Runtime.ShowEntitySuccessEventArgs.EventId, self.OnShowSpineSuccessDelegate)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:RemoveListener()</span><br><span class="line">    GameEntry.LuaEvent:Unsubscribe(UnityGameFramework.Runtime.ShowEntitySuccessEventArgs.EventId, self.OnShowSpineSuccessDelegate)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---界面轮询。</span><br><span class="line">---@param elapseSeconds number</span><br><span class="line">---@param realElapseSeconds number</span><br><span class="line">---@return void</span><br><span class="line">function m:OnUpdate(elapseSeconds, realElapseSeconds)</span><br><span class="line">    if not self.IsCreateRole then</span><br><span class="line">        return</span><br><span class="line">    end</span><br><span class="line">    if self.RoleData == nil then</span><br><span class="line">        return</span><br><span class="line">    end</span><br><span class="line">    if self.IsCatch then</span><br><span class="line">        return</span><br><span class="line">    end</span><br><span class="line">    if not self.IsMoving then</span><br><span class="line">        if PlayerModule.GetServerTime() &gt; self.NextMovieTimer then</span><br><span class="line">            self:StartMove()</span><br><span class="line">        end</span><br><span class="line">        return</span><br><span class="line">    end</span><br><span class="line">    local direction = self.NextPos - self.View.transform.localPosition</span><br><span class="line">    if direction.magnitude &gt; self.RoleData.roleRareSpeed then</span><br><span class="line">        self.View.transform:Translate(direction.normalized * self.RoleData.roleRareSpeed * UnityEngine.Time.deltaTime)</span><br><span class="line">        self:ChangeRoleOrderZ()</span><br><span class="line">    else</span><br><span class="line">        self:StopMove()</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:ChangeOrder()</span><br><span class="line">    if self.RoleObj then</span><br><span class="line">        local canvas = self.View:GetComponentInParent(typeof(UnityEngine.Canvas))</span><br><span class="line">        setGameObjectLayers(self.RoleObj.transform, &quot;UI&quot;)</span><br><span class="line">        local renderers = self.RoleObj:GetComponentsInChildren(typeof(UnityEngine.Renderer))</span><br><span class="line">        for i = 0, renderers.Length - 1 do</span><br><span class="line">            renderers[i].sortingLayerID = LuaCodeInterface.SortingLayerNameToID(&quot;Default&quot;)</span><br><span class="line">            renderers[i].sortingOrder = canvas.sortingOrder + 1</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnShowSpineSuccess(sender, args)</span><br><span class="line">    if self.EntityId == args.Entity.Id then</span><br><span class="line">        self.RoleObj = args.Entity.gameObject</span><br><span class="line">        self.Animation = args.Entity.gameObject:GetComponentInChildren(typeof(Spine.Unity.SkeletonAnimation))</span><br><span class="line">        self.Animation.state:SetAnimation(0,&quot;idle&quot;, true)</span><br><span class="line">        self:StartMove()</span><br><span class="line">        self.IsCreateRole = true</span><br><span class="line">        self:ChangeOrder()</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---获取一个随机位置 坐标Z控制小人显示层级</span><br><span class="line">function m:GetRandomPos()</span><br><span class="line">    local rx = math.random(-self.View.transform.parent.rect.w/2,self.View.transform.parent.rect.w/2)</span><br><span class="line">    local ry = math.random(-self.View.transform.parent.rect.h/2,self.View.transform.parent.rect.h/2)</span><br><span class="line">    return Vector3.New(rx,ry,0)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---开始移动</span><br><span class="line">function m:StartMove()</span><br><span class="line">    self.IsMoving = true</span><br><span class="line">    self.NextPos = self:GetRandomPos()</span><br><span class="line">    if self.Animation then</span><br><span class="line">        self.Animation.state:SetEmptyAnimation(0, 0)</span><br><span class="line">        self.Animation.state:SetAnimation(0, &quot;walk&quot;, true)</span><br><span class="line">    end</span><br><span class="line">    self:RefreshWalkFaceTo()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---移动到目标位置停止移动</span><br><span class="line">function m:StopMove()</span><br><span class="line">    self.IsMoving = false</span><br><span class="line">    self.View.transform.localPosition = self.NextPos</span><br><span class="line">    self.NextMovieTimer = math.random(0,4) + PlayerModule.GetServerTime()</span><br><span class="line">    if self.Animation then</span><br><span class="line">        self.Animation.state:SetAnimation(0,&quot;idle&quot;, true)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---播放抓住状态</span><br><span class="line">function m:CatchState()</span><br><span class="line">    self.IsMoving = false</span><br><span class="line">    self.IsCatch = true</span><br><span class="line">    if self.Animation then</span><br><span class="line">        self.Animation.AnimationName = nil</span><br><span class="line">        self.Animation.state:SetEmptyAnimation(0, 0)</span><br><span class="line">        self.Animation.state:SetAnimation(0,&quot;drag&quot;, true)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---刷新移动朝向</span><br><span class="line">function m:RefreshWalkFaceTo()</span><br><span class="line">    local checkRet = self.NextPos.x - self.View.transform.localPosition.x</span><br><span class="line">    local localScale = self.View.transform.localScale</span><br><span class="line">    if checkRet &gt; 0 then</span><br><span class="line">        localScale.x = -math.abs(localScale.x)</span><br><span class="line">    else</span><br><span class="line">        localScale.x = math.abs(localScale.x)</span><br><span class="line">    end</span><br><span class="line">    self.View.transform.localScale = localScale</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@param roleData AmusementParkDollMachineRoleData</span><br><span class="line">function m:SetData(roleData)</span><br><span class="line">    self.RoleData = roleData</span><br><span class="line">    self.IsCreateRole = false</span><br><span class="line">    self.IsCatch = false</span><br><span class="line">    for i = 1, 4 do</span><br><span class="line">        self[&quot;Quality&quot;..i]:SetActive(self.RoleData.roleRare == i)</span><br><span class="line">    end</span><br><span class="line">    self.View.name = self.RoleData.cid</span><br><span class="line">    local pos = self:GetRandomPos()</span><br><span class="line">    self.View.transform.localPosition = pos</span><br><span class="line">    self:ChangeRoleOrderZ()</span><br><span class="line">    self.NextPos = self:GetRandomPos()</span><br><span class="line">    self:ShowSpine()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---改变小人移动Z值(移动是层级关系)</span><br><span class="line">function m:ChangeRoleOrderZ()</span><br><span class="line">    local pos =  self.View.transform.localPosition</span><br><span class="line">    ---设置小人移动的Z值</span><br><span class="line">    self.OrderZ.transform.localPosition = Vector3.New(0,0,(pos.y + 150)/100)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:ShowSpine()</span><br><span class="line">    self:HideEntity()</span><br><span class="line">    self.EntityId = GameEntry.Entity:GenerateEntityID()</span><br><span class="line">    GameEntry.Entity:ShowUIElement(self.EntityId, self.RoleData:GetCfgData().PlayerSpine, 0, self.SpineRoot.transform, Vector3.zero)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:HideEntity()</span><br><span class="line">    if self.EntityId ~= 0 then</span><br><span class="line">        GameEntry.Entity:HideEntity(self.EntityId)</span><br><span class="line">        self.EntityId = 0</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Dispose()</span><br><span class="line">    AssetUtil.UnloadAsset(self)</span><br><span class="line">    self:RemoveListener()</span><br><span class="line">    self:HideEntity()</span><br><span class="line"></span><br><span class="line">    LuaCodeInterface.ClearOutlet(self.View, self)</span><br><span class="line">    UnityEngine.Object.Destroy(self.View)</span><br><span class="line">    self.View = nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+          <h1 id="C-委托（Delegate）"><a href="#C-委托（Delegate）" class="headerlink" title="C# 委托（Delegate）"></a><strong>C# 委托（Delegate）</strong></h1><p>在 C# 中，委托（Delegate） 是一种类型安全的函数指针，它允许将方法作为参数传递给其他方法。</p>
+<p>C# 中的委托（Delegate）类似于 C 或 C++ 中函数的指针。委托（Delegate） 是存有对某个方法的引用的一种引用类型变量，引用可在运行时被改变。</p>
+<p>委托在 C# 中非常常见，用于事件处理、回调函数、LINQ 等操作。</p>
+<p>所有的委托（Delegate）都派生自 System.Delegate 类。</p>
+<h1 id="声明委托（Delegate）"><a href="#声明委托（Delegate）" class="headerlink" title="声明委托（Delegate）"></a><strong>声明委托（Delegate）</strong></h1><p>委托是一个引用类型，它定义了一个方法签名，可以用于存储指向该签名的方法。通过委托，你可以调用其他类中的方法。</p>
+<p>委托声明决定了可由该委托引用的方法。委托可指向一个与其具有相同标签的方法。</p>
+<p>声明委托的语法如下：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public delegate &lt;return type&gt; &lt;delegate-name&gt; &lt;parameter list&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>中文格式说明：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public delegate 返回类型 委托名(参数类型 参数名, ...);</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>例如以下代码，我们定义一个接受两个整数并返回一个整数的委托：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public delegate int MathOperation(int x, int y);</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>以下例子的委托可被用于引用任何一个带有一个单一的 string 参数的方法，并返回一个 int 类型变量。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public delegate int MyDelegate (string s);</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h1 id="实例化委托（Delegate）"><a href="#实例化委托（Delegate）" class="headerlink" title="实例化委托（Delegate）"></a><strong>实例化委托（Delegate）</strong></h1><p>一旦声明了委托类型，委托对象必须使用 new 关键字来创建，且与一个特定的方法有关。当创建委托时，传递到 new 语句的参数就像方法调用一样书写，但是不带有参数。例如：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public delegate void printString(string s);</span><br><span class="line">...</span><br><span class="line">printString ps1 = new printString(WriteToScreen);</span><br><span class="line">printString ps2 = new printString(WriteToFile);</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>下面的实例演示了委托的声明、实例化和使用，该委托可用于引用带有一个整型参数的方法，并返回一个整型值。</p>
+<p><strong>&gt; 实例:</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">delegate int NumberChanger(int n);</span><br><span class="line">namespace DelegateAppl</span><br><span class="line">&#123;</span><br><span class="line">   class TestDelegate</span><br><span class="line">   &#123;</span><br><span class="line">      static int num = 10;</span><br><span class="line">      public static int AddNum(int p)</span><br><span class="line">      &#123;</span><br><span class="line">         num += p;</span><br><span class="line">         return num;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      public static int MultNum(int q)</span><br><span class="line">      &#123;</span><br><span class="line">         num *= q;</span><br><span class="line">         return num;</span><br><span class="line">      &#125;</span><br><span class="line">      public static int getNum()</span><br><span class="line">      &#123;</span><br><span class="line">         return num;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         // 创建委托实例</span><br><span class="line">         NumberChanger nc1 = new NumberChanger(AddNum);</span><br><span class="line">         NumberChanger nc2 = new NumberChanger(MultNum);</span><br><span class="line">         // 使用委托对象调用方法</span><br><span class="line">         nc1(25);</span><br><span class="line">         Console.WriteLine(&quot;Value of Num: &#123;0&#125;&quot;, getNum());</span><br><span class="line">         nc2(5);</span><br><span class="line">         Console.WriteLine(&quot;Value of Num: &#123;0&#125;&quot;, getNum());</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Value of Num: 35</span><br><span class="line">Value of Num: 175</span><br></pre></td></tr></table></figure>
 </code></pre>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -645,7 +718,7 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -659,7 +732,7 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity象素鸟小游戏摘要</a>
+            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【索引器Indexer】</a>
         </h2>
 
         <div class="post-meta">
@@ -668,36 +741,26 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2024-08-14 19:38:16" itemprop="dateCreated datePublished" datetime="2024-08-14T19:38:16+08:00">2024-08-14</time>
+              <time title="创建时间：2025-02-05 15:23:12 / 修改时间：15:34:08" itemprop="dateCreated datePublished" datetime="2025-02-05T15:23:12+08:00">2025-02-05</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
                 </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
-                </span>
             </span>
 
           
-            <span id="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity象素鸟小游戏摘要" title="阅读次数">
+            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【索引器Indexer】" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -712,8 +775,8 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -728,15 +791,23 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Lua实现Unity象素鸟小游戏要点记录：</p>
-<h1 id="游戏玩法简介"><a href="#游戏玩法简介" class="headerlink" title="游戏玩法简介"></a>游戏玩法简介</h1><p>不用物理引擎实现像素鸟在障碍物之间飞行，通过配表配置小鸟向下的加速度和点击一次屏幕给小鸟赋值一次初始速度和向上加速度来模拟小鸟飞行。障碍物根据配置难度在固定距离随机生成。</p>
-<h1 id="功能实现简述"><a href="#功能实现简述" class="headerlink" title="功能实现简述"></a>功能实现简述</h1><h2 id="飞行障碍实现"><a href="#飞行障碍实现" class="headerlink" title="飞行障碍实现"></a>飞行障碍实现</h2><p>创建AmusementParkBirdObstacleCell障碍控件。游戏运行时，根据固定的配置距离，生成不同难度的障碍实例。障碍物分为上，下两部份，中间有可穿行的空隙。</p>
-<p><strong>AmusementParkBirdObstacleCell</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">---@class AmusementParkBirdObstacleCell</span><br><span class="line">local m = &#123;</span><br><span class="line">    View = nil,</span><br><span class="line">    ---@type number 移动速度</span><br><span class="line">    Speed = 0,</span><br><span class="line">    ---@type UnityEngine.Collider2D</span><br><span class="line">    TopCollider2D = nil,</span><br><span class="line">    ---@type UnityEngine.Collider2D</span><br><span class="line">    BottomCollider2D = nil,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(view)</span><br><span class="line">    local obj = Clone(m)</span><br><span class="line">    obj:Init(view)</span><br><span class="line">    return obj</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(view)</span><br><span class="line">    self.View = view</span><br><span class="line">    LuaCodeInterface.BindOutlet(self.View, self)</span><br><span class="line"></span><br><span class="line">    self.TopCollider2D = self.View.transform:Find(&quot;Top&quot;).gameObject:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line">    self.BottomCollider2D = self.View.transform:Find(&quot;Bottom&quot;).gameObject:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line"></span><br><span class="line">    self:AddListener()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:AddListener()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:RemoveListener()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---界面轮询。</span><br><span class="line">---@param elapseSeconds number</span><br><span class="line">---@param realElapseSeconds number</span><br><span class="line">---@return void</span><br><span class="line">function m:OnUpdate(elapseSeconds, realElapseSeconds)</span><br><span class="line">    self.View.transform:Translate(Vector3.New(self.Speed * UnityEngine.Time.deltaTime * -1, 0, 0))</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@param speed number</span><br><span class="line">function m:SetData(speed)</span><br><span class="line">    self.Speed = speed</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Dispose()</span><br><span class="line">    AssetUtil.UnloadAsset(self)</span><br><span class="line">    self:RemoveListener()</span><br><span class="line"></span><br><span class="line">    LuaCodeInterface.ClearOutlet(self.View, self)</span><br><span class="line">    UnityEngine.Object.Destroy(self.View)</span><br><span class="line">    self.View = nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+          <h1 id="C-索引器（Indexer）"><a href="#C-索引器（Indexer）" class="headerlink" title="C# 索引器（Indexer）"></a><strong>C# 索引器（Indexer）</strong></h1><p>索引器（Indexer） 允许一个对象可以像数组一样使用下标的方式来访问。</p>
+<p>当您为类定义一个索引器时，该类的行为就会像一个 虚拟数组（virtual array） 一样。您可以使用数组访问运算符 [ ] 来访问该类的的成员。</p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a><strong>语法</strong></h1><p>一维索引器的语法如下：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">element-type this[int index]</span><br><span class="line">&#123;</span><br><span class="line">   // get 访问器</span><br><span class="line">   get</span><br><span class="line">   &#123;</span><br><span class="line">      // 返回 index 指定的值</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   // set 访问器</span><br><span class="line">   set</span><br><span class="line">   &#123;</span><br><span class="line">      // 设置 index 指定的值</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
+<h1 id="索引器（Indexer）的用途"><a href="#索引器（Indexer）的用途" class="headerlink" title="索引器（Indexer）的用途"></a><strong>索引器（Indexer）的用途</strong></h1><p>索引器的行为的声明在某种程度上类似于属性（property）。就像属性（property），您可使用 get 和 set 访问器来定义索引器。但是，属性返回或设置一个特定的数据成员，而索引器返回或设置对象实例的一个特定值。换句话说，它把实例数据分为更小的部分，并索引每个部分，获取或设置每个部分。</p>
+<p>定义一个属性（property）包括提供属性名称。索引器定义的时候不带有名称，但带有 this 关键字，它指向对象实例。下面的实例演示了这个概念：</p>
+<p><strong>&gt; 实例:</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace IndexerApplication</span><br><span class="line">&#123;</span><br><span class="line">   class IndexedNames</span><br><span class="line">   &#123;</span><br><span class="line">      private string[] namelist = new string[size];</span><br><span class="line">      static public int size = 10;</span><br><span class="line">      public IndexedNames()</span><br><span class="line">      &#123;</span><br><span class="line">         for (int i = 0; i &lt; size; i++)</span><br><span class="line">         namelist[i] = &quot;N. A.&quot;;</span><br><span class="line">      &#125;</span><br><span class="line">      public string this[int index]</span><br><span class="line">      &#123;</span><br><span class="line">         get</span><br><span class="line">         &#123;</span><br><span class="line">            string tmp;</span><br><span class="line"></span><br><span class="line">            if( index &gt;= 0 &amp;&amp; index &lt;= size-1 )</span><br><span class="line">            &#123;</span><br><span class="line">               tmp = namelist[index];</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">               tmp = &quot;&quot;;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            return ( tmp );</span><br><span class="line">         &#125;</span><br><span class="line">         set</span><br><span class="line">         &#123;</span><br><span class="line">            if( index &gt;= 0 &amp;&amp; index &lt;= size-1 )</span><br><span class="line">            &#123;</span><br><span class="line">               namelist[index] = value;</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         IndexedNames names = new IndexedNames();</span><br><span class="line">         names[0] = &quot;Zara&quot;;</span><br><span class="line">         names[1] = &quot;Riz&quot;;</span><br><span class="line">         names[2] = &quot;Nuha&quot;;</span><br><span class="line">         names[3] = &quot;Asif&quot;;</span><br><span class="line">         names[4] = &quot;Davinder&quot;;</span><br><span class="line">         names[5] = &quot;Sunil&quot;;</span><br><span class="line">         names[6] = &quot;Rubic&quot;;</span><br><span class="line">         for ( int i = 0; i &lt; IndexedNames.size; i++ )</span><br><span class="line">         &#123;</span><br><span class="line">            Console.WriteLine(names[i]);</span><br><span class="line">         &#125;</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Zara</span><br><span class="line">Riz</span><br><span class="line">Nuha</span><br><span class="line">Asif</span><br><span class="line">Davinder</span><br><span class="line">Sunil</span><br><span class="line">Rubic</span><br><span class="line">N. A.</span><br><span class="line">N. A.</span><br><span class="line">N. A.</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h1 id="重载索引器（Indexer）"><a href="#重载索引器（Indexer）" class="headerlink" title="重载索引器（Indexer）"></a><strong>重载索引器（Indexer）</strong></h1><p>索引器（Indexer）可被重载。索引器声明的时候也可带有多个参数，且每个参数可以是不同的类型。没有必要让索引器必须是整型的。C# 允许索引器可以是其他类型，例如，字符串类型。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -760,7 +831,7 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -774,7 +845,7 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity一笔画小游戏摘要</a>
+            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【属性Property】</a>
         </h2>
 
         <div class="post-meta">
@@ -783,36 +854,26 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2024-08-14 19:12:39" itemprop="dateCreated datePublished" datetime="2024-08-14T19:12:39+08:00">2024-08-14</time>
+              <time title="创建时间：2025-02-05 14:59:27 / 修改时间：15:20:27" itemprop="dateCreated datePublished" datetime="2025-02-05T14:59:27+08:00">2025-02-05</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
                 </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
-                </span>
             </span>
 
           
-            <span id="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity一笔画小游戏摘要" title="阅读次数">
+            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【属性Property】" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -827,8 +888,8 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -843,18 +904,30 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>用Lua实现Unity一笔画小游戏要点记录：</p>
-<h1 id="游戏玩法简介"><a href="#游戏玩法简介" class="headerlink" title="游戏玩法简介"></a>游戏玩法简介</h1><p>选择不同难度关卡开始游戏，每一关有多个方块小格，可以从任意一个方块格作为起点开始连接到下一个方块格，下一个方块格必须与起始格上下左右相邻。同一个方块格不能重复连接，成功连接后，目标方块格又成为新的起始方块格。以此类推直至将所有方块格连完。</p>
-<h1 id="功能实现简述"><a href="#功能实现简述" class="headerlink" title="功能实现简述"></a>功能实现简述</h1><h2 id="关卡难度"><a href="#关卡难度" class="headerlink" title="关卡难度"></a>关卡难度</h2><p>关卡难度选择，不同关卡制作不同prefab预设。prefab预设摆放所有要连接的格子位置信息节点。选择关卡开始游戏时，在每一个位置信息节点下生成一个游戏连接格实例对象。创建方格数据结构 AmusementParkOneConnectBlockData 和 视图显示控件AmusementParkOneConnectBlockCell</p>
-<p><strong>AmusementParkOneConnectBlockData</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">---@class AmusementParkOneConnectBlockData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type number</span><br><span class="line">    Index = 0,</span><br><span class="line">    ---@type number</span><br><span class="line">    X = 0,</span><br><span class="line">    ---@type number</span><br><span class="line">    Y = 0,</span><br><span class="line">    ---@type number 0 未连接,1 已连接</span><br><span class="line">    State = 0,</span><br><span class="line">    ---@type boolean 最新连通</span><br><span class="line">    IsFirst = false,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(index,x,y)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(index,x,y)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(index,x,y)</span><br><span class="line">    self.Index = index</span><br><span class="line">    self.X = tonumber(x)</span><br><span class="line">    self.Y = tonumber(y)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m	</span><br></pre></td></tr></table></figure>
+          <h1 id="C-属性（Property）"><a href="#C-属性（Property）" class="headerlink" title="C# 属性（Property）"></a><strong>C# 属性（Property）</strong></h1><p>C# 中的属性（Property）是类和结构体中用于封装数据的成员。它们提供了一种方式来定义类成员的访问和设置规则，通常用于隐藏字段（Fields）的内部实现细节，同时提供控制数据访问的机制。</p>
+<p>属性可以看作是对字段的包装器，通常由 get 和 set 访问器组成。</p>
+<p>属性（Property）不会确定存储位置。相反，它们具有可读写或计算它们值的 访问器（accessors）。</p>
+<p>例如，有一个名为 Student 的类，带有 age、name 和 code 的私有域。我们不能在类的范围以外直接访问这些域，但是我们可以拥有访问这些私有域的属性。</p>
+<h1 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a><strong>基本语法</strong></h1><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Person</span><br><span class="line">&#123;</span><br><span class="line">    private string name;</span><br><span class="line"></span><br><span class="line">    public string Name</span><br><span class="line">    &#123;</span><br><span class="line">        get &#123; return name; &#125;</span><br><span class="line">        set &#123; name = value; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p><strong>AmusementParkOneConnectBlockCell</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">---@class AmusementParkOneConnectBlockCell</span><br><span class="line">local m = &#123;</span><br><span class="line">    View = nil,</span><br><span class="line">    ---@type AmusementParkOneConnectBlockData</span><br><span class="line">    BlockData = nil,</span><br><span class="line">    ---@type Vector3</span><br><span class="line">    StartPos = nil,</span><br><span class="line">    ---@type function</span><br><span class="line">    OnBeginDragCallBack = nil,</span><br><span class="line">    ---@type function</span><br><span class="line">    OnDragCallBack = nil,</span><br><span class="line">    ---@type UnityEngine.Collider2D</span><br><span class="line">    BlockCollider = nil,</span><br><span class="line">    ---@type UnityEngine.Collider2D</span><br><span class="line">    DrgCollider = nil,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(view)</span><br><span class="line">    local obj = Clone(m)</span><br><span class="line">    obj:Init(view)</span><br><span class="line">    return obj</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(view)</span><br><span class="line">    self.View = view</span><br><span class="line">    LuaCodeInterface.BindOutlet(self.View, self)</span><br><span class="line"></span><br><span class="line">    self.DelegateBtnSelf = function() self:OnClickBtnSelf() end</span><br><span class="line"></span><br><span class="line">    self.BlockCollider = self.View:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line">    self.DrgCollider = self.ImgDrag:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line"></span><br><span class="line">    self.StartPos = self.ImgDrag.transform.position</span><br><span class="line">    self.ImgDrag:GetComponent(&quot;UIDrag&quot;).onBeginDrag = function(eventData) self:OnBeginDrag(eventData) end</span><br><span class="line">    self.ImgDrag:GetComponent(&quot;UIDrag&quot;).onDrag = function(pointerEventData) self:OnDrag(pointerEventData) end</span><br><span class="line">    self.ImgDrag:GetComponent(&quot;UIDrag&quot;).onReachTargetSuccess = function(eventData) self:OnDragSuccess(eventData) end</span><br><span class="line">    self.ImgDrag:GetComponent(&quot;UIDrag&quot;).onReachTargetFailure = function(eventData) self:OnFailure(eventData) end</span><br><span class="line"></span><br><span class="line">    self:AddListener()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:AddListener()</span><br><span class="line">    self.View:GetComponent(&quot;Button&quot;).onClick:AddListener(self.DelegateBtnSelf)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:RemoveListener()</span><br><span class="line">    self.View:GetComponent(&quot;Button&quot;).onClick:RemoveListener(self.DelegateBtnSelf)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnClickBtnSelf()</span><br><span class="line">    if self.OnBeginDragCallBack then</span><br><span class="line">        self.OnBeginDragCallBack(self)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnBeginDrag()</span><br><span class="line">    if self.OnBeginDragCallBack then</span><br><span class="line">        self.OnBeginDragCallBack(self)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnDrag(eventData)</span><br><span class="line">    if self.OnDragCallBack then</span><br><span class="line">        self.OnDragCallBack(self)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnDragSuccess(eventData)</span><br><span class="line">    self.ImgDrag.transform.position = self.StartPos</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnFailure(eventData)</span><br><span class="line">    self.ImgDrag.transform.position = self.StartPos</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:UpdateView()</span><br><span class="line">    self.ImgDefault:SetActive(self.BlockData.State == 0)</span><br><span class="line">    self.ImgCheck:SetActive(self.BlockData.State == 1)</span><br><span class="line">    self.ImgTag:SetActive(self.BlockData.IsFirst)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@param blockData AmusementParkOneConnectBlockData</span><br><span class="line">function m:SetData(blockData)</span><br><span class="line">    self.BlockData = blockData</span><br><span class="line">    self.View.name = self.BlockData.Index</span><br><span class="line">    self:UpdateView()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Dispose()</span><br><span class="line">    AssetUtil.UnloadAsset(self)</span><br><span class="line">    self:RemoveListener()</span><br><span class="line">    self.OnBeginDragCallBack = nil</span><br><span class="line">    self.OnDragCallBack = nil</span><br><span class="line"></span><br><span class="line">    LuaCodeInterface.ClearOutlet(self.View, self)</span><br><span class="line">    UnityEngine.Object.Destroy(self.View)</span><br><span class="line">    self.View = nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>以上代码中，Name 属性封装了私有字段 name。get 访问器用于获取字段值，而 set 访问器用于设置字段值。</p>
+<h1 id="自动实现的属性"><a href="#自动实现的属性" class="headerlink" title="自动实现的属性"></a><strong>自动实现的属性</strong></h1><p>如果你只需要一个简单的属性，C# 允许使用自动实现的属性，这样你不需要显式地定义字段。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class Person</span><br><span class="line">&#123;</span><br><span class="line">    public string Name &#123; get; set; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
+<p>在这种情况下，编译器会自动为 Name 属性生成一个私有的匿名字段来存储值。</p>
+<h1 id="只读属性"><a href="#只读属性" class="headerlink" title="只读属性"></a><strong>只读属性</strong></h1><p>如果你只需要一个只读属性，可以省略 set 访问器。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Person</span><br><span class="line">&#123;</span><br><span class="line">    public string Name &#123; get; &#125;</span><br><span class="line"></span><br><span class="line">    public Person(string name)</span><br><span class="line">    &#123;</span><br><span class="line">        Name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h1 id="只写属性"><a href="#只写属性" class="headerlink" title="只写属性"></a><strong>只写属性</strong></h1><p>类似地，如果你只需要一个只写属性，可以省略 get 访问器。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Person</span><br><span class="line">&#123;</span><br><span class="line">    private string name;</span><br><span class="line"></span><br><span class="line">    public string Name</span><br><span class="line">    &#123;</span><br><span class="line">        set &#123; name = value; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h1 id="自定义逻辑"><a href="#自定义逻辑" class="headerlink" title="自定义逻辑"></a><strong>自定义逻辑</strong></h1><p>你可以在 get 和 set 访问器中包含自定义的逻辑。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class Person</span><br><span class="line">&#123;</span><br><span class="line">    private string name;</span><br><span class="line"></span><br><span class="line">    public string Name</span><br><span class="line">    &#123;</span><br><span class="line">        get &#123; return name; &#125;</span><br><span class="line">        set</span><br><span class="line">        &#123;</span><br><span class="line">            if (string.IsNullOrWhiteSpace(value))</span><br><span class="line">                throw new ArgumentException(&quot;Name cannot be empty.&quot;);</span><br><span class="line">            name = value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h1 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a><strong>计算属性</strong></h1>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -877,7 +950,7 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -945,7 +1018,7 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-count">77</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

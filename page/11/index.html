@@ -139,7 +139,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">68</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">77</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -173,7 +173,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/21/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -187,7 +187,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【元组】</a>
+            <a href="/2023/06/21/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【正则表达式】</a>
         </h2>
 
         <div class="post-meta">
@@ -197,7 +197,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-05-29 14:02:36" itemprop="dateCreated datePublished" datetime="2023-05-29T14:02:36+08:00">2023-05-29</time>
+              <time title="创建时间：2023-06-21 11:58:29" itemprop="dateCreated datePublished" datetime="2023-06-21T11:58:29+08:00">2023-06-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -221,7 +221,7 @@
             </span>
 
           
-            <span id="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【元组】" title="阅读次数">
+            <span id="/2023/06/21/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【正则表达式】" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -236,8 +236,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/06/21/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/21/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -252,37 +252,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Python3-元组"><a href="#Python3-元组" class="headerlink" title="- Python3 元组"></a>- Python3 元组</h2><p>Python 的元组与列表类似，不同之处在于元组的元素不能修改。</p>
-<p>元组使用小括号 ( )，列表使用方括号 [ ]。</p>
-<p>元组创建很简单，只需要在括号中添加元素，并使用逗号隔开即可。</p>
+          <h2 id="Python3-正则表达式"><a href="#Python3-正则表达式" class="headerlink" title="- Python3 正则表达式"></a>- Python3 正则表达式</h2><p>正则表达式是一个特殊的字符序列，它能帮助你方便的检查一个字符串是否与某种模式匹配。</p>
+<p>Python 自1.5版本起增加了re 模块，它提供 Perl 风格的正则表达式模式。</p>
+<p>re 模块使 Python 语言拥有全部的正则表达式功能。</p>
+<p>compile 函数根据一个模式字符串和可选的标志参数生成一个正则表达式对象。该对象拥有一系列方法用于正则表达式匹配和替换。</p>
+<p>re 模块也提供了与这些方法功能完全一致的函数，这些函数使用一个模式字符串做为它们的第一个参数。</p>
+<h2 id="re-match函数"><a href="#re-match函数" class="headerlink" title="- re.match函数"></a>- re.match函数</h2><p>re.match 尝试从字符串的起始位置匹配一个模式，如果不是起始位置匹配成功的话，match()就返回none。</p>
+<p>函数语法：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">re.match(pattern, string, flags=0)</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>函数参数说明：</p>
+<pre><code>参数	  描述
+pattern	匹配的正则表达式
+string	要匹配的字符串。
+flags	标志位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等。
+</code></pre>
+<p>匹配成功re.match方法返回一个匹配的对象，否则返回None。</p>
+<p>我们可以使用group(num) 或 groups() 匹配对象函数来获取匹配表达式。</p>
+<pre><code>匹配对象方法	描述
+group(num=0)	匹配的整个表达式的字符串，group() 可以一次输入多个组号，在这种情况下它将返回一个包含那些组所对应值的元组。
+groups()	返回一个包含所有小组字符串的元组，从 1 到 所含的小组号。
+</code></pre>
 <blockquote>
-<p><strong>实例:</strong></p>
+<p><strong>实例</strong></p>
 </blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tup1 = (&#x27;Google&#x27;, &#x27;Runoob&#x27;, 1997, 2000)</span><br><span class="line">&gt;&gt;&gt; tup2 = (1, 2, 3, 4, 5 )</span><br><span class="line">&gt;&gt;&gt; tup3 = &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;   #  不需要括号也可以</span><br><span class="line">&gt;&gt;&gt; type(tup3)</span><br><span class="line">&lt;class &#x27;tuple&#x27;&gt;</span><br></pre></td></tr></table></figure>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import re</span><br><span class="line">print(re.match(&#x27;www&#x27;, &#x27;www.runoob.com&#x27;).span())  # 在起始位置匹配</span><br><span class="line">print(re.match(&#x27;com&#x27;, &#x27;www.runoob.com&#x27;))         # 不在起始位置匹配</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>创建空元组</p>
-<pre><code>tup1 = ()
-</code></pre>
-<p>元组中只包含一个元素时，需要在元素后面添加逗号 , ，否则括号会被当作运算符使用：</p>
-<blockquote>
-<p><strong>实例:</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tup1 = (50)</span><br><span class="line">&gt;&gt;&gt; type(tup1)     # 不加逗号，类型为整型</span><br><span class="line">&lt;class &#x27;int&#x27;&gt;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; tup1 = (50,)</span><br><span class="line">&gt;&gt;&gt; type(tup1)     # 加上逗号，类型为元组</span><br><span class="line">&lt;class &#x27;tuple&#x27;&gt;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>元组与字符串类似，下标索引从 0 开始，可以进行截取，组合等。</p>
-<h2 id="访问元组"><a href="#访问元组" class="headerlink" title="- 访问元组"></a>- 访问元组</h2><p>元组可以使用下标索引来访问元组中的值，如下实例:</p>
-<blockquote>
-<p><strong>实例:</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tup1 = (&#x27;Google&#x27;, &#x27;Runoob&#x27;, 1997, 2000)</span><br><span class="line">tup2 = (1, 2, 3, 4, 5, 6, 7 )</span><br><span class="line"> </span><br><span class="line">print (&quot;tup1[0]: &quot;, tup1[0])</span><br><span class="line">print (&quot;tup2[1:5]: &quot;, tup2[1:5])</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>以上实例输出结果：</p>
-<pre><code>tup1[0]:  Google
-tup2[1:5]:  (2, 3, 4, 5)
+<p>以上实例运行输出结果为：</p>
+<pre><code>(0, 3)
+None
 </code></pre>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/06/21/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -306,7 +308,7 @@ tup2[1:5]:  (2, 3, 4, 5)
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%88%97%E8%A1%A8%E3%80%91/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -320,7 +322,7 @@ tup2[1:5]:  (2, 3, 4, 5)
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%88%97%E8%A1%A8%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【列表】</a>
+            <a href="/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【标准库概览】</a>
         </h2>
 
         <div class="post-meta">
@@ -330,7 +332,7 @@ tup2[1:5]:  (2, 3, 4, 5)
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-05-29 12:11:17" itemprop="dateCreated datePublished" datetime="2023-05-29T12:11:17+08:00">2023-05-29</time>
+              <time title="创建时间：2023-06-08 10:42:07" itemprop="dateCreated datePublished" datetime="2023-06-08T10:42:07+08:00">2023-06-08</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -354,7 +356,7 @@ tup2[1:5]:  (2, 3, 4, 5)
             </span>
 
           
-            <span id="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%88%97%E8%A1%A8%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【列表】" title="阅读次数">
+            <span id="/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【标准库概览】" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -369,8 +371,8 @@ tup2[1:5]:  (2, 3, 4, 5)
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%88%97%E8%A1%A8%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%88%97%E8%A1%A8%E3%80%91/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -385,25 +387,38 @@ tup2[1:5]:  (2, 3, 4, 5)
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Python3-列表"><a href="#Python3-列表" class="headerlink" title="- Python3 列表"></a>- Python3 列表</h2><p>序列是 Python 中最基本的数据结构。<br>序列中的每个值都有对应的位置值，称之为索引，第一个索引是 0，第二个索引是 1，依此类推。<br>Python 有 6 个序列的内置类型，但最常见的是列表和元组。<br>列表都可以进行的操作包括索引，切片，加，乘，检查成员。此外，Python 已经内置确定序列的长度以及确定最大和最小的元素的方法。<br>列表是最常用的 Python 数据类型，它可以作为一个方括号内的逗号分隔值出现。<br>列表的数据项不需要具有相同的类型<br>创建一个列表，只要把逗号分隔的不同的数据项使用方括号括起来即可。如下所示：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list1 = [&#x27;Google&#x27;, &#x27;Runoob&#x27;, 1997, 2000]</span><br><span class="line">list2 = [1, 2, 3, 4, 5 ]</span><br><span class="line">list3 = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]</span><br><span class="line">list4 = [&#x27;red&#x27;, &#x27;green&#x27;, &#x27;blue&#x27;, &#x27;yellow&#x27;, &#x27;white&#x27;, &#x27;black&#x27;]</span><br></pre></td></tr></table></figure>
+          <h2 id="Python3-标准库概览"><a href="#Python3-标准库概览" class="headerlink" title="- Python3 标准库概览"></a>- Python3 标准库概览</h2><p>Python 标准库非常庞大，所提供的组件涉及范围十分广泛，使用标准库我们可以让您轻松地完成各种任务。</p>
+<p>以下是一些 Python3 标准库中的模块：</p>
+<ul>
+<li><p>os 模块：os 模块提供了许多与操作系统交互的函数，例如创建、移动和删除文件和目录，以及访问环境变量等。</p>
+</li>
+<li><p>sys 模块：sys 模块提供了与 Python 解释器和系统相关的功能，例如解释器的版本和路径，以及与 stdin、stdout 和 stderr 相关的信息。</p>
+</li>
+<li><p>time 模块：time 模块提供了处理时间的函数，例如获取当前时间、格式化日期和时间、计时等。</p>
+</li>
+<li><p>datetime 模块：datetime 模块提供了更高级的日期和时间处理函数，例如处理时区、计算时间差、计算日期差等。</p>
+</li>
+<li><p>random 模块：random 模块提供了生成随机数的函数，例如生成随机整数、浮点数、序列等。</p>
+</li>
+<li><p>math 模块：math 模块提供了数学函数，例如三角函数、对数函数、指数函数、常数等。</p>
+</li>
+<li><p>re 模块：re 模块提供了正则表达式处理函数，可以用于文本搜索、替换、分割等。</p>
+</li>
+<li><p>json 模块：json 模块提供了 JSON 编码和解码函数，可以将 Python 对象转换为 JSON 格式，并从 JSON 格式中解析出 Python 对象。</p>
+</li>
+<li><p>urllib 模块：urllib 模块提供了访问网页和处理 URL 的功能，包括下载文件、发送 POST 请求、处理 cookies 等。</p>
+</li>
+</ul>
+<h2 id="操作系统接口"><a href="#操作系统接口" class="headerlink" title="- 操作系统接口"></a>- 操作系统接口</h2><p>os模块提供了不少与操作系统相关联的函数。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import os</span><br><span class="line">&gt;&gt;&gt; os.getcwd()      # 返回当前的工作目录</span><br><span class="line">&#x27;C:\\Python34&#x27;</span><br><span class="line">&gt;&gt;&gt; os.chdir(&#x27;/server/accesslogs&#x27;)   # 修改当前的工作目录</span><br><span class="line">&gt;&gt;&gt; os.system(&#x27;mkdir today&#x27;)   # 执行系统命令 mkdir </span><br><span class="line">0</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>访问列表中的值<br>与字符串的索引一样，列表索引从 0 开始，第二个索引是 1，依此类推。</p>
-<p>通过索引列表可以进行截取、组合等操作。</p>
-<blockquote>
-<p><strong>实例:</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list = [&#x27;red&#x27;, &#x27;green&#x27;, &#x27;blue&#x27;, &#x27;yellow&#x27;, &#x27;white&#x27;, &#x27;black&#x27;]</span><br><span class="line">print( list[0] )</span><br><span class="line">print( list[1] )</span><br><span class="line">print( list[2] )</span><br></pre></td></tr></table></figure>
+<p>建议使用 “import os” 风格而非 “from os import *”。这样可以保证随操作系统不同而有所变化的 os.open() 不会覆盖内置函数 open()。</p>
+<p>在使用 os 这样的大型模块时内置的 dir() 和 help() 函数非常有用:<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import os</span><br><span class="line">&gt;&gt;&gt; dir(os)</span><br><span class="line">&lt;returns a list of all module functions&gt;</span><br><span class="line">&gt;&gt;&gt; help(os)</span><br><span class="line">&lt;returns an extensive manual page created from the module&#x27;s docstrings&gt;</span><br></pre></td></tr></table></figure><br>针对日常的文件和目录管理任务，:mod:shutil 模块提供了一个易于使用的高级接口:</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import shutil</span><br><span class="line">&gt;&gt;&gt; shutil.copyfile(&#x27;data.db&#x27;, &#x27;archive.db&#x27;)</span><br><span class="line">&gt;&gt;&gt; shutil.move(&#x27;/build/executables&#x27;, &#x27;installdir&#x27;)</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>以上实例输出结果：</p>
-<pre><code>red
-green
-blue
-</code></pre>
-<p>索引也可以从尾部开始，最后一个元素的索引为 -1，往前一位为 -2，以此类推。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%88%97%E8%A1%A8%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -427,7 +442,7 @@ blue
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -441,7 +456,7 @@ blue
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【字符串】</a>
+            <a href="/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【面向对向】</a>
         </h2>
 
         <div class="post-meta">
@@ -451,7 +466,7 @@ blue
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-05-29 10:32:43" itemprop="dateCreated datePublished" datetime="2023-05-29T10:32:43+08:00">2023-05-29</time>
+              <time title="创建时间：2023-06-06 14:43:17" itemprop="dateCreated datePublished" datetime="2023-06-06T14:43:17+08:00">2023-06-06</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -475,7 +490,7 @@ blue
             </span>
 
           
-            <span id="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【字符串】" title="阅读次数">
+            <span id="/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【面向对向】" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -490,8 +505,8 @@ blue
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -506,29 +521,38 @@ blue
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Python3-字符串"><a href="#Python3-字符串" class="headerlink" title="- Python3 字符串"></a>- Python3 字符串</h2><p>字符串是 Python 中最常用的数据类型。我们可以使用引号( ‘ 或 “ )来创建字符串。<br>创建字符串很简单，只要为变量分配一个值即可。例如：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27;</span><br><span class="line">var2 = &quot;Runoob&quot;</span><br></pre></td></tr></table></figure>
+          <h2 id="Python3-面向对象"><a href="#Python3-面向对象" class="headerlink" title="Python3 面向对象"></a>Python3 面向对象</h2><p>Python从设计之初就已经是一门面向对象的语言，正因为如此，在Python中创建一个类和对象是很容易的。本章节我们将详细介绍Python的面向对象编程。</p>
+<p>如果你以前没有接触过面向对象的编程语言，那你可能需要先了解一些面向对象语言的一些基本特征，在头脑里头形成一个基本的面向对象的概念，这样有助于你更容易的学习Python的面向对象编程。</p>
+<p>接下来我们先来简单的了解下面向对象的一些基本特征。</p>
+<h2 id="面向对象技术简介"><a href="#面向对象技术简介" class="headerlink" title="- 面向对象技术简介"></a>- 面向对象技术简介</h2><ul>
+<li><p>类(Class): 用来描述具有相同的属性和方法的对象的集合。它定义了该集合中每个对象所共有的属性和方法。对象是类的实例。<br>方法：类中定义的函数。</p>
+</li>
+<li><p>类变量：类变量在整个实例化的对象中是公用的。类变量定义在类中且在函数体之外。类变量通常不作为实例变量使用。</p>
+</li>
+<li><p>数据成员：类变量或者实例变量用于处理类及其实例对象的相关的数据。</p>
+</li>
+<li><p>方法重写：如果从父类继承的方法不能满足子类的需求，可以对其进行改写，这个过程叫方法的覆盖（override），也称为方法的重写。</p>
+</li>
+<li><p>局部变量：定义在方法中的变量，只作用于当前实例的类。</p>
+</li>
+<li><p>实例变量：在类的声明中，属性是用变量来表示的，这种变量就称为实例变量，实例变量就是一个用 self 修饰的变量。</p>
+</li>
+<li><p>继承：即一个派生类（derived class）继承基类（base class）的字段和方法。继承也允许把一个派生类的对象作为一个基类对象对待。例如，有这样一个设计：一个Dog类型的对象派生自Animal类，这是模拟”是一个（is-a）”关系（例图，Dog是一个Animal）。</p>
+</li>
+<li><p>实例化：创建一个类的实例，类的具体对象。</p>
+</li>
+<li><p>对象：通过类定义的数据结构实例。对象包括两个数据成员（类变量和实例变量）和方法。<br>和其它编程语言相比，Python 在尽可能不增加新的语法和语义的情况下加入了类机制。</p>
+</li>
+</ul>
+<p>Python中的类提供了面向对象编程的所有基本功能：类的继承机制允许多个基类，派生类可以覆盖基类中的任何方法，方法中可以调用基类中的同名方法。</p>
+<p>对象可以包含任意数量和类型的数据。</p>
+<h2 id="类定义"><a href="#类定义" class="headerlink" title="- 类定义"></a>- 类定义</h2><p>语法格式如下：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class ClassName:</span><br><span class="line">    &lt;statement-1&gt;</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    &lt;statement-N&gt;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<h2 id="Python-访问字符串中的值"><a href="#Python-访问字符串中的值" class="headerlink" title="- Python 访问字符串中的值"></a>- Python 访问字符串中的值</h2><p>Python 不支持单字符类型，单字符在 Python 中也是作为一个字符串使用。<br>Python 访问子字符串，可以使用方括号 [] 来截取字符串，字符串的截取的语法格式如下：</p>
-<pre><code>变量[头下标:尾下标]
-</code></pre>
-<p>索引值以 0 为开始值，-1 为从末尾的开始位置。</p>
-<p>如下实例：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27;</span><br><span class="line">var2 = &quot;Runoob&quot;</span><br><span class="line"> </span><br><span class="line">print (&quot;var1[0]: &quot;, var1[0])</span><br><span class="line">print (&quot;var2[1:5]: &quot;, var2[1:5])</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>以上实例执行结果：</p>
-<pre><code>var1[0]:  H
-var2[1:5]:  unoo
-</code></pre>
-<h2 id="Python-字符串更新"><a href="#Python-字符串更新" class="headerlink" title="- Python 字符串更新"></a>- Python 字符串更新</h2><p>你可以截取字符串的一部分并与其他字段拼接，如下实例：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27; </span><br><span class="line">print (&quot;已更新字符串 : &quot;, var1[:6] + &#x27;Runoob!&#x27;)</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>以上实例执行结果</p>
-<pre><code>已更新字符串 :  Hello Runoob!
-</code></pre>
+<p>类实例化后，可以使用其属性，实际上，创建一个类之后，可以通过类名访问其属性。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -552,7 +576,7 @@ var2[1:5]:  unoo
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/05/16/git%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/02/%E5%A4%8F%E5%AD%A3%E5%AB%A9%E7%8E%89%E7%B1%B3%E9%92%93%E8%8D%89%E9%B1%BC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -566,7 +590,7 @@ var2[1:5]:  unoo
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/05/16/git%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">git相关操作整理</a>
+            <a href="/2023/06/02/%E5%A4%8F%E5%AD%A3%E5%AB%A9%E7%8E%89%E7%B1%B3%E9%92%93%E8%8D%89%E9%B1%BC/" class="post-title-link" itemprop="url">夏季嫩玉米钓草鱼技巧</a>
         </h2>
 
         <div class="post-meta">
@@ -576,129 +600,7 @@ var2[1:5]:  unoo
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-05-16 23:27:48" itemprop="dateCreated datePublished" datetime="2023-05-16T23:27:48+08:00">2023-05-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">Hexo博客搭建</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/05/16/git%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="git相关操作整理" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/05/16/git%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/05/16/git%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <hr>
-<h2 id="Github使用之git回退到某个历史版本"><a href="#Github使用之git回退到某个历史版本" class="headerlink" title="- Github使用之git回退到某个历史版本:"></a>- Github使用之git回退到某个历史版本:</h2><p><strong>1. 查找历史版本</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 使用git log命令查看所有的历史版本，获取你git的某个历史版本的id,假设查到历史版本的id</span><br><span class="line">&gt; 是:fae6966548e3ae76cfa7f38a461c438cf75ba965</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p><strong>2. 恢复到历史版本</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; $ git reset --hard fae6966548e3ae76cfa7f38a461c438cf75ba965</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p><strong>3. 把修改推到远程服务器</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; $ git push -f -u origin master</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="git如何避免”warning-LF-will-be-replaced-by-CRLF“提示？"><a href="#git如何避免”warning-LF-will-be-replaced-by-CRLF“提示？" class="headerlink" title="- git如何避免”warning: LF will be replaced by CRLF“提示？"></a>- git如何避免”warning: LF will be replaced by CRLF“提示？</h2><p>在Windows下使用Git进行修改提交时，控制台显示了如下输出内容：1warning: in the working copy of ‘styles&#x2F;global.css’, CRLF will be replaced by LF the next time Git touches it这是因为目前的Git仓库由于跨操作系统操作而引发了部分文件的换行符转换问题。具体来说，Linux、macOS、Windows操作系统对于文本文件的换行符有不同的标准，因此一个文件如果与上次操作的系统环境不同，Git自然会在文件对比时识别到标识符被修改，从而引发提示。LF和CR字符在不同的操作系统中被用作操作符，其中LF（0x0A, \n）的初始定义是将光标从当前位置下移一行，不涉及移动到该行行首位置的动作，而CR（0x0D, \r）的原始含义则是将光标前移到当前行的行首，不涉及下移的动作。Linux系操作系统（含macOS，虽然它在OSX时期曾经使用过CR）使用LF直接表示光标换行+移到行首；Windows组合使用了CRLF（0x0D 0x0A, \r\n），无疑是符合标准语义的做法。尽管这不是一个Bug或错误，但还是可以通过如下方式对Git进行配置，以避免在每次提交代码时显示：</p>
-<p><strong>Linux&#x2F;macOS系统下在提交代码时自动将CRLF转换为LF</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; $ git config --global core.autocrlf input</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p><strong>Windows系统下在提交代码时自动将LF转换为CRLF</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; git config --global core.autocrlf true</span><br></pre></td></tr></table></figure>
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/16/git%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/05/05/%E4%BA%94%E6%AD%A5%E8%B0%83%E6%BC%82%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/05/%E4%BA%94%E6%AD%A5%E8%B0%83%E6%BC%82%E6%B3%95/" class="post-title-link" itemprop="url">5步调漂方法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-05-05 14:26:20" itemprop="dateCreated datePublished" datetime="2023-05-05T14:26:20+08:00">2023-05-05</time>
+              <time title="创建时间：2023-06-02 14:52:54" itemprop="dateCreated datePublished" datetime="2023-06-02T14:52:54+08:00">2023-06-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -718,7 +620,7 @@ var2[1:5]:  unoo
             </span>
 
           
-            <span id="/2023/05/05/%E4%BA%94%E6%AD%A5%E8%B0%83%E6%BC%82%E6%B3%95/" class="post-meta-item leancloud_visitors" data-flag-title="5步调漂方法" title="阅读次数">
+            <span id="/2023/06/02/%E5%A4%8F%E5%AD%A3%E5%AB%A9%E7%8E%89%E7%B1%B3%E9%92%93%E8%8D%89%E9%B1%BC/" class="post-meta-item leancloud_visitors" data-flag-title="夏季嫩玉米钓草鱼技巧" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -733,8 +635,8 @@ var2[1:5]:  unoo
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/05/05/%E4%BA%94%E6%AD%A5%E8%B0%83%E6%BC%82%E6%B3%95/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/05/05/%E4%BA%94%E6%AD%A5%E8%B0%83%E6%BC%82%E6%B3%95/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/06/02/%E5%A4%8F%E5%AD%A3%E5%AB%A9%E7%8E%89%E7%B1%B3%E9%92%93%E8%8D%89%E9%B1%BC/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/02/%E5%A4%8F%E5%AD%A3%E5%AB%A9%E7%8E%89%E7%B1%B3%E9%92%93%E8%8D%89%E9%B1%BC/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -749,13 +651,157 @@ var2[1:5]:  unoo
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><strong>5步调漂方法：不会调漂别着急，一步步来，肯定错不了！</strong></p>
-<p>调漂看似简单，其实道道很多，很多新手钓友都有被调漂折磨的经历。看别人都开钓了，这边还没调好漂，心里着急得不得了。尤其是在夏季野钓，上鱼时间比较短，所以更需要在调漂上减少时间，这样就增加了上鱼时间，说不定就能多钓两条鱼。调漂方法比较多，但是本质没多大区别，精通了一种，其他的方法也就触类旁通了。所以以空钩调漂为例，图解下调漂步骤，希望能帮助到各位钓友。</p>
-<h2 id="先找底"><a href="#先找底" class="headerlink" title="- 先找底"></a>- 先找底</h2><p>在铅皮座上裹上足够重的铅皮，保证钓组入水以后铅坠是躺底的状态，而且要求浮漂露出的目数不能过高，这样才保证水线是垂直而且被拉直的状态，对水深的测量也是比较精准的，大致状态如下图。达到这种状态以后可以先不着急调漂，此时可以把钓组和浮漂在水中泡一泡，这是因为钓组和浮漂往往都会吃水，会影响钓组重量的变化，泡上一会再调漂，会更精准一些。可以先开饵做好准备工作。</p>
-<h2 id="调调目"><a href="#调调目" class="headerlink" title="- 调调目"></a>- 调调目</h2><p>下一步就是下拉浮漂座了，确定个半水深度来调漂。浮漂座通常是前后各两颗太空豆夹住的，可以把最上面的一颗固定在刚才找底的位置上，这样在后面精确找底的时候会快速很多。浮漂座下拉大概 2 倍子线长度，在这个深度调漂是比较准确的，尤其是在钓深水的时候这点一定要注意。我们以调四钓二为例，空钩半水修剪铅皮到浮漂露出水面 4 目。修剪铅皮是个耐心活，当浮漂开始慢慢沉入水中，铅皮就需要一丝丝的剪了。</p>
+          <p>夏天已经来了，天气一热，很多大鱼都会上钩，比如鲤鱼、草鱼、青鱼等。</p>
+<p>想要钓到这些大鱼，有一种食物是必不可少的，那就是玉米。</p>
+<p>玉米被称为“素饵之王”，在野外垂钓中，不管是新鲜的，还是发酵的，都是用来垂钓的。</p>
+<p>但玉米在水里不会形成雾气，所以口感很淡，而且玉米的个头很大，而且野生的大鱼不多，用玉米钓鱼很难成功。</p>
+<p>我们要理智的使用玉米，在垂钓中没有什么鱼饵是万能的，玉米好不好，关键就在于我们用的好不好。想要用玉米钓到大鱼，必须要有三样东西。</p>
+<p><strong>- 第一，看鱼的情况，看是不是要用玉米</strong></p>
+<p>以上所述，即使是“万能饵”，也不是每一种饵料都能得到鱼儿的喜爱，一种饵料好不好，要看鱼儿在用的时候情况。</p>
+<p>我们要钓鱼的是一条警惕性很高的野生大鱼，在自然的环境下，他们会以草籽、水草、水果和谷物等天然的食物为食，所以他们更喜欢吃一些味道比较淡的天然食物。因此，用玉米来钓鱼并不是什么难事。</p>
+<p>不过，野外的大鱼并不多，要想钓到大鱼，就得用诱饵，而玉米又不是雾化的，所以我们要用粉末状的诱饵。</p>
+<p>所以，我们不能只用玉米粒来打窝，可以在窝料里加点玉米粉，也可以加点鱼饵。</p>
+<p><strong>- 第二，你买到的东西，未必就有你自己做的好</strong></p>
+<p>在许多情况下，我们都会使用到发酵的玉米，特别是在垂钓鲤鱼时，更是如此。这是因为，在夏季，锦鲤的食物会沉入水中，由于温度高，会迅速发酵，散发出酒香。鲤鱼习惯于食用发酵食品，所以我们用发酵过的玉米来钓鱼，很合他们的胃口。</p>
+<p>很多垂钓爱好者都觉得，他们卖的是老玉米，味道更好。</p>
+<p>但是实际上，我们自己煮出来的玉米往往比从外面买来的玉米更有效。由于自家煮制的玉米面，可以根据本地鱼肉的味道来调配，所用的玉米面和其他食材，都更新鲜。</p>
+<p>许多人不想自己煮，一方面是因为加工过程繁琐，还不如买两包，动动手指头就能送到；二是他自己做的玉米面没有经过任何处理，在夏天的高温下，玉米面煮的太久就会坏掉，而在夏天煮的太久又太麻烦。</p>
+<p>因此，有时间的垂钓朋友，我觉得自己可以用自己浸泡的玉米粒，与买来的玉米粒进行比较，看看鱼儿们更喜欢哪个。</p>
+<p>如果水温超过25℃，应该果断地改用嫩玉米粒，因为在水温较暖和时，使用嫩玉米钓草鱼的效果非常好，如果水域中的草鱼较多，很容易钓到爆护。下面，我们就讲下夏季用嫩玉米钓草鱼的4个技巧。</p>
+<p><strong>- 第三，使用嫩玉米</strong></p>
+<p>一、使用新鲜的甜玉米或水果玉米</p>
+<p>草鱼在高温天气时，非常喜欢吃嫩玉米，对嫩玉米中的甜玉米更为喜欢，甜玉米中的水果玉米则最好用。在用刀削玉米粒时，尽量削的深一些，让玉米粒成块地粘在一起，打窝诱鱼的效果更好。</p>
+<p>二、玉米中要加白酒和糖</p>
+<p>在夏季的炎热天气，嫩玉米粒很容易发酵变酸，垂钓效果就会大打折扣。为了防止嫩玉米粒发酵变质，可以在其中添加少量的白酒，保鲜效果很好。此外，还可以在嫩玉米中添加少量的糖，用来增加甜度，提高鱼饵的适口性，果葡糖浆或者蜂蜜都可以。</p>
+<p>三、在玉米中添加诱食剂</p>
+<p>每500克嫩玉米粒，可以添加1毫升的多巴盐和0.5毫升的鱼阿法，对草鱼的诱食效果非常好，能够增加窝子里草鱼的饥饿感和兴奋程度，让鱼口变得更好。</p>
+<p>四、正确的打窝方法</p>
+<p>草鱼是中下层鱼类，但不是底栖鱼类，不会老老实实底部窝子里吃食。想要把很多的草鱼诱到钓点里，钓鱼人需要持续地打窝，每分钟打一勺嫩玉米粒下去，每勺10~20粒嫩玉米，只要保持住较高的打窝频率，就能够钓到较多的草鱼。</p>
+<p><img src="http://iili.io/HSg1Je9.md.jpg"></p>
+<p>图1（水库环境）</p>
+<p><img src="http://iili.io/HSglL6Q.md.jpg"></p>
+<p>图2（22年夏天三一水库用嫩玉米连竿小草鱼）</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【迭代器与生成器】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-01 14:23:24" itemprop="dateCreated datePublished" datetime="2023-06-01T14:23:24+08:00">2023-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【迭代器与生成器】" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Python3-迭代器与生成器"><a href="#Python3-迭代器与生成器" class="headerlink" title="- Python3 迭代器与生成器"></a>- Python3 迭代器与生成器</h2><h2 id="迭代器"><a href="#迭代器" class="headerlink" title="- 迭代器"></a>- 迭代器</h2><p>迭代是Python最强大的功能之一，是访问集合元素的一种方式。</p>
+<p>迭代器是一个可以记住遍历的位置的对象。</p>
+<p>迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退。</p>
+<p>迭代器有两个基本的方法：iter() 和 next()。</p>
+<p>字符串，列表或元组对象都可用于创建迭代器：</p>
+<blockquote>
+<p><strong>实例(Python 3.0+):</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list=[1,2,3,4]</span><br><span class="line">&gt;&gt;&gt; it = iter(list)    # 创建迭代器对象</span><br><span class="line">&gt;&gt;&gt; print (next(it))   # 输出迭代器的下一个元素</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; print (next(it))</span><br><span class="line">2</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>迭代器对象可以使用常规for语句进行遍历：</p>
+<blockquote>
+<p><strong>实例(Python 3.0+):</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list=[1,2,3,4]</span><br><span class="line">it = iter(list)    # 创建迭代器对象</span><br><span class="line">for x in it:</span><br><span class="line">    print (x, end=&quot; &quot;)</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>执行以上程序，输出结果如下：</p>
+<pre><code>1 2 3 4
+</code></pre>
+<p>也可以使用 next() 函数：</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/05/%E4%BA%94%E6%AD%A5%E8%B0%83%E6%BC%82%E6%B3%95/#more" rel="contents">
+              <a class="btn" href="/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8%E3%80%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -779,7 +825,7 @@ var2[1:5]:  unoo
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/05/05/%E6%80%8E%E4%B9%88%E9%81%BF%E5%85%8D%E8%9E%83%E8%9F%B9%E9%97%B9%E7%AA%9D/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A8%E5%AF%BC%E5%BC%8F%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -793,7 +839,7 @@ var2[1:5]:  unoo
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/05/05/%E6%80%8E%E4%B9%88%E9%81%BF%E5%85%8D%E8%9E%83%E8%9F%B9%E9%97%B9%E7%AA%9D/" class="post-title-link" itemprop="url">怎么避免螃蟹闹窝</a>
+            <a href="/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A8%E5%AF%BC%E5%BC%8F%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【推导式】</a>
         </h2>
 
         <div class="post-meta">
@@ -803,7 +849,7 @@ var2[1:5]:  unoo
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-05-05 11:05:39" itemprop="dateCreated datePublished" datetime="2023-05-05T11:05:39+08:00">2023-05-05</time>
+              <time title="创建时间：2023-06-01 14:07:23" itemprop="dateCreated datePublished" datetime="2023-06-01T14:07:23+08:00">2023-06-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -818,12 +864,16 @@ var2[1:5]:  unoo
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%92%93%E9%B1%BC/" itemprop="url" rel="index"><span itemprop="name">钓鱼</span></a>
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
                 </span>
             </span>
 
           
-            <span id="/2023/05/05/%E6%80%8E%E4%B9%88%E9%81%BF%E5%85%8D%E8%9E%83%E8%9F%B9%E9%97%B9%E7%AA%9D/" class="post-meta-item leancloud_visitors" data-flag-title="怎么避免螃蟹闹窝" title="阅读次数">
+            <span id="/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A8%E5%AF%BC%E5%BC%8F%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【推导式】" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -838,8 +888,8 @@ var2[1:5]:  unoo
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/05/05/%E6%80%8E%E4%B9%88%E9%81%BF%E5%85%8D%E8%9E%83%E8%9F%B9%E9%97%B9%E7%AA%9D/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/05/05/%E6%80%8E%E4%B9%88%E9%81%BF%E5%85%8D%E8%9E%83%E8%9F%B9%E9%97%B9%E7%AA%9D/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A8%E5%AF%BC%E5%BC%8F%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A8%E5%AF%BC%E5%BC%8F%E3%80%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -854,23 +904,41 @@ var2[1:5]:  unoo
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote>
-<p><strong>钓鱼：遇到螃蟹闹窝怎么办！</strong></p>
-</blockquote>
-<blockquote>
-<p>小鱼闹窝、小虾闹窝及螃蟹闹窝，但凡遇到其中一个，无疑令钓鱼人烦躁不堪，钩饵入水难以就位着底，中途截口时有发生；浮漂上下浮动，如同跳芭蕾舞，动作剧烈却提竿不中鱼。回到钓友的问题，钓鱼时遇到螃蟹闹窝，如何应对，以最大程度获得较好鱼口。本文以此为起点，一窥究竟。</p>
-</blockquote>
-<hr>
-<p><img src="https://iili.io/HSglg99.md.jpg"></p>
-<hr>
-<pre><code>**应对螃蟹闹窝，采取的应对措施有哪些：**
+          <h2 id="Python-推导式"><a href="#Python-推导式" class="headerlink" title="- Python 推导式"></a>- Python 推导式</h2><p>Python 推导式是一种独特的数据处理方式，可以从一个数据序列构建另一个新的数据序列的结构体。</p>
+<p>Python 支持各种数据结构的推导式：</p>
+<ul>
+<li><p>列表(list)推导式</p>
+</li>
+<li><p>字典(dict)推导式</p>
+</li>
+<li><p>集合(set)推导式</p>
+</li>
+<li><p>元组(tuple)推导式</p>
+</li>
+</ul>
+<h2 id="列表推导式"><a href="#列表推导式" class="headerlink" title="- 列表推导式"></a>- 列表推导式</h2><p>列表推导式格式为：</p>
+<pre><code>[表达式 for 变量 in 列表] 
+[out_exp_res for out_exp in input_list]
 </code></pre>
+<p>或者 </p>
+<pre><code>[表达式 for 变量 in 列表 if 条件]
+[out_exp_res for out_exp in input_list if condition]
+</code></pre>
+<p>out_exp_res：列表生成元素表达式，可以是有返回值的函数。<br>for out_exp in input_list：迭代 input_list 将 out_exp 传入到 out_exp_res 表达式中。<br>if condition：条件语句，可以过滤列表中不符合条件的值。<br>过滤掉长度小于或等于3的字符串列表，并将剩下的转换成大写字母：</p>
 <blockquote>
-<p>螃蟹属于甲壳类动物，拥有一双锋利且坚硬的夹钳，所以主线、子线它能轻而易举地切断。绝大多数的螃蟹偏杂食性，同鲫鱼、鲤鱼类似，像植物碎屑、藻类维生素都能摄食，但更偏好些腥味的肉食。另外不同于鱼类，能够在各水层自由游动，螃蟹多栖息在水底，像碎石堆缝隙、水草丛、石穴等常有它活跃的身影。熟悉螃蟹的这些习性，可有针对性采取应对措施。</p>
+<p><strong>实例：</strong></p>
 </blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; names = [&#x27;Bob&#x27;,&#x27;Tom&#x27;,&#x27;alice&#x27;,&#x27;Jerry&#x27;,&#x27;Wendy&#x27;,&#x27;Smith&#x27;]</span><br><span class="line">&gt;&gt;&gt; new_names = [name.upper()for name in names if len(name)&gt;3]</span><br><span class="line">&gt;&gt;&gt; print(new_names)</span><br><span class="line">[&#x27;ALICE&#x27;, &#x27;JERRY&#x27;, &#x27;WENDY&#x27;, &#x27;SMITH&#x27;]</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>计算 30 以内可以被 3 整除的整数：</p>
+<blockquote>
+<p><strong>实例：</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; multiples = [i for i in range(30) if i % 3 == 0]</span><br><span class="line">&gt;&gt;&gt; print(multiples)</span><br><span class="line">[0, 3, 6, 9, 12, 15, 18, 21, 24, 27]</span><br></pre></td></tr></table></figure>
+</code></pre>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/05/%E6%80%8E%E4%B9%88%E9%81%BF%E5%85%8D%E8%9E%83%E8%9F%B9%E9%97%B9%E7%AA%9D/#more" rel="contents">
+              <a class="btn" href="/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A8%E5%AF%BC%E5%BC%8F%E3%80%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -893,7 +961,7 @@ var2[1:5]:  unoo
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -961,7 +1029,7 @@ var2[1:5]:  unoo
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-count">77</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

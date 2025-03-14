@@ -139,7 +139,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">68</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">77</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -173,7 +173,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90JSON%E3%80%91/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/07/03/%E6%89%8B%E7%AB%BF%E6%8A%BD%E7%99%BD%E6%9D%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -187,7 +187,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90JSON%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【JSON】</a>
+            <a href="/2023/07/03/%E6%89%8B%E7%AB%BF%E6%8A%BD%E7%99%BD%E6%9D%A1/" class="post-title-link" itemprop="url">手竿抽白条</a>
         </h2>
 
         <div class="post-meta">
@@ -197,7 +197,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-06-25 18:03:08" itemprop="dateCreated datePublished" datetime="2023-06-25T18:03:08+08:00">2023-06-25</time>
+              <time title="创建时间：2023-07-03 14:27:41" itemprop="dateCreated datePublished" datetime="2023-07-03T14:27:41+08:00">2023-07-03</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -212,16 +212,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
                 </span>
             </span>
 
           
-            <span id="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90JSON%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【JSON】" title="阅读次数">
+            <span id="/2023/07/03/%E6%89%8B%E7%AB%BF%E6%8A%BD%E7%99%BD%E6%9D%A1/" class="post-meta-item leancloud_visitors" data-flag-title="手竿抽白条" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -236,8 +232,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90JSON%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90JSON%E3%80%91/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/07/03/%E6%89%8B%E7%AB%BF%E6%8A%BD%E7%99%BD%E6%9D%A1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/03/%E6%89%8B%E7%AB%BF%E6%8A%BD%E7%99%BD%E6%9D%A1/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -252,45 +248,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Python3-JSON-数据解析"><a href="#Python3-JSON-数据解析" class="headerlink" title="- Python3 JSON 数据解析"></a>- Python3 JSON 数据解析</h2><p>JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。</p>
-<p>Python3 中可以使用 json 模块来对 JSON 数据进行编解码，它包含了两个函数：</p>
-<p>json.dumps(): 对数据进行编码。<br>json.loads(): 对数据进行解码。</p>
-<p><img src="https://www.runoob.com/wp-content/uploads/2016/04/json-dumps-loads.png"><br>在 json 的编解码过程中，Python 的原始类型与 json 类型会相互转换，具体的转化对照如下：</p>
-<p><strong>Python 编码为 JSON 类型转换对应表：</strong></p>
-<pre><code>Python	JSON
-dict	object
-list, tuple	array
-str	string
-int, float, int- &amp; float-derived Enums	number
-True	true
-False	false
-None	null
-</code></pre>
-<p><strong>JSON 解码为 Python 类型转换对应表：</strong></p>
-<pre><code>JSON	Python
-object	dict
-array	list
-string	str
-number (int)	int
-number (real)	float
-true	True
-false	False
-null	None
-</code></pre>
-<p><strong>json.dumps 与 json.loads 实例</strong></p>
-<p>以下实例演示了 Python 数据结构转换为JSON：</p>
-<blockquote>
-<p><strong>实例(Python 3.0+)</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python3</span><br><span class="line"> </span><br><span class="line">import json</span><br><span class="line"> </span><br><span class="line"># Python 字典类型转换为 JSON 对象</span><br><span class="line">data = &#123;</span><br><span class="line">    &#x27;no&#x27; : 1,</span><br><span class="line">    &#x27;name&#x27; : &#x27;Runoob&#x27;,</span><br><span class="line">    &#x27;url&#x27; : &#x27;http://www.runoob.com&#x27;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">json_str = json.dumps(data)</span><br><span class="line">print (&quot;Python 原始数据：&quot;, repr(data))</span><br><span class="line">print (&quot;JSON 对象：&quot;, json_str)</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>执行以上代码输出结果为：</p>
-<pre><code>Python 原始数据： &#123;&#39;url&#39;: &#39;http://www.runoob.com&#39;, &#39;no&#39;: 1, &#39;name&#39;: &#39;Runoob&#39;&#125;
-JSON 对象： &#123;&quot;url&quot;: &quot;http://www.runoob.com&quot;, &quot;no&quot;: 1, &quot;name&quot;: &quot;Runoob&quot;&#125;
-</code></pre>
+          <p>今天周日，阴天适合钓鱼，9点多来到三一水库钓红尾。这个水库我是常客了，周末没事几乎都会来，所以对这个水库的鱼情还是比较了解，小黄尾，白条，小鲫鱼比较多，几乎没大鱼，偶尔能上个小鲤鱼，毕竟钓鱼免费，钓钓小鱼玩一下还是可以的。今天的目标鱼和往常一样主钓小黄尾和白条。鱼竿12尺玄武人Y，1号主线，0.4子线4号轻口袖，拉饵，从9点半到下午5点，连竿不断，中途竞然还一竿上了3尾白条，到下午收竿估计钓了300多尾，但是个体太小，好多都是挂起来的，下周换2号钩试试说不定能钓更多。<br>装备搭配：12尺玄武人Y，1号主线，0.4子线4号轻口袖<br><img src="https://iili.io/HijrPs4.md.jpg"><br>鱼获展示1<br><img src="https://iili.io/HijrL12.md.jpg"><br>鱼获展示2</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90JSON%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/07/03/%E6%89%8B%E7%AB%BF%E6%8A%BD%E7%99%BD%E6%9D%A1/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -314,7 +275,7 @@ JSON 对象： &#123;&quot;url&quot;: &quot;http://www.runoob.com&quot;, &quot;n
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90XML%E8%A7%A3%E6%9E%90%E3%80%91/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/07/03/%E8%B7%AF%E4%BA%9A%E5%BC%80%E5%85%89%E4%B8%8A%E8%B4%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -328,7 +289,7 @@ JSON 对象： &#123;&quot;url&quot;: &quot;http://www.runoob.com&quot;, &quot;n
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90XML%E8%A7%A3%E6%9E%90%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【XML解析】</a>
+            <a href="/2023/07/03/%E8%B7%AF%E4%BA%9A%E5%BC%80%E5%85%89%E4%B8%8A%E8%B4%A7/" class="post-title-link" itemprop="url">路亚开光上货</a>
         </h2>
 
         <div class="post-meta">
@@ -338,7 +299,7 @@ JSON 对象： &#123;&quot;url&quot;: &quot;http://www.runoob.com&quot;, &quot;n
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-06-25 16:30:40" itemprop="dateCreated datePublished" datetime="2023-06-25T16:30:40+08:00">2023-06-25</time>
+              <time title="创建时间：2023-07-03 14:20:17" itemprop="dateCreated datePublished" datetime="2023-07-03T14:20:17+08:00">2023-07-03</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -353,16 +314,12 @@ JSON 对象： &#123;&quot;url&quot;: &quot;http://www.runoob.com&quot;, &quot;n
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
                 </span>
             </span>
 
           
-            <span id="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90XML%E8%A7%A3%E6%9E%90%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【XML解析】" title="阅读次数">
+            <span id="/2023/07/03/%E8%B7%AF%E4%BA%9A%E5%BC%80%E5%85%89%E4%B8%8A%E8%B4%A7/" class="post-meta-item leancloud_visitors" data-flag-title="路亚开光上货" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -377,8 +334,8 @@ JSON 对象： &#123;&quot;url&quot;: &quot;http://www.runoob.com&quot;, &quot;n
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90XML%E8%A7%A3%E6%9E%90%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90XML%E8%A7%A3%E6%9E%90%E3%80%91/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/07/03/%E8%B7%AF%E4%BA%9A%E5%BC%80%E5%85%89%E4%B8%8A%E8%B4%A7/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/03/%E8%B7%AF%E4%BA%9A%E5%BC%80%E5%85%89%E4%B8%8A%E8%B4%A7/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -393,70 +350,229 @@ JSON 对象： &#123;&quot;url&quot;: &quot;http://www.runoob.com&quot;, &quot;n
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Python3-XML-解析"><a href="#Python3-XML-解析" class="headerlink" title="- Python3 XML 解析"></a>- Python3 XML 解析</h2><h2 id="什么是-XML？"><a href="#什么是-XML？" class="headerlink" title="- 什么是 XML？"></a>- 什么是 XML？</h2><p>XML 指可扩展标记语言（eXtensible Markup Language），标准通用标记语言的子集，是一种用于标记电子文件使其具有结构性的标记语言。</p>
-<p>XML 被设计用来传输和存储数据。</p>
-<p>XML 是一套定义语义标记的规则，这些标记将文档分成许多部件并对这些部件加以标识。</p>
-<p>它也是元标记语言，即定义了用于定义其他与特定领域有关的、语义的、结构化的标记语言的句法语言。</p>
-<h2 id="Python-对-XML-的解析"><a href="#Python-对-XML-的解析" class="headerlink" title="- Python 对 XML 的解析"></a>- Python 对 XML 的解析</h2><p>常见的 XML 编程接口有 DOM 和 SAX，这两种接口处理 XML 文件的方式不同，当然使用场合也不同。</p>
-<p>Python 有三种方法解析 XML，SAX，DOM，以及 ElementTree:</p>
-<p><strong>1.SAX (simple API for XML )</strong></p>
-<p>Python 标准库包含 SAX 解析器，SAX 用事件驱动模型，通过在解析 XML 的过程中触发一个个的事件并调用用户定义的回调函数来处理 XML 文件。</p>
-<p><strong>2.DOM(Document Object Model)</strong></p>
-<p>将 XML 数据在内存中解析成一个树，通过对树的操作来操作 XML。</p>
-<p>本章节使用到的 XML 实例文件 movies.xml 内容如下：</p>
-<blockquote>
-<p><strong>实例</strong></p>
-</blockquote>
-<pre><code>&lt;collection shelf=&quot;New Arrivals&quot;&gt;
-&lt;movie title=&quot;Enemy Behind&quot;&gt;
-   &lt;type&gt;War, Thriller&lt;/type&gt;
-   &lt;format&gt;DVD&lt;/format&gt;
-   &lt;year&gt;2003&lt;/year&gt;
-   &lt;rating&gt;PG&lt;/rating&gt;
-   &lt;stars&gt;10&lt;/stars&gt;
-   &lt;description&gt;Talk about a US-Japan war&lt;/description&gt;
-&lt;/movie&gt;
-&lt;movie title=&quot;Transformers&quot;&gt;
-   &lt;type&gt;Anime, Science Fiction&lt;/type&gt;
-   &lt;format&gt;DVD&lt;/format&gt;
-   &lt;year&gt;1989&lt;/year&gt;
-   &lt;rating&gt;R&lt;/rating&gt;
-   &lt;stars&gt;8&lt;/stars&gt;
-   &lt;description&gt;A schientific fiction&lt;/description&gt;
-&lt;/movie&gt;
-   &lt;movie title=&quot;Trigun&quot;&gt;
-   &lt;type&gt;Anime, Action&lt;/type&gt;
-   &lt;format&gt;DVD&lt;/format&gt;
-   &lt;episodes&gt;4&lt;/episodes&gt;
-   &lt;rating&gt;PG&lt;/rating&gt;
-   &lt;stars&gt;10&lt;/stars&gt;
-   &lt;description&gt;Vash the Stampede!&lt;/description&gt;
-&lt;/movie&gt;
-&lt;movie title=&quot;Ishtar&quot;&gt;
-   &lt;type&gt;Comedy&lt;/type&gt;
-   &lt;format&gt;VHS&lt;/format&gt;
-   &lt;rating&gt;PG&lt;/rating&gt;
-   &lt;stars&gt;2&lt;/stars&gt;
-   &lt;description&gt;Viewable boredom&lt;/description&gt;
-&lt;/movie&gt;
-&lt;/collection&gt;
+          <p>(佐大师164L-BFS + 阿德BFS + 飞蝇)<br><img src="https://iili.io/Hijrtd7.md.jpg"></p>
+<p>今天周六，准备去狮子水库大干一天。早早地起床收拾好装备，各种饵料，窝料，钓箱，钓伞，竿包，活鱼筒满满一后背箱。到水库9点左右，开饵打窝地摊摆好9点半了。满怀信心等待上鱼，结果一直到下午3点，又晒又热不说，关键一口没有，这谁受的了，果断收竿回家。路过西来大桥发现河里好多钓鱼佬在玩溪流钓，才反应过来今天禁鱼期结束可以钓鱼了。虽然刚刚空军但钓鱼人就是这样看到水就走不动。马上车停路边去探查一下鱼情，乖乖不得了，每个人都钓了好多马口，桃花，大白条。可惜我没带溪流钓装备，今天的台钓装备都是干大鱼的。在后备箱一通乱翻，找到一套路亚微物装备，结果到河边接连三个炒粉，第四竿成功抛出大概十米，慢慢收线突然竿尖一颤，开光上鱼小马口，玩了两个小时上了两个马口，感觉路亚比台钓好玩</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/29/Next%E4%B8%BB%E9%A2%98%E6%96%B0%E5%A2%9E%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E4%BA%8C%E7%BB%B4%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/29/Next%E4%B8%BB%E9%A2%98%E6%96%B0%E5%A2%9E%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E4%BA%8C%E7%BB%B4%E7%A0%81/" class="post-title-link" itemprop="url">Next主题新增微信公众号二维码</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-29 18:04:52" itemprop="dateCreated datePublished" datetime="2023-06-29T18:04:52+08:00">2023-06-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">Hexo博客搭建</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/06/29/Next%E4%B8%BB%E9%A2%98%E6%96%B0%E5%A2%9E%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E4%BA%8C%E7%BB%B4%E7%A0%81/" class="post-meta-item leancloud_visitors" data-flag-title="Next主题新增微信公众号二维码" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/06/29/Next%E4%B8%BB%E9%A2%98%E6%96%B0%E5%A2%9E%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E4%BA%8C%E7%BB%B4%E7%A0%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/29/Next%E4%B8%BB%E9%A2%98%E6%96%B0%E5%A2%9E%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E4%BA%8C%E7%BB%B4%E7%A0%81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="获取微信公众号二维码图片"><a href="#获取微信公众号二维码图片" class="headerlink" title="- 获取微信公众号二维码图片"></a>- 获取微信公众号二维码图片</h2><p>从公众号管理后台下载公众号二维码图片，如下图所示。将选中的图片放入主题目录下的.&#x2F;themes&#x2F;next&#x2F;source&#x2F;images&#x2F;目录中，并将图片改名为wechat-qcode.jpg。<br><img src="https://iili.io/HiKoygV.png"></p>
+<h2 id="设置微信公众号二维码在侧边栏显示"><a href="#设置微信公众号二维码在侧边栏显示" class="headerlink" title="- 设置微信公众号二维码在侧边栏显示"></a>- 设置微信公众号二维码在侧边栏显示</h2><p>编辑 themes&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;sidebar.swig 文件，在自己觉得排版合适的位置插入以下代码：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wechat_OA&quot;&gt;</span><br><span class="line">	&lt;span&gt;欢迎关注我的公众号&lt;/span&gt;</span><br><span class="line">	&lt;!-- 这里添加你的二维码图片 --&gt;</span><br><span class="line">	&lt;img src =&quot;/images/wechat-qcode.jpg&quot;&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<h2 id="Python-使用-SAX-解析-xml"><a href="#Python-使用-SAX-解析-xml" class="headerlink" title="- Python 使用 SAX 解析 xml"></a>- Python 使用 SAX 解析 xml</h2><p>SAX 是一种基于事件驱动的API。</p>
-<p>利用 SAX 解析 XML 文档牵涉到两个部分: 解析器和事件处理器。</p>
-<p>解析器负责读取 XML 文档，并向事件处理器发送事件，如元素开始跟元素结束事件。</p>
-<p>而事件处理器则负责对事件作出响应，对传递的 XML 数据进行处理。</p>
+<p>如下图所示<br><img src="https://iili.io/HiKoKKl.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/28/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%95%B0%E7%BB%84%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/28/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%95%B0%E7%BB%84%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【C#数组】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-28 15:40:48" itemprop="dateCreated datePublished" datetime="2023-06-28T15:40:48+08:00">2023-06-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/06/28/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%95%B0%E7%BB%84%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【C#数组】" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/06/28/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%95%B0%E7%BB%84%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/28/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%95%B0%E7%BB%84%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="C-数组（Array）"><a href="#C-数组（Array）" class="headerlink" title="- C# 数组（Array）"></a>- C# 数组（Array）</h2><p>数组是一个存储相同类型元素的固定大小的顺序集合。数组是用来存储数据的集合，通常认为数组是一个同一类型变量的集合。</p>
+<p>声明数组变量并不是声明 number0、number1、…、number99 一个个单独的变量，而是声明一个就像 numbers 这样的变量，然后使用 numbers[0]、numbers[1]、…、numbers[99] 来表示一个个单独的变量。数组中某个指定的元素是通过索引来访问的。</p>
+<p>所有的数组都是由连续的内存位置组成的。最低的地址对应第一个元素，最高的地址对应最后一个元素。</p>
+<h2 id="声明数组"><a href="#声明数组" class="headerlink" title="- 声明数组"></a>- 声明数组</h2><p>在 C# 中声明一个数组，您可以使用下面的语法：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datatype[] arrayName;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>其中，</p>
 <ul>
-<li><p>1、对大型文件进行处理；</p>
+<li><p>datatype 用于指定被存储在数组中的元素的类型。</p>
 </li>
-<li><p>2、只需要文件的部分内容，或者只需从文件中得到特定信息。</p>
+<li><p><input disabled="" type="checkbox"> 
+指定数组的秩（维度）。秩指定数组的大小。</p>
 </li>
-<li><p>3、想建立自己的对象模型的时候。</p>
+<li><p>arrayName 指定数组的名称。</p>
 </li>
 </ul>
-<p>在 Python 中使用 sax 方式处理 xml 要先引入 xml.sax 中的 parse 函数，还有 xml.sax.handler 中的 ContentHandler。</p>
+<p>例如：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double[] balance;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="初始化数组"><a href="#初始化数组" class="headerlink" title="- 初始化数组"></a>- 初始化数组</h2><p>声明一个数组不会在内存中初始化数组。当初始化数组变量时，您可以赋值给数组。</p>
+<p>数组是一个引用类型，所以您需要使用 new 关键字来创建数组的实例。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90XML%E8%A7%A3%E6%9E%90%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/06/28/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%95%B0%E7%BB%84%E3%80%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -480,7 +596,7 @@ JSON 对象： &#123;&quot;url&quot;: &quot;http://www.runoob.com&quot;, &quot;n
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%91/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%AF%E7%A9%BA%E7%B1%BB%E5%9E%8BNullable%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -494,7 +610,7 @@ JSON 对象： &#123;&quot;url&quot;: &quot;http://www.runoob.com&quot;, &quot;n
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【多线程】</a>
+            <a href="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%AF%E7%A9%BA%E7%B1%BB%E5%9E%8BNullable%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【C#可空类型Nullable】</a>
         </h2>
 
         <div class="post-meta">
@@ -504,7 +620,7 @@ JSON 对象： &#123;&quot;url&quot;: &quot;http://www.runoob.com&quot;, &quot;n
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-06-25 15:17:32" itemprop="dateCreated datePublished" datetime="2023-06-25T15:17:32+08:00">2023-06-25</time>
+              <time title="创建时间：2023-06-27 16:59:12" itemprop="dateCreated datePublished" datetime="2023-06-27T16:59:12+08:00">2023-06-27</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -519,16 +635,16 @@ JSON 对象： &#123;&quot;url&quot;: &quot;http://www.runoob.com&quot;, &quot;n
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
                 </span>
             </span>
 
           
-            <span id="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【多线程】" title="阅读次数">
+            <span id="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%AF%E7%A9%BA%E7%B1%BB%E5%9E%8BNullable%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【C#可空类型Nullable】" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -543,8 +659,8 @@ JSON 对象： &#123;&quot;url&quot;: &quot;http://www.runoob.com&quot;, &quot;n
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%91/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%AF%E7%A9%BA%E7%B1%BB%E5%9E%8BNullable%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%AF%E7%A9%BA%E7%B1%BB%E5%9E%8BNullable%E3%80%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -559,207 +675,56 @@ JSON 对象： &#123;&quot;url&quot;: &quot;http://www.runoob.com&quot;, &quot;n
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Python3-多线程"><a href="#Python3-多线程" class="headerlink" title="- Python3 多线程"></a>- Python3 多线程</h2><p>多线程类似于同时执行多个不同程序，多线程运行有如下优点：</p>
-<ul>
-<li><p>使用线程可以把占据长时间的程序中的任务放到后台去处理。</p>
-</li>
-<li><p>用户界面可以更加吸引人，比如用户点击了一个按钮去触发某些事件的处理，可以弹出一个进度条来显示处理的进度。</p>
-</li>
-<li><p>程序的运行速度可能加快。</p>
-</li>
-<li><p>在一些等待的任务实现上如用户输入、文件读写和网络收发数据等，线程就比较有用了。在这种情况下我们可以释放一些珍贵的资源如内存占用等等。<br>每个独立的线程有一个程序运行的入口、顺序执行序列和程序的出口。但是线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制。</p>
-</li>
-</ul>
-<p>每个线程都有他自己的一组CPU寄存器，称为线程的上下文，该上下文反映了线程上次运行该线程的CPU寄存器的状态。</p>
-<p>指令指针和堆栈指针寄存器是线程上下文中两个最重要的寄存器，线程总是在进程得到上下文中运行的，这些地址都用于标志拥有线程的进程地址空间中的内存。</p>
-<ul>
-<li><p>线程可以被抢占（中断）。</p>
-</li>
-<li><p>在其他线程正在运行时，线程可以暂时搁置（也称为睡眠） – 这就是线程的退让。<br>线程可以分为:</p>
-</li>
-<li><p><strong>内核线程</strong>：由操作系统内核创建和撤销。</p>
-</li>
-<li><p><strong>用户线程</strong>：不需要内核支持而在用户程序中实现的线程。<br>Python3 线程中常用的两个模块为：</p>
-</li>
-<li><p>_thread</p>
-</li>
-<li><p>threading(推荐使用)<br>thread 模块已被废弃。用户可以使用 threading 模块代替。所以，在 Python3 中不能再使用”thread” 模块。为了兼容性，Python3 将 thread 重命名为 “_thread”。</p>
-</li>
-</ul>
-<h2 id="开始学习Python线程"><a href="#开始学习Python线程" class="headerlink" title="- 开始学习Python线程"></a>- 开始学习Python线程</h2><p>Python中使用线程有两种方式：函数或者用类来包装线程对象。</p>
-<p>函数式：调用 _thread 模块中的start_new_thread()函数来产生新线程。语法如下:</p>
-<pre><code>_thread.start_new_thread ( function, args[, kwargs] )
+          <h2 id="C-可空类型（Nullable）"><a href="#C-可空类型（Nullable）" class="headerlink" title="- C# 可空类型（Nullable）"></a>- C# 可空类型（Nullable）</h2><h2 id="C-单问号-与-双问号"><a href="#C-单问号-与-双问号" class="headerlink" title="- C# 单问号 ? 与 双问号 ??"></a>- C# 单问号 ? 与 双问号 ??</h2><p>? 单问号用于对 int、double、bool 等无法直接赋值为 null 的数据类型进行 null 的赋值，意思是这个数据类型是 Nullable 类型的。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int? i = 3;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>参数说明:</p>
-<ul>
-<li><p>function - 线程函数。</p>
-</li>
-<li><p>args - 传递给线程函数的参数,他必须是个tuple类型。</p>
-</li>
-<li><p>kwargs - 可选参数。</p>
-</li>
-</ul>
-<blockquote>
-<p><strong>实例</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python3</span><br><span class="line"></span><br><span class="line">import _thread</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line"># 为线程定义一个函数</span><br><span class="line">def print_time( threadName, delay):</span><br><span class="line">   count = 0</span><br><span class="line">   while count &lt; 5:</span><br><span class="line">      time.sleep(delay)</span><br><span class="line">      count += 1</span><br><span class="line">      print (&quot;%s: %s&quot; % ( threadName, time.ctime(time.time()) ))</span><br><span class="line"></span><br><span class="line"># 创建两个线程</span><br><span class="line">try:</span><br><span class="line">   _thread.start_new_thread( print_time, (&quot;Thread-1&quot;, 2, ) )</span><br><span class="line">   _thread.start_new_thread( print_time, (&quot;Thread-2&quot;, 4, ) )</span><br><span class="line">except:</span><br><span class="line">   print (&quot;Error: 无法启动线程&quot;)</span><br><span class="line"></span><br><span class="line">while 1:</span><br><span class="line">   pass</span><br></pre></td></tr></table></figure>
+<p>等同于：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Nullable&lt;int&gt; i = new Nullable&lt;int&gt;(3);</span><br></pre></td></tr></table></figure>
+
+int i; //默认值0
+int? ii; //默认值null
 </code></pre>
-<p>执行以上程序输出结果如下：</p>
-<pre><code>Thread-1: Wed Jan  5 17:38:08 2022
-Thread-2: Wed Jan  5 17:38:10 2022
-Thread-1: Wed Jan  5 17:38:10 2022
-Thread-1: Wed Jan  5 17:38:12 2022
-Thread-2: Wed Jan  5 17:38:14 2022
-Thread-1: Wed Jan  5 17:38:14 2022
-Thread-1: Wed Jan  5 17:38:16 2022
-Thread-2: Wed Jan  5 17:38:18 2022
-Thread-2: Wed Jan  5 17:38:22 2022
-Thread-2: Wed Jan  5 17:38:26 2022
+<p>?? 双问号用于判断一个变量在为 null 的时候返回一个指定的值。</p>
+<p>接下来我们详细说明。</p>
+<h2 id="C-可空类型（Nullable）-1"><a href="#C-可空类型（Nullable）-1" class="headerlink" title="- C# 可空类型（Nullable）"></a>- C# 可空类型（Nullable）</h2><p>C# 提供了一个特殊的数据类型，nullable 类型（可空类型），可空类型可以表示其基础值类型正常范围内的值，再加上一个 null 值。</p>
+<p>例如，Nullable&lt; Int32 &gt;，读作”可空的 Int32”，可以被赋值为 -2,147,483,648 到 2,147,483,647 之间的任意值，也可以被赋值为 null 值。类似的，Nullable&lt; bool &gt; 变量可以被赋值为 true 或 false 或 null。</p>
+<p>在处理数据库和其他包含可能未赋值的元素的数据类型时，将 null 赋值给数值类型或布尔型的功能特别有用。例如，数据库中的布尔型字段可以存储值 true 或 false，或者，该字段也可以未定义。</p>
+<p>声明一个 nullable 类型（可空类型）的语法如下：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt; data_type&gt; ? &lt;variable_name&gt; = null;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>执行以上程后可以按下 ctrl-c 退出。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/21/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/21/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【正则表达式】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-21 11:58:29" itemprop="dateCreated datePublished" datetime="2023-06-21T11:58:29+08:00">2023-06-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/06/21/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【正则表达式】" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/06/21/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/21/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Python3-正则表达式"><a href="#Python3-正则表达式" class="headerlink" title="- Python3 正则表达式"></a>- Python3 正则表达式</h2><p>正则表达式是一个特殊的字符序列，它能帮助你方便的检查一个字符串是否与某种模式匹配。</p>
-<p>Python 自1.5版本起增加了re 模块，它提供 Perl 风格的正则表达式模式。</p>
-<p>re 模块使 Python 语言拥有全部的正则表达式功能。</p>
-<p>compile 函数根据一个模式字符串和可选的标志参数生成一个正则表达式对象。该对象拥有一系列方法用于正则表达式匹配和替换。</p>
-<p>re 模块也提供了与这些方法功能完全一致的函数，这些函数使用一个模式字符串做为它们的第一个参数。</p>
-<h2 id="re-match函数"><a href="#re-match函数" class="headerlink" title="- re.match函数"></a>- re.match函数</h2><p>re.match 尝试从字符串的起始位置匹配一个模式，如果不是起始位置匹配成功的话，match()就返回none。</p>
-<p>函数语法：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">re.match(pattern, string, flags=0)</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>函数参数说明：</p>
-<pre><code>参数	  描述
-pattern	匹配的正则表达式
-string	要匹配的字符串。
-flags	标志位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等。
-</code></pre>
-<p>匹配成功re.match方法返回一个匹配的对象，否则返回None。</p>
-<p>我们可以使用group(num) 或 groups() 匹配对象函数来获取匹配表达式。</p>
-<pre><code>匹配对象方法	描述
-group(num=0)	匹配的整个表达式的字符串，group() 可以一次输入多个组号，在这种情况下它将返回一个包含那些组所对应值的元组。
-groups()	返回一个包含所有小组字符串的元组，从 1 到 所含的小组号。
-</code></pre>
+<p>下面的实例演示了可空数据类型的用法：</p>
 <blockquote>
 <p><strong>实例</strong></p>
 </blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import re</span><br><span class="line">print(re.match(&#x27;www&#x27;, &#x27;www.runoob.com&#x27;).span())  # 在起始位置匹配</span><br><span class="line">print(re.match(&#x27;com&#x27;, &#x27;www.runoob.com&#x27;))         # 不在起始位置匹配</span><br></pre></td></tr></table></figure>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace CalculatorApplication</span><br><span class="line">&#123;</span><br><span class="line">   class NullablesAtShow</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         int? num1 = null;</span><br><span class="line">         int? num2 = 45;</span><br><span class="line">         double? num3 = new double?();</span><br><span class="line">         double? num4 = 3.14157;</span><br><span class="line">         </span><br><span class="line">         bool? boolval = new bool?();</span><br><span class="line"></span><br><span class="line">         // 显示值</span><br><span class="line">         </span><br><span class="line">         Console.WriteLine(&quot;显示可空类型的值： &#123;0&#125;, &#123;1&#125;, &#123;2&#125;, &#123;3&#125;&quot;,</span><br><span class="line">                            num1, num2, num3, num4);</span><br><span class="line">         Console.WriteLine(&quot;一个可空的布尔值： &#123;0&#125;&quot;, boolval);</span><br><span class="line">         Console.ReadLine();</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>以上实例运行输出结果为：</p>
-<pre><code>(0, 3)
-None
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<pre><code>显示可空类型的值： , 45,  , 3.14157
+一个可空的布尔值：
 </code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/06/21/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<h2 id="Null-合并运算符（-）"><a href="#Null-合并运算符（-）" class="headerlink" title="- Null 合并运算符（ ?? ）"></a>- Null 合并运算符（ ?? ）</h2><p>Null 合并运算符用于定义可空类型和引用类型的默认值。Null 合并运算符为类型转换定义了一个预设值，以防可空类型的值为 Null。Null 合并运算符把操作数类型隐式转换为另一个可空（或不可空）的值类型的操作数的类型。</p>
+<p>如果第一个操作数的值为 null，则运算符返回第二个操作数的值，否则返回第一个操作数的值。下面的实例演示了这点：</p>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace CalculatorApplication</span><br><span class="line">&#123;</span><br><span class="line">   class NullablesAtShow</span><br><span class="line">   &#123;</span><br><span class="line">         </span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         </span><br><span class="line">         double? num1 = null;</span><br><span class="line">         double? num2 = 3.14157;</span><br><span class="line">         double num3;</span><br><span class="line">         num3 = num1 ?? 5.34;      // num1 如果为空值则返回 5.34</span><br><span class="line">         Console.WriteLine(&quot;num3 的值： &#123;0&#125;&quot;, num3);</span><br><span class="line">         num3 = num2 ?? 5.34;</span><br><span class="line">         Console.WriteLine(&quot;num3 的值： &#123;0&#125;&quot;, num3);</span><br><span class="line">         Console.ReadLine();</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<pre><code>num3 的值： 5.34
+num3 的值： 3.14157
+</code></pre>
+<p>说明：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">num3 = num1 ?? 5.34;      // num1 如果为空值则返回 5.34</span><br><span class="line">Console.WriteLine(&quot;num3 的值： &#123;0&#125;&quot;, num3);</span><br><span class="line">num3 = num2 ?? 5.34;</span><br><span class="line">Console.WriteLine(&quot;num3 的值： &#123;0&#125;&quot;, num3);</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>C# 中两个问号的作用是判断??左边的对象是否为 null，如果不为 null 则使用 ?? 左边的对象，如果为 null 则使用 ?? 右边的对象。</p>
+<p>比如：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = b ?? </span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>如果 b 为 null，则 a &#x3D; c，如果 b 不为 null，则 a &#x3D; b。</p>
+<p>?? 可以理解为三元运算符的简化形式：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num3 = num1 ?? 5.34;</span><br><span class="line">num3 = (num1 == null) ? 5.34 : num1;</span><br></pre></td></tr></table></figure>
+</code></pre>
+
       
     </div>
 
@@ -778,7 +743,7 @@ None
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%96%B9%E6%B3%95-foreach%E9%81%8D%E5%8E%86%E7%9A%84%E7%94%A8%E6%B3%95%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -792,7 +757,7 @@ None
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【标准库概览】</a>
+            <a href="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%96%B9%E6%B3%95-foreach%E9%81%8D%E5%8E%86%E7%9A%84%E7%94%A8%E6%B3%95%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【C#方法,foreach遍历的用法】</a>
         </h2>
 
         <div class="post-meta">
@@ -802,7 +767,7 @@ None
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-06-08 10:42:07" itemprop="dateCreated datePublished" datetime="2023-06-08T10:42:07+08:00">2023-06-08</time>
+              <time title="创建时间：2023-06-27 16:27:22" itemprop="dateCreated datePublished" datetime="2023-06-27T16:27:22+08:00">2023-06-27</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -817,16 +782,16 @@ None
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
                 </span>
             </span>
 
           
-            <span id="/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【标准库概览】" title="阅读次数">
+            <span id="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%96%B9%E6%B3%95-foreach%E9%81%8D%E5%8E%86%E7%9A%84%E7%94%A8%E6%B3%95%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【C#方法,foreach遍历的用法】" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -841,8 +806,8 @@ None
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%96%B9%E6%B3%95-foreach%E9%81%8D%E5%8E%86%E7%9A%84%E7%94%A8%E6%B3%95%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%96%B9%E6%B3%95-foreach%E9%81%8D%E5%8E%86%E7%9A%84%E7%94%A8%E6%B3%95%E3%80%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -857,172 +822,39 @@ None
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Python3-标准库概览"><a href="#Python3-标准库概览" class="headerlink" title="- Python3 标准库概览"></a>- Python3 标准库概览</h2><p>Python 标准库非常庞大，所提供的组件涉及范围十分广泛，使用标准库我们可以让您轻松地完成各种任务。</p>
-<p>以下是一些 Python3 标准库中的模块：</p>
+          <h2 id="C-方法"><a href="#C-方法" class="headerlink" title="- C# 方法"></a>- C# 方法</h2><p>一个方法是把一些相关的语句组织在一起，用来执行一个任务的语句块。每一个 C# 程序至少有一个带有 Main 方法的类。</p>
+<p>要使用一个方法，您需要：</p>
 <ul>
-<li><p>os 模块：os 模块提供了许多与操作系统交互的函数，例如创建、移动和删除文件和目录，以及访问环境变量等。</p>
+<li><p>定义方法</p>
 </li>
-<li><p>sys 模块：sys 模块提供了与 Python 解释器和系统相关的功能，例如解释器的版本和路径，以及与 stdin、stdout 和 stderr 相关的信息。</p>
-</li>
-<li><p>time 模块：time 模块提供了处理时间的函数，例如获取当前时间、格式化日期和时间、计时等。</p>
-</li>
-<li><p>datetime 模块：datetime 模块提供了更高级的日期和时间处理函数，例如处理时区、计算时间差、计算日期差等。</p>
-</li>
-<li><p>random 模块：random 模块提供了生成随机数的函数，例如生成随机整数、浮点数、序列等。</p>
-</li>
-<li><p>math 模块：math 模块提供了数学函数，例如三角函数、对数函数、指数函数、常数等。</p>
-</li>
-<li><p>re 模块：re 模块提供了正则表达式处理函数，可以用于文本搜索、替换、分割等。</p>
-</li>
-<li><p>json 模块：json 模块提供了 JSON 编码和解码函数，可以将 Python 对象转换为 JSON 格式，并从 JSON 格式中解析出 Python 对象。</p>
-</li>
-<li><p>urllib 模块：urllib 模块提供了访问网页和处理 URL 的功能，包括下载文件、发送 POST 请求、处理 cookies 等。</p>
+<li><p>调用方法</p>
 </li>
 </ul>
-<h2 id="操作系统接口"><a href="#操作系统接口" class="headerlink" title="- 操作系统接口"></a>- 操作系统接口</h2><p>os模块提供了不少与操作系统相关联的函数。</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import os</span><br><span class="line">&gt;&gt;&gt; os.getcwd()      # 返回当前的工作目录</span><br><span class="line">&#x27;C:\\Python34&#x27;</span><br><span class="line">&gt;&gt;&gt; os.chdir(&#x27;/server/accesslogs&#x27;)   # 修改当前的工作目录</span><br><span class="line">&gt;&gt;&gt; os.system(&#x27;mkdir today&#x27;)   # 执行系统命令 mkdir </span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+<h2 id="C-中定义方法"><a href="#C-中定义方法" class="headerlink" title="- C# 中定义方法"></a>- C# 中定义方法</h2><p>当定义一个方法时，从根本上说是在声明它的结构的元素。在 C# 中，定义方法的语法如下：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Access Specifier&gt; &lt;Return Type&gt; &lt;Method Name&gt;(Parameter List)</span><br><span class="line">&#123;</span><br><span class="line">   Method Body</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>建议使用 “import os” 风格而非 “from os import *”。这样可以保证随操作系统不同而有所变化的 os.open() 不会覆盖内置函数 open()。</p>
-<p>在使用 os 这样的大型模块时内置的 dir() 和 help() 函数非常有用:<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import os</span><br><span class="line">&gt;&gt;&gt; dir(os)</span><br><span class="line">&lt;returns a list of all module functions&gt;</span><br><span class="line">&gt;&gt;&gt; help(os)</span><br><span class="line">&lt;returns an extensive manual page created from the module&#x27;s docstrings&gt;</span><br></pre></td></tr></table></figure><br>针对日常的文件和目录管理任务，:mod:shutil 模块提供了一个易于使用的高级接口:</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import shutil</span><br><span class="line">&gt;&gt;&gt; shutil.copyfile(&#x27;data.db&#x27;, &#x27;archive.db&#x27;)</span><br><span class="line">&gt;&gt;&gt; shutil.move(&#x27;/build/executables&#x27;, &#x27;installdir&#x27;)</span><br></pre></td></tr></table></figure>
+<p>下面是方法的各个元素：</p>
+<ul>
+<li><p>Access Specifier：访问修饰符，这个决定了变量或方法对于另一个类的可见性。</p>
+</li>
+<li><p>Return type：返回类型，一个方法可以返回一个值。返回类型是方法返回的值的数据类型。如果方法不返回任何值，则返回类型为 void。</p>
+</li>
+<li><p>Method name：方法名称，是一个唯一的标识符，且是大小写敏感的。它不能与类中声明的其他标识符相同。</p>
+</li>
+<li><p>Parameter list：参数列表，使用圆括号括起来，该参数是用来传递和接收方法的数据。参数列表是指方法的参数类型、顺序和数量。参数是可选的，也就是说，一个方法可能不包含参数。</p>
+</li>
+<li><p>Method body：方法主体，包含了完成任务所需的指令集。</p>
+</li>
+</ul>
+<p>下面的代码片段显示一个函数 FindMax，它接受两个整数值，并返回两个中的较大值。它有 public 访问修饰符，所以它可以使用类的实例从类的外部进行访问。</p>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class NumberManipulator</span><br><span class="line">&#123;</span><br><span class="line">   public int FindMax(int num1, int num2)</span><br><span class="line">   &#123;</span><br><span class="line">      /* 局部变量声明 */</span><br><span class="line">      int result;</span><br><span class="line"></span><br><span class="line">      if (num1 &gt; num2)</span><br><span class="line">         result = num1;</span><br><span class="line">      else</span><br><span class="line">         result = num2;</span><br><span class="line"></span><br><span class="line">      return result;</span><br><span class="line">   &#125;</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【面向对向】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-06 14:43:17" itemprop="dateCreated datePublished" datetime="2023-06-06T14:43:17+08:00">2023-06-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【面向对向】" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Python3-面向对象"><a href="#Python3-面向对象" class="headerlink" title="Python3 面向对象"></a>Python3 面向对象</h2><p>Python从设计之初就已经是一门面向对象的语言，正因为如此，在Python中创建一个类和对象是很容易的。本章节我们将详细介绍Python的面向对象编程。</p>
-<p>如果你以前没有接触过面向对象的编程语言，那你可能需要先了解一些面向对象语言的一些基本特征，在头脑里头形成一个基本的面向对象的概念，这样有助于你更容易的学习Python的面向对象编程。</p>
-<p>接下来我们先来简单的了解下面向对象的一些基本特征。</p>
-<h2 id="面向对象技术简介"><a href="#面向对象技术简介" class="headerlink" title="- 面向对象技术简介"></a>- 面向对象技术简介</h2><ul>
-<li><p>类(Class): 用来描述具有相同的属性和方法的对象的集合。它定义了该集合中每个对象所共有的属性和方法。对象是类的实例。<br>方法：类中定义的函数。</p>
-</li>
-<li><p>类变量：类变量在整个实例化的对象中是公用的。类变量定义在类中且在函数体之外。类变量通常不作为实例变量使用。</p>
-</li>
-<li><p>数据成员：类变量或者实例变量用于处理类及其实例对象的相关的数据。</p>
-</li>
-<li><p>方法重写：如果从父类继承的方法不能满足子类的需求，可以对其进行改写，这个过程叫方法的覆盖（override），也称为方法的重写。</p>
-</li>
-<li><p>局部变量：定义在方法中的变量，只作用于当前实例的类。</p>
-</li>
-<li><p>实例变量：在类的声明中，属性是用变量来表示的，这种变量就称为实例变量，实例变量就是一个用 self 修饰的变量。</p>
-</li>
-<li><p>继承：即一个派生类（derived class）继承基类（base class）的字段和方法。继承也允许把一个派生类的对象作为一个基类对象对待。例如，有这样一个设计：一个Dog类型的对象派生自Animal类，这是模拟”是一个（is-a）”关系（例图，Dog是一个Animal）。</p>
-</li>
-<li><p>实例化：创建一个类的实例，类的具体对象。</p>
-</li>
-<li><p>对象：通过类定义的数据结构实例。对象包括两个数据成员（类变量和实例变量）和方法。<br>和其它编程语言相比，Python 在尽可能不增加新的语法和语义的情况下加入了类机制。</p>
-</li>
-</ul>
-<p>Python中的类提供了面向对象编程的所有基本功能：类的继承机制允许多个基类，派生类可以覆盖基类中的任何方法，方法中可以调用基类中的同名方法。</p>
-<p>对象可以包含任意数量和类型的数据。</p>
-<h2 id="类定义"><a href="#类定义" class="headerlink" title="- 类定义"></a>- 类定义</h2><p>语法格式如下：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class ClassName:</span><br><span class="line">    &lt;statement-1&gt;</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    &lt;statement-N&gt;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>类实例化后，可以使用其属性，实际上，创建一个类之后，可以通过类名访问其属性。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%96%B9%E6%B3%95-foreach%E9%81%8D%E5%8E%86%E7%9A%84%E7%94%A8%E6%B3%95%E3%80%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1045,7 +877,7 @@ None
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1113,7 +945,7 @@ None
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-count">77</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
