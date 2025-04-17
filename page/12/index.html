@@ -139,7 +139,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">77</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">78</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -169,6 +169,143 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A8%E5%AF%BC%E5%BC%8F%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A8%E5%AF%BC%E5%BC%8F%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【推导式】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-01 14:07:23" itemprop="dateCreated datePublished" datetime="2023-06-01T14:07:23+08:00">2023-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A8%E5%AF%BC%E5%BC%8F%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【推导式】" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A8%E5%AF%BC%E5%BC%8F%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A8%E5%AF%BC%E5%BC%8F%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Python-推导式"><a href="#Python-推导式" class="headerlink" title="- Python 推导式"></a>- Python 推导式</h2><p>Python 推导式是一种独特的数据处理方式，可以从一个数据序列构建另一个新的数据序列的结构体。</p>
+<p>Python 支持各种数据结构的推导式：</p>
+<ul>
+<li><p>列表(list)推导式</p>
+</li>
+<li><p>字典(dict)推导式</p>
+</li>
+<li><p>集合(set)推导式</p>
+</li>
+<li><p>元组(tuple)推导式</p>
+</li>
+</ul>
+<h2 id="列表推导式"><a href="#列表推导式" class="headerlink" title="- 列表推导式"></a>- 列表推导式</h2><p>列表推导式格式为：</p>
+<pre><code>[表达式 for 变量 in 列表] 
+[out_exp_res for out_exp in input_list]
+</code></pre>
+<p>或者 </p>
+<pre><code>[表达式 for 变量 in 列表 if 条件]
+[out_exp_res for out_exp in input_list if condition]
+</code></pre>
+<p>out_exp_res：列表生成元素表达式，可以是有返回值的函数。<br>for out_exp in input_list：迭代 input_list 将 out_exp 传入到 out_exp_res 表达式中。<br>if condition：条件语句，可以过滤列表中不符合条件的值。<br>过滤掉长度小于或等于3的字符串列表，并将剩下的转换成大写字母：</p>
+<blockquote>
+<p><strong>实例：</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; names = [&#x27;Bob&#x27;,&#x27;Tom&#x27;,&#x27;alice&#x27;,&#x27;Jerry&#x27;,&#x27;Wendy&#x27;,&#x27;Smith&#x27;]</span><br><span class="line">&gt;&gt;&gt; new_names = [name.upper()for name in names if len(name)&gt;3]</span><br><span class="line">&gt;&gt;&gt; print(new_names)</span><br><span class="line">[&#x27;ALICE&#x27;, &#x27;JERRY&#x27;, &#x27;WENDY&#x27;, &#x27;SMITH&#x27;]</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>计算 30 以内可以被 3 整除的整数：</p>
+<blockquote>
+<p><strong>实例：</strong></p>
+</blockquote>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; multiples = [i for i in range(30) if i % 3 == 0]</span><br><span class="line">&gt;&gt;&gt; print(multiples)</span><br><span class="line">[0, 3, 6, 9, 12, 15, 18, 21, 24, 27]</span><br></pre></td></tr></table></figure>
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A8%E5%AF%BC%E5%BC%8F%E3%80%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -806,131 +943,6 @@ blue
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/" class="post-title-link" itemprop="url">Python学习笔记【字符串】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-05-29 10:32:43" itemprop="dateCreated datePublished" datetime="2023-05-29T10:32:43+08:00">2023-05-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="Python学习笔记【字符串】" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Python3-字符串"><a href="#Python3-字符串" class="headerlink" title="- Python3 字符串"></a>- Python3 字符串</h2><p>字符串是 Python 中最常用的数据类型。我们可以使用引号( ‘ 或 “ )来创建字符串。<br>创建字符串很简单，只要为变量分配一个值即可。例如：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27;</span><br><span class="line">var2 = &quot;Runoob&quot;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="Python-访问字符串中的值"><a href="#Python-访问字符串中的值" class="headerlink" title="- Python 访问字符串中的值"></a>- Python 访问字符串中的值</h2><p>Python 不支持单字符类型，单字符在 Python 中也是作为一个字符串使用。<br>Python 访问子字符串，可以使用方括号 [] 来截取字符串，字符串的截取的语法格式如下：</p>
-<pre><code>变量[头下标:尾下标]
-</code></pre>
-<p>索引值以 0 为开始值，-1 为从末尾的开始位置。</p>
-<p>如下实例：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27;</span><br><span class="line">var2 = &quot;Runoob&quot;</span><br><span class="line"> </span><br><span class="line">print (&quot;var1[0]: &quot;, var1[0])</span><br><span class="line">print (&quot;var2[1:5]: &quot;, var2[1:5])</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>以上实例执行结果：</p>
-<pre><code>var1[0]:  H
-var2[1:5]:  unoo
-</code></pre>
-<h2 id="Python-字符串更新"><a href="#Python-字符串更新" class="headerlink" title="- Python 字符串更新"></a>- Python 字符串更新</h2><p>你可以截取字符串的一部分并与其他字段拼接，如下实例：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27; </span><br><span class="line">print (&quot;已更新字符串 : &quot;, var1[:6] + &#x27;Runoob!&#x27;)</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>以上实例执行结果</p>
-<pre><code>已更新字符串 :  Hello Runoob!
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1002,7 +1014,7 @@ var2[1:5]:  unoo
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-count">78</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

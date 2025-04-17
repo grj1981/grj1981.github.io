@@ -139,7 +139,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">77</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">78</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -169,6 +169,128 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/" class="post-title-link" itemprop="url">Unity3DRigidbody2D使用与优化</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-12-06 11:09:12 / 修改时间：11:37:51" itemprop="dateCreated datePublished" datetime="2024-12-06T11:09:12+08:00">2024-12-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3DRigidbody2D使用与优化" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="移动"><a href="#移动" class="headerlink" title="移动"></a>移动</h1><p>当gameobject被加上rigidbody2d组件时，如果想移动它，不要这样写：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">void Update()</span><br><span class="line">&#123;</span><br><span class="line">	this.transform.Translate (Vector3.left * speed * Time.deltaTime);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>这种写法，主要针对无rigidbody2d的gameobject对象，否则，性能很差。<br>正确的写法：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void FixedUpdate()</span><br><span class="line">&#123;</span><br><span class="line">	rigidbody2D.MovePosition (rigidbody2D.position + Vector2.left * speed * Time.fixedDeltaTime);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void Start () </span><br><span class="line">&#123;</span><br><span class="line">	rigidbody2D.velocity = Vector2.left * speed;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h1 id="Body-Type属性"><a href="#Body-Type属性" class="headerlink" title="Body Type属性"></a>Body Type属性</h1><p>rigidbody2d最为重要的一个属性，不同的选项，不同的物理效果：</p>
+<h2 id="Dynamic（动态的）"><a href="#Dynamic（动态的）" class="headerlink" title="Dynamic（动态的）"></a>Dynamic（动态的）</h2><pre><code>具有完全的物理特性；
+会与所有类型的Rigidbody2D进行碰撞；
+是最常用的Rigidbody2D类型、也是默认的类型；
+是最耗费性能的类型；
+</code></pre>
+<h2 id="Kinematic（运动学）"><a href="#Kinematic（运动学）" class="headerlink" title="Kinematic（运动学）"></a>Kinematic（运动学）</h2><pre><code>仅在用户控制下运动，不会受到重力和AddForce等力相关函数的影响;
+只与Dynamic的Rigidbody2D发生碰撞（不勾选Use Full Kinematic Contacts）；
+不能通过力或碰撞改变速度，但是可以设置其速度和位置、旋转；
+比Dynamic性能高；
+</code></pre>
+<h2 id="Static-静态的"><a href="#Static-静态的" class="headerlink" title="Static (静态的)"></a>Static (静态的)</h2><pre><code>具有无限质量、不可移动的物体;
+velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
+只与Dynamic的Rigidbody2D发生碰撞;
+性能最高；
+</code></pre>
+<h1 id="Simulated-物理模拟"><a href="#Simulated-物理模拟" class="headerlink" title="Simulated 物理模拟"></a>Simulated 物理模拟</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -796,138 +918,6 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/" class="post-title-link" itemprop="url">Unity3D物体Transform</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-06-19 17:05:14" itemprop="dateCreated datePublished" datetime="2024-06-19T17:05:14+08:00">2024-06-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3D物体Transform" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Transform维持物体之间的父子级</p>
-<h1 id="获取位置"><a href="#获取位置" class="headerlink" title="获取位置"></a>获取位置</h1><pre><code>获取世界空间中的位置: transform.position
-相对父物体位置: transform.localPosition
-</code></pre>
-<h1 id="获取旋转"><a href="#获取旋转" class="headerlink" title="获取旋转"></a>获取旋转</h1><pre><code>获取物体在世界空间旋转值(四元素)：transform.rotation
-获取物体相对父物体旋转值(四元素)：transform.localRotation
-获取物体在世界空间旋转值(Euler 度为单位): transform.eulerAngles
-获取物体相对父物体旋转值(Euler 度为单位): transform.localEulerAngles
-</code></pre>
-<h1 id="获取缩放"><a href="#获取缩放" class="headerlink" title="获取缩放"></a>获取缩放</h1><pre><code>获取物体相对父物体缩放比： transform.localScale
-</code></pre>
-<h1 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h1><pre><code>前方(Z轴方向)：transform.forward
-右方(X轴方向)：transform.right
-上方(Y轴方向)：transform.up
-</code></pre>
-<h1 id="父子关系"><a href="#父子关系" class="headerlink" title="父子关系"></a>父子关系</h1><pre><code>父物体: transform.parent.gameObject
-子物体数量: transform.childCount
-通过子物体名称找子物体: transform.Find(&quot;childObjName&quot;).gameObject
-通过索引位置找子物体: transform.GetChild(0).gameObject
-</code></pre>
-<h1 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h1><p> 在 Update() 方法中调用</p>
-<h2 id="时刻看向指定位置"><a href="#时刻看向指定位置" class="headerlink" title="- 时刻看向指定位置"></a>- 时刻看向指定位置</h2><pre><code>transform.LookAt(Vector3.zero)
-</code></pre>
-<h2 id="旋转"><a href="#旋转" class="headerlink" title="- 旋转"></a>- 旋转</h2><pre><code>按自身Y轴方向，每侦1度进行旋转(自转)：transform.Rotate(Vector3.up,1)
-</code></pre>
-<h2 id="围绕某个物体旋转"><a href="#围绕某个物体旋转" class="headerlink" title="- 围绕某个物体旋转"></a>- 围绕某个物体旋转</h2><pre><code>围绕某个物体旋转(世界坐标(0,0,0)的点的Y轴): transform.RotateAround(Vector3.zero,Vector3.up,5)
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -999,7 +989,7 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-count">78</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

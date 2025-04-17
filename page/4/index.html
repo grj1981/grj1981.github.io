@@ -139,7 +139,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">77</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">78</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -169,6 +169,138 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/" class="post-title-link" itemprop="url">Unity3D物体Transform</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-06-19 17:05:14" itemprop="dateCreated datePublished" datetime="2024-06-19T17:05:14+08:00">2024-06-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3D物体Transform" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Transform维持物体之间的父子级</p>
+<h1 id="获取位置"><a href="#获取位置" class="headerlink" title="获取位置"></a>获取位置</h1><pre><code>获取世界空间中的位置: transform.position
+相对父物体位置: transform.localPosition
+</code></pre>
+<h1 id="获取旋转"><a href="#获取旋转" class="headerlink" title="获取旋转"></a>获取旋转</h1><pre><code>获取物体在世界空间旋转值(四元素)：transform.rotation
+获取物体相对父物体旋转值(四元素)：transform.localRotation
+获取物体在世界空间旋转值(Euler 度为单位): transform.eulerAngles
+获取物体相对父物体旋转值(Euler 度为单位): transform.localEulerAngles
+</code></pre>
+<h1 id="获取缩放"><a href="#获取缩放" class="headerlink" title="获取缩放"></a>获取缩放</h1><pre><code>获取物体相对父物体缩放比： transform.localScale
+</code></pre>
+<h1 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h1><pre><code>前方(Z轴方向)：transform.forward
+右方(X轴方向)：transform.right
+上方(Y轴方向)：transform.up
+</code></pre>
+<h1 id="父子关系"><a href="#父子关系" class="headerlink" title="父子关系"></a>父子关系</h1><pre><code>父物体: transform.parent.gameObject
+子物体数量: transform.childCount
+通过子物体名称找子物体: transform.Find(&quot;childObjName&quot;).gameObject
+通过索引位置找子物体: transform.GetChild(0).gameObject
+</code></pre>
+<h1 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h1><p> 在 Update() 方法中调用</p>
+<h2 id="时刻看向指定位置"><a href="#时刻看向指定位置" class="headerlink" title="- 时刻看向指定位置"></a>- 时刻看向指定位置</h2><pre><code>transform.LookAt(Vector3.zero)
+</code></pre>
+<h2 id="旋转"><a href="#旋转" class="headerlink" title="- 旋转"></a>- 旋转</h2><pre><code>按自身Y轴方向，每侦1度进行旋转(自转)：transform.Rotate(Vector3.up,1)
+</code></pre>
+<h2 id="围绕某个物体旋转"><a href="#围绕某个物体旋转" class="headerlink" title="- 围绕某个物体旋转"></a>- 围绕某个物体旋转</h2><pre><code>围绕某个物体旋转(世界坐标(0,0,0)的点的Y轴): transform.RotateAround(Vector3.zero,Vector3.up,5)
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -746,114 +878,6 @@ C:/Users/GONGRE~1/AppData/Local/Temp/DefaultCompany/New Unity Project
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/" class="post-title-link" itemprop="url">钓鱼日记[23.12.16]</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-16 20:21:05" itemprop="dateCreated datePublished" datetime="2023-12-16T20:21:05+08:00">2023-12-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.12.16]" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>12月16日，星期六</p>
-<p>今天是大降温的头一天，寒潮来袭。气温明显比昨天低了好几度，最高温度仅有7度。办完上午的事情后，我决定去河边钓鱼，看看这个寒冷的天气对鱼情的影响。</p>
-<p><img src="https://iili.io/JAcANwl.md.jpg"></p>
-<p><img src="https://iili.io/JAcAcjp.md.jpg"></p>
-<p>来到西来河边，我发现河水已经干涸了。回忆起夏天的时候，河里马口特别多，当时我玩路亚微物，钓上了好多美丽的马口。但是现在水太浅，温度又低，估计没有鱼儿了。况且，上周河边野钓，那么好的环境，水比较深，都没钓到鱼，这让我有些犹豫。于是，我决定改变原计划，去水库钓小红尾。 </p>
-<p><img src="https://iili.io/JAcAX8G.md.jpg"></p>
-<p>到了水库已经过了中午12点。虽然温度很低，但是水温并没有那么冷，感觉还可以。我打开包装袋，准备使用新买的虾拉饵料作钓。钓具方面，我选择了15尺的枯法师，配以小钩和细线。寒风迎面吹来，非常寒冷，水面波浪也相对较大。然而，令我欣喜的是，鱼儿们的咬口非常好。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -925,7 +949,7 @@ C:/Users/GONGRE~1/AppData/Local/Temp/DefaultCompany/New Unity Project
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-count">78</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
