@@ -139,7 +139,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">78</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">79</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -169,6 +169,120 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity连连看小游戏摘要</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-31 16:48:39" itemprop="dateCreated datePublished" datetime="2024-01-31T16:48:39+08:00">2024-01-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity连连看小游戏摘要" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>用Lua实现Unity连连看游戏要点记录：</p>
+<p>游戏功能描述，通过游戏关卡配置从水果类型中，生成指定类型水果及其数量，位置随机。连线要求最多支持两个拐点，三段线相连通才能消除。</p>
+<h2 id="创建游戏关卡数据结构"><a href="#创建游戏关卡数据结构" class="headerlink" title="- 创建游戏关卡数据结构"></a>- 创建游戏关卡数据结构</h2><p>创建关卡水果数据结构 ROFruitData</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">---水果连连看水果数据</span><br><span class="line">---@class ROFruitData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type number 配置ID</span><br><span class="line">    cid = nil,</span><br><span class="line">    ---@type boolean 是否消除</span><br><span class="line">    isClean = false,</span><br><span class="line">    ---@type number 所在位置</span><br><span class="line">    pos = 0,</span><br><span class="line">    ---@type number 行</span><br><span class="line">    x = 0,</span><br><span class="line">    ---@type number 列</span><br><span class="line">    y = 0,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(cid,clean)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(cid,clean)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(cid,clean)</span><br><span class="line">    self.cid = cid</span><br><span class="line">    self.isClean = clean</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@param pos number</span><br><span class="line">function m:SetPos(pos)</span><br><span class="line">    self.pos = pos</span><br><span class="line">    local x,y = self:GetX_Y()</span><br><span class="line">    self.x = x</span><br><span class="line">    self.y = y</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@return CfgRestaurantOperationFruitListData</span><br><span class="line">function m:GetCfgData()</span><br><span class="line">    if self.cid &gt; 0 then</span><br><span class="line">        return CfgRestaurantOperationFruitListTable[self.cid]</span><br><span class="line">    end</span><br><span class="line">    return nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---通过Pos获取格子位置 (每行10个格子)</span><br><span class="line">---@return number,number  行，列</span><br><span class="line">function m:GetX_Y()</span><br><span class="line">    local x = math.ceil(self.pos / 10)</span><br><span class="line">    local y = self.pos - 10 * (x-1)</span><br><span class="line">    return x,y</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -712,119 +826,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/11/18/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-18/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/11/18/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-18/" class="post-title-link" itemprop="url">钓鱼日记[23.11.18]</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-11-18 21:10:01" itemprop="dateCreated datePublished" datetime="2023-11-18T21:10:01+08:00">2023-11-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/11/18/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-18/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.11.18]" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/11/18/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-18/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/11/18/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-18/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>11月18日</p>
-<p>周六，今天的天气依然阴冷，吃过午饭，准备去西来两河口钓土凤。10月份在这里搭钓台钓土凤的经历还历历在目，当时土凤马口很多，但是今天我并没有准备搭钓台，而是打算用抄网竿装上镰刀头，在河边水草丛生的地方对着河面掏个草洞，用小短竿钓鲫鱼。</p>
-<p><img src="https://iili.io/JoKoxql.md.jpg"></p>
-<p>不久，我来到了河边，选定了一个水草丰茂的地方，开始准备掏草洞。首先，我用镰刀头在水草丛中对着河面割开一个口子，然后用抄网竿一路探入水下，将水下的水草清理干净。掏草洞是一项非常费力的活儿，需要大量的耐心和精细的动作，经过了差不多一个小时才勉强掏好了一个小草洞。</p>
-<p><img src="https://iili.io/JoKocLx.md.jpg"></p>
-<p>我拿出小短竿开始钓鱼。将新鲜的饵料挂在鱼钩上，然后轻轻放入河中。虽然水温很低，我还是坚持守在原地，期待着鱼儿的上钩。</p>
-<p><img src="https://iili.io/JoKoMdP.md.jpg"></p>
-<p><img src="https://iili.io/JoKoRee.md.jpg"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/11/18/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-18/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -892,7 +897,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-count">79</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
