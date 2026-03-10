@@ -1287,7 +1287,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #006395;
+  background: #75d1ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2580,7 +2580,7 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: flex-start;
 }
 .photos-column {
@@ -2605,7 +2605,7 @@ body {
 /*相册封面显示以及点击面积*/
 .photos-column a img {
   height: 280px;
-  width: 380px;
+  width: 300px;
   object-fit: cover;
   margin-bottom: 32px;
 }
@@ -2626,6 +2626,6 @@ body {
 /*图片显示面积*/
 .img-column a img {
   height: 280px;
-  width: 380px;
+  width: 300px;
   object-fit: scale-down;
 }
