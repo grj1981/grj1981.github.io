@@ -16,7 +16,6 @@ categories:
 
 <div style="display: flex; gap: 22px; flex-wrap: wrap; margin-top:30px;">
   <a href="./snake/" class="btngame btngame-primary">🐍 贪吃蛇</a>
-  <a href="./snake/" class="btngame btngame-primary">🐍 贪吃蛇</a>
 </div>
 
 <style>

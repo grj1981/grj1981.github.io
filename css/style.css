@@ -18,3 +18,17 @@ body {
 	filter: grayscale(0%);
 	transform: scale(1.1);
 }
+
+@media (max-width: 768px) {
+	.gallery img {
+		width: 150px;
+		margin: 3px;
+	}
+}
+
+@media (max-width: 480px) {
+	.gallery img {
+		width: 120px;
+		margin: 2px;
+	}
+}

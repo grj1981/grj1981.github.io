@@ -1287,7 +1287,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff1df0;
+  background: #d9ff04;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2572,7 +2572,6 @@ body {
 .header-inner {
   background: rgba(255,255,255,0.8);
 }
-/*相册主页面*/
 .photos-page {
   margin-top: -50px;
 }
@@ -2584,30 +2583,58 @@ body {
   align-items: flex-start;
 }
 .photos-column {
-  margin: 20px;
-  margin-bottom: 15px;
-}
-.photos-item {
+  margin: 12px;
   margin-bottom: 10px;
 }
-/*相册标题样式*/
+.photos-item {
+  margin-bottom: 8px;
+}
 .photos-item p {
-  margin: -25px auto 10px;
-  max-width: 50%;
+  margin: 8px auto 15px;
+  max-width: 85%;
   text-align: center;
-  font-size: 15px;
+  font-size: 14px;
   color: #222;
   background: rgba(255,255,255,0.3);
-  border-radius: 20px;
+  border-radius: 15px;
   border: 1px solid #222;
-  box-shadow: 0 8px 20px -8px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 12px -4px rgba(0,0,0,0.3);
 }
-/*相册封面显示以及点击面积*/
 .photos-column a img {
-  height: 280px;
-  width: 300px;
+  height: 260px;
+  width: 240px;
   object-fit: cover;
-  margin-bottom: 32px;
+  margin-bottom: 0;
+  border: 3px solid #2c3e50;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+.photos-column a img:hover {
+  transform: scale(1.05);
+  border-color: #1a252f;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+@media (max-width: 768px) {
+  .photos-column a img {
+    height: 220px;
+    width: 200px;
+  }
+  .photos-item p {
+    font-size: 13px;
+  }
+}
+@media (max-width: 480px) {
+  .photos-column a img {
+    height: 200px;
+    width: 180px;
+  }
+  .photos-item p {
+    font-size: 12px;
+  }
+  .photos-column {
+    margin: 8px;
+  }
 }
 .img-list {
   display: flex;

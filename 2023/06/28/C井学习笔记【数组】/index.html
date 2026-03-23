@@ -284,9 +284,7 @@
 <h2 id="初始化数组"><a href="#初始化数组" class="headerlink" title="- 初始化数组"></a>- 初始化数组</h2><p>声明一个数组不会在内存中初始化数组。当初始化数组变量时，您可以赋值给数组。</p>
 <p>数组是一个引用类型，所以您需要使用 new 关键字来创建数组的实例。</p>
 <span id="more"></span>
-<p>例如：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double[] balance = new double[10];</span><br></pre></td></tr></table></figure>
-</code></pre>
+<p>例如：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double[] balance = new double[10];</span><br></pre></td></tr></table></figure></p>
 <h2 id="赋值给数组"><a href="#赋值给数组" class="headerlink" title="- 赋值给数组"></a>- 赋值给数组</h2><p>您可以通过使用索引号赋值给一个单独的数组元素，比如：</p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">double[] balance = new double[10];</span><br><span class="line">balance[0] = 4500.0;</span><br></pre></td></tr></table></figure>
 </code></pre>
@@ -372,14 +370,11 @@ Element[9] = 109
 <h2 id="C-数组细节"><a href="#C-数组细节" class="headerlink" title="- C# 数组细节"></a>- C# 数组细节</h2><p>在 C# 中，数组是非常重要的，且需要了解更多的细节。下面列出了 C# 程序员必须清楚的一些与数组相关的重要概念：</p>
 <h3 id="多维数组"><a href="#多维数组" class="headerlink" title="- 多维数组"></a>- 多维数组</h3><p>C#支持多维数组。多维数组最简单的形式是二维数组。</p>
 <h4 id="C-多维数组"><a href="#C-多维数组" class="headerlink" title="C# 多维数组"></a>C# 多维数组</h4><p>C# 支持多维数组。多维数组又称为矩形数组。</p>
-<p>您可以声明一个 string 变量的二维数组，如下：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">string [,] names;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>或者，您可以声明一个 int 变量的三维数组，如下：</p>
+<p>您可以声明一个 string 变量的二维数组，如下：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">string [,] names;</span><br></pre></td></tr></table></figure><br>或者，您可以声明一个 int 变量的三维数组，如下：</p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int [ , , ] m;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <h4 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h4><p>多维数组最简单的形式是二维数组。一个二维数组，在本质上，是一个一维数组的列表。</p>
-<p>一个二维数组可以被认为是一个带有 x 行和 y 列的表格。下面是一个二维数组，包含 3 行和 4 列：<br><img src="https://www.runoob.com/wp-content/uploads/2014/04/two_dimensional_arrays.jpg"></p>
+<p>一个二维数组可以被认为是一个带有 x 行和 y 列的表格。下面是一个二维数组，包含 3 行和 4 列：<br><img data-src="https://www.runoob.com/wp-content/uploads/2014/04/two_dimensional_arrays.jpg"></p>
 <h4 id="C-中的二维数组"><a href="#C-中的二维数组" class="headerlink" title="C# 中的二维数组"></a>C# 中的二维数组</h4><p>因此，数组中的每个元素是使用形式为 a[ i , j ] 的元素名称来标识的，其中 a 是数组名称，i 和 j 是唯一标识 a 中每个元素的下标。</p>
 <p><strong>初始化二维数组</strong><br>多维数组可以通过在括号内为每行指定值来进行初始化。下面是一个带有 3 行 4 列的数组。</p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int [,] a = new int [3,4] &#123;</span><br><span class="line"> &#123;0, 1, 2, 3&#125; ,   /*  初始化索引号为 0 的行 */</span><br><span class="line"> &#123;4, 5, 6, 7&#125; ,   /*  初始化索引号为 1 的行 */</span><br><span class="line"> &#123;8, 9, 10, 11&#125;   /*  初始化索引号为 2 的行 */</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -445,9 +440,7 @@ a[4][1] = 8
 </blockquote>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">namespace ArrayApplication</span><br><span class="line">&#123;</span><br><span class="line">   class MyArray</span><br><span class="line">   &#123;</span><br><span class="line">      double getAverage(int[] arr, int size)</span><br><span class="line">      &#123;</span><br><span class="line">         int i;</span><br><span class="line">         double avg;</span><br><span class="line">         int sum = 0;</span><br><span class="line"></span><br><span class="line">         for (i = 0; i &lt; size; ++i)</span><br><span class="line">         &#123;</span><br><span class="line">            sum += arr[i];</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         avg = (double)sum / size;</span><br><span class="line">         return avg;</span><br><span class="line">      &#125;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         MyArray app = new MyArray();</span><br><span class="line">         /* 一个带有 5 个元素的 int 数组 */</span><br><span class="line">         int [] balance = new int[]&#123;1000, 2, 3, 17, 50&#125;;</span><br><span class="line">         double avg;</span><br><span class="line"></span><br><span class="line">         /* 传递数组的指针作为参数 */</span><br><span class="line">         avg = app.getAverage(balance, 5 ) ;</span><br><span class="line"></span><br><span class="line">         /* 输出返回值 */</span><br><span class="line">         Console.WriteLine( &quot;平均值是： &#123;0&#125; &quot;, avg );</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
-<pre><code>平均值是： 214.4
-</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br>	<br>	平均值是： 214.4</p>
 <h3 id="参数数组"><a href="#参数数组" class="headerlink" title="- 参数数组"></a>- 参数数组</h3><p>这通常用于传递未知数量的参数给函数。</p>
 <p>有时，当声明一个方法时，您不能确定要传递给函数作为参数的参数数目。C# 参数数组解决了这个问题，参数数组通常用于传递未知数量的参数给函数。</p>
 <h4 id="params-关键字"><a href="#params-关键字" class="headerlink" title="params 关键字"></a>params 关键字</h4><p>在使用数组作为形参时，C# 提供了 params 关键字，使调用数组为形参的方法时，既可以传递数组实参，也可以传递一组数组元素。params 的使用格式为：</p>
