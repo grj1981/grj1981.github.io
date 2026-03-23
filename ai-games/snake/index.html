@@ -26,7 +26,7 @@
 <meta property="og:description" content="贪吃蛇游戏 - ByteFisher              &#x2F;* 游戏容器样式 *&#x2F;         #snake-game-container {             display: flex;             flex-direction: column;             align-items: center;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-19T07:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-20T10:49:14.765Z">
+<meta property="article:modified_time" content="2026-03-23T08:05:03.420Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="game">
 <meta property="article:tag" content="贪吃蛇">
@@ -233,7 +233,8 @@
             border-radius: 8px;
             background: #111;
             box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
-        }
+            touch-action: none;  /* 禁止默认触摸行为，防止页面滚动 */
+        }   
 
         .game-info {
             display: flex;
@@ -519,6 +520,47 @@
                 }
             }
 
+            // ============================================
+            // 以下为新增的触摸控制代码
+            // ============================================
+
+            // 触摸控制变量
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let touchStartTime = 0;
+
+            // 触摸开始
+            canvas.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+                touchStartTime = Date.now();
+            }, { passive: false });
+
+            // 触摸结束 - 判断滑动方向
+            canvas.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                const touchEndX = e.changedTouches[0].clientX;
+                const touchEndY = e.changedTouches[0].clientY;
+                const touchDuration = Date.now() - touchStartTime;
+                
+                const minSwipeDistance = 30;
+                const maxTouchDuration = 500;
+                
+                if (touchDuration < maxTouchDuration) {
+                    const deltaX = touchEndX - touchStartX;
+                    const deltaY = touchEndY - touchStartY;
+                    
+                    if (Math.abs(deltaX) > minSwipeDistance || Math.abs(deltaY) > minSwipeDistance) {
+                        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                            nextDirection = deltaX > 0 ? 'RIGHT' : 'LEFT';
+                        } else {
+                            nextDirection = deltaY > 0 ? 'DOWN' : 'UP';
+                        }
+                    }
+                }
+            }, { passive: false });
+
             // 绑定事件（先移除旧的避免重复绑定，但由于 PJAX 会重建 DOM，旧监听器自动失效，这里直接绑定即可）
             window.removeEventListener('keydown', handleKeydown);
             window.addEventListener('keydown', handleKeydown);
@@ -543,15 +585,18 @@
             // 防止重复绑定事件（每个页面只绑定一次）
             if (!window._pjaxSnakeListener) {
                 pjax.on('complete', function() {
-                    // 仅当当前路径是游戏页面时才重新初始化
-                    if (window.location.pathname === '/snake/' || window.location.pathname.endsWith('/snake/')) {
-                        console.log('PJAX 完成，重新初始化游戏');
-                        window.initSnakeGame();
-                    }
+                    console.log('PJAX 完成，重新初始化游戏');
+                    window.initSnakeGame();                 
                 });
                 window._pjaxSnakeListener = true;
             }
         }
+
+        // 监听 jQuery PJAX 完成事件
+        $(document).on('pjax:complete', function() {
+            console.log('jQuery PJAX 完成，重新初始化游戏');
+            window.initSnakeGame();
+        });
     </script>
 </body>
 </html>
