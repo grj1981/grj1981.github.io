@@ -18,6 +18,8 @@ categories:
   <a href="./snake/" class="btngame btngame-primary">🐍 贪吃蛇</a>
 </div>
 
+{% aigames_count %}
+
 <style>
 .btngame {
   display: inline-block;

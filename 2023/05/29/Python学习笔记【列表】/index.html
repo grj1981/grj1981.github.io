@@ -127,12 +127,12 @@
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-aigames">
 
-    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏</a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏<span class="badge">1</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -362,7 +362,9 @@ squares += [36, 49, 64, 81, 100]
 squares
 [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 </code></pre>
-<h2 id="嵌套列表"><a href="#嵌套列表" class="headerlink" title="- 嵌套列表"></a>- 嵌套列表</h2><p>使用嵌套列表即在列表里创建其它列表，例如：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a = [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]</span><br><span class="line">&gt;&gt;&gt; n = [1, 2, 3]</span><br><span class="line">&gt;&gt;&gt; x = [a, n]</span><br><span class="line">&gt;&gt;&gt; x</span><br><span class="line">[[&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;], [1, 2, 3]]</span><br><span class="line">&gt;&gt;&gt; x[0]</span><br><span class="line">[&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]</span><br><span class="line">&gt;&gt;&gt; x[0][1]</span><br><span class="line">&#x27;b&#x27;</span><br></pre></td></tr></table></figure></p>
+<h2 id="嵌套列表"><a href="#嵌套列表" class="headerlink" title="- 嵌套列表"></a>- 嵌套列表</h2><p>使用嵌套列表即在列表里创建其它列表，例如：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a = [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]</span><br><span class="line">&gt;&gt;&gt; n = [1, 2, 3]</span><br><span class="line">&gt;&gt;&gt; x = [a, n]</span><br><span class="line">&gt;&gt;&gt; x</span><br><span class="line">[[&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;], [1, 2, 3]]</span><br><span class="line">&gt;&gt;&gt; x[0]</span><br><span class="line">[&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]</span><br><span class="line">&gt;&gt;&gt; x[0][1]</span><br><span class="line">&#x27;b&#x27;</span><br></pre></td></tr></table></figure>
+</code></pre>
 <h2 id="列表比较"><a href="#列表比较" class="headerlink" title="- 列表比较"></a>- 列表比较</h2><p>列表比较需要引入 operator 模块的 eq 方法：</p>
 <blockquote>
 <p><strong>实例：</strong></p>
@@ -384,8 +386,27 @@ operator.eq(c,b):  True
 4	list(seq) 将元组转换为列表
 </code></pre>
 <p>Python包含以下方法:</p>
-<p>序号	方法<br>	1	list.append(obj) 在列表末尾添加新的对象<br>	<br>	2	list.count(obj) 统计某个元素在列表中出现的次数<br>	<br>	3	list.extend(seq) 在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表）<br>	<br>	4	list.index(obj) 从列表中找出某个值第一个匹配项的索引位置<br>	<br>	5	list.insert(index, obj) 将对象插入列表<br>	<br>	6	list.pop([index&#x3D;-1]) 移除列表中的一个元素（默认最后一个元素），并且返回该元素的值<br>	<br>	7	list.remove(obj) 移除列表中某个值的第一个匹配项<br>	<br>	8	list.reverse() 反向列表中元素<br>	<br>	9	list.sort( key&#x3D;None, reverse&#x3D;False) 对原列表进行排序<br>	<br>	10	list.clear() 清空列表<br>	<br>	11	list.copy() 复制列表
-	</p>
+<p>序号	方法<br>    1	list.append(obj) 在列表末尾添加新的对象</p>
+<pre><code>2	list.count(obj) 统计某个元素在列表中出现的次数
+
+3	list.extend(seq) 在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表）
+
+4	list.index(obj) 从列表中找出某个值第一个匹配项的索引位置
+
+5	list.insert(index, obj) 将对象插入列表
+
+6	list.pop([index=-1]) 移除列表中的一个元素（默认最后一个元素），并且返回该元素的值
+
+7	list.remove(obj) 移除列表中某个值的第一个匹配项
+
+8	list.reverse() 反向列表中元素
+
+9	list.sort( key=None, reverse=False) 对原列表进行排序
+
+10	list.clear() 清空列表
+
+11	list.copy() 复制列表
+</code></pre>
 
     </div>
 

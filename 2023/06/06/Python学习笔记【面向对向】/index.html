@@ -127,12 +127,12 @@
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-aigames">
 
-    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏</a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏<span class="badge">1</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -347,7 +347,9 @@ __main__.Test
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class DerivedClassName(BaseClassName):</span><br><span class="line">    &lt;statement-1&gt;</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    &lt;statement-N&gt;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>子类（派生类 DerivedClassName）会继承父类（基类 BaseClassName）的属性和方法。</p>
-<p>BaseClassName（实例中的基类名）必须与派生类定义在一个作用域内。除了类，还可以用表达式，基类定义在另一个模块中时这一点非常有用:<br>	<br>	class DerivedClassName(modname.BaseClassName):</p>
+<p>BaseClassName（实例中的基类名）必须与派生类定义在一个作用域内。除了类，还可以用表达式，基类定义在另一个模块中时这一点非常有用:</p>
+<pre><code>class DerivedClassName(modname.BaseClassName):
+</code></pre>
 <blockquote>
 <p>实例(Python 3.0+):</p>
 </blockquote>

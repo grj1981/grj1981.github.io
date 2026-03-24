@@ -127,12 +127,12 @@
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-aigames">
 
-    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏</a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏<span class="badge">1</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -273,7 +273,10 @@
 </code></pre>
 <p>GetMouseButtonDown()和GetMouseButtonUp()成对出现</p>
 <h2 id="按钮键盘按键"><a href="#按钮键盘按键" class="headerlink" title="按钮键盘按键"></a>按钮键盘按键</h2><p>KeyCode 枚举</p>
-<p>按下键盘A键：<br>	<br>	Input.GetKeyDown(KeyCode.A)<br>	<br>持续按下A键：</p>
+<p>按下键盘A键：</p>
+<pre><code>Input.GetKeyDown(KeyCode.A)
+</code></pre>
+<p>持续按下A键：</p>
 <pre><code>Input.GetKey(KeyCode.A)
 </code></pre>
 <p>抬起键盘按键：</p>
@@ -304,7 +307,9 @@
 <p>开启多点触摸：</p>
 <pre><code>Input.multiTouchEnabled = true;
 </code></pre>
-<p>判断单点触摸：<br>	<br>	Input.touchCount &#x3D;&#x3D; 1;</p>
+<p>判断单点触摸：</p>
+<pre><code>Input.touchCount == 1;
+</code></pre>
 <p>判断多点触摸:</p>
 <pre><code>Input.touchCount == 2;
 </code></pre>

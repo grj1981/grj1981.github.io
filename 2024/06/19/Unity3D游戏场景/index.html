@@ -127,12 +127,12 @@
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-aigames">
 
-    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏</a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏<span class="badge">1</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -284,9 +284,9 @@ Debug.Log(objs.Length);
 </ol>
 <blockquote>
 <p><strong>实例</strong></p>
+</blockquote>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public class SceneTest : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">	float timer = 0;</span><br><span class="line">	AsyncOperation operation;</span><br><span class="line">	</span><br><span class="line">	// Start is called before the first frame update</span><br><span class="line">	void Start()</span><br><span class="line">	&#123;</span><br><span class="line">		//异步加载场景 协程</span><br><span class="line">		StartCoroutine(LoadScene());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	IEnumerator LoadScene()</span><br><span class="line">	&#123;</span><br><span class="line">		operation = SceneManager.LoadSceneAsync(&quot;Scene2&quot;,LoadSceneMode.Additive);</span><br><span class="line">		//场景是否立即激活</span><br><span class="line">		operation.allowSceneActivation = false;</span><br><span class="line">		yield return operation;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	// Update is called once per frame</span><br><span class="line">	void Update()</span><br><span class="line">	&#123;</span><br><span class="line">		Debug.Log(operation.progress);</span><br><span class="line">		timer += Time.deltaTime;</span><br><span class="line">		if (timer &gt; 5)</span><br><span class="line">		&#123;</span><br><span class="line">			//5秒后激活加载的场景</span><br><span class="line">			operation.allowSceneActivation = true;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 </code></pre>
-</blockquote>
 
     </div>
 

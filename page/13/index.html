@@ -124,12 +124,12 @@
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-aigames">
 
-    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏</a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏<span class="badge">1</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -262,19 +262,19 @@
 <p>元组创建很简单，只需要在括号中添加元素，并使用逗号隔开即可。</p>
 <blockquote>
 <p><strong>实例:</strong></p>
+</blockquote>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tup1 = (&#x27;Google&#x27;, &#x27;Runoob&#x27;, 1997, 2000)</span><br><span class="line">&gt;&gt;&gt; tup2 = (1, 2, 3, 4, 5 )</span><br><span class="line">&gt;&gt;&gt; tup3 = &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;   #  不需要括号也可以</span><br><span class="line">&gt;&gt;&gt; type(tup3)</span><br><span class="line">&lt;class &#x27;tuple&#x27;&gt;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>创建空元组</p>
-</blockquote>
 <pre><code>tup1 = ()
 </code></pre>
 <p>元组中只包含一个元素时，需要在元素后面添加逗号 , ，否则括号会被当作运算符使用：</p>
 <blockquote>
 <p><strong>实例:</strong></p>
+</blockquote>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tup1 = (50)</span><br><span class="line">&gt;&gt;&gt; type(tup1)     # 不加逗号，类型为整型</span><br><span class="line">&lt;class &#x27;int&#x27;&gt;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; tup1 = (50,)</span><br><span class="line">&gt;&gt;&gt; type(tup1)     # 加上逗号，类型为元组</span><br><span class="line">&lt;class &#x27;tuple&#x27;&gt;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>元组与字符串类似，下标索引从 0 开始，可以进行截取，组合等。</p>
-</blockquote>
 <h2 id="访问元组"><a href="#访问元组" class="headerlink" title="- 访问元组"></a>- 访问元组</h2><p>元组可以使用下标索引来访问元组中的值，如下实例:</p>
 <blockquote>
 <p><strong>实例:</strong></p>
@@ -511,14 +511,24 @@ blue
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Python3-字符串"><a href="#Python3-字符串" class="headerlink" title="- Python3 字符串"></a>- Python3 字符串</h2><p>字符串是 Python 中最常用的数据类型。我们可以使用引号( ‘ 或 “ )来创建字符串。<br>创建字符串很简单，只要为变量分配一个值即可。例如：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27;</span><br><span class="line">var2 = &quot;Runoob&quot;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Python-访问字符串中的值"><a href="#Python-访问字符串中的值" class="headerlink" title="- Python 访问字符串中的值"></a>- Python 访问字符串中的值</h2><p>Python 不支持单字符类型，单字符在 Python 中也是作为一个字符串使用。<br>Python 访问子字符串，可以使用方括号 [] 来截取字符串，字符串的截取的语法格式如下：<br>	<br>	变量[头下标:尾下标]</p>
+          <h2 id="Python3-字符串"><a href="#Python3-字符串" class="headerlink" title="- Python3 字符串"></a>- Python3 字符串</h2><p>字符串是 Python 中最常用的数据类型。我们可以使用引号( ‘ 或 “ )来创建字符串。<br>创建字符串很简单，只要为变量分配一个值即可。例如：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27;</span><br><span class="line">var2 = &quot;Runoob&quot;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="Python-访问字符串中的值"><a href="#Python-访问字符串中的值" class="headerlink" title="- Python 访问字符串中的值"></a>- Python 访问字符串中的值</h2><p>Python 不支持单字符类型，单字符在 Python 中也是作为一个字符串使用。<br>Python 访问子字符串，可以使用方括号 [] 来截取字符串，字符串的截取的语法格式如下：</p>
+<pre><code>变量[头下标:尾下标]
+</code></pre>
 <p>索引值以 0 为开始值，-1 为从末尾的开始位置。</p>
-<p>如下实例：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27;</span><br><span class="line">var2 = &quot;Runoob&quot;</span><br><span class="line"> </span><br><span class="line">print (&quot;var1[0]: &quot;, var1[0])</span><br><span class="line">print (&quot;var2[1:5]: &quot;, var2[1:5])</span><br></pre></td></tr></table></figure><br>以上实例执行结果：</p>
+<p>如下实例：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27;</span><br><span class="line">var2 = &quot;Runoob&quot;</span><br><span class="line"> </span><br><span class="line">print (&quot;var1[0]: &quot;, var1[0])</span><br><span class="line">print (&quot;var2[1:5]: &quot;, var2[1:5])</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>以上实例执行结果：</p>
 <pre><code>var1[0]:  H
 var2[1:5]:  unoo
 </code></pre>
-<h2 id="Python-字符串更新"><a href="#Python-字符串更新" class="headerlink" title="- Python 字符串更新"></a>- Python 字符串更新</h2><p>你可以截取字符串的一部分并与其他字段拼接，如下实例：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27; </span><br><span class="line">print (&quot;已更新字符串 : &quot;, var1[:6] + &#x27;Runoob!&#x27;)</span><br></pre></td></tr></table></figure><br>以上实例执行结果</p>
+<h2 id="Python-字符串更新"><a href="#Python-字符串更新" class="headerlink" title="- Python 字符串更新"></a>- Python 字符串更新</h2><p>你可以截取字符串的一部分并与其他字段拼接，如下实例：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27; </span><br><span class="line">print (&quot;已更新字符串 : &quot;, var1[:6] + &#x27;Runoob!&#x27;)</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>以上实例执行结果</p>
 <pre><code>已更新字符串 :  Hello Runoob!
 </code></pre>
           <!--noindex-->
@@ -848,7 +858,7 @@ var2[1:5]:  unoo
 <p>小鱼闹窝、小虾闹窝及螃蟹闹窝，但凡遇到其中一个，无疑令钓鱼人烦躁不堪，钩饵入水难以就位着底，中途截口时有发生；浮漂上下浮动，如同跳芭蕾舞，动作剧烈却提竿不中鱼。回到钓友的问题，钓鱼时遇到螃蟹闹窝，如何应对，以最大程度获得较好鱼口。本文以此为起点，一窥究竟。</p>
 </blockquote>
 <hr>
-<p><img data-src="https://iili.io/HSglg99.md.jpg"></p>
+<p><img src="https://iili.io/HSglg99.md.jpg"></p>
 <hr>
 <pre><code>**应对螃蟹闹窝，采取的应对措施有哪些：**
 </code></pre>

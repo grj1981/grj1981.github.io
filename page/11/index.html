@@ -124,12 +124,12 @@
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-aigames">
 
-    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏</a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏<span class="badge">1</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -260,7 +260,7 @@
           <h2 id="Python3-JSON-数据解析"><a href="#Python3-JSON-数据解析" class="headerlink" title="- Python3 JSON 数据解析"></a>- Python3 JSON 数据解析</h2><p>JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。</p>
 <p>Python3 中可以使用 json 模块来对 JSON 数据进行编解码，它包含了两个函数：</p>
 <p>json.dumps(): 对数据进行编码。<br>json.loads(): 对数据进行解码。</p>
-<p><img data-src="https://www.runoob.com/wp-content/uploads/2016/04/json-dumps-loads.png"><br>在 json 的编解码过程中，Python 的原始类型与 json 类型会相互转换，具体的转化对照如下：</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2016/04/json-dumps-loads.png"><br>在 json 的编解码过程中，Python 的原始类型与 json 类型会相互转换，具体的转化对照如下：</p>
 <p><strong>Python 编码为 JSON 类型转换对应表：</strong></p>
 <pre><code>Python	JSON
 dict	object
@@ -606,10 +606,10 @@ JSON 对象： &#123;&quot;url&quot;: &quot;http://www.runoob.com&quot;, &quot;n
 </ul>
 <blockquote>
 <p><strong>实例</strong></p>
+</blockquote>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python3</span><br><span class="line"></span><br><span class="line">import _thread</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line"># 为线程定义一个函数</span><br><span class="line">def print_time( threadName, delay):</span><br><span class="line">   count = 0</span><br><span class="line">   while count &lt; 5:</span><br><span class="line">      time.sleep(delay)</span><br><span class="line">      count += 1</span><br><span class="line">      print (&quot;%s: %s&quot; % ( threadName, time.ctime(time.time()) ))</span><br><span class="line"></span><br><span class="line"># 创建两个线程</span><br><span class="line">try:</span><br><span class="line">   _thread.start_new_thread( print_time, (&quot;Thread-1&quot;, 2, ) )</span><br><span class="line">   _thread.start_new_thread( print_time, (&quot;Thread-2&quot;, 4, ) )</span><br><span class="line">except:</span><br><span class="line">   print (&quot;Error: 无法启动线程&quot;)</span><br><span class="line"></span><br><span class="line">while 1:</span><br><span class="line">   pass</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>执行以上程序输出结果如下：</p>
-</blockquote>
 <pre><code>Thread-1: Wed Jan  5 17:38:08 2022
 Thread-2: Wed Jan  5 17:38:10 2022
 Thread-1: Wed Jan  5 17:38:10 2022
@@ -888,7 +888,7 @@ None
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import os</span><br><span class="line">&gt;&gt;&gt; os.getcwd()      # 返回当前的工作目录</span><br><span class="line">&#x27;C:\\Python34&#x27;</span><br><span class="line">&gt;&gt;&gt; os.chdir(&#x27;/server/accesslogs&#x27;)   # 修改当前的工作目录</span><br><span class="line">&gt;&gt;&gt; os.system(&#x27;mkdir today&#x27;)   # 执行系统命令 mkdir </span><br><span class="line">0</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>建议使用 “import os” 风格而非 “from os import *”。这样可以保证随操作系统不同而有所变化的 os.open() 不会覆盖内置函数 open()。</p>
-<p>在使用 os 这样的大型模块时内置的 dir() 和 help() 函数非常有用:<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import os</span><br><span class="line">&gt;&gt;&gt; dir(os)</span><br><span class="line">&lt;returns a list of all module functions&gt;</span><br><span class="line">&gt;&gt;&gt; help(os)</span><br><span class="line">&lt;returns an extensive manual page created from the module&#x27;s docstrings&gt;</span><br></pre></td></tr></table></figure><br>针对日常的文件和目录管理任务，:mod:shutil 模块提供了一个易于使用的高级接口:</p>
+<p>在使用 os 这样的大型模块时内置的 dir() 和 help() 函数非常有用:<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import os</span><br><span class="line">&gt;&gt;&gt; dir(os)</span><br><span class="line">&lt;returns a list of all module functions&gt;</span><br><span class="line">&gt;&gt;&gt; help(os)</span><br><span class="line">&lt;returns an extensive manual page created from the module&#x27;s docstrings&gt;</span><br></pre></td></tr></table></figure><br>针对日常的文件和目录管理任务，:mod:shutil 模块提供了一个易于使用的高级接口:</p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import shutil</span><br><span class="line">&gt;&gt;&gt; shutil.copyfile(&#x27;data.db&#x27;, &#x27;archive.db&#x27;)</span><br><span class="line">&gt;&gt;&gt; shutil.move(&#x27;/build/executables&#x27;, &#x27;installdir&#x27;)</span><br></pre></td></tr></table></figure>
 </code></pre>
           <!--noindex-->

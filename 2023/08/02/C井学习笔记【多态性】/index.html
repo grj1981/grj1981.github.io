@@ -129,12 +129,12 @@
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-aigames">
 
-    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏</a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏<span class="badge">1</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -267,7 +267,7 @@
 <p>多态性可以是静态的或动态的。在静态多态性中，函数的响应是在编译时发生的。在动态多态性中，函数的响应是在运行时发生的。</p>
 <p>在 C# 中，每个类型都是多态的，因为包括用户定义类型在内的所有类型都继承自 Object。</p>
 <p>多态就是同一个接口，使用不同的实例而执行不同操作，如图所示：</p>
-<p><img data-src="https://www.runoob.com/wp-content/uploads/2013/12/dt-java.png"></p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2013/12/dt-java.png"></p>
 <p>现实中，比如我们按下 F1 键这个动作：</p>
 <ul>
 <li><p>如果当前在 Flash 界面下弹出的就是 AS 3 的帮助文档；</p>
@@ -283,17 +283,17 @@
 </li>
 <li><p>运算符重载</p>
 </li>
-<li></li>
+<li><p>运算符重载将在下一章节讨论，接下来我们将讨论函数重载。</p>
+</li>
 </ul>
-<p>运算符重载将在下一章节讨论，接下来我们将讨论函数重载。</p>
 <h2 id="函数重载"><a href="#函数重载" class="headerlink" title="- 函数重载"></a>- 函数重载</h2><p>您可以在同一个范围内对相同的函数名有多个定义。函数的定义必须彼此不同，可以是参数列表中的参数类型不同，也可以是参数个数不同。不能重载只有返回类型不同的函数声明。</p>
 <p>下面的实例演示了几个相同的函数 Add()，用于对不同个数参数进行相加处理：</p>
 <blockquote>
 <p><strong>实例</strong></p>
+</blockquote>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace PolymorphismApplication</span><br><span class="line">&#123;</span><br><span class="line">    public class TestData  </span><br><span class="line">    &#123;  </span><br><span class="line">        public int Add(int a, int b, int c)  </span><br><span class="line">        &#123;  </span><br><span class="line">            return a + b + c;  </span><br><span class="line">        &#125;  </span><br><span class="line">        public int Add(int a, int b)  </span><br><span class="line">        &#123;  </span><br><span class="line">            return a + b;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    class Program  </span><br><span class="line">    &#123;  </span><br><span class="line">        static void Main(string[] args)  </span><br><span class="line">        &#123;  </span><br><span class="line">            TestData dataClass = new TestData();</span><br><span class="line">            int add1 = dataClass.Add(1, 2);  </span><br><span class="line">            int add2 = dataClass.Add(1, 2, 3);</span><br><span class="line"></span><br><span class="line">            Console.WriteLine(&quot;add1 :&quot; + add1);</span><br><span class="line">            Console.WriteLine(&quot;add2 :&quot; + add2);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>下面的实例演示了几个相同的函数 print()，用于打印不同的数据类型：</p>
-</blockquote>
 <span id="more"></span>
 <blockquote>
 <p><strong>实例</strong></p>
@@ -317,10 +317,10 @@
 </ul>
 <blockquote>
 <p><strong>实例</strong></p>
+</blockquote>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace PolymorphismApplication</span><br><span class="line">&#123;</span><br><span class="line">   abstract class Shape</span><br><span class="line">   &#123;</span><br><span class="line">       abstract public int area();</span><br><span class="line">   &#125;</span><br><span class="line">   class Rectangle:  Shape</span><br><span class="line">   &#123;</span><br><span class="line">      private int length;</span><br><span class="line">      private int width;</span><br><span class="line">      public Rectangle( int a=0, int b=0)</span><br><span class="line">      &#123;</span><br><span class="line">         length = a;</span><br><span class="line">         width = b;</span><br><span class="line">      &#125;</span><br><span class="line">      public override int area ()</span><br><span class="line">      &#123;</span><br><span class="line">         Console.WriteLine(&quot;Rectangle 类的面积：&quot;);</span><br><span class="line">         return (width * length);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   class RectangleTester</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         Rectangle r = new Rectangle(10, 7);</span><br><span class="line">         double a = r.area();</span><br><span class="line">         Console.WriteLine(&quot;面积： &#123;0&#125;&quot;,a);</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>当上面的代码被编译和执行时，它会产生下列结果：</p>
-</blockquote>
 <pre><code>Rectangle 类的面积：
 面积： 70
 </code></pre>
@@ -347,10 +347,10 @@
 <p>下面的程序演示通过虚方法 area() 来计算不同形状图像的面积：</p>
 <blockquote>
 <p><strong>实例</strong></p>
+</blockquote>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace PolymorphismApplication</span><br><span class="line">&#123;</span><br><span class="line">   class Shape</span><br><span class="line">   &#123;</span><br><span class="line">      protected int width, height;</span><br><span class="line">      public Shape( int a=0, int b=0)</span><br><span class="line">      &#123;</span><br><span class="line">         width = a;</span><br><span class="line">         height = b;</span><br><span class="line">      &#125;</span><br><span class="line">      public virtual int area()</span><br><span class="line">      &#123;</span><br><span class="line">         Console.WriteLine(&quot;父类的面积：&quot;);</span><br><span class="line">         return 0;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   class Rectangle: Shape</span><br><span class="line">   &#123;</span><br><span class="line">      public Rectangle( int a=0, int b=0): base(a, b)</span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">      public override int area ()</span><br><span class="line">      &#123;</span><br><span class="line">         Console.WriteLine(&quot;Rectangle 类的面积：&quot;);</span><br><span class="line">         return (width * height);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   class Triangle: Shape</span><br><span class="line">   &#123;</span><br><span class="line">      public Triangle(int a = 0, int b = 0): base(a, b)</span><br><span class="line">      &#123;</span><br><span class="line">     </span><br><span class="line">      &#125;</span><br><span class="line">      public override int area()</span><br><span class="line">      &#123;</span><br><span class="line">         Console.WriteLine(&quot;Triangle 类的面积：&quot;);</span><br><span class="line">         return (width * height / 2);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   class Caller</span><br><span class="line">   &#123;</span><br><span class="line">      public void CallArea(Shape sh)</span><br><span class="line">      &#123;</span><br><span class="line">         int a;</span><br><span class="line">         a = sh.area();</span><br><span class="line">         Console.WriteLine(&quot;面积： &#123;0&#125;&quot;, a);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;  </span><br><span class="line">   class Tester</span><br><span class="line">   &#123;</span><br><span class="line">     </span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         Caller c = new Caller();</span><br><span class="line">         Rectangle r = new Rectangle(10, 7);</span><br><span class="line">         Triangle t = new Triangle(10, 5);</span><br><span class="line">         c.CallArea(r);</span><br><span class="line">         c.CallArea(t);</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>当上面的代码被编译和执行时，它会产生下列结果：</p>
-</blockquote>
 <pre><code>Rectangle 类的面积：
 面积：70
 Triangle 类的面积：

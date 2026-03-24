@@ -135,12 +135,12 @@
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-aigames">
 
-    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏</a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏<span class="badge">1</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -266,20 +266,19 @@
       
         <h2 id="【Hexo】Next主题添加网易云音乐"><a href="#【Hexo】Next主题添加网易云音乐" class="headerlink" title="- 【Hexo】Next主题添加网易云音乐"></a>- 【Hexo】Next主题添加网易云音乐</h2><p>使用网易云音乐插件给 Next主题博客添加网易云音乐，具体步骤如下：</p>
 <h2 id="生成网易云外链播放器"><a href="#生成网易云外链播放器" class="headerlink" title="- 生成网易云外链播放器"></a>- 生成网易云外链播放器</h2><p>进入 <a target="_blank" rel="noopener" href="https://music.163.com/">网易云音乐</a>，注册帐号，创建新的歌单，找到喜欢的歌曲加入歌单，点击分享按钮。</p>
-<p><img data-src="https://iili.io/HP4LXcb.png"></p>
+<p><img src="https://iili.io/HP4LXcb.png"></p>
 <p>点击”我的音乐”旁边的”关注”页签，可以在动态列表下看到刚才分享出来的音乐，点击歌单名称。</p>
-<p><img data-src="https://iili.io/HP4LGV9.png"></p>
+<p><img src="https://iili.io/HP4LGV9.png"></p>
 <p>进入歌单列表详情，点击生成外链播放器</p>
 <span id="more"></span>
-<p><img data-src="https://iili.io/HP4LWKu.png"></p>
+<p><img src="https://iili.io/HP4LWKu.png"></p>
 <p>选择你需要的尺寸和播放模式，点击复制代码按钮，复制生成的网易云音乐播放代码。</p>
-<p><img data-src="https://iili.io/HP4LMPe.png"></p>
+<p><img src="https://iili.io/HP4LMPe.png"></p>
 <h2 id="博客中插入生成的外链播放器代码"><a href="#博客中插入生成的外链播放器代码" class="headerlink" title="- 博客中插入生成的外链播放器代码"></a>- 博客中插入生成的外链播放器代码</h2><p>打开&#x2F;themes&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;sidebar.swig文件，在合适位置插入复制出来的网易云音乐播放代码。位置可以跟据具<br>体效果自行调整。</p>
-<p><img data-src="https://iili.io/HP4LhSj.png"></p>
+<p><img src="https://iili.io/HP4LhSj.png"></p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>访问本地服务器localhost:4000，即可看到播放器了，但是每次翻页或者查看日志都会导致浏览器刷新而播放器重新播放音乐。
-	</p>
+<p>访问本地服务器localhost:4000，即可看到播放器了，但是每次翻页或者查看日志都会导致浏览器刷新而播放器重新播放音乐。</p>
 <h2 id="安装pjax模块实现音乐全局播放"><a href="#安装pjax模块实现音乐全局播放" class="headerlink" title="- 安装pjax模块实现音乐全局播放"></a>- 安装pjax模块实现音乐全局播放</h2><p>为了防止每次翻页都会导致浏览器刷新而播放器重新播放音乐，需要引入pjax模块。</p>
 <ol>
 <li><p>转入到Next目录</p>
@@ -290,13 +289,13 @@
 <li><p>获取pjax模块，将模块安装到source&#x2F;lib目录：</p>
  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/theme-next/theme-next-pjax source/lib/pjax</span><br></pre></td></tr></table></figure></li>
 </ol>
-<p><img data-src="https://iili.io/HP4LwHx.png"></p>
+<p><img src="https://iili.io/HP4LwHx.png"></p>
 <ol start="3">
 <li><p>启用pjax模块</p>
 <p> 在Next主题的_config.yml文件中，启用pjax模块</p>
 </li>
 </ol>
-<p><img data-src="https://iili.io/HP4LNAQ.png"></p>
+<p><img src="https://iili.io/HP4LNAQ.png"></p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>访问本地服务器localhost:4000，翻页播放器不会重新播放音乐了。</p>

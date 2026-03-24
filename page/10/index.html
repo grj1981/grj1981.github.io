@@ -124,12 +124,12 @@
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-aigames">
 
-    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏</a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏<span class="badge">1</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -383,8 +383,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="C-可空类型（Nullable）"><a href="#C-可空类型（Nullable）" class="headerlink" title="- C# 可空类型（Nullable）"></a>- C# 可空类型（Nullable）</h2><h2 id="C-单问号-与-双问号"><a href="#C-单问号-与-双问号" class="headerlink" title="- C# 单问号 ? 与 双问号 ??"></a>- C# 单问号 ? 与 双问号 ??</h2><p>? 单问号用于对 int、double、bool 等无法直接赋值为 null 的数据类型进行 null 的赋值，意思是这个数据类型是 Nullable 类型的。<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int? i = 3;</span><br></pre></td></tr></table></figure><br>等同于：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Nullable&lt;int&gt; i = new Nullable&lt;int&gt;(3);</span><br></pre></td></tr></table></figure></p>
-<pre><code>int i; //默认值0
+          <h2 id="C-可空类型（Nullable）"><a href="#C-可空类型（Nullable）" class="headerlink" title="- C# 可空类型（Nullable）"></a>- C# 可空类型（Nullable）</h2><h2 id="C-单问号-与-双问号"><a href="#C-单问号-与-双问号" class="headerlink" title="- C# 单问号 ? 与 双问号 ??"></a>- C# 单问号 ? 与 双问号 ??</h2><p>? 单问号用于对 int、double、bool 等无法直接赋值为 null 的数据类型进行 null 的赋值，意思是这个数据类型是 Nullable 类型的。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int? i = 3;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>等同于：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Nullable&lt;int&gt; i = new Nullable&lt;int&gt;(3);</span><br></pre></td></tr></table></figure>
+
+int i; //默认值0
 int? ii; //默认值null
 </code></pre>
 <p>?? 双问号用于判断一个变量在为 null 的时候返回一个指定的值。</p>
@@ -392,7 +397,10 @@ int? ii; //默认值null
 <h2 id="C-可空类型（Nullable）-1"><a href="#C-可空类型（Nullable）-1" class="headerlink" title="- C# 可空类型（Nullable）"></a>- C# 可空类型（Nullable）</h2><p>C# 提供了一个特殊的数据类型，nullable 类型（可空类型），可空类型可以表示其基础值类型正常范围内的值，再加上一个 null 值。</p>
 <p>例如，Nullable&lt; Int32 &gt;，读作”可空的 Int32”，可以被赋值为 -2,147,483,648 到 2,147,483,647 之间的任意值，也可以被赋值为 null 值。类似的，Nullable&lt; bool &gt; 变量可以被赋值为 true 或 false 或 null。</p>
 <p>在处理数据库和其他包含可能未赋值的元素的数据类型时，将 null 赋值给数值类型或布尔型的功能特别有用。例如，数据库中的布尔型字段可以存储值 true 或 false，或者，该字段也可以未定义。</p>
-<p>声明一个 nullable 类型（可空类型）的语法如下：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt; data_type&gt; ? &lt;variable_name&gt; = null;</span><br></pre></td></tr></table></figure><br>下面的实例演示了可空数据类型的用法：</p>
+<p>声明一个 nullable 类型（可空类型）的语法如下：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt; data_type&gt; ? &lt;variable_name&gt; = null;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>下面的实例演示了可空数据类型的用法：</p>
 <blockquote>
 <p><strong>实例</strong></p>
 </blockquote>
@@ -406,14 +414,21 @@ int? ii; //默认值null
 <p>如果第一个操作数的值为 null，则运算符返回第二个操作数的值，否则返回第一个操作数的值。下面的实例演示了这点：</p>
 <blockquote>
 <p><strong>实例</strong></p>
+</blockquote>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace CalculatorApplication</span><br><span class="line">&#123;</span><br><span class="line">   class NullablesAtShow</span><br><span class="line">   &#123;</span><br><span class="line">         </span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         </span><br><span class="line">         double? num1 = null;</span><br><span class="line">         double? num2 = 3.14157;</span><br><span class="line">         double num3;</span><br><span class="line">         num3 = num1 ?? 5.34;      // num1 如果为空值则返回 5.34</span><br><span class="line">         Console.WriteLine(&quot;num3 的值： &#123;0&#125;&quot;, num3);</span><br><span class="line">         num3 = num2 ?? 5.34;</span><br><span class="line">         Console.WriteLine(&quot;num3 的值： &#123;0&#125;&quot;, num3);</span><br><span class="line">         Console.ReadLine();</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>当上面的代码被编译和执行时，它会产生下列结果：<br>	<br>	num3 的值： 5.34<br>	num3 的值： 3.14157<br>说明：</p>
-</blockquote>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<pre><code>num3 的值： 5.34
+num3 的值： 3.14157
+</code></pre>
+<p>说明：</p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">num3 = num1 ?? 5.34;      // num1 如果为空值则返回 5.34</span><br><span class="line">Console.WriteLine(&quot;num3 的值： &#123;0&#125;&quot;, num3);</span><br><span class="line">num3 = num2 ?? 5.34;</span><br><span class="line">Console.WriteLine(&quot;num3 的值： &#123;0&#125;&quot;, num3);</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>C# 中两个问号的作用是判断??左边的对象是否为 null，如果不为 null 则使用 ?? 左边的对象，如果为 null 则使用 ?? 右边的对象。</p>
-<p>比如：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = b ?? </span><br></pre></td></tr></table></figure><br>如果 b 为 null，则 a &#x3D; c，如果 b 不为 null，则 a &#x3D; b。</p>
+<p>比如：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = b ?? </span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>如果 b 为 null，则 a &#x3D; c，如果 b 不为 null，则 a &#x3D; b。</p>
 <p>?? 可以理解为三元运算符的简化形式：</p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num3 = num1 ?? 5.34;</span><br><span class="line">num3 = (num1 == null) ? 5.34 : num1;</span><br></pre></td></tr></table></figure>
 </code></pre>
@@ -523,7 +538,10 @@ int? ii; //默认值null
 <li><p>调用方法</p>
 </li>
 </ul>
-<h2 id="C-中定义方法"><a href="#C-中定义方法" class="headerlink" title="- C# 中定义方法"></a>- C# 中定义方法</h2><p>当定义一个方法时，从根本上说是在声明它的结构的元素。在 C# 中，定义方法的语法如下：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Access Specifier&gt; &lt;Return Type&gt; &lt;Method Name&gt;(Parameter List)</span><br><span class="line">&#123;</span><br><span class="line">   Method Body</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>下面是方法的各个元素：</p>
+<h2 id="C-中定义方法"><a href="#C-中定义方法" class="headerlink" title="- C# 中定义方法"></a>- C# 中定义方法</h2><p>当定义一个方法时，从根本上说是在声明它的结构的元素。在 C# 中，定义方法的语法如下：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Access Specifier&gt; &lt;Return Type&gt; &lt;Method Name&gt;(Parameter List)</span><br><span class="line">&#123;</span><br><span class="line">   Method Body</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>下面是方法的各个元素：</p>
 <ul>
 <li><p>Access Specifier：访问修饰符，这个决定了变量或方法对于另一个类的可见性。</p>
 </li>
@@ -539,9 +557,9 @@ int? ii; //默认值null
 <p>下面的代码片段显示一个函数 FindMax，它接受两个整数值，并返回两个中的较大值。它有 public 访问修饰符，所以它可以使用类的实例从类的外部进行访问。</p>
 <blockquote>
 <p><strong>实例</strong></p>
+</blockquote>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class NumberManipulator</span><br><span class="line">&#123;</span><br><span class="line">   public int FindMax(int num1, int num2)</span><br><span class="line">   &#123;</span><br><span class="line">      /* 局部变量声明 */</span><br><span class="line">      int result;</span><br><span class="line"></span><br><span class="line">      if (num1 &gt; num2)</span><br><span class="line">         result = num1;</span><br><span class="line">      else</span><br><span class="line">         result = num2;</span><br><span class="line"></span><br><span class="line">      return result;</span><br><span class="line">   &#125;</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
-</blockquote>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%96%B9%E6%B3%95-foreach%E9%81%8D%E5%8E%86%E7%9A%84%E7%94%A8%E6%B3%95%E3%80%91/#more" rel="contents">
@@ -696,8 +714,6 @@ Line 7 - c 的值是 21
 <li><p>c &#x3D; a–: 先将 a 赋值给 c，再对 a 进行自减运算。</p>
 </li>
 <li><p>c &#x3D; –a: 先将 a 进行自减运算，再将 a 赋值给 c 。</p>
-</li>
-</ul>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%BF%90%E7%AE%97%E7%AC%A6%E3%80%91/#more" rel="contents">
@@ -822,7 +838,10 @@ Line 7 - c 的值是 21
 </li>
 </ul>
 <p>以下创建一个 test.cs 文件，文件包含了可以打印出 “Hello World” 的简单代码：</p>
-<p>test.cs 文件代码：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace HelloWorldApplication</span><br><span class="line">&#123;</span><br><span class="line">   class HelloWorld</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         /* 我的第一个 C# 程序*/</span><br><span class="line">         Console.WriteLine(&quot;Hello World&quot;);</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<p>test.cs 文件代码：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace HelloWorldApplication</span><br><span class="line">&#123;</span><br><span class="line">   class HelloWorld</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         /* 我的第一个 C# 程序*/</span><br><span class="line">         Console.WriteLine(&quot;Hello World&quot;);</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
 <pre><code>Hello World
 </code></pre>
 <p>让我们看一下上面程序的各个部分：</p>
@@ -832,8 +851,6 @@ Line 7 - c 的值是 21
 <li><p>下一行是 namespace 声明。一个 namespace 里包含了一系列的类。HelloWorldApplication 命名空间包含了类 HelloWorld。</p>
 </li>
 <li><p>下一行是 class 声明。类 HelloWorld 包含了程序使用的数据和方法声明。类一般包含多个方法。方法定义了类的行为。在这里，HelloWorld 类只有一个 Main 方法。</p>
-</li>
-</ul>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/06/26/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84%E3%80%91/#more" rel="contents">
@@ -937,9 +954,9 @@ Line 7 - c 的值是 21
       
           <h2 id="【Hexo】Next主题添加网易云音乐"><a href="#【Hexo】Next主题添加网易云音乐" class="headerlink" title="- 【Hexo】Next主题添加网易云音乐"></a>- 【Hexo】Next主题添加网易云音乐</h2><p>使用网易云音乐插件给 Next主题博客添加网易云音乐，具体步骤如下：</p>
 <h2 id="生成网易云外链播放器"><a href="#生成网易云外链播放器" class="headerlink" title="- 生成网易云外链播放器"></a>- 生成网易云外链播放器</h2><p>进入 <a target="_blank" rel="noopener" href="https://music.163.com/">网易云音乐</a>，注册帐号，创建新的歌单，找到喜欢的歌曲加入歌单，点击分享按钮。</p>
-<p><img data-src="https://iili.io/HP4LXcb.png"></p>
+<p><img src="https://iili.io/HP4LXcb.png"></p>
 <p>点击”我的音乐”旁边的”关注”页签，可以在动态列表下看到刚才分享出来的音乐，点击歌单名称。</p>
-<p><img data-src="https://iili.io/HP4LGV9.png"></p>
+<p><img src="https://iili.io/HP4LGV9.png"></p>
 <p>进入歌单列表详情，点击生成外链播放器</p>
           <!--noindex-->
             <div class="post-button">

@@ -127,12 +127,12 @@
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-aigames">
 
-    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏</a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏<span class="badge">1</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -313,10 +313,10 @@ Box2 的体积： 1560
 <p>默认的构造函数没有任何参数。但是如果你需要一个带有参数的构造函数可以有参数，这种构造函数叫做参数化构造函数。这种技术可以帮助你在创建对象的同时给对象赋初始值，具体请看下面实例：</p>
 <blockquote>
 <p><strong>实例</strong></p>
+</blockquote>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace LineApplication</span><br><span class="line">&#123;</span><br><span class="line">   class Line</span><br><span class="line">   &#123;</span><br><span class="line">      private double length;   // 线条的长度</span><br><span class="line">      public Line(double len)  // 参数化构造函数</span><br><span class="line">      &#123;</span><br><span class="line">         Console.WriteLine(&quot;对象已创建，length = &#123;0&#125;&quot;, len);</span><br><span class="line">         length = len;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      public void setLength( double len )</span><br><span class="line">      &#123;</span><br><span class="line">         length = len;</span><br><span class="line">      &#125;</span><br><span class="line">      public double getLength()</span><br><span class="line">      &#123;</span><br><span class="line">         return length;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         Line line = new Line(10.0);</span><br><span class="line">         Console.WriteLine(&quot;线条的长度： &#123;0&#125;&quot;, line.getLength());</span><br><span class="line">         // 设置线条长度</span><br><span class="line">         line.setLength(6.0);</span><br><span class="line">         Console.WriteLine(&quot;线条的长度： &#123;0&#125;&quot;, line.getLength());</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>当上面的代码被编译和执行时，它会产生下列结果：</p>
-</blockquote>
 <pre><code>对象已创建，length = 10
 线条的长度： 10
 线条的长度： 6
