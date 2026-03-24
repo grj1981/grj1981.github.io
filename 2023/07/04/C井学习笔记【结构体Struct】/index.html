@@ -28,8 +28,8 @@
 <meta property="article:published_time" content="2023-07-04T07:36:43.000Z">
 <meta property="article:modified_time" content="2024-08-26T09:55:57.304Z">
 <meta property="article:author" content="淡水鱼">
-<meta property="article:tag" content="IT">
 <meta property="article:tag" content="C#">
+<meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://www.bytefisher.top/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%93%E6%9E%84%E4%BD%93Struct%E3%80%91/">
@@ -343,13 +343,7 @@ Author : Zara Ali
 Subject : Telecom Billing Tutorial
 Book_id : 6495700
 </code></pre>
-<p>1、结构体中声明的字段无法赋予初值，类可以:</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">struct test001</span><br><span class="line">&#123;</span><br><span class="line">    private int aa = 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>执行以上代码将出现“结构中不能实例属性或字段初始值设定”的报错，而类中无此限制，代码如下：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class test002</span><br><span class="line">&#123;</span><br><span class="line">    private int aa = 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>2、结构体的构造函数中，必须为结构体所有字段赋值，类的构造函数无此限制:</p>
+<p>1、结构体中声明的字段无法赋予初值，类可以:<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">struct test001</span><br><span class="line">&#123;</span><br><span class="line">    private int aa = 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>执行以上代码将出现“结构中不能实例属性或字段初始值设定”的报错，而类中无此限制，代码如下：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class test002</span><br><span class="line">&#123;</span><br><span class="line">    private int aa = 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>2、结构体的构造函数中，必须为结构体所有字段赋值，类的构造函数无此限制:</p>
 <h2 id="补充：类与结构的选择"><a href="#补充：类与结构的选择" class="headerlink" title="- 补充：类与结构的选择"></a>- 补充：类与结构的选择</h2><p>首先明确，类的对象是存储在堆空间中，结构存储在栈中。堆空间大，但访问速度较慢，栈空间小，访问速度相对更快。故而，当我们描述一个轻量级对象的时候，结构可提高效率，成本更低。当然，这也得从需求出发，假如我们在传值的时候希望传递的是对象的引用地址而不是对象的拷贝，就应该使用类了。</p>
 <p>C# 中结构类型和类类型在语法上非常相似，他们都是一种数据结构，都可以包括数据成员和方法成员。</p>
 <p>C# 中的简单类型，如int、double、bool等都是结构类型。如果需要的话，甚至可以使用结构类型结合运算符运算重载，再为 C# 语言创建出一种新的值类型来。</p>
@@ -368,8 +362,8 @@ Book_id : 6495700
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/IT/" rel="tag"># IT</a>
               <a href="/tags/C/" rel="tag"># C#</a>
+              <a href="/tags/IT/" rel="tag"># IT</a>
           </div>
 
         

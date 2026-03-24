@@ -262,7 +262,7 @@
 <p>多态性可以是静态的或动态的。在静态多态性中，函数的响应是在编译时发生的。在动态多态性中，函数的响应是在运行时发生的。</p>
 <p>在 C# 中，每个类型都是多态的，因为包括用户定义类型在内的所有类型都继承自 Object。</p>
 <p>多态就是同一个接口，使用不同的实例而执行不同操作，如图所示：</p>
-<p><img src="https://www.runoob.com/wp-content/uploads/2013/12/dt-java.png"></p>
+<p><img data-src="https://www.runoob.com/wp-content/uploads/2013/12/dt-java.png"></p>
 <p>现实中，比如我们按下 F1 键这个动作：</p>
 <ul>
 <li><p>如果当前在 Flash 界面下弹出的就是 AS 3 的帮助文档；</p>
@@ -278,17 +278,17 @@
 </li>
 <li><p>运算符重载</p>
 </li>
-<li><p>运算符重载将在下一章节讨论，接下来我们将讨论函数重载。</p>
-</li>
+<li></li>
 </ul>
+<p>运算符重载将在下一章节讨论，接下来我们将讨论函数重载。</p>
 <h2 id="函数重载"><a href="#函数重载" class="headerlink" title="- 函数重载"></a>- 函数重载</h2><p>您可以在同一个范围内对相同的函数名有多个定义。函数的定义必须彼此不同，可以是参数列表中的参数类型不同，也可以是参数个数不同。不能重载只有返回类型不同的函数声明。</p>
 <p>下面的实例演示了几个相同的函数 Add()，用于对不同个数参数进行相加处理：</p>
 <blockquote>
 <p><strong>实例</strong></p>
-</blockquote>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace PolymorphismApplication</span><br><span class="line">&#123;</span><br><span class="line">    public class TestData  </span><br><span class="line">    &#123;  </span><br><span class="line">        public int Add(int a, int b, int c)  </span><br><span class="line">        &#123;  </span><br><span class="line">            return a + b + c;  </span><br><span class="line">        &#125;  </span><br><span class="line">        public int Add(int a, int b)  </span><br><span class="line">        &#123;  </span><br><span class="line">            return a + b;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    class Program  </span><br><span class="line">    &#123;  </span><br><span class="line">        static void Main(string[] args)  </span><br><span class="line">        &#123;  </span><br><span class="line">            TestData dataClass = new TestData();</span><br><span class="line">            int add1 = dataClass.Add(1, 2);  </span><br><span class="line">            int add2 = dataClass.Add(1, 2, 3);</span><br><span class="line"></span><br><span class="line">            Console.WriteLine(&quot;add1 :&quot; + add1);</span><br><span class="line">            Console.WriteLine(&quot;add2 :&quot; + add2);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>下面的实例演示了几个相同的函数 print()，用于打印不同的数据类型：</p>
+</blockquote>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/08/02/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E6%80%81%E6%80%A7%E3%80%91/#more" rel="contents">
@@ -395,7 +395,7 @@
 <p>一番准备之后，已经是9点半了。我决定先用12尺的玄武人Y钓一些小鱼回去喂乌龟。撮了两个大饵，抛入水中先找底。结果浮漂一入水就全没入水中，一提竿大弯弓水下没动静，感觉像挂底，习惯性的拿着鱼竿向上轻弹两下，突然一股具大的力道从鱼竿传到手撑，鱼竿差点脱手而去，鱼线带着嗖嗖嗖的声音往外串，，我急忙调整鱼竿的角度，左右晃动鱼竿，希望能让鱼竿弯起来。但感觉就像是牵了一头不听指挥的牛，一直往前冲。结果鱼脱钩了，4号袖钩都被拉直了。看着水面上翻起的夹着浑水的大水花，我的内心久久不能平静。过了几分钟，等我心情平复了一些，我分析了一下原因。这其实是跑鱼的正常现象。12尺的玄武人Y有点短，主线0.8号，子线0.4号，加上4号袖钩，这样的配置确实只适合钓小鱼。再加上水深只有60厘米，很难有鱼游动的空间。一想到这些，我不再那么懊恼了。钓鱼玩的就是一个过程，于是我收拾好心情，继续钓。</p>
 <p>刚刚跑了鱼，窝里肯定已经没有鱼了。于是我准备去玩路亚。上次的路亚装备还在，我准备玩飞蝇。出人意料的是，路亚鱼口很好，还解锁了鲈鱼。</p>
 <p>路亚上的第一条鲈鱼</p>
-<p><img src="https://iili.io/JH6bxmN.md.jpg"></p>
+<p><img data-src="https://iili.io/JH6bxmN.md.jpg"></p>
 <p>用2克小亮片上的第一条鲈鱼,咬口猛，中鱼瞬间有时会跳出水面洗腮</p>
           <!--noindex-->
             <div class="post-button">
@@ -499,8 +499,8 @@
 
       
           <p>又到了令人开心和愉快的周末时光！原本计划这个周末去河边玩路亚微物钓鱼，不过上周下了几天雨，导致河水暴涨，无法安全地玩耍。为了保证安全，我决定改去三一水库钓小鱼，毕竟水库的深度只有大约1.5米，环境也很舒适。</p>
-<p>钓位环境<br><img src="https://iili.io/JH6bHmB.md.jpg"></p>
-<p>我准备了一根6.3米长的钓竿，上面挂玉米，打算用来钓鲤鱼；另外还有一根3.6米短竿，用来钓小鲫鱼。<br><img src="https://iili.io/JH6Dtqu.md.jpg"></p>
+<p>钓位环境<br><img data-src="https://iili.io/JH6bHmB.md.jpg"></p>
+<p>我准备了一根6.3米长的钓竿，上面挂玉米，打算用来钓鲤鱼；另外还有一根3.6米短竿，用来钓小鲫鱼。<br><img data-src="https://iili.io/JH6Dtqu.md.jpg"></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/07/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-16/#more" rel="contents">
@@ -614,8 +614,8 @@
 </li>
 </ul>
 <p>大概看了一下，对于向我这种新手小白，还是觉得GitHub多项目重定向这一方案要简单一些。那就先折腾简单的吧，另外几种方案有机会再尝试。</p>
-<h2 id="建立中转仓库"><a href="#建立中转仓库" class="headerlink" title="- 建立中转仓库"></a>- 建立中转仓库</h2><p>需要在 GitHub 上再新建一个仓库，用来中转旧域名 <a target="_blank" rel="noopener" href="http://www.ai-fish.top/">www.ai-fish.top</a> 中的访问到新的域名 <a href="http://www.bytefisher.top/">www.bytefisher.top</a> 中转仓库里面不会有过多内容。创建它只是为了存放 CNAME 文件 和 404.html文件，告诉 GitHub Pages 我们有两个域名而已。我创建了一个名为ByteFisher的仓库，正常情况下，访问这个仓库 GitHub Pages 的域名前缀为 用户名.github.io&#x2F;ByteFisher<br>图1 创建中转仓库 ByteFisher<br><img src="https://iili.io/HsjuVu1.png"></p>
-<h2 id="添加-GitHub-Pages-服务"><a href="#添加-GitHub-Pages-服务" class="headerlink" title="- 添加 GitHub Pages 服务"></a>- 添加 GitHub Pages 服务</h2><p>图2 中转仓库CNAME文件中填写旧的域名 ：<a target="_blank" rel="noopener" href="http://www.ai-fish.top/">www.ai-fish.top</a><br><img src="https://iili.io/HsjuN6v.png"><br>图3 修改博客主仓库中CNAME文件，填写新的域名：<a href="http://www.bytefisher.top/">www.bytefisher.top</a><br><img src="https://iili.io/Hsjuv8N.png"></p>
+<h2 id="建立中转仓库"><a href="#建立中转仓库" class="headerlink" title="- 建立中转仓库"></a>- 建立中转仓库</h2><p>需要在 GitHub 上再新建一个仓库，用来中转旧域名 <a target="_blank" rel="noopener" href="http://www.ai-fish.top/">www.ai-fish.top</a> 中的访问到新的域名 <a href="http://www.bytefisher.top/">www.bytefisher.top</a> 中转仓库里面不会有过多内容。创建它只是为了存放 CNAME 文件 和 404.html文件，告诉 GitHub Pages 我们有两个域名而已。我创建了一个名为ByteFisher的仓库，正常情况下，访问这个仓库 GitHub Pages 的域名前缀为 用户名.github.io&#x2F;ByteFisher<br>图1 创建中转仓库 ByteFisher<br><img data-src="https://iili.io/HsjuVu1.png"></p>
+<h2 id="添加-GitHub-Pages-服务"><a href="#添加-GitHub-Pages-服务" class="headerlink" title="- 添加 GitHub Pages 服务"></a>- 添加 GitHub Pages 服务</h2><p>图2 中转仓库CNAME文件中填写旧的域名 ：<a target="_blank" rel="noopener" href="http://www.ai-fish.top/">www.ai-fish.top</a><br><img data-src="https://iili.io/HsjuN6v.png"><br>图3 修改博客主仓库中CNAME文件，填写新的域名：<a href="http://www.bytefisher.top/">www.bytefisher.top</a><br><img data-src="https://iili.io/Hsjuv8N.png"></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/07/07/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%9A%E9%A1%B9%E7%9B%AE%E9%87%8D%E5%AE%9A%E5%90%91%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E9%A1%B6%E7%BA%A7%E5%9F%9F%E5%90%8D/#more" rel="contents">

@@ -28,8 +28,8 @@
 <meta property="article:published_time" content="2025-03-14T08:52:24.000Z">
 <meta property="article:modified_time" content="2025-03-14T09:13:41.424Z">
 <meta property="article:author" content="淡水鱼">
-<meta property="article:tag" content="IT">
 <meta property="article:tag" content="C#">
+<meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/03/14/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90DOTween%E5%BA%93%E3%80%91/">
@@ -274,9 +274,7 @@
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object.Destroy(fog);</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>这行代码用于销毁 fog 对象。</p>
-<h1 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h1><h2 id="序列（Sequences）"><a href="#序列（Sequences）" class="headerlink" title="序列（Sequences）"></a>序列（Sequences）</h2><p>序列可以让你将多个动画组合在一起，按顺序执行。</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var sequence = DOTween.Sequence();</span><br><span class="line">sequence.Join(DOTween.To(() =&gt; ump.fValue, fv =&gt; ump.fValue = fv, 1f, 3f));</span><br><span class="line">sequence.Join(DOTween.To(() =&gt; fog.transform.localScale, lv =&gt; fog.transform.localScale = lv, new Vector3(2, 2, 2), 3f));</span><br><span class="line">sequence.Play();</span><br></pre></td></tr></table></figure>
-</code></pre>
+<h1 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h1><h2 id="序列（Sequences）"><a href="#序列（Sequences）" class="headerlink" title="序列（Sequences）"></a>序列（Sequences）</h2><p>序列可以让你将多个动画组合在一起，按顺序执行。<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var sequence = DOTween.Sequence();</span><br><span class="line">sequence.Join(DOTween.To(() =&gt; ump.fValue, fv =&gt; ump.fValue = fv, 1f, 3f));</span><br><span class="line">sequence.Join(DOTween.To(() =&gt; fog.transform.localScale, lv =&gt; fog.transform.localScale = lv, new Vector3(2, 2, 2), 3f));</span><br><span class="line">sequence.Play();</span><br></pre></td></tr></table></figure></p>
 <h2 id="循环（Loops）"><a href="#循环（Loops）" class="headerlink" title="循环（Loops）"></a>循环（Loops）</h2><p>你可以设置动画循环播放，使用 SetLoops 方法。</p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DOTween.To(() =&gt; ump.fValue, fv =&gt; ump.fValue = fv, 1f, 3f)</span><br><span class="line">    .SetLoops(-1, LoopType.Yoyo);</span><br></pre></td></tr></table></figure>
 </code></pre>
@@ -306,8 +304,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/IT/" rel="tag"># IT</a>
               <a href="/tags/C/" rel="tag"># C#</a>
+              <a href="/tags/IT/" rel="tag"># IT</a>
           </div>
 
         

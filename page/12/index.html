@@ -279,9 +279,9 @@
 <p>每500克嫩玉米粒，可以添加1毫升的多巴盐和0.5毫升的鱼阿法，对草鱼的诱食效果非常好，能够增加窝子里草鱼的饥饿感和兴奋程度，让鱼口变得更好。</p>
 <p>四、正确的打窝方法</p>
 <p>草鱼是中下层鱼类，但不是底栖鱼类，不会老老实实底部窝子里吃食。想要把很多的草鱼诱到钓点里，钓鱼人需要持续地打窝，每分钟打一勺嫩玉米粒下去，每勺10~20粒嫩玉米，只要保持住较高的打窝频率，就能够钓到较多的草鱼。</p>
-<p><img src="http://iili.io/HSg1Je9.md.jpg"></p>
+<p><img data-src="http://iili.io/HSg1Je9.md.jpg"></p>
 <p>图1（水库环境）</p>
-<p><img src="http://iili.io/HSglL6Q.md.jpg"></p>
+<p><img data-src="http://iili.io/HSglL6Q.md.jpg"></p>
 <p>图2（22年夏天三一水库用嫩玉米连竿小草鱼）</p>
 
       
@@ -388,16 +388,16 @@
 <p>字符串，列表或元组对象都可用于创建迭代器：</p>
 <blockquote>
 <p><strong>实例(Python 3.0+):</strong></p>
-</blockquote>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list=[1,2,3,4]</span><br><span class="line">&gt;&gt;&gt; it = iter(list)    # 创建迭代器对象</span><br><span class="line">&gt;&gt;&gt; print (next(it))   # 输出迭代器的下一个元素</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; print (next(it))</span><br><span class="line">2</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>迭代器对象可以使用常规for语句进行遍历：</p>
+</blockquote>
 <blockquote>
 <p><strong>实例(Python 3.0+):</strong></p>
-</blockquote>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list=[1,2,3,4]</span><br><span class="line">it = iter(list)    # 创建迭代器对象</span><br><span class="line">for x in it:</span><br><span class="line">    print (x, end=&quot; &quot;)</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>执行以上程序，输出结果如下：</p>
+</blockquote>
 <pre><code>1 2 3 4
 </code></pre>
 <p>也可以使用 next() 函数：</p>
@@ -784,10 +784,10 @@ set(value)
 </code></pre>
 <blockquote>
 <p><strong>实例:</strong></p>
-</blockquote>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; basket = &#123;&#x27;apple&#x27;, &#x27;orange&#x27;, &#x27;apple&#x27;, &#x27;pear&#x27;, &#x27;orange&#x27;, &#x27;banana&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; print(basket)                      # 这里演示的是去重功能</span><br><span class="line">&#123;&#x27;orange&#x27;, &#x27;banana&#x27;, &#x27;pear&#x27;, &#x27;apple&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; &#x27;orange&#x27; in basket                 # 快速判断元素是否在集合内</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; &#x27;crabgrass&#x27; in basket</span><br><span class="line">False</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; # 下面展示两个集合间的运算.</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; a = set(&#x27;abracadabra&#x27;)</span><br><span class="line">&gt;&gt;&gt; b = set(&#x27;alacazam&#x27;)</span><br><span class="line">&gt;&gt;&gt; a                                  </span><br><span class="line">&#123;&#x27;a&#x27;, &#x27;r&#x27;, &#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; a - b                              # 集合a中包含而集合b中不包含的元素</span><br><span class="line">&#123;&#x27;r&#x27;, &#x27;d&#x27;, &#x27;b&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; a | b                              # 集合a或b中包含的所有元素</span><br><span class="line">&#123;&#x27;a&#x27;, &#x27;c&#x27;, &#x27;r&#x27;, &#x27;d&#x27;, &#x27;b&#x27;, &#x27;m&#x27;, &#x27;z&#x27;, &#x27;l&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; a &amp; b                              # 集合a和b中都包含了的元素</span><br><span class="line">&#123;&#x27;a&#x27;, &#x27;c&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; a ^ b                              # 不同时包含于a和b的元素</span><br><span class="line">&#123;&#x27;r&#x27;, &#x27;d&#x27;, &#x27;b&#x27;, &#x27;m&#x27;, &#x27;z&#x27;, &#x27;l&#x27;&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>类似列表推导式，同样集合支持集合推导式(Set comprehension):</p>
+</blockquote>
 <blockquote>
 <p><strong>实例:</strong></p>
 </blockquote>
@@ -903,12 +903,7 @@ set(value)
 <p>d &#x3D; {key1 : value1, key2 : value2, key3 : value3 }<br>注意：dict 作为 Python 的关键字和内置函数，变量名不建议命名为 dict。</p>
 <p>键必须是唯一的，但值则不必。</p>
 <p>值可以取任何数据类型，但键必须是不可变的，如字符串，数字。</p>
-<p>一个简单的字典实例：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tinydict = &#123;&#x27;name&#x27;: &#x27;runoob&#x27;, &#x27;likes&#x27;: 123, &#x27;url&#x27;: &#x27;www.runoob.com&#x27;&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>也可如此创建字典：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tinydict1 = &#123; &#x27;abc&#x27;: 456 &#125;</span><br><span class="line">tinydict2 = &#123; &#x27;abc&#x27;: 123, 98.6: 37 &#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
+<p>一个简单的字典实例：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tinydict = &#123;&#x27;name&#x27;: &#x27;runoob&#x27;, &#x27;likes&#x27;: 123, &#x27;url&#x27;: &#x27;www.runoob.com&#x27;&#125;</span><br></pre></td></tr></table></figure><br>也可如此创建字典：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tinydict1 = &#123; &#x27;abc&#x27;: 456 &#125;</span><br><span class="line">tinydict2 = &#123; &#x27;abc&#x27;: 123, 98.6: 37 &#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="创建空字典"><a href="#创建空字典" class="headerlink" title="- 创建空字典"></a>- 创建空字典</h2><p>使用大括号 { } 创建空字典：</p>
 <blockquote>
 <p><strong>实例:</strong></p>

@@ -265,12 +265,7 @@
 <p>d &#x3D; {key1 : value1, key2 : value2, key3 : value3 }<br>注意：dict 作为 Python 的关键字和内置函数，变量名不建议命名为 dict。</p>
 <p>键必须是唯一的，但值则不必。</p>
 <p>值可以取任何数据类型，但键必须是不可变的，如字符串，数字。</p>
-<p>一个简单的字典实例：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tinydict = &#123;&#x27;name&#x27;: &#x27;runoob&#x27;, &#x27;likes&#x27;: 123, &#x27;url&#x27;: &#x27;www.runoob.com&#x27;&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>也可如此创建字典：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tinydict1 = &#123; &#x27;abc&#x27;: 456 &#125;</span><br><span class="line">tinydict2 = &#123; &#x27;abc&#x27;: 123, 98.6: 37 &#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
+<p>一个简单的字典实例：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tinydict = &#123;&#x27;name&#x27;: &#x27;runoob&#x27;, &#x27;likes&#x27;: 123, &#x27;url&#x27;: &#x27;www.runoob.com&#x27;&#125;</span><br></pre></td></tr></table></figure><br>也可如此创建字典：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tinydict1 = &#123; &#x27;abc&#x27;: 456 &#125;</span><br><span class="line">tinydict2 = &#123; &#x27;abc&#x27;: 123, 98.6: 37 &#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="创建空字典"><a href="#创建空字典" class="headerlink" title="- 创建空字典"></a>- 创建空字典</h2><p>使用大括号 { } 创建空字典：</p>
 <blockquote>
 <p><strong>实例:</strong></p>
@@ -308,10 +303,10 @@ tinydict[&#39;Age&#39;]:  7
 <p>如果用字典里没有的键访问数据，会输出错误如下：</p>
 <blockquote>
 <p><strong>实例:</strong></p>
-</blockquote>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tinydict = &#123;&#x27;Name&#x27;: &#x27;Runoob&#x27;, &#x27;Age&#x27;: 7, &#x27;Class&#x27;: &#x27;First&#x27;&#125;</span><br><span class="line"> </span><br><span class="line">print (&quot;tinydict[&#x27;Alice&#x27;]: &quot;, tinydict[&#x27;Alice&#x27;])</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>以上实例输出结果：</p>
+</blockquote>
 <pre><code>Traceback (most recent call last):
   File &quot;test.py&quot;, line 5, in &lt;module&gt;
     print (&quot;tinydict[&#39;Alice&#39;]: &quot;, tinydict[&#39;Alice&#39;])
@@ -323,7 +318,7 @@ KeyError: &#39;Alice&#39;
 </blockquote>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tinydict = &#123;&#x27;Name&#x27;: &#x27;Runoob&#x27;, &#x27;Age&#x27;: 7, &#x27;Class&#x27;: &#x27;First&#x27;&#125;</span><br><span class="line"> </span><br><span class="line">tinydict[&#x27;Age&#x27;] = 8               # 更新 Age</span><br><span class="line">tinydict[&#x27;School&#x27;] = &quot;菜鸟教程&quot;  # 添加信息</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">print (&quot;tinydict[&#x27;Age&#x27;]: &quot;, tinydict[&#x27;Age&#x27;])</span><br><span class="line">print (&quot;tinydict[&#x27;School&#x27;]: &quot;, tinydict[&#x27;School&#x27;])</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>以上实例输出结果：<br>    tinydict[‘Age’]:  8<br>    tinydict[‘School’]:  菜鸟教程</p>
+<p>以上实例输出结果：<br>	tinydict[‘Age’]:  8<br>	tinydict[‘School’]:  菜鸟教程</p>
 <h2 id="删除字典元素"><a href="#删除字典元素" class="headerlink" title="- 删除字典元素"></a>- 删除字典元素</h2><p>能删单一的元素也能清空字典，清空只需一项操作。</p>
 <p>显式删除一个字典用del命令，如下实例：</p>
 <blockquote>
@@ -380,11 +375,8 @@ TypeError: unhashable type: &#39;list&#39;
 &gt;&gt;&gt; type(tinydict)
 &lt;class &#39;dict&#39;&gt;
 </code></pre>
-<p>Python字典包含了以下内置方法：</p>
-<pre><code>1	dict.clear()
-删除字典内所有元素
-
-2	dict.copy()
+<p>Python字典包含了以下内置方法：<br>	<br>	1	dict.clear()<br>	删除字典内所有元素</p>
+<pre><code>2	dict.copy()
 返回一个字典的浅复制
 
 3	dict.fromkeys()

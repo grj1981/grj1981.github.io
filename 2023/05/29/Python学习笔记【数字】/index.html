@@ -310,10 +310,7 @@ del var_a, var_b
 <p>在整数除法中，除法 &#x2F; 总是返回一个浮点数，如果只想得到整数的结果，丢弃可能的分数部分，可以使用运算符 &#x2F;&#x2F; ：</p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 17 / 3  # 整数除法返回浮点型</span><br><span class="line">5.666666666666667</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">&gt;&gt;&gt; 17 // 3  # 整数除法返回向下取整后的结果</span><br><span class="line">5</span><br><span class="line">&gt;&gt;&gt; 17 % 3  # ％操作符返回除法的余数</span><br><span class="line">2</span><br><span class="line">&gt;&gt;&gt; 5 * 3 + 2 </span><br><span class="line">17</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>注意：&#x2F;&#x2F; 得到的并不一定是整数类型的数，它与分母分子的数据类型有关系。</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 7//2</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; 7.0//2</span><br><span class="line">3.0</span><br><span class="line">&gt;&gt;&gt; 7//2.0</span><br><span class="line">3.0</span><br><span class="line">&gt;&gt;&gt; </span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>等号 &#x3D; 用于给变量赋值。赋值之后，除了下一个提示符，解释器不会显示任何结果。</p>
+<p>注意：&#x2F;&#x2F; 得到的并不一定是整数类型的数，它与分母分子的数据类型有关系。<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 7//2</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; 7.0//2</span><br><span class="line">3.0</span><br><span class="line">&gt;&gt;&gt; 7//2.0</span><br><span class="line">3.0</span><br><span class="line">&gt;&gt;&gt; </span><br></pre></td></tr></table></figure><br>等号 &#x3D; 用于给变量赋值。赋值之后，除了下一个提示符，解释器不会显示任何结果。</p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; width = 20</span><br><span class="line">&gt;&gt;&gt; height = 5*9</span><br><span class="line">&gt;&gt;&gt; width * height</span><br><span class="line">900</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>Python 可以使用 ** 操作来进行幂运算：</p>
@@ -366,14 +363,7 @@ sqrt(x)	返回数字x的平方根。
 </code></pre>
 <h2 id="随机数函数"><a href="#随机数函数" class="headerlink" title="- 随机数函数"></a>- 随机数函数</h2><p>随机数可以用于数学，游戏，安全等领域中，还经常被嵌入到算法中，用以提高算法效率，并提高程序的安全性。</p>
 <p>Python包含以下常用随机数函数：</p>
-<p>函数	描述</p>
-<pre><code>choice(seq)	从序列的元素中随机挑选一个元素，比如random.choice(range(10))，从0到9中随机挑选一个整数。
-randrange ([start,] stop [,step])	从指定范围内，按指定基数递增的集合中获取一个随机数，基数默认值为 1
-random()	随机生成下一个实数，它在[0,1)范围内。
-seed([x])	改变随机数生成器的种子seed。如果你不了解其原理，你不必特别去设定seed，Python会帮你选择seed。
-shuffle(lst)	将序列的所有元素随机排序
-uniform(x, y)	随机生成下一个实数，它在[x,y]范围内。
-</code></pre>
+<p>函数	描述<br>	<br>	choice(seq)	从序列的元素中随机挑选一个元素，比如random.choice(range(10))，从0到9中随机挑选一个整数。<br>	randrange ([start,] stop [,step])	从指定范围内，按指定基数递增的集合中获取一个随机数，基数默认值为 1<br>	random()	随机生成下一个实数，它在[0,1)范围内。<br>	seed([x])	改变随机数生成器的种子seed。如果你不了解其原理，你不必特别去设定seed，Python会帮你选择seed。<br>	shuffle(lst)	将序列的所有元素随机排序<br>	uniform(x, y)	随机生成下一个实数，它在[x,y]范围内。</p>
 <h2 id="三角函数"><a href="#三角函数" class="headerlink" title="- 三角函数"></a>- 三角函数</h2><p>Python包括以下三角函数：</p>
 <p>函数	描述</p>
 <pre><code>acos(x)	返回x的反余弦弧度值。
