@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 7.0.0">
+<meta name="generator" content="Hexo 8.1.1">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
   <meta name="description" content="C# 集合（Collection）集合（Collection）类是专门用于数据存储和检索的类。这些类提供了对栈（stack）、队列（queue）、列表（list）和哈希表（hash table）的支持。大多数集合类实现了相同的接口。 集合（Collection）类服务于不同的目的，如为元素动态分配内存，基于索引访问列表项等等。这些类创建 Object 类的对象的集合。在 C# 中，Object 类">
 <meta property="og:type" content="article">
@@ -127,22 +127,27 @@
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
 
   </li>
-        <li class="menu-item menu-item-tags">
+        <li class="menu-item menu-item-aigames">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">16</span></a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏<span class="badge">1</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">9</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">10</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">81</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">18</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -299,7 +304,7 @@ SyncRoot	object	获取可用于同步访问的对象。
 <p>下表列出了 ArrayList 类的一些常用的 方法：</p>
 <p>方法名称	返回类型	描述</p>
 <pre><code>添加与插入	
- 
+	
 Add(object value)	int	将对象添加到 ArrayList 的末尾，返回新元素的索引。
 AddRange(ICollection c)	void	将指定集合的所有元素添加到 ArrayList 的末尾。
 Insert(int index, object value)	void	在指定索引处插入对象。
@@ -326,7 +331,7 @@ Reverse()	void	反转 ArrayList 中元素的顺序。
 CopyTo(Array array)	void	将 ArrayList 的元素复制到指定数组中。
 
 其他
-    
+	
 GetRange(int index, int count)	ArrayList	获取从指定索引开始的指定数量的元素子集。
 ToArray()	object[]	将 ArrayList 中的元素复制到数组中。
 TrimToSize()	void	将容量调整为实际元素数量以节省内存。
@@ -465,7 +470,7 @@ Values	ICollection 或 IList&lt;TValue&gt;	获取排序列表中的所有值。
 <p>下表列出了 SortedList 类的一些常用的 方法：</p>
 <p>方法名称	返回类型	描述</p>
 <pre><code>添加与移除
-    
+	
 Add(TKey key, TValue value)	void	将指定的键值对添加到排序列表。
 Remove(TKey key)	bool	从排序列表中移除具有指定键的元素。
 RemoveAt(int index)	void	移除排序列表中指定索引位置的键值对。
@@ -492,9 +497,7 @@ GetEnumerator()	IEnumerator	返回一个枚举器，用于循环访问排序列�
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">001: Zara Ali</span><br><span class="line">002: Abida Rehman</span><br><span class="line">003: Joe Holzner</span><br><span class="line">004: Mausam Banazir Nur</span><br><span class="line">005: M. Amlan </span><br><span class="line">006: M. Arif</span><br><span class="line">007: Ritesh Saikia</span><br><span class="line">008: Nuha Ali</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p><strong>泛型版:</strong></p>
-<p><strong>&gt; 实例:</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line"></span><br><span class="line">class Program</span><br><span class="line">&#123;</span><br><span class="line">    static void Main()</span><br><span class="line">    &#123;</span><br><span class="line">        // 创建泛型 SortedList</span><br><span class="line">        SortedList&lt;int, string&gt; sortedList = new SortedList&lt;int, string&gt;();</span><br><span class="line"></span><br><span class="line">        // 添加键值对</span><br><span class="line">        sortedList.Add(2, &quot;Banana&quot;);</span><br><span class="line">        sortedList.Add(1, &quot;Apple&quot;);</span><br><span class="line">        sortedList.Add(3, &quot;Cherry&quot;);</span><br><span class="line"></span><br><span class="line">        // 自动按键排序</span><br><span class="line">        Console.WriteLine(&quot;SortedList contents:&quot;);</span><br><span class="line">        foreach (var kvp in sortedList)</span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine($&quot;Key: &#123;kvp.Key&#125;, Value: &#123;kvp.Value&#125;&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 查找与访问</span><br><span class="line">        Console.WriteLine($&quot;\nValue for key 2: &#123;sortedList[2]&#125;&quot;); // 输出：Banana</span><br><span class="line"></span><br><span class="line">        // 删除元素</span><br><span class="line">        sortedList.Remove(1);</span><br><span class="line">        Console.WriteLine(&quot;\nAfter removing key 1:&quot;);</span><br><span class="line">        foreach (var kvp in sortedList)</span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine($&quot;Key: &#123;kvp.Key&#125;, Value: &#123;kvp.Value&#125;&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 检查键与值</span><br><span class="line">        Console.WriteLine($&quot;\nContains key 3: &#123;sortedList.ContainsKey(3)&#125;&quot;); // 输出：True</span><br><span class="line">        Console.WriteLine($&quot;Contains value &#x27;Apple&#x27;: &#123;sortedList.ContainsValue(&quot;Apple&quot;)&#125;&quot;); // 输出：False</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
+<p><strong>&gt; 实例:</strong><br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line"></span><br><span class="line">class Program</span><br><span class="line">&#123;</span><br><span class="line">    static void Main()</span><br><span class="line">    &#123;</span><br><span class="line">        // 创建泛型 SortedList</span><br><span class="line">        SortedList&lt;int, string&gt; sortedList = new SortedList&lt;int, string&gt;();</span><br><span class="line"></span><br><span class="line">        // 添加键值对</span><br><span class="line">        sortedList.Add(2, &quot;Banana&quot;);</span><br><span class="line">        sortedList.Add(1, &quot;Apple&quot;);</span><br><span class="line">        sortedList.Add(3, &quot;Cherry&quot;);</span><br><span class="line"></span><br><span class="line">        // 自动按键排序</span><br><span class="line">        Console.WriteLine(&quot;SortedList contents:&quot;);</span><br><span class="line">        foreach (var kvp in sortedList)</span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine($&quot;Key: &#123;kvp.Key&#125;, Value: &#123;kvp.Value&#125;&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 查找与访问</span><br><span class="line">        Console.WriteLine($&quot;\nValue for key 2: &#123;sortedList[2]&#125;&quot;); // 输出：Banana</span><br><span class="line"></span><br><span class="line">        // 删除元素</span><br><span class="line">        sortedList.Remove(1);</span><br><span class="line">        Console.WriteLine(&quot;\nAfter removing key 1:&quot;);</span><br><span class="line">        foreach (var kvp in sortedList)</span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine($&quot;Key: &#123;kvp.Key&#125;, Value: &#123;kvp.Value&#125;&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 检查键与值</span><br><span class="line">        Console.WriteLine($&quot;\nContains key 3: &#123;sortedList.ContainsKey(3)&#125;&quot;); // 输出：True</span><br><span class="line">        Console.WriteLine($&quot;Contains value &#x27;Apple&#x27;: &#123;sortedList.ContainsValue(&quot;Apple&quot;)&#125;&quot;); // 输出：False</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="堆栈（Stack）"><a href="#堆栈（Stack）" class="headerlink" title="堆栈（Stack）"></a><strong>堆栈（Stack）</strong></h1><p>它代表了一个后进先出的对象集合。<br>当您需要对各项进行后进先出的访问时，则使用堆栈。当您在列表中添加一项，称为推入元素，当您从列表中移除一项时，称为弹出元素。</p>
 <p>在 C# 中，堆栈（Stack） 是一种后进先出（LIFO, Last In First Out）的数据结构。</p>
 <p>堆栈（Stack）适用于存储和按顺序处理数据，其中最新添加的元素会最先被移除。</p>
@@ -551,9 +554,7 @@ Synchronized(Stack stack)	Stack	返回一个线程安全的堆栈包装器。
 <p><strong>&gt; 实例:</strong></p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.Collections;</span><br><span class="line"></span><br><span class="line">namespace CollectionsApplication</span><br><span class="line">&#123;</span><br><span class="line">    class Program</span><br><span class="line">    &#123;</span><br><span class="line">        static void Main(string[] args)</span><br><span class="line">        &#123;</span><br><span class="line">            Stack st = new Stack();</span><br><span class="line"></span><br><span class="line">            st.Push(&#x27;A&#x27;);</span><br><span class="line">            st.Push(&#x27;M&#x27;);</span><br><span class="line">            st.Push(&#x27;G&#x27;);</span><br><span class="line">            st.Push(&#x27;W&#x27;);</span><br><span class="line">           </span><br><span class="line">            Console.WriteLine(&quot;Current stack: &quot;);</span><br><span class="line">            foreach (char c in st)</span><br><span class="line">            &#123;</span><br><span class="line">                Console.Write(c + &quot; &quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            Console.WriteLine();</span><br><span class="line">           </span><br><span class="line">            st.Push(&#x27;V&#x27;);</span><br><span class="line">            st.Push(&#x27;H&#x27;);</span><br><span class="line">            Console.WriteLine(&quot;The next poppable value in stack: &#123;0&#125;&quot;,</span><br><span class="line">            st.Peek());</span><br><span class="line">            Console.WriteLine(&quot;Current stack: &quot;);          </span><br><span class="line">            foreach (char c in st)</span><br><span class="line">            &#123;</span><br><span class="line">               Console.Write(c + &quot; &quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            Console.WriteLine();</span><br><span class="line"></span><br><span class="line">            Console.WriteLine(&quot;Removing values &quot;);</span><br><span class="line">            st.Pop();</span><br><span class="line">            st.Pop();</span><br><span class="line">            st.Pop();</span><br><span class="line">           </span><br><span class="line">            Console.WriteLine(&quot;Current stack: &quot;);</span><br><span class="line">            foreach (char c in st)</span><br><span class="line">            &#123;</span><br><span class="line">               Console.Write(c + &quot; &quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Current stack: </span><br><span class="line">W G M A</span><br><span class="line">The next poppable value in stack: H</span><br><span class="line">Current stack: </span><br><span class="line">H V W G M A</span><br><span class="line">Removing values</span><br><span class="line">Current stack: </span><br><span class="line">G M A</span><br></pre></td></tr></table></figure>
-</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Current stack: </span><br><span class="line">W G M A</span><br><span class="line">The next poppable value in stack: H</span><br><span class="line">Current stack: </span><br><span class="line">H V W G M A</span><br><span class="line">Removing values</span><br><span class="line">Current stack: </span><br><span class="line">G M A</span><br></pre></td></tr></table></figure></p>
 <p><strong>泛型堆栈：</strong></p>
 <p><strong>&gt; 实例:</strong></p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line"></span><br><span class="line">class Program</span><br><span class="line">&#123;</span><br><span class="line">    static void Main()</span><br><span class="line">    &#123;</span><br><span class="line">        Stack&lt;int&gt; stack = new Stack&lt;int&gt;();</span><br><span class="line"></span><br><span class="line">        // 压栈</span><br><span class="line">        stack.Push(10);</span><br><span class="line">        stack.Push(20);</span><br><span class="line">        stack.Push(30);</span><br><span class="line"></span><br><span class="line">        // 查看堆栈顶部</span><br><span class="line">        Console.WriteLine($&quot;Peek: &#123;stack.Peek()&#125;&quot;); // 输出：30</span><br><span class="line"></span><br><span class="line">        // 弹栈</span><br><span class="line">        Console.WriteLine($&quot;Pop: &#123;stack.Pop()&#125;&quot;); // 输出：30</span><br><span class="line"></span><br><span class="line">        // 剩余堆栈</span><br><span class="line">        Console.WriteLine(&quot;Remaining items:&quot;);</span><br><span class="line">        foreach (var item in stack)</span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(item); // 输出：20, 10</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -615,9 +616,7 @@ Synchronized(Queue queue)	Queue	返回一个线程安全的队列包装器。
 <p><strong>&gt; 实例2:</strong></p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.Collections;</span><br><span class="line"></span><br><span class="line">namespace CollectionsApplication</span><br><span class="line">&#123;</span><br><span class="line">   class Program</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         Queue q = new Queue();</span><br><span class="line"></span><br><span class="line">         q.Enqueue(&#x27;A&#x27;);</span><br><span class="line">         q.Enqueue(&#x27;M&#x27;);</span><br><span class="line">         q.Enqueue(&#x27;G&#x27;);</span><br><span class="line">         q.Enqueue(&#x27;W&#x27;);</span><br><span class="line">         </span><br><span class="line">         Console.WriteLine(&quot;Current queue: &quot;);</span><br><span class="line">         foreach (char c in q)</span><br><span class="line">            Console.Write(c + &quot; &quot;);</span><br><span class="line">         Console.WriteLine();</span><br><span class="line">         q.Enqueue(&#x27;V&#x27;);</span><br><span class="line">         q.Enqueue(&#x27;H&#x27;);</span><br><span class="line">         Console.WriteLine(&quot;Current queue: &quot;);        </span><br><span class="line">         foreach (char c in q)</span><br><span class="line">            Console.Write(c + &quot; &quot;);</span><br><span class="line">         Console.WriteLine();</span><br><span class="line">         Console.WriteLine(&quot;Removing some values &quot;);</span><br><span class="line">         char ch = (char)q.Dequeue();</span><br><span class="line">         Console.WriteLine(&quot;The removed value: &#123;0&#125;&quot;, ch);</span><br><span class="line">         ch = (char)q.Dequeue();</span><br><span class="line">         Console.WriteLine(&quot;The removed value: &#123;0&#125;&quot;, ch);</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Current queue: </span><br><span class="line">A M G W </span><br><span class="line">Current queue: </span><br><span class="line">A M G W V H </span><br><span class="line">Removing values</span><br><span class="line">The removed value: A</span><br><span class="line">The removed value: M</span><br></pre></td></tr></table></figure>
-</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Current queue: </span><br><span class="line">A M G W </span><br><span class="line">Current queue: </span><br><span class="line">A M G W V H </span><br><span class="line">Removing values</span><br><span class="line">The removed value: A</span><br><span class="line">The removed value: M</span><br></pre></td></tr></table></figure></p>
 <h1 id="点阵列（BitArray）"><a href="#点阵列（BitArray）" class="headerlink" title="点阵列（BitArray）"></a><strong>点阵列（BitArray）</strong></h1><p>它代表了一个使用值 1 和 0 来表示的二进制数组。<br>当您需要存储位，但是事先不知道位数时，则使用点阵列。您可以使用整型索引从点阵列集合中访问各项，索引从零开始。</p>
 <p>BitArray 是 C# 中用于表示一组位（bit）值的集合。</p>
 <p>BitArray 属于 System.Collections 命名空间，主要用于处理二进制数据或进行位操作，相比使用布尔数组（bool[]），BitArray 更加高效，因为它以紧凑的方式存储每个位。</p>
@@ -638,19 +637,7 @@ Console.WriteLine(bits.Length); // 输出：8
 bits.Length = 10; // 修改长度为 10
 下表列出了 BitArray 类的一些常用的 方法：
 </code></pre>
-<p>方法名称	返回类型	描述</p>
-<pre><code>And(BitArray)	BitArray	按位与操作，将两个 BitArray 对应位进行与运算，并返回结果。
-Or(BitArray)	BitArray	按位或操作，将两个 BitArray 对应位进行或运算，并返回结果。
-Xor(BitArray)	BitArray	按位异或操作，将两个 BitArray 对应位进行异或运算，并返回结果。
-Not()	BitArray	按位取反操作，将 BitArray 的每个位取反，并返回结果。
-Set(int index, bool value)	void	将指定索引处的位设置为指定值（true 或 false）。
-SetAll(bool value)	void	将所有位设置为指定值（true 或 false）。
-Get(int index)	bool	获取指定索引处的位的值。
-Clone()	object	创建当前 BitArray 的浅表副本（复制）。
-CopyTo(Array array, int index)	void	将 BitArray 的内容复制到指定的数组，从指定索引开始。
-Equals(object obj)	bool	确定指定对象是否等于当前 BitArray。
-GetEnumerator()	IEnumerator	返回一个枚举器，用于循环访问 BitArray 中的位。
-</code></pre>
+<p>方法名称	返回类型	描述<br>	<br>	And(BitArray)	BitArray	按位与操作，将两个 BitArray 对应位进行与运算，并返回结果。<br>	Or(BitArray)	BitArray	按位或操作，将两个 BitArray 对应位进行或运算，并返回结果。<br>	Xor(BitArray)	BitArray	按位异或操作，将两个 BitArray 对应位进行异或运算，并返回结果。<br>	Not()	BitArray	按位取反操作，将 BitArray 的每个位取反，并返回结果。<br>	Set(int index, bool value)	void	将指定索引处的位设置为指定值（true 或 false）。<br>	SetAll(bool value)	void	将所有位设置为指定值（true 或 false）。<br>	Get(int index)	bool	获取指定索引处的位的值。<br>	Clone()	object	创建当前 BitArray 的浅表副本（复制）。<br>	CopyTo(Array array, int index)	void	将 BitArray 的内容复制到指定的数组，从指定索引开始。<br>	Equals(object obj)	bool	确定指定对象是否等于当前 BitArray。<br>	GetEnumerator()	IEnumerator	返回一个枚举器，用于循环访问 BitArray 中的位。</p>
 <p>方法使用：</p>
 <pre><code>BitArray bits = new BitArray(8, false); // 创建 8 位数组，全部为 false
 bits.Set(0, true); // 设置第 0 位为 true
@@ -668,13 +655,8 @@ bits.SetAll(true); // 全部设置为 true
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var list=new List&lt;int&gt;();</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>首先，List 是个强类型，很安全。其次看那个尖括号，它是 C#2.0 时加入的泛型，所以并不存在像 ArrayList。<br>那样要拆&#x2F;装箱以此造成性能浪费。</p>
-<p>然后，List 通过索引分配，索引与数组一样，从 0 开始。它可以通过索引来读取值：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a=new List&lt;int&gt;();</span><br><span class="line">a.Add(12);</span><br><span class="line">a.Add(10);</span><br><span class="line">Console.WriteLine(a[0]);</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>列表可以有相同的项，而且项是手动排序。</p>
-<p>在改变项后，要注意项的索引会发生改变：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a=new List&lt;int&gt;();</span><br><span class="line">a.Add(12);</span><br><span class="line">a.Add(10);</span><br><span class="line">Console.WriteLine(a[0]);</span><br><span class="line">a.Remove(12);</span><br><span class="line">Console.WriteLine(a[0]);</span><br></pre></td></tr></table></figure>
-</code></pre>
+<p>然后，List 通过索引分配，索引与数组一样，从 0 开始。它可以通过索引来读取值：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a=new List&lt;int&gt;();</span><br><span class="line">a.Add(12);</span><br><span class="line">a.Add(10);</span><br><span class="line">Console.WriteLine(a[0]);</span><br></pre></td></tr></table></figure><br>列表可以有相同的项，而且项是手动排序。</p>
+<p>在改变项后，要注意项的索引会发生改变：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a=new List&lt;int&gt;();</span><br><span class="line">a.Add(12);</span><br><span class="line">a.Add(10);</span><br><span class="line">Console.WriteLine(a[0]);</span><br><span class="line">a.Remove(12);</span><br><span class="line">Console.WriteLine(a[0]);</span><br></pre></td></tr></table></figure></p>
 <p>提供一下常用的列表方法：</p>
 <ul>
 <li><p>1、Add() 将东西加入到列表的最后。</p>
@@ -688,9 +670,7 @@ bits.SetAll(true); // 全部设置为 true
 <li><p>5、Contains() 查看某项是否存在于列表中。</p>
 </li>
 </ul>
-<p><strong>&gt; 实例：</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using static System.Console;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line">namespace HelloWorldApplication</span><br><span class="line">&#123;</span><br><span class="line">   class HelloWorld</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">          var a=new List&lt;int&gt;();</span><br><span class="line">          a.Add(2);</span><br><span class="line">          a.Add(6);</span><br><span class="line">          a.Add(2);</span><br><span class="line">          a.Add(10);</span><br><span class="line">         Console.WriteLine($&quot;第一个数为&#123;a[0]&#125;&quot;);</span><br><span class="line">          a.Remove(2);//删去第一个匹配此条件的项</span><br><span class="line">          a.Sort();</span><br><span class="line">          foreach(var a2 in a)</span><br><span class="line">          &#123;</span><br><span class="line">              WriteLine(a2);</span><br><span class="line">          &#125;</span><br><span class="line">          bool a3=a.Contains(2);</span><br><span class="line">          WriteLine(a3);</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
+<p><strong>&gt; 实例：</strong><br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using static System.Console;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line">namespace HelloWorldApplication</span><br><span class="line">&#123;</span><br><span class="line">   class HelloWorld</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">          var a=new List&lt;int&gt;();</span><br><span class="line">          a.Add(2);</span><br><span class="line">          a.Add(6);</span><br><span class="line">          a.Add(2);</span><br><span class="line">          a.Add(10);</span><br><span class="line">         Console.WriteLine($&quot;第一个数为&#123;a[0]&#125;&quot;);</span><br><span class="line">          a.Remove(2);//删去第一个匹配此条件的项</span><br><span class="line">          a.Sort();</span><br><span class="line">          foreach(var a2 in a)</span><br><span class="line">          &#123;</span><br><span class="line">              WriteLine(a2);</span><br><span class="line">          &#125;</span><br><span class="line">          bool a3=a.Contains(2);</span><br><span class="line">          WriteLine(a3);</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
     </div>
 
@@ -700,8 +680,8 @@ bits.SetAll(true); // 全部设置为 true
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/C/" rel="tag"># C#</a>
               <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/C/" rel="tag"># C#</a>
           </div>
 
         
@@ -792,20 +772,20 @@ bits.SetAll(true); // 全部设置为 true
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-count">81</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -879,6 +859,7 @@ bits.SetAll(true); // 全部设置为 true
   
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 

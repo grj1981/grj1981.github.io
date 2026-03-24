@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 7.0.0">
+<meta name="generator" content="Hexo 8.1.1">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
   <meta name="description" content="Lua实现Unity象素鸟小游戏要点记录： 游戏玩法简介不用物理引擎实现像素鸟在障碍物之间飞行，通过配表配置小鸟向下的加速度和点击一次屏幕给小鸟赋值一次初始速度和向上加速度来模拟小鸟飞行。障碍物根据配置难度在固定距离随机生成。 功能实现简述飞行障碍实现创建AmusementParkBirdObstacleCell障碍控件。游戏运行时，根据固定的配置距离，生成不同难度的障碍实例。障碍物分为上，下两部">
 <meta property="og:type" content="article">
@@ -29,8 +29,8 @@
 <meta property="article:modified_time" content="2026-01-10T12:59:18.643Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="IT">
-<meta property="article:tag" content="Unity3D">
 <meta property="article:tag" content="Lua">
+<meta property="article:tag" content="Unity3D">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://www.bytefisher.top/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
@@ -128,22 +128,27 @@
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
 
   </li>
-        <li class="menu-item menu-item-tags">
+        <li class="menu-item menu-item-aigames">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">16</span></a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏<span class="badge">1</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">9</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">10</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">81</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">18</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -262,8 +267,7 @@
       
         <p>Lua实现Unity象素鸟小游戏要点记录：</p>
 <h1 id="游戏玩法简介"><a href="#游戏玩法简介" class="headerlink" title="游戏玩法简介"></a>游戏玩法简介</h1><p>不用物理引擎实现像素鸟在障碍物之间飞行，通过配表配置小鸟向下的加速度和点击一次屏幕给小鸟赋值一次初始速度和向上加速度来模拟小鸟飞行。障碍物根据配置难度在固定距离随机生成。</p>
-<h1 id="功能实现简述"><a href="#功能实现简述" class="headerlink" title="功能实现简述"></a>功能实现简述</h1><h2 id="飞行障碍实现"><a href="#飞行障碍实现" class="headerlink" title="飞行障碍实现"></a>飞行障碍实现</h2><p>创建AmusementParkBirdObstacleCell障碍控件。游戏运行时，根据固定的配置距离，生成不同难度的障碍实例。障碍物分为上，下两部份，中间有可穿行的空隙。</p>
-<p><strong>AmusementParkBirdObstacleCell</strong></p>
+<h1 id="功能实现简述"><a href="#功能实现简述" class="headerlink" title="功能实现简述"></a>功能实现简述</h1><h2 id="飞行障碍实现"><a href="#飞行障碍实现" class="headerlink" title="飞行障碍实现"></a>飞行障碍实现</h2><p>创建AmusementParkBirdObstacleCell障碍控件。游戏运行时，根据固定的配置距离，生成不同难度的障碍实例。障碍物分为上，下两部份，中间有可穿行的空隙。<br>	<br><strong>AmusementParkBirdObstacleCell</strong></p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">---@class AmusementParkBirdObstacleCell</span><br><span class="line">local m = &#123;</span><br><span class="line">    View = nil,</span><br><span class="line">    ---@type number 移动速度</span><br><span class="line">    Speed = 0,</span><br><span class="line">    ---@type UnityEngine.Collider2D</span><br><span class="line">    TopCollider2D = nil,</span><br><span class="line">    ---@type UnityEngine.Collider2D</span><br><span class="line">    BottomCollider2D = nil,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(view)</span><br><span class="line">    local obj = Clone(m)</span><br><span class="line">    obj:Init(view)</span><br><span class="line">    return obj</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(view)</span><br><span class="line">    self.View = view</span><br><span class="line">    LuaCodeInterface.BindOutlet(self.View, self)</span><br><span class="line"></span><br><span class="line">    self.TopCollider2D = self.View.transform:Find(&quot;Top&quot;).gameObject:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line">    self.BottomCollider2D = self.View.transform:Find(&quot;Bottom&quot;).gameObject:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line"></span><br><span class="line">    self:AddListener()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:AddListener()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:RemoveListener()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---界面轮询。</span><br><span class="line">---@param elapseSeconds number</span><br><span class="line">---@param realElapseSeconds number</span><br><span class="line">---@return void</span><br><span class="line">function m:OnUpdate(elapseSeconds, realElapseSeconds)</span><br><span class="line">    self.View.transform:Translate(Vector3.New(self.Speed * UnityEngine.Time.deltaTime * -1, 0, 0))</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@param speed number</span><br><span class="line">function m:SetData(speed)</span><br><span class="line">    self.Speed = speed</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Dispose()</span><br><span class="line">    AssetUtil.UnloadAsset(self)</span><br><span class="line">    self:RemoveListener()</span><br><span class="line"></span><br><span class="line">    LuaCodeInterface.ClearOutlet(self.View, self)</span><br><span class="line">    UnityEngine.Object.Destroy(self.View)</span><br><span class="line">    self.View = nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
 </code></pre>
 <span id="more"></span>
@@ -277,26 +281,26 @@
 <p><strong>实例</strong></p>
 </blockquote>
 <pre><code>---@class AmusementParkGameFlappyBirdUI
-local AmusementParkGameFlappyBirdUI = &#123;
+local AmusementParkGameFlappyBirdUI = {
     ---@type number
     PassTime = 0,
     ---@type AmusementParkBirdBG
     ParkBirdBG = nil,
     ---@type AmusementParkBirdObstacleCell[]
-    BirdObstacleCells = &#123;&#125;,
+    BirdObstacleCells = {},
     ---@type AmusementParkBirdObstacleCell 上一个被创建的障碍物
     LastBirdObstacleCell = nil,
     ---@type Vector3 障碍物出生位置(固定在屏幕右侧)
     BirthLocation = Vector3.New(670,0,0),
     ---@type UnityEngine.GameObject[] 障碍物预设集合
-    ObstaclePrefabs = &#123;&#125;,
+    ObstaclePrefabs = {},
     ---@type AmusementParkBirdPlayer
     BirdPlayer = nil,
     ---@type UnityEngine.Collider2D 上边界
     UpCollider2D = nil,
     ---@type UnityEngine.Collider2D 下边界
     DownCollider2D = nil,
-&#125;
+}
 AmusementParkGameFlappyBirdUI = Base:Extend(&quot;AmusementParkGameFlappyBirdUI&quot;, &quot;IQIGame.Onigao.UI.AmusementParkGameFlappyBirdUI&quot;, AmusementParkGameFlappyBirdUI)
 
 require(&quot;IQIGame.UIExternalApi.AmusementParkGameFlappyBirdUIApi&quot;)
@@ -320,7 +324,7 @@ function AmusementParkGameFlappyBirdUI:OnInit()
     self.ParkBirdBG = AmusementParkBirdBG.New(self.BGNode)
     self.BirdPlayer = AmusementParkBirdPlayer.New(self.Player)
 
-    self.ObstaclePrefabs = &#123;&#125;
+    self.ObstaclePrefabs = {}
     for i = 1, self.BalkPrefabs.transform.childCount do
         local objTrs = self.BalkPrefabs.transform:Find(i)
         if objTrs then
@@ -350,7 +354,7 @@ end
 ---UI是否有独立的背景音乐，如果有则返回，否则返回nil，注意一个UI同时只能有一个背景音乐，如果需要切换，调用self.UIController:ChangeBGM()方法
 ---@return number @SoundCid
 function AmusementParkGameFlappyBirdUI:GetBGM(userData)
-    return nil
+	return nil
 end
 
 ---界面打开。
@@ -533,7 +537,7 @@ function AmusementParkGameFlappyBirdUI:CleanObstacles()
     for i, v in pairs(self.BirdObstacleCells) do
         v:Dispose()
     end
-    self.BirdObstacleCells = &#123;&#125;
+    self.BirdObstacleCells = {}
 end
 
 function AmusementParkGameFlappyBirdUI:RefreshScore()
@@ -631,8 +635,8 @@ return AmusementParkGameFlappyBirdUI
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/IT/" rel="tag"># IT</a>
               <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
+              <a href="/tags/IT/" rel="tag"># IT</a>
               <a href="/tags/Lua/" rel="tag"># Lua</a>
           </div>
 
@@ -724,20 +728,20 @@ return AmusementParkGameFlappyBirdUI
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-count">81</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -811,6 +815,7 @@ return AmusementParkGameFlappyBirdUI
   
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 

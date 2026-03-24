@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 7.0.0">
+<meta name="generator" content="Hexo 8.1.1">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
   <meta name="description" content="- Python3 字典字典是另一种可变容器模型，且可存储任意类型对象。 字典的每个键值 key&#x3D;&gt;value 对用冒号 : 分割，每个对之间用逗号(,)分割，整个字典包括在花括号 {} 中 ,格式如下所示： d &#x3D; {key1 : value1, key2 : value2, key3 : value3 }注意：dict 作为 Python 的关键字和内置函数，变量名不">
 <meta property="og:type" content="article">
@@ -127,22 +127,27 @@
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册</a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
 
   </li>
-        <li class="menu-item menu-item-tags">
+        <li class="menu-item menu-item-aigames">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">16</span></a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏<span class="badge">1</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">9</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">10</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">81</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">18</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -260,12 +265,7 @@
 <p>d &#x3D; {key1 : value1, key2 : value2, key3 : value3 }<br>注意：dict 作为 Python 的关键字和内置函数，变量名不建议命名为 dict。</p>
 <p>键必须是唯一的，但值则不必。</p>
 <p>值可以取任何数据类型，但键必须是不可变的，如字符串，数字。</p>
-<p>一个简单的字典实例：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tinydict = &#123;&#x27;name&#x27;: &#x27;runoob&#x27;, &#x27;likes&#x27;: 123, &#x27;url&#x27;: &#x27;www.runoob.com&#x27;&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>也可如此创建字典：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tinydict1 = &#123; &#x27;abc&#x27;: 456 &#125;</span><br><span class="line">tinydict2 = &#123; &#x27;abc&#x27;: 123, 98.6: 37 &#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
+<p>一个简单的字典实例：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tinydict = &#123;&#x27;name&#x27;: &#x27;runoob&#x27;, &#x27;likes&#x27;: 123, &#x27;url&#x27;: &#x27;www.runoob.com&#x27;&#125;</span><br></pre></td></tr></table></figure><br>也可如此创建字典：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tinydict1 = &#123; &#x27;abc&#x27;: 456 &#125;</span><br><span class="line">tinydict2 = &#123; &#x27;abc&#x27;: 123, 98.6: 37 &#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="创建空字典"><a href="#创建空字典" class="headerlink" title="- 创建空字典"></a>- 创建空字典</h2><p>使用大括号 { } 创建空字典：</p>
 <blockquote>
 <p><strong>实例:</strong></p>
@@ -273,7 +273,7 @@
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 使用大括号 &#123;&#125; 来创建空字典</span><br><span class="line">emptyDict = &#123;&#125;</span><br><span class="line"> </span><br><span class="line"># 打印字典</span><br><span class="line">print(emptyDict)</span><br><span class="line"> </span><br><span class="line"># 查看字典的数量</span><br><span class="line">print(&quot;Length:&quot;, len(emptyDict))</span><br><span class="line"> </span><br><span class="line"># 查看类型</span><br><span class="line">print(type(emptyDict))</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>以上实例输出结果：</p>
-<pre><code>&#123;&#125;
+<pre><code>{}
 Length: 0
 &lt;class &#39;dict&#39;&gt;
 </code></pre>
@@ -286,7 +286,7 @@ Length: 0
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">emptyDict = dict()</span><br><span class="line"></span><br><span class="line"># 打印字典</span><br><span class="line">print(emptyDict)</span><br><span class="line"> </span><br><span class="line"># 查看字典的数量</span><br><span class="line">print(&quot;Length:&quot;,len(emptyDict))</span><br><span class="line"> </span><br><span class="line"># 查看类型</span><br><span class="line">print(type(emptyDict))</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>以上实例输出结果：</p>
-<pre><code>&#123;&#125;
+<pre><code>{}
 Length: 0
 &lt;class &#39;dict&#39;&gt;
 </code></pre>
@@ -303,10 +303,10 @@ tinydict[&#39;Age&#39;]:  7
 <p>如果用字典里没有的键访问数据，会输出错误如下：</p>
 <blockquote>
 <p><strong>实例:</strong></p>
-</blockquote>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tinydict = &#123;&#x27;Name&#x27;: &#x27;Runoob&#x27;, &#x27;Age&#x27;: 7, &#x27;Class&#x27;: &#x27;First&#x27;&#125;</span><br><span class="line"> </span><br><span class="line">print (&quot;tinydict[&#x27;Alice&#x27;]: &quot;, tinydict[&#x27;Alice&#x27;])</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>以上实例输出结果：</p>
+</blockquote>
 <pre><code>Traceback (most recent call last):
   File &quot;test.py&quot;, line 5, in &lt;module&gt;
     print (&quot;tinydict[&#39;Alice&#39;]: &quot;, tinydict[&#39;Alice&#39;])
@@ -318,7 +318,7 @@ KeyError: &#39;Alice&#39;
 </blockquote>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tinydict = &#123;&#x27;Name&#x27;: &#x27;Runoob&#x27;, &#x27;Age&#x27;: 7, &#x27;Class&#x27;: &#x27;First&#x27;&#125;</span><br><span class="line"> </span><br><span class="line">tinydict[&#x27;Age&#x27;] = 8               # 更新 Age</span><br><span class="line">tinydict[&#x27;School&#x27;] = &quot;菜鸟教程&quot;  # 添加信息</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">print (&quot;tinydict[&#x27;Age&#x27;]: &quot;, tinydict[&#x27;Age&#x27;])</span><br><span class="line">print (&quot;tinydict[&#x27;School&#x27;]: &quot;, tinydict[&#x27;School&#x27;])</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>以上实例输出结果：<br>    tinydict[‘Age’]:  8<br>    tinydict[‘School’]:  菜鸟教程</p>
+<p>以上实例输出结果：<br>	tinydict[‘Age’]:  8<br>	tinydict[‘School’]:  菜鸟教程</p>
 <h2 id="删除字典元素"><a href="#删除字典元素" class="headerlink" title="- 删除字典元素"></a>- 删除字典元素</h2><p>能删单一的元素也能清空字典，清空只需一项操作。</p>
 <p>显式删除一个字典用del命令，如下实例：</p>
 <blockquote>
@@ -353,33 +353,30 @@ NameError: name &#39;tinydict&#39; is not defined
 <p>以上实例输出结果：</p>
 <pre><code>Traceback (most recent call last):
   File &quot;test.py&quot;, line 3, in &lt;module&gt;
-    tinydict = &#123;[&#39;Name&#39;]: &#39;Runoob&#39;, &#39;Age&#39;: 7&#125;
+    tinydict = {[&#39;Name&#39;]: &#39;Runoob&#39;, &#39;Age&#39;: 7}
 TypeError: unhashable type: &#39;list&#39;
 </code></pre>
 <h2 id="字典内置函数-方法"><a href="#字典内置函数-方法" class="headerlink" title="- 字典内置函数&amp;方法"></a>- 字典内置函数&amp;方法</h2><p>Python字典包含了以下内置函数：</p>
 <pre><code>1	len(dict)
 计算字典元素个数，即键的总数。	
-&gt;&gt;&gt; tinydict = &#123;&#39;Name&#39;: &#39;Runoob&#39;, &#39;Age&#39;: 7, &#39;Class&#39;: &#39;First&#39;&#125;
+&gt;&gt;&gt; tinydict = {&#39;Name&#39;: &#39;Runoob&#39;, &#39;Age&#39;: 7, &#39;Class&#39;: &#39;First&#39;}
 &gt;&gt;&gt; len(tinydict)
 3
 
 2	str(dict)
 输出字典，可以打印的字符串表示。	
-&gt;&gt;&gt; tinydict = &#123;&#39;Name&#39;: &#39;Runoob&#39;, &#39;Age&#39;: 7, &#39;Class&#39;: &#39;First&#39;&#125;
+&gt;&gt;&gt; tinydict = {&#39;Name&#39;: &#39;Runoob&#39;, &#39;Age&#39;: 7, &#39;Class&#39;: &#39;First&#39;}
 &gt;&gt;&gt; str(tinydict)
-&quot;&#123;&#39;Name&#39;: &#39;Runoob&#39;, &#39;Class&#39;: &#39;First&#39;, &#39;Age&#39;: 7&#125;&quot;
+&quot;{&#39;Name&#39;: &#39;Runoob&#39;, &#39;Class&#39;: &#39;First&#39;, &#39;Age&#39;: 7}&quot;
 
 3	type(variable)
 返回输入的变量类型，如果变量是字典就返回字典类型。	
-&gt;&gt;&gt; tinydict = &#123;&#39;Name&#39;: &#39;Runoob&#39;, &#39;Age&#39;: 7, &#39;Class&#39;: &#39;First&#39;&#125;
+&gt;&gt;&gt; tinydict = {&#39;Name&#39;: &#39;Runoob&#39;, &#39;Age&#39;: 7, &#39;Class&#39;: &#39;First&#39;}
 &gt;&gt;&gt; type(tinydict)
 &lt;class &#39;dict&#39;&gt;
 </code></pre>
-<p>Python字典包含了以下内置方法：</p>
-<pre><code>1	dict.clear()
-删除字典内所有元素
-
-2	dict.copy()
+<p>Python字典包含了以下内置方法：<br>	<br>	1	dict.clear()<br>	删除字典内所有元素</p>
+<pre><code>2	dict.copy()
 返回一个字典的浅复制
 
 3	dict.fromkeys()
@@ -513,20 +510,20 @@ TypeError: unhashable type: &#39;list&#39;
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-count">81</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -600,6 +597,7 @@ TypeError: unhashable type: &#39;list&#39;
   
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
