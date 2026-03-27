@@ -183,6 +183,7 @@
 
         function handleKeydown(e) {
             if (e.key.startsWith('Arrow')) e.preventDefault();
+            if (!timer) return;
             switch (e.key) {
                 case 'ArrowUp': nextDirection = 'UP'; break;
                 case 'ArrowDown': nextDirection = 'DOWN'; break;

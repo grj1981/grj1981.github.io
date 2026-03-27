@@ -276,15 +276,18 @@
         function handleKeydown(e) {
             if (e.key.startsWith('Arrow')) e.preventDefault();
             if (gameOver) return;
+            if (!timer) return;
             
             switch (e.key) {
                 case 'ArrowUp': moveRotate(); break;
                 case 'ArrowLeft': move(-1, 0); draw(); break;
                 case 'ArrowRight': move(1, 0); draw(); break;
                 case 'ArrowDown': 
-                    while (move(0, 1)) {} 
-                    lockPiece();
-                    draw();
+                    if (timer) {
+                        while (move(0, 1)) {} 
+                        lockPiece();
+                        draw();
+                    }
                     break;
             }
         }
