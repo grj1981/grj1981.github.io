@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+  <meta name="description" content="前言在静态博客中嵌入 JavaScript 小游戏是一种提升用户体验的好方法。之前用 Lua 为 Unity 实现过多种小游戏，现在尝试将经典的贪吃蛇游戏移植到 Hexo 博客中。 本文将详细介绍如何在 Hexo 博客中实现一个可玩的贪吃蛇小游戏，包括游戏页面搭建、核心逻辑实现以及移动端适配。 项目结构游戏放置在 source&#x2F;ai-games&#x2F;snake&#x2F; 目录下，文件结构如下： 123sour">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 博客实战：贪吃蛇小游戏开发指南">
+<meta property="og:url" content="https://www.bytefisher.top/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="前言在静态博客中嵌入 JavaScript 小游戏是一种提升用户体验的好方法。之前用 Lua 为 Unity 实现过多种小游戏，现在尝试将经典的贪吃蛇游戏移植到 Hexo 博客中。 本文将详细介绍如何在 Hexo 博客中实现一个可玩的贪吃蛇小游戏，包括游戏页面搭建、核心逻辑实现以及移动端适配。 项目结构游戏放置在 source&#x2F;ai-games&#x2F;snake&#x2F; 目录下，文件结构如下： 123sour">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-27T12:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-27T09:29:04.783Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="游戏开发">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.bytefisher.top/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Hexo 博客实战：贪吃蛇小游戏开发指南 | ByteFisher</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <!--相册弹出js-->
+  <script type="text/javascript" src="/js/lightbox-plus-jquery.min.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-aigames">
+
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">83</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">21</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo 博客实战：贪吃蛇小游戏开发指南
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-03-27 20:00:00 / 修改时间：17:29:04" itemprop="dateCreated datePublished" datetime="2026-03-27T20:00:00+08:00">2026-03-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">游戏开发</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo 博客实战：贪吃蛇小游戏开发指南" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在静态博客中嵌入 JavaScript 小游戏是一种提升用户体验的好方法。之前用 Lua 为 Unity 实现过多种小游戏，现在尝试将经典的贪吃蛇游戏移植到 Hexo 博客中。</p>
+<p>本文将详细介绍如何在 Hexo 博客中实现一个可玩的贪吃蛇小游戏，包括游戏页面搭建、核心逻辑实现以及移动端适配。</p>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><p>游戏放置在 <code>source/ai-games/snake/</code> 目录下，文件结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">source/ai-games/snake/</span><br><span class="line">├── index.md          # 游戏页面（HTML + 样式）</span><br><span class="line">└── snake-game.js     # 游戏核心逻辑</span><br></pre></td></tr></table></figure>
+
+<p>这种独立目录的方式便于管理，每个游戏都有自己完整的资源。</p>
+<h2 id="游戏页面实现"><a href="#游戏页面实现" class="headerlink" title="游戏页面实现"></a>游戏页面实现</h2><p>游戏页面使用 Hexo 的 <code></code> 标签来嵌入原始 HTML 代码，这样可以避免 Hexo 对 HTML 标签进行转义。</p>
+<h3 id="Canvas-画布"><a href="#Canvas-画布" class="headerlink" title="Canvas 画布"></a>Canvas 画布</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;game-canvas&quot;</span> <span class="attr">width</span>=<span class="string">&quot;400&quot;</span> <span class="attr">height</span>=<span class="string">&quot;400&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>游戏采用 20×20 网格，每个格子 20px，整体画布大小为 400×400 像素。</p>
+<h3 id="样式设计"><a href="#样式设计" class="headerlink" title="样式设计"></a>样式设计</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">canvas</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid <span class="number">#4CAF50</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">8px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#111</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">20px</span> <span class="built_in">rgba</span>(<span class="number">76</span>, <span class="number">175</span>, <span class="number">80</span>, <span class="number">0.3</span>);</span><br><span class="line">    touch-action: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>暗色系背景配合绿色边框，营造游戏氛围。<code>touch-action: none</code> 用于禁止移动端默认触摸行为，避免游戏时页面滚动。</p>
+<h2 id="核心逻辑实现"><a href="#核心逻辑实现" class="headerlink" title="核心逻辑实现"></a>核心逻辑实现</h2><p>游戏逻辑全部封装在 <code>snake-game.js</code> 文件中，共约 309 行代码。</p>
+<h3 id="全局初始化函数"><a href="#全局初始化函数" class="headerlink" title="全局初始化函数"></a>全局初始化函数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">initSnakeGame</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 获取 DOM 元素</span></span><br><span class="line">    <span class="keyword">const</span> canvas = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;game-canvas&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>);</span><br><span class="line">    <span class="comment">// ... 初始化逻辑</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>将游戏初始化函数挂载到 <code>window</code> 对象上，便于 PJAX 页面切换后重新调用。</p>
+<h3 id="游戏配置"><a href="#游戏配置" class="headerlink" title="游戏配置"></a>游戏配置</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gridSize = <span class="number">20</span>;      <span class="comment">// 20x20 网格</span></span><br><span class="line"><span class="keyword">const</span> cellSize = <span class="number">20</span>;      <span class="comment">// 每个格子 20px</span></span><br><span class="line"><span class="keyword">let</span> snake = [</span><br><span class="line">    &#123;<span class="attr">x</span>: <span class="number">10</span>, <span class="attr">y</span>: <span class="number">10</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">x</span>: <span class="number">9</span>, <span class="attr">y</span>: <span class="number">10</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">x</span>: <span class="number">8</span>, <span class="attr">y</span>: <span class="number">10</span>&#125;</span><br><span class="line">];</span><br><span class="line"><span class="keyword">let</span> direction = <span class="string">&#x27;RIGHT&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> nextDirection = <span class="string">&#x27;RIGHT&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>蛇身使用数组存储，每个元素表示蛇的一节坐标。<code>direction</code> 和 <code>nextDirection</code> 分离的设计可以防止连续快速按键导致蛇身掉头自杀。</p>
+<h3 id="蛇的移动"><a href="#蛇的移动" class="headerlink" title="蛇的移动"></a>蛇的移动</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">move</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 应用下次方向（防止掉头）</span></span><br><span class="line">    <span class="keyword">const</span> opposite = &#123; <span class="string">&#x27;UP&#x27;</span>: <span class="string">&#x27;DOWN&#x27;</span>, <span class="string">&#x27;DOWN&#x27;</span>: <span class="string">&#x27;UP&#x27;</span>, <span class="string">&#x27;LEFT&#x27;</span>: <span class="string">&#x27;RIGHT&#x27;</span>, <span class="string">&#x27;RIGHT&#x27;</span>: <span class="string">&#x27;LEFT&#x27;</span> &#125;;</span><br><span class="line">    <span class="keyword">if</span> (nextDirection &amp;&amp; opposite[nextDirection] !== direction) &#123;</span><br><span class="line">        direction = nextDirection;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> head = snake[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> newHead = &#123; ...head &#125;;</span><br><span class="line">    <span class="keyword">switch</span> (direction) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;RIGHT&#x27;</span>: newHead.<span class="property">x</span>++; <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;LEFT&#x27;</span>:  newHead.<span class="property">x</span>--; <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;UP&#x27;</span>:    newHead.<span class="property">y</span>--; <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;DOWN&#x27;</span>:  newHead.<span class="property">y</span>++; <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断是否吃到食物</span></span><br><span class="line">    <span class="keyword">const</span> isEating = food &amp;&amp; newHead.<span class="property">x</span> === food.<span class="property">x</span> &amp;&amp; newHead.<span class="property">y</span> === food.<span class="property">y</span>;</span><br><span class="line">    <span class="keyword">let</span> newSnake = [newHead, ...snake];</span><br><span class="line">    <span class="keyword">if</span> (!isEating) newSnake.<span class="title function_">pop</span>();  <span class="comment">// 没吃到则移除尾部</span></span><br><span class="line"></span><br><span class="line">    snake = newSnake;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>核心思路：</p>
+<ul>
+<li>每次移动在头部添加新方块</li>
+<li>吃到食物时不移除尾部，蛇身变长</li>
+<li>未吃到食物时移除尾部，保持蛇身长度不变</li>
+</ul>
+<h3 id="碰撞检测"><a href="#碰撞检测" class="headerlink" title="碰撞检测"></a>碰撞检测</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 边界碰撞</span></span><br><span class="line"><span class="keyword">if</span> (newHead.<span class="property">x</span> &lt; <span class="number">0</span> || newHead.<span class="property">x</span> &gt;= gridSize || </span><br><span class="line">    newHead.<span class="property">y</span> &lt; <span class="number">0</span> || newHead.<span class="property">y</span> &gt;= gridSize) &#123;</span><br><span class="line">    gameOver = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自身碰撞</span></span><br><span class="line"><span class="keyword">if</span> (newSnake.<span class="title function_">slice</span>(<span class="number">1</span>).<span class="title function_">some</span>(<span class="function"><span class="params">seg</span> =&gt;</span> seg.<span class="property">x</span> === newHead.<span class="property">x</span> &amp;&amp; seg.<span class="property">y</span> === newHead.<span class="property">y</span>)) &#123;</span><br><span class="line">    gameOver = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="食物生成"><a href="#食物生成" class="headerlink" title="食物生成"></a>食物生成</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">randomFood</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> x = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * gridSize);</span><br><span class="line">        <span class="keyword">const</span> y = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * gridSize);</span><br><span class="line">        <span class="comment">// 避开蛇身</span></span><br><span class="line">        <span class="keyword">if</span> (!snake.<span class="title function_">some</span>(<span class="function"><span class="params">seg</span> =&gt;</span> seg.<span class="property">x</span> === x &amp;&amp; seg.<span class="property">y</span> === y)) &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;x, y&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用循环尝试生成随机位置，直到找到不与蛇身重叠的位置。</p>
+<h3 id="绘制系统"><a href="#绘制系统" class="headerlink" title="绘制系统"></a>绘制系统</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">draw</span>(<span class="params"></span>) &#123;</span><br><span class="line">    ctx.<span class="title function_">clearRect</span>(<span class="number">0</span>, <span class="number">0</span>, canvas.<span class="property">width</span>, canvas.<span class="property">height</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制网格线</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt;= gridSize; i++) &#123;</span><br><span class="line">        <span class="comment">// ... 绘制横竖线</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制蛇身</span></span><br><span class="line">    snake.<span class="title function_">forEach</span>(<span class="function">(<span class="params">seg, idx</span>) =&gt;</span> &#123;</span><br><span class="line">        ctx.<span class="property">fillStyle</span> = idx === <span class="number">0</span> ? <span class="string">&#x27;#8bc34a&#x27;</span> : <span class="string">&#x27;#4CAF50&#x27;</span>;</span><br><span class="line">        ctx.<span class="title function_">fillRect</span>(seg.<span class="property">x</span> * cellSize + <span class="number">1</span>, seg.<span class="property">y</span> * cellSize + <span class="number">1</span>, </span><br><span class="line">                     cellSize - <span class="number">2</span>, cellSize - <span class="number">2</span>);</span><br><span class="line">        <span class="comment">// 蛇眼睛</span></span><br><span class="line">        <span class="keyword">if</span> (idx === <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// ... 绘制眼睛</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制食物</span></span><br><span class="line">    <span class="keyword">if</span> (food) &#123;</span><br><span class="line">        ctx.<span class="property">fillStyle</span> = <span class="string">&#x27;#f44336&#x27;</span>;</span><br><span class="line">        ctx.<span class="title function_">beginPath</span>();</span><br><span class="line">        ctx.<span class="title function_">arc</span>(food.<span class="property">x</span> * cellSize + cellSize / <span class="number">2</span>, </span><br><span class="line">                food.<span class="property">y</span> * cellSize + cellSize / <span class="number">2</span>, <span class="number">8</span>, <span class="number">0</span>, <span class="number">2</span> * <span class="title class_">Math</span>.<span class="property">PI</span>);</span><br><span class="line">        ctx.<span class="title function_">fill</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>绘制顺序：清空画布 → 网格线 → 蛇身 → 食物 → 游戏结束遮罩。</p>
+<span id="more"></span>
+
+<h2 id="控制方式"><a href="#控制方式" class="headerlink" title="控制方式"></a>控制方式</h2><h3 id="键盘控制"><a href="#键盘控制" class="headerlink" title="键盘控制"></a>键盘控制</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">handleKeydown</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (e.<span class="property">key</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;Arrow&#x27;</span>)) e.<span class="title function_">preventDefault</span>();</span><br><span class="line">    <span class="keyword">switch</span> (e.<span class="property">key</span>) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;ArrowUp&#x27;</span>:    nextDirection = <span class="string">&#x27;UP&#x27;</span>; <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;ArrowDown&#x27;</span>:  nextDirection = <span class="string">&#x27;DOWN&#x27;</span>; <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;ArrowLeft&#x27;</span>:  nextDirection = <span class="string">&#x27;LEFT&#x27;</span>; <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;ArrowRight&#x27;</span>: nextDirection = <span class="string">&#x27;RIGHT&#x27;</span>; <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="触摸滑动控制"><a href="#触摸滑动控制" class="headerlink" title="触摸滑动控制"></a>触摸滑动控制</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">canvas.<span class="title function_">addEventListener</span>(<span class="string">&#x27;touchend&#x27;</span>, <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> deltaX = touchEndX - touchStartX;</span><br><span class="line">    <span class="keyword">const</span> deltaY = touchEndY - touchStartY;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (<span class="title class_">Math</span>.<span class="title function_">abs</span>(deltaX) &gt; <span class="title class_">Math</span>.<span class="title function_">abs</span>(deltaY)) &#123;</span><br><span class="line">        nextDirection = deltaX &gt; <span class="number">0</span> ? <span class="string">&#x27;RIGHT&#x27;</span> : <span class="string">&#x27;LEFT&#x27;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        nextDirection = deltaY &gt; <span class="number">0</span> ? <span class="string">&#x27;DOWN&#x27;</span> : <span class="string">&#x27;UP&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>通过比较水平&#x2F;垂直滑动距离来判断滑动方向，实现移动端手势控制。</p>
+<h2 id="PJAX-兼容处理"><a href="#PJAX-兼容处理" class="headerlink" title="PJAX 兼容处理"></a>PJAX 兼容处理</h2><p>Hexo 的主题通常使用 PJAX 实现无刷新页面切换，这会导致 JavaScript 状态丢失。需要监听页面切换事件重新初始化游戏：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;pjax:success&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;game-canvas&#x27;</span>)) &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(initGameWhenReady, <span class="number">100</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>同时需要在游戏初始化时清除旧定时器，防止多个游戏循环同时运行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">_snakeTimer</span>) &#123;</span><br><span class="line">    <span class="built_in">clearInterval</span>(<span class="variable language_">window</span>.<span class="property">_snakeTimer</span>);</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">_snakeTimer</span> = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过以上方案，我们在 Hexo 博客中成功实现了一个完整的贪吃蛇小游戏。核心要点总结：</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>实现方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>游戏初始化</td>
+<td>全局函数 <code>window.initSnakeGame</code></td>
+</tr>
+<tr>
+<td>蛇的移动</td>
+<td>数组队列操作</td>
+</tr>
+<tr>
+<td>碰撞检测</td>
+<td>边界 + 自身遍历检测</td>
+</tr>
+<tr>
+<td>控制方式</td>
+<td>键盘方向键 + 触摸滑动</td>
+</tr>
+<tr>
+<td>页面兼容</td>
+<td>PJAX 事件监听 + 定时器清理</td>
+</tr>
+</tbody></table>
+<p>游戏已集成到博客的小游戏栏目中，可以直接访问体验。后续计划添加更多经典小游戏，如俄罗斯方块、扫雷等。</p>
+<hr>
+<p><strong>相关链接：</strong></p>
+<ul>
+<li><a href="/ai-games/snake/">🐍 贪吃蛇游戏</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" rel="tag"># 游戏开发</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" rel="prev" title="VSCode 中搭建 OpenCode AI 编程助手完整指南">
+      <i class="fa fa-chevron-left"></i> VSCode 中搭建 OpenCode AI 编程助手完整指南
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BF%84%E7%BD%97%E6%96%AF%E6%96%B9%E5%9D%97%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" rel="next" title="Hexo 博客实战：俄罗斯方块小游戏开发指南">
+      Hexo 博客实战：俄罗斯方块小游戏开发指南 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E9%A1%B5%E9%9D%A2%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">游戏页面实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Canvas-%E7%94%BB%E5%B8%83"><span class="nav-number">3.1.</span> <span class="nav-text">Canvas 画布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E5%BC%8F%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.2.</span> <span class="nav-text">样式设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E9%80%BB%E8%BE%91%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.</span> <span class="nav-text">核心逻辑实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%88%9D%E5%A7%8B%E5%8C%96%E5%87%BD%E6%95%B0"><span class="nav-number">4.1.</span> <span class="nav-text">全局初始化函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E9%85%8D%E7%BD%AE"><span class="nav-number">4.2.</span> <span class="nav-text">游戏配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%9B%87%E7%9A%84%E7%A7%BB%E5%8A%A8"><span class="nav-number">4.3.</span> <span class="nav-text">蛇的移动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A2%B0%E6%92%9E%E6%A3%80%E6%B5%8B"><span class="nav-number">4.4.</span> <span class="nav-text">碰撞检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A3%9F%E7%89%A9%E7%94%9F%E6%88%90"><span class="nav-number">4.5.</span> <span class="nav-text">食物生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">4.6.</span> <span class="nav-text">绘制系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E6%96%B9%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">控制方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E6%8E%A7%E5%88%B6"><span class="nav-number">5.1.</span> <span class="nav-text">键盘控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A6%E6%91%B8%E6%BB%91%E5%8A%A8%E6%8E%A7%E5%88%B6"><span class="nav-number">5.2.</span> <span class="nav-text">触摸滑动控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PJAX-%E5%85%BC%E5%AE%B9%E5%A4%84%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">PJAX 兼容处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Weibo → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8SGHVqNSzlIvUsQekb6EVL2z-gzGzoHsz',
+      appKey     : 'kM6zUKBTanjH10n2gcXV8OTE',
+      placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+      avatar     : 'retro',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>
