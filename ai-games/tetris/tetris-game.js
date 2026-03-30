@@ -241,6 +241,7 @@
                 speedTimer = null;
             }
             window._tetrisTimer = null;
+            gameStarted = false;
 
             initBoard();
             score = 0;
@@ -255,6 +256,7 @@
         function start() {
             if (gameOver) return;
             if (timer) return;
+            gameStarted = true;
             timer = setInterval(drop, dropInterval);
             window._tetrisTimer = timer;
             
@@ -296,13 +298,17 @@
         let touchStartX = 0;
         let touchStartY = 0;
 
+        let gameStarted = false;
+
         const tetrisTouchStart = function(e) {
+            if (!gameStarted) return;
             e.preventDefault();
             touchStartX = e.touches[0].clientX;
             touchStartY = e.touches[0].clientY;
         };
 
         const tetrisTouchEnd = function(e) {
+            if (!gameStarted) return;
             e.preventDefault();
             const touchEndX = e.changedTouches[0].clientX;
             const touchEndY = e.changedTouches[0].clientY;
@@ -347,6 +353,8 @@
             clearInterval(window._tetrisTimer);
             window._tetrisTimer = null;
         }
+        
+        gameStarted = false;
 
         const canvas = document.getElementById('game-canvas');
         if (canvas) {

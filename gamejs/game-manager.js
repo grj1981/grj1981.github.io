@@ -88,6 +88,8 @@ const GameManager = {
         this.initialized = true;
 
         const self = this;
+        let retryCount = 0;
+        const maxRetries = 50;
 
         function initGameWhenReady() {
             const canvas = document.getElementById('game-canvas');
@@ -95,20 +97,33 @@ const GameManager = {
             const restartBtn = document.getElementById('restart-btn');
             
             if (!canvas || !startBtn || !restartBtn) {
-                setTimeout(initGameWhenReady, 100);
+                if (retryCount < maxRetries) {
+                    retryCount++;
+                    setTimeout(initGameWhenReady, 100);
+                }
                 return;
             }
             
             self.detectGame();
         }
 
+        function tryInit() {
+            if (document.getElementById('game-canvas')) {
+                initGameWhenReady();
+            } else if (retryCount < maxRetries) {
+                retryCount++;
+                setTimeout(tryInit, 100);
+            }
+        }
+
         if (document.readyState === 'complete') {
-            setTimeout(initGameWhenReady, 50);
+            setTimeout(tryInit, 50);
         } else {
-            window.addEventListener('load', initGameWhenReady);
+            window.addEventListener('load', tryInit);
         }
 
         document.addEventListener('pjax:success', function() {
+            retryCount = 0;
             setTimeout(function() {
                 if (document.getElementById('game-canvas')) {
                     self.detectGame();
