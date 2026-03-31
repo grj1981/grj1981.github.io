@@ -52,6 +52,8 @@ const GameManager = {
             const keyHandler = window[`_${name}KeyHandler`];
             const touchStart = window[`_${name}TouchStart`];
             const touchEnd = window[`_${name}TouchEnd`];
+            const clickHandler = window[`_${name}Click`];
+            const rightClickHandler = window[`_${name}RightClick`];
 
             if (keyHandler) {
                 window.removeEventListener('keydown', keyHandler);
@@ -61,6 +63,13 @@ const GameManager = {
                 if (canvas) {
                     if (touchStart) canvas.removeEventListener('touchstart', touchStart);
                     if (touchEnd) canvas.removeEventListener('touchend', touchEnd);
+                }
+            }
+            if (clickHandler || rightClickHandler) {
+                const canvas = document.getElementById('game-canvas');
+                if (canvas) {
+                    if (clickHandler) canvas.removeEventListener('click', clickHandler);
+                    if (rightClickHandler) canvas.removeEventListener('contextmenu', rightClickHandler);
                 }
             }
         });
@@ -80,6 +89,8 @@ const GameManager = {
             this.initGame('snake');
         } else if (path.includes('/tetris/')) {
             this.initGame('tetris');
+        } else if (path.includes('/minesweeper/')) {
+            this.initGame('minesweeper');
         }
     },
 
@@ -93,10 +104,8 @@ const GameManager = {
 
         function initGameWhenReady() {
             const canvas = document.getElementById('game-canvas');
-            const startBtn = document.getElementById('start-btn');
-            const restartBtn = document.getElementById('restart-btn');
             
-            if (!canvas || !startBtn || !restartBtn) {
+            if (!canvas) {
                 if (retryCount < maxRetries) {
                     retryCount++;
                     setTimeout(initGameWhenReady, 100);
