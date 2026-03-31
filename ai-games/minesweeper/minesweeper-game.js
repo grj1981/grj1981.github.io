@@ -31,6 +31,7 @@
         const timerSpan = document.getElementById('timer');
         const difficultySelect = document.getElementById('difficulty');
         const faceBtn = document.getElementById('face-btn');
+        const restartBtn = document.getElementById('restart-btn');
 
         if (!ctx || !scoreSpan) {
             console.error('游戏初始化失败：元素未就绪');
@@ -143,6 +144,7 @@
                 showAllMines(x, y);
                 draw();
                 updateFace('dead');
+                showRestartButton();
                 return;
             }
 
@@ -164,6 +166,7 @@
                 flagAllMines();
                 draw();
                 updateFace('win');
+                showRestartButton();
                 return;
             }
 
@@ -303,6 +306,18 @@
             }
         }
 
+        function showRestartButton() {
+            if (restartBtn) {
+                restartBtn.style.display = 'inline-block';
+            }
+        }
+
+        function hideRestartButton() {
+            if (restartBtn) {
+                restartBtn.style.display = 'none';
+            }
+        }
+
         function startTimer() {
             stopTimer();
             timeElapsed = 0;
@@ -335,6 +350,7 @@
             initBoard();
             updateScore();
             updateFace('normal');
+            hideRestartButton();
             draw();
             console.log('新游戏, 难度: ' + currentDifficulty);
         }
@@ -534,6 +550,16 @@
 
         if (faceBtn) {
             faceBtn.onclick = startNewGame;
+        }
+        
+        if (restartBtn) {
+            console.log('restartBtn 找到，绑定事件');
+            restartBtn.onclick = function() {
+                console.log('点击了再玩一次按钮');
+                startNewGame();
+            };
+        } else {
+            console.error('restartBtn 未找到');
         }
 
         initBoard();

@@ -84,54 +84,60 @@ const GameManager = {
 
     detectGame() {
         const path = window.location.pathname;
+        const canvas = document.getElementById('game-canvas');
+        if (!canvas) return;
         
+        let gameName = null;
         if (path.includes('/snake/')) {
-            this.initGame('snake');
+            gameName = 'snake';
         } else if (path.includes('/tetris/')) {
-            this.initGame('tetris');
+            gameName = 'tetris';
         } else if (path.includes('/minesweeper/')) {
-            this.initGame('minesweeper');
+            gameName = 'minesweeper';
+        }
+        
+        if (gameName && this.games[gameName]) {
+            this.initGame(gameName);
         }
     },
 
     init() {
         if (this.initialized) return;
-        this.initialized = true;
-
+        
         const self = this;
+        const maxRetries = 30;
         let retryCount = 0;
-        const maxRetries = 50;
 
-        function initGameWhenReady() {
+        function tryDetectCurrentGame() {
             const canvas = document.getElementById('game-canvas');
             
             if (!canvas) {
                 if (retryCount < maxRetries) {
                     retryCount++;
-                    setTimeout(initGameWhenReady, 100);
+                    setTimeout(tryDetectCurrentGame, 100);
                 }
                 return;
             }
             
-            self.detectGame();
-        }
-
-        function tryInit() {
-            if (document.getElementById('game-canvas')) {
-                initGameWhenReady();
+            const path = window.location.pathname;
+            let gameName = null;
+            if (path.includes('/snake/')) gameName = 'snake';
+            else if (path.includes('/tetris/')) gameName = 'tetris';
+            else if (path.includes('/minesweeper/')) gameName = 'minesweeper';
+            
+            if (gameName && self.games[gameName]) {
+                self.initialized = true;
+                self.initGame(gameName);
             } else if (retryCount < maxRetries) {
                 retryCount++;
-                setTimeout(tryInit, 100);
+                setTimeout(tryDetectCurrentGame, 100);
             }
         }
-
-        if (document.readyState === 'complete') {
-            setTimeout(tryInit, 50);
-        } else {
-            window.addEventListener('load', tryInit);
-        }
+        
+        tryDetectCurrentGame();
 
         document.addEventListener('pjax:success', function() {
+            self.initialized = false;
             retryCount = 0;
             setTimeout(function() {
                 if (document.getElementById('game-canvas')) {
