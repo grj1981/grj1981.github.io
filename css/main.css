@@ -1287,7 +1287,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #fbffd9;
+  background: #c17174;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2563,14 +2563,109 @@ body {
 .content-wrap {
   opacity: 0.8;
 }
-​,
 .sidebar {
   background-color: transparent;
   opacity: 0.8;
 }
-​,
 .header-inner {
   background: rgba(255,255,255,0.8);
+}
+.videos-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 0;
+}
+.videos-column {
+  width: 180px;
+  margin: 0;
+}
+.videos-item {
+  cursor: pointer;
+}
+.video-cover {
+  width: 180px;
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid #e74c3c;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.video-cover:hover {
+  transform: scale(1.03);
+  border-color: #c0392b;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+.video-play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+.video-play-icon i {
+  color: #fff;
+  font-size: 20px;
+  margin-left: 3px;
+}
+.video-cover:hover .video-play-icon {
+  opacity: 1;
+  background: rgba(231,76,60,0.8);
+}
+.video-desc {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #555;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+@media (max-width: 768px) {
+  .videos-grid {
+    gap: 16px;
+  }
+  .videos-column {
+    width: 160px;
+  }
+  .video-cover {
+    width: 160px;
+    height: 200px;
+  }
+  .video-desc {
+    font-size: 11px;
+  }
+}
+@media (max-width: 480px) {
+  .videos-grid {
+    gap: 12px;
+  }
+  .videos-column {
+    width: 140px;
+  }
+  .video-cover {
+    width: 140px;
+    height: 180px;
+  }
+  .video-desc {
+    font-size: 10px;
+  }
 }
 .photos-page {
   margin-top: -50px;
