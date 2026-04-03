@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://iili.io/JH6bhrb.th.jpg">
 <meta property="og:image" content="https://iili.io/J2NFhhb.th.jpg">
 <meta property="article:published_time" content="2023-04-27T08:12:18.000Z">
-<meta property="article:modified_time" content="2026-04-03T06:00:00.430Z">
+<meta property="article:modified_time" content="2026-04-03T06:07:23.352Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="unity,手游开发,编程,flash开发,钓鱼">
 <meta name="twitter:card" content="summary">
@@ -233,31 +233,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 		});
 	});
-	
-<pre><code>// 动态获取各相册图片数量
-var albumPaths = [&#39;./img2026/&#39;, &#39;./img2025/&#39;, &#39;./img2024/&#39;, &#39;./img2023/&#39;, &#39;./img2022/&#39;, &#39;./img2/&#39;, &#39;./img3/&#39;];
-var albumIds = [&#39;count-2026&#39;, &#39;count-2025&#39;, &#39;count-2024&#39;, &#39;count-2023&#39;, &#39;count-2022&#39;, &#39;count-img2&#39;, &#39;count-img3&#39;];
-
-async function fetchImageCounts() &#123;
-	for (var i = 0; i &lt; albumPaths.length; i++) &#123;
-		try &#123;
-			var response = await fetch(albumPaths[i]);
-			var html = await response.text();
-			var matches = html.match(/data-lightbox=&quot;fishPhotos&quot;/g);
-			var count = matches ? matches.length : 0;
-			var countEl = document.getElementById(albumIds[i]);
-			if (countEl) &#123;
-				countEl.textContent = &#39;(&#39; + count + &#39;张)&#39;;
-			&#125;
-		&#125; catch (e) &#123;
-			console.log(&#39;获取相册数量失败: &#39; + albumPaths[i]);
-		&#125;
-	&#125;
-&#125;
-
-fetchImageCounts();
-</code></pre>
-<p>});<br></script></p>
+});
+</script>
 <style>
 .photos-item p .photo-count {
 	color: #e74c3c;
@@ -271,49 +248,49 @@ fetchImageCounts();
 			<div class="photos-item">
 				<a href="./img2026/"><img class="lozad" data-src="https://iili.io/qfzkoBf.th.jpg" data-src="https://iili.io/qfzkoBf.th.jpg" alt="2026年鱼获">
 				</a>
-				<p>-鱼获展示[2026] <span id="count-2026" class="photo-count">(加载中...)</span>-</p>
+				<p>-鱼获展示[2026] <span class="photo-count">(30张)</span>-</p>
 			</div>
 		</div>
 		<div class="photos-column">
 			<div class="photos-item">
 				<a href="./img2025/"><img class="lozad" data-src="https://iili.io/KOgsQQ1.th.jpg" data-src="https://iili.io/KOgsQQ1.th.jpg" alt="2025年鱼获">
 				</a>
-				<p>-鱼获展示[2025] <span id="count-2025" class="photo-count">(加载中...)</span>-</p>
+				<p>-鱼获展示[2025] <span class="photo-count">(65张)</span>-</p>
 			</div>
 		</div>
 		<div class="photos-column">
 			<div class="photos-item">
 				<a href="./img2024/"><img class="lozad" data-src="https://iili.io/JGhumFe.th.jpg" data-src="https://iili.io/JGhumFe.th.jpg" alt="2024年鱼获">
 				</a>
-				<p>-鱼获展示[2024] <span id="count-2024" class="photo-count">(加载中...)</span>-</p>
+				<p>-鱼获展示[2024] <span class="photo-count">(58张)</span>-</p>
 			</div>
 		</div>
 		<div class="photos-column">
 			<div class="photos-item">
 				<a href="./img2023/"><img class="lozad" data-src="https://iili.io/JH6bqrJ.th.jpg" data-src="https://iili.io/JH6bqrJ.th.jpg" alt="2023年鱼获">
 				</a>
-				<p>-鱼获展示[2023] <span id="count-2023" class="photo-count">(加载中...)</span>-</p>
+				<p>-鱼获展示[2023] <span class="photo-count">(120张)</span>-</p>
 			</div>
 		</div>
 		<div class="photos-column">
 			<div class="photos-item">
 				<a href="./img2022/"><img class="lozad" data-src="https://iili.io/HSg16Ex.th.jpg" data-src="https://iili.io/HSg16Ex.th.jpg" alt="2022年鱼获">
 				</a>
-				<p>-鱼获展示[2022] <span id="count-2022" class="photo-count">(加载中...)</span>-</p>
+				<p>-鱼获展示[2022] <span class="photo-count">(95张)</span>-</p>
 			</div>
 		</div>
 		<div class="photos-column">
 			<div class="photos-item">
 				<a href="./img2/"><img class="lozad" data-src="https://iili.io/JH6bhrb.th.jpg" data-src="https://iili.io/JH6bhrb.th.jpg" alt="钓场风景">
 				</a>
-				<p>-钓场风景 <span id="count-img2" class="photo-count">(加载中...)</span>-</p>
+				<p>-钓场风景 <span class="photo-count">(90张)</span>-</p>
 			</div>
 		</div>
 		<div class="photos-column">
 			<div class="photos-item">
 				<a href="./img3/"><img class="lozad" data-src="https://iili.io/J2NFhhb.th.jpg" data-src="https://iili.io/J2NFhhb.th.jpg" alt="个人随拍">
 				</a>
-				<p>-个人随拍 <span id="count-img3" class="photo-count">(加载中...)</span>-</p>
+				<p>-个人随拍 <span class="photo-count">(45张)</span>-</p>
 			</div>
 		</div>
 	</div>
