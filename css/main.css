@@ -1287,7 +1287,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #d5db26;
+  background: #fff046;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2572,7 +2572,7 @@ body {
 }
 @media (max-width: 480px) {
   .modal-content {
-    width: 92% !important;
+    width: 88% !important;
   }
 }
 .videos-grid {
