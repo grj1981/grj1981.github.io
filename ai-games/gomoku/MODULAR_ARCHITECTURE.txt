@@ -1,0 +1,558 @@
+# 五子棋游戏模块化架构设计文档
+
+## 1. 架构概述
+
+本架构采用分层模块化设计，将游戏逻辑、AI算法、用户界面分离，通过统一接口进行通信。同时集成 GameManager 实现游戏生命周期的自动管理。
+
+### 架构图
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                         HTML 页面                            │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
+│  │  game-canvas │  │  按钮控件  │  │  结果显示区域       │  │
+│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                      游戏模块 (modules/)                     │
+│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐        │
+│  │ gomoku-main  │ │ gomoku-core │ │  gomoku-ai  │        │
+│  │  (GomokuGame)│ │  (Board)    │ │   (AI)      │        │
+│  └──────────────┘ └──────────────┘ └──────────────┘        │
+│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐        │
+│  │  gomoku-ui   │ │ gomoku-utils│ │ gomoku-config│       │
+│  │   (UI)       │ │  (工具函数)  │ │   (配置)     │        │
+│  └──────────────┘ └──────────────┘ └──────────────┘        │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                     GameManager (gamejs/)                    │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │              游戏生命周期管理器                         │   │
+│  │  - register()    注册游戏                             │   │
+│  │  - initGame()    初始化游戏                           │   │
+│  │  - cleanupGame() 清理游戏                             │   │
+│  │  - pjax 集成     页面切换自动管理                      │   │
+│  └─────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## 2. 模块划分
+
+```
+source/ai-games/gomoku/
+├── index.md                      # 页面入口
+├── modules/
+│   ├── gomoku-config.js          # 配置模块（常量定义）
+│   ├── gomoku-utils.js            # 工具模块（通用函数）
+│   ├── gomoku-core.js             # 核心模块（棋盘逻辑）
+│   ├── gomoku-ai.js               # AI模块（搜索算法）
+│   ├── gomoku-ui.js               # UI模块（界面渲染）
+│   └── gomoku-main.js             # 主模块（游戏入口）
+└── source/gamejs/
+    └── game-manager.js             # 游戏生命周期管理器
+```
+
+## 3. 模块详细设计
+
+### 3.1 gomoku-config.js - 配置模块
+
+**职责**：集中管理所有常量配置，包括难度设置、分数常量、搜索配置、UI配置等。
+
+**核心接口**：
+```javascript
+// 通过 window.GomokuConfig 访问
+GomokuConfig.DIFFICULTY       // 难度配置 {easy, normal, hard}
+GomokuConfig.SCORE           // 分数常量 {FIVE, FOUR, OPEN_THREE, ...}
+GomokuConfig.COLORS           // 颜色配置
+GomokuConfig.UI_CONFIG        // UI配置
+GomokuConfig.getDifficulty()  // 根据难度获取配置
+```
+
+**特性**：
+- 防止重复声明（`if (!window.GomokuConfig)`）
+- 兼容 Node.js 模块系统
+
+### 3.2 gomoku-utils.js - 工具模块
+
+**职责**：提供通用工具函数，包括开局库、哈希计算、深拷贝、防抖节流等。
+
+**核心接口**：
+```javascript
+class GomokuUtils {
+    constructor()
+    initOpeningBook()           // 初始化开局库
+    generateZobristTable(size)  // 生成Zobrist表
+    calculateZobristHash()      // 计算棋盘哈希
+    deepClone(obj)              // 深拷贝对象
+    debounce(func, wait)       // 防抖函数
+    throttle(func, limit)       // 节流函数
+    saveGameState()             // 保存游戏状态
+    loadGameState()             // 加载游戏状态
+    validateBoard()             // 验证棋盘状态
+}
+```
+
+**特性**：
+- 防止重复声明
+- 依赖 GomokuConfig
+
+### 3.3 gomoku-core.js - 核心模块
+
+**职责**：棋盘状态管理、游戏规则、胜负判定。
+
+**核心接口**：
+```javascript
+class GomokuBoard {
+    constructor(size)           // 初始化指定大小的棋盘
+    
+    // 棋盘操作
+    createEmptyBoard(size)      // 创建空棋盘
+    getSize()                   // 获取棋盘大小
+    getBoard()                  // 获取棋盘状态
+    reset(size)                 // 重置棋盘
+    
+    // 落子相关
+    makeMove(row, col, player) // 落子
+    undoMove()                  // 撤销落子
+    isValidMove(row, col)      // 验证落子位置
+    
+    // 游戏状态
+    checkWin(row, col, player) // 判断胜负
+    getWinner()                 // 获取获胜者
+    getEmptyCount()             // 获取空位数
+    getCandidateMoves()         // 获取候选落子位置
+}
+```
+
+**内部常量**：
+```javascript
+this.BLACK = 1   // 黑棋
+this.WHITE = 2   // 白棋
+this.EMPTY = 0   // 空位
+```
+
+**特性**：
+- 防止重复声明
+- 记录着法历史用于撤销
+
+### 3.4 gomoku-ai.js - AI模块
+
+**职责**：AI搜索算法、评估函数、启发式优化。
+
+**核心接口**：
+```javascript
+class GomokuAI {
+    constructor(difficulty)      // 根据难度初始化
+    setDifficulty(difficulty)    // 设置难度
+    findBestMove(board, aiColor)// 寻找最佳落子位置
+    
+    // 统计信息
+    getSearchStats()            // 获取搜索统计
+    
+    // 缓存管理
+    clearCaches()               // 清空缓存
+}
+```
+
+**AI 算法特性**：
+- **Minimax + Alpha-Beta剪枝**：搜索最优着法
+- **迭代加深**：根据时间限制控制搜索深度
+- **置换表**：避免重复计算
+- **杀手启发**：优先搜索可能引起剪枝的着法
+- **历史启发**：基于历史表现排序着法
+- **评估函数**：基于预计算模式表评分
+
+**难度配置**：
+| 难度  | 棋盘大小 | 搜索深度 | 时间限制 |
+|-------|---------|---------|---------|
+| easy  | 9×9     | 3层     | 4000ms  |
+| normal| 13×13   | 5层     | 7000ms  |
+| hard  | 15×15   | 6层     | 10000ms |
+
+### 3.5 gomoku-ui.js - UI模块
+
+**职责**：画布渲染、用户交互、响应式布局。
+
+**核心接口**：
+```javascript
+class GomokuUI {
+    constructor(canvasId, options)
+    init(boardSize)              // 初始化UI
+    resizeCanvas()               // 调整画布大小
+    drawBoard(board)             // 绘制棋盘和棋子
+    drawEmptyBoard()             // 绘制空棋盘
+    
+    // 事件处理
+    onClick(callback)             // 注册点击事件
+    onTouch(callback)            // 注册触摸事件
+    onResize(callback)           // 注册窗口调整事件
+    cleanup()                    // 清理事件监听器
+    
+    // 界面更新
+    updateTurnIndicator()        // 更新回合指示器
+    showThinkingIndicator(show)  // 显示思考状态
+    showMessage(message, type)   // 显示消息
+    highlightLastMove()          // 高亮最后落子
+}
+```
+
+**事件处理**：
+- 点击落子：鼠标点击 canvas 触发
+- 触摸落子：移动端触摸支持
+- 窗口调整：响应式重绘棋盘
+
+**特性**：
+- 防止重复声明
+- 自动计算 cellSize 实现响应式布局
+- 棋子渐变效果
+
+### 3.6 gomoku-main.js - 主模块
+
+**职责**：整合所有模块，提供统一的游戏入口，管理游戏流程。
+
+**核心类**：
+```javascript
+class GomokuGame {
+    constructor(options)         // 初始化游戏
+    init()                      // 初始化/重置游戏
+    getBoardSize()              // 获取棋盘大小
+    setupEventListeners()       // 设置事件监听器
+    
+    // 游戏操作
+    makePlayerMove(row, col)    // 玩家落子
+    makeAIMove()                // AI落子
+    undo()                      // 悔棋
+    restart(difficulty)          // 重新开始
+    changeDifficulty(difficulty) // 切换难度
+    getHint()                   // 获取提示
+    
+    // 状态管理
+    saveGame()                  // 保存游戏
+    loadGame()                  // 加载游戏
+    getGameInfo()               // 获取游戏信息
+    destroy()                    // 销毁游戏实例
+}
+```
+
+**全局初始化函数**：
+```javascript
+initGomokuGame()  // 供 GameManager 调用
+```
+
+**游戏实例管理**：
+- `window.gomokuGame` - 全局游戏实例
+- 支持检查 canvas 有效性后重建实例
+
+## 4. GameManager - 游戏生命周期管理
+
+**职责**：统一管理多个游戏的生命周期，处理 pjax 页面切换。
+
+**核心接口**：
+```javascript
+const GameManager = {
+    games: {},                  // 已注册的游戏
+    
+    register(name, options) {   // 注册游戏
+        // options: { init, cleanup, timerKey }
+    },
+    
+    initGame(name) {             // 初始化指定游戏
+        cleanupCurrentGame();
+        game.init();
+    },
+    
+    cleanupGame(name) {          // 清理指定游戏
+        game.cleanup();
+        clearTimer();
+        removeEventListeners();
+    },
+    
+    cleanupAll() {               // 清理所有游戏
+        cleanupCurrentGame();
+    },
+    
+    init() {                     // 初始化管理器
+        // 首次加载检测
+        // pjax:success 检测
+    }
+}
+```
+
+**初始化流程**：
+
+```
+┌────────────────────────────────────────────────────────────┐
+│                     GameManager.init()                       │
+├────────────────────────────────────────────────────────────┤
+│  1. 首次加载检测                                            │
+│     └─ DOMContentLoaded → detectAndInit()                  │
+│        └─ 游戏已注册? → initGame() : 等待                    │
+│                                                            │
+│  2. pjax 导航检测                                          │
+│     └─ pjax:success → detectAndInit()                      │
+│        └─ 游戏已注册? → initGame() : 等待                   │
+└────────────────────────────────────────────────────────────┘
+```
+
+**pjax 集成**：
+- `pjax:before` → `cleanupAll()` - 切换前清理
+- `pjax:success` → `detectAndInit()` - 切换后初始化
+
+**防止重复声明**：
+```javascript
+if (typeof window.GameManager === 'undefined') {
+    window.GameManager = { ... };
+}
+```
+
+## 5. 数据流设计
+
+### 5.1 游戏流程
+
+```
+用户点击 → UI.onClick()
+              │
+              ▼
+        GomokuGame.makePlayerMove()
+              │
+              ▼
+        GomokuBoard.makeMove()  ← 验证落子、更新状态
+              │
+              ▼
+        GomokuAI.findBestMove() ← 计算最佳着法
+              │
+              ▼
+        GomokuBoard.makeMove()  ← AI落子
+              │
+              ▼
+        GomokuUI.drawBoard()    ← 重绘界面
+```
+
+### 5.2 初始化流程
+
+```
+页面加载 → script[data-pjax] 执行
+              │
+              ▼
+        GameManager.init()
+              │
+              ▼
+        游戏模块加载 → register()
+              │
+              ▼
+        pjax:success / DOMContentLoaded
+              │
+              ▼
+        detectAndInit()
+              │
+              ▼
+        initGomokuGame()
+              │
+              ▼
+        new GomokuGame()
+              │
+              ├─→ new GomokuBoard()
+              ├─→ new GomokuAI()
+              ├─→ new GomokuUI() → UI.init()
+              └─→ setupEventListeners()
+```
+
+### 5.3 页面切换流程
+
+```
+点击链接 → pjax:before
+              │
+              ▼
+        GameManager.cleanupAll()
+              │
+              ▼
+        gomokuCleanup()
+              │
+              ├─→ GomokuGame.destroy() → GomokuUI.cleanup()
+              └─→ window.gomokuGame = null
+              │
+              ▼
+        pjax 替换页面内容
+              │
+              ▼
+        pjax:success
+              │
+              ▼
+        detectAndInit()
+              │
+              ▼
+        新游戏模块注册
+              │
+              ▼
+        initGomokuGame() → 创建新实例
+```
+
+## 6. pjax 兼容性设计
+
+### 6.1 防重复声明模式
+
+所有模块采用以下模式防止 pjax 重载时重复声明：
+
+```javascript
+// 配置文件
+if (!window.GomokuConfig) {
+    window.GomokuConfig = { ... };
+}
+
+// 类文件
+if (typeof window.GomokuCore === 'undefined') {
+    window.GomokuCore = class GomokuCore { ... };
+}
+
+// 函数文件
+if (typeof window.initGame === 'undefined') {
+    window.initGame = function() { ... };
+}
+```
+
+### 6.2 canvas 有效性检测
+
+初始化前检查 canvas 是否属于当前 DOM：
+
+```javascript
+if (window.gomokuGame) {
+    const ui = window.gomokuGame.ui;
+    if (ui && ui.canvas && document.contains(ui.canvas)) {
+        // canvas 有效，重置游戏状态
+        game.init();
+    } else {
+        // canvas 已失效，需要重建
+        window.gomokuGame = null;
+    }
+}
+```
+
+### 6.3 UI 状态重置
+
+`GomokuUI.cleanup()` 必须重置所有状态：
+
+```javascript
+cleanup() {
+    // 移除事件监听
+    this.clickHandlers.forEach(handler => {
+        this.canvas.removeEventListener('click', handler);
+    });
+    
+    // 清空处理器
+    this.clickHandlers = [];
+    this.resizeHandlers = [];
+    
+    // 重置初始化标志
+    this.isInitialized = false;
+    
+    // 清空画布
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+}
+```
+
+## 7. 性能优化策略
+
+### 7.1 AI 搜索优化
+
+| 优化技术 | 说明 | 效果 |
+|---------|------|------|
+| Alpha-Beta剪枝 | 减少搜索节点 | 提升50%+ |
+| 迭代加深 | 时间控制搜索深度 | 平衡速度与强度 |
+| 置换表 | 避免重复计算 | 减少30%计算量 |
+| 杀手启发 | 优先验证杀手着法 | 增强剪枝效果 |
+| 历史启发 | 基于历史排序着法 | 提升节点质量 |
+
+### 7.2 评估优化
+
+- **预计算模式表**：避免运行时计算
+- **增量评估**：只更新受影响位置
+- **缓存机制**：评估结果复用
+
+### 7.3 内存优化
+
+- **对象复用**：避免频繁创建临时对象
+- **及时清理**：pjax 切换时释放资源
+- **置换表大小控制**：平衡内存与命中率
+
+## 8. 难度配置
+
+```javascript
+GomokuConfig.DIFFICULTY = {
+    easy: {
+        size: 9,
+        depth: 3,
+        timeLimit: 4000,
+        skill: 1,
+        useIterativeDeepening: false,
+        useKillerHeuristic: false,
+        useHistoryHeuristic: false
+    },
+    normal: {
+        size: 13,
+        depth: 5,
+        timeLimit: 7000,
+        skill: 2,
+        useIterativeDeepening: true,
+        useKillerHeuristic: true,
+        useHistoryHeuristic: false
+    },
+    hard: {
+        size: 15,
+        depth: 6,
+        timeLimit: 10000,
+        skill: 3,
+        useIterativeDeepening: true,
+        useKillerHeuristic: true,
+        useHistoryHeuristic: true
+    }
+};
+```
+
+## 9. 扩展指南
+
+### 9.1 添加新难度
+
+1. 在 `gomoku-config.js` 的 `DIFFICULTY` 中添加配置
+2. 确保 AI 支持新配置
+
+### 9.2 添加新功能
+
+1. 在对应模块中实现功能
+2. 如需全局访问，挂载到 `window` 对象
+3. 更新 `initGomokuGame()` 注册功能
+
+### 9.3 添加新游戏
+
+1. 参考五子棋创建模块文件
+2. 在 `game-manager.js` 的 `detectGame()` 中添加检测逻辑
+3. 注册游戏到 GameManager
+
+## 10. 调试技巧
+
+### 10.1 控制台日志
+
+```javascript
+[GameManager] 游戏管理器相关日志
+[gomoku] 游戏实例相关日志
+[gomoku-board] 棋盘相关日志
+```
+
+### 10.2 调试对象
+
+```javascript
+window.GameManager      // 游戏管理器
+window.gomokuGame      // 当前游戏实例
+window.gomokuGame.ui   // UI 实例
+window.gomokuGame.board// 棋盘实例
+window.gomokuGame.ai   // AI 实例
+```
+
+---
+
+*文档版本：2.0*
+*更新日期：2026-04-15*
+*基于实际实现更新*

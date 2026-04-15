@@ -1,7 +1,8 @@
 // 游戏管理器 - 统一管理多个游戏的生命周期
 // 解决游戏切换时的定时器残留、事件堆积问题
 
-const GameManager = {
+if (typeof window.GameManager === 'undefined') {
+    window.GameManager = {
     currentGame: null,
     games: {},
     initialized: false,
@@ -85,7 +86,7 @@ const GameManager = {
     detectGame() {
         const path = window.location.pathname;
         const canvas = document.getElementById('game-canvas');
-        if (!canvas) return;
+        if (!canvas) return null;
         
         let gameName = null;
         if (path.includes('/snake/')) {
@@ -94,64 +95,53 @@ const GameManager = {
             gameName = 'tetris';
         } else if (path.includes('/minesweeper/')) {
             gameName = 'minesweeper';
+        } else if (path.includes('/gomoku/')) {
+            gameName = 'gomoku';
         }
         
-        if (gameName && this.games[gameName]) {
-            this.initGame(gameName);
-        }
+        return gameName;
     },
 
     init() {
-        if (this.initialized) return;
-        
         const self = this;
-        const maxRetries = 30;
-        let retryCount = 0;
-
-        function tryDetectCurrentGame() {
-            const canvas = document.getElementById('game-canvas');
-            
-            if (!canvas) {
-                if (retryCount < maxRetries) {
-                    retryCount++;
-                    setTimeout(tryDetectCurrentGame, 100);
-                }
+        
+        function detectAndInit() {
+            const gameName = self.detectGame();
+            if (!gameName) {
                 return;
             }
             
-            const path = window.location.pathname;
-            let gameName = null;
-            if (path.includes('/snake/')) gameName = 'snake';
-            else if (path.includes('/tetris/')) gameName = 'tetris';
-            else if (path.includes('/minesweeper/')) gameName = 'minesweeper';
-            
-            if (gameName && self.games[gameName]) {
-                self.initialized = true;
-                self.initGame(gameName);
-            } else if (retryCount < maxRetries) {
-                retryCount++;
-                setTimeout(tryDetectCurrentGame, 100);
+            if (!self.games[gameName]) {
+                console.log('[GameManager] 游戏未注册，等待...');
+                setTimeout(detectAndInit, 50);
+                return;
             }
+            
+            console.log('[GameManager] 初始化游戏:', gameName);
+            self.initialized = true;
+            self.initGame(gameName);
         }
         
-        tryDetectCurrentGame();
-
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(detectAndInit, 50);
+            });
+        } else {
+            setTimeout(detectAndInit, 50);
+        }
+        
         document.addEventListener('pjax:success', function() {
             self.initialized = false;
-            retryCount = 0;
-            setTimeout(function() {
-                if (document.getElementById('game-canvas')) {
-                    self.detectGame();
-                }
-            }, 100);
+            setTimeout(detectAndInit, 100);
         });
     }
 };
 
-window.GameManager = GameManager;
+console.log('[game-manager] 脚本已加载');
 
 document.addEventListener('pjax:before', function() {
     GameManager.cleanupAll();
 });
 
 GameManager.init();
+}
