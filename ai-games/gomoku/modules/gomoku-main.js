@@ -9,6 +9,7 @@ if (typeof window.GomokuGame === 'undefined') {
         this.options = {
             canvasId: 'game-canvas',
             difficulty: 'normal',
+            boardSize: GomokuConfig.DEFAULT_BOARD_SIZE,
             playerColor: 1, // 1: 黑棋(先手), 2: 白棋(后手)
             enableUndo: true,
             enableHint: false,
@@ -108,10 +109,13 @@ if (typeof window.GomokuGame === 'undefined') {
         }
     }
     
-    // 获取棋盘大小（根据难度）
-    getBoardSize() {
-        return GomokuConfig.DIFFICULTY[this.options.difficulty]?.size || 15;
-    }
+// 获取棋盘大小
+        getBoardSize() {
+            if (this.options.boardSize && GomokuConfig.BOARD_SIZES.includes(this.options.boardSize)) {
+                return this.options.boardSize;
+            }
+            return GomokuConfig.DEFAULT_BOARD_SIZE;
+        }
     
     // 设置事件监听器
     setupEventListeners() {
@@ -302,30 +306,35 @@ if (typeof window.GomokuGame === 'undefined') {
         });
     }
     
-    // 悔棋
-    undo() {
-        if (!this.options.enableUndo || this.state.isThinking || this.state.moveHistory.length < 2) {
+    // 悔棋 - 可选择撤销单步或两步
+    undo(steps = 2) {
+        if (!this.options.enableUndo || this.state.isThinking || this.state.moveHistory.length < steps) {
             return false;
         }
         
-        // 撤销最后两步（玩家一步 + AI一步）
-        let undone = 0;
-        while (undone < 2 && this.state.moveHistory.length > 0) {
-            if (this.board.undoMove()) {
-                undone++;
+        // 撤销指定步数
+        if (this.board.undoMove(steps)) {
+            // 移除对应数量的移动历史记录
+            for (let i = 0; i < steps && this.state.moveHistory.length > 0; i++) {
                 this.state.moveHistory.pop();
-            } else {
-                break;
             }
-        }
-        
-        if (undone > 0) {
+            
             this.ui.drawBoard(this.board.getBoard());
             this.state.isPlaying = true;
             return true;
         }
         
         return false;
+    }
+    
+    // 撤销玩家一步（仅撤销玩家最近的一步）
+    undoPlayer() {
+        return this.undo(1);
+    }
+    
+    // 撤销双方一步（玩家+AI）
+    undoBoth() {
+        return this.undo(2);
     }
     
     // 重新开始
@@ -426,7 +435,10 @@ if (typeof window.GomokuGame === 'undefined') {
     saveGame() {
         const gameState = {
             board: this.board.getBoard(),
-            currentPlayer: this.board.getCurrentPlayer(),
+            boardSize: this.board.getSize(),
+            currentPlayer: this.board.currentPlayer,
+            gameOver: this.board.gameOver,
+            winner: this.board.winner,
             moveHistory: this.state.moveHistory,
             difficulty: this.options.difficulty,
             playerColor: this.options.playerColor,
@@ -442,11 +454,21 @@ if (typeof window.GomokuGame === 'undefined') {
         
         if (!gameState) return false;
         
-        // 恢复棋盘
-        this.board.board = gameState.board;
-        this.board.currentPlayer = gameState.currentPlayer;
-        this.board.gameOver = false;
-        this.board.winner = null;
+        // 重建棋盘（使用正确的初始化流程）
+        this.board.reset(gameState.board.length);
+        
+        // 重新执行所有历史着法以恢复棋盘状态
+        if (gameState.moveHistory && gameState.moveHistory.length > 0) {
+            for (const move of gameState.moveHistory) {
+                // 尝试落子，使用原始的玩家
+                this.board.makeMove(move.row, move.col, move.player);
+            }
+        }
+        
+        // 恢复当前玩家（如果游戏未结束）
+        if (!gameState.gameOver) {
+            this.board.currentPlayer = gameState.currentPlayer;
+        }
         
         // 恢复状态
         this.state.moveHistory = gameState.moveHistory || [];
@@ -457,6 +479,11 @@ if (typeof window.GomokuGame === 'undefined') {
         // 更新选项
         this.options.difficulty = gameState.difficulty || 'normal';
         this.options.playerColor = gameState.playerColor || 1;
+        
+        // 如果保存了棋盘大小，使用它
+        if (gameState.boardSize) {
+            this.options.boardSize = gameState.boardSize;
+        }
         
         // 更新AI难度
         this.ai.setDifficulty(this.options.difficulty);

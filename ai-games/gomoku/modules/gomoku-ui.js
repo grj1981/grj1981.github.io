@@ -108,27 +108,25 @@ if (typeof window.GomokuUI === 'undefined') {
     drawStarPoints() {
         this.ctx.fillStyle = this.colors.BOARD_LINE;
         
+        let starPoints = [];
         if (this.boardSize === 15) {
-            this.boardConfig.STAR_POINTS_15.forEach(([x, y]) => {
-                this.ctx.beginPath();
-                this.ctx.arc(
-                    this.options.margin + x * this.options.cellSize,
-                    this.options.margin + y * this.options.cellSize,
-                    this.boardConfig.STAR_POINT_RADIUS,
-                    0, Math.PI * 2
-                );
-                this.ctx.fill();
-            });
+            starPoints = this.boardConfig.STAR_POINTS_15;
         } else if (this.boardSize === 13) {
+            starPoints = this.boardConfig.STAR_POINTS_13;
+        } else if (this.boardSize === 9) {
+            starPoints = this.boardConfig.STAR_POINTS_9;
+        }
+        
+        starPoints.forEach(([x, y]) => {
             this.ctx.beginPath();
             this.ctx.arc(
-                this.options.margin + this.boardConfig.STAR_POINT_13[0] * this.options.cellSize,
-                this.options.margin + this.boardConfig.STAR_POINT_13[1] * this.options.cellSize,
+                this.options.margin + x * this.options.cellSize,
+                this.options.margin + y * this.options.cellSize,
                 this.boardConfig.STAR_POINT_RADIUS,
                 0, Math.PI * 2
             );
             this.ctx.fill();
-        }
+        });
     }
     
     // 绘制棋子

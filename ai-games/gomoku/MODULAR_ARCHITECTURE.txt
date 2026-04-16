@@ -52,7 +52,7 @@ source/ai-games/gomoku/
 │   ├── gomoku-ai.js               # AI模块（搜索算法）
 │   ├── gomoku-ui.js               # UI模块（界面渲染）
 │   └── gomoku-main.js             # 主模块（游戏入口）
-└── source/gamejs/
+└── source/ai-games/gamejs/
     └── game-manager.js             # 游戏生命周期管理器
 ```
 

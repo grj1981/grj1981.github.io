@@ -206,10 +206,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-04-15 20:00:00 / 修改时间：18:13:15" itemprop="dateCreated datePublished" datetime="2026-04-15T20:00:00+08:00">2026-04-15</time>
+              <time title="创建时间：2026-04-15 20:00:00" itemprop="dateCreated datePublished" datetime="2026-04-15T20:00:00+08:00">2026-04-15</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-04-16 11:21:40" itemprop="dateModified" datetime="2026-04-16T11:21:40+08:00">2026-04-16</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -268,7 +274,7 @@
 <li><strong>PJAX 兼容性处理</strong>：如何在静态博客中实现流畅的页面切换</li>
 <li><strong>AI 算法设计</strong>：如何实现具有不同难度的棋局评估与搜索</li>
 </ol>
-<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">source/ai-games/gomoku/</span><br><span class="line">├── index.md                      # 游戏页面入口（HTML + CSS）</span><br><span class="line">└── modules/</span><br><span class="line">    ├── gomoku-config.js          # 配置模块（难度、分数常量）</span><br><span class="line">    ├── gomoku-utils.js           # 工具函数（深拷贝、存储）</span><br><span class="line">    ├── gomoku-core.js            # 棋盘核心（状态管理、胜负判定）</span><br><span class="line">    ├── gomoku-ai.js             # AI 引擎（搜索算法、评估函数）</span><br><span class="line">    ├── gomoku-ui.js              # UI 渲染（画布绘制、事件处理）</span><br><span class="line">    └── gomoku-main.js           # 游戏入口（整合模块、流程控制）</span><br><span class="line"></span><br><span class="line">source/gamejs/</span><br><span class="line">└── game-manager.js               # 游戏生命周期管理器</span><br></pre></td></tr></table></figure>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">source/ai-games/gomoku/</span><br><span class="line">├── index.md                      # 游戏页面入口（HTML + CSS）</span><br><span class="line">└── modules/</span><br><span class="line">    ├── gomoku-config.js          # 配置模块（难度、分数常量）</span><br><span class="line">    ├── gomoku-utils.js           # 工具函数（深拷贝、存储）</span><br><span class="line">    ├── gomoku-core.js            # 棋盘核心（状态管理、胜负判定）</span><br><span class="line">    ├── gomoku-ai.js             # AI 引擎（搜索算法、评估函数）</span><br><span class="line">    ├── gomoku-ui.js              # UI 渲染（画布绘制、事件处理）</span><br><span class="line">    └── gomoku-main.js           # 游戏入口（整合模块、流程控制）</span><br><span class="line"></span><br><span class="line">source/ai-games/gamejs/</span><br><span class="line">└── game-manager.js               # 游戏生命周期管理器</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2026/04/15/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BA%94%E5%AD%90%E6%A3%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/#more" rel="contents">

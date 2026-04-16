@@ -6,7 +6,6 @@ if (!window.GomokuConfig) {
         // ============= 难度配置 =============
         DIFFICULTY: {
             easy: { 
-                size: 9, 
                 name: '简单', 
                 depth: 3, 
                 timeLimit: 3000, 
@@ -16,7 +15,6 @@ if (!window.GomokuConfig) {
                 useHistoryHeuristic: false
             },
             normal: { 
-                size: 13, 
                 name: '普通', 
                 depth: 6, 
                 timeLimit: 4000, 
@@ -26,7 +24,6 @@ if (!window.GomokuConfig) {
                 useHistoryHeuristic: true
             },
             hard: { 
-                size: 15, 
                 name: '困难', 
                 depth: 12, 
                 timeLimit: 8000, 
@@ -36,6 +33,12 @@ if (!window.GomokuConfig) {
                 useHistoryHeuristic: true
             }
         },
+
+        // ============= 棋盘大小配置 =============
+        BOARD_SIZES: [9, 13, 15],
+
+        // ============= 游戏常量 =============
+        DEFAULT_BOARD_SIZE: 15,
 
         // ============= 分数常量 =============
         SCORE: {
@@ -84,6 +87,7 @@ if (!window.GomokuConfig) {
         TRANSPOSITION_CONFIG: {
             TABLE_SIZE: 500000,
             HASH_PRIME: 31,
+            MAX_SIZE: 100000,
             FLAGS: {
                 EXACT: 'EXACT',
                 LOWER: 'LOWER',
@@ -102,7 +106,6 @@ if (!window.GomokuConfig) {
             CELL_SIZE: 40,
             MARGIN: 20,
             MOBILE_THRESHOLD: 500,
-            CANVAS_MAX_SIZE: 300,
             WINDOW_PADDING: 40,
             MAX_CANVAS_WIDTH: 450,
             AI_THINKING_DELAY: 50
@@ -123,7 +126,8 @@ if (!window.GomokuConfig) {
         // ============= 棋盘配置 =============
         BOARD_CONFIG: {
             STAR_POINTS_15: [[3, 3], [3, 11], [7, 7], [11, 3], [11, 11]],
-            STAR_POINT_13: [6, 6],
+            STAR_POINTS_13: [[3, 3], [3, 9], [6, 6], [9, 3], [9, 9]],
+            STAR_POINTS_9: [[2, 2], [2, 6], [4, 4], [6, 2], [6, 6]],
             STAR_POINT_RADIUS: 4,
             PIECE_RADIUS_RATIO: 0.4,
             GRADIENT_OFFSET_RATIO: 0.3,

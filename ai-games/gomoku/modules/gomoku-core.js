@@ -74,7 +74,8 @@ if (typeof window.GomokuBoard === 'undefined') {
         if (!this.isValidMove(row, col)) return false;
         
         this.board[row][col] = movePlayer;
-        this.moveHistory.push({ row, col, player: movePlayer, board: this.cloneBoard() });
+        // 只存储位置，不存储完整棋盘，节省内存
+        this.moveHistory.push({ row, col, player: movePlayer });
         
         // 检查是否获胜
         if (this.checkWin(row, col, movePlayer)) {
@@ -93,17 +94,25 @@ if (typeof window.GomokuBoard === 'undefined') {
         return true;
     }
     
-    // 悔棋
-    undoMove() {
+    // 悔棋 - 根据步数恢复棋盘
+    undoMove(steps = 1) {
         if (this.moveHistory.length === 0) return false;
         
-        this.moveHistory.pop();
+        // 限制最大撤销步数
+        const undoCount = Math.min(steps, this.moveHistory.length);
+        
+        // 移除最后 N 步
+        for (let i = 0; i < undoCount; i++) {
+            if (this.moveHistory.length === 0) break;
+            const lastMove = this.moveHistory.pop();
+            this.board[lastMove.row][lastMove.col] = this.EMPTY;
+        }
+        
+        // 恢复当前玩家
         if (this.moveHistory.length > 0) {
-            const lastState = this.moveHistory[this.moveHistory.length - 1];
-            this.board = lastState.board;
-            this.currentPlayer = lastState.player === this.BLACK ? this.WHITE : this.BLACK;
+            const lastMove = this.moveHistory[this.moveHistory.length - 1];
+            this.currentPlayer = lastMove.player === this.BLACK ? this.WHITE : this.BLACK;
         } else {
-            this.board = this.createEmptyBoard(this.size);
             this.currentPlayer = this.BLACK;
         }
         

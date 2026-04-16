@@ -32,6 +32,17 @@ if (typeof window.GomokuAI === 'undefined') {
         this.historyHeuristic.clear();
         this.killerMoves.fill({ row: -1, col: -1 });
         this.nodesSearched = 0;
+        
+        // 限制缓存大小，防止内存溢出
+        const MAX_CACHE_SIZE = this.TRANSPOSITION_CONFIG.MAX_SIZE || 100000;
+        if (this.transpositionTable.size > MAX_CACHE_SIZE) {
+            // 清理旧条目
+            const entries = Array.from(this.transpositionTable.entries());
+            this.transpositionTable = new Map(entries.slice(-MAX_CACHE_SIZE / 2));
+        }
+        if (this.lineCache.size > 10000) {
+            this.lineCache.clear();
+        }
     }
     
     initPatternScoreTable() {
@@ -571,43 +582,37 @@ if (typeof window.GomokuAI === 'undefined') {
         return bestScore;
     }
     
-    getCandidateConfig() {
+getCandidateConfig() {
         if (this.config.skill === 1) return this.SEARCH_CONFIG.CANDIDATE_LIMITS.EASY;
         if (this.config.skill === 2) return this.SEARCH_CONFIG.CANDIDATE_LIMITS.NORMAL;
         return this.SEARCH_CONFIG.CANDIDATE_LIMITS.HARD;
     }
-    
-    iterativeDeepening(board, player) {
-        const startTime = Date.now();
-        let bestMove = null;
-        let bestScore = -Infinity;
-        let currentDepth = 2;
-        
-        const emptyCount = this.countEmptyCells(board);
-        if (emptyCount >= board.length * board.length - 1) {
-            return this.getOpeningMove(board);
-        }
-        
+
+    getQuickMoves(board, player) {
         const ownWin = this.findWinningThreat(board, player);
         if (ownWin && ownWin.score >= this.SCORE.FIVE * 0.9) {
-            return ownWin;
+            return { type: 'win', move: ownWin };
         }
-        
+
         const opponentWin = this.checkOpponentHasWinningMove(board, player);
         if (opponentWin) {
-            return opponentWin;
+            return { type: 'block', move: opponentWin };
         }
-        
+
         const attackThreat = this.findWinningThreat(board, player);
         if (attackThreat) {
-            return attackThreat;
+            return { type: 'attack', move: attackThreat };
         }
-        
+
         const blockThreat = this.findBlockingMove(board, player);
         if (blockThreat) {
-            return blockThreat;
+            return { type: 'block_threat', move: blockThreat };
         }
-        
+
+        return null;
+    }
+
+    prepareSearchMoves(board, player) {
         const candidateConfig = this.SEARCH_CONFIG.CANDIDATE_LIMITS.HARD;
         const candidates = this.getCandidateMoves(board, candidateConfig.maxCandidates);
         const scored = candidates.map(m => ({
@@ -616,30 +621,85 @@ if (typeof window.GomokuAI === 'undefined') {
             threatLevel: this.getMoveThreatLevel(board, m.row, m.col, player)
         }));
         scored.sort((a, b) => b.score - a.score);
-        
+
         const winMove = scored.find(s => s.score >= this.SCORE.FIVE * 0.9);
-        if (winMove) return winMove.move;
-        
+        if (winMove) return { type: 'win', moves: [winMove.move] };
+
         const topMoves = scored.slice(0, Math.min(8, scored.length));
-        
+
         if (topMoves[0] && topMoves[0].threatLevel >= this.SCORE.OPEN_FOUR) {
-            return topMoves[0].move;
+            return { type: 'threat', moves: [topMoves[0].move] };
         }
-        
+
         if (topMoves[0] && topMoves[0].score >= this.SCORE.OPEN_THREE * 2) {
             const hasBetterMove = topMoves.some((m, i) => i > 0 && m.score > topMoves[0].score * 1.5);
             if (!hasBetterMove) {
-                return topMoves[0].move;
+                return { type: 'dominant', moves: [topMoves[0].move] };
             }
         }
+
+        return { type: 'search', moves: topMoves.map(m => m.move) };
+    }
+
+    doFullSearch(board, player, startTime, topMoves) {
+        let bestMove = topMoves[0] ? topMoves[0].move : { row: Math.floor(board.length / 2), col: Math.floor(board.length / 2) };
+        let bestScore = -Infinity;
+        const depth = this.config.depth;
+
+        for (const move of topMoves) {
+            if (Date.now() - startTime > this.config.timeLimit) break;
+
+            const boardCopy = this.cloneBoard(board);
+            boardCopy[move.row][move.col] = player;
+
+            if (this.checkWin(boardCopy, move.row, move.col, player)) {
+                return move;
+            }
+
+            const score = this.minimax(
+                boardCopy, depth - 1, -Infinity, Infinity, 
+                false, player === 1 ? 2 : 1, depth, startTime
+            );
+
+            if (score > bestScore) {
+                bestScore = score;
+                bestMove = move;
+            }
+        }
+
+        return bestMove;
+    }
+
+iterativeDeepening(board, player) {
+        const startTime = Date.now();
         
+        const emptyCount = this.countEmptyCells(board);
+        if (emptyCount >= board.length * board.length - 1) {
+            return this.getOpeningMove(board);
+        }
+
+        const quickResult = this.getQuickMoves(board, player);
+        if (quickResult) {
+            return quickResult.move;
+        }
+
+        const prepared = this.prepareSearchMoves(board, player);
+        
+        if (prepared.type === 'win' || prepared.type === 'threat' || prepared.type === 'dominant') {
+            return prepared.moves[0];
+        }
+
+        const topMoves = prepared.moves;
+        let bestMove = topMoves[0] ? topMoves[0].move : { row: Math.floor(board.length / 2), col: Math.floor(board.length / 2) };
+        let currentDepth = 2;
+
         while (Date.now() - startTime < this.config.timeLimit * 0.8 && 
                currentDepth <= this.config.depth) {
             
             let currentBestMove = topMoves[0] ? topMoves[0].move : { row: Math.floor(board.length / 2), col: Math.floor(board.length / 2) };
             let currentBestScore = -Infinity;
             
-            for (const { move } of topMoves) {
+            for (const move of topMoves) {
                 if (Date.now() - startTime > this.config.timeLimit) break;
                 
                 const boardCopy = this.cloneBoard(board);
@@ -661,13 +721,12 @@ if (typeof window.GomokuAI === 'undefined') {
             }
             
             bestMove = currentBestMove;
-            bestScore = currentBestScore;
             currentDepth++;
         }
-        
+
         return bestMove || (topMoves[0] ? topMoves[0].move : { row: Math.floor(board.length / 2), col: Math.floor(board.length / 2) });
     }
-    
+
     useMinimaxSearch(board, player) {
         const startTime = Date.now();
         
@@ -675,78 +734,19 @@ if (typeof window.GomokuAI === 'undefined') {
         if (emptyCount >= board.length * board.length - 1) {
             return this.getOpeningMove(board);
         }
-        
-        const ownWin = this.findWinningThreat(board, player);
-        if (ownWin && ownWin.score >= this.SCORE.FIVE * 0.9) {
-            return ownWin;
+
+        const quickResult = this.getQuickMoves(board, player);
+        if (quickResult) {
+            return quickResult.move;
         }
+
+        const prepared = this.prepareSearchMoves(board, player);
         
-        const opponentWin = this.checkOpponentHasWinningMove(board, player);
-        if (opponentWin) {
-            return opponentWin;
+        if (prepared.type === 'win' || prepared.type === 'threat' || prepared.type === 'dominant') {
+            return prepared.moves[0];
         }
-        
-        const attackThreat = this.findWinningThreat(board, player);
-        if (attackThreat) {
-            return attackThreat;
-        }
-        
-        const blockThreat = this.findBlockingMove(board, player);
-        if (blockThreat) {
-            return blockThreat;
-        }
-        
-        const candidateConfig = this.getCandidateConfig();
-        const candidates = this.getCandidateMoves(board, candidateConfig.maxCandidates);
-        const scored = candidates.map(m => ({
-            move: m,
-            score: this.evaluatePoint(board, m.row, m.col, player),
-            threatLevel: this.getMoveThreatLevel(board, m.row, m.col, player)
-        }));
-        scored.sort((a, b) => b.score - a.score);
-        
-        const winMove = scored.find(s => s.score >= this.SCORE.FIVE * 0.9);
-        if (winMove) return winMove.move;
-        
-        const topMoves = scored.slice(0, Math.min(8, scored.length));
-        
-        if (topMoves[0] && topMoves[0].threatLevel >= this.SCORE.OPEN_FOUR) {
-            return topMoves[0].move;
-        }
-        
-        if (topMoves[0] && topMoves[0].score >= this.SCORE.OPEN_THREE * 2) {
-            const hasBetterMove = topMoves.some((m, i) => i > 0 && m.score > topMoves[0].score * 1.5);
-            if (!hasBetterMove) {
-                return topMoves[0].move;
-            }
-        }
-        
-        let bestMove = topMoves[0] ? topMoves[0].move : { row: Math.floor(board.length / 2), col: Math.floor(board.length / 2) };
-        let bestScore = -Infinity;
-        const depth = this.config.depth;
-        
-        for (const { move } of topMoves) {
-            if (Date.now() - startTime > this.config.timeLimit) break;
-            
-            const boardCopy = this.cloneBoard(board);
-            boardCopy[move.row][move.col] = player;
-            
-            if (this.checkWin(boardCopy, move.row, move.col, player)) {
-                return move;
-            }
-            
-            const score = this.minimax(
-                boardCopy, depth - 1, -Infinity, Infinity, 
-                false, player === 1 ? 2 : 1, depth, startTime
-            );
-            
-            if (score > bestScore) {
-                bestScore = score;
-                bestMove = move;
-            }
-        }
-        
-        return bestMove;
+
+        return this.doFullSearch(board, player, startTime, prepared.moves);
     }
     
     getOpeningMove(board) {
