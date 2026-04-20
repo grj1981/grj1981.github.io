@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+  <meta name="description" content="前言继五子棋之后，本文介绍光影拼图游戏的开发。相比其他游戏，拼图的核心难点在于图片处理与碎片管理：如何将一张图片切割成碎片，实现拖拽吸附，并保证在移动端和桌面端都有良好的交互体验。 拼图游戏是一个看似简单但技术实现复杂的益智游戏，实际开发中需要解决：  图片处理：如何动态加载、切割图片，并处理加载失败的情况 碎片管理：如何生成、定位、旋转和吸附碎片 响应式设计：如何在不同屏幕尺寸下保持游戏体验 移">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 博客实战：光影拼图游戏开发指南">
+<meta property="og:url" content="https://www.bytefisher.top/2026/04/20/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="前言继五子棋之后，本文介绍光影拼图游戏的开发。相比其他游戏，拼图的核心难点在于图片处理与碎片管理：如何将一张图片切割成碎片，实现拖拽吸附，并保证在移动端和桌面端都有良好的交互体验。 拼图游戏是一个看似简单但技术实现复杂的益智游戏，实际开发中需要解决：  图片处理：如何动态加载、切割图片，并处理加载失败的情况 碎片管理：如何生成、定位、旋转和吸附碎片 响应式设计：如何在不同屏幕尺寸下保持游戏体验 移">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-04-20T12:00:00.000Z">
+<meta property="article:modified_time" content="2026-04-20T10:43:22.696Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="游戏开发">
+<meta property="article:tag" content="Canvas">
+<meta property="article:tag" content="响应式设计">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.bytefisher.top/2026/04/20/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Hexo 博客实战：光影拼图游戏开发指南 | ByteFisher</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <!--相册弹出js-->
+  <script type="text/javascript" src="/js/lightbox-plus-jquery.min.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-aigames">
+
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">39</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">87</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/04/20/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo 博客实战：光影拼图游戏开发指南
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-04-20 20:00:00 / 修改时间：18:43:22" itemprop="dateCreated datePublished" datetime="2026-04-20T20:00:00+08:00">2026-04-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">游戏开发</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2026/04/20/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo 博客实战：光影拼图游戏开发指南" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2026/04/20/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2026/04/20/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>继<a href="/ai-games/gomoku/">五子棋</a>之后，本文介绍光影拼图游戏的开发。相比其他游戏，拼图的核心难点在于<strong>图片处理与碎片管理</strong>：如何将一张图片切割成碎片，实现拖拽吸附，并保证在移动端和桌面端都有良好的交互体验。</p>
+<p>拼图游戏是一个看似简单但技术实现复杂的益智游戏，实际开发中需要解决：</p>
+<ol>
+<li><strong>图片处理</strong>：如何动态加载、切割图片，并处理加载失败的情况</li>
+<li><strong>碎片管理</strong>：如何生成、定位、旋转和吸附碎片</li>
+<li><strong>响应式设计</strong>：如何在不同屏幕尺寸下保持游戏体验</li>
+<li><strong>移动端适配</strong>：如何统一处理触摸和鼠标事件</li>
+<li><strong>性能优化</strong>：如何管理图片资源和动画帧</li>
+</ol>
+<p>本文重点讲解三个核心问题：</p>
+<ol>
+<li><strong>图片切割与碎片生成</strong>：Canvas 图片处理技术</li>
+<li><strong>拖拽吸附算法</strong>：碎片位置匹配与自动吸附</li>
+<li><strong>跨平台事件处理</strong>：统一鼠标与触摸交互</li>
+</ol>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">source/ai-games/puzzle/</span><br><span class="line">├── index.md                      # 游戏页面入口（HTML + CSS）</span><br><span class="line">└── modules/</span><br><span class="line">    ├── puzzle-config.js          # 配置模块（难度、颜色、动画参数）</span><br><span class="line">    ├── puzzle-core.js            # 核心逻辑（碎片生成、吸附算法）</span><br><span class="line">    ├── puzzle-render.js          # 渲染模块（Canvas 绘制、动画）</span><br><span class="line">    ├── puzzle-ai.js              # AI 提示系统</span><br><span class="line">    └── puzzle-game.js           # 游戏入口（整合模块、事件处理）</span><br><span class="line"></span><br><span class="line">source/ai-games/gamejs/</span><br><span class="line">└── game-manager.js               # 游戏生命周期管理器（复用）</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="为什么拼图需要不同的架构？"><a href="#为什么拼图需要不同的架构？" class="headerlink" title="为什么拼图需要不同的架构？"></a>为什么拼图需要不同的架构？</h2><p>拼图游戏与<a href="/ai-games/gomoku/">五子棋</a>在技术实现上有本质区别：</p>
+<table>
+<thead>
+<tr>
+<th>游戏</th>
+<th>核心算法</th>
+<th>技术难点</th>
+<th>资源管理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="/ai-games/gomoku/">五子棋</a></td>
+<td>Minimax 搜索</td>
+<td>AI 博弈树</td>
+<td>轻量</td>
+</tr>
+<tr>
+<td>拼图</td>
+<td>图片处理+吸附</td>
+<td>图片切割+响应式</td>
+<td>图片资源+动画帧</td>
+</tr>
+</tbody></table>
+<p>拼图的特殊性：</p>
+<ul>
+<li><strong>图片资源</strong>：需要动态加载外部图片，处理跨域和加载失败</li>
+<li><strong>Canvas 渲染</strong>：需要实时绘制碎片、网格、动画效果</li>
+<li><strong>响应式设计</strong>：碎片位置需要随屏幕尺寸动态调整</li>
+<li><strong>事件处理</strong>：需要同时支持鼠标和触摸交互</li>
+</ul>
+<h2 id="模块化架构设计"><a href="#模块化架构设计" class="headerlink" title="模块化架构设计"></a>模块化架构设计</h2><p>游戏采用分层模块化设计，将图片处理、渲染、逻辑分离：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────────────────────────┐</span><br><span class="line">│                      HTML 页面                            │</span><br><span class="line">│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐  │</span><br><span class="line">│  │ game-canvas │  │ 游戏信息区  │  │ 操作按钮区域   │  │</span><br><span class="line">│  └─────────────┘  └─────────────┘  └─────────────────┘  │</span><br><span class="line">└─────────────────────────────────────────────────────────┘</span><br><span class="line">                             │</span><br><span class="line">                             ▼</span><br><span class="line">┌─────────────────────────────────────────────────────────┐</span><br><span class="line">│               PuzzleGame (游戏入口)                       │</span><br><span class="line">│  职责：整合所有模块、控制游戏流程、管理状态              │</span><br><span class="line">│  ├─ PuzzleCore   → 碎片生成、吸附算法、状态管理         │</span><br><span class="line">│  ├─ PuzzleRender → Canvas 渲染、动画效果                │</span><br><span class="line">│  └─ PuzzleAI     → 提示系统、AI 辅助                   │</span><br><span class="line">└─────────────────────────────────────────────────────────┘</span><br><span class="line">                             │</span><br><span class="line">                             ▼</span><br><span class="line">┌─────────────────────────────────────────────────────────┐</span><br><span class="line">│                  GameManager (生命周期管理)               │</span><br><span class="line">│  职责：统一管理游戏注册、初始化、清理                    │</span><br><span class="line">│  ├─ register()   → 注册游戏到管理器                     │</span><br><span class="line">│  ├─ initGame()  → 初始化指定游戏                      │</span><br><span class="line">│  └─ cleanupGame() → 清理指定游戏资源                   │</span><br><span class="line">└─────────────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<h3 id="各模块职责详解"><a href="#各模块职责详解" class="headerlink" title="各模块职责详解"></a>各模块职责详解</h3><p><strong>PuzzleConfig（配置中心）</strong></p>
+<ul>
+<li>集中管理所有常量配置</li>
+<li>难度参数（网格大小、提示数量、时间限制）</li>
+<li>颜色方案、动画参数</li>
+<li>图片 API 配置</li>
+</ul>
+<p><strong>PuzzleCore（核心逻辑）</strong></p>
+<ul>
+<li>图片加载与切割</li>
+<li>碎片生成与位置计算</li>
+<li>吸附算法实现</li>
+<li>游戏状态管理</li>
+</ul>
+<p><strong>PuzzleRender（渲染引擎）</strong></p>
+<ul>
+<li>Canvas 绘制碎片、网格、背景</li>
+<li>动画效果（旋转、高亮、粒子）</li>
+<li>响应式缩放适配</li>
+<li>性能优化（离屏渲染）</li>
+</ul>
+<p><strong>PuzzleAI（智能提示）</strong></p>
+<ul>
+<li>距离评估算法</li>
+<li>提示冷却机制</li>
+<li>视觉反馈效果</li>
+</ul>
+<p><strong>PuzzleGame（流程控制）</strong></p>
+<ul>
+<li>事件监听与处理</li>
+<li>游戏状态流转</li>
+<li>模块间通信协调</li>
+</ul>
+<h2 id="PJAX-兼容性处理"><a href="#PJAX-兼容性处理" class="headerlink" title="PJAX 兼容性处理"></a>PJAX 兼容性处理</h2><p>拼图游戏复用五子棋的 GameManager 方案，但需要处理额外的资源清理：</p>
+<h3 id="拼图特有的清理需求"><a href="#拼图特有的清理需求" class="headerlink" title="拼图特有的清理需求"></a>拼图特有的清理需求</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">cleanupPuzzleGame</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 1. 停止动画渲染（必须！否则内存泄漏）</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">PuzzleRender</span>) &#123;</span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">PuzzleRender</span>.<span class="title function_">stopAnimation</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2. 清除选中状态</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">PuzzleCore</span>) &#123;</span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">PuzzleCore</span>.<span class="title function_">clearSelection</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 3. 重置游戏状态</span></span><br><span class="line">    <span class="keyword">if</span> (gameState) &#123;</span><br><span class="line">        gameState.<span class="property">isPlaying</span> = <span class="literal">false</span>;</span><br><span class="line">        gameState.<span class="property">isComplete</span> = <span class="literal">false</span>;</span><br><span class="line">        gameState.<span class="property">isFailed</span> = <span class="literal">false</span>;</span><br><span class="line">        gameState.<span class="property">currentPiece</span> = <span class="literal">null</span>;</span><br><span class="line">        gameState.<span class="property">selectedPiece</span> = <span class="literal">null</span>;</span><br><span class="line">        gameState.<span class="property">moveHistory</span> = [];</span><br><span class="line">        <span class="keyword">if</span> (gameState.<span class="property">timerInterval</span>) &#123;</span><br><span class="line">            <span class="built_in">clearInterval</span>(gameState.<span class="property">timerInterval</span>);</span><br><span class="line">            gameState.<span class="property">timerInterval</span> = <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 4. 清除 window 定时器</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">_puzzleTimer</span>) &#123;</span><br><span class="line">        <span class="built_in">clearInterval</span>(<span class="variable language_">window</span>.<span class="property">_puzzleTimer</span>);</span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">_puzzleTimer</span> = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 5. 移除事件监听</span></span><br><span class="line">    <span class="keyword">const</span> canvas = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;game-canvas&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (canvas) &#123;</span><br><span class="line">        canvas.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;mousedown&#x27;</span>, <span class="variable language_">window</span>.<span class="property">_puzzleMouseDown</span>);</span><br><span class="line">        canvas.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;mousemove&#x27;</span>, <span class="variable language_">window</span>.<span class="property">_puzzleMouseMove</span>);</span><br><span class="line">        canvas.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;mouseup&#x27;</span>, <span class="variable language_">window</span>.<span class="property">_puzzleMouseUp</span>);</span><br><span class="line">        canvas.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;mouseleave&#x27;</span>, <span class="variable language_">window</span>.<span class="property">_puzzleMouseUp</span>);</span><br><span class="line">        canvas.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;dblclick&#x27;</span>, <span class="variable language_">window</span>.<span class="property">_puzzleClick</span>);</span><br><span class="line">        canvas.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;touchstart&#x27;</span>, <span class="variable language_">window</span>.<span class="property">_puzzleTouchStart</span>);</span><br><span class="line">        canvas.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;touchmove&#x27;</span>, <span class="variable language_">window</span>.<span class="property">_puzzleTouchMove</span>);</span><br><span class="line">        canvas.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;touchend&#x27;</span>, <span class="variable language_">window</span>.<span class="property">_puzzleTouchEnd</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 6. 清除 window 变量引用</span></span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">_puzzleMouseDown</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">_puzzleMouseMove</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">_puzzleMouseUp</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">_puzzleClick</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">_puzzleTouchStart</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">_puzzleTouchMove</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">_puzzleTouchEnd</span> = <span class="literal">null</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 7. 重新获取canvas并清除内容</span></span><br><span class="line">    <span class="keyword">const</span> currentCanvas = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;game-canvas&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (currentCanvas) &#123;</span><br><span class="line">        <span class="keyword">const</span> ctx = currentCanvas.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span> (ctx) &#123;</span><br><span class="line">            ctx.<span class="title function_">clearRect</span>(<span class="number">0</span>, <span class="number">0</span>, currentCanvas.<span class="property">width</span>, currentCanvas.<span class="property">height</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;光影拼图游戏已清理&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键清理点</strong>：</p>
+<ol>
+<li><strong>动画帧</strong>：必须调用 <code>cancelAnimationFrame</code>，否则持续运行消耗 CPU</li>
+<li><strong>图片资源</strong>：虽然浏览器会自动回收，但显式设置为 <code>null</code> 有助于 GC</li>
+<li><strong>事件监听</strong>：必须移除，否则 PJAX 切换后旧监听器仍在</li>
+<li><strong>定时器</strong>：游戏计时器必须清除</li>
+</ol>
+<h3 id="图片资源的-PJAX-处理"><a href="#图片资源的-PJAX-处理" class="headerlink" title="图片资源的 PJAX 处理"></a>图片资源的 PJAX 处理</h3><p>拼图游戏使用外部图片 API，需要特殊处理：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">startGame</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">showLoading</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 清除之前的选中状态</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">PuzzleCore</span>) &#123;</span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">PuzzleCore</span>.<span class="title function_">clearSelection</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    gameState.<span class="property">currentPiece</span> = <span class="literal">null</span>;</span><br><span class="line">    gameState.<span class="property">selectedPiece</span> = <span class="literal">null</span>;</span><br><span class="line">    </span><br><span class="line">    gameState.<span class="property">isPlaying</span> = <span class="literal">true</span>;</span><br><span class="line">    gameState.<span class="property">isComplete</span> = <span class="literal">false</span>;</span><br><span class="line">    gameState.<span class="property">isFailed</span> = <span class="literal">false</span>;</span><br><span class="line">    gameState.<span class="property">level</span> = <span class="number">1</span>;</span><br><span class="line">    gameState.<span class="property">imageSeed</span> = <span class="title class_">Date</span>.<span class="title function_">now</span>();</span><br><span class="line">    gameState.<span class="property">moveHistory</span> = [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> size = <span class="title function_">getCanvasSize</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 先尝试异步加载，15秒超时后使用同步模式</span></span><br><span class="line">    <span class="keyword">const</span> loadPromise = <span class="variable language_">window</span>.<span class="property">PuzzleCore</span>.<span class="title function_">init</span>(<span class="number">1</span>, size.<span class="property">width</span>, size.<span class="property">height</span>, gameState.<span class="property">imageSeed</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> initData = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        initData = <span class="keyword">await</span> <span class="title class_">Promise</span>.<span class="title function_">race</span>([</span><br><span class="line">            loadPromise,</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> <span class="title function_">resolve</span>(<span class="literal">null</span>), <span class="number">15000</span>))</span><br><span class="line">        ]);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">warn</span>(<span class="string">&#x27;图片加载失败&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 如果超时或失败，使用同步模式（纯色碎片）</span></span><br><span class="line">    <span class="keyword">if</span> (!initData || !initData.<span class="property">pieces</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;使用纯色模式&#x27;</span>);</span><br><span class="line">        initData = <span class="variable language_">window</span>.<span class="property">PuzzleCore</span>.<span class="title function_">initSync</span>(<span class="number">1</span>, size.<span class="property">width</span>, size.<span class="property">height</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">updateUI</span>(initData);</span><br><span class="line">    <span class="title function_">hideLoading</span>();</span><br><span class="line">    <span class="title function_">startTimer</span>();</span><br><span class="line">    <span class="title function_">startRender</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>超时处理策略</strong>：</p>
+<ol>
+<li><strong>15秒超时</strong>：防止图片加载卡死整个游戏</li>
+<li><strong>降级方案</strong>：加载失败时使用纯色碎片</li>
+<li><strong>种子机制</strong>：使用时间戳作为随机种子，确保每次游戏图片不同</li>
+</ol>
+<h2 id="核心算法实现"><a href="#核心算法实现" class="headerlink" title="核心算法实现"></a>核心算法实现</h2><h3 id="图片处理与碎片生成"><a href="#图片处理与碎片生成" class="headerlink" title="图片处理与碎片生成"></a>图片处理与碎片生成</h3><p>拼图游戏的核心是将一张完整图片切割成多个碎片：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">generatePuzzle</span>(<span class="params">config, canvasWidth, canvasHeight</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">pieces</span> = [];</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">targetGrid</span> = [];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> gridSize = config.<span class="property">grid</span>;</span><br><span class="line">    <span class="keyword">const</span> cellSize = <span class="title class_">Math</span>.<span class="title function_">min</span>(canvasWidth, canvasHeight) / (gridSize + <span class="number">2</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">cellSize</span> = cellSize;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> gridWidth = gridSize * cellSize;</span><br><span class="line">    <span class="keyword">const</span> gridHeight = gridSize * cellSize;</span><br><span class="line">    <span class="keyword">const</span> gridOffsetX = (canvasWidth - gridWidth) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">const</span> gridOffsetY = (canvasHeight - gridHeight) / <span class="number">2</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">gridOffsetX</span> = gridOffsetX;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">gridOffsetY</span> = gridOffsetY;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 生成目标网格位置</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> row = <span class="number">0</span>; row &lt; gridSize; row++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> col = <span class="number">0</span>; col &lt; gridSize; col++) &#123;</span><br><span class="line">            <span class="keyword">const</span> targetX = gridOffsetX + col * cellSize;</span><br><span class="line">            <span class="keyword">const</span> targetY = gridOffsetY + row * cellSize;</span><br><span class="line">            </span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">targetGrid</span>.<span class="title function_">push</span>(&#123;</span><br><span class="line">                <span class="attr">row</span>: row,</span><br><span class="line">                <span class="attr">col</span>: col,</span><br><span class="line">                <span class="attr">x</span>: targetX,</span><br><span class="line">                <span class="attr">y</span>: targetY,</span><br><span class="line">                <span class="attr">occupied</span>: <span class="literal">false</span></span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 生成碎片</span></span><br><span class="line">    <span class="keyword">const</span> pieceCount = gridSize * gridSize;</span><br><span class="line">    <span class="keyword">const</span> isGeometric = <span class="title class_">Math</span>.<span class="title function_">random</span>() &gt; <span class="number">0.5</span>;</span><br><span class="line">    <span class="keyword">const</span> colors = <span class="variable language_">window</span>.<span class="property">PuzzleConfig</span>.<span class="title function_">getColorPalette</span>(isGeometric);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; pieceCount; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> targetPos = <span class="variable language_">this</span>.<span class="property">targetGrid</span>[i];</span><br><span class="line">        <span class="keyword">const</span> row = <span class="title class_">Math</span>.<span class="title function_">floor</span>(i / gridSize);</span><br><span class="line">        <span class="keyword">const</span> col = i % gridSize;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 计算碎片在原始图片中的位置</span></span><br><span class="line">        <span class="keyword">const</span> srcX = col * (<span class="variable language_">this</span>.<span class="property">puzzleImage</span>.<span class="property">width</span> / gridSize);</span><br><span class="line">        <span class="keyword">const</span> srcY = row * (<span class="variable language_">this</span>.<span class="property">puzzleImage</span>.<span class="property">height</span> / gridSize);</span><br><span class="line">        <span class="keyword">const</span> srcWidth = <span class="variable language_">this</span>.<span class="property">puzzleImage</span>.<span class="property">width</span> / gridSize;</span><br><span class="line">        <span class="keyword">const</span> srcHeight = <span class="variable language_">this</span>.<span class="property">puzzleImage</span>.<span class="property">height</span> / gridSize;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 随机初始位置（避开网格区域）</span></span><br><span class="line">        <span class="keyword">let</span> initX, initY;</span><br><span class="line">        <span class="keyword">const</span> side = <span class="title class_">Math</span>.<span class="title function_">random</span>() &gt; <span class="number">0.5</span> ? <span class="string">&#x27;left&#x27;</span> : <span class="string">&#x27;right&#x27;</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (side === <span class="string">&#x27;left&#x27;</span>) &#123;</span><br><span class="line">            initX = <span class="title class_">Math</span>.<span class="title function_">random</span>() * (gridOffsetX - cellSize - <span class="number">20</span>) + <span class="number">10</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            initX = gridOffsetX + gridWidth + <span class="title class_">Math</span>.<span class="title function_">random</span>() * (canvasWidth - gridOffsetX - gridWidth - cellSize - <span class="number">10</span>) + <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        initY = <span class="title class_">Math</span>.<span class="title function_">random</span>() * (canvasHeight - cellSize - <span class="number">20</span>) + <span class="number">10</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 随机旋转角度（如果启用旋转）</span></span><br><span class="line">        <span class="keyword">const</span> rotation = <span class="variable language_">this</span>.<span class="property">enableRotation</span> ? <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="number">4</span>) * <span class="number">90</span> : <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">const</span> targetRotation = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">const</span> piece = &#123;</span><br><span class="line">            <span class="attr">id</span>: i,</span><br><span class="line">            <span class="attr">width</span>: cellSize,</span><br><span class="line">            <span class="attr">height</span>: cellSize,</span><br><span class="line">            <span class="attr">currentX</span>: initX,</span><br><span class="line">            <span class="attr">currentY</span>: initY,</span><br><span class="line">            <span class="attr">displayX</span>: initX,</span><br><span class="line">            <span class="attr">displayY</span>: initY,</span><br><span class="line">            <span class="attr">targetX</span>: targetPos.<span class="property">x</span>,</span><br><span class="line">            <span class="attr">targetY</span>: targetPos.<span class="property">y</span>,</span><br><span class="line">            <span class="attr">row</span>: row,</span><br><span class="line">            <span class="attr">col</span>: col,</span><br><span class="line">            <span class="attr">rotation</span>: rotation,</span><br><span class="line">            <span class="attr">targetRotation</span>: targetRotation,</span><br><span class="line">            <span class="attr">isLocked</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">isSelected</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">color</span>: colors[i % colors.<span class="property">length</span>],</span><br><span class="line">            <span class="attr">srcX</span>: srcX,</span><br><span class="line">            <span class="attr">srcY</span>: srcY,</span><br><span class="line">            <span class="attr">srcWidth</span>: srcWidth,</span><br><span class="line">            <span class="attr">srcHeight</span>: srcHeight,</span><br><span class="line">            <span class="attr">shape</span>: isGeometric ? (<span class="title class_">Math</span>.<span class="title function_">random</span>() &gt; <span class="number">0.5</span> ? <span class="string">&#x27;circle&#x27;</span> : <span class="string">&#x27;square&#x27;</span>) : <span class="string">&#x27;square&#x27;</span></span><br><span class="line">        &#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">pieces</span>.<span class="title function_">push</span>(piece);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 打乱碎片顺序（Fisher-Yates 洗牌算法）</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="variable language_">this</span>.<span class="property">pieces</span>.<span class="property">length</span> - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">const</span> j = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * (i + <span class="number">1</span>));</span><br><span class="line">        [<span class="variable language_">this</span>.<span class="property">pieces</span>[i], <span class="variable language_">this</span>.<span class="property">pieces</span>[j]] = [<span class="variable language_">this</span>.<span class="property">pieces</span>[j], <span class="variable language_">this</span>.<span class="property">pieces</span>[i]];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键算法</strong>：</p>
+<ol>
+<li><strong>网格计算</strong>：根据难度计算网格大小和位置</li>
+<li><strong>图片切割</strong>：使用 Canvas 的 <code>drawImage</code> 参数切割图片</li>
+<li><strong>随机分布</strong>：碎片初始位置避开目标网格区域</li>
+<li><strong>洗牌算法</strong>：确保碎片顺序随机</li>
+</ol>
+<h3 id="碎片吸附算法"><a href="#碎片吸附算法" class="headerlink" title="碎片吸附算法"></a>碎片吸附算法</h3><p>吸附算法是拼图游戏的核心交互逻辑：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">checkSnap</span>(<span class="params">pieceId</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> piece = <span class="variable language_">this</span>.<span class="property">pieces</span>.<span class="title function_">find</span>(<span class="function"><span class="params">p</span> =&gt;</span> p.<span class="property">id</span> === pieceId);</span><br><span class="line">    <span class="keyword">if</span> (!piece || piece.<span class="property">isLocked</span>) <span class="keyword">return</span> &#123; <span class="attr">snapped</span>: <span class="literal">false</span> &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 计算与所有目标位置的距离</span></span><br><span class="line">    <span class="keyword">let</span> minDistance = <span class="title class_">Infinity</span>;</span><br><span class="line">    <span class="keyword">let</span> targetIndex = -<span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="property">targetGrid</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> target = <span class="variable language_">this</span>.<span class="property">targetGrid</span>[i];</span><br><span class="line">        <span class="keyword">if</span> (target.<span class="property">occupied</span>) <span class="keyword">continue</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">const</span> dx = piece.<span class="property">currentX</span> - target.<span class="property">x</span>;</span><br><span class="line">        <span class="keyword">const</span> dy = piece.<span class="property">currentY</span> - target.<span class="property">y</span>;</span><br><span class="line">        <span class="keyword">const</span> distance = <span class="title class_">Math</span>.<span class="title function_">sqrt</span>(dx * dx + dy * dy);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (distance &lt; minDistance) &#123;</span><br><span class="line">            minDistance = distance;</span><br><span class="line">            targetIndex = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 检查是否在吸附范围内</span></span><br><span class="line">    <span class="keyword">const</span> snapDistance = <span class="variable language_">window</span>.<span class="property">PuzzleConfig</span>.<span class="property">ANIMATION</span>.<span class="property">snapDistance</span>;</span><br><span class="line">    <span class="keyword">const</span> rotationMatch = !<span class="variable language_">this</span>.<span class="property">enableRotation</span> || </span><br><span class="line">                         <span class="title class_">Math</span>.<span class="title function_">abs</span>(piece.<span class="property">rotation</span> - piece.<span class="property">targetRotation</span>) &lt; <span class="number">45</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (minDistance &lt; snapDistance &amp;&amp; rotationMatch &amp;&amp; targetIndex &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> target = <span class="variable language_">this</span>.<span class="property">targetGrid</span>[targetIndex];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 验证行列匹配（可选，增强游戏性）</span></span><br><span class="line">        <span class="keyword">const</span> rowMatch = piece.<span class="property">row</span> === target.<span class="property">row</span>;</span><br><span class="line">        <span class="keyword">const</span> colMatch = piece.<span class="property">col</span> === target.<span class="property">col</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (rowMatch &amp;&amp; colMatch) &#123;</span><br><span class="line">            <span class="comment">// 精确匹配，锁定碎片</span></span><br><span class="line">            piece.<span class="property">currentX</span> = target.<span class="property">x</span>;</span><br><span class="line">            piece.<span class="property">currentY</span> = target.<span class="property">y</span>;</span><br><span class="line">            piece.<span class="property">rotation</span> = piece.<span class="property">targetRotation</span>;</span><br><span class="line">            piece.<span class="property">isLocked</span> = <span class="literal">true</span>;</span><br><span class="line">            target.<span class="property">occupied</span> = <span class="literal">true</span>;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">completedPieces</span>++;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 检查是否完成</span></span><br><span class="line">            <span class="keyword">const</span> isComplete = <span class="variable language_">this</span>.<span class="property">completedPieces</span> === <span class="variable language_">this</span>.<span class="property">pieces</span>.<span class="property">length</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                <span class="attr">snapped</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="attr">isComplete</span>: isComplete,</span><br><span class="line">                <span class="attr">targetIndex</span>: targetIndex</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (minDistance &lt; snapDistance * <span class="number">0.5</span>) &#123;</span><br><span class="line">            <span class="comment">// 距离很近但不匹配行列，仍然吸附但给提示</span></span><br><span class="line">            piece.<span class="property">currentX</span> = target.<span class="property">x</span>;</span><br><span class="line">            piece.<span class="property">currentY</span> = target.<span class="property">y</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                <span class="attr">snapped</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="attr">isComplete</span>: <span class="literal">false</span>,</span><br><span class="line">                <span class="attr">targetIndex</span>: targetIndex,</span><br><span class="line">                <span class="attr">warning</span>: <span class="string">&#x27;位置正确但行列不匹配&#x27;</span></span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">snapped</span>: <span class="literal">false</span> &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>吸附逻辑</strong>：</p>
+<ol>
+<li><strong>距离计算</strong>：使用欧几里得距离公式</li>
+<li><strong>旋转匹配</strong>：检查碎片旋转角度是否接近目标</li>
+<li><strong>行列验证</strong>：增强游戏难度，要求行列匹配</li>
+<li><strong>分级吸附</strong>：完全匹配锁定，部分匹配只吸附不锁定</li>
+</ol>
+<h3 id="响应式设计实现"><a href="#响应式设计实现" class="headerlink" title="响应式设计实现"></a>响应式设计实现</h3><p>拼图游戏需要在不同设备上保持体验：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">resize</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="property">canvas</span>) <span class="keyword">return</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> container = <span class="variable language_">this</span>.<span class="property">canvas</span>.<span class="property">parentElement</span>;</span><br><span class="line">    <span class="keyword">const</span> oldWidth = <span class="variable language_">this</span>.<span class="property">canvas</span>.<span class="property">width</span> || <span class="number">500</span>;</span><br><span class="line">    <span class="keyword">const</span> oldHeight = <span class="variable language_">this</span>.<span class="property">canvas</span>.<span class="property">height</span> || <span class="number">400</span>;</span><br><span class="line">    <span class="keyword">const</span> newWidth = <span class="title class_">Math</span>.<span class="title function_">min</span>(<span class="number">600</span>, container.<span class="property">clientWidth</span> - <span class="number">40</span>);</span><br><span class="line">    <span class="keyword">const</span> newHeight = <span class="title class_">Math</span>.<span class="title function_">min</span>(<span class="number">500</span>, <span class="variable language_">window</span>.<span class="property">innerHeight</span> * <span class="number">0.6</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (oldWidth &gt; <span class="number">0</span> &amp;&amp; oldHeight &gt; <span class="number">0</span> &amp;&amp; <span class="variable language_">window</span>.<span class="property">PuzzleCore</span> &amp;&amp; <span class="variable language_">window</span>.<span class="property">PuzzleCore</span>.<span class="property">pieces</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> scaleX = newWidth / oldWidth;</span><br><span class="line">        <span class="keyword">const</span> scaleY = newHeight / oldHeight;</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">PuzzleCore</span>.<span class="property">pieces</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">p</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!p.<span class="property">isLocked</span>) &#123;</span><br><span class="line">                p.<span class="property">currentX</span> *= scaleX;</span><br><span class="line">                p.<span class="property">currentY</span> *= scaleY;</span><br><span class="line">                p.<span class="property">currentX</span> = <span class="title class_">Math</span>.<span class="title function_">max</span>(<span class="number">0</span>, <span class="title class_">Math</span>.<span class="title function_">min</span>(newWidth - p.<span class="property">width</span>, p.<span class="property">currentX</span>));</span><br><span class="line">                p.<span class="property">currentY</span> = <span class="title class_">Math</span>.<span class="title function_">max</span>(<span class="number">0</span>, <span class="title class_">Math</span>.<span class="title function_">min</span>(newHeight - p.<span class="property">height</span>, p.<span class="property">currentY</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            p.<span class="property">targetX</span> *= scaleX;</span><br><span class="line">            p.<span class="property">targetY</span> *= scaleY;</span><br><span class="line">        &#125;);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">PuzzleCore</span>.<span class="property">gridOffsetX</span>) &#123;</span><br><span class="line">            <span class="variable language_">window</span>.<span class="property">PuzzleCore</span>.<span class="property">gridOffsetX</span> *= scaleX;</span><br><span class="line">            <span class="variable language_">window</span>.<span class="property">PuzzleCore</span>.<span class="property">gridOffsetY</span> *= scaleY;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">PuzzleCore</span>.<span class="property">canvasWidth</span> = newWidth;</span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">PuzzleCore</span>.<span class="property">canvasHeight</span> = newHeight;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">canvas</span>.<span class="property">width</span> = newWidth;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">canvas</span>.<span class="property">height</span> = newHeight;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>响应式策略</strong>：</p>
+<ol>
+<li><strong>比例缩放</strong>：所有位置按比例调整</li>
+<li><strong>边界检查</strong>：确保碎片不超出画布</li>
+<li><strong>网格重算</strong>：目标位置同步缩放</li>
+<li><strong>性能考虑</strong>：只在必要时重算</li>
+</ol>
+<h2 id="AI-提示系统"><a href="#AI-提示系统" class="headerlink" title="AI 提示系统"></a>AI 提示系统</h2><p>拼图游戏的 AI 不是博弈对手，而是辅助提示系统：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">getBestHint</span>(<span class="params">core</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="title function_">canUseHint</span>(core)) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> unlockedPieces = core.<span class="property">pieces</span>.<span class="title function_">filter</span>(<span class="function"><span class="params">p</span> =&gt;</span> !p.<span class="property">isLocked</span>);</span><br><span class="line">    <span class="keyword">if</span> (unlockedPieces.<span class="property">length</span> === <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> bestPiece = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">let</span> minScore = <span class="title class_">Infinity</span>;</span><br><span class="line">    </span><br><span class="line">    unlockedPieces.<span class="title function_">forEach</span>(<span class="function"><span class="params">piece</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> distance = <span class="title class_">Math</span>.<span class="title function_">sqrt</span>(</span><br><span class="line">            <span class="title class_">Math</span>.<span class="title function_">pow</span>(piece.<span class="property">currentX</span> - piece.<span class="property">targetX</span>, <span class="number">2</span>) +</span><br><span class="line">            <span class="title class_">Math</span>.<span class="title function_">pow</span>(piece.<span class="property">currentY</span> - piece.<span class="property">targetY</span>, <span class="number">2</span>)</span><br><span class="line">        );</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> rotationPenalty = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (core.<span class="property">enableRotation</span> &amp;&amp; piece.<span class="property">rotation</span> !== piece.<span class="property">targetRotation</span>) &#123;</span><br><span class="line">            rotationPenalty = <span class="number">50</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">const</span> score = distance + rotationPenalty;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (score &lt; minScore) &#123;</span><br><span class="line">            minScore = score;</span><br><span class="line">            bestPiece = piece;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> bestPiece;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示算法</strong>：</p>
+<ol>
+<li><strong>距离评估</strong>：计算碎片当前位置与目标位置的距离</li>
+<li><strong>旋转惩罚</strong>：如果旋转不正确，增加难度分数</li>
+<li><strong>冷却机制</strong>：防止玩家滥用提示</li>
+<li><strong>视觉反馈</strong>：高亮显示目标位置</li>
+</ol>
+<h2 id="移动端优化"><a href="#移动端优化" class="headerlink" title="移动端优化"></a>移动端优化</h2><p>拼图游戏需要优秀的移动端体验：</p>
+<h3 id="统一事件处理"><a href="#统一事件处理" class="headerlink" title="统一事件处理"></a>统一事件处理</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getCanvasCoords</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> rect = canvas.<span class="title function_">getBoundingClientRect</span>();</span><br><span class="line">    <span class="keyword">if</span> (e.<span class="property">touches</span> &amp;&amp; e.<span class="property">touches</span>.<span class="property">length</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">x</span>: e.<span class="property">touches</span>[<span class="number">0</span>].<span class="property">clientX</span> - rect.<span class="property">left</span>,</span><br><span class="line">            <span class="attr">y</span>: e.<span class="property">touches</span>[<span class="number">0</span>].<span class="property">clientY</span> - rect.<span class="property">top</span></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">x</span>: e.<span class="property">clientX</span> - rect.<span class="property">left</span>,</span><br><span class="line">        <span class="attr">y</span>: e.<span class="property">clientY</span> - rect.<span class="property">top</span></span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">handleCanvasMouseDown</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!gameState.<span class="property">isPlaying</span> || gameState.<span class="property">isComplete</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> coords = <span class="title function_">getCanvasCoords</span>(e);</span><br><span class="line">    <span class="keyword">const</span> piece = <span class="variable language_">window</span>.<span class="property">PuzzleCore</span>.<span class="title function_">getPieceAt</span>(coords.<span class="property">x</span>, coords.<span class="property">y</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (piece &amp;&amp; !piece.<span class="property">isLocked</span>) &#123;</span><br><span class="line">        <span class="comment">// 只选中，不开始拖拽</span></span><br><span class="line">        gameState.<span class="property">selectedPiece</span> = piece;</span><br><span class="line">        gameState.<span class="property">dragStartX</span> = coords.<span class="property">x</span>;</span><br><span class="line">        gameState.<span class="property">dragStartY</span> = coords.<span class="property">y</span>;</span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">PuzzleCore</span>.<span class="title function_">selectPiece</span>(piece.<span class="property">id</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 移动端振动反馈</span></span><br><span class="line">        <span class="keyword">if</span> (navigator.<span class="property">vibrate</span> &amp;&amp; e.<span class="property">type</span> === <span class="string">&#x27;touchstart&#x27;</span>) &#123;</span><br><span class="line">            navigator.<span class="title function_">vibrate</span>(<span class="number">10</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (piece &amp;&amp; piece.<span class="property">isLocked</span>) &#123;</span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">PuzzleCore</span>.<span class="title function_">clearSelection</span>();</span><br><span class="line">        gameState.<span class="property">selectedPiece</span> = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="拖拽阈值处理"><a href="#拖拽阈值处理" class="headerlink" title="拖拽阈值处理"></a>拖拽阈值处理</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">handleCanvasMouseMove</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> pieceToMove = gameState.<span class="property">currentPiece</span> || gameState.<span class="property">selectedPiece</span>;</span><br><span class="line">    <span class="keyword">if</span> (!pieceToMove || gameState.<span class="property">isComplete</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> coords = <span class="title function_">getCanvasCoords</span>(e);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 如果还没有开始拖拽，检查是否移动超过阈值</span></span><br><span class="line">    <span class="keyword">if</span> (!gameState.<span class="property">currentPiece</span> &amp;&amp; gameState.<span class="property">selectedPiece</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> dx = coords.<span class="property">x</span> - gameState.<span class="property">dragStartX</span>;</span><br><span class="line">        <span class="keyword">const</span> dy = coords.<span class="property">y</span> - gameState.<span class="property">dragStartY</span>;</span><br><span class="line">        <span class="keyword">const</span> distance = <span class="title class_">Math</span>.<span class="title function_">sqrt</span>(dx * dx + dy * dy);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 只有移动超过15px才开始拖拽（给双击留出空间）</span></span><br><span class="line">        <span class="keyword">if</span> (distance &gt; <span class="number">15</span>) &#123;</span><br><span class="line">            <span class="comment">// 开始拖拽</span></span><br><span class="line">            gameState.<span class="property">currentPiece</span> = gameState.<span class="property">selectedPiece</span>;</span><br><span class="line">            gameState.<span class="property">dragOffset</span> = &#123;</span><br><span class="line">                <span class="attr">x</span>: coords.<span class="property">x</span> - gameState.<span class="property">selectedPiece</span>.<span class="property">currentX</span>,</span><br><span class="line">                <span class="attr">y</span>: coords.<span class="property">y</span> - gameState.<span class="property">selectedPiece</span>.<span class="property">currentY</span></span><br><span class="line">            &#125;;</span><br><span class="line">            canvas.<span class="property">style</span>.<span class="property">cursor</span> = <span class="string">&#x27;grabbing&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 如果已经开始拖拽</span></span><br><span class="line">    <span class="keyword">if</span> (gameState.<span class="property">currentPiece</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (e.<span class="property">cancelable</span> &amp;&amp; e.<span class="property">type</span> === <span class="string">&#x27;touchmove&#x27;</span>) &#123;</span><br><span class="line">            e.<span class="title function_">preventDefault</span>(); <span class="comment">// 防止页面滚动</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">PuzzleCore</span>.<span class="title function_">movePiece</span>(</span><br><span class="line">            gameState.<span class="property">currentPiece</span>.<span class="property">id</span>,</span><br><span class="line">            coords.<span class="property">x</span> - gameState.<span class="property">dragOffset</span>.<span class="property">x</span>,</span><br><span class="line">            coords.<span class="property">y</span> - gameState.<span class="property">dragOffset</span>.<span class="property">y</span></span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>移动端优化点</strong>：</p>
+<ol>
+<li><strong>统一坐标</strong>：鼠标和触摸事件使用相同坐标计算</li>
+<li><strong>拖拽阈值</strong>：防止误触，需要移动一定距离才开始拖拽</li>
+<li><strong>振动反馈</strong>：增强触觉体验</li>
+<li><strong>滚动阻止</strong>：拖拽时阻止页面滚动</li>
+</ol>
+<h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><h3 id="图片加载优化"><a href="#图片加载优化" class="headerlink" title="图片加载优化"></a>图片加载优化</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">init</span>(<span class="params">level, canvasWidth = <span class="number">500</span>, canvasHeight = <span class="number">400</span>, imageSeed = <span class="literal">null</span></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">currentLevel</span> = level;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">canvasWidth</span> = canvasWidth;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">canvasHeight</span> = canvasHeight;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> config = <span class="variable language_">window</span>.<span class="property">PuzzleConfig</span>.<span class="title function_">getDifficulty</span>(level);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">hintsRemaining</span> = config.<span class="property">hints</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">enableRotation</span> = config.<span class="property">rotation</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">gridSize</span> = config.<span class="property">grid</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> seed = imageSeed || <span class="title class_">Date</span>.<span class="title function_">now</span>();</span><br><span class="line">    <span class="keyword">const</span> imageUrl = <span class="string">`<span class="subst">$&#123;<span class="variable language_">window</span>.PuzzleConfig.IMAGE_BASE_URL&#125;</span>/<span class="subst">$&#123;canvasWidth&#125;</span>/<span class="subst">$&#123;canvasHeight&#125;</span>?random=<span class="subst">$&#123;seed&#125;</span>`</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">puzzleImage</span> = <span class="keyword">new</span> <span class="title class_">Image</span>();</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">puzzleImage</span>.<span class="property">crossOrigin</span> = <span class="string">&#x27;anonymous&#x27;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">puzzleImage</span>.<span class="property">onload</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">imageLoaded</span> = <span class="literal">true</span>;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">generatePuzzle</span>(config, canvasWidth, canvasHeight);</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">completedPieces</span> = <span class="number">0</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="title function_">resolve</span>(&#123;</span><br><span class="line">                <span class="attr">pieces</span>: <span class="variable language_">this</span>.<span class="property">pieces</span>,</span><br><span class="line">                <span class="attr">gridSize</span>: <span class="variable language_">this</span>.<span class="property">gridSize</span>,</span><br><span class="line">                <span class="attr">hints</span>: <span class="variable language_">this</span>.<span class="property">hintsRemaining</span>,</span><br><span class="line">                <span class="attr">level</span>: level,</span><br><span class="line">                <span class="attr">cellSize</span>: <span class="variable language_">this</span>.<span class="property">cellSize</span></span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">puzzleImage</span>.<span class="property">onerror</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">imageLoaded</span> = <span class="literal">false</span>;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">warn</span>(<span class="string">&#x27;图片加载失败，使用纯色模式&#x27;</span>);</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">generatePuzzle</span>(config, canvasWidth, canvasHeight);</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">completedPieces</span> = <span class="number">0</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="title function_">resolve</span>(&#123;</span><br><span class="line">                <span class="attr">pieces</span>: <span class="variable language_">this</span>.<span class="property">pieces</span>,</span><br><span class="line">                <span class="attr">gridSize</span>: <span class="variable language_">this</span>.<span class="property">gridSize</span>,</span><br><span class="line">                <span class="attr">hints</span>: <span class="variable language_">this</span>.<span class="property">hintsRemaining</span>,</span><br><span class="line">                <span class="attr">level</span>: level,</span><br><span class="line">                <span class="attr">cellSize</span>: <span class="variable language_">this</span>.<span class="property">cellSize</span></span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">puzzleImage</span>.<span class="property">src</span> = imageUrl;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="动画帧管理"><a href="#动画帧管理" class="headerlink" title="动画帧管理"></a>动画帧管理</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">startAnimation</span>(<span class="params">updateFunc</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">stopAnimation</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> lastTime = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">animate</span> = (<span class="params">currentTime</span>) =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> delta = currentTime - lastTime || <span class="number">0</span>;</span><br><span class="line">        lastTime = currentTime;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (updateFunc) &#123;</span><br><span class="line">            <span class="title function_">updateFunc</span>(delta);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">animationFrame</span> = <span class="title function_">requestAnimationFrame</span>(animate);</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">animationFrame</span> = <span class="title function_">requestAnimationFrame</span>(animate);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">stopAnimation</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">animationFrame</span>) &#123;</span><br><span class="line">        <span class="title function_">cancelAnimationFrame</span>(<span class="variable language_">this</span>.<span class="property">animationFrame</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">animationFrame</span> = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>性能优化策略</strong>：</p>
+<ol>
+<li><strong>图片懒加载</strong>：使用 Promise 异步加载</li>
+<li><strong>降级方案</strong>：图片失败时使用纯色模式</li>
+<li><strong>动画帧管理</strong>：正确启动和停止动画循环</li>
+<li><strong>内存回收</strong>：清理不再需要的资源引用</li>
+</ol>
+<h2 id="难度配置系统"><a href="#难度配置系统" class="headerlink" title="难度配置系统"></a>难度配置系统</h2><p>拼图游戏采用渐进式难度设计：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">DIFFICULTY</span>: &#123;</span><br><span class="line">    <span class="number">1</span>: &#123; <span class="attr">grid</span>: <span class="number">2</span>, <span class="attr">size</span>: <span class="number">4</span>, <span class="attr">hints</span>: <span class="number">6</span>, <span class="attr">rotation</span>: <span class="literal">true</span>, <span class="attr">time</span>: <span class="number">60</span> &#125;,</span><br><span class="line">    <span class="number">2</span>: &#123; <span class="attr">grid</span>: <span class="number">2</span>, <span class="attr">size</span>: <span class="number">4</span>, <span class="attr">hints</span>: <span class="number">6</span>, <span class="attr">rotation</span>: <span class="literal">true</span>, <span class="attr">time</span>: <span class="number">60</span> &#125;,</span><br><span class="line">    <span class="number">3</span>: &#123; <span class="attr">grid</span>: <span class="number">3</span>, <span class="attr">size</span>: <span class="number">9</span>, <span class="attr">hints</span>: <span class="number">5</span>, <span class="attr">rotation</span>: <span class="literal">true</span>, <span class="attr">time</span>: <span class="number">90</span> &#125;,</span><br><span class="line">    <span class="number">4</span>: &#123; <span class="attr">grid</span>: <span class="number">3</span>, <span class="attr">size</span>: <span class="number">9</span>, <span class="attr">hints</span>: <span class="number">5</span>, <span class="attr">rotation</span>: <span class="literal">true</span>, <span class="attr">time</span>: <span class="number">90</span> &#125;,</span><br><span class="line">    <span class="number">5</span>: &#123; <span class="attr">grid</span>: <span class="number">3</span>, <span class="attr">size</span>: <span class="number">9</span>, <span class="attr">hints</span>: <span class="number">4</span>, <span class="attr">rotation</span>: <span class="literal">true</span>, <span class="attr">time</span>: <span class="number">90</span> &#125;,</span><br><span class="line">    <span class="number">6</span>: &#123; <span class="attr">grid</span>: <span class="number">4</span>, <span class="attr">size</span>: <span class="number">16</span>, <span class="attr">hints</span>: <span class="number">5</span>, <span class="attr">rotation</span>: <span class="literal">true</span>, <span class="attr">time</span>: <span class="number">120</span> &#125;,</span><br><span class="line">    <span class="number">7</span>: &#123; <span class="attr">grid</span>: <span class="number">4</span>, <span class="attr">size</span>: <span class="number">16</span>, <span class="attr">hints</span>: <span class="number">4</span>, <span class="attr">rotation</span>: <span class="literal">true</span>, <span class="attr">time</span>: <span class="number">120</span> &#125;,</span><br><span class="line">    <span class="number">8</span>: &#123; <span class="attr">grid</span>: <span class="number">4</span>, <span class="attr">size</span>: <span class="number">16</span>, <span class="attr">hints</span>: <span class="number">3</span>, <span class="attr">rotation</span>: <span class="literal">true</span>, <span class="attr">time</span>: <span class="number">120</span> &#125;,</span><br><span class="line">    <span class="number">9</span>: &#123; <span class="attr">grid</span>: <span class="number">5</span>, <span class="attr">size</span>: <span class="number">25</span>, <span class="attr">hints</span>: <span class="number">4</span>, <span class="attr">rotation</span>: <span class="literal">true</span>, <span class="attr">time</span>: <span class="number">150</span> &#125;,</span><br><span class="line">    <span class="number">10</span>: &#123; <span class="attr">grid</span>: <span class="number">5</span>, <span class="attr">size</span>: <span class="number">25</span>, <span class="attr">hints</span>: <span class="number">4</span>, <span class="attr">rotation</span>: <span class="literal">true</span>, <span class="attr">time</span>: <span class="number">150</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>难度参数</strong>：</p>
+<ul>
+<li><code>grid</code>：网格大小（2×2 到 5×5）</li>
+<li><code>size</code>：碎片总数</li>
+<li><code>hints</code>：提示次数</li>
+<li><code>rotation</code>：是否启用旋转</li>
+<li><code>time</code>：时间限制（秒）</li>
+</ul>
+<h2 id="游戏流程图"><a href="#游戏流程图" class="headerlink" title="游戏流程图"></a>游戏流程图</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────────────────────────────────┐</span><br><span class="line">│                        用户访问页面                               │</span><br><span class="line">└─────────────────────────────────────────────────────────────────┘</span><br><span class="line">                               │</span><br><span class="line">                               ▼</span><br><span class="line">┌─────────────────────────────────────────────────────────────────┐</span><br><span class="line">│                    GameManager 检测游戏                           │</span><br><span class="line">│  document.contains(canvas) → 检测到 puzzle 页面                 │</span><br><span class="line">└─────────────────────────────────────────────────────────────────┘</span><br><span class="line">                               │</span><br><span class="line">                               ▼</span><br><span class="line">┌─────────────────────────────────────────────────────────────────┐</span><br><span class="line">│                    加载所有模块脚本                               │</span><br><span class="line">│  puzzle-config.js → puzzle-core.js → puzzle-render.js → ...   │</span><br><span class="line">│  register(&#x27;puzzle&#x27;, &#123; init, cleanup &#125;)                         │</span><br><span class="line">└─────────────────────────────────────────────────────────────────┘</span><br><span class="line">                               │</span><br><span class="line">                               ▼</span><br><span class="line">┌─────────────────────────────────────────────────────────────────┐</span><br><span class="line">│                    initPuzzleGame()                              │</span><br><span class="line">│  new PuzzleCore() → 加载图片 → 生成碎片                         │</span><br><span class="line">│                 → new PuzzleRender() → 启动动画                 │</span><br><span class="line">│                 → 绑定事件监听                                  │</span><br><span class="line">└─────────────────────────────────────────────────────────────────┘</span><br><span class="line">                               │</span><br><span class="line">                               ▼</span><br><span class="line">┌─────────────────────────────────────────────────────────────────┐</span><br><span class="line">│                      游戏主循环                                  │</span><br><span class="line">│  1. 用户拖拽碎片 → checkSnap() → 吸附判断                      │</span><br><span class="line">│  2. 碎片锁定 → 更新完成计数 → 检查通关                         │</span><br><span class="line">│  3. 时间倒计时 → 超时判断 → 游戏结束                           │</span><br><span class="line">│  4. 请求提示 → AI 计算 → 高亮显示                             │</span><br><span class="line">└─────────────────────────────────────────────────────────────────┘</span><br><span class="line">                               │</span><br><span class="line">                               ▼</span><br><span class="line">┌─────────────────────────────────────────────────────────────────┐</span><br><span class="line">│                      通关判断                                    │</span><br><span class="line">│  所有碎片锁定 → 显示通关界面 → 下一关按钮                      │</span><br><span class="line">│  时间耗尽 → 显示失败界面 → 重新开始按钮                        │</span><br><span class="line">└─────────────────────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>光影拼图游戏的开发涉及多个技术领域：</p>
+<ol>
+<li><strong>Canvas 图形处理</strong>：图片切割、碎片绘制、动画渲染</li>
+<li><strong>交互算法</strong>：拖拽吸附、距离计算、旋转匹配</li>
+<li><strong>响应式设计</strong>：跨设备适配、动态缩放、触摸优化</li>
+<li><strong>资源管理</strong>：图片加载、内存回收、性能优化</li>
+<li><strong>游戏设计</strong>：难度曲线、提示系统、反馈机制</li>
+</ol>
+<p>相比<a href="/ai-games/gomoku/">五子棋</a>的 AI 博弈，拼图游戏更注重图形处理和用户体验。通过模块化设计和良好的架构，我们实现了：</p>
+<ul>
+<li>可维护的代码结构</li>
+<li>优秀的跨平台体验</li>
+<li>稳定的性能表现</li>
+<li>良好的可扩展性</li>
+</ul>
+<p>拼图游戏展示了如何在静态博客中集成复杂的图形应用，为后续更多类型的游戏开发提供了技术基础。</p>
+<hr>
+<p><strong>相关链接：</strong></p>
+<ul>
+<li><a href="/ai-games/puzzle/">🧩 光影拼图游戏</a></li>
+<li><a href="/ai-games/gomoku/">🎮 五子棋游戏</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" rel="tag"># 游戏开发</a>
+              <a href="/tags/Canvas/" rel="tag"># Canvas</a>
+              <a href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1/" rel="tag"># 响应式设计</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/04/15/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BA%94%E5%AD%90%E6%A3%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" rel="prev" title="Hexo 博客实战：五子棋小游戏开发指南">
+      <i class="fa fa-chevron-left"></i> Hexo 博客实战：五子棋小游戏开发指南
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8B%BC%E5%9B%BE%E9%9C%80%E8%A6%81%E4%B8%8D%E5%90%8C%E7%9A%84%E6%9E%B6%E6%9E%84%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">为什么拼图需要不同的架构？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">4.</span> <span class="nav-text">模块化架构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%84%E6%A8%A1%E5%9D%97%E8%81%8C%E8%B4%A3%E8%AF%A6%E8%A7%A3"><span class="nav-number">4.1.</span> <span class="nav-text">各模块职责详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PJAX-%E5%85%BC%E5%AE%B9%E6%80%A7%E5%A4%84%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text">PJAX 兼容性处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%BC%E5%9B%BE%E7%89%B9%E6%9C%89%E7%9A%84%E6%B8%85%E7%90%86%E9%9C%80%E6%B1%82"><span class="nav-number">5.1.</span> <span class="nav-text">拼图特有的清理需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90%E7%9A%84-PJAX-%E5%A4%84%E7%90%86"><span class="nav-number">5.2.</span> <span class="nav-text">图片资源的 PJAX 处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">6.</span> <span class="nav-text">核心算法实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86%E4%B8%8E%E7%A2%8E%E7%89%87%E7%94%9F%E6%88%90"><span class="nav-number">6.1.</span> <span class="nav-text">图片处理与碎片生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A2%8E%E7%89%87%E5%90%B8%E9%99%84%E7%AE%97%E6%B3%95"><span class="nav-number">6.2.</span> <span class="nav-text">碎片吸附算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0"><span class="nav-number">6.3.</span> <span class="nav-text">响应式设计实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI-%E6%8F%90%E7%A4%BA%E7%B3%BB%E7%BB%9F"><span class="nav-number">7.</span> <span class="nav-text">AI 提示系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E4%BC%98%E5%8C%96"><span class="nav-number">8.</span> <span class="nav-text">移动端优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%9F%E4%B8%80%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="nav-number">8.1.</span> <span class="nav-text">统一事件处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%96%E6%8B%BD%E9%98%88%E5%80%BC%E5%A4%84%E7%90%86"><span class="nav-number">8.2.</span> <span class="nav-text">拖拽阈值处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-number">9.</span> <span class="nav-text">性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E4%BC%98%E5%8C%96"><span class="nav-number">9.1.</span> <span class="nav-text">图片加载优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E7%94%BB%E5%B8%A7%E7%AE%A1%E7%90%86"><span class="nav-number">9.2.</span> <span class="nav-text">动画帧管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%BE%E5%BA%A6%E9%85%8D%E7%BD%AE%E7%B3%BB%E7%BB%9F"><span class="nav-number">10.</span> <span class="nav-text">难度配置系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="nav-number">11.</span> <span class="nav-text">游戏流程图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">12.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Weibo → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe id="music-player" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8SGHVqNSzlIvUsQekb6EVL2z-gzGzoHsz',
+      appKey     : 'kM6zUKBTanjH10n2gcXV8OTE',
+      placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+      avatar     : 'retro',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
+
+<style>
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  scrollbar-gutter: stable;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.modal::-webkit-scrollbar {
+  display: none !important;
+}
+
+.modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.modal-content {
+  position: relative;
+  width: min(71%, 340px);
+  height: min(95%, 90vh);
+  max-height: calc(100vh - 100px);
+  margin: 0 auto;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: min(81%, 320px);
+    height: min(90%, 85vh);
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: min(94%, 300px);
+    height: min(80%, 80vh);
+    max-height: calc(100vh - 80px);
+  }
+}
+
+.modal-content iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  border: none;
+  display: block;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  left: auto;
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 10000;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+}
+
+.close-btn:hover {
+  color: #e74c3c;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  background: rgba(0,0,0,0.1);
+  border-radius: 50%;
+  line-height: 50px;
+  user-select: none;
+}
+
+.nav-btn:hover {
+  background: rgba(0,0,0,0.2);
+}
+
+.prev-btn {
+  left: 0;
+}
+
+.next-btn {
+  right: 15px;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: calc(100% - 60px);
+    max-width: none;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    line-height: 40px;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var musicIframe = null;
+  var musicDisplayStyle = '';
+  var isMusicPaused = false;
+  var videoIds = [];
+  var currentIndex = 0;
+  
+  function findMusicIframe() {
+    var iframes = document.getElementsByTagName('iframe');
+    for (var i = 0; i < iframes.length; i++) {
+      var src = iframes[i].src || '';
+      if (src.indexOf('music.163.com') > -1 || src.indexOf('outchain/player') > -1) {
+        return iframes[i];
+      }
+    }
+    console.log('[Douyin] Music iframe not found in', iframes.length, 'iframes');
+    return null;
+  }
+  
+  function pauseMusic() {
+    console.log('[Douyin] Trying to pause music...');
+    musicIframe = findMusicIframe();
+    
+    if (musicIframe) {
+      console.log('[Douyin] Music iframe found');
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=1') > -1) {
+        musicIframe.src = src.replace('auto=1', 'auto=0');
+        console.log('[Douyin] Changed auto=1 to auto=0');
+      }
+      isMusicPaused = true;
+    } else {
+      console.log('[Douyin] Music iframe NOT found!');
+    }
+  }
+  
+  function resumeMusic() {
+    console.log('[Douyin] Trying to resume music...');
+    
+    if (musicIframe && isMusicPaused) {
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=0') > -1) {
+        musicIframe.src = src.replace('auto=0', 'auto=1');
+        console.log('[Douyin] Changed auto=0 to auto=1');
+      }
+      isMusicPaused = false;
+    }
+  }
+  
+  function init() {
+    console.log('[Douyin] Initializing...');
+    var cards = document.querySelectorAll('.video-card');
+    console.log('[Douyin] Found', cards.length, 'video cards');
+    
+    videoIds = [];
+    for (var j = 0; j < cards.length; j++) {
+      var videoId = cards[j].getAttribute('data-id');
+      if (videoId) {
+        videoIds.push(videoId);
+      }
+      cards[j].addEventListener('click', openModal);
+    }
+    
+    var closeBtn = document.querySelector('.close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+    
+    var prevBtn = document.querySelector('.prev-btn');
+    var nextBtn = document.querySelector('.next-btn');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(-1);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(1);
+      });
+    }
+    
+    var modal = document.getElementById('douyin-modal');
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+    }
+  }
+  
+  function navigateVideo(direction) {
+    if (videoIds.length === 0) return;
+    
+    currentIndex += direction;
+    if (currentIndex < 0) {
+      currentIndex = videoIds.length - 1;
+    } else if (currentIndex >= videoIds.length) {
+      currentIndex = 0;
+    }
+    
+    var videoId = videoIds[currentIndex];
+    var player = document.getElementById('douyin-player');
+    if (player && videoId) {
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+    }
+  }
+  
+  function openModal(e) {
+    console.log('[Douyin] Opening modal...');
+    var card = e.currentTarget;
+    var videoId = card.getAttribute('data-id');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    currentIndex = videoIds.indexOf(videoId);
+    
+    if (player && modal && videoId) {
+      pauseMusic();
+      
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.marginRight = '0px';
+    }
+  }
+  
+  function closeModal() {
+    console.log('[Douyin] Closing modal...');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    if (player) {
+      player.src = '';
+    }
+    
+    if (modal) {
+      modal.classList.remove('active');
+    }
+    
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    
+    resumeMusic();
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+    </div>
+</body>
+</html>

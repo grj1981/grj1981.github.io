@@ -134,7 +134,7 @@
   </li>
         <li class="menu-item menu-item-aigames">
 
-    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">4</span></a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">5</span></a>
 
   </li>
         <li class="menu-item menu-item-douyin">
@@ -149,12 +149,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">86</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">87</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">24</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -670,7 +670,10 @@
     <a href="/2026/04/03/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/" rel="prev" title="Hexo博客集成抖音视频实战指南">
       <i class="fa fa-chevron-left"></i> Hexo博客集成抖音视频实战指南
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2026/04/20/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" rel="next" title="Hexo 博客实战：光影拼图游戏开发指南">
+      Hexo 博客实战：光影拼图游戏开发指南 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -746,7 +749,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-count">87</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -759,7 +762,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1149,7 +1152,6 @@ body {
       console.log('[Douyin] Music iframe found');
       var src = musicIframe.src || '';
       
-      // 将 auto=1 改为 auto=0（停止播放）
       if (src.indexOf('auto=1') > -1) {
         musicIframe.src = src.replace('auto=1', 'auto=0');
         console.log('[Douyin] Changed auto=1 to auto=0');
@@ -1166,7 +1168,6 @@ body {
     if (musicIframe && isMusicPaused) {
       var src = musicIframe.src || '';
       
-      // 将 auto=0 改回 auto=1（恢复播放）
       if (src.indexOf('auto=0') > -1) {
         musicIframe.src = src.replace('auto=0', 'auto=1');
         console.log('[Douyin] Changed auto=0 to auto=1');

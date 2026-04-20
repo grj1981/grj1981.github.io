@@ -97,6 +97,8 @@ if (typeof window.GameManager === 'undefined') {
             gameName = 'minesweeper';
         } else if (path.includes('/gomoku/')) {
             gameName = 'gomoku';
+        } else if (path.includes('/puzzle/')) {
+            gameName = 'puzzle';
         }
         
         return gameName;
@@ -107,13 +109,21 @@ if (typeof window.GameManager === 'undefined') {
         
         function detectAndInit() {
             const gameName = self.detectGame();
+            
+            // 如果检测不到游戏但当前有游戏在运行，清理它
+            if (!gameName && self.currentGame) {
+                console.log('[GameManager] 离开游戏页面，清理游戏');
+                self.cleanupAll();
+                return;
+            }
+            
             if (!gameName) {
                 return;
             }
             
             if (!self.games[gameName]) {
-                console.log('[GameManager] 游戏未注册，等待...');
-                setTimeout(detectAndInit, 50);
+                // 游戏未注册，持续轮询等待，改为更长的间隔减少资源消耗
+                setTimeout(detectAndInit, 200);
                 return;
             }
             

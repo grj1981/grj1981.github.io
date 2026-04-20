@@ -1,0 +1,483 @@
+# 光影拼图游戏设计文档
+
+## 1. 项目概述
+
+**光影拼图**是一款基于 HTML5 Canvas 的益智拼图游戏，支持无限关卡挑战。玩家通过拖拽、旋转彩色碎片，在限定时间内完成拼图。
+
+### 核心特性
+- 🎮 支持桌面端和移动端操作
+- 🧩 无限关卡系统，难度渐进
+- 🖼️ 支持随机图片或纯色模式
+- ⏱️ 时间限制与提示系统
+- 🔄 碎片旋转机制
+- 🏆 最佳关卡记录
+
+---
+
+## 2. 系统架构
+
+### 2.1 模块化设计
+
+```
+puzzle/
+├── index.md                    # 游戏页面入口
+├── puzzle-game.js              # 游戏主控制器
+├── modules/
+│   ├── puzzle-config.js        # 配置管理
+│   ├── puzzle-core.js          # 游戏核心逻辑
+│   ├── puzzle-render.js        # 渲染引擎
+│   └── puzzle-ai.js            # AI提示系统
+└── DESIGN.md                   # 设计文档
+```
+
+### 2.2 模块职责
+
+| 模块 | 职责 | 关键功能 |
+|------|------|----------|
+| **puzzle-game.js** | 游戏生命周期管理 | 初始化、事件处理、状态管理、清理 |
+| **puzzle-config.js** | 配置管理 | 难度配置、颜色配置、动画参数 |
+| **puzzle-core.js** | 游戏核心逻辑 | 碎片生成、碰撞检测、旋转逻辑 |
+| **puzzle-render.js** | 渲染引擎 | Canvas 绘制、动画效果、UI渲染 |
+| **puzzle-ai.js** | 提示系统 | 智能提示、冷却机制 |
+
+---
+
+## 3. 游戏机制
+
+### 3.1 核心玩法
+
+1. **目标**：将散落的彩色碎片拖拽到中央虚线网格中
+2. **吸附**：碎片到达正确位置后自动吸附
+3. **旋转**：双击碎片（桌面端）或点击两次（移动端）旋转
+4. **提示**：点击提示按钮显示最近目标位置
+5. **时间**：每关有限定时间，超时失败
+
+### 3.2 操作方式
+
+| 平台 | 拖拽 | 旋转 | 选中 |
+|------|------|------|------|
+| **桌面端** | 鼠标拖拽 | 双击碎片 | 点击碎片 |
+| **移动端** | 手指拖拽 | 点击两次 | 点击碎片 |
+
+### 3.3 难度系统
+
+#### 3.3.1 基础难度（1-10关）
+
+| 关卡 | 网格 | 碎片数 | 提示数 | 时间 | 秒/碎片 |
+|------|------|--------|--------|------|---------|
+| 1-2 | 2×2 | 4 | 6 | 60s | 15.0s |
+| 3-5 | 3×3 | 9 | 4-5 | 90s | 10.0s |
+| 6-8 | 4×4 | 16 | 3-5 | 120s | 7.5s |
+| 9-10 | 5×5 | 25 | 4 | 150s | 6.0s |
+
+#### 3.3.2 无限关卡（11+关）
+
+- **网格**：保持在 5×5（25碎片）
+- **时间**：150s + (level-10)×10s
+- **提示**：每10关减少1个，最低2个
+- **旋转**：始终启用
+
+**示例**：
+- 第20关：250秒，3提示
+- 第50关：550秒，2提示
+
+---
+
+## 4. 技术实现
+
+### 4.1 游戏状态管理
+
+```javascript
+// puzzle-game.js 中的游戏状态
+gameState = {
+    isPlaying: false,        // 游戏是否进行中
+    isComplete: false,       // 是否完成
+    isFailed: false,         // 是否失败
+    level: 1,                // 当前关卡
+    currentPiece: null,      // 当前拖拽的碎片
+    selectedPiece: null,     // 当前选中的碎片
+    dragOffset: { x: 0, y: 0 }, // 拖拽偏移量
+    timeRemaining: 60,       // 剩余时间
+    timerInterval: null,     // 定时器引用
+    imageSeed: 0,            // 图片随机种子
+    moveHistory: [],         // 移动历史
+    bestLevel: 0             // 最佳关卡记录
+}
+```
+
+### 4.2 碎片数据结构
+
+```javascript
+// puzzle-core.js 中的碎片对象
+piece = {
+    id: number,              // 碎片ID
+    correctIndex: number,    // 正确位置索引
+    currentX: number,        // 当前位置X
+    currentY: number,        // 当前位置Y
+    targetX: number,         // 目标位置X
+    targetY: number,         // 目标位置Y
+    imageData: object,       // 图片数据（图片模式）
+    rotation: number,        // 当前旋转角度
+    targetRotation: number,  // 目标旋转角度（0）
+    isLocked: boolean,       // 是否已锁定
+    isSelected: boolean,     // 是否被选中
+    isRotating: boolean,     // 是否正在旋转
+    width: number,           // 碎片宽度
+    height: number           // 碎片高度
+}
+```
+
+### 4.3 碰撞检测
+
+```javascript
+// puzzle-core.js:checkSnap()
+checkSnap(pieceId) {
+    const piece = this.pieces.find(p => p.id === pieceId);
+    const distance = Math.sqrt(
+        Math.pow(piece.currentX - piece.targetX, 2) +
+        Math.pow(piece.currentY - piece.targetY, 2)
+    );
+    
+    const rotationCorrect = !this.enableRotation || piece.rotation === piece.targetRotation;
+    const snapDistance = window.PuzzleConfig.ANIMATION.snapDistance; // 30px
+    
+    if (distance < snapDistance && rotationCorrect) {
+        // 吸附成功
+        piece.isLocked = true;
+        this.completedPieces++;
+        return { snapped: true, isComplete: this.completedPieces === this.pieces.length };
+    }
+    return { snapped: false };
+}
+```
+
+### 4.4 渲染流程
+
+```javascript
+// puzzle-render.js 渲染循环
+render(state) {
+    this.clear();                          // 清空画布
+    this.drawBackgroundImage();            // 绘制背景图片
+    this.drawTargetGrid();                 // 绘制目标网格
+    this.drawPiecesWithImage(state.pieces); // 绘制碎片
+    this.drawParticles();                  // 绘制粒子效果
+    this.drawHintTargetAndLine();          // 绘制提示
+    if (state.isComplete) this.drawCompletionEffect(); // 完成特效
+    if (state.isFailed) this.drawFailedEffect();       // 失败特效
+}
+```
+
+---
+
+## 5. 事件系统
+
+### 5.1 事件绑定
+
+```javascript
+// puzzle-game.js 事件绑定
+window._puzzleMouseDown = handleCanvasMouseDown;
+window._puzzleMouseMove = handleCanvasMouseMove;
+window._puzzleMouseUp = handleCanvasMouseUp;
+window._puzzleClick = handleCanvasClick;
+window._puzzleTouchStart = handleCanvasMouseDown;
+window._puzzleTouchMove = handleCanvasMouseMove;
+window._puzzleTouchEnd = handleCanvasMouseUp;
+
+// 绑定到 canvas
+canvas.addEventListener('mousedown', window._puzzleMouseDown);
+canvas.addEventListener('touchstart', window._puzzleTouchStart, { passive: false });
+// ... 其他事件
+```
+
+### 5.2 事件清理
+
+```javascript
+// puzzle-game.js:cleanupPuzzleGame()
+function cleanupPuzzleGame() {
+    // 移除所有事件监听
+    canvas.removeEventListener('mousedown', window._puzzleMouseDown);
+    canvas.removeEventListener('touchstart', window._puzzleTouchStart);
+    // ... 其他事件
+    
+    // 清理 window 变量
+    window._puzzleMouseDown = null;
+    window._puzzleTouchStart = null;
+    // ... 其他变量
+}
+```
+
+---
+
+## 6. 图片系统
+
+### 6.1 图片加载策略
+
+```javascript
+// puzzle-core.js:init()
+init(level, canvasWidth, canvasHeight, imageSeed) {
+    const seed = imageSeed || Date.now();
+    const imageUrl = `${window.PuzzleConfig.IMAGE_BASE_URL}/${canvasWidth}/${canvasHeight}?random=${seed}`;
+    
+    return new Promise((resolve) => {
+        this.puzzleImage.onload = () => {
+            this.imageLoaded = true;
+            this.generatePuzzle(config, canvasWidth, canvasHeight);
+            resolve({ pieces: this.pieces, ... });
+        };
+        
+        this.puzzleImage.onerror = () => {
+            this.imageLoaded = false;
+            this.generatePuzzle(config, canvasWidth, canvasHeight);
+            resolve({ pieces: this.pieces, ... });
+        };
+        
+        this.puzzleImage.src = imageUrl;
+    });
+}
+```
+
+### 6.2 超时处理
+
+```javascript
+// puzzle-game.js:startGame()
+const loadPromise = window.PuzzleCore.init(1, size.width, size.height, gameState.imageSeed);
+const initData = await Promise.race([
+    loadPromise,
+    new Promise((resolve) => setTimeout(() => resolve(null), 15000))
+]);
+
+if (!initData || !initData.pieces) {
+    // 超时或失败，使用纯色模式
+    initData = window.PuzzleCore.initSync(1, size.width, size.height);
+}
+```
+
+---
+
+## 7. 提示系统
+
+### 7.1 智能提示算法
+
+```javascript
+// puzzle-ai.js:getBestHint()
+getBestHint(core) {
+    const unlockedPieces = core.pieces.filter(p => !p.isLocked);
+    let bestPiece = null;
+    let minScore = Infinity;
+    
+    unlockedPieces.forEach(piece => {
+        const distance = Math.sqrt(
+            Math.pow(piece.currentX - piece.targetX, 2) +
+            Math.pow(piece.currentY - piece.targetY, 2)
+        );
+        
+        let rotationPenalty = 0;
+        if (core.enableRotation && piece.rotation !== piece.targetRotation) {
+            rotationPenalty = 50;
+        }
+        
+        const score = distance + rotationPenalty;
+        if (score < minScore) {
+            minScore = score;
+            bestPiece = piece;
+        }
+    });
+    
+    return bestPiece;
+}
+```
+
+### 7.2 冷却机制
+
+```javascript
+// puzzle-ai.js:startCooldown()
+startCooldown() {
+    this.hintCooldown = true;
+    const cooldown = window.PuzzleConfig.AI.cooldown; // 3000ms
+    
+    setTimeout(() => {
+        this.hintCooldown = false;
+    }, cooldown);
+}
+```
+
+---
+
+## 8. 性能优化
+
+### 8.1 渲染优化
+
+- **动画帧管理**：使用 `requestAnimationFrame` 实现平滑动画
+- **脏矩形优化**：只更新变化区域（当前为全画布重绘）
+- **粒子系统**：粒子数量限制，自动清理
+
+### 8.2 内存管理
+
+- **事件清理**：pjax 切换时完整清理所有事件监听
+- **定时器管理**：统一通过 `window._puzzleTimer` 管理
+- **图片资源**：图片加载失败时降级到纯色模式
+
+### 8.3 响应式设计
+
+```javascript
+// puzzle-render.js:resize()
+resize() {
+    const newWidth = Math.min(600, container.clientWidth - 40);
+    const newHeight = Math.min(500, window.innerHeight * 0.6);
+    
+    // 缩放所有碎片位置
+    const scaleX = newWidth / oldWidth;
+    const scaleY = newHeight / oldHeight;
+    
+    window.PuzzleCore.pieces.forEach(p => {
+        if (!p.isLocked) {
+            p.currentX *= scaleX;
+            p.currentY *= scaleY;
+        }
+        p.targetX *= scaleX;
+        p.targetY *= scaleY;
+    });
+}
+```
+
+---
+
+## 9. 兼容性设计
+
+### 9.1 浏览器兼容
+
+- **Canvas API**：支持主流浏览器
+- **触摸事件**：支持移动端触摸操作
+- **振动反馈**：支持 `navigator.vibrate`（可选）
+- **图片跨域**：设置 `crossOrigin = 'anonymous'`
+
+### 9.2 降级策略
+
+| 功能 | 降级方案 |
+|------|----------|
+| 图片加载失败 | 纯色模式 |
+| 振动API不可用 | 静默忽略 |
+| 旋转API不支持 | 使用 `ctx.rect` 替代 `ctx.roundRect` |
+| 移动端双击 | 改为两次点击 |
+
+---
+
+## 10. 扩展性设计
+
+### 10.1 可扩展配置
+
+```javascript
+// puzzle-config.js 结构
+window.PuzzleConfig = {
+    DIFFICULTY: {},      // 难度配置
+    COLORS: {},          // 颜色配置
+    ANIMATION: {},       // 动画参数
+    AI: {},              // AI参数
+    // ... 可添加更多配置组
+}
+```
+
+### 10.2 模块化扩展
+
+- **新游戏模式**：添加新的 `puzzle-mode-*.js` 模块
+- **新特效系统**：扩展 `puzzle-render.js` 的渲染方法
+- **新AI算法**：扩展 `puzzle-ai.js` 的提示算法
+
+### 10.3 数据持久化
+
+```javascript
+// 当前实现
+localStorage.setItem('puzzle-best-level', gameState.bestLevel);
+
+// 可扩展为
+const gameData = {
+    bestLevel: gameState.bestLevel,
+    bestTime: gameState.bestTime,
+    totalWins: gameState.totalWins,
+    achievements: gameState.achievements
+};
+localStorage.setItem('puzzle-game-data', JSON.stringify(gameData));
+```
+
+---
+
+## 11. 测试策略
+
+### 11.1 功能测试点
+
+| 测试项 | 测试方法 | 预期结果 |
+|--------|----------|----------|
+| 碎片拖拽 | 鼠标/触摸拖拽 | 碎片跟随移动 |
+| 碎片旋转 | 双击/两次点击 | 碎片旋转90° |
+| 自动吸附 | 拖拽到目标位置 | 碎片自动锁定 |
+| 时间系统 | 等待时间结束 | 游戏失败提示 |
+| 提示系统 | 点击提示按钮 | 显示最近目标 |
+| 关卡切换 | 完成当前关卡 | 进入下一关 |
+| 响应式 | 调整窗口大小 | 画布自适应 |
+
+### 11.2 性能测试
+
+- **内存泄漏**：多次 pjax 切换后检查内存
+- **渲染性能**：25个碎片时的帧率
+- **加载时间**：图片加载超时处理
+
+---
+
+## 12. 未来改进方向
+
+### 12.1 短期改进
+
+1. **粒子效果**：实现碎片吸附时的粒子特效
+2. **音效系统**：添加拖拽、旋转、完成音效
+3. **成就系统**：无提示通关、快速通关等成就
+
+### 12.2 中期改进
+
+1. **多主题支持**：几何、自然、抽象等不同主题
+2. **自定义关卡**：玩家创建和分享关卡
+3. **社交功能**：关卡排行榜、好友挑战
+
+### 12.3 长期愿景
+
+1. **3D拼图**：支持 Z 轴旋转的立体拼图
+2. **AR模式**：通过摄像头识别现实物体拼图
+3. **协作模式**：多人协作完成大型拼图
+
+---
+
+## 13. 维护指南
+
+### 13.1 代码规范
+
+- **模块化**：保持各模块职责单一
+- **事件管理**：统一通过 window 变量管理事件函数
+- **错误处理**：所有异步操作都有错误处理
+- **日志输出**：关键操作添加 console.log
+
+### 13.2 部署检查
+
+```bash
+# 构建检查
+npm run build
+
+# 本地测试
+npm run server
+
+# 访问测试
+http://localhost:4000/ai-games/puzzle/
+```
+
+### 13.3 故障排查
+
+| 问题 | 可能原因 | 解决方案 |
+|------|----------|----------|
+| 游戏不加载 | 模块未注册 | 检查 GameManager.register |
+| 事件堆积 | cleanup 不完整 | 检查 cleanupPuzzleGame |
+| 图片加载慢 | 网络问题 | 检查超时处理逻辑 |
+| 移动端卡顿 | 渲染性能 | 检查粒子数量和动画帧率 |
+
+---
+
+*文档版本：1.0*  
+*最后更新：2026-04-20*  
+*维护者：ByteFisher AI 助手*
