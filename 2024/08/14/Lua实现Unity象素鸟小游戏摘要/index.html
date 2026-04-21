@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 7.3.0">
+<meta name="generator" content="Hexo 8.1.1">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -28,9 +28,9 @@
 <meta property="article:published_time" content="2024-08-14T11:38:16.000Z">
 <meta property="article:modified_time" content="2024-08-26T09:55:57.308Z">
 <meta property="article:author" content="淡水鱼">
-<meta property="article:tag" content="Unity3D">
 <meta property="article:tag" content="IT">
 <meta property="article:tag" content="Lua">
+<meta property="article:tag" content="Unity3D">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://www.bytefisher.top/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
@@ -148,12 +148,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">87</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">88</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -286,26 +286,26 @@
 <p><strong>实例</strong></p>
 </blockquote>
 <pre><code>---@class AmusementParkGameFlappyBirdUI
-local AmusementParkGameFlappyBirdUI = &#123;
+local AmusementParkGameFlappyBirdUI = {
     ---@type number
     PassTime = 0,
     ---@type AmusementParkBirdBG
     ParkBirdBG = nil,
     ---@type AmusementParkBirdObstacleCell[]
-    BirdObstacleCells = &#123;&#125;,
+    BirdObstacleCells = {},
     ---@type AmusementParkBirdObstacleCell 上一个被创建的障碍物
     LastBirdObstacleCell = nil,
     ---@type Vector3 障碍物出生位置(固定在屏幕右侧)
     BirthLocation = Vector3.New(670,0,0),
     ---@type UnityEngine.GameObject[] 障碍物预设集合
-    ObstaclePrefabs = &#123;&#125;,
+    ObstaclePrefabs = {},
     ---@type AmusementParkBirdPlayer
     BirdPlayer = nil,
     ---@type UnityEngine.Collider2D 上边界
     UpCollider2D = nil,
     ---@type UnityEngine.Collider2D 下边界
     DownCollider2D = nil,
-&#125;
+}
 AmusementParkGameFlappyBirdUI = Base:Extend(&quot;AmusementParkGameFlappyBirdUI&quot;, &quot;IQIGame.Onigao.UI.AmusementParkGameFlappyBirdUI&quot;, AmusementParkGameFlappyBirdUI)
 
 require(&quot;IQIGame.UIExternalApi.AmusementParkGameFlappyBirdUIApi&quot;)
@@ -329,7 +329,7 @@ function AmusementParkGameFlappyBirdUI:OnInit()
     self.ParkBirdBG = AmusementParkBirdBG.New(self.BGNode)
     self.BirdPlayer = AmusementParkBirdPlayer.New(self.Player)
 
-    self.ObstaclePrefabs = &#123;&#125;
+    self.ObstaclePrefabs = {}
     for i = 1, self.BalkPrefabs.transform.childCount do
         local objTrs = self.BalkPrefabs.transform:Find(i)
         if objTrs then
@@ -542,7 +542,7 @@ function AmusementParkGameFlappyBirdUI:CleanObstacles()
     for i, v in pairs(self.BirdObstacleCells) do
         v:Dispose()
     end
-    self.BirdObstacleCells = &#123;&#125;
+    self.BirdObstacleCells = {}
 end
 
 function AmusementParkGameFlappyBirdUI:RefreshScore()
@@ -733,7 +733,7 @@ return AmusementParkGameFlappyBirdUI
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-count">88</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -746,7 +746,7 @@ return AmusementParkGameFlappyBirdUI
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

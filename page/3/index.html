@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 7.3.0">
+<meta name="generator" content="Hexo 8.1.1">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -144,12 +144,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">87</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">88</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -179,6 +179,181 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【集合Collection】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-02-05 17:46:14 / 修改时间：18:54:48" itemprop="dateCreated datePublished" datetime="2025-02-05T17:46:14+08:00">2025-02-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【集合Collection】" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="C-集合（Collection）"><a href="#C-集合（Collection）" class="headerlink" title="C# 集合（Collection）"></a><strong>C# 集合（Collection）</strong></h1><p>集合（Collection）类是专门用于数据存储和检索的类。这些类提供了对栈（stack）、队列（queue）、列表（list）和哈希表（hash table）的支持。大多数集合类实现了相同的接口。</p>
+<p>集合（Collection）类服务于不同的目的，如为元素动态分配内存，基于索引访问列表项等等。这些类创建 Object 类的对象的集合。在 C# 中，Object 类是所有数据类型的基类。</p>
+<h1 id="动态数组（ArrayList）"><a href="#动态数组（ArrayList）" class="headerlink" title="动态数组（ArrayList）"></a><strong>动态数组（ArrayList）</strong></h1><p>它代表了可被单独索引的对象的有序集合。<br>它基本上可以替代一个数组。但是，与数组不同的是，您可以使用索引在指定的位置添加和移除项目，动态数组会自动重新调整它的大小。它也允许在列表中进行动态内存分配、增加、搜索、排序各项。</p>
+<h2 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h2><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayList : ICollection, IEnumerable, IList, ICloneable</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>实现接口：</p>
+<ul>
+<li><p>IList：支持按索引访问元素。</p>
+</li>
+<li><p>ICollection：支持集合基本操作，如添加、删除和计数。</p>
+</li>
+<li><p>IEnumerable：支持通过枚举器遍历元素。</p>
+</li>
+<li><p>ICloneable：支持克隆 ArrayList。</p>
+</li>
+</ul>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><h3 id="动态扩展"><a href="#动态扩展" class="headerlink" title="动态扩展"></a>动态扩展</h3><ul>
+<li><p>ArrayList 的容量可以根据需要自动调整，不需要指定固定大小。</p>
+</li>
+<li><p>当添加的元素超过当前容量时，ArrayList 会自动增加容量（通常是原容量的两倍）。</p>
+</li>
+</ul>
+<h3 id="非泛型集合"><a href="#非泛型集合" class="headerlink" title="非泛型集合"></a>非泛型集合</h3><ul>
+<li>ArrayList 是非泛型集合，所有元素被存储为 object 类型。这意味着它可以存储任意类型的对象，但需要注意装箱（boxing）和拆箱（unboxing）的性能影响。</li>
+</ul>
+<h3 id="无序操作"><a href="#无序操作" class="headerlink" title="无序操作"></a>无序操作</h3><ul>
+<li>虽然元素存储顺序与添加顺序一致，但它并不提供内置排序功能。</li>
+</ul>
+<h3 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h3><ul>
+<li>默认不是线程安全的。如果需要线程安全的 ArrayList，可以使用 ArrayList.Synchronized 方法生成一个线程安全的版本。<br>ArrayList 类的方法和属性</li>
+</ul>
+<p>下表列出了 ArrayList 类的一些常用的 属性：</p>
+<pre><code>属性名称	类型	描述
+
+Count	int	获取 ArrayList 中包含的元素数量。
+Capacity	int	获取或设置 ArrayList 的容量（存储空间）。
+IsFixedSize	bool	指示 ArrayList 是否具有固定大小。
+IsReadOnly	bool	指示 ArrayList 是否为只读。
+IsSynchronized	bool	指示 ArrayList 是否线程安全。
+SyncRoot	object	获取可用于同步访问的对象。
+</code></pre>
+<p>下表列出了 ArrayList 类的一些常用的 方法：</p>
+<p>方法名称	返回类型	描述</p>
+<pre><code>添加与插入	
+	
+Add(object value)	int	将对象添加到 ArrayList 的末尾，返回新元素的索引。
+AddRange(ICollection c)	void	将指定集合的所有元素添加到 ArrayList 的末尾。
+Insert(int index, object value)	void	在指定索引处插入对象。
+InsertRange(int index, ICollection c)	void	在指定索引处插入指定集合的所有元素。
+
+删除		
+
+Remove(object value)	void	移除首次出现的指定对象。
+RemoveAt(int index)	void	移除指定索引处的元素。
+RemoveRange(int index, int count)	void	移除从指定索引开始的指定数量的元素。
+Clear()	void	移除所有元素。
+
+访问与查询		
+
+Contains(object item)	bool	判断 ArrayList 是否包含指定对象。
+IndexOf(object value)	int	获取指定对象首次出现的索引。
+LastIndexOf(object value)	int	获取指定对象最后一次出现的索引。
+
+排序与复制		
+
+Sort()	void	按照默认顺序排序 ArrayList 中的元素。
+Sort(IComparer comparer)	void	按照自定义比较器排序。
+Reverse()	void	反转 ArrayList 中元素的顺序。
+CopyTo(Array array)	void	将 ArrayList 的元素复制到指定数组中。
+
+其他
+	
+GetRange(int index, int count)	ArrayList	获取从指定索引开始的指定数量的元素子集。
+ToArray()	object[]	将 ArrayList 中的元素复制到数组中。
+TrimToSize()	void	将容量调整为实际元素数量以节省内存。
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -789,138 +964,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【特性Attribute】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2025-02-05 11:57:31 / 修改时间：12:33:14" itemprop="dateCreated datePublished" datetime="2025-02-05T11:57:31+08:00">2025-02-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【特性Attribute】" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="C-特性（Attribute）"><a href="#C-特性（Attribute）" class="headerlink" title="C# 特性（Attribute）"></a><strong>C# 特性（Attribute）</strong></h1><p>特性（Attribute）是用于在运行时传递程序中各种元素（比如类、方法、结构、枚举、组件等）的行为信息的声明性标签。您可以通过使用特性向程序添加声明性信息。一个声明性标签是通过放置在它所应用的元素前面的方括号（[ ]）来描述的。</p>
-<p>特性（Attribute）用于添加元数据，如编译器指令和注释、描述、方法、类等其他信息。.Net 框架提供了两种类型的特性：预定义特性和自定义特性。</p>
-<h1 id="规定特性（Attribute）"><a href="#规定特性（Attribute）" class="headerlink" title="规定特性（Attribute）"></a><strong>规定特性（Attribute）</strong></h1><p>规定特性（Attribute）的语法如下：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[attribute(positional_parameters, name_parameter = value, ...)]</span><br><span class="line">element</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>特性（Attribute）的名称和值是在方括号内规定的，放置在它所应用的元素之前。positional_parameters 规定必需的信息，name_parameter 规定可选的信息。</p>
-<h1 id="预定义特性（Attribute）"><a href="#预定义特性（Attribute）" class="headerlink" title="预定义特性（Attribute）"></a><strong>预定义特性（Attribute）</strong></h1><p>.Net 框架提供了三种预定义特性：
-	</p>
-<ul>
-<li><p>AttributeUsage</p>
-</li>
-<li><p>Conditional</p>
-</li>
-<li><p>Obsolete</p>
-</li>
-</ul>
-<h2 id="AttributeUsage"><a href="#AttributeUsage" class="headerlink" title="AttributeUsage"></a>AttributeUsage</h2><p>预定义特性 AttributeUsage 描述了如何使用一个自定义特性类。它规定了特性可应用到的项目的类型。</p>
-<p>规定该特性的语法如下：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[AttributeUsage(</span><br><span class="line">   validon,</span><br><span class="line">   AllowMultiple=allowmultiple,</span><br><span class="line">   Inherited=inherited</span><br><span class="line">)]</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>其中：</p>
-<ul>
-<li><p>参数 validon 规定特性可被放置的语言元素。它是枚举器 AttributeTargets 的值的组合。默认值是 AttributeTargets.All。</p>
-</li>
-<li><p>参数 allowmultiple（可选的）为该特性的 AllowMultiple 属性（property）提供一个布尔值。如果为 true，则该特性是多用的。默认值是 false（单用的）。</p>
-</li>
-<li><p>参数 inherited（可选的）为该特性的 Inherited 属性（property）提供一个布尔值。如果为 true，则该特性可被派生类继承。默认值是 false（不被继承）。</p>
-</li>
-</ul>
-<p>例如：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[AttributeUsage(AttributeTargets.Class |</span><br><span class="line">AttributeTargets.Constructor |</span><br><span class="line">AttributeTargets.Field |</span><br><span class="line">AttributeTargets.Method |</span><br><span class="line">AttributeTargets.Property, </span><br><span class="line">AllowMultiple = true)]</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="Conditional"><a href="#Conditional" class="headerlink" title="Conditional"></a>Conditional</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -992,7 +1035,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-count">88</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1005,7 +1048,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

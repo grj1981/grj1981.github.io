@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 7.3.0">
+<meta name="generator" content="Hexo 8.1.1">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -147,12 +147,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">87</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">88</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -299,10 +299,10 @@
 </code></pre>
 <span id="more"></span>
 <h2 id="字典推导式"><a href="#字典推导式" class="headerlink" title="- 字典推导式"></a>- 字典推导式</h2><p>字典推导基本格式：</p>
-<pre><code>&#123; key_expr: value_expr for value in collection &#125;
+<pre><code>{ key_expr: value_expr for value in collection }
 </code></pre>
 <p>或</p>
-<pre><code>&#123; key_expr: value_expr for value in collection if condition &#125;
+<pre><code>{ key_expr: value_expr for value in collection if condition }
 </code></pre>
 <p>使用字符串及其长度创建字典：</p>
 <blockquote>
@@ -317,10 +317,10 @@
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = &#123;x: x**2 for x in (2, 4, 6)&#125;</span><br><span class="line">&gt;&gt;&gt; dic</span><br><span class="line">&#123;2: 4, 4: 16, 6: 36&#125;</span><br><span class="line">&gt;&gt;&gt; type(dic)</span><br><span class="line">&lt;class &#x27;dict&#x27;&gt;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <h2 id="集合推导式"><a href="#集合推导式" class="headerlink" title="- 集合推导式"></a>- 集合推导式</h2><p>集合推导式基本格式：</p>
-<pre><code>&#123; expression for item in Sequence &#125;
+<pre><code>{ expression for item in Sequence }
 </code></pre>
 <p>或</p>
-<pre><code>&#123; expression for item in Sequence if conditional &#125;
+<pre><code>{ expression for item in Sequence if conditional }
 </code></pre>
 <p>计算数字 1,2,3 的平方数：</p>
 <blockquote>
@@ -449,7 +449,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-count">88</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -462,7 +462,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

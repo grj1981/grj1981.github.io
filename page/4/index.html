@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 7.3.0">
+<meta name="generator" content="Hexo 8.1.1">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -144,12 +144,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">87</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">88</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -179,6 +179,138 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【特性Attribute】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-02-05 11:57:31 / 修改时间：12:33:14" itemprop="dateCreated datePublished" datetime="2025-02-05T11:57:31+08:00">2025-02-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【特性Attribute】" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="C-特性（Attribute）"><a href="#C-特性（Attribute）" class="headerlink" title="C# 特性（Attribute）"></a><strong>C# 特性（Attribute）</strong></h1><p>特性（Attribute）是用于在运行时传递程序中各种元素（比如类、方法、结构、枚举、组件等）的行为信息的声明性标签。您可以通过使用特性向程序添加声明性信息。一个声明性标签是通过放置在它所应用的元素前面的方括号（[ ]）来描述的。</p>
+<p>特性（Attribute）用于添加元数据，如编译器指令和注释、描述、方法、类等其他信息。.Net 框架提供了两种类型的特性：预定义特性和自定义特性。</p>
+<h1 id="规定特性（Attribute）"><a href="#规定特性（Attribute）" class="headerlink" title="规定特性（Attribute）"></a><strong>规定特性（Attribute）</strong></h1><p>规定特性（Attribute）的语法如下：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[attribute(positional_parameters, name_parameter = value, ...)]</span><br><span class="line">element</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>特性（Attribute）的名称和值是在方括号内规定的，放置在它所应用的元素之前。positional_parameters 规定必需的信息，name_parameter 规定可选的信息。</p>
+<h1 id="预定义特性（Attribute）"><a href="#预定义特性（Attribute）" class="headerlink" title="预定义特性（Attribute）"></a><strong>预定义特性（Attribute）</strong></h1><p>.Net 框架提供了三种预定义特性：
+	</p>
+<ul>
+<li><p>AttributeUsage</p>
+</li>
+<li><p>Conditional</p>
+</li>
+<li><p>Obsolete</p>
+</li>
+</ul>
+<h2 id="AttributeUsage"><a href="#AttributeUsage" class="headerlink" title="AttributeUsage"></a>AttributeUsage</h2><p>预定义特性 AttributeUsage 描述了如何使用一个自定义特性类。它规定了特性可应用到的项目的类型。</p>
+<p>规定该特性的语法如下：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[AttributeUsage(</span><br><span class="line">   validon,</span><br><span class="line">   AllowMultiple=allowmultiple,</span><br><span class="line">   Inherited=inherited</span><br><span class="line">)]</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>其中：</p>
+<ul>
+<li><p>参数 validon 规定特性可被放置的语言元素。它是枚举器 AttributeTargets 的值的组合。默认值是 AttributeTargets.All。</p>
+</li>
+<li><p>参数 allowmultiple（可选的）为该特性的 AllowMultiple 属性（property）提供一个布尔值。如果为 true，则该特性是多用的。默认值是 false（单用的）。</p>
+</li>
+<li><p>参数 inherited（可选的）为该特性的 Inherited 属性（property）提供一个布尔值。如果为 true，则该特性可被派生类继承。默认值是 false（不被继承）。</p>
+</li>
+</ul>
+<p>例如：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[AttributeUsage(AttributeTargets.Class |</span><br><span class="line">AttributeTargets.Constructor |</span><br><span class="line">AttributeTargets.Field |</span><br><span class="line">AttributeTargets.Method |</span><br><span class="line">AttributeTargets.Property, </span><br><span class="line">AllowMultiple = true)]</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="Conditional"><a href="#Conditional" class="headerlink" title="Conditional"></a>Conditional</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -766,120 +898,6 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity象素鸟小游戏摘要</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-08-14 19:38:16" itemprop="dateCreated datePublished" datetime="2024-08-14T19:38:16+08:00">2024-08-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity象素鸟小游戏摘要" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Lua实现Unity象素鸟小游戏要点记录：</p>
-<h1 id="游戏玩法简介"><a href="#游戏玩法简介" class="headerlink" title="游戏玩法简介"></a>游戏玩法简介</h1><p>不用物理引擎实现像素鸟在障碍物之间飞行，通过配表配置小鸟向下的加速度和点击一次屏幕给小鸟赋值一次初始速度和向上加速度来模拟小鸟飞行。障碍物根据配置难度在固定距离随机生成。</p>
-<h1 id="功能实现简述"><a href="#功能实现简述" class="headerlink" title="功能实现简述"></a>功能实现简述</h1><h2 id="飞行障碍实现"><a href="#飞行障碍实现" class="headerlink" title="飞行障碍实现"></a>飞行障碍实现</h2><p>创建AmusementParkBirdObstacleCell障碍控件。游戏运行时，根据固定的配置距离，生成不同难度的障碍实例。障碍物分为上，下两部份，中间有可穿行的空隙。<br>	<br><strong>AmusementParkBirdObstacleCell</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">---@class AmusementParkBirdObstacleCell</span><br><span class="line">local m = &#123;</span><br><span class="line">    View = nil,</span><br><span class="line">    ---@type number 移动速度</span><br><span class="line">    Speed = 0,</span><br><span class="line">    ---@type UnityEngine.Collider2D</span><br><span class="line">    TopCollider2D = nil,</span><br><span class="line">    ---@type UnityEngine.Collider2D</span><br><span class="line">    BottomCollider2D = nil,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(view)</span><br><span class="line">    local obj = Clone(m)</span><br><span class="line">    obj:Init(view)</span><br><span class="line">    return obj</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(view)</span><br><span class="line">    self.View = view</span><br><span class="line">    LuaCodeInterface.BindOutlet(self.View, self)</span><br><span class="line"></span><br><span class="line">    self.TopCollider2D = self.View.transform:Find(&quot;Top&quot;).gameObject:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line">    self.BottomCollider2D = self.View.transform:Find(&quot;Bottom&quot;).gameObject:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line"></span><br><span class="line">    self:AddListener()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:AddListener()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:RemoveListener()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---界面轮询。</span><br><span class="line">---@param elapseSeconds number</span><br><span class="line">---@param realElapseSeconds number</span><br><span class="line">---@return void</span><br><span class="line">function m:OnUpdate(elapseSeconds, realElapseSeconds)</span><br><span class="line">    self.View.transform:Translate(Vector3.New(self.Speed * UnityEngine.Time.deltaTime * -1, 0, 0))</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@param speed number</span><br><span class="line">function m:SetData(speed)</span><br><span class="line">    self.Speed = speed</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Dispose()</span><br><span class="line">    AssetUtil.UnloadAsset(self)</span><br><span class="line">    self:RemoveListener()</span><br><span class="line"></span><br><span class="line">    LuaCodeInterface.ClearOutlet(self.View, self)</span><br><span class="line">    UnityEngine.Object.Destroy(self.View)</span><br><span class="line">    self.View = nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -951,7 +969,7 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-count">88</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -964,7 +982,7 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 7.3.0">
+<meta name="generator" content="Hexo 8.1.1">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -144,12 +144,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">87</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">88</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -179,6 +179,122 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/" class="post-title-link" itemprop="url">Unity3D路径权限</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-06-19 14:25:43" itemprop="dateCreated datePublished" datetime="2024-06-19T14:25:43+08:00">2024-06-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3D路径权限" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Application"><a href="#Application" class="headerlink" title="Application"></a><strong>Application</strong></h1><h2 id="游戏数据文件夹路径-只读，打包加密压缩"><a href="#游戏数据文件夹路径-只读，打包加密压缩" class="headerlink" title="- 游戏数据文件夹路径(只读，打包加密压缩)"></a>- 游戏数据文件夹路径(只读，打包加密压缩)</h2><pre><code>Debug.Log(Application.dataPath);  
+D:/UnityTest/TestUnity2021Project/New Unity Project/Assets
+</code></pre>
+<h2 id="持久化文件夹路径"><a href="#持久化文件夹路径" class="headerlink" title="- 持久化文件夹路径"></a>- 持久化文件夹路径</h2><pre><code>Debug.Log(Application.persistentDataPath);
+C:/Users/gongrenjun/AppData/LocalLow/DefaultCompany/New Unity Project
+</code></pre>
+<h2 id="StreamingAssets文件夹路径-只读，配置文件-打包后不会加密压缩"><a href="#StreamingAssets文件夹路径-只读，配置文件-打包后不会加密压缩" class="headerlink" title="- StreamingAssets文件夹路径(只读，配置文件,打包后不会加密压缩)"></a>- StreamingAssets文件夹路径(只读，配置文件,打包后不会加密压缩)</h2><pre><code>Debug.Log(Application.streamingAssetsPath);
+D:/UnityTest/TestUnity2021Project/New Unity Project/Assets/StreamingAssets
+</code></pre>
+<h2 id="临时文件夹"><a href="#临时文件夹" class="headerlink" title="- 临时文件夹"></a>- 临时文件夹</h2><pre><code>Debug.Log(Application.temporaryCachePath);
+C:/Users/GONGRE~1/AppData/Local/Temp/DefaultCompany/New Unity Project
+</code></pre>
+<h2 id="是否在后台运行-可在Projectt-Settins-Player-选项中设置"><a href="#是否在后台运行-可在Projectt-Settins-Player-选项中设置" class="headerlink" title="- 是否在后台运行 可在Projectt Settins -&gt; Player 选项中设置"></a>- 是否在后台运行 可在Projectt Settins -&gt; Player 选项中设置</h2><pre><code>Debug.Log(Application.runInBackground);
+</code></pre>
+<h2 id="打开URL"><a href="#打开URL" class="headerlink" title="- 打开URL"></a>- 打开URL</h2><pre><code>Application.OpenURL(&quot;http://www.bytefisher.top&quot;);
+</code></pre>
+<h2 id="退出游戏"><a href="#退出游戏" class="headerlink" title="- 退出游戏"></a>- 退出游戏</h2><pre><code>Application.Quit();
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -729,120 +845,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现U3D弹幕飞行游戏摘要</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-06 11:04:38" itemprop="dateCreated datePublished" datetime="2023-12-06T11:04:38+08:00">2023-12-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现U3D弹幕飞行游戏摘要" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>用Lua实现Unity弹幕飞行游戏要点记录：</p>
-<h2 id="对象池"><a href="#对象池" class="headerlink" title="- 对象池"></a>- 对象池</h2><p>创建游戏中可循环利用的游戏对象池</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">---获取一个可用子弹</span><br><span class="line">---@return FlightGameBullet</span><br><span class="line">function m:GetBullet()</span><br><span class="line">    for i, v in pairs(self.flightGameBulletPool) do</span><br><span class="line">        if not v.active then</span><br><span class="line">            return v</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    ---如果没有可用子弹，动态创建一个新的子弹</span><br><span class="line">    local bulletCell = FlightGameBullet.New(UnityEngine.Object.Instantiate(self.BulletModel))</span><br><span class="line">    self.flightGameBulletPool[bulletCell.View:GetInstanceID()] = bulletCell</span><br><span class="line">    return bulletCell</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---回收子弹</span><br><span class="line">---@param bullet FlightGameBullet</span><br><span class="line">function m:RecycleBullet(bullet)</span><br><span class="line">    bullet.View.transform:SetParent(self.RecoveryNode.transform, false)</span><br><span class="line">    bullet:Reset()</span><br><span class="line">    self.flightGameBulletPool[bullet.View:GetInstanceID()] = bullet</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---获取一个未被激活的敌人</span><br><span class="line">---@return FlightGameEnemy</span><br><span class="line">function m:GetEnemy()</span><br><span class="line">    for i, v in pairs(self.flightGameEnemyPool) do</span><br><span class="line">        if not v.active and v:IsPlayDamageEnd() then</span><br><span class="line">            return v</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    ---如果没有未被激活的敌人，动态创建一个新的敌人</span><br><span class="line">    local enemy = FlightGameEnemy.New(UnityEngine.Object.Instantiate(self.EnemyModel),self.rootScene)</span><br><span class="line">    self.flightGameEnemyPool[enemy.View:GetInstanceID()] = enemy</span><br><span class="line">    return enemy</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---回收敌人设置成未激活状态</span><br><span class="line">---@param enemy FlightGameEnemy</span><br><span class="line">function m:RecycleEnemy(enemy)</span><br><span class="line">    enemy.View.transform:SetParent(self.RecoveryNode.transform, false)</span><br><span class="line">    enemy:Reset()</span><br><span class="line">    self.flightGameEnemyPool[enemy.View:GetInstanceID()] = enemy</span><br><span class="line">end</span><br><span class="line">--endregion Object Management</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="碰撞检测"><a href="#碰撞检测" class="headerlink" title="- 碰撞检测"></a>- 碰撞检测</h2><p>实现场景中游戏对象的碰撞检测</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -914,7 +916,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-count">88</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -927,7 +929,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
