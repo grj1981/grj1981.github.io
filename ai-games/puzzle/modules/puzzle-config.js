@@ -50,6 +50,24 @@
             animationSteps: 3
         },
 
+        // 难度曲线配置 - 优先级2.3优化
+        difficultyCurve: {
+            timeGrowth: 'logarithmic',
+            hintReduction: 'adaptive',
+            timeCoefficient: 15,
+            maxTime: 600
+        },
+
+        // 玩家表现数据 - 优先级2.3优化
+        playerPerformance: {
+            levels: {},
+            recentWins: [],
+            recentLosses: [],
+            averageTime: 0,
+            winStreak: 0,
+            loseStreak: 0
+        },
+
         getDifficulty(level) {
             const baseLevel = Math.min(Math.max(1, level), 10);
             const baseConfig = this.DIFFICULTY[baseLevel];
@@ -58,22 +76,160 @@
                 return baseConfig;
             }
             
-            // 11+ 关卡：保持5×5网格，优化时间压力，合理减少提示
-            const timeBonus = (level - 10) * 10; // 每关增加10秒（原15秒）
-            const hintReduction = Math.floor((level - 10) / 10); // 每10关减少1个提示（原5关）
+            // 优先级2.3优化：对数增长的时间
+            const config = this.getAdaptiveDifficulty(level, baseConfig);
+            
+            return config;
+        },
+
+        // 自适应难度计算 - 优先级2.3优化
+        getAdaptiveDifficulty(level, baseConfig) {
+            const curve = this.difficultyCurve;
+            const perf = this.playerPerformance;
+            
+            // 对数增长的时间
+            const logBase = Math.log(level - 9);
+            const rawTimeBonus = logBase * curve.timeCoefficient;
+            const timeBonus = Math.min(rawTimeBonus, curve.maxTime - baseConfig.time);
+            
+            // 基于玩家表现调整提示数量
+            const hints = this.calculateAdaptiveHints(level, baseConfig);
             
             return {
                 grid: baseConfig.grid,
                 size: baseConfig.size,
-                hints: Math.max(2, baseConfig.hints - hintReduction),
+                hints: hints,
                 rotation: baseConfig.rotation,
-                time: baseConfig.time + timeBonus
+                time: baseConfig.time + Math.floor(timeBonus)
             };
+        },
+
+        // 计算自适应提示数 - 优先级2.3优化
+        calculateAdaptiveHints(level, baseConfig) {
+            const perf = this.playerPerformance;
+            const baseHints = baseConfig.hints;
+            
+            // 计算玩家技能水平
+            const playerSkill = this.calculatePlayerSkill();
+            
+            let hintAdjustment = 0;
+            
+            if (playerSkill < 0.3) {
+                hintAdjustment = Math.min(2, Math.floor((0.3 - playerSkill) * 10));
+            } else if (playerSkill > 0.8) {
+                hintAdjustment = -1;
+            }
+            
+            // 基于连续胜率调整
+            if (perf.winStreak >= 5) {
+                hintAdjustment = Math.min(hintAdjustment, -1);
+            } else if (perf.loseStreak >= 3) {
+                hintAdjustment = Math.max(hintAdjustment, 1);
+            }
+            
+            return Math.max(2, Math.min(8, baseHints + hintAdjustment));
+        },
+
+        // 计算玩家技能 - 优先级2.3优化
+        calculatePlayerSkill() {
+            const perf = this.playerPerformance;
+            const { recentWins, recentLosses } = perf;
+            
+            const total = recentWins.length + recentLosses.length;
+            if (total === 0) return 0.5;
+            
+            const winRate = recentWins.length / total;
+            
+            if (perf.averageTime === 0) return 0.5;
+            
+            const timeBonus = Math.min(1, perf.averageTime / 300);
+            
+            return winRate * 0.7 + timeBonus * 0.3;
+        },
+
+        // 记录关卡完成 - 优先级2.3优化
+        recordLevelComplete(level, timeSeconds, success) {
+            const perf = this.playerPerformance;
+            
+            if (success) {
+                perf.recentWins.push({ level, time: timeSeconds, timestamp: Date.now() });
+                perf.winStreak++;
+                perf.loseStreak = 0;
+                
+                if (perf.recentWins.length > 20) {
+                    perf.recentWins.shift();
+                }
+                
+                if (perf.recentWins.length > 0) {
+                    const sum = perf.recentWins.reduce((a, b) => a + b.time, 0);
+                    perf.averageTime = sum / perf.recentWins.length;
+                }
+            } else {
+                perf.recentLosses.push({ level, timestamp: Date.now() });
+                perf.loseStreak++;
+                perf.winStreak = 0;
+                
+                if (perf.recentLosses.length > 20) {
+                    perf.recentLosses.shift();
+                }
+            }
+        },
+
+        // 获取当前难度信息 - 优先级2.3优化
+        getDifficultyInfo(level) {
+            const config = this.getDifficulty(level);
+            const playerSkill = this.calculatePlayerSkill();
+            
+            return {
+                level,
+                ...config,
+                playerSkill: playerSkill.toFixed(2),
+                timeGrowth: 'logarithmic',
+                averageTime: Math.round(this.playerPerformance.averageTime)
+            };
+        },
+
+        // 保存玩家表现数据
+        savePlayerPerformance() {
+            try {
+                localStorage.setItem('puzzle-player-performance', JSON.stringify(this.playerPerformance));
+            } catch (e) {
+                console.warn('[PuzzleConfig] 保存玩家表现失败');
+            }
+        },
+
+        // 加载玩家表现数据
+        loadPlayerPerformance() {
+            try {
+                const saved = localStorage.getItem('puzzle-player-performance');
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    Object.assign(this.playerPerformance, data);
+                }
+            } catch (e) {
+                console.warn('[PuzzleConfig] 加载玩家表现失败');
+            }
+        },
+
+        // 重置表现数据
+        resetPerformance() {
+            this.playerPerformance = {
+                levels: {},
+                recentWins: [],
+                recentLosses: [],
+                averageTime: 0,
+                winStreak: 0,
+                loseStreak: 0
+            };
+            this.savePlayerPerformance();
         },
 
         getColorPalette(isGeometric) {
             return isGeometric ? this.COLORS.geometric : this.COLORS.abstract;
         }
     };
+
+    // 加载玩家表现数据
+    window.PuzzleConfig.loadPlayerPerformance();
 
 })();

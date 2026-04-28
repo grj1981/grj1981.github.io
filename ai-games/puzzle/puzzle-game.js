@@ -3,6 +3,7 @@
 (function() {
     let canvas = null;
     let gameState = null;
+    let touchManager = null;
     
     function initPuzzleGame() {
         // 每次都重新获取canvas确保是最新DOM
@@ -12,16 +13,47 @@
             return;
         }
 
-        const requiredModules = ['PuzzleConfig', 'PuzzleCore', 'PuzzleRender', 'PuzzleAI'];
-        const missing = requiredModules.filter(m => !window[m]);
-        
-        if (missing.length > 0) {
-            console.log('等待模块加载:', missing.join(', '));
-            setTimeout(initPuzzleGame, 50);
-            return;
+        // 模块存在则防御性重置，确保重新进入时状态干净
+        if (window.PuzzleCore) {
+            window.PuzzleCore.clearSelection();
+            window.PuzzleCore.reset();
         }
-
-        gameState = null;
+        if (window.PuzzleRender) {
+            window.PuzzleRender.stopAnimation();
+            window.PuzzleRender.hintTarget = null;
+            window.PuzzleRender.dirtyRegions = [];
+            window.PuzzleRender.particles = [];
+            window.PuzzleRender.staticCache = new Map();
+        }
+        if (window.PuzzleAI) {
+            window.PuzzleAI.init();
+        }
+        if (window.GameStateManager) {
+            window.GameStateManager.cleanup();
+        }
+        if (window.ImageLoadManager && window.ImageLoadManager.cleanup) {
+            window.ImageLoadManager.cleanup();
+        }
+        
+        // TouchManager是可选模块，不阻塞游戏启动
+        if (window.TouchManager) {
+            touchManager = window.TouchManager;
+            try {
+                touchManager.cleanup();
+                touchManager.init(canvas);
+                
+                // 配置触摸事件
+                touchManager.on('tap', handleTap);
+                touchManager.on('doubletap', handleDoubleTap);
+                touchManager.on('dragstart', handleDragStart);
+                touchManager.on('dragmove', handleDragMove);
+                touchManager.on('dragend', handleDragEnd);
+                touchManager.on('longpress', handleLongPress);
+                console.log('[PuzzleGame] TouchManager 已初始化');
+            } catch (e) {
+                console.warn('[PuzzleGame] TouchManager 初始化失败:', e);
+            }
+        }
 
         const levelSpan = document.getElementById('level');
         const hintsSpan = document.getElementById('hints');
@@ -32,22 +64,35 @@
         const timerSpan = document.getElementById('timer');
         let nextBtn = null;
 
+        // 初始化统一状态管理
+        const gsm = window.GameStateManager;
+        gsm.init();
+        // 兼容旧代码，通过代理桥接到 GameStateManager
         gameState = {
-            isPlaying: false,
-            isComplete: false,
-            level: 1,
+            get isPlaying() { return gsm.get('game.isPlaying'); },
+            set isPlaying(v) { gsm.set('game.isPlaying', v); },
+            get isComplete() { return gsm.get('game.isComplete'); },
+            set isComplete(v) { gsm.set('game.isComplete', v); },
+            get level() { return gsm.get('game.level'); },
+            set level(v) { gsm.set('game.level', v); },
+            get bestLevel() { return gsm.get('game.bestLevel'); },
+            set bestLevel(v) { if (v > gsm.get('game.bestLevel')) gsm.set('game.bestLevel', v); },
+            get timeRemaining() { return gsm.get('game.timeRemaining'); },
+            set timeRemaining(v) { gsm.set('game.timeRemaining', v); },
+            get isFailed() { return gsm.get('game.isFailed'); },
+            set isFailed(v) { gsm.set('game.isFailed', v); },
+            get imageSeed() { return gsm.get('game.imageSeed'); },
+            set imageSeed(v) { gsm.set('game.imageSeed', v); },
+            get moveHistory() { return gsm.get('game.moveHistory') || []; },
+            set moveHistory(v) { gsm.set('game.moveHistory', v); },
+            get maxHistorySize() { return gsm.get('game.maxHistorySize') || 50; },
             currentPiece: null,
-            dragOffset: { x: 0, y: 0 },
             selectedPiece: null,
+            dragOffset: { x: 0, y: 0 },
             dragStartX: 0,
             dragStartY: 0,
-            bestLevel: parseInt(localStorage.getItem('puzzle-best-level')) || 0,
-            timeRemaining: 60,
             timerInterval: null,
-            isFailed: false,
-            imageSeed: 0,
-            moveHistory: [],
-            maxHistorySize: 50
+            perfInterval: null
         };
 
         if (bestLevelSpan) {
@@ -82,6 +127,159 @@
 
         window.PuzzleRender.init('game-canvas');
         window.PuzzleAI.init();
+        
+        // 初始化ImageLoadManager（图片加载优化）
+        if (window.ImageLoadManager) {
+            window.ImageLoadManager.init();
+            console.log('[PuzzleGame] ImageLoadManager 已初始化');
+        }
+        
+        // 打印性能信息
+        if (window.PuzzleRender.getPerformanceStats) {
+            gameState.perfInterval = setInterval(() => {
+                const stats = window.PuzzleRender.getPerformanceStats();
+                console.log(`[PuzzleGame] 性能: FPS=${stats.fps}, 渲染时间=${stats.avgRenderTime.toFixed(2)}ms, 粒子数=${stats.particleCount}`);
+            }, 5000);
+        }
+        
+        // 触摸事件处理器
+        function handleTap(data) {
+            // 处理点击选中
+            const rect = canvas.getBoundingClientRect();
+            const coords = { x: data.x - rect.left, y: data.y - rect.top };
+            const piece = window.PuzzleCore.getPieceAt(coords.x, coords.y);
+            
+            if (piece && !piece.isLocked) {
+                gameState.selectedPiece = piece;
+                window.PuzzleCore.selectPiece(piece.id);
+            }
+        }
+        
+        function handleDoubleTap(data) {
+            const rect = canvas.getBoundingClientRect();
+            const coords = { x: data.x - rect.left, y: data.y - rect.top };
+            const piece = window.PuzzleCore.getPieceAt(coords.x, coords.y);
+            
+            if (piece && gameState.selectedPiece && gameState.selectedPiece.id === piece.id) {
+                if (window.PuzzleCore.enableRotation) {
+                    window.PuzzleCore.rotatePiece(piece.id, true);
+                    if (navigator.vibrate) {
+                        navigator.vibrate(5);
+                    }
+                }
+                window.PuzzleAI.recordRotationResult(true);
+            }
+        }
+        
+        function handleDragStart(data) {
+            if (!gameState.isPlaying || gameState.isComplete) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            const coords = { x: data.x - rect.left, y: data.y - rect.top };
+            const piece = window.PuzzleCore.getPieceAt(coords.x, coords.y);
+            
+            if (piece && !piece.isLocked) {
+                gameState.selectedPiece = piece;
+                gameState.currentPiece = piece;
+                gameState.dragStartX = coords.x;
+                gameState.dragStartY = coords.y;
+                gameState.dragOffset = {
+                    x: coords.x - piece.currentX,
+                    y: coords.y - piece.currentY
+                };
+                window.PuzzleCore.selectPiece(piece.id);
+                
+                if (navigator.vibrate) {
+                    navigator.vibrate(10);
+                }
+            }
+        }
+        
+        function handleDragMove(data) {
+            if (!gameState.currentPiece) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            const coords = { x: data.x - rect.left, y: data.y - rect.top };
+            
+            window.PuzzleCore.movePiece(
+                gameState.currentPiece.id,
+                coords.x - gameState.dragOffset.x,
+                coords.y - gameState.dragOffset.y
+            );
+        }
+        
+        function handleDragEnd(data) {
+            if (!gameState.currentPiece) return;
+            
+            const piece = gameState.currentPiece;
+            const pieceId = piece.id;
+            const oldX = piece.currentX;
+            const oldY = piece.currentY;
+            
+            const result = window.PuzzleCore.checkSnap(pieceId);
+            
+            if (result.snapped) {
+                if (!piece.isLocked) {
+                    if (navigator.vibrate) {
+                        navigator.vibrate([10, 50, 10]);
+                    }
+                    gameState.moveHistory.push({
+                        pieceId: pieceId,
+                        oldX: oldX,
+                        oldY: oldY,
+                        timestamp: Date.now()
+                    });
+                    if (gameState.moveHistory.length > gameState.maxHistorySize) {
+                        gameState.moveHistory.shift();
+                    }
+                    applyTimeBonus();
+                }
+                console.log('碎片吸附成功:', pieceId);
+                
+                const progress = window.PuzzleCore.getProgress();
+                if (hintsSpan) hintsSpan.textContent = progress.hints;
+                
+                window.PuzzleCore.clearSelection();
+                
+                if (result.isComplete) {
+                    handleGameComplete();
+                }
+            }
+            
+            gameState.currentPiece = null;
+            gameState.selectedPiece = null;
+        }
+        
+        function handleLongPress(data) {
+            // 长按显示提示
+            if (gameState.isPlaying && !gameState.isComplete) {
+                if (!window.PuzzleAI.canUseHint(window.PuzzleCore)) return;
+
+                const result = window.PuzzleAI.useHint(window.PuzzleCore, window.PuzzleRender);
+                if (result && hintsSpan) {
+                    hintsSpan.textContent = result.hintsRemaining;
+                    // 视觉反馈：闪烁提示数字
+                    hintsSpan.style.transition = 'color 0.3s, transform 0.3s';
+                    hintsSpan.style.color = '#ff4444';
+                    hintsSpan.style.transform = 'scale(1.3)';
+                    setTimeout(() => {
+                        hintsSpan.style.color = '';
+                        hintsSpan.style.transform = '';
+                    }, 600);
+                    // 闪烁提示按钮
+                    if (hintBtn) {
+                        hintBtn.style.transition = 'background-color 0.3s';
+                        hintBtn.style.backgroundColor = '#ff6666';
+                        setTimeout(() => {
+                            hintBtn.style.backgroundColor = '';
+                        }, 600);
+                    }
+                }
+                if (navigator.vibrate) {
+                    navigator.vibrate(50);
+                }
+            }
+        }
 
         function showLoading() {
             if (!canvas) return;
@@ -152,6 +350,23 @@
         function showFailedMessage() {
             gameState.isPlaying = false;
             
+            const config = window.PuzzleConfig.getDifficulty(gameState.level);
+            const timeUsed = config.time;
+            
+            // 更新持久化数据
+            if (window.GameDataPersistence) {
+                window.GameDataPersistence.saveGameSession({
+                    level: gameState.level,
+                    completed: false,
+                    timeUsed: timeUsed,
+                    hintsUsed: config.hints - window.PuzzleCore.hintsRemaining
+                });
+            }
+            
+            // 反馈闭环：记录失败
+            window.PuzzleConfig.recordLevelComplete(gameState.level, timeUsed, false);
+            window.PuzzleConfig.savePlayerPerformance();
+            
             if (startBtn) {
                 startBtn.textContent = '⏰ 时间到！重新开始';
                 startBtn.style.display = 'inline-block';
@@ -186,20 +401,19 @@
 
             const size = getCanvasSize();
             
-            // 先尝试异步加载，15秒超时后使用同步模式
+            let loadAborted = false;
             const loadPromise = window.PuzzleCore.init(1, size.width, size.height, gameState.imageSeed);
             
             let initData = null;
             try {
                 initData = await Promise.race([
-                    loadPromise,
-                    new Promise((resolve) => setTimeout(() => resolve(null), 15000))
+                    loadPromise.then(data => { if (loadAborted) return null; return data; }),
+                    new Promise((resolve) => setTimeout(() => { loadAborted = true; resolve(null); }, 15000))
                 ]);
             } catch (e) {
                 console.warn('图片加载失败');
             }
             
-            // 如果超时或失败，使用同步模式
             if (!initData || !initData.pieces) {
                 console.log('使用纯色模式');
                 initData = window.PuzzleCore.initSync(1, size.width, size.height);
@@ -240,6 +454,21 @@
             gameState.isPlaying = false;
             stopTimer();
             
+            const config = window.PuzzleConfig.getDifficulty(gameState.level);
+            const timeUsed = config.time - gameState.timeRemaining;
+            
+            // 更新持久化数据
+            if (window.GameDataPersistence) {
+                window.GameDataPersistence.saveGameSession({
+                    level: gameState.level,
+                    completed: true,
+                    timeUsed: timeUsed,
+                    hintsUsed: config.hints - window.PuzzleCore.hintsRemaining,
+                    rotationCount: window.PuzzleAI.playerBehavior.rotationAttempts,
+                    successfulRotations: window.PuzzleAI.playerBehavior.successfulRotations
+                });
+            }
+            
             if (gameState.level > gameState.bestLevel) {
                 gameState.bestLevel = gameState.level;
                 localStorage.setItem('puzzle-best-level', gameState.bestLevel);
@@ -248,7 +477,10 @@
                 }
             }
             
-            const config = window.PuzzleConfig.getDifficulty(gameState.level);
+            // 反馈闭环：记录难度和AI行为
+            window.PuzzleConfig.recordLevelComplete(gameState.level, timeUsed, true);
+            window.PuzzleAI.recordCompletionTime(timeUsed);
+            window.PuzzleConfig.savePlayerPerformance();
 
             // 始终显示下一关按钮（无限关卡）
             if (!nextBtn) {
@@ -283,14 +515,14 @@
             
             const size = getCanvasSize();
             
-            // 图片加载超时处理
+            let loadAborted = false;
             const loadPromise = window.PuzzleCore.init(gameState.level, size.width, size.height, gameState.imageSeed);
             
             let initData = null;
             try {
                 initData = await Promise.race([
-                    loadPromise,
-                    new Promise((resolve) => setTimeout(() => resolve(null), 15000))
+                    loadPromise.then(data => { if (loadAborted) return null; return data; }),
+                    new Promise((resolve) => setTimeout(() => { loadAborted = true; resolve(null); }, 15000))
                 ]);
             } catch (e) {
                 console.warn('图片加载失败');
@@ -307,170 +539,7 @@
             console.log('进入下一关，关卡:', gameState.level);
         }
 
-        function getCanvasCoords(e) {
-            const rect = canvas.getBoundingClientRect();
-            if (e.touches && e.touches.length > 0) {
-                return {
-                    x: e.touches[0].clientX - rect.left,
-                    y: e.touches[0].clientY - rect.top
-                };
-            }
-            return {
-                x: e.clientX - rect.left,
-                y: e.clientY - rect.top
-            };
-        }
-
-        function handleCanvasMouseDown(e) {
-            if (!gameState.isPlaying || gameState.isComplete) return;
-
-            const coords = getCanvasCoords(e);
-            const piece = window.PuzzleCore.getPieceAt(coords.x, coords.y);
-
-            if (piece && !piece.isLocked) {
-                // 只选中，不开始拖拽
-                gameState.selectedPiece = piece;
-                gameState.dragStartX = coords.x;
-                gameState.dragStartY = coords.y;
-                window.PuzzleCore.selectPiece(piece.id);
-                
-                if (navigator.vibrate && e.type === 'touchstart') {
-                    navigator.vibrate(10);
-                }
-            } else if (piece && piece.isLocked) {
-                window.PuzzleCore.clearSelection();
-                gameState.selectedPiece = null;
-            }
-        }
-
-        function handleCanvasMouseMove(e) {
-            const pieceToMove = gameState.currentPiece || gameState.selectedPiece;
-            if (!pieceToMove || gameState.isComplete) return;
-
-            const coords = getCanvasCoords(e);
-            
-            // 如果还没有开始拖拽，检查是否移动超过阈值
-            if (!gameState.currentPiece && gameState.selectedPiece) {
-                const dx = coords.x - gameState.dragStartX;
-                const dy = coords.y - gameState.dragStartY;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                // 只有移动超过15px才开始拖拽（给双击留出空间）
-                if (distance > 15) {
-                    // 开始拖拽
-                    gameState.currentPiece = gameState.selectedPiece;
-                    gameState.dragOffset = {
-                        x: coords.x - gameState.selectedPiece.currentX,
-                        y: coords.y - gameState.selectedPiece.currentY
-                    };
-                    canvas.style.cursor = 'grabbing';
-                }
-            }
-            
-            // 如果已经开始拖拽
-            if (gameState.currentPiece) {
-                if (e.cancelable && e.type === 'touchmove') {
-                    e.preventDefault();
-                }
-
-                window.PuzzleCore.movePiece(
-                    gameState.currentPiece.id,
-                    coords.x - gameState.dragOffset.x,
-                    coords.y - gameState.dragOffset.y
-                );
-            }
-        }
-
-        function handleCanvasMouseUp(e) {
-            // 处理拖拽结束
-            if (gameState.currentPiece) {
-                const piece = gameState.currentPiece;
-                const pieceId = piece.id;
-                const oldX = piece.currentX;
-                const oldY = piece.currentY;
-                
-                const result = window.PuzzleCore.checkSnap(pieceId);
-
-                if (result.snapped) {
-                    if (!piece.isLocked) {
-                        if (navigator.vibrate) {
-                            navigator.vibrate([10, 50, 10]);
-                        }
-                        gameState.moveHistory.push({
-                            pieceId: pieceId,
-                            oldX: oldX,
-                            oldY: oldY,
-                            timestamp: Date.now()
-                        });
-                        if (gameState.moveHistory.length > gameState.maxHistorySize) {
-                            gameState.moveHistory.shift();
-                        }
-                        applyTimeBonus();
-                    }
-                    console.log('碎片吸附成功:', pieceId);
-
-                    const progress = window.PuzzleCore.getProgress();
-                    if (hintsSpan) hintsSpan.textContent = progress.hints;
-
-                    if (result.isComplete) {
-                        handleGameComplete();
-                    }
-                }
-
-                gameState.currentPiece = null;
-                gameState.selectedPiece = null;
-                canvas.style.cursor = 'default';
-            }
-        }
-
-        window._puzzleMouseDown = handleCanvasMouseDown;
-        window._puzzleMouseMove = handleCanvasMouseMove;
-        window._puzzleMouseUp = handleCanvasMouseUp;
-        window._puzzleClick = handleCanvasClick;
-        window._puzzleTouchStart = handleCanvasMouseDown;
-        window._puzzleTouchMove = handleCanvasMouseMove;
-        window._puzzleTouchEnd = handleCanvasMouseUp;
-
-        canvas.addEventListener('mousedown', window._puzzleMouseDown);
-        canvas.addEventListener('mousemove', window._puzzleMouseMove);
-        canvas.addEventListener('mouseup', window._puzzleMouseUp);
-        canvas.addEventListener('mouseleave', window._puzzleMouseUp);
-
-        function handleCanvasClick(e) {
-            if (!gameState.isPlaying || gameState.isComplete) return;
-
-            const coords = getCanvasCoords(e);
-            const piece = window.PuzzleCore.getPieceAt(coords.x, coords.y);
-
-            if (piece && !piece.isLocked) {
-                // 如果点击的是当前选中的碎片，则旋转
-                if (gameState.selectedPiece && gameState.selectedPiece.id === piece.id) {
-                    if (window.PuzzleCore.enableRotation) {
-                        window.PuzzleCore.rotatePiece(piece.id, true);
-                        if (navigator.vibrate) {
-                            navigator.vibrate(5);
-                        }
-                    }
-                } else {
-                    // 否则选中该碎片
-                    gameState.selectedPiece = piece;
-                    window.PuzzleCore.selectPiece(piece.id);
-                    if (navigator.vibrate) {
-                        navigator.vibrate(10);
-                    }
-                }
-            } else {
-                // 点击空白区域或已锁定碎片，取消选中
-                window.PuzzleCore.clearSelection();
-                gameState.selectedPiece = null;
-            }
-        }
-
-        canvas.addEventListener('dblclick', window._puzzleClick);
-
-        canvas.addEventListener('touchstart', window._puzzleTouchStart, { passive: false });
-        canvas.addEventListener('touchmove', window._puzzleTouchMove, { passive: false });
-        canvas.addEventListener('touchend', window._puzzleTouchEnd);
+        // 桌面端双击旋转通过 TouchManager 的 doubletap 事件处理
 
         canvas.style.cursor = 'pointer';
 
@@ -498,11 +567,38 @@ function cleanupPuzzleGame() {
         // 停止动画渲染
         if (window.PuzzleRender) {
             window.PuzzleRender.stopAnimation();
+            window.PuzzleRender.hintTarget = null;
+            window.PuzzleRender.staticCache = new Map();
+            window.PuzzleRender.dirtyRegions = [];
+            window.PuzzleRender.particles = [];
+            window.PuzzleRender.particlePool.forEach(p => { p.active = false; });
+            window.PuzzleRender.hints = [];
         }
         
-        // 清除选中状态
+        // 重置 PuzzleCore 完整状态
         if (window.PuzzleCore) {
             window.PuzzleCore.clearSelection();
+            window.PuzzleCore.reset();
+        }
+        
+        // 重置 PuzzleAI
+        if (window.PuzzleAI) {
+            window.PuzzleAI.init();
+        }
+        
+        // 清理 GameStateManager
+        if (window.GameStateManager) {
+            window.GameStateManager.cleanup();
+        }
+        
+        // 清理 ImageLoadManager
+        if (window.ImageLoadManager && window.ImageLoadManager.cleanup) {
+            window.ImageLoadManager.cleanup();
+        }
+        
+        // 清理 TouchManager
+        if (window.TouchManager) {
+            window.TouchManager.cleanup();
         }
         
         // 重置游戏状态
@@ -513,9 +609,14 @@ function cleanupPuzzleGame() {
             gameState.currentPiece = null;
             gameState.selectedPiece = null;
             gameState.moveHistory = [];
+            gameState.level = 1;
             if (gameState.timerInterval) {
                 clearInterval(gameState.timerInterval);
                 gameState.timerInterval = null;
+            }
+            if (gameState.perfInterval) {
+                clearInterval(gameState.perfInterval);
+                gameState.perfInterval = null;
             }
         }
         
@@ -525,29 +626,7 @@ function cleanupPuzzleGame() {
             window._puzzleTimer = null;
         }
         
-        // 移除事件监听
-        const canvas = document.getElementById('game-canvas');
-        if (canvas) {
-            canvas.removeEventListener('mousedown', window._puzzleMouseDown);
-            canvas.removeEventListener('mousemove', window._puzzleMouseMove);
-            canvas.removeEventListener('mouseup', window._puzzleMouseUp);
-            canvas.removeEventListener('mouseleave', window._puzzleMouseUp);
-            canvas.removeEventListener('dblclick', window._puzzleClick);
-            canvas.removeEventListener('touchstart', window._puzzleTouchStart);
-            canvas.removeEventListener('touchmove', window._puzzleTouchMove);
-            canvas.removeEventListener('touchend', window._puzzleTouchEnd);
-        }
-        
-        // 清除 window 变量引用
-        window._puzzleMouseDown = null;
-        window._puzzleMouseMove = null;
-        window._puzzleMouseUp = null;
-        window._puzzleClick = null;
-        window._puzzleTouchStart = null;
-        window._puzzleTouchMove = null;
-        window._puzzleTouchEnd = null;
-        
-        // 重新获取canvas并清除内容
+        // 清除 canvas 内容
         const currentCanvas = document.getElementById('game-canvas');
         if (currentCanvas) {
             const ctx = currentCanvas.getContext('2d');
@@ -556,7 +635,6 @@ function cleanupPuzzleGame() {
             }
         }
         
-        // 允许重新初始化
         console.log('光影拼图游戏已清理');
     }
 

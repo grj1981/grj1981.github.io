@@ -32,6 +32,40 @@
             this.puzzleImage = new Image();
             this.puzzleImage.crossOrigin = 'anonymous';
             
+            // 使用ImageLoadManager优化图片加载
+            if (window.ImageLoadManager) {
+                return window.ImageLoadManager.loadImage(imageUrl, { maxRetries: 3, timeout: 15000 })
+                    .then(img => {
+                        this.puzzleImage = img;
+                        this.imageLoaded = true;
+                        this.generatePuzzle(config, canvasWidth, canvasHeight);
+                        this.completedPieces = 0;
+                        
+                        return {
+                            pieces: this.pieces,
+                            gridSize: this.gridSize,
+                            hints: this.hintsRemaining,
+                            level: level,
+                            cellSize: this.cellSize
+                        };
+                    })
+                    .catch(error => {
+                        console.warn('图片加载失败，使用纯色模式:', error);
+                        this.imageLoaded = false;
+                        this.generatePuzzle(config, canvasWidth, canvasHeight);
+                        this.completedPieces = 0;
+                        
+                        return {
+                            pieces: this.pieces,
+                            gridSize: this.gridSize,
+                            hints: this.hintsRemaining,
+                            level: level,
+                            cellSize: this.cellSize
+                        };
+                    });
+            }
+            
+            // 原始加载方式（兼容）
             return new Promise((resolve) => {
                 this.puzzleImage.onload = () => {
                     this.imageLoaded = true;
@@ -205,7 +239,7 @@
             
             if (animated) {
                 piece.isRotating = true;
-                piece.targetRotation = (piece.rotation + 90) % 360;
+                piece.animTargetRotation = (piece.rotation + 90) % 360;
             } else {
                 piece.rotation = (piece.rotation + 90) % 360;
             }
@@ -219,13 +253,13 @@
             
             this.pieces.forEach(p => {
                 if (p.isRotating) {
-                    let diff = p.targetRotation - p.rotation;
+                    let diff = p.animTargetRotation - p.rotation;
                     
                     if (diff > 180) diff -= 360;
                     if (diff < -180) diff += 360;
                     
                     if (Math.abs(diff) < speed) {
-                        p.rotation = p.targetRotation;
+                        p.rotation = p.animTargetRotation;
                         p.isRotating = false;
                     } else {
                         p.rotation += diff > 0 ? speed : -speed;
@@ -307,36 +341,6 @@
             return null;
         },
 
-        useHint() {
-            if (this.hintsRemaining <= 0) return null;
-            
-            this.hintsRemaining--;
-            
-            const unlockedPieces = this.pieces.filter(p => !p.isLocked);
-            if (unlockedPieces.length === 0) return null;
-            
-            let bestPiece = null;
-            let minDistance = Infinity;
-            
-            unlockedPieces.forEach(piece => {
-                const distance = Math.sqrt(
-                    Math.pow(piece.currentX - piece.targetX, 2) +
-                    Math.pow(piece.currentY - piece.targetY, 2)
-                );
-                
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    bestPiece = piece;
-                }
-            });
-            
-            return bestPiece;
-        },
-
-        nextLevel() {
-            return this.init(this.currentLevel + 1);
-        },
-
         getProgress() {
             return {
                 completed: this.completedPieces,
@@ -360,6 +364,23 @@
 
         hasImage() {
             return this.imageLoaded && window.PuzzleConfig.enableImageMode;
+        },
+
+        reset() {
+            this.pieces = [];
+            this.targetGrid = [];
+            this.currentLevel = 1;
+            this.completedPieces = 0;
+            this.hintsRemaining = 0;
+            this.canvasWidth = 500;
+            this.canvasHeight = 400;
+            this.gridSize = 2;
+            this.selectedPieceId = null;
+            this.puzzleImage = null;
+            this.imageLoaded = false;
+            this.cellSize = null;
+            this.gridOffsetX = null;
+            this.gridOffsetY = null;
         }
     };
 

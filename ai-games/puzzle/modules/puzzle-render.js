@@ -10,6 +10,14 @@
         animationFrame: null,
         hints: [],
         lastTime: 0,
+        
+        // 性能监控 - 优先级1.1优化
+        performance: {
+            frameCount: 0,
+            lastFrameTime: 0,
+            currentFPS: 0,
+            renderTimes: []
+        },
 
         init(canvasId) {
             this.canvas = document.getElementById(canvasId);
@@ -65,7 +73,9 @@
 
         clear() {
             if (!this.ctx) return;
-            
+
+            this.ctx.shadowColor = 'transparent';
+            this.ctx.shadowBlur = 0;
             this.ctx.fillStyle = '#ffffff';
             this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         },
@@ -81,11 +91,6 @@
                 
                 this.ctx.translate(centerX, centerY);
                 this.ctx.rotate((piece.rotation || 0) * Math.PI / 180);
-                
-                if (piece.isLocked) {
-                    this.ctx.shadowColor = window.PuzzleConfig.COLORS.success;
-                    this.ctx.shadowBlur = 15;
-                }
                 
                 if (piece.isSelected) {
                     const selSize = piece.width;
@@ -137,6 +142,9 @@
 
         drawTargetGrid(gridSize, cellSize) {
             if (!this.ctx) return;
+            // 确保 shadow 干净
+            this.ctx.shadowColor = 'transparent';
+            this.ctx.shadowBlur = 0;
             
             const canvasWidth = this.canvas.width;
             const canvasHeight = this.canvas.height;
@@ -301,6 +309,9 @@
             const offsetY = core.gridOffsetY;
             
             this.ctx.save();
+            // 确保 shadow 干净，防止继承外层状态
+            this.ctx.shadowColor = 'transparent';
+            this.ctx.shadowBlur = 0;
             this.ctx.globalAlpha = 0.3;
             this.ctx.drawImage(
                 image,
@@ -325,6 +336,9 @@
             const actualCellSize = core.cellSize;
             
             this.ctx.save();
+            // 确保 shadow 干净
+            this.ctx.shadowColor = 'transparent';
+            this.ctx.shadowBlur = 0;
             
             lockedPieces.forEach(piece => {
                 const size = piece.width;
@@ -353,11 +367,6 @@
                 
                 this.ctx.translate(centerX, centerY);
                 this.ctx.rotate((piece.rotation || 0) * Math.PI / 180);
-                
-                if (piece.isLocked) {
-                    this.ctx.shadowColor = window.PuzzleConfig.COLORS.success;
-                    this.ctx.shadowBlur = 15;
-                }
                 
                 if (piece.isSelected) {
                     this.ctx.shadowColor = window.PuzzleConfig.COLORS.highlight;
@@ -422,8 +431,13 @@
         render(state) {
             if (!this.ctx) return;
             
+            const startTime = performance.now();
+            
             try {
                 this.clear();
+                // 确保 shadow 状态干净，防止跨帧泄漏
+                this.ctx.shadowColor = 'transparent';
+                this.ctx.shadowBlur = 0;
                 
                 const cellSize = state.cellSize || (window.PuzzleCore ? window.PuzzleCore.cellSize : null);
                 if (cellSize) {
@@ -455,6 +469,13 @@
                 if (state.isFailed) {
                     this.drawFailedEffect();
                 }
+                
+                // 记录渲染时间 - 优先级1.1优化
+                const renderTime = performance.now() - startTime;
+                this.performance.renderTimes.push(renderTime);
+                if (this.performance.renderTimes.length > 60) {
+                    this.performance.renderTimes.shift();
+                }
             } catch (e) {
                 console.error('Render error:', e);
             }
@@ -482,6 +503,29 @@
                 this.animationFrame = null;
             }
             this.particles = [];
+        },
+
+        // 获取性能统计 - 优先级1.1优化
+        getPerformanceStats() {
+            const now = performance.now();
+            this.performance.frameCount++;
+            
+            if (now - this.performance.lastFrameTime >= 1000) {
+                this.performance.currentFPS = this.performance.frameCount;
+                this.performance.frameCount = 0;
+                this.performance.lastFrameTime = now;
+            }
+            
+            const avgRenderTime = this.performance.renderTimes.length > 0 
+                ? this.performance.renderTimes.reduce((a, b) => a + b, 0) / this.performance.renderTimes.length 
+                : 0;
+            
+            return {
+                fps: this.performance.currentFPS || 0,
+                avgRenderTime: avgRenderTime,
+                particleCount: this.particles.length,
+                dirtyRegionCount: 0
+            };
         },
 
         showHint(piece) {
