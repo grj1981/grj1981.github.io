@@ -30,7 +30,6 @@
             const seed = imageSeed || Date.now();
             const imageUrl = `${window.PuzzleConfig.IMAGE_BASE_URL}/${canvasWidth}/${canvasHeight}?random=${seed}`;
             this.puzzleImage = new Image();
-            this.puzzleImage.crossOrigin = 'anonymous';
             
             // 使用ImageLoadManager优化图片加载
             if (window.ImageLoadManager) {
@@ -127,14 +126,16 @@
             this.targetGrid = [];
             
             const gridSize = config.grid;
-            const cellSize = Math.min(canvasWidth, canvasHeight) / (gridSize + 2);
+            const isNarrow = canvasWidth < 450;
+            const padding = isNarrow ? 1 : 2;
+            const cellSize = Math.min(canvasWidth / (gridSize + padding), canvasHeight / (gridSize + 3));
             
             this.cellSize = cellSize;
             
             const gridWidth = gridSize * cellSize;
             const gridHeight = gridSize * cellSize;
             const gridOffsetX = (canvasWidth - gridWidth) / 2;
-            const gridOffsetY = (canvasHeight - gridHeight) / 2;
+            const gridOffsetY = (canvasHeight - gridHeight) / 2 + (isNarrow ? cellSize * 0.3 : 0);
             
             this.gridOffsetX = gridOffsetX;
             this.gridOffsetY = gridOffsetY;
@@ -188,41 +189,73 @@
             
             const shuffledIndices = this.shuffleArray([...Array(config.size).keys()]);
             
-            const leftAreaWidth = canvasWidth * 0.25;
-            const rightAreaWidth = canvasWidth * 0.25;
-            
-            shuffledIndices.forEach((originalIndex, newIndex) => {
-                const target = this.targetGrid[originalIndex];
+            if (isNarrow) {
+                const stripHeight = canvasHeight - gridOffsetY - gridHeight - 10;
+                const areaTop = gridOffsetY + gridHeight + 10;
+                const areaH = Math.max(stripHeight, pieceSize + 20);
                 
-                let rotation = 0;
-                if (this.enableRotation && Math.random() > 0.5) {
-                    rotation = Math.floor(Math.random() * 4) * 90;
-                }
-                
-                let startX, startY;
-                if (newIndex % 2 === 0) {
-                    startX = Math.random() * leftAreaWidth + 10;
-                    startY = Math.random() * (canvasHeight - pieceSize - 20) + 10;
-                } else {
-                    startX = canvasWidth - rightAreaWidth + Math.random() * (rightAreaWidth - pieceSize - 10);
-                    startY = Math.random() * (canvasHeight - pieceSize - 20) + 10;
-                }
-                
-                this.pieces.push({
-                    id: originalIndex,
-                    correctIndex: originalIndex,
-                    currentX: startX,
-                    currentY: startY,
-                    targetX: target.x,
-                    targetY: target.y,
-                    imageData: target.imageData,
-                    rotation: rotation,
-                    targetRotation: 0,
-                    isLocked: false,
-                    width: pieceSize,
-                    height: pieceSize
+                shuffledIndices.forEach((originalIndex, newIndex) => {
+                    const target = this.targetGrid[originalIndex];
+                    
+                    let rotation = 0;
+                    if (this.enableRotation && Math.random() > 0.5) {
+                        rotation = Math.floor(Math.random() * 4) * 90;
+                    }
+                    
+                    const startX = Math.random() * (canvasWidth - pieceSize - 10) + 5;
+                    const startY = areaTop + Math.random() * Math.max(0, areaH - pieceSize - 10);
+                    
+                    this.pieces.push({
+                        id: originalIndex,
+                        correctIndex: originalIndex,
+                        currentX: Math.min(startX, canvasWidth - pieceSize - 2),
+                        currentY: Math.min(startY, canvasHeight - pieceSize - 2),
+                        targetX: target.x,
+                        targetY: target.y,
+                        imageData: target.imageData,
+                        rotation: rotation,
+                        targetRotation: 0,
+                        isLocked: false,
+                        width: pieceSize,
+                        height: pieceSize
+                    });
                 });
-            });
+            } else {
+                const marginW = Math.max(canvasWidth * 0.18, 40);
+                
+                shuffledIndices.forEach((originalIndex, newIndex) => {
+                    const target = this.targetGrid[originalIndex];
+                    
+                    let rotation = 0;
+                    if (this.enableRotation && Math.random() > 0.5) {
+                        rotation = Math.floor(Math.random() * 4) * 90;
+                    }
+                    
+                    let startX, startY;
+                    if (newIndex % 2 === 0) {
+                        startX = Math.random() * (marginW - pieceSize) + 5;
+                        startY = Math.random() * (canvasHeight - pieceSize - 10) + 5;
+                    } else {
+                        startX = canvasWidth - marginW + Math.random() * (marginW - pieceSize - 5);
+                        startY = Math.random() * (canvasHeight - pieceSize - 10) + 5;
+                    }
+                    
+                    this.pieces.push({
+                        id: originalIndex,
+                        correctIndex: originalIndex,
+                        currentX: Math.max(2, Math.min(canvasWidth - pieceSize - 2, startX)),
+                        currentY: Math.max(2, Math.min(canvasHeight - pieceSize - 2, startY)),
+                        targetX: target.x,
+                        targetY: target.y,
+                        imageData: target.imageData,
+                        rotation: rotation,
+                        targetRotation: 0,
+                        isLocked: false,
+                        width: pieceSize,
+                        height: pieceSize
+                    });
+                });
+            }
         },
 
         shuffleArray(array) {
@@ -290,8 +323,8 @@
             const piece = this.pieces.find(p => p.id === pieceId);
             if (!piece || piece.isLocked) return false;
             
-            piece.currentX = newX;
-            piece.currentY = newY;
+            piece.currentX = Math.max(0, Math.min(this.canvasWidth - piece.width, newX));
+            piece.currentY = Math.max(0, Math.min(this.canvasHeight - piece.height, newY));
             return true;
         },
 
@@ -351,11 +384,19 @@
         },
 
         getPiecesForRender() {
-            return this.pieces.map(p => ({
+            const rendered = this.pieces.map(p => ({
                 ...p,
                 displayX: p.isLocked ? p.targetX : p.currentX,
                 displayY: p.isLocked ? p.targetY : p.currentY
             }));
+            if (this.selectedPieceId != null) {
+                const selIdx = rendered.findIndex(p => p.id === this.selectedPieceId && !p.isLocked);
+                if (selIdx >= 0) {
+                    const [sel] = rendered.splice(selIdx, 1);
+                    rendered.push(sel);
+                }
+            }
+            return rendered;
         },
 
         getImage() {

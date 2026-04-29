@@ -45,8 +45,13 @@
             this.initParticlePool();
             this.resize();
             
-            window.addEventListener('resize', () => this.resize());
+            window.addEventListener('resize', () => this.debounceResize());
             return true;
+        },
+
+        debounceResize() {
+            if (this._resizeTimer) clearTimeout(this._resizeTimer);
+            this._resizeTimer = setTimeout(() => this.resize(), 150);
         },
 
         // 初始化粒子对象池
@@ -110,40 +115,49 @@
             const oldWidth = this.canvas.width || 500;
             const oldHeight = this.canvas.height || 400;
             
-            // 使用 clientWidth/clientHeight 反映 CSS 实际显示尺寸（含 max-width 约束）
-            const newWidth = Math.min(600, this.canvas.clientWidth || (this.canvas.parentElement.clientWidth - 40));
-            const newHeight = Math.min(500, window.innerHeight * 0.6);
+            const containerW = this.canvas.parentElement.clientWidth - 40;
+            const maxW = Math.min(containerW, 500);
+            const newWidth = Math.min(maxW, window.innerWidth - 30);
+            const newHeight = Math.round(newWidth * 0.8);
             
-            if (newWidth === oldWidth && newHeight === oldHeight) return;
+            const maxH = Math.min(window.innerHeight * 0.55, 500);
+            const finalWidth = Math.min(newWidth, Math.round(maxH / 0.8));
+            const finalHeight = Math.round(finalWidth * 0.8);
+            
+            if (finalWidth < 200) return;
+            
+            if (finalWidth === oldWidth && finalHeight === oldHeight) return;
             
             if (oldWidth > 0 && oldHeight > 0 && window.PuzzleCore && window.PuzzleCore.pieces) {
-                const scaleX = newWidth / oldWidth;
-                const scaleY = newHeight / oldHeight;
+                const scaleX = finalWidth / oldWidth;
+                const scaleY = finalHeight / oldHeight;
                 
                 window.PuzzleCore.pieces.forEach(p => {
+                    p.width = Math.round(p.width * Math.min(scaleX, scaleY));
+                    p.height = Math.round(p.height * Math.min(scaleX, scaleY));
                     if (!p.isLocked) {
-                        p.currentX *= scaleX;
-                        p.currentY *= scaleY;
-                        p.currentX = Math.max(0, Math.min(newWidth - p.width, p.currentX));
-                        p.currentY = Math.max(0, Math.min(newHeight - p.height, p.currentY));
+                        p.currentX = Math.max(0, Math.min(finalWidth - p.width, p.currentX * scaleX));
+                        p.currentY = Math.max(0, Math.min(finalHeight - p.height, p.currentY * scaleY));
                     }
-                    p.targetX *= scaleX;
-                    p.targetY *= scaleY;
+                    p.targetX = Math.round(p.targetX * scaleX);
+                    p.targetY = Math.round(p.targetY * scaleY);
                 });
                 
-                if (window.PuzzleCore.gridOffsetX) {
-                    window.PuzzleCore.gridOffsetX *= scaleX;
-                    window.PuzzleCore.gridOffsetY *= scaleY;
+                if (window.PuzzleCore.gridOffsetX != null) {
+                    window.PuzzleCore.gridOffsetX = Math.round(window.PuzzleCore.gridOffsetX * scaleX);
+                    window.PuzzleCore.gridOffsetY = Math.round(window.PuzzleCore.gridOffsetY * scaleY);
                 }
                 
-                window.PuzzleCore.canvasWidth = newWidth;
-                window.PuzzleCore.canvasHeight = newHeight;
+                window.PuzzleCore.canvasWidth = finalWidth;
+                window.PuzzleCore.canvasHeight = finalHeight;
+                if (window.PuzzleCore.cellSize) {
+                    window.PuzzleCore.cellSize = Math.round(window.PuzzleCore.cellSize * Math.min(scaleX, scaleY));
+                }
             }
             
-            this.canvas.width = newWidth;
-            this.canvas.height = newHeight;
+            this.canvas.width = finalWidth;
+            this.canvas.height = finalHeight;
             
-            // 清除静态缓存
             this.staticCache.clear();
         },
 
@@ -578,6 +592,10 @@
 
         // 停止动画
         stopAnimation() {
+            if (this._resizeTimer) {
+                clearTimeout(this._resizeTimer);
+                this._resizeTimer = null;
+            }
             if (this.animationFrame) {
                 cancelAnimationFrame(this.animationFrame);
                 this.animationFrame = null;

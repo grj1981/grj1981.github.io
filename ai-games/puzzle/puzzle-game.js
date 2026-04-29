@@ -306,9 +306,8 @@
         }
 
         function getCanvasSize() {
-            const rect = canvas.getBoundingClientRect();
-            const w = rect.width > 0 ? rect.width : (canvas.width || 500);
-            const h = rect.height > 0 ? rect.height : (canvas.height || 400);
+            const w = canvas && canvas.width > 0 ? canvas.width : 500;
+            const h = canvas && canvas.height > 0 ? canvas.height : 400;
             return { width: w, height: h };
         }
 

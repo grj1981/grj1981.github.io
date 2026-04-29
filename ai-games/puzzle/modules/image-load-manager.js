@@ -8,7 +8,7 @@
         currentRetry: 0,
         sources: [
             'https://picsum.photos',
-            'https://via.placeholder.com',
+            'https://api.paugram.com/wallpaper/',
             'https://source.unsplash.com/1600x900'
         ],
         currentIndex: 0,
@@ -94,6 +94,8 @@
             
             if (source.includes('picsum.photos')) {
                 return `${source}/${width}/${height}?random=${seed || timestamp}`;
+            } else if (source.includes('api.paugram.com')) {
+                return `${source}?type=nature&t=${seed || timestamp}`;
             } else if (source.includes('placeholder.com')) {
                 return `${source}/${width}x${height}?text=Puzzle+${seed || timestamp}`;
             } else if (source.includes('source.unsplash.com')) {
@@ -138,7 +140,6 @@
         loadImage(url, retryCount = 0) {
             return new Promise((resolve, reject) => {
                 const img = new Image();
-                img.crossOrigin = 'anonymous';
                 
                 // 设置超时
                 const timeout = setTimeout(() => {
@@ -215,7 +216,6 @@
             return new Promise((resolve, reject) => {
                 const attemptLoad = (attempt = 0) => {
                     const img = new Image();
-                    img.crossOrigin = 'anonymous';
                     
                     const timeoutId = setTimeout(() => {
                         attemptLoad(attempt + 1);
