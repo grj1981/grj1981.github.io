@@ -768,11 +768,11 @@
             const canvasHeight = this.canvas.height;
             const actualCellSize = window.PuzzleCore ? window.PuzzleCore.cellSize : Math.min(canvasWidth, canvasHeight) / (gridSize + 2);
             
+            const gridPixelSize = gridSize * actualCellSize;
             const canvasCenterX = canvasWidth / 2;
             const canvasCenterY = canvasHeight / 2;
-            const gridPixelSize = gridSize * actualCellSize;
-            const offsetX = canvasCenterX - gridPixelSize / 2;
-            const offsetY = canvasCenterY - gridPixelSize / 2;
+            const offsetX = window.PuzzleCore ? window.PuzzleCore.gridOffsetX : (canvasCenterX - gridPixelSize / 2);
+            const offsetY = window.PuzzleCore ? window.PuzzleCore.gridOffsetY : (canvasCenterY - gridPixelSize / 2);
             
             this.ctx.strokeStyle = '#6699cc';
             this.ctx.lineWidth = 2;
