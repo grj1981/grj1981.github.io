@@ -149,7 +149,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">90</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">91</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -514,7 +514,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">90</span>
+          <span class="site-state-item-count">91</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -784,7 +784,7 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     <span class="close-btn">&times;</span>
     <span class="nav-btn prev-btn">&#10094;</span>
     <span class="nav-btn next-btn">&#10095;</span>
-    <iframe id="douyin-player" frameborder="0" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
   </div>
 </div>
 
@@ -823,37 +823,41 @@ body {
 .modal-content {
   position: relative;
   width: min(71%, 340px);
-  height: min(95%, 90vh);
+  max-width: calc((100vh - 100px) * 9 / 17.5);
+  height: auto;
+  aspect-ratio: 9 / 17.5;
   max-height: calc(100vh - 100px);
   margin: 0 auto;
   overflow: hidden;
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 @media (max-width: 768px) {
   .modal-content {
     width: min(81%, 320px);
-    height: min(90%, 85vh);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
   }
 }
 
 @media (max-width: 480px) {
   .modal-content {
     width: min(94%, 300px);
-    height: min(80%, 80vh);
+    max-width: calc((100vh - 80px) * 9 / 17.5);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
     max-height: calc(100vh - 80px);
   }
 }
 
 .modal-content iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   border-radius: 8px;
   border: none;
-  display: block;
 }
 
 .close-btn {
@@ -911,7 +915,7 @@ body {
 @media (max-width: 768px) {
   .modal-content {
     width: calc(100% - 60px);
-    max-width: none;
+    max-width: calc((100vh - 100px) * 9 / 17.5);
     margin: 0 auto;
     box-sizing: border-box;
   }

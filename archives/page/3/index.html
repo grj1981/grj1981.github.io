@@ -145,7 +145,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">90</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">91</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -215,13 +215,33 @@
     <div class="posts-collapse">
       <div class="collection-title">
         
-        <span class="collection-header">很好! 目前共计 90 篇日志。 继续努力。</span>
+        <span class="collection-header">很好! 目前共计 91 篇日志。 继续努力。</span>
       </div>
 
       
     <div class="collection-year">
       <span class="collection-header">2025</span>
     </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2025-02-05T14:27:15+08:00"
+              content="2025-02-05">
+          02-05
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/" itemprop="url">
+            <span itemprop="name">C#学习笔记【反射Reflection】</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
 
   <article itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -406,26 +426,6 @@
     </header>
   </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-21T11:45:25+08:00"
-              content="2024-06-21">
-          06-21
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/21/Unity3D%E8%BE%93%E5%85%A5%E6%8E%A7%E5%88%B6/" itemprop="url">
-            <span itemprop="name">Unity3D输入控制</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
 
     </div>
   </div>
@@ -435,7 +435,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/9/">9</a><a class="extend next" rel="next" href="/archives/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/archives/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/10/">10</a><a class="extend next" rel="next" href="/archives/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -503,7 +503,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">90</span>
+          <span class="site-state-item-count">91</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -773,7 +773,7 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     <span class="close-btn">&times;</span>
     <span class="nav-btn prev-btn">&#10094;</span>
     <span class="nav-btn next-btn">&#10095;</span>
-    <iframe id="douyin-player" frameborder="0" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
   </div>
 </div>
 
@@ -812,37 +812,41 @@ body {
 .modal-content {
   position: relative;
   width: min(71%, 340px);
-  height: min(95%, 90vh);
+  max-width: calc((100vh - 100px) * 9 / 17.5);
+  height: auto;
+  aspect-ratio: 9 / 17.5;
   max-height: calc(100vh - 100px);
   margin: 0 auto;
   overflow: hidden;
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 @media (max-width: 768px) {
   .modal-content {
     width: min(81%, 320px);
-    height: min(90%, 85vh);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
   }
 }
 
 @media (max-width: 480px) {
   .modal-content {
     width: min(94%, 300px);
-    height: min(80%, 80vh);
+    max-width: calc((100vh - 80px) * 9 / 17.5);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
     max-height: calc(100vh - 80px);
   }
 }
 
 .modal-content iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   border-radius: 8px;
   border: none;
-  display: block;
 }
 
 .close-btn {
@@ -900,7 +904,7 @@ body {
 @media (max-width: 768px) {
   .modal-content {
     width: calc(100% - 60px);
-    max-width: none;
+    max-width: calc((100vh - 100px) * 9 / 17.5);
     margin: 0 auto;
     box-sizing: border-box;
   }

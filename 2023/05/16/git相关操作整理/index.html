@@ -148,7 +148,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">90</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">91</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -363,7 +363,7 @@
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>打开github，在头像下面点击settings，再点击SSH and GPG keys，新建一个SSH，名字随便。将输出的内容复制到框中，点击确定保存。</p>
-<p>输入ssh -T <a href="mailto:&#x67;&#x69;&#116;&#64;&#103;&#x69;&#x74;&#104;&#117;&#98;&#x2e;&#99;&#111;&#109;">git@github.com</a>，如果出现你的用户名，验证成功。</p>
+<p>输入ssh -T <a href="mailto:&#x67;&#105;&#116;&#x40;&#x67;&#105;&#116;&#104;&#x75;&#x62;&#x2e;&#99;&#111;&#109;">git@github.com</a>，如果出现你的用户名，验证成功。</p>
 <p>打开博客根目录下的_config.yml文件，这是博客的配置文件，在这里你可以修改与博客相关的各种信息。</p>
 <p>修改最后一行的配置：</p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">	type: git</span><br><span class="line">	repository: https://github.com/godweiyang/godweiyang.github.io</span><br><span class="line">	branch: master</span><br></pre></td></tr></table></figure>
@@ -484,7 +484,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">90</span>
+          <span class="site-state-item-count">91</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -754,7 +754,7 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     <span class="close-btn">&times;</span>
     <span class="nav-btn prev-btn">&#10094;</span>
     <span class="nav-btn next-btn">&#10095;</span>
-    <iframe id="douyin-player" frameborder="0" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
   </div>
 </div>
 
@@ -793,37 +793,41 @@ body {
 .modal-content {
   position: relative;
   width: min(71%, 340px);
-  height: min(95%, 90vh);
+  max-width: calc((100vh - 100px) * 9 / 17.5);
+  height: auto;
+  aspect-ratio: 9 / 17.5;
   max-height: calc(100vh - 100px);
   margin: 0 auto;
   overflow: hidden;
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 @media (max-width: 768px) {
   .modal-content {
     width: min(81%, 320px);
-    height: min(90%, 85vh);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
   }
 }
 
 @media (max-width: 480px) {
   .modal-content {
     width: min(94%, 300px);
-    height: min(80%, 80vh);
+    max-width: calc((100vh - 80px) * 9 / 17.5);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
     max-height: calc(100vh - 80px);
   }
 }
 
 .modal-content iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   border-radius: 8px;
   border: none;
-  display: block;
 }
 
 .close-btn {
@@ -881,7 +885,7 @@ body {
 @media (max-width: 768px) {
   .modal-content {
     width: calc(100% - 60px);
-    max-width: none;
+    max-width: calc((100vh - 100px) * 9 / 17.5);
     margin: 0 auto;
     box-sizing: border-box;
   }
