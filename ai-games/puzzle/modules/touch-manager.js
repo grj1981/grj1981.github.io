@@ -186,39 +186,25 @@ if (window.TouchManager) {
 
             if (!storedTouch) return;
 
-            // 取消长按 - 只要手指移动就取消
             this.cancelLongPress();
 
-            // 如果已经触发过长按，不再响应拖拽
-            if (this.isLongPress) return;
-
-            // 计算移动距离
-            const dx = touch.clientX - storedTouch.startX;
-            const dy = touch.clientY - storedTouch.startY;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-
-            // 超过阈值，开始拖拽
-            if (distance > this.gestureConfig.dragThreshold && !storedTouch.isDragging) {
-                storedTouch.isDragging = true;
-                this.triggerEvent('dragstart', {
-                    x: e.clientX,
-                    y: e.clientY,
-                    touchId: 0
-                });
-            }
+            const duration = Date.now() - storedTouch.startTime;
+            const distance = Math.sqrt(
+                Math.pow(touch.clientX - storedTouch.startX, 2) +
+                Math.pow(touch.clientY - storedTouch.startY, 2)
+            );
 
             if (storedTouch.isDragging) {
-                storedTouch.currentX = e.clientX;
-                storedTouch.currentY = e.clientY;
-
-                this.triggerEvent('dragmove', {
-                    x: e.clientX,
-                    y: e.clientY,
-                    dx: dx,
-                    dy: dy,
-                    touchId: 0
+                this.triggerEvent('dragend', {
+                    x: touch.clientX,
+                    y: touch.clientY,
+                    touchId: touchId
                 });
+            } else if (duration < 300 && distance < 10) {
+                this.handleTap(touch.clientX, touch.clientY);
             }
+
+            this.touches.delete(touchId);
         },
 
         // 鼠标按下
