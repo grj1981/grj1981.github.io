@@ -12,11 +12,11 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
 <meta property="og:type" content="website">
@@ -103,6 +103,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -129,22 +130,27 @@
   </li>
         <li class="menu-item menu-item-aigames">
 
-    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏<span class="badge">1</span></a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">42</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">10</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">12</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">81</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">92</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">28</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -152,11 +158,38 @@
     <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -178,7 +211,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -192,7 +225,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity一笔画小游戏摘要</a>
+            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【委托Delegate】</a>
         </h2>
 
         <div class="post-meta">
@@ -202,7 +235,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-08-14 19:12:39" itemprop="dateCreated datePublished" datetime="2024-08-14T19:12:39+08:00">2024-08-14</time>
+              <time title="创建时间：2025-02-05 15:39:03" itemprop="dateCreated datePublished" datetime="2025-02-05T15:39:03+08:00">2025-02-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -217,20 +250,16 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
                 </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
-                </span>
             </span>
 
           
-            <span id="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity一笔画小游戏摘要" title="阅读次数">
+            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【委托Delegate】" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -245,8 +274,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -261,18 +290,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>用Lua实现Unity一笔画小游戏要点记录：</p>
-<h1 id="游戏玩法简介"><a href="#游戏玩法简介" class="headerlink" title="游戏玩法简介"></a>游戏玩法简介</h1><p>选择不同难度关卡开始游戏，每一关有多个方块小格，可以从任意一个方块格作为起点开始连接到下一个方块格，下一个方块格必须与起始格上下左右相邻。同一个方块格不能重复连接，成功连接后，目标方块格又成为新的起始方块格。以此类推直至将所有方块格连完。</p>
-<h1 id="功能实现简述"><a href="#功能实现简述" class="headerlink" title="功能实现简述"></a>功能实现简述</h1><h2 id="关卡难度"><a href="#关卡难度" class="headerlink" title="关卡难度"></a>关卡难度</h2><p>关卡难度选择，不同关卡制作不同prefab预设。prefab预设摆放所有要连接的格子位置信息节点。选择关卡开始游戏时，在每一个位置信息节点下生成一个游戏连接格实例对象。创建方格数据结构 AmusementParkOneConnectBlockData 和 视图显示控件AmusementParkOneConnectBlockCell</p>
-<p><strong>AmusementParkOneConnectBlockData</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">---@class AmusementParkOneConnectBlockData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type number</span><br><span class="line">    Index = 0,</span><br><span class="line">    ---@type number</span><br><span class="line">    X = 0,</span><br><span class="line">    ---@type number</span><br><span class="line">    Y = 0,</span><br><span class="line">    ---@type number 0 未连接,1 已连接</span><br><span class="line">    State = 0,</span><br><span class="line">    ---@type boolean 最新连通</span><br><span class="line">    IsFirst = false,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(index,x,y)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(index,x,y)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(index,x,y)</span><br><span class="line">    self.Index = index</span><br><span class="line">    self.X = tonumber(x)</span><br><span class="line">    self.Y = tonumber(y)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m	</span><br></pre></td></tr></table></figure>
+          <h1 id="C-委托（Delegate）"><a href="#C-委托（Delegate）" class="headerlink" title="C# 委托（Delegate）"></a><strong>C# 委托（Delegate）</strong></h1><p>在 C# 中，委托（Delegate） 是一种类型安全的函数指针，它允许将方法作为参数传递给其他方法。</p>
+<p>C# 中的委托（Delegate）类似于 C 或 C++ 中函数的指针。委托（Delegate） 是存有对某个方法的引用的一种引用类型变量，引用可在运行时被改变。</p>
+<p>委托在 C# 中非常常见，用于事件处理、回调函数、LINQ 等操作。</p>
+<p>所有的委托（Delegate）都派生自 System.Delegate 类。</p>
+<h1 id="声明委托（Delegate）"><a href="#声明委托（Delegate）" class="headerlink" title="声明委托（Delegate）"></a><strong>声明委托（Delegate）</strong></h1><p>委托是一个引用类型，它定义了一个方法签名，可以用于存储指向该签名的方法。通过委托，你可以调用其他类中的方法。</p>
+<p>委托声明决定了可由该委托引用的方法。委托可指向一个与其具有相同标签的方法。</p>
+<p>声明委托的语法如下：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public delegate &lt;return type&gt; &lt;delegate-name&gt; &lt;parameter list&gt;</span><br></pre></td></tr></table></figure><br>中文格式说明：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public delegate 返回类型 委托名(参数类型 参数名, ...);</span><br></pre></td></tr></table></figure></p>
+<p>例如以下代码，我们定义一个接受两个整数并返回一个整数的委托：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public delegate int MathOperation(int x, int y);</span><br></pre></td></tr></table></figure></p>
+<p>以下例子的委托可被用于引用任何一个带有一个单一的 string 参数的方法，并返回一个 int 类型变量。<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public delegate int MyDelegate (string s);</span><br></pre></td></tr></table></figure></p>
+<h1 id="实例化委托（Delegate）"><a href="#实例化委托（Delegate）" class="headerlink" title="实例化委托（Delegate）"></a><strong>实例化委托（Delegate）</strong></h1><p>一旦声明了委托类型，委托对象必须使用 new 关键字来创建，且与一个特定的方法有关。当创建委托时，传递到 new 语句的参数就像方法调用一样书写，但是不带有参数。例如：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public delegate void printString(string s);</span><br><span class="line">...</span><br><span class="line">printString ps1 = new printString(WriteToScreen);</span><br><span class="line">printString ps2 = new printString(WriteToFile);</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p><strong>AmusementParkOneConnectBlockCell</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">---@class AmusementParkOneConnectBlockCell</span><br><span class="line">local m = &#123;</span><br><span class="line">    View = nil,</span><br><span class="line">    ---@type AmusementParkOneConnectBlockData</span><br><span class="line">    BlockData = nil,</span><br><span class="line">    ---@type Vector3</span><br><span class="line">    StartPos = nil,</span><br><span class="line">    ---@type function</span><br><span class="line">    OnBeginDragCallBack = nil,</span><br><span class="line">    ---@type function</span><br><span class="line">    OnDragCallBack = nil,</span><br><span class="line">    ---@type UnityEngine.Collider2D</span><br><span class="line">    BlockCollider = nil,</span><br><span class="line">    ---@type UnityEngine.Collider2D</span><br><span class="line">    DrgCollider = nil,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(view)</span><br><span class="line">    local obj = Clone(m)</span><br><span class="line">    obj:Init(view)</span><br><span class="line">    return obj</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(view)</span><br><span class="line">    self.View = view</span><br><span class="line">    LuaCodeInterface.BindOutlet(self.View, self)</span><br><span class="line"></span><br><span class="line">    self.DelegateBtnSelf = function() self:OnClickBtnSelf() end</span><br><span class="line"></span><br><span class="line">    self.BlockCollider = self.View:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line">    self.DrgCollider = self.ImgDrag:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line"></span><br><span class="line">    self.StartPos = self.ImgDrag.transform.position</span><br><span class="line">    self.ImgDrag:GetComponent(&quot;UIDrag&quot;).onBeginDrag = function(eventData) self:OnBeginDrag(eventData) end</span><br><span class="line">    self.ImgDrag:GetComponent(&quot;UIDrag&quot;).onDrag = function(pointerEventData) self:OnDrag(pointerEventData) end</span><br><span class="line">    self.ImgDrag:GetComponent(&quot;UIDrag&quot;).onReachTargetSuccess = function(eventData) self:OnDragSuccess(eventData) end</span><br><span class="line">    self.ImgDrag:GetComponent(&quot;UIDrag&quot;).onReachTargetFailure = function(eventData) self:OnFailure(eventData) end</span><br><span class="line"></span><br><span class="line">    self:AddListener()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:AddListener()</span><br><span class="line">    self.View:GetComponent(&quot;Button&quot;).onClick:AddListener(self.DelegateBtnSelf)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:RemoveListener()</span><br><span class="line">    self.View:GetComponent(&quot;Button&quot;).onClick:RemoveListener(self.DelegateBtnSelf)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnClickBtnSelf()</span><br><span class="line">    if self.OnBeginDragCallBack then</span><br><span class="line">        self.OnBeginDragCallBack(self)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnBeginDrag()</span><br><span class="line">    if self.OnBeginDragCallBack then</span><br><span class="line">        self.OnBeginDragCallBack(self)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnDrag(eventData)</span><br><span class="line">    if self.OnDragCallBack then</span><br><span class="line">        self.OnDragCallBack(self)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnDragSuccess(eventData)</span><br><span class="line">    self.ImgDrag.transform.position = self.StartPos</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnFailure(eventData)</span><br><span class="line">    self.ImgDrag.transform.position = self.StartPos</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:UpdateView()</span><br><span class="line">    self.ImgDefault:SetActive(self.BlockData.State == 0)</span><br><span class="line">    self.ImgCheck:SetActive(self.BlockData.State == 1)</span><br><span class="line">    self.ImgTag:SetActive(self.BlockData.IsFirst)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@param blockData AmusementParkOneConnectBlockData</span><br><span class="line">function m:SetData(blockData)</span><br><span class="line">    self.BlockData = blockData</span><br><span class="line">    self.View.name = self.BlockData.Index</span><br><span class="line">    self:UpdateView()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Dispose()</span><br><span class="line">    AssetUtil.UnloadAsset(self)</span><br><span class="line">    self:RemoveListener()</span><br><span class="line">    self.OnBeginDragCallBack = nil</span><br><span class="line">    self.OnDragCallBack = nil</span><br><span class="line"></span><br><span class="line">    LuaCodeInterface.ClearOutlet(self.View, self)</span><br><span class="line">    UnityEngine.Object.Destroy(self.View)</span><br><span class="line">    self.View = nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>下面的实例演示了委托的声明、实例化和使用，该委托可用于引用带有一个整型参数的方法，并返回一个整型值。</p>
+<p><strong>&gt; 实例:</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">delegate int NumberChanger(int n);</span><br><span class="line">namespace DelegateAppl</span><br><span class="line">&#123;</span><br><span class="line">   class TestDelegate</span><br><span class="line">   &#123;</span><br><span class="line">      static int num = 10;</span><br><span class="line">      public static int AddNum(int p)</span><br><span class="line">      &#123;</span><br><span class="line">         num += p;</span><br><span class="line">         return num;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      public static int MultNum(int q)</span><br><span class="line">      &#123;</span><br><span class="line">         num *= q;</span><br><span class="line">         return num;</span><br><span class="line">      &#125;</span><br><span class="line">      public static int getNum()</span><br><span class="line">      &#123;</span><br><span class="line">         return num;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         // 创建委托实例</span><br><span class="line">         NumberChanger nc1 = new NumberChanger(AddNum);</span><br><span class="line">         NumberChanger nc2 = new NumberChanger(MultNum);</span><br><span class="line">         // 使用委托对象调用方法</span><br><span class="line">         nc1(25);</span><br><span class="line">         Console.WriteLine(&quot;Value of Num: &#123;0&#125;&quot;, getNum());</span><br><span class="line">         nc2(5);</span><br><span class="line">         Console.WriteLine(&quot;Value of Num: &#123;0&#125;&quot;, getNum());</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Value of Num: 35</span><br><span class="line">Value of Num: 175</span><br></pre></td></tr></table></figure>
 </code></pre>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -296,7 +335,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -310,7 +349,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/" class="post-title-link" itemprop="url">Unity3D正交相机视野控制</a>
+            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【索引器Indexer】</a>
         </h2>
 
         <div class="post-meta">
@@ -320,7 +359,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-07-03 11:52:16" itemprop="dateCreated datePublished" datetime="2024-07-03T11:52:16+08:00">2024-07-03</time>
+              <time title="创建时间：2025-02-05 15:23:12" itemprop="dateCreated datePublished" datetime="2025-02-05T15:23:12+08:00">2025-02-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -335,20 +374,16 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
                 </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
-                </span>
             </span>
 
           
-            <span id="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3D正交相机视野控制" title="阅读次数">
+            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【索引器Indexer】" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -363,8 +398,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/" itemprop="commentCount"></span>
+    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -379,48 +414,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="正交相机（Orthographic-Camera）"><a href="#正交相机（Orthographic-Camera）" class="headerlink" title="正交相机（Orthographic Camera）"></a>正交相机（Orthographic Camera）</h1><p>Unity3D中的正交相机（Orthographic Camera）是一种投影方式，它不同于透视相机（Perspective Camera）的投影方式。在正交相机中，物体在视野中的大小与其与相机的距离无关，也就是说，所有物体在相机视野中呈现的大小是相同的。</p>
-<p>Unity3D的正交相机可以看作是一个在固定位置的照相机，它将三维空间中的物体投影到一个二维图像平面上，而不考虑物体到相机的距离。因此，在正交投影中，无论物体离相机多远，它们在二维图像平面上的大小都不会改变。</p>
-<p>正交相机的投影方式是通过一个虚拟的长方体来取景，并将场景投影到这个长方体的前面。在Unity中，可以通过更改相机参数来调整这个长方体的尺寸，进而影响相机视野中物体的显示大小。</p>
-<h1 id="主要特点和应用场景"><a href="#主要特点和应用场景" class="headerlink" title="主要特点和应用场景"></a>主要特点和应用场景</h1><h2 id="物体大小不变"><a href="#物体大小不变" class="headerlink" title="物体大小不变"></a>物体大小不变</h2><pre><code>由于正交相机不考虑物体到相机的距离，所以物体在相机视野中的大小是固定的，这使得在2D游戏或者UI设计中非常方便。
+          <h1 id="C-索引器（Indexer）"><a href="#C-索引器（Indexer）" class="headerlink" title="C# 索引器（Indexer）"></a><strong>C# 索引器（Indexer）</strong></h1><p>索引器（Indexer） 允许一个对象可以像数组一样使用下标的方式来访问。</p>
+<p>当您为类定义一个索引器时，该类的行为就会像一个 虚拟数组（virtual array） 一样。您可以使用数组访问运算符 [ ] 来访问该类的的成员。</p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a><strong>语法</strong></h1><p>一维索引器的语法如下：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">element-type this[int index]</span><br><span class="line">&#123;</span><br><span class="line">   // get 访问器</span><br><span class="line">   get</span><br><span class="line">   &#123;</span><br><span class="line">      // 返回 index 指定的值</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   // set 访问器</span><br><span class="line">   set</span><br><span class="line">   &#123;</span><br><span class="line">      // 设置 index 指定的值</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<h2 id="无透视收缩效果"><a href="#无透视收缩效果" class="headerlink" title="无透视收缩效果"></a>无透视收缩效果</h2><pre><code>在正交投影中，远处的物体和近处的物体在图像平面上的大小是相同的，不会有透视收缩效果，这使得场景中的物体之间的相对距离
-保持不变。
+<h1 id="索引器（Indexer）的用途"><a href="#索引器（Indexer）的用途" class="headerlink" title="索引器（Indexer）的用途"></a><strong>索引器（Indexer）的用途</strong></h1><p>索引器的行为的声明在某种程度上类似于属性（property）。就像属性（property），您可使用 get 和 set 访问器来定义索引器。但是，属性返回或设置一个特定的数据成员，而索引器返回或设置对象实例的一个特定值。换句话说，它把实例数据分为更小的部分，并索引每个部分，获取或设置每个部分。</p>
+<p>定义一个属性（property）包括提供属性名称。索引器定义的时候不带有名称，但带有 this 关键字，它指向对象实例。下面的实例演示了这个概念：</p>
+<p><strong>&gt; 实例:</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace IndexerApplication</span><br><span class="line">&#123;</span><br><span class="line">   class IndexedNames</span><br><span class="line">   &#123;</span><br><span class="line">      private string[] namelist = new string[size];</span><br><span class="line">      static public int size = 10;</span><br><span class="line">      public IndexedNames()</span><br><span class="line">      &#123;</span><br><span class="line">         for (int i = 0; i &lt; size; i++)</span><br><span class="line">         namelist[i] = &quot;N. A.&quot;;</span><br><span class="line">      &#125;</span><br><span class="line">      public string this[int index]</span><br><span class="line">      &#123;</span><br><span class="line">         get</span><br><span class="line">         &#123;</span><br><span class="line">            string tmp;</span><br><span class="line"></span><br><span class="line">            if( index &gt;= 0 &amp;&amp; index &lt;= size-1 )</span><br><span class="line">            &#123;</span><br><span class="line">               tmp = namelist[index];</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">               tmp = &quot;&quot;;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            return ( tmp );</span><br><span class="line">         &#125;</span><br><span class="line">         set</span><br><span class="line">         &#123;</span><br><span class="line">            if( index &gt;= 0 &amp;&amp; index &lt;= size-1 )</span><br><span class="line">            &#123;</span><br><span class="line">               namelist[index] = value;</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         IndexedNames names = new IndexedNames();</span><br><span class="line">         names[0] = &quot;Zara&quot;;</span><br><span class="line">         names[1] = &quot;Riz&quot;;</span><br><span class="line">         names[2] = &quot;Nuha&quot;;</span><br><span class="line">         names[3] = &quot;Asif&quot;;</span><br><span class="line">         names[4] = &quot;Davinder&quot;;</span><br><span class="line">         names[5] = &quot;Sunil&quot;;</span><br><span class="line">         names[6] = &quot;Rubic&quot;;</span><br><span class="line">         for ( int i = 0; i &lt; IndexedNames.size; i++ )</span><br><span class="line">         &#123;</span><br><span class="line">            Console.WriteLine(names[i]);</span><br><span class="line">         &#125;</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<h2 id="适用于2D游戏和UI设计"><a href="#适用于2D游戏和UI设计" class="headerlink" title="适用于2D游戏和UI设计"></a>适用于2D游戏和UI设计</h2><pre><code>正交相机由于其特殊的投影方式，非常适合用于2D游戏和UI设计，可以很容易地实现平铺纹理或者背景等效果。
-</code></pre>
-<h2 id="易于实现像素化效果"><a href="#易于实现像素化效果" class="headerlink" title="易于实现像素化效果"></a>易于实现像素化效果</h2><pre><code>正交相机由于物体大小固定，所以可以很容易地实现像素化效果，这在一些复古风格的2D游戏中非常常见。
-</code></pre>
-<p>总的来说，Unity3D的正交相机通过忽略物体到相机的距离，实现了一种特殊的投影方式，这种方式在2D游戏和UI设计中有广泛的应用。</p>
-<h1 id="正交相机的主要属性"><a href="#正交相机的主要属性" class="headerlink" title="正交相机的主要属性"></a>正交相机的主要属性</h1><p><strong>- 投影模式（Projection Type）</strong></p>
-<pre><code>这是设置相机投影方式的属性，Unity中提供了多种投影模式，但对于正交相机来说，通常只会选择“正交（Orthographic）”这一项。
-选择正交投影后，相机的视野不会因物体距离的增加而产生大小变化。
-</code></pre>
-<p><strong>- 视野大小（Field of View）</strong></p>
-<pre><code>在正交投影中，视野大小实际上定义了相机的视锥体的大小，它决定了相机的可视范围。Unity中是以角度来定义的，数值越大，
-视野范围越宽。
-</code></pre>
-<p><strong>- 近平面（Near Plane）和远平面（Far Plane）</strong></p>
-<pre><code>这两个属性定义了相机视锥体的近边界和远边界。在正交相机中，这两个平面是固定垂直于相机前后的，不会因为相机的移动而改变。
-近平面和远平面的距离决定了相机的深度范围。
-</code></pre>
-<p><strong>- 正交尺寸（Orthographic Size）</strong></p>
-<pre><code>这个属性定义了相机的虚拟长方体视野的尺寸。相机将场景投影到一个虚拟的长方体上，这个长方体的长、宽、高分别由正交尺寸的
-X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个长方体的尺寸决定的。例如，如果正交尺寸的X为10，Y为5，那么相机视野
-的宽高比就是2:1。
-</code></pre>
-<p><strong>- 平移（Position）</strong></p>
-<pre><code>这是相机在三维空间中的位置，可以自由设置。
-</code></pre>
-<p><strong>- 旋转（Rotation）</strong></p>
-<pre><code>这是相机在三维空间中的旋转，同样可以自由设置。旋转会影响相机的朝向，从而改变拍摄的视角。
-</code></pre>
-<p><strong>- 缩放（Scale）</strong></p>
-<pre><code>在Unity中，相机也有缩放属性，但这通常指的是相机视锥体的缩放，而不是像物体一样改变大小。这个属性在正交相机中不太常用。
-</code></pre>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Zara</span><br><span class="line">Riz</span><br><span class="line">Nuha</span><br><span class="line">Asif</span><br><span class="line">Davinder</span><br><span class="line">Sunil</span><br><span class="line">Rubic</span><br><span class="line">N. A.</span><br><span class="line">N. A.</span><br><span class="line">N. A.</span><br></pre></td></tr></table></figure></p>
+<h1 id="重载索引器（Indexer）"><a href="#重载索引器（Indexer）" class="headerlink" title="重载索引器（Indexer）"></a><strong>重载索引器（Indexer）</strong></h1><p>索引器（Indexer）可被重载。索引器声明的时候也可带有多个参数，且每个参数可以是不同的类型。没有必要让索引器必须是整型的。C# 允许索引器可以是其他类型，例如，字符串类型。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/#more" rel="contents">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -444,7 +452,7 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/06/21/Unity3D%E8%BE%93%E5%85%A5%E6%8E%A7%E5%88%B6/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -458,7 +466,7 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/06/21/Unity3D%E8%BE%93%E5%85%A5%E6%8E%A7%E5%88%B6/" class="post-title-link" itemprop="url">Unity3D输入控制</a>
+            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【属性Property】</a>
         </h2>
 
         <div class="post-meta">
@@ -468,7 +476,7 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-06-21 11:45:25" itemprop="dateCreated datePublished" datetime="2024-06-21T11:45:25+08:00">2024-06-21</time>
+              <time title="创建时间：2025-02-05 14:59:27" itemprop="dateCreated datePublished" datetime="2025-02-05T14:59:27+08:00">2025-02-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -483,7 +491,7 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -492,7 +500,7 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
             </span>
 
           
-            <span id="/2024/06/21/Unity3D%E8%BE%93%E5%85%A5%E6%8E%A7%E5%88%B6/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3D输入控制" title="阅读次数">
+            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【属性Property】" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -507,8 +515,8 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2024/06/21/Unity3D%E8%BE%93%E5%85%A5%E6%8E%A7%E5%88%B6/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/06/21/Unity3D%E8%BE%93%E5%85%A5%E6%8E%A7%E5%88%B6/" itemprop="commentCount"></span>
+    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -523,34 +531,30 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="鼠标键盘"><a href="#鼠标键盘" class="headerlink" title="鼠标键盘"></a>鼠标键盘</h1><p>鼠标键盘输入控制，Input类,要在Update()函数中检测</p>
-<h2 id="鼠标点击"><a href="#鼠标点击" class="headerlink" title="鼠标点击"></a>鼠标点击</h2><p>0左键 1右键 2滚轮</p>
-<p>按下鼠标左键：</p>
-<pre><code>Input.GetMouseButtonDown(0)
+          <h1 id="C-属性（Property）"><a href="#C-属性（Property）" class="headerlink" title="C# 属性（Property）"></a><strong>C# 属性（Property）</strong></h1><p>C# 中的属性（Property）是类和结构体中用于封装数据的成员。它们提供了一种方式来定义类成员的访问和设置规则，通常用于隐藏字段（Fields）的内部实现细节，同时提供控制数据访问的机制。</p>
+<p>属性可以看作是对字段的包装器，通常由 get 和 set 访问器组成。</p>
+<p>属性（Property）不会确定存储位置。相反，它们具有可读写或计算它们值的 访问器（accessors）。</p>
+<p>例如，有一个名为 Student 的类，带有 age、name 和 code 的私有域。我们不能在类的范围以外直接访问这些域，但是我们可以拥有访问这些私有域的属性。</p>
+<h1 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a><strong>基本语法</strong></h1><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Person</span><br><span class="line">&#123;</span><br><span class="line">    private string name;</span><br><span class="line"></span><br><span class="line">    public string Name</span><br><span class="line">    &#123;</span><br><span class="line">        get &#123; return name; &#125;</span><br><span class="line">        set &#123; name = value; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>持续按下鼠标左键：</p>
-<pre><code>Input.GetMouseButton(0)
+<p>以上代码中，Name 属性封装了私有字段 name。get 访问器用于获取字段值，而 set 访问器用于设置字段值。</p>
+<h1 id="自动实现的属性"><a href="#自动实现的属性" class="headerlink" title="自动实现的属性"></a><strong>自动实现的属性</strong></h1><p>如果你只需要一个简单的属性，C# 允许使用自动实现的属性，这样你不需要显式地定义字段。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class Person</span><br><span class="line">&#123;</span><br><span class="line">    public string Name &#123; get; set; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>抬起鼠标左键：</p>
-<pre><code>Input.GetMouseButtonUp(0)
+<p>在这种情况下，编译器会自动为 Name 属性生成一个私有的匿名字段来存储值。</p>
+<h1 id="只读属性"><a href="#只读属性" class="headerlink" title="只读属性"></a><strong>只读属性</strong></h1><p>如果你只需要一个只读属性，可以省略 set 访问器。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Person</span><br><span class="line">&#123;</span><br><span class="line">    public string Name &#123; get; &#125;</span><br><span class="line"></span><br><span class="line">    public Person(string name)</span><br><span class="line">    &#123;</span><br><span class="line">        Name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>GetMouseButtonDown()和GetMouseButtonUp()成对出现</p>
-<h2 id="按钮键盘按键"><a href="#按钮键盘按键" class="headerlink" title="按钮键盘按键"></a>按钮键盘按键</h2><p>KeyCode 枚举</p>
-<p>按下键盘A键：<br>	<br>	Input.GetKeyDown(KeyCode.A)<br>	<br>持续按下A键：</p>
-<pre><code>Input.GetKey(KeyCode.A)
+<h1 id="只写属性"><a href="#只写属性" class="headerlink" title="只写属性"></a><strong>只写属性</strong></h1><p>类似地，如果你只需要一个只写属性，可以省略 get 访问器。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Person</span><br><span class="line">&#123;</span><br><span class="line">    private string name;</span><br><span class="line"></span><br><span class="line">    public string Name</span><br><span class="line">    &#123;</span><br><span class="line">        set &#123; name = value; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>抬起键盘按键：</p>
-<pre><code>Input.GetKeyUp(KeyCode.A)
+<h1 id="自定义逻辑"><a href="#自定义逻辑" class="headerlink" title="自定义逻辑"></a><strong>自定义逻辑</strong></h1><p>你可以在 get 和 set 访问器中包含自定义的逻辑。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class Person</span><br><span class="line">&#123;</span><br><span class="line">    private string name;</span><br><span class="line"></span><br><span class="line">    public string Name</span><br><span class="line">    &#123;</span><br><span class="line">        get &#123; return name; &#125;</span><br><span class="line">        set</span><br><span class="line">        &#123;</span><br><span class="line">            if (string.IsNullOrWhiteSpace(value))</span><br><span class="line">                throw new ArgumentException(&quot;Name cannot be empty.&quot;);</span><br><span class="line">            name = value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>GetKeyDown() 和 GetKeyUp()成对出现</p>
-<blockquote>
-<p><strong>实例</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">// Update is called once per frame</span><br><span class="line">   void Update()</span><br><span class="line">   &#123;   </span><br><span class="line">       //鼠标点击</span><br><span class="line">       //按下鼠标 0左键 1右键 2滚轮</span><br><span class="line">       if (Input.GetMouseButtonDown(0))</span><br><span class="line">       &#123;</span><br><span class="line">           Debug.Log(&quot;按下了鼠标左键&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">       //持续按下</span><br><span class="line">       if (Input.GetMouseButton(0))</span><br><span class="line">       &#123;</span><br><span class="line">           Debug.Log(&quot;持续按下鼠标左键&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">       //抬起鼠标</span><br><span class="line">       if (Input.GetMouseButtonUp(0))</span><br><span class="line">       &#123;</span><br><span class="line">           Debug.Log(&quot;抬起了鼠标左键&quot;);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       //键盘</span><br><span class="line">       //按下键盘</span><br><span class="line">       if (Input.GetKeyDown(KeyCode.A))</span><br><span class="line">       &#123;</span><br><span class="line">           Debug.Log(&quot;按下A键&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">       //持续按下A键</span><br><span class="line">       if (Input.GetKey(KeyCode.A))</span><br><span class="line">       &#123;</span><br><span class="line">           Debug.Log(&quot;持续按下A键&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">       //抬起键盘按键</span><br><span class="line">       if (Input.GetKeyUp(KeyCode.A))</span><br><span class="line">       &#123;</span><br><span class="line">           Debug.Log(&quot;松开抬起A键&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
+<h1 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a><strong>计算属性</strong></h1>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/06/21/Unity3D%E8%BE%93%E5%85%A5%E6%8E%A7%E5%88%B6/#more" rel="contents">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -574,7 +578,7 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -588,7 +592,7 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/" class="post-title-link" itemprop="url">Unity3D物体Transform</a>
+            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【反射Reflection】</a>
         </h2>
 
         <div class="post-meta">
@@ -598,7 +602,7 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-06-19 17:05:14" itemprop="dateCreated datePublished" datetime="2024-06-19T17:05:14+08:00">2024-06-19</time>
+              <time title="创建时间：2025-02-05 14:27:15" itemprop="dateCreated datePublished" datetime="2025-02-05T14:27:15+08:00">2025-02-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -613,7 +617,7 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -622,7 +626,7 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
             </span>
 
           
-            <span id="/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3D物体Transform" title="阅读次数">
+            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【反射Reflection】" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -637,8 +641,8 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/" itemprop="commentCount"></span>
+    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -653,166 +657,51 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Transform维持物体之间的父子级</p>
-<h1 id="获取位置"><a href="#获取位置" class="headerlink" title="获取位置"></a>获取位置</h1><pre><code>获取世界空间中的位置: transform.position
-相对父物体位置: transform.localPosition
-</code></pre>
-<h1 id="获取旋转"><a href="#获取旋转" class="headerlink" title="获取旋转"></a>获取旋转</h1><pre><code>获取物体在世界空间旋转值(四元素)：transform.rotation
-获取物体相对父物体旋转值(四元素)：transform.localRotation
-获取物体在世界空间旋转值(Euler 度为单位): transform.eulerAngles
-获取物体相对父物体旋转值(Euler 度为单位): transform.localEulerAngles
-</code></pre>
-<h1 id="获取缩放"><a href="#获取缩放" class="headerlink" title="获取缩放"></a>获取缩放</h1><pre><code>获取物体相对父物体缩放比： transform.localScale
-</code></pre>
-<h1 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h1><pre><code>前方(Z轴方向)：transform.forward
-右方(X轴方向)：transform.right
-上方(Y轴方向)：transform.up
-</code></pre>
-<h1 id="父子关系"><a href="#父子关系" class="headerlink" title="父子关系"></a>父子关系</h1><pre><code>父物体: transform.parent.gameObject
-子物体数量: transform.childCount
-通过子物体名称找子物体: transform.Find(&quot;childObjName&quot;).gameObject
-通过索引位置找子物体: transform.GetChild(0).gameObject
-</code></pre>
-<h1 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h1><p> 在 Update() 方法中调用</p>
-<h2 id="时刻看向指定位置"><a href="#时刻看向指定位置" class="headerlink" title="- 时刻看向指定位置"></a>- 时刻看向指定位置</h2><pre><code>transform.LookAt(Vector3.zero)
-</code></pre>
-<h2 id="旋转"><a href="#旋转" class="headerlink" title="- 旋转"></a>- 旋转</h2><pre><code>按自身Y轴方向，每侦1度进行旋转(自转)：transform.Rotate(Vector3.up,1)
-</code></pre>
-<h2 id="围绕某个物体旋转"><a href="#围绕某个物体旋转" class="headerlink" title="- 围绕某个物体旋转"></a>- 围绕某个物体旋转</h2><pre><code>围绕某个物体旋转(世界坐标(0,0,0)的点的Y轴): transform.RotateAround(Vector3.zero,Vector3.up,5)
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/06/19/Unity3D%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/06/19/Unity3D%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF/" class="post-title-link" itemprop="url">Unity3D游戏场景</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-06-19 15:05:23" itemprop="dateCreated datePublished" datetime="2024-06-19T15:05:23+08:00">2024-06-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-10 20:59:18" itemprop="dateModified" datetime="2026-01-10T20:59:18+08:00">2026-01-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2024/06/19/Unity3D%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3D游戏场景" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2024/06/19/Unity3D%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/06/19/Unity3D%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="场景类-Scene"><a href="#场景类-Scene" class="headerlink" title="场景类 Scene"></a>场景类 Scene</h1><h2 id="获取当前活动场景"><a href="#获取当前活动场景" class="headerlink" title="- 获取当前活动场景"></a>- 获取当前活动场景</h2><pre><code>Scene scene = SceneManager.GetActiveScene();
-</code></pre>
-<h2 id="场景名称"><a href="#场景名称" class="headerlink" title="- 场景名称"></a>- 场景名称</h2><pre><code>Debug.Log(scene.name);
-</code></pre>
-<h2 id="是否加载"><a href="#是否加载" class="headerlink" title="- 是否加载"></a>- 是否加载</h2><pre><code>Debug.Log(scene.isLoaded);
-</code></pre>
-<h2 id="场景路径"><a href="#场景路径" class="headerlink" title="- 场景路径"></a>- 场景路径</h2><pre><code>Debug.Log(scene.path);
-</code></pre>
-<h2 id="场景索引"><a href="#场景索引" class="headerlink" title="- 场景索引"></a>- 场景索引</h2><pre><code>Debug.Log(scene.buildIndex);
-</code></pre>
-<h2 id="获取场景内物体数量"><a href="#获取场景内物体数量" class="headerlink" title="- 获取场景内物体数量"></a>- 获取场景内物体数量</h2><pre><code>GameObject[] objs = scene.GetRootGameObjects();
-Debug.Log(objs.Length);
-</code></pre>
-<h1 id="场景管理类-SceneManager"><a href="#场景管理类-SceneManager" class="headerlink" title="场景管理类 SceneManager"></a>场景管理类 SceneManager</h1><h2 id="创建场景"><a href="#创建场景" class="headerlink" title="- 创建场景"></a>- 创建场景</h2><pre><code>SceneManager.CreateScene(&quot;NewScene&quot;);
-</code></pre>
-<h2 id="加载场景（同步-异步）"><a href="#加载场景（同步-异步）" class="headerlink" title="- 加载场景（同步&#x2F;异步）"></a>- 加载场景（同步&#x2F;异步）</h2><ol>
-<li><p>同步加载场景</p>
-<p> SceneManager.LoadSceneAsync(“Scene2”,LoadSceneMode.Additive);</p>
+          <h1 id="C-反射（Reflection）"><a href="#C-反射（Reflection）" class="headerlink" title="C# 反射（Reflection）"></a><strong>C# 反射（Reflection）</strong></h1><p>反射指程序可以访问、检测和修改它本身状态或行为的一种能力。</p>
+<p>程序集包含模块，而模块包含类型，类型又包含成员。反射则提供了封装程序集、模块和类型的对象。</p>
+<p>您可以使用反射动态地创建类型的实例，将类型绑定到现有对象，或从现有对象中获取类型。然后，可以调用类型的方法或访问其字段和属性。</p>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><p><strong>优点：</strong></p>
+<ul>
+<li><p>1、反射提高了程序的灵活性和扩展性。</p>
 </li>
-<li><p>异步加载场景 协程</p>
+<li><p>2、降低耦合性，提高自适应能力。</p>
 </li>
-</ol>
-<blockquote>
-<p><strong>实例</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public class SceneTest : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">	float timer = 0;</span><br><span class="line">	AsyncOperation operation;</span><br><span class="line">	</span><br><span class="line">	// Start is called before the first frame update</span><br><span class="line">	void Start()</span><br><span class="line">	&#123;</span><br><span class="line">		//异步加载场景 协程</span><br><span class="line">		StartCoroutine(LoadScene());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	IEnumerator LoadScene()</span><br><span class="line">	&#123;</span><br><span class="line">		operation = SceneManager.LoadSceneAsync(&quot;Scene2&quot;,LoadSceneMode.Additive);</span><br><span class="line">		//场景是否立即激活</span><br><span class="line">		operation.allowSceneActivation = false;</span><br><span class="line">		yield return operation;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	// Update is called once per frame</span><br><span class="line">	void Update()</span><br><span class="line">	&#123;</span><br><span class="line">		Debug.Log(operation.progress);</span><br><span class="line">		timer += Time.deltaTime;</span><br><span class="line">		if (timer &gt; 5)</span><br><span class="line">		&#123;</span><br><span class="line">			//5秒后激活加载的场景</span><br><span class="line">			operation.allowSceneActivation = true;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<li><p>3、它允许程序创建和控制任何类的对象，无需提前硬编码目标类。</p>
+</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li><p>1、性能问题：使用反射基本上是一种解释操作，用于字段和方法接入时要远慢于直接代码。因此反射机制主要应用在对灵活性和拓展性要求很高的系统框架上，普通程序不建议使用。</p>
+</li>
+<li><p>2、使用反射会模糊程序内部逻辑；程序员希望在源代码中看到程序的逻辑，反射却绕过了源代码的技术，因而会带来维护的问题，反射代码比相应的直接代码更复杂。</p>
+</li>
+</ul>
+<h1 id="反射（Reflection）的用途"><a href="#反射（Reflection）的用途" class="headerlink" title="反射（Reflection）的用途"></a><strong>反射（Reflection）的用途</strong></h1><p>反射（Reflection）有下列用途：</p>
+<ul>
+<li><p>它允许在运行时查看特性（attribute）信息。</p>
+</li>
+<li><p>它允许审查集合中的各种类型，以及实例化这些类型。</p>
+</li>
+<li><p>它允许延迟绑定的方法和属性（property）。</p>
+</li>
+<li><p>它允许在运行时创建新类型，然后使用这些类型执行一些任务。</p>
+</li>
+</ul>
+<h1 id="查看元数据"><a href="#查看元数据" class="headerlink" title="查看元数据"></a><strong>查看元数据</strong></h1><p>我们已经在上面的章节中提到过，使用反射（Reflection）可以查看特性（attribute）信息。</p>
+<p>System.Reflection 类的 MemberInfo 对象需要被初始化，用于发现与类相关的特性（attribute）。为了做到这点，您可以定义目标类的一个对象，如下：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.Reflection.MemberInfo info = typeof(MyClass);</span><br></pre></td></tr></table></figure></p>
+<p>下面的程序演示了这点：</p>
+<p><strong>&gt; 实例：</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">[AttributeUsage(AttributeTargets.All)]</span><br><span class="line">public class HelpAttribute : System.Attribute</span><br><span class="line">&#123;</span><br><span class="line">   public readonly string Url;</span><br><span class="line"></span><br><span class="line">   public string Topic  // Topic 是一个命名（named）参数</span><br><span class="line">   &#123;</span><br><span class="line">      get</span><br><span class="line">      &#123;</span><br><span class="line">         return topic;</span><br><span class="line">      &#125;</span><br><span class="line">      set</span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">         topic = value;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public HelpAttribute(string url)  // url 是一个定位（positional）参数</span><br><span class="line">   &#123;</span><br><span class="line">      this.Url = url;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   private string topic;</span><br><span class="line">&#125;</span><br><span class="line">[HelpAttribute(&quot;Information on the class MyClass&quot;)]</span><br><span class="line">class MyClass</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">namespace AttributeAppl</span><br><span class="line">&#123;</span><br><span class="line">   class Program</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         System.Reflection.MemberInfo info = typeof(MyClass);</span><br><span class="line">         object[] attributes = info.GetCustomAttributes(true);</span><br><span class="line">         for (int i = 0; i &lt; attributes.Length; i++)</span><br><span class="line">         &#123;</span><br><span class="line">            System.Console.WriteLine(attributes[i]);</span><br><span class="line">         &#125;</span><br><span class="line">         Console.ReadKey();</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
-</blockquote>
-
+<p>当上面的代码被编译和执行时，它会显示附加到类 MyClass 上的自定义特性：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HelpAttribute</span><br></pre></td></tr></table></figure></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -831,7 +720,7 @@ Debug.Log(objs.Length);
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -845,7 +734,7 @@ Debug.Log(objs.Length);
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/" class="post-title-link" itemprop="url">Unity3D路径权限</a>
+            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【特性Attribute】</a>
         </h2>
 
         <div class="post-meta">
@@ -855,7 +744,7 @@ Debug.Log(objs.Length);
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-06-19 14:25:43" itemprop="dateCreated datePublished" datetime="2024-06-19T14:25:43+08:00">2024-06-19</time>
+              <time title="创建时间：2025-02-05 11:57:31" itemprop="dateCreated datePublished" datetime="2025-02-05T11:57:31+08:00">2025-02-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -870,7 +759,7 @@ Debug.Log(objs.Length);
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -879,7 +768,7 @@ Debug.Log(objs.Length);
             </span>
 
           
-            <span id="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3D路径权限" title="阅读次数">
+            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【特性Attribute】" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -894,8 +783,8 @@ Debug.Log(objs.Length);
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/" itemprop="commentCount"></span>
+    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -910,25 +799,170 @@ Debug.Log(objs.Length);
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Application"><a href="#Application" class="headerlink" title="Application"></a><strong>Application</strong></h1><h2 id="游戏数据文件夹路径-只读，打包加密压缩"><a href="#游戏数据文件夹路径-只读，打包加密压缩" class="headerlink" title="- 游戏数据文件夹路径(只读，打包加密压缩)"></a>- 游戏数据文件夹路径(只读，打包加密压缩)</h2><pre><code>Debug.Log(Application.dataPath);  
-D:/UnityTest/TestUnity2021Project/New Unity Project/Assets
+          <h1 id="C-特性（Attribute）"><a href="#C-特性（Attribute）" class="headerlink" title="C# 特性（Attribute）"></a><strong>C# 特性（Attribute）</strong></h1><p>特性（Attribute）是用于在运行时传递程序中各种元素（比如类、方法、结构、枚举、组件等）的行为信息的声明性标签。您可以通过使用特性向程序添加声明性信息。一个声明性标签是通过放置在它所应用的元素前面的方括号（[ ]）来描述的。</p>
+<p>特性（Attribute）用于添加元数据，如编译器指令和注释、描述、方法、类等其他信息。.Net 框架提供了两种类型的特性：预定义特性和自定义特性。</p>
+<h1 id="规定特性（Attribute）"><a href="#规定特性（Attribute）" class="headerlink" title="规定特性（Attribute）"></a><strong>规定特性（Attribute）</strong></h1><p>规定特性（Attribute）的语法如下：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[attribute(positional_parameters, name_parameter = value, ...)]</span><br><span class="line">element</span><br></pre></td></tr></table></figure>
 </code></pre>
-<h2 id="持久化文件夹路径"><a href="#持久化文件夹路径" class="headerlink" title="- 持久化文件夹路径"></a>- 持久化文件夹路径</h2><pre><code>Debug.Log(Application.persistentDataPath);
-C:/Users/gongrenjun/AppData/LocalLow/DefaultCompany/New Unity Project
+<p>特性（Attribute）的名称和值是在方括号内规定的，放置在它所应用的元素之前。positional_parameters 规定必需的信息，name_parameter 规定可选的信息。</p>
+<h1 id="预定义特性（Attribute）"><a href="#预定义特性（Attribute）" class="headerlink" title="预定义特性（Attribute）"></a><strong>预定义特性（Attribute）</strong></h1><p>.Net 框架提供了三种预定义特性：
+	</p>
+<ul>
+<li><p>AttributeUsage</p>
+</li>
+<li><p>Conditional</p>
+</li>
+<li><p>Obsolete</p>
+</li>
+</ul>
+<h2 id="AttributeUsage"><a href="#AttributeUsage" class="headerlink" title="AttributeUsage"></a>AttributeUsage</h2><p>预定义特性 AttributeUsage 描述了如何使用一个自定义特性类。它规定了特性可应用到的项目的类型。</p>
+<p>规定该特性的语法如下：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[AttributeUsage(</span><br><span class="line">   validon,</span><br><span class="line">   AllowMultiple=allowmultiple,</span><br><span class="line">   Inherited=inherited</span><br><span class="line">)]</span><br></pre></td></tr></table></figure>
 </code></pre>
-<h2 id="StreamingAssets文件夹路径-只读，配置文件-打包后不会加密压缩"><a href="#StreamingAssets文件夹路径-只读，配置文件-打包后不会加密压缩" class="headerlink" title="- StreamingAssets文件夹路径(只读，配置文件,打包后不会加密压缩)"></a>- StreamingAssets文件夹路径(只读，配置文件,打包后不会加密压缩)</h2><pre><code>Debug.Log(Application.streamingAssetsPath);
-D:/UnityTest/TestUnity2021Project/New Unity Project/Assets/StreamingAssets
+<p>其中：</p>
+<ul>
+<li><p>参数 validon 规定特性可被放置的语言元素。它是枚举器 AttributeTargets 的值的组合。默认值是 AttributeTargets.All。</p>
+</li>
+<li><p>参数 allowmultiple（可选的）为该特性的 AllowMultiple 属性（property）提供一个布尔值。如果为 true，则该特性是多用的。默认值是 false（单用的）。</p>
+</li>
+<li><p>参数 inherited（可选的）为该特性的 Inherited 属性（property）提供一个布尔值。如果为 true，则该特性可被派生类继承。默认值是 false（不被继承）。</p>
+</li>
+</ul>
+<p>例如：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[AttributeUsage(AttributeTargets.Class |</span><br><span class="line">AttributeTargets.Constructor |</span><br><span class="line">AttributeTargets.Field |</span><br><span class="line">AttributeTargets.Method |</span><br><span class="line">AttributeTargets.Property, </span><br><span class="line">AllowMultiple = true)]</span><br></pre></td></tr></table></figure>
 </code></pre>
-<h2 id="临时文件夹"><a href="#临时文件夹" class="headerlink" title="- 临时文件夹"></a>- 临时文件夹</h2><pre><code>Debug.Log(Application.temporaryCachePath);
-C:/Users/GONGRE~1/AppData/Local/Temp/DefaultCompany/New Unity Project
-</code></pre>
-<h2 id="是否在后台运行-可在Projectt-Settins-Player-选项中设置"><a href="#是否在后台运行-可在Projectt-Settins-Player-选项中设置" class="headerlink" title="- 是否在后台运行 可在Projectt Settins -&gt; Player 选项中设置"></a>- 是否在后台运行 可在Projectt Settins -&gt; Player 选项中设置</h2><pre><code>Debug.Log(Application.runInBackground);
-</code></pre>
-<h2 id="打开URL"><a href="#打开URL" class="headerlink" title="- 打开URL"></a>- 打开URL</h2><pre><code>Application.OpenURL(&quot;http://www.bytefisher.top&quot;);
-</code></pre>
-<h2 id="退出游戏"><a href="#退出游戏" class="headerlink" title="- 退出游戏"></a>- 退出游戏</h2><pre><code>Application.Quit();
-</code></pre>
+<h2 id="Conditional"><a href="#Conditional" class="headerlink" title="Conditional"></a>Conditional</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
 
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【接口Interface】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-02-05 11:11:49" itemprop="dateCreated datePublished" datetime="2025-02-05T11:11:49+08:00">2025-02-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-01-10 20:59:18" itemprop="dateModified" datetime="2026-01-10T20:59:18+08:00">2026-01-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【接口Interface】" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="C-接口-Interface"><a href="#C-接口-Interface" class="headerlink" title="C#接口(Interface)"></a><strong>C#接口(Interface)</strong></h1><p>接口定义了所有类继承接口时应遵循的语法合同。接口定义了语法合同 “是什么” 部分，派生类定义了语法合同 “怎么做” 部分。</p>
+<p>接口定义了属性、方法和事件，这些都是接口的成员。接口只包含了成员的声明。成员的定义是派生类的责任。接口提供了派生类应遵循的标准结构。</p>
+<p>接口使得实现接口的类或结构在形式上保持一致。</p>
+<p>抽象类在某种程度上与接口类似，但是，它们大多只是用在当只有少数方法由基类声明由派生类实现时。</p>
+<p>接口本身并不实现任何功能，它只是和声明实现该接口的对象订立一个必须实现哪些行为的契约。</p>
+<p>抽象类不能直接实例化，但允许派生出具体的，具有实际功能的类。</p>
+<h1 id="定义接口-MyInterface-cs"><a href="#定义接口-MyInterface-cs" class="headerlink" title="定义接口: MyInterface.cs"></a><strong>定义接口: MyInterface.cs</strong></h1><p>接口使用 interface 关键字声明，它与类的声明类似。接口声明默认是 public 的。下面是一个接口声明的实例：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface IMyInterface</span><br><span class="line">&#123;</span><br><span class="line">    void MethodToImplement();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>以上代码定义了接口 IMyInterface。通常接口命名以 I 字母开头，这个接口只有一个方法 MethodToImplement()，没有参数和返回值，当然我们可以按照需求设置参数和返回值。</p>
+<p>值得注意的是，该方法并没有具体的实现。</p>
+<h1 id="实现以上接口：InterfaceImplementer-cs"><a href="#实现以上接口：InterfaceImplementer-cs" class="headerlink" title="实现以上接口：InterfaceImplementer.cs"></a><strong>实现以上接口：InterfaceImplementer.cs</strong></h1><p><strong>&gt; 实例：</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">interface IMyInterface</span><br><span class="line">&#123;</span><br><span class="line">        // 接口成员</span><br><span class="line">    void MethodToImplement();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class InterfaceImplementer : IMyInterface</span><br><span class="line">&#123;</span><br><span class="line">    static void Main()</span><br><span class="line">    &#123;</span><br><span class="line">        InterfaceImplementer iImp = new InterfaceImplementer();</span><br><span class="line">        iImp.MethodToImplement();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void MethodToImplement()</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(&quot;MethodToImplement() called.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>InterfaceImplementer 类实现了 IMyInterface 接口，接口的实现与类的继承语法格式类似：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class InterfaceImplementer : IMyInterface</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>继承接口后，我们需要实现接口的方法 MethodToImplement() , 方法名必须与接口定义的方法名一致。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -946,7 +980,7 @@ C:/Users/GONGRE~1/AppData/Local/Temp/DefaultCompany/New Unity Project
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1014,20 +1048,20 @@ C:/Users/GONGRE~1/AppData/Local/Temp/DefaultCompany/New Unity Project
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-count">92</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1040,7 +1074,7 @@ C:/Users/GONGRE~1/AppData/Local/Temp/DefaultCompany/New Unity Project
         <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.bytefisher.top/" title="Weibo → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
       </span>
       <span class="links-of-author-item">
         <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
@@ -1050,7 +1084,7 @@ C:/Users/GONGRE~1/AppData/Local/Temp/DefaultCompany/New Unity Project
 
 
       </div>
-	  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <iframe id="music-player" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
 	  <div class="wechat_OA">
 		<span>欢迎关注我的公众号</span>
 		<!-- 这里添加你的二维码图片 -->
@@ -1086,6 +1120,26 @@ C:/Users/GONGRE~1/AppData/Local/Temp/DefaultCompany/New Unity Project
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
         
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
@@ -1101,6 +1155,7 @@ C:/Users/GONGRE~1/AppData/Local/Temp/DefaultCompany/New Unity Project
   
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
@@ -1178,8 +1233,37 @@ window.addEventListener('pjax:success', () => {
 
 
   
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -1228,7 +1312,330 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
   }, window.Valine);
 });
 </script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
 
+<style>
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  scrollbar-gutter: stable;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.modal::-webkit-scrollbar {
+  display: none !important;
+}
+
+.modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.modal-content {
+  position: relative;
+  width: min(71%, 340px);
+  max-width: calc((100vh - 100px) * 9 / 17.5);
+  height: auto;
+  aspect-ratio: 9 / 17.5;
+  max-height: calc(100vh - 100px);
+  margin: 0 auto;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: min(81%, 320px);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: min(94%, 300px);
+    max-width: calc((100vh - 80px) * 9 / 17.5);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+    max-height: calc(100vh - 80px);
+  }
+}
+
+.modal-content iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  border: none;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  left: auto;
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 10000;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+}
+
+.close-btn:hover {
+  color: #e74c3c;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  background: rgba(0,0,0,0.1);
+  border-radius: 50%;
+  line-height: 50px;
+  user-select: none;
+}
+
+.nav-btn:hover {
+  background: rgba(0,0,0,0.2);
+}
+
+.prev-btn {
+  left: 0;
+}
+
+.next-btn {
+  right: 15px;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: calc(100% - 60px);
+    max-width: calc((100vh - 100px) * 9 / 17.5);
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    line-height: 40px;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var musicIframe = null;
+  var musicDisplayStyle = '';
+  var isMusicPaused = false;
+  var videoIds = [];
+  var currentIndex = 0;
+  
+  function findMusicIframe() {
+    var iframes = document.getElementsByTagName('iframe');
+    for (var i = 0; i < iframes.length; i++) {
+      var src = iframes[i].src || '';
+      if (src.indexOf('music.163.com') > -1 || src.indexOf('outchain/player') > -1) {
+        return iframes[i];
+      }
+    }
+    console.log('[Douyin] Music iframe not found in', iframes.length, 'iframes');
+    return null;
+  }
+  
+  function pauseMusic() {
+    console.log('[Douyin] Trying to pause music...');
+    musicIframe = findMusicIframe();
+    
+    if (musicIframe) {
+      console.log('[Douyin] Music iframe found');
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=1') > -1) {
+        musicIframe.src = src.replace('auto=1', 'auto=0');
+        console.log('[Douyin] Changed auto=1 to auto=0');
+      }
+      isMusicPaused = true;
+    } else {
+      console.log('[Douyin] Music iframe NOT found!');
+    }
+  }
+  
+  function resumeMusic() {
+    console.log('[Douyin] Trying to resume music...');
+    
+    if (musicIframe && isMusicPaused) {
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=0') > -1) {
+        musicIframe.src = src.replace('auto=0', 'auto=1');
+        console.log('[Douyin] Changed auto=0 to auto=1');
+      }
+      isMusicPaused = false;
+    }
+  }
+  
+  function init() {
+    console.log('[Douyin] Initializing...');
+    var cards = document.querySelectorAll('.video-card');
+    console.log('[Douyin] Found', cards.length, 'video cards');
+    
+    videoIds = [];
+    for (var j = 0; j < cards.length; j++) {
+      var videoId = cards[j].getAttribute('data-id');
+      if (videoId) {
+        videoIds.push(videoId);
+      }
+      cards[j].addEventListener('click', openModal);
+    }
+    
+    var closeBtn = document.querySelector('.close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+    
+    var prevBtn = document.querySelector('.prev-btn');
+    var nextBtn = document.querySelector('.next-btn');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(-1);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(1);
+      });
+    }
+    
+    var modal = document.getElementById('douyin-modal');
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+    }
+  }
+  
+  function navigateVideo(direction) {
+    if (videoIds.length === 0) return;
+    
+    currentIndex += direction;
+    if (currentIndex < 0) {
+      currentIndex = videoIds.length - 1;
+    } else if (currentIndex >= videoIds.length) {
+      currentIndex = 0;
+    }
+    
+    var videoId = videoIds[currentIndex];
+    var player = document.getElementById('douyin-player');
+    if (player && videoId) {
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+    }
+  }
+  
+  function openModal(e) {
+    console.log('[Douyin] Opening modal...');
+    var card = e.currentTarget;
+    var videoId = card.getAttribute('data-id');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    currentIndex = videoIds.indexOf(videoId);
+    
+    if (player && modal && videoId) {
+      pauseMusic();
+      
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.marginRight = '0px';
+    }
+  }
+  
+  function closeModal() {
+    console.log('[Douyin] Closing modal...');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    if (player) {
+      player.src = '';
+    }
+    
+    if (modal) {
+      modal.classList.remove('active');
+    }
+    
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    
+    resumeMusic();
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
     </div>
 </body>
 </html>

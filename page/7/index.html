@@ -12,11 +12,11 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
 <meta property="og:type" content="website">
@@ -103,6 +103,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -129,22 +130,27 @@
   </li>
         <li class="menu-item menu-item-aigames">
 
-    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏<span class="badge">1</span></a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">42</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">10</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">12</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">81</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">92</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">28</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -152,11 +158,38 @@
     <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -178,7 +211,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/10/14/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-14/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -192,7 +225,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/10/14/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-14/" class="post-title-link" itemprop="url">钓鱼日记[23.10.14]</a>
+            <a href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity堆叠消除小游戏摘要</a>
         </h2>
 
         <div class="post-meta">
@@ -202,14 +235,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-10-14 19:00:00" itemprop="dateCreated datePublished" datetime="2023-10-14T19:00:00+08:00">2023-10-14</time>
+              <time title="创建时间：2024-01-31 18:11:16" itemprop="dateCreated datePublished" datetime="2024-01-31T18:11:16+08:00">2024-01-31</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-04 23:02:40" itemprop="dateModified" datetime="2024-01-04T23:02:40+08:00">2024-01-04</time>
+                <time title="修改时间：2024-02-20 21:03:23" itemprop="dateModified" datetime="2024-02-20T21:03:23+08:00">2024-02-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -217,12 +250,20 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
                 </span>
             </span>
 
           
-            <span id="/2023/10/14/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-14/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.10.14]" title="阅读次数">
+            <span id="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity堆叠消除小游戏摘要" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -237,8 +278,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/10/14/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-14/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/10/14/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-14/" itemprop="commentCount"></span>
+    <a title="valine" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -253,13 +294,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>10月14日<br>阳光明媚的早晨我兴致勃勃地穿上了新买的60公分高的长筒水鞋,满怀期待地来到了上周的钓点。上周的钓鱼经历令我异常开心,然而那次狼狈的遛鱼却让我久久不能释怀,一条小鲤鱼竟然让我两只水鞋都装满了水,因此我特意买了一双更高的长筒水鞋。今天,我准备在同一个位置搭起钓台,使用6.75米的鱼竿,1.2号的主线和0.5号的子线,带上4号袖钩来钓马口和土凤。上次用的6.3米竿子感觉效果不错,今天用了更长的竿子,希望能钓的更好。</p>
-<p><img data-src="https://iili.io/JFvCka1.md.jpg"></p>
-<p>为了能更快地诱鱼,我用红虫颗粒打窝。</p>
-<p><img data-src="https://iili.io/JFvCWjj.md.jpg"></p>
+          <p>Lua实现Unity堆叠消除小游戏，游戏功能每次随机生成四个不同形状的方块，将方块拖入10*10的格子棋盘，如果放入的棋盘格都有空格则可以放入方块，当放满一行或者一列时，消除满行满列的放入格。</p>
+<h2 id="创建拼图地图格数据"><a href="#创建拼图地图格数据" class="headerlink" title="- 创建拼图地图格数据"></a>- 创建拼图地图格数据</h2><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">---拼图地图格数据</span><br><span class="line">---@class ROPuzzleMapTileData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type number 位置标记</span><br><span class="line">    index = 0,</span><br><span class="line">    ---@type number 所在行</span><br><span class="line">    x = 0,</span><br><span class="line">    ---@type number 所在列</span><br><span class="line">    y = 0,</span><br><span class="line">    ---@type number 地图格上放置的方块ID  为0 表示空格</span><br><span class="line">    blockId = 0,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(index,x,y,id)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(index,x,y,id)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(index,x,y,id)</span><br><span class="line">    self.index = index</span><br><span class="line">    self.x = x</span><br><span class="line">    self.y = y</span><br><span class="line">    self.blockId = id</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="创建拼图游戏数据结构"><a href="#创建拼图游戏数据结构" class="headerlink" title="- 创建拼图游戏数据结构"></a>- 创建拼图游戏数据结构</h2><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line">---@class ROPuzzleGameData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type CfgRestaurantOperationPuzzleControlData</span><br><span class="line">    cfgPuzzleGameControlData = nil,</span><br><span class="line">    ---@type number 当前积分</span><br><span class="line">    score = 0,</span><br><span class="line">    ---@type ROPuzzleMapTileData[]</span><br><span class="line">    tileMaps = &#123;&#125;,</span><br><span class="line">    ---@type number 最大行数</span><br><span class="line">    maxLine = 10,</span><br><span class="line">    ---@type number 最大列数</span><br><span class="line">    maxColumn = 10,</span><br><span class="line">    ---@type number 单次生成的方块数量(上限为4)</span><br><span class="line">    randomBlock = &#123;&#125;,</span><br><span class="line">    ---@type boolean 游戏是否已经开始（点了开始按钮视为游戏开始）</span><br><span class="line">    isGameStart = false,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">local ROPuzzleMapTileData = require(&quot;IQIGame.Module.CommonActivity.RestaurantOperation.ROPuzzleGame.ROPuzzleMapTileData&quot;)</span><br><span class="line"></span><br><span class="line">function m.New(cfgData)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(cfgData)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(cfgData)</span><br><span class="line">    self.score = 0</span><br><span class="line">    self.cfgPuzzleGameControlData = cfgData</span><br><span class="line">    self.tileMaps = self:CreateTiles()</span><br><span class="line">    self.isGameStart = true</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---开始新游戏，创建拼图地图</span><br><span class="line">function m:CreateTiles()</span><br><span class="line">    local tab = &#123;&#125;</span><br><span class="line">    local index = 0</span><br><span class="line">    for line = 1, self.maxLine do</span><br><span class="line">        for column = 1, self.maxColumn do</span><br><span class="line">            index = index + 1</span><br><span class="line">            local tileData = ROPuzzleMapTileData.New(index,line,column,0)</span><br><span class="line">            tab[index] = tileData</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    return tab</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---随机生成四个方块</span><br><span class="line">function m:RefreshRandomBlock()</span><br><span class="line">    self.randomBlock = &#123;&#125;</span><br><span class="line">    local blockGroup = table.clone(self.cfgPuzzleGameControlData.BlockGroup)</span><br><span class="line">    ---洗牌操作</span><br><span class="line">    for i = #blockGroup, 2, -1 do</span><br><span class="line">        local random_index = math.random(i)</span><br><span class="line">        blockGroup[i], blockGroup[random_index] = blockGroup[random_index],blockGroup[i]</span><br><span class="line">    end</span><br><span class="line">    ---根据配置数据取方块</span><br><span class="line">    for i = 1, self.cfgPuzzleGameControlData.BlockNum do</span><br><span class="line">        local id = blockGroup[i]</span><br><span class="line">        table.insert(self.randomBlock,id)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---消除满行满列，并返回消除的行列</span><br><span class="line">---@return number, number[],number[] 消除的总行数，同时消除的行和列</span><br><span class="line">function m:Eliminate()</span><br><span class="line">    local lines = &#123;&#125;</span><br><span class="line">    local columns = &#123;&#125;</span><br><span class="line">    ---行检测</span><br><span class="line">    for i = 1, self.maxLine do</span><br><span class="line">        local isFull = true</span><br><span class="line">        for j = 1, self.maxColumn do</span><br><span class="line">            local pos = (i-1) * self.maxLine + j</span><br><span class="line">            if self.tileMaps[pos].blockId == 0 then</span><br><span class="line">                isFull = false</span><br><span class="line">                break</span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">        if isFull then</span><br><span class="line">            table.insert(lines,i)</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    ---列检测</span><br><span class="line">    for j = 1, self.maxColumn do</span><br><span class="line">        local isFull = true</span><br><span class="line">        for i = 1, self.maxLine do</span><br><span class="line">            local pos = (i-1) * self.maxLine + j</span><br><span class="line">            if self.tileMaps[pos].blockId == 0 then</span><br><span class="line">                isFull = false</span><br><span class="line">                break</span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">        if isFull then</span><br><span class="line">            table.insert(columns,j)</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    local totalNum = #lines + #columns</span><br><span class="line">    return totalNum,lines,columns</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---增加积分</span><br><span class="line">---@param score number</span><br><span class="line">function m:AddScore(score)</span><br><span class="line">    self.score = self.score + score</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---检测方块还有没有空地能放下</span><br><span class="line">---@param blockCell PuzzleGameBlockCell</span><br><span class="line">---@return boolean</span><br><span class="line">function m:CheckBlockCellCanPutDown(blockCell)</span><br><span class="line">    local posTab = blockCell.blockData</span><br><span class="line">    for i, tileData in pairs(self.tileMaps) do</span><br><span class="line">        ---找到了一个空格子</span><br><span class="line">        local canPutDown = false</span><br><span class="line">        if tileData.blockId == 0 then</span><br><span class="line">            ---所有检测点都满足返回true</span><br><span class="line">            for j, pos in pairs(posTab) do</span><br><span class="line"></span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    return false</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>通过调用RefreshRandomBlock()方法，每次随机生成不重复的四个方块</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/10/14/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-14/#more" rel="contents">
+              <a class="btn" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -283,7 +326,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/10/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-05/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -297,7 +340,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/10/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-05/" class="post-title-link" itemprop="url">钓鱼日记[23.10.05]</a>
+            <a href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity连连看小游戏摘要</a>
         </h2>
 
         <div class="post-meta">
@@ -307,14 +350,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-10-06 19:10:20" itemprop="dateCreated datePublished" datetime="2023-10-06T19:10:20+08:00">2023-10-06</time>
+              <time title="创建时间：2024-01-31 16:48:39" itemprop="dateCreated datePublished" datetime="2024-01-31T16:48:39+08:00">2024-01-31</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-04 23:02:40" itemprop="dateModified" datetime="2024-01-04T23:02:40+08:00">2024-01-04</time>
+                <time title="修改时间：2024-02-20 21:03:23" itemprop="dateModified" datetime="2024-02-20T21:03:23+08:00">2024-02-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -322,12 +365,20 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
                 </span>
             </span>
 
           
-            <span id="/2023/10/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-05/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.10.05]" title="阅读次数">
+            <span id="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity连连看小游戏摘要" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -342,8 +393,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/10/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-05/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/10/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-05/" itemprop="commentCount"></span>
+    <a title="valine" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -358,15 +409,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>好久没更新钓鱼日志了，国庆大假还有两天结束，今天决定去西来古镇野河探钓一下，由于河边在修路，不好停车，今年都没去那钓过鱼，去年河里的白条，麦线鱼挺多。</p>
-<p>10月5号，天气阴沉，上午9点半来到河边。两岸水草很多，河中间走水比较厉害，我决定用6.3米的鱼竿钓浅滩。那有很多小鱼在炸水，线组搭配1.2号的主线，0.4号的子线，配备了4号的鱼钩，水深大约1米左右。刚抛几竿就开始上小马口，咬口很凶猛，但是由于鱼竿比较粗硬，小鱼在起竿的时候比较容易弹掉。</p>
-<p>开始上鱼不久，我突然就感受到了不一样的拉力，鱼不大但窜的特别厉害。一两多的小鱼，都能把我的鱼竿拉成大弯弓，以为是来了鲤鱼，结果鱼出水后惊奇地发现竟然是花骨鱼，以前没有这种鱼。突然钓到这种鱼让我感觉非常惊喜。今天的鱼情特别好，马口一直连竿，中途还有一条小鲤鱼上了钩。总的来说，我获得了几十条马口鱼，九条花骨鱼和一条鲤鱼。收获颇丰。</p>
-<p><img data-src="https://iili.io/J2N3Y0B.md.jpg"></p>
-<p>第一尾花骨鱼</p>
-<p><img data-src="https://iili.io/J2N3uxj.md.jpg"></p>
+          <p>用Lua实现Unity连连看游戏要点记录：</p>
+<p>游戏功能描述，通过游戏关卡配置从水果类型中，生成指定类型水果及其数量，位置随机。连线要求最多支持两个拐点，三段线相连通才能消除。</p>
+<h2 id="创建游戏关卡数据结构"><a href="#创建游戏关卡数据结构" class="headerlink" title="- 创建游戏关卡数据结构"></a>- 创建游戏关卡数据结构</h2><p>创建关卡水果数据结构 ROFruitData</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">---水果连连看水果数据</span><br><span class="line">---@class ROFruitData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type number 配置ID</span><br><span class="line">    cid = nil,</span><br><span class="line">    ---@type boolean 是否消除</span><br><span class="line">    isClean = false,</span><br><span class="line">    ---@type number 所在位置</span><br><span class="line">    pos = 0,</span><br><span class="line">    ---@type number 行</span><br><span class="line">    x = 0,</span><br><span class="line">    ---@type number 列</span><br><span class="line">    y = 0,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(cid,clean)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(cid,clean)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(cid,clean)</span><br><span class="line">    self.cid = cid</span><br><span class="line">    self.isClean = clean</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@param pos number</span><br><span class="line">function m:SetPos(pos)</span><br><span class="line">    self.pos = pos</span><br><span class="line">    local x,y = self:GetX_Y()</span><br><span class="line">    self.x = x</span><br><span class="line">    self.y = y</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@return CfgRestaurantOperationFruitListData</span><br><span class="line">function m:GetCfgData()</span><br><span class="line">    if self.cid &gt; 0 then</span><br><span class="line">        return CfgRestaurantOperationFruitListTable[self.cid]</span><br><span class="line">    end</span><br><span class="line">    return nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---通过Pos获取格子位置 (每行10个格子)</span><br><span class="line">---@return number,number  行，列</span><br><span class="line">function m:GetX_Y()</span><br><span class="line">    local x = math.ceil(self.pos / 10)</span><br><span class="line">    local y = self.pos - 10 * (x-1)</span><br><span class="line">    return x,y</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+</code></pre>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/10/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-05/#more" rel="contents">
+              <a class="btn" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -390,7 +440,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/10/02/%E5%9B%BD%E5%BA%86%E6%B8%B8%E6%B8%B8%E8%A7%88%E8%AF%BA%E6%B0%B4%E6%B2%B3%E4%B8%AD%E5%B3%B0%E6%B4%9E/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -404,7 +454,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/10/02/%E5%9B%BD%E5%BA%86%E6%B8%B8%E6%B8%B8%E8%A7%88%E8%AF%BA%E6%B0%B4%E6%B2%B3%E4%B8%AD%E5%B3%B0%E6%B4%9E/" class="post-title-link" itemprop="url">诺水河中峰洞游记</a>
+            <a href="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/" class="post-title-link" itemprop="url">钓鱼日记[23.12.16]</a>
         </h2>
 
         <div class="post-meta">
@@ -414,7 +464,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-10-02 17:21:53" itemprop="dateCreated datePublished" datetime="2023-10-02T17:21:53+08:00">2023-10-02</time>
+              <time title="创建时间：2023-12-16 20:21:05" itemprop="dateCreated datePublished" datetime="2023-12-16T20:21:05+08:00">2023-12-16</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -429,12 +479,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%97%85%E6%B8%B8/" itemprop="url" rel="index"><span itemprop="name">旅游</span></a>
+                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
                 </span>
             </span>
 
           
-            <span id="/2023/10/02/%E5%9B%BD%E5%BA%86%E6%B8%B8%E6%B8%B8%E8%A7%88%E8%AF%BA%E6%B0%B4%E6%B2%B3%E4%B8%AD%E5%B3%B0%E6%B4%9E/" class="post-meta-item leancloud_visitors" data-flag-title="诺水河中峰洞游记" title="阅读次数">
+            <span id="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.12.16]" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -449,8 +499,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/10/02/%E5%9B%BD%E5%BA%86%E6%B8%B8%E6%B8%B8%E8%A7%88%E8%AF%BA%E6%B0%B4%E6%B2%B3%E4%B8%AD%E5%B3%B0%E6%B4%9E/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/10/02/%E5%9B%BD%E5%BA%86%E6%B8%B8%E6%B8%B8%E8%A7%88%E8%AF%BA%E6%B0%B4%E6%B2%B3%E4%B8%AD%E5%B3%B0%E6%B4%9E/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -465,15 +515,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2023年国庆长假，我陪媳妇回娘家，第二天大家决定去探索中国西南部令人神往的自然奇观——诺水河中峰洞。这个位于通江县的景点以其壮丽的溶洞景观和令人陶醉的自然美景而闻名于世。在这次旅程中，我将带你穿越洞穴，欣赏天然钟乳石的奇迹，领略五彩斑斓的魅力，并感受如同探险的刺激。</p>
-<p><img data-src="https://iili.io/J2NFcB4.md.jpg"></p>
-<p>高山耸立，云雾缭绕在青峰之间</p>
-<p>诺水河中峰洞位于通江县境内，被壮丽的山峰环绕，洞口隐藏在丛山峻岭之中，云雾飘渺，宛如仙境一般。国庆期间，我和家人一起出发，期待在这个壮丽的自然胜地度过难忘的时光。</p>
-<p><img data-src="https://iili.io/J2NFv3B.md.jpg"></p>
-<p>山高云雾缭绕，崖壁通道仙境之旅</p>
+          <p>12月16日，星期六</p>
+<p>今天是大降温的头一天，寒潮来袭。气温明显比昨天低了好几度，最高温度仅有7度。办完上午的事情后，我决定去河边钓鱼，看看这个寒冷的天气对鱼情的影响。</p>
+<p><img data-src="https://iili.io/JAcANwl.md.jpg"></p>
+<p><img data-src="https://iili.io/JAcAcjp.md.jpg"></p>
+<p>来到西来河边，我发现河水已经干涸了。回忆起夏天的时候，河里马口特别多，当时我玩路亚微物，钓上了好多美丽的马口。但是现在水太浅，温度又低，估计没有鱼儿了。况且，上周河边野钓，那么好的环境，水比较深，都没钓到鱼，这让我有些犹豫。于是，我决定改变原计划，去水库钓小红尾。 </p>
+<p><img data-src="https://iili.io/JAcAX8G.md.jpg"></p>
+<p>到了水库已经过了中午12点。虽然温度很低，但是水温并没有那么冷，感觉还可以。我打开包装袋，准备使用新买的虾拉饵料作钓。钓具方面，我选择了15尺的枯法师，配以小钩和细线。寒风迎面吹来，非常寒冷，水面波浪也相对较大。然而，令我欣喜的是，鱼儿们的咬口非常好。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/10/02/%E5%9B%BD%E5%BA%86%E6%B8%B8%E6%B8%B8%E8%A7%88%E8%AF%BA%E6%B0%B4%E6%B2%B3%E4%B8%AD%E5%B3%B0%E6%B4%9E/#more" rel="contents">
+              <a class="btn" href="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -497,7 +548,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/09/17/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-17/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -511,7 +562,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/09/17/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-17/" class="post-title-link" itemprop="url">钓鱼日记[23.09.17]</a>
+            <a href="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/" class="post-title-link" itemprop="url">钓鱼日记[23.12.10]</a>
         </h2>
 
         <div class="post-meta">
@@ -521,7 +572,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-09-17 18:00:20" itemprop="dateCreated datePublished" datetime="2023-09-17T18:00:20+08:00">2023-09-17</time>
+              <time title="创建时间：2023-12-10 21:01:05" itemprop="dateCreated datePublished" datetime="2023-12-10T21:01:05+08:00">2023-12-10</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -541,7 +592,7 @@
             </span>
 
           
-            <span id="/2023/09/17/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-17/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.09.17]" title="阅读次数">
+            <span id="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.12.10]" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -556,8 +607,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/09/17/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-17/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/09/17/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-17/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -572,13 +623,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>9月16日（星期六）阴<br>转眼又到了秋天，这是一年中的第二个钓鱼黄金季节。秋天的天气逐渐转凉，气温适宜，使得鱼类活动活跃起来。它们开始准备过冬，需要摄取更多的食物，所以秋季成为钓鱼的最佳时机。秋天也是农作物的收获季节，人们需要忙碌地收割果实、蔬菜和谷物，并进行后续的加工和储存工作。而对于种植柑橘等果树的果农来说，秋季是套袋最忙碌的时期，套袋需要大量的人工操作，包括为果实选取合适的袋子、将果实轻柔地放入袋中，然后绑紧袋子，这一过程需要耗费大量的时间和劳动力。家里也种了一些粑粑柑，这些天媳妇和老妈正忙着给粑粑柑套袋，恰逢周末本来也想尽一点自己的绵薄之力。但套袋的实际操作让我感到吃力，一会蹲一会站，一会又需要弓着身子弯子腰，手上还忙个不停，简直比连续加通宵班还累，没套好二十个果子，就感觉头晕，于是决定去水库钓鱼放松一下。</p>
-<p>晚上下过雨，树叶上还有很多水</p>
-<p><img data-src="https://iili.io/JH64ucP.md.jpg"><br>关鸡的围栏</p>
-<p><img data-src="https://iili.io/JH64Bwb.md.jpg"><br>感觉这果子还长的挺快，都这么大个了</p>
+          <p>12月10日，星期天</p>
+<p>今天是一个悠闲的周末，在寿安镇参加完一场热闹的酒席后，午后与表弟满怀期待地踏上了一段探秘之旅，我们的目标是一直传说中的南河旧沙场，那里据说是个钓鱼的好地方。从网络上朋友们晒出的满载而归的照片就可以看出，这里的鱼种颇为丰富。因为距离比较远，一直没有机会前往，幸运的是今天结束酒席我们便在附近，于是决定去实地探探。</p>
+<p><img data-src="https://iili.io/JuqGTBa.md.jpg"></p>
+<p>第一次踏上这片朴实的乡间，对于指向南河边的路途，我们了解甚少，我与表弟开车沿着曲折蜿蜒的小路前行，朝着心中模糊的目标寻找。沿路的风景如同幅幅静谧的田园画卷，然而美丽背后却隐藏着迷宫般的复杂，好几次我们信心满满地沿一条道路驶入，却不料终结于荒郊的尽头，只得无奈掉头，重新寻找踪迹。我们一次又一次地尝试，转进又转出, 终于在曲折迂回后，一条幽深的小径映入眼帘。摇晃的车辆随着小径的痕迹颠簸前行，终于我们抵达了心中期待已久的钓鱼之地。</p>
+<p><img data-src="https://iili.io/JuqGCmP.md.jpg"></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/09/17/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-17/#more" rel="contents">
+              <a class="btn" href="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -602,7 +654,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/09/03/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-03/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -616,7 +668,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/09/03/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-03/" class="post-title-link" itemprop="url">钓鱼日记[23.09.03]</a>
+            <a href="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现U3D弹幕飞行游戏摘要</a>
         </h2>
 
         <div class="post-meta">
@@ -626,7 +678,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-09-03 19:10:20" itemprop="dateCreated datePublished" datetime="2023-09-03T19:10:20+08:00">2023-09-03</time>
+              <time title="创建时间：2023-12-06 11:04:38" itemprop="dateCreated datePublished" datetime="2023-12-06T11:04:38+08:00">2023-12-06</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -641,12 +693,20 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
                 </span>
             </span>
 
           
-            <span id="/2023/09/03/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-03/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.09.03]" title="阅读次数">
+            <span id="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现U3D弹幕飞行游戏摘要" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -661,8 +721,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/09/03/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-03/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/09/03/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-03/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -677,14 +737,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>又到了开心愉快的周末钓鱼时间。家养的乌龟正在蜕皮，似乎又长大了一些，胃口也变大了。每次钓回来的小鱼都不够它们吃，所以下定决心这周要多钓些小鱼回来。<br>9月2日（星期六）多云转晴<br>今天天气很好，上午阴凉的气温在20多度，非常适合钓鱼。一早就整理好钓竿、钓箱、活鱼桶、大钓伞、鱼护包、路亚包，还带了两只海竿，车厢里满满当当。信心满满地向水库出发，今天一定要钓到大鱼。<br>信心满满的出发<br><img data-src="https://iili.io/J9fg7KQ.md.jpg"></p>
-<p>到达水库后，看到水面几乎干涸了。这几百亩的水域中只有中间还有些许水，而且都很浅。用13.5尺竿子抛出去都只有20CM左右水深。显然，要钓到大鱼是不可能了。但水质混浊，按照以往的经验，应该还是能钓到小鲫鱼的。没有再犹豫，开始垂钓。刚开始没多久，旁边的钓友就中了一条大约三两重的鲶鱼，而且他那个位置水更浅，只能使用七星票。这让我不禁感到意外，怎么这么浅的水域也能钓到如此大的鲶鱼呢？之前在水较深的时候也才曾钓到过最大2两重的鲶鱼，这一瞬间又激起了我的信心。连续抛竿作钓，窝里的小白条越来越多，而且都非常小。有时候甚至不带饵料，空钩也能钓到鱼。更让人惊讶的是，我使用的双钩竟然能够一次中三条鱼。</p>
-<p>双钩奇迹<br><img data-src="https://iili.io/J9fgIDu.md.jpg"></p>
-<p>钓了一个小时，窝里全是这种小白条，一条小鲫鱼都没钓到。这时候一家人带着一个可爱活泼的小女孩也来钓鱼。小女孩大约10岁，看到我在钓鱼，不停地询问我是否钓到了鱼。我告诉她，只钓到了一些非常小的鱼。一听有鱼可钓，小女孩兴奋地吵着她爸爸要钓鱼。她的爸爸将手中的鱼竿递给了她。没过多久，小女孩高兴地叫喊起来：“中鱼了，中鱼了，好大！”我转头看去，果然小女孩手上的鱼竿弯成了弧形，鱼在鱼竿的牵引下划过一段弧线，便被挑上岸，是一条大约2两重的小鲤鱼。我几乎不敢相信，竟然能在这样浅的水域钓到鲤鱼。也许钓友们经常调侃的那些新手“大礼包”是真实存在的。看着小女孩脸上洋溢着灿烂的笑容，就像阳光穿透云层，她的喜悦像一道明媚的彩虹，让人感受到了她对钓鱼的内心快乐。我相信，不管过了多久，这一刻都将成为小女孩最深刻的记忆，就像我儿子6岁时和我一起去河边钓鱼，那次钓到的差不多有三两重的鲫鱼一样，他时不时会在我面前炫耀一下。</p>
-<p>看到小女孩钓上了鲤鱼，我更加相信，肯定能钓到鲫鱼。可能是水太浅，鱼儿进窝速度较慢。我需要慢慢诱鱼，因此保持了大约一分钟一竿的频率坚持拉饵作钓。果然，坚持了一段时间后终于上了第一条小鲫鱼，尽管个体相较之前的钓获稍小。到了午后，窝里的鱼越来越多，从岸上看去有一片黑压压的鱼群。小白条占多数，不过鲫鱼数量也不少，我开始连竿钓起了小鲫鱼。</p>
+          <p>用Lua实现Unity弹幕飞行游戏要点记录：</p>
+<h2 id="对象池"><a href="#对象池" class="headerlink" title="- 对象池"></a>- 对象池</h2><p>创建游戏中可循环利用的游戏对象池</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">---获取一个可用子弹</span><br><span class="line">---@return FlightGameBullet</span><br><span class="line">function m:GetBullet()</span><br><span class="line">    for i, v in pairs(self.flightGameBulletPool) do</span><br><span class="line">        if not v.active then</span><br><span class="line">            return v</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    ---如果没有可用子弹，动态创建一个新的子弹</span><br><span class="line">    local bulletCell = FlightGameBullet.New(UnityEngine.Object.Instantiate(self.BulletModel))</span><br><span class="line">    self.flightGameBulletPool[bulletCell.View:GetInstanceID()] = bulletCell</span><br><span class="line">    return bulletCell</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---回收子弹</span><br><span class="line">---@param bullet FlightGameBullet</span><br><span class="line">function m:RecycleBullet(bullet)</span><br><span class="line">    bullet.View.transform:SetParent(self.RecoveryNode.transform, false)</span><br><span class="line">    bullet:Reset()</span><br><span class="line">    self.flightGameBulletPool[bullet.View:GetInstanceID()] = bullet</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---获取一个未被激活的敌人</span><br><span class="line">---@return FlightGameEnemy</span><br><span class="line">function m:GetEnemy()</span><br><span class="line">    for i, v in pairs(self.flightGameEnemyPool) do</span><br><span class="line">        if not v.active and v:IsPlayDamageEnd() then</span><br><span class="line">            return v</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    ---如果没有未被激活的敌人，动态创建一个新的敌人</span><br><span class="line">    local enemy = FlightGameEnemy.New(UnityEngine.Object.Instantiate(self.EnemyModel),self.rootScene)</span><br><span class="line">    self.flightGameEnemyPool[enemy.View:GetInstanceID()] = enemy</span><br><span class="line">    return enemy</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---回收敌人设置成未激活状态</span><br><span class="line">---@param enemy FlightGameEnemy</span><br><span class="line">function m:RecycleEnemy(enemy)</span><br><span class="line">    enemy.View.transform:SetParent(self.RecoveryNode.transform, false)</span><br><span class="line">    enemy:Reset()</span><br><span class="line">    self.flightGameEnemyPool[enemy.View:GetInstanceID()] = enemy</span><br><span class="line">end</span><br><span class="line">--endregion Object Management</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="碰撞检测"><a href="#碰撞检测" class="headerlink" title="- 碰撞检测"></a>- 碰撞检测</h2><p>实现场景中游戏对象的碰撞检测</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/09/03/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-03/#more" rel="contents">
+              <a class="btn" href="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -708,7 +768,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/08/21/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-08-21/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/12/02/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -722,7 +782,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/08/21/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-08-21/" class="post-title-link" itemprop="url">钓鱼日记[23.08.21]</a>
+            <a href="/2023/12/02/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-02/" class="post-title-link" itemprop="url">钓鱼日记[23.12.02]</a>
         </h2>
 
         <div class="post-meta">
@@ -732,7 +792,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-08-21 19:49:29" itemprop="dateCreated datePublished" datetime="2023-08-21T19:49:29+08:00">2023-08-21</time>
+              <time title="创建时间：2023-12-02 20:11:01" itemprop="dateCreated datePublished" datetime="2023-12-02T20:11:01+08:00">2023-12-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -752,7 +812,7 @@
             </span>
 
           
-            <span id="/2023/08/21/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-08-21/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.08.21]" title="阅读次数">
+            <span id="/2023/12/02/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-02/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.12.02]" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -767,8 +827,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/08/21/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-08-21/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/08/21/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-08-21/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/12/02/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-02/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/12/02/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-02/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -783,17 +843,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>这几天一直很忙，一直没有时间更新我钓鱼的日志。不过抽空的时候，我整理了一下上个周末的钓鱼经历。</p>
-<p>周六早上（8月19日），我早早起来来到了水库边。这是我第一次如此一大早来到水库，欣赏着大雨后的清晨，水库的美景让我心旷神怡。在远方的地平线上，高山峰峦起伏地矗立着，与蔚蓝的天空相接，峰巅的雄伟挺拔清晰可见。</p>
-<p>清晨的水库风光<br><img data-src="https://iili.io/JH6bhrb.md.jpg"></p>
-<p>按照我平时的习惯，我使用拉饵的方式钓小鲫鱼。然而这次窝子里的小白条鱼特别多，甚至在饵料没到位之前，水面上就已经黑压压一片。浮漂被小鱼拉来拉去，四号鱼钩根本钓不上鱼，毕竟鱼儿太小了。</p>
-<p>我钓到了一只透明的河虾，它晶莹剔透，美得令人赏心悦目。</p>
-<p>晶莹剔透的透明河虾<br><img data-src="https://iili.io/JH6bWBe.md.jpg"></p>
-<p>微风拂过的波光粼粼水面<br><img data-src="https://iili.io/JH6bgCF.md.jpg"></p>
-<p>水面上盘旋觅食的水鸟<br><img data-src="https://iili.io/JH6bw2j.md.jpg"></p>
+          <p>12月2日</p>
+<p>周六，阴冷的冬日，我决定去三一水库钓小红尾。此次的钓鱼之旅，我特意选择了15尺枯法师7，想和以前经常使用的15尺普天元独步，进行一个详细的对比。在网上，对于15尺枯法师7的评论褒贬不一，相对于其他尺寸而言，人们普遍认为15尺是整个枯7系列最不好的一款，持感重头，整体偏软。 </p>
+<p><img data-src="https://iili.io/JIFdS7R.md.jpg"></p>
+<p><img data-src="https://iili.io/JIFde1a.md.jpg"></p>
+<p>刚开始使用枯法师的时候，确实能感受到比独步有明显的重头感，相比于15尺独步，枯7的竿身要细一些，竿壁也更厚。我发现15尺枯法师7，在抛投时和独步一样都比较精准，但刺鱼没有独步那么犀利，独步龙凤尾，刺鱼没延迟很直接。然而，枯法师7代的腰力明显优于独步，当我遇到相同的鱼情时，独步只是竿稍前两节稍微弯曲，就能将鱼飞出水面，而枯法师则能更大幅度地弯曲，甚至大弯弓。</p>
+<p><img data-src="https://iili.io/JIFdhzP.md.jpg"></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/08/21/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-08-21/#more" rel="contents">
+              <a class="btn" href="/2023/12/02/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-02/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -816,7 +874,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -884,20 +942,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-count">92</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -910,7 +968,7 @@
         <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.bytefisher.top/" title="Weibo → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
       </span>
       <span class="links-of-author-item">
         <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
@@ -920,7 +978,7 @@
 
 
       </div>
-	  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <iframe id="music-player" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
 	  <div class="wechat_OA">
 		<span>欢迎关注我的公众号</span>
 		<!-- 这里添加你的二维码图片 -->
@@ -956,6 +1014,26 @@
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
         
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
@@ -971,6 +1049,7 @@
   
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
@@ -1048,8 +1127,37 @@ window.addEventListener('pjax:success', () => {
 
 
   
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -1098,7 +1206,330 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
   }, window.Valine);
 });
 </script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
 
+<style>
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  scrollbar-gutter: stable;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.modal::-webkit-scrollbar {
+  display: none !important;
+}
+
+.modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.modal-content {
+  position: relative;
+  width: min(71%, 340px);
+  max-width: calc((100vh - 100px) * 9 / 17.5);
+  height: auto;
+  aspect-ratio: 9 / 17.5;
+  max-height: calc(100vh - 100px);
+  margin: 0 auto;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: min(81%, 320px);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: min(94%, 300px);
+    max-width: calc((100vh - 80px) * 9 / 17.5);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+    max-height: calc(100vh - 80px);
+  }
+}
+
+.modal-content iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  border: none;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  left: auto;
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 10000;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+}
+
+.close-btn:hover {
+  color: #e74c3c;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  background: rgba(0,0,0,0.1);
+  border-radius: 50%;
+  line-height: 50px;
+  user-select: none;
+}
+
+.nav-btn:hover {
+  background: rgba(0,0,0,0.2);
+}
+
+.prev-btn {
+  left: 0;
+}
+
+.next-btn {
+  right: 15px;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: calc(100% - 60px);
+    max-width: calc((100vh - 100px) * 9 / 17.5);
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    line-height: 40px;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var musicIframe = null;
+  var musicDisplayStyle = '';
+  var isMusicPaused = false;
+  var videoIds = [];
+  var currentIndex = 0;
+  
+  function findMusicIframe() {
+    var iframes = document.getElementsByTagName('iframe');
+    for (var i = 0; i < iframes.length; i++) {
+      var src = iframes[i].src || '';
+      if (src.indexOf('music.163.com') > -1 || src.indexOf('outchain/player') > -1) {
+        return iframes[i];
+      }
+    }
+    console.log('[Douyin] Music iframe not found in', iframes.length, 'iframes');
+    return null;
+  }
+  
+  function pauseMusic() {
+    console.log('[Douyin] Trying to pause music...');
+    musicIframe = findMusicIframe();
+    
+    if (musicIframe) {
+      console.log('[Douyin] Music iframe found');
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=1') > -1) {
+        musicIframe.src = src.replace('auto=1', 'auto=0');
+        console.log('[Douyin] Changed auto=1 to auto=0');
+      }
+      isMusicPaused = true;
+    } else {
+      console.log('[Douyin] Music iframe NOT found!');
+    }
+  }
+  
+  function resumeMusic() {
+    console.log('[Douyin] Trying to resume music...');
+    
+    if (musicIframe && isMusicPaused) {
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=0') > -1) {
+        musicIframe.src = src.replace('auto=0', 'auto=1');
+        console.log('[Douyin] Changed auto=0 to auto=1');
+      }
+      isMusicPaused = false;
+    }
+  }
+  
+  function init() {
+    console.log('[Douyin] Initializing...');
+    var cards = document.querySelectorAll('.video-card');
+    console.log('[Douyin] Found', cards.length, 'video cards');
+    
+    videoIds = [];
+    for (var j = 0; j < cards.length; j++) {
+      var videoId = cards[j].getAttribute('data-id');
+      if (videoId) {
+        videoIds.push(videoId);
+      }
+      cards[j].addEventListener('click', openModal);
+    }
+    
+    var closeBtn = document.querySelector('.close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+    
+    var prevBtn = document.querySelector('.prev-btn');
+    var nextBtn = document.querySelector('.next-btn');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(-1);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(1);
+      });
+    }
+    
+    var modal = document.getElementById('douyin-modal');
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+    }
+  }
+  
+  function navigateVideo(direction) {
+    if (videoIds.length === 0) return;
+    
+    currentIndex += direction;
+    if (currentIndex < 0) {
+      currentIndex = videoIds.length - 1;
+    } else if (currentIndex >= videoIds.length) {
+      currentIndex = 0;
+    }
+    
+    var videoId = videoIds[currentIndex];
+    var player = document.getElementById('douyin-player');
+    if (player && videoId) {
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+    }
+  }
+  
+  function openModal(e) {
+    console.log('[Douyin] Opening modal...');
+    var card = e.currentTarget;
+    var videoId = card.getAttribute('data-id');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    currentIndex = videoIds.indexOf(videoId);
+    
+    if (player && modal && videoId) {
+      pauseMusic();
+      
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.marginRight = '0px';
+    }
+  }
+  
+  function closeModal() {
+    console.log('[Douyin] Closing modal...');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    if (player) {
+      player.src = '';
+    }
+    
+    if (modal) {
+      modal.classList.remove('active');
+    }
+    
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    
+    resumeMusic();
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
     </div>
 </body>
 </html>

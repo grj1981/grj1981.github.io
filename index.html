@@ -12,11 +12,11 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
 <meta property="og:type" content="website">
@@ -103,6 +103,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -129,22 +130,27 @@
   </li>
         <li class="menu-item menu-item-aigames">
 
-    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏<span class="badge">1</span></a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">42</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">10</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">12</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">81</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">92</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">28</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -152,11 +158,38 @@
     <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -178,7 +211,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/05/01/2026-05-01-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E4%BA%94%E4%B8%80%E6%B0%B4%E5%BA%93%E7%AE%97%E6%80%BB%E8%B4%A6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -192,7 +225,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">VSCode 中搭建 OpenCode AI 编程助手完整指南</a>
+            <a href="/2026/05/01/2026-05-01-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E4%BA%94%E4%B8%80%E6%B0%B4%E5%BA%93%E7%AE%97%E6%80%BB%E8%B4%A6/" class="post-title-link" itemprop="url">五一蒙蒙细雨，波纹鲤K6.3大战水库大鲤</a>
         </h2>
 
         <div class="post-meta">
@@ -201,10 +234,456 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-03-24 20:00:00 / 修改时间：23:58:57" itemprop="dateCreated datePublished" datetime="2026-03-24T20:00:00+08:00">2026-03-24</time>
+              <time title="创建时间：2026-05-01 20:00:00" itemprop="dateCreated datePublished" datetime="2026-05-01T20:00:00+08:00">2026-05-01</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-05-02 19:53:46" itemprop="dateModified" datetime="2026-05-02T19:53:46+08:00">2026-05-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2026/05/01/2026-05-01-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E4%BA%94%E4%B8%80%E6%B0%B4%E5%BA%93%E7%AE%97%E6%80%BB%E8%B4%A6/" class="post-meta-item leancloud_visitors" data-flag-title="五一蒙蒙细雨，波纹鲤K6.3大战水库大鲤" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2026/05/01/2026-05-01-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E4%BA%94%E4%B8%80%E6%B0%B4%E5%BA%93%E7%AE%97%E6%80%BB%E8%B4%A6/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2026/05/01/2026-05-01-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E4%BA%94%E4%B8%80%E6%B0%B4%E5%BA%93%E7%AE%97%E6%80%BB%E8%B4%A6/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>上次收杆时说过，五一回来算总账。</p>
+<p>言出必行。</p>
+<p>五月一号，天还没亮就醒了。窗外淅淅沥沥的雨声让我心里一凉——天气预报没说下雨啊。打开手机一看，蒙蒙细雨，温度不高，气压倒是稳定。我一拍大腿：这不就是钓大鱼的天吗？阴雨天，大物靠岸，今天不爆护都对不起这天气！</p>
+<p>抄起装备就出发。后备箱里波纹鲤K6.3已经擦得锃亮，线组也提前绑好了——2.0主线+1.5子线，新关东2号钩。上次1.0子线被切得怀疑人生，今天直接加粗。对了，这次特地换了个大鱼桶，上次那个小桶三条鱼就塞满了，今天五一必须安排到位。</p>
+<p><img data-src="https://iili.io/BLa6Q5P.png"></p>
+<p>到水库的时候岸边已经有不少人了，好位置基本都被占了。我沿着水边走了一圈，找了个相对宽敞的空位坐下来。雨丝细细密密的，水面泛着一层涟漪。调漂、找底、打窝，一套流程走完，挂上老坛玉米抛下第一竿。</p>
+<p>抽了支烟的功夫，浮漂轻轻点了一下。</p>
+<p>我瞬间坐直了身子，眼睛死死盯着那枚红绿相间的浮漂。又过了大概两分钟，浮漂出现了一个标准的鲤鱼口——先点两下，然后稳稳地斜着沉了下去。等到黑漂的瞬间，我猛地扬竿刺鱼！</p>
+<p>杆身传来的第一感觉让我心跳都漏了一拍——好重！</p>
+<p><img data-src="https://iili.io/BLa6igV.png"></p>
+<p>波纹鲤K6.3的腰身瞬间弯成一道漂亮的弧线，竿梢几乎扎进水里。鱼线切水的声音在雨幕中格外清脆——“嗡——嗡——“，那是只有大鱼才拉得出来的声音。</p>
+<p><img data-src="https://iili.io/BLa6P0Q.png"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/05/01/2026-05-01-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E4%BA%94%E4%B8%80%E6%B0%B4%E5%BA%93%E7%AE%97%E6%80%BB%E8%B4%A6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/04/29/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%EF%BC%88%E7%BB%AD%EF%BC%89-%E5%BC%B9%E7%AA%97%E6%92%AD%E6%94%BE%E4%BD%93%E9%AA%8C%E4%BC%98%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/04/29/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%EF%BC%88%E7%BB%AD%EF%BC%89-%E5%BC%B9%E7%AA%97%E6%92%AD%E6%94%BE%E4%BD%93%E9%AA%8C%E4%BC%98%E5%8C%96/" class="post-title-link" itemprop="url">Hexo博客集成抖音视频实战指南（续）- 弹窗播放体验优化</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-04-29 20:00:00" itemprop="dateCreated datePublished" datetime="2026-04-29T20:00:00+08:00">2026-04-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-05-01 20:34:43" itemprop="dateModified" datetime="2026-05-01T20:34:43+08:00">2026-05-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">Hexo博客搭建</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2026/04/29/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%EF%BC%88%E7%BB%AD%EF%BC%89-%E5%BC%B9%E7%AA%97%E6%92%AD%E6%94%BE%E4%BD%93%E9%AA%8C%E4%BC%98%E5%8C%96/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo博客集成抖音视频实战指南（续）- 弹窗播放体验优化" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2026/04/29/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%EF%BC%88%E7%BB%AD%EF%BC%89-%E5%BC%B9%E7%AA%97%E6%92%AD%E6%94%BE%E4%BD%93%E9%AA%8C%E4%BC%98%E5%8C%96/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2026/04/29/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%EF%BC%88%E7%BB%AD%EF%BC%89-%E5%BC%B9%E7%AA%97%E6%92%AD%E6%94%BE%E4%BD%93%E9%AA%8C%E4%BC%98%E5%8C%96/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在上一篇文章《Hexo博客集成抖音视频实战指南》中，我们详细介绍了如何在Hexo博客中集成抖音视频相册功能，包括数据层设计、页面模板、弹窗播放等核心实现。</p>
+<p>然而，在实际使用过程中，我发现弹窗播放存在几个体验问题：视频内容没有垂直居中、弹窗内部出现滚动条、底部进度条和”看更多”区域被遮挡。这些问题严重影响了用户的观看体验。</p>
+<p>本文作为续篇，将深入分析这些问题背后的技术根因，并提供完整的修复方案。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/04/29/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%EF%BC%88%E7%BB%AD%EF%BC%89-%E5%BC%B9%E7%AA%97%E6%92%AD%E6%94%BE%E4%BD%93%E9%AA%8C%E4%BC%98%E5%8C%96/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/04/28/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97%EF%BC%88%E4%BC%98%E5%8C%96%E7%AF%87%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/04/28/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97%EF%BC%88%E4%BC%98%E5%8C%96%E7%AF%87%EF%BC%89/" class="post-title-link" itemprop="url">Hexo 博客实战：光影拼图游戏开发指南（优化篇）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-04-28 21:00:00" itemprop="dateCreated datePublished" datetime="2026-04-28T21:00:00+08:00">2026-04-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-05-01 20:34:43" itemprop="dateModified" datetime="2026-05-01T20:34:43+08:00">2026-05-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">游戏开发</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2026/04/28/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97%EF%BC%88%E4%BC%98%E5%8C%96%E7%AF%87%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo 博客实战：光影拼图游戏开发指南（优化篇）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2026/04/28/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97%EF%BC%88%E4%BC%98%E5%8C%96%E7%AF%87%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2026/04/28/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97%EF%BC%88%E4%BC%98%E5%8C%96%E7%AF%87%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>继<a href="/2026/04/20/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">光影拼图游戏开发指南（功能篇）</a>介绍功能实现后，本篇聚焦优化过程中解决的 <strong>7 个 P0 级集成问题</strong> 与运行 Bug。问题的根源在于：Phase 1&#x2F;Phase 2 的优化模块代码已完成，但未正确集成到游戏主流程中。</p>
+<p>本文重点讲解：</p>
+<ol>
+<li><strong>模块集成问题</strong>：优化代码为何闲置，如何激活</li>
+<li><strong>集成修复</strong>：6 大模块重构</li>
+<li><strong>Bug 修复</strong>：融入具体集成章节中</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/04/28/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97%EF%BC%88%E4%BC%98%E5%8C%96%E7%AF%87%EF%BC%89/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/04/26/2026-04-26-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93%E5%A4%8D%E4%BB%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/04/26/2026-04-26-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93%E5%A4%8D%E4%BB%87/" class="post-title-link" itemprop="url">上周你拖走我浮漂的嚣张劲儿呢？ 今天线组全换</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-04-26 09:00:00" itemprop="dateCreated datePublished" datetime="2026-04-26T09:00:00+08:00">2026-04-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-05-01 20:34:43" itemprop="dateModified" datetime="2026-05-01T20:34:43+08:00">2026-05-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2026/04/26/2026-04-26-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93%E5%A4%8D%E4%BB%87/" class="post-meta-item leancloud_visitors" data-flag-title="上周你拖走我浮漂的嚣张劲儿呢？ 今天线组全换" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2026/04/26/2026-04-26-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93%E5%A4%8D%E4%BB%87/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2026/04/26/2026-04-26-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93%E5%A4%8D%E4%BB%87/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>上周你在水库里想干嘛？把我的达摩浮漂拖走了还不过瘾，还连续切我1.0子线、2.0主线？真把这水库当你家开的了？</p>
+<p><strong>今天我就是来算账的。</strong></p>
+<p>周六一大早就醒了，比上班还积极。到水库边才八点半，晨雾还没散尽，水面飘着一层薄薄的水汽。还是上次那个钓位，还是那套装备——6.3米鱼竿+2.0主线+1.0子线。挂饵抛竿，我就不信这个邪了。</p>
+<p><img data-src="https://iili.io/KOgskQ9.jpg"></p>
+<p>下杆不到十分钟，浮漂一个黑漂闷了下去！我条件反射提竿——</p>
+<p><strong>好家伙，中鱼了！</strong></p>
+<p>杆身瞬间弯成满月，线切水的声音”呜呜”响。绝对是条大物，手心全是汗。遛了大概两三分钟，鱼劲刚松了点，我刚想往岸边带——</p>
+<p>“嘣”的一声，杆梢弹了回来。</p>
+<p><strong>子线又双叒叕切了。</strong></p>
+<p><img data-src="https://iili.io/qXc6vfe.jpg"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/04/26/2026-04-26-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93%E5%A4%8D%E4%BB%87/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/04/21/OpenCode%E4%B8%AD%E6%8E%A5%E5%85%A5Qwen%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/04/21/OpenCode%E4%B8%AD%E6%8E%A5%E5%85%A5Qwen%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">OpenCode 中接入 Qwen 模型完整指南</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-04-21 20:00:00" itemprop="dateCreated datePublished" datetime="2026-04-21T20:00:00+08:00">2026-04-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-04-25 21:26:24" itemprop="dateModified" datetime="2026-04-25T21:26:24+08:00">2026-04-25</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -220,7 +699,7 @@
             </span>
 
           
-            <span id="/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="post-meta-item leancloud_visitors" data-flag-title="VSCode 中搭建 OpenCode AI 编程助手完整指南" title="阅读次数">
+            <span id="/2026/04/21/OpenCode%E4%B8%AD%E6%8E%A5%E5%85%A5Qwen%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/" class="post-meta-item leancloud_visitors" data-flag-title="OpenCode 中接入 Qwen 模型完整指南" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -235,8 +714,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" itemprop="commentCount"></span>
+    <a title="valine" href="/2026/04/21/OpenCode%E4%B8%AD%E6%8E%A5%E5%85%A5Qwen%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2026/04/21/OpenCode%E4%B8%AD%E6%8E%A5%E5%85%A5Qwen%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -251,10 +730,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>在 AI 编程工具蓬勃发展的今天，开源免费的 <a target="_blank" rel="noopener" href="https://github.com/anomalyco/opencode">OpenCode</a> 凭借其强大的功能和灵活的扩展性，已经成为超过 500 万开发者的首选。作为一个拥有 <strong>12 万 + GitHub Stars</strong> 的开源项目，OpenCode 提供了终端、桌面应用和 IDE 多种使用方式。本文将详细介绍如何在 VSCode 中搭建和使用 OpenCode，帮助你快速上手这款强大的 AI 编程助手。</p>
+          <p>在上篇文章 <a target="_blank" rel="noopener" href="https://bytefisher.cn/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/">VSCode 中搭建 OpenCode AI 编程助手完整指南</a> 中，我们介绍了 OpenCode 的基础使用方法。在实际使用中，除了 OpenCode Zen 官方套餐外，很多开发者希望使用其他 AI 模型来降低成本或获得更好的中文编程支持。阿里云 Qwen（通义千问）作为国产优秀的大语言模型，在中文理解和代码生成方面表现出色，而且接入成本较低。本文将详细介绍如何在 OpenCode 中接入 Qwen 模型。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/#more" rel="contents">
+              <a class="btn" href="/2026/04/21/OpenCode%E4%B8%AD%E6%8E%A5%E5%85%A5Qwen%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -278,7 +757,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-%E6%8F%92%E4%BB%B6-%E6%89%93%E9%80%A0%E9%AB%98%E6%95%88%E7%8E%87%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0-AI-%E7%A8%8B%E5%BA%8F%E5%91%98%E2%80%9D/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/04/20/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -292,7 +771,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-%E6%8F%92%E4%BB%B6-%E6%89%93%E9%80%A0%E9%AB%98%E6%95%88%E7%8E%87%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0-AI-%E7%A8%8B%E5%BA%8F%E5%91%98%E2%80%9D/" class="post-title-link" itemprop="url">Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员”</a>
+            <a href="/2026/04/20/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">Hexo 博客实战：光影拼图游戏开发指南</a>
         </h2>
 
         <div class="post-meta">
@@ -302,14 +781,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2026-03-10 23:31:44" itemprop="dateCreated datePublished" datetime="2026-03-10T23:31:44+08:00">2026-03-10</time>
+              <time title="创建时间：2026-04-20 20:00:00" itemprop="dateCreated datePublished" datetime="2026-04-20T20:00:00+08:00">2026-04-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-11 00:22:01" itemprop="dateModified" datetime="2026-03-11T00:22:01+08:00">2026-03-11</time>
+                <time title="修改时间：2026-04-25 21:26:24" itemprop="dateModified" datetime="2026-04-25T21:26:24+08:00">2026-04-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -317,20 +796,16 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                  <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">游戏开发</span></a>
                 </span>
             </span>
 
           
-            <span id="/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-%E6%8F%92%E4%BB%B6-%E6%89%93%E9%80%A0%E9%AB%98%E6%95%88%E7%8E%87%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0-AI-%E7%A8%8B%E5%BA%8F%E5%91%98%E2%80%9D/" class="post-meta-item leancloud_visitors" data-flag-title="Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员”" title="阅读次数">
+            <span id="/2026/04/20/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo 博客实战：光影拼图游戏开发指南" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -345,8 +820,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-%E6%8F%92%E4%BB%B6-%E6%89%93%E9%80%A0%E9%AB%98%E6%95%88%E7%8E%87%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0-AI-%E7%A8%8B%E5%BA%8F%E5%91%98%E2%80%9D/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-%E6%8F%92%E4%BB%B6-%E6%89%93%E9%80%A0%E9%AB%98%E6%95%88%E7%8E%87%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0-AI-%E7%A8%8B%E5%BA%8F%E5%91%98%E2%80%9D/" itemprop="commentCount"></span>
+    <a title="valine" href="/2026/04/20/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2026/04/20/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -361,578 +836,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>针对 Visual Studio 2022 用户，要打造一个高效率的“本地 AI 程序员”，关键在于选择一款能与 VS 2022 深度集成、且支持连接本地模型（如 Ollama）的插件。目前最高效的方案是使用 Visual Studio 的插件 Copilot (第三方开源版，非官方) 配合 Ollama。</p>
-<p>以下是部署全流程：</p>
-<h2 id="方案架构"><a href="#方案架构" class="headerlink" title="方案架构"></a>方案架构</h2><p><strong>- 核心引擎:</strong> Ollama。负责在本地运行 DeepSeek 模型。</p>
-<p><strong>- 模型选择:</strong> DeepSeek-Coder-V2:16b。这是目前代码能力极强且适合本地部署的专用模型（如果显存不足，可退而求其次选择 deepseek-coder:6.7b）。</p>
-<p><strong>- IDE 插件:</strong> Visual Copilot (在 VS 扩展市场中搜索)。这是一个开源免费插件，能够将 Ollama 接入 VS 2022，提供代码补全和聊天功能。</p>
-<h2 id="详细部署步骤"><a href="#详细部署步骤" class="headerlink" title="详细部署步骤"></a>详细部署步骤</h2><p><strong>- 第一步：配置本地模型引擎 (Ollama)</strong></p>
-<p><strong>下载安装：</strong> 访问 Ollama 官网 下载并安装 Windows 版本。</p>
-<p><strong>拉取专用代码模型：</strong> 打开命令行（PowerShell 或 CMD），输入以下命令下载 DeepSeek 的代码模型：</p>
-<pre><code>ollama run deepseek-coder-v2:16b
-</code></pre>
-<p>注：如果您的显卡显存小于 12GB，建议使用 ollama run deepseek-coder:6.7b 以保证速度。</p>
-<p><strong>验证运行：</strong> 安装完成后，确保 Ollama 在托盘区运行，且在浏览器访问 <a target="_blank" rel="noopener" href="http://localhost:11434/">http://localhost:11434</a> 能看到 “Ollama is running” 字样。</p>
-<p><strong>- 第二步：安装并配置 Visual Studio 2022 插件</strong></p>
-<p>Visual Studio 2022 原生集成了 GitHub Copilot，但它无法连接本地 Ollama（除非使用代理转发，非常麻烦）。我们需要安装支持 OpenAI 兼容接口的第三方插件。</p>
-<p><strong>打开扩展管理器：</strong> 在 Visual Studio 2022 中，点击顶部菜单栏的 扩展 -&gt; 管理扩展。</p>
-<p><strong>搜索插件：</strong> 在搜索框中输入 “Visual Copilot” （或者搜索 “CodeGPT” ，两者皆可，这里以 Visual Copilot 为例，因为它对 OpenAI 兼容性很好）。</p>
-<p><strong>安装：</strong> 点击下载，安装完成后 重启 VS 2022。</p>
-<p><strong>- 第三步：连接插件与 Ollama</strong></p>
-<p>重启后，我们需要告诉插件去哪里找本地模型：</p>
-<p><strong>打开设置：</strong> 在 VS 菜单栏找到新出现的 Visual Copilot 图标或菜单项，选择 Settings &#x2F; Options。</p>
-<p><strong>配置 API 地址：</strong></p>
-<p>找到 Api Base (或 Endpoint) 一栏。</p>
-<p>填入：<a target="_blank" rel="noopener" href="http://localhost:11434/v1">http://localhost:11434/v1</a></p>
-<p>注意：必须加上 &#x2F;v1，这是为了兼容 OpenAI 的协议格式。</p>
-<p><strong>配置密钥 (API Key)：</strong></p>
-<p>找到 Api Key 一栏。</p>
-<p>填入：ollama (或者随便填几个字符，本地模式下 Ollama 不验证 Key，但这栏通常不能为空)。</p>
-<p><strong>配置模型名称：</strong></p>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>继<a href="/ai-games/gomoku/">五子棋</a>之后，本文介绍光影拼图游戏的开发。相比其他游戏，拼图的核心难点在于<strong>图片处理与碎片管理</strong>：如何将一张图片切割成碎片，实现拖拽吸附，并保证在移动端和桌面端都有良好的交互体验。</p>
+<p>拼图游戏是一个看似简单但技术实现复杂的益智游戏，实际开发中需要解决：</p>
+<ol>
+<li><strong>图片处理</strong>：如何动态加载、切割图片，并处理加载失败的情况</li>
+<li><strong>碎片管理</strong>：如何生成、定位、旋转和吸附碎片</li>
+<li><strong>响应式设计</strong>：如何在不同屏幕尺寸下保持游戏体验</li>
+<li><strong>移动端适配</strong>：如何统一处理触摸和鼠标事件</li>
+<li><strong>性能优化</strong>：如何管理图片资源和动画帧</li>
+</ol>
+<p>本文重点讲解三个核心问题：</p>
+<ol>
+<li><strong>图片切割与碎片生成</strong>：Canvas 图片处理技术</li>
+<li><strong>拖拽吸附算法</strong>：碎片位置匹配与自动吸附</li>
+<li><strong>跨平台事件处理</strong>：统一鼠标与触摸交互</li>
+</ol>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">source/ai-games/puzzle/</span><br><span class="line">├── index.md                      # 游戏页面入口（HTML + CSS）</span><br><span class="line">└── modules/</span><br><span class="line">    ├── puzzle-config.js          # 配置模块（难度、颜色、动画参数）</span><br><span class="line">    ├── puzzle-core.js            # 核心逻辑（碎片生成、吸附算法）</span><br><span class="line">    ├── puzzle-render.js          # 渲染模块（Canvas 绘制、动画）</span><br><span class="line">    ├── puzzle-ai.js              # AI 提示系统</span><br><span class="line">    └── puzzle-game.js           # 游戏入口（整合模块、事件处理）</span><br><span class="line"></span><br><span class="line">source/ai-games/gamejs/</span><br><span class="line">└── game-manager.js               # 游戏生命周期管理器（复用）</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-%E6%8F%92%E4%BB%B6-%E6%89%93%E9%80%A0%E9%AB%98%E6%95%88%E7%8E%87%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0-AI-%E7%A8%8B%E5%BA%8F%E5%91%98%E2%80%9D/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/05/19/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%A1%8C%E4%B8%BA%E6%A0%91%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/05/19/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%A1%8C%E4%B8%BA%E6%A0%91%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【行为树】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-05-19 16:18:34" itemprop="dateCreated datePublished" datetime="2025-05-19T16:18:34+08:00">2025-05-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-10 20:59:18" itemprop="dateModified" datetime="2026-01-10T20:59:18+08:00">2026-01-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2025/05/19/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%A1%8C%E4%B8%BA%E6%A0%91%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【行为树】" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2025/05/19/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%A1%8C%E4%B8%BA%E6%A0%91%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2025/05/19/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%A1%8C%E4%B8%BA%E6%A0%91%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策逻辑，每个节点代表一个行为或条件。下面是对Unity行为树的概要及用法的解释：</p>
-<h1 id="行为树概要"><a href="#行为树概要" class="headerlink" title="行为树概要"></a>行为树概要</h1><h2 id="节点类型"><a href="#节点类型" class="headerlink" title="节点类型"></a>节点类型</h2><p><strong>- 选择器（Selector）</strong>：会从上到下依次尝试子节点，直到有一个子节点成功执行。</p>
-<p><strong>- 序列器（Sequence）</strong>：会从上到下依次执行子节点，直到有一个子节点失败。</p>
-<p><strong>- 条件节点（Condition Node）</strong>：用于检查某个条件是否为真或假。通常是行为树的叶子节点。</p>
-<p><strong>- 动作节点（Action Node）</strong>：执行某个动作。同样通常是行为树的叶子节点。</p>
-<p><strong>- 装饰器节点（Decorator Node）</strong>：用于修改子节点的行为。可以嵌套在其他节点中，如选择器、序列器或动作节点。</p>
-<h2 id="行为树的特点"><a href="#行为树的特点" class="headerlink" title="行为树的特点"></a>行为树的特点</h2><p><strong>- 可重用性</strong>：节点可以被多次复用，从而简化行为树的设计。</p>
-<p><strong>- 模块化</strong>：行为树可以被拆分为多个子树，便于管理和维护。</p>
-<p><strong>- 并行执行</strong>：支持并行执行多个子节点，提高效率。</p>
-<p><strong>- 状态记忆</strong>：行为树可以记住每个节点的状态，便于从上次中断的地方继续执行。</p>
-<h1 id="Unity中的行为树用法"><a href="#Unity中的行为树用法" class="headerlink" title="Unity中的行为树用法"></a>Unity中的行为树用法</h1><p>Unity提供了多种工具和库来支持行为树的创建和使用，其中比较流行的包括Behavior Designer和Unity官方的Behavior Tree插件（从Unity 2021.2开始引入）。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/05/19/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%A1%8C%E4%B8%BA%E6%A0%91%E3%80%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/04/17/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%96%E6%B6%88%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/17/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%96%E6%B6%88%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【取消异步操作】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-04-17 14:17:54" itemprop="dateCreated datePublished" datetime="2025-04-17T14:17:54+08:00">2025-04-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-10 20:59:18" itemprop="dateModified" datetime="2026-01-10T20:59:18+08:00">2026-01-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2025/04/17/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%96%E6%B6%88%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【取消异步操作】" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2025/04/17/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%96%E6%B6%88%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2025/04/17/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%96%E6%B6%88%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a><strong>基本概念</strong></h1><p>CancellationTokenSource 是一个类，用于创建一个取消令牌 (CancellationToken)，并通过该令牌来通知一个或多个异步操作取消请求。CancellationToken 是一个结构体，用于传递取消通知。</p>
-<h2 id="创建-CancellationTokenSource"><a href="#创建-CancellationTokenSource" class="headerlink" title="创建 CancellationTokenSource"></a>创建 CancellationTokenSource</h2><p>首先，你需要创建一个 CancellationTokenSource 对象。</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">using System.Threading;</span><br><span class="line"></span><br><span class="line">public class CancellationTokenExample</span><br><span class="line">&#123;</span><br><span class="line">    private CancellationTokenSource tokenSource;</span><br><span class="line"></span><br><span class="line">    public void Initialize()</span><br><span class="line">    &#123;</span><br><span class="line">        tokenSource = new CancellationTokenSource();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="获取-CancellationToken"><a href="#获取-CancellationToken" class="headerlink" title="获取 CancellationToken"></a>获取 CancellationToken</h2><p>从 CancellationTokenSource 获取 CancellationToken 对象。</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">using System.Threading;</span><br><span class="line"></span><br><span class="line">public class CancellationTokenExample</span><br><span class="line">&#123;</span><br><span class="line">    private CancellationTokenSource tokenSource;</span><br><span class="line"></span><br><span class="line">    public void Initialize()</span><br><span class="line">    &#123;</span><br><span class="line">        tokenSource = new CancellationTokenSource();</span><br><span class="line">        CancellationToken token = tokenSource.Token;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="在异步方法中使用-CancellationToken"><a href="#在异步方法中使用-CancellationToken" class="headerlink" title="在异步方法中使用 CancellationToken"></a>在异步方法中使用 CancellationToken</h2><p>在异步方法中使用 CancellationToken 来检查取消请求，并在需要时抛出 OperationCanceledException。</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.Threading;</span><br><span class="line">using System.Threading.Tasks;</span><br><span class="line">using Cysharp.Threading.Tasks; // 如果使用 UniTask</span><br><span class="line"></span><br><span class="line">public class CancellationTokenExample : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    private CancellationTokenSource tokenSource;</span><br><span class="line"></span><br><span class="line">    public async void StartLongRunningTask()</span><br><span class="line">    &#123;</span><br><span class="line">        Initialize();</span><br><span class="line">        CancellationToken token = tokenSource.Token;</span><br><span class="line"></span><br><span class="line">        try</span><br><span class="line">        &#123;</span><br><span class="line">            await LongRunningTask(token);</span><br><span class="line">        &#125;</span><br><span class="line">        catch (OperationCanceledException)</span><br><span class="line">        &#123;</span><br><span class="line">            Debug.Log(&quot;任务已被取消&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private async UniTask LongRunningTask(CancellationToken token)</span><br><span class="line">    &#123;</span><br><span class="line">        for (int i = 0; i &lt; 10; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            token.ThrowIfCancellationRequested(); // 检查取消请求并抛出异常</span><br><span class="line"></span><br><span class="line">            // 模拟长时间运行的任务</span><br><span class="line">            await UniTask.Delay(1000, cancellationToken: token);</span><br><span class="line"></span><br><span class="line">            Debug.Log($&quot;任务进行中: 第 &#123;i + 1&#125; 次&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void Initialize()</span><br><span class="line">    &#123;</span><br><span class="line">        tokenSource = new CancellationTokenSource();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void OnClickCancelBtn()</span><br><span class="line">    &#123;</span><br><span class="line">        if (tokenSource != null)</span><br><span class="line">        &#123;</span><br><span class="line">            tokenSource.Cancel();</span><br><span class="line">            tokenSource.Dispose();</span><br><span class="line">            tokenSource = null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        StartLongRunningTask();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void OnDestroy()</span><br><span class="line">    &#123;</span><br><span class="line">        if (tokenSource != null)</span><br><span class="line">        &#123;</span><br><span class="line">            tokenSource.Cancel();</span><br><span class="line">            tokenSource.Dispose();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/04/17/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%96%E6%B6%88%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E3%80%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/03/14/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90DOTween%E5%BA%93%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/03/14/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90DOTween%E5%BA%93%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【DOTween库】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-03-14 16:52:24" itemprop="dateCreated datePublished" datetime="2025-03-14T16:52:24+08:00">2025-03-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-10 20:59:18" itemprop="dateModified" datetime="2026-01-10T20:59:18+08:00">2026-01-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2025/03/14/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90DOTween%E5%BA%93%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【DOTween库】" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2025/03/14/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90DOTween%E5%BA%93%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2025/03/14/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90DOTween%E5%BA%93%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="DOTween-库详细用法教程"><a href="#DOTween-库详细用法教程" class="headerlink" title="DOTween 库详细用法教程"></a>DOTween 库详细用法教程</h1><p>DOTween 是一个用于 Unity 的强大且灵活的动画库，它使用链式语法来创建和控制动画，使得代码更加简洁和易读。下面详细介绍 DOTween 的用法。</p>
-<h1 id="安装-DOTween"><a href="#安装-DOTween" class="headerlink" title="安装 DOTween"></a>安装 DOTween</h1><p>你可以通过 Unity 的包管理器来安装 DOTween。步骤如下：</p>
-<p>打开 Unity 的 Package Manager（可以通过 Window -&gt; Package Manager 打开）。<br>点击左上角的 “+” 按钮，然后选择 Add package from git URL。<br>在弹出的窗口中输入 DOTween 的 Git URL：<a target="_blank" rel="noopener" href="https://github.com/Demigiant/dotween.git%E3%80%82">https://github.com/Demigiant/dotween.git。</a><br>点击 Add 按钮完成安装。</p>
-<h1 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h1><h2 id="插值动画（Tweening）"><a href="#插值动画（Tweening）" class="headerlink" title="插值动画（Tweening）"></a>插值动画（Tweening）</h2><p>使用 DOTween.To、DOTween.From、DOTween.ToX 等方法来创建动画，这些方法通常需要起始值、结束值、动画持续时间和更新频率。</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DOTween.To(() =&gt; ump.fValue, fv =&gt; ump.fValue = fv, 1f, 3f);</span><br><span class="line">DiffCopyInsert</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>这行代码的意思是从 ump.fValue 的当前值开始到 1f 的值，持续时间为 3 秒，每帧更新。ump.fValue 是一个属性或字段，fv &#x3D;&gt; ump.fValue &#x3D; fv 是一个回调函数，用于设置 ump.fValue 的值为动画计算出的新值。</p>
-<h2 id="链式语法"><a href="#链式语法" class="headerlink" title="链式语法"></a>链式语法</h2><p>DOTween 的动画可以使用链式语法来添加更多的配置，例如 SetTarget、SetLink 等。</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">await tweener.SetTarget(ump).SetLink(fog).GetAwaiter();</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>这行代码首先设置了动画的目标对象为 ump，然后设置了动画的链接对象为 fog。链接对象的作用是当链接对象被销毁时，动画也会自动停止。GetAwaiter() 用于将动画变为异步等待对象。</p>
-<h2 id="等待动画完成"><a href="#等待动画完成" class="headerlink" title="等待动画完成"></a>等待动画完成</h2><p>你可以使用 await 来等待动画完成。AwaitForComplete() 是一个扩展方法，用于等待 DOTween 动画完成。</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">await td.AwaitForComplete();</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>这行代码会暂停当前协程，直到动画 td 完成。</p>
-<h2 id="销毁对象"><a href="#销毁对象" class="headerlink" title="销毁对象"></a>销毁对象</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/03/14/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90DOTween%E5%BA%93%E3%80%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【集合Collection】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-02-05 17:46:14" itemprop="dateCreated datePublished" datetime="2025-02-05T17:46:14+08:00">2025-02-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-10 20:59:18" itemprop="dateModified" datetime="2026-01-10T20:59:18+08:00">2026-01-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【集合Collection】" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="C-集合（Collection）"><a href="#C-集合（Collection）" class="headerlink" title="C# 集合（Collection）"></a><strong>C# 集合（Collection）</strong></h1><p>集合（Collection）类是专门用于数据存储和检索的类。这些类提供了对栈（stack）、队列（queue）、列表（list）和哈希表（hash table）的支持。大多数集合类实现了相同的接口。</p>
-<p>集合（Collection）类服务于不同的目的，如为元素动态分配内存，基于索引访问列表项等等。这些类创建 Object 类的对象的集合。在 C# 中，Object 类是所有数据类型的基类。</p>
-<h1 id="动态数组（ArrayList）"><a href="#动态数组（ArrayList）" class="headerlink" title="动态数组（ArrayList）"></a><strong>动态数组（ArrayList）</strong></h1><p>它代表了可被单独索引的对象的有序集合。<br>它基本上可以替代一个数组。但是，与数组不同的是，您可以使用索引在指定的位置添加和移除项目，动态数组会自动重新调整它的大小。它也允许在列表中进行动态内存分配、增加、搜索、排序各项。</p>
-<h2 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h2><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayList : ICollection, IEnumerable, IList, ICloneable</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>实现接口：</p>
-<ul>
-<li><p>IList：支持按索引访问元素。</p>
-</li>
-<li><p>ICollection：支持集合基本操作，如添加、删除和计数。</p>
-</li>
-<li><p>IEnumerable：支持通过枚举器遍历元素。</p>
-</li>
-<li><p>ICloneable：支持克隆 ArrayList。</p>
-</li>
-</ul>
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><h3 id="动态扩展"><a href="#动态扩展" class="headerlink" title="动态扩展"></a>动态扩展</h3><ul>
-<li><p>ArrayList 的容量可以根据需要自动调整，不需要指定固定大小。</p>
-</li>
-<li><p>当添加的元素超过当前容量时，ArrayList 会自动增加容量（通常是原容量的两倍）。</p>
-</li>
-</ul>
-<h3 id="非泛型集合"><a href="#非泛型集合" class="headerlink" title="非泛型集合"></a>非泛型集合</h3><ul>
-<li>ArrayList 是非泛型集合，所有元素被存储为 object 类型。这意味着它可以存储任意类型的对象，但需要注意装箱（boxing）和拆箱（unboxing）的性能影响。</li>
-</ul>
-<h3 id="无序操作"><a href="#无序操作" class="headerlink" title="无序操作"></a>无序操作</h3><ul>
-<li>虽然元素存储顺序与添加顺序一致，但它并不提供内置排序功能。</li>
-</ul>
-<h3 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h3><ul>
-<li>默认不是线程安全的。如果需要线程安全的 ArrayList，可以使用 ArrayList.Synchronized 方法生成一个线程安全的版本。<br>ArrayList 类的方法和属性</li>
-</ul>
-<p>下表列出了 ArrayList 类的一些常用的 属性：</p>
-<pre><code>属性名称	类型	描述
-
-Count	int	获取 ArrayList 中包含的元素数量。
-Capacity	int	获取或设置 ArrayList 的容量（存储空间）。
-IsFixedSize	bool	指示 ArrayList 是否具有固定大小。
-IsReadOnly	bool	指示 ArrayList 是否为只读。
-IsSynchronized	bool	指示 ArrayList 是否线程安全。
-SyncRoot	object	获取可用于同步访问的对象。
-</code></pre>
-<p>下表列出了 ArrayList 类的一些常用的 方法：</p>
-<p>方法名称	返回类型	描述</p>
-<pre><code>添加与插入	
-	
-Add(object value)	int	将对象添加到 ArrayList 的末尾，返回新元素的索引。
-AddRange(ICollection c)	void	将指定集合的所有元素添加到 ArrayList 的末尾。
-Insert(int index, object value)	void	在指定索引处插入对象。
-InsertRange(int index, ICollection c)	void	在指定索引处插入指定集合的所有元素。
-
-删除		
-
-Remove(object value)	void	移除首次出现的指定对象。
-RemoveAt(int index)	void	移除指定索引处的元素。
-RemoveRange(int index, int count)	void	移除从指定索引开始的指定数量的元素。
-Clear()	void	移除所有元素。
-
-访问与查询		
-
-Contains(object item)	bool	判断 ArrayList 是否包含指定对象。
-IndexOf(object value)	int	获取指定对象首次出现的索引。
-LastIndexOf(object value)	int	获取指定对象最后一次出现的索引。
-
-排序与复制		
-
-Sort()	void	按照默认顺序排序 ArrayList 中的元素。
-Sort(IComparer comparer)	void	按照自定义比较器排序。
-Reverse()	void	反转 ArrayList 中元素的顺序。
-CopyTo(Array array)	void	将 ArrayList 的元素复制到指定数组中。
-
-其他
-	
-GetRange(int index, int count)	ArrayList	获取从指定索引开始的指定数量的元素子集。
-ToArray()	object[]	将 ArrayList 中的元素复制到数组中。
-TrimToSize()	void	将容量调整为实际元素数量以节省内存。
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2026/04/20/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -955,7 +877,7 @@ TrimToSize()	void	将容量调整为实际元素数量以节省内存。
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1023,20 +945,20 @@ TrimToSize()	void	将容量调整为实际元素数量以节省内存。
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-count">92</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1049,7 +971,7 @@ TrimToSize()	void	将容量调整为实际元素数量以节省内存。
         <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.bytefisher.top/" title="Weibo → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
       </span>
       <span class="links-of-author-item">
         <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
@@ -1059,7 +981,7 @@ TrimToSize()	void	将容量调整为实际元素数量以节省内存。
 
 
       </div>
-	  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <iframe id="music-player" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
 	  <div class="wechat_OA">
 		<span>欢迎关注我的公众号</span>
 		<!-- 这里添加你的二维码图片 -->
@@ -1095,6 +1017,26 @@ TrimToSize()	void	将容量调整为实际元素数量以节省内存。
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
         
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
@@ -1110,6 +1052,7 @@ TrimToSize()	void	将容量调整为实际元素数量以节省内存。
   
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
@@ -1187,8 +1130,37 @@ window.addEventListener('pjax:success', () => {
 
 
   
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -1237,7 +1209,330 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
   }, window.Valine);
 });
 </script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
 
+<style>
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  scrollbar-gutter: stable;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.modal::-webkit-scrollbar {
+  display: none !important;
+}
+
+.modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.modal-content {
+  position: relative;
+  width: min(71%, 340px);
+  max-width: calc((100vh - 100px) * 9 / 17.5);
+  height: auto;
+  aspect-ratio: 9 / 17.5;
+  max-height: calc(100vh - 100px);
+  margin: 0 auto;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: min(81%, 320px);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: min(94%, 300px);
+    max-width: calc((100vh - 80px) * 9 / 17.5);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+    max-height: calc(100vh - 80px);
+  }
+}
+
+.modal-content iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  border: none;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  left: auto;
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 10000;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+}
+
+.close-btn:hover {
+  color: #e74c3c;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  background: rgba(0,0,0,0.1);
+  border-radius: 50%;
+  line-height: 50px;
+  user-select: none;
+}
+
+.nav-btn:hover {
+  background: rgba(0,0,0,0.2);
+}
+
+.prev-btn {
+  left: 0;
+}
+
+.next-btn {
+  right: 15px;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: calc(100% - 60px);
+    max-width: calc((100vh - 100px) * 9 / 17.5);
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    line-height: 40px;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var musicIframe = null;
+  var musicDisplayStyle = '';
+  var isMusicPaused = false;
+  var videoIds = [];
+  var currentIndex = 0;
+  
+  function findMusicIframe() {
+    var iframes = document.getElementsByTagName('iframe');
+    for (var i = 0; i < iframes.length; i++) {
+      var src = iframes[i].src || '';
+      if (src.indexOf('music.163.com') > -1 || src.indexOf('outchain/player') > -1) {
+        return iframes[i];
+      }
+    }
+    console.log('[Douyin] Music iframe not found in', iframes.length, 'iframes');
+    return null;
+  }
+  
+  function pauseMusic() {
+    console.log('[Douyin] Trying to pause music...');
+    musicIframe = findMusicIframe();
+    
+    if (musicIframe) {
+      console.log('[Douyin] Music iframe found');
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=1') > -1) {
+        musicIframe.src = src.replace('auto=1', 'auto=0');
+        console.log('[Douyin] Changed auto=1 to auto=0');
+      }
+      isMusicPaused = true;
+    } else {
+      console.log('[Douyin] Music iframe NOT found!');
+    }
+  }
+  
+  function resumeMusic() {
+    console.log('[Douyin] Trying to resume music...');
+    
+    if (musicIframe && isMusicPaused) {
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=0') > -1) {
+        musicIframe.src = src.replace('auto=0', 'auto=1');
+        console.log('[Douyin] Changed auto=0 to auto=1');
+      }
+      isMusicPaused = false;
+    }
+  }
+  
+  function init() {
+    console.log('[Douyin] Initializing...');
+    var cards = document.querySelectorAll('.video-card');
+    console.log('[Douyin] Found', cards.length, 'video cards');
+    
+    videoIds = [];
+    for (var j = 0; j < cards.length; j++) {
+      var videoId = cards[j].getAttribute('data-id');
+      if (videoId) {
+        videoIds.push(videoId);
+      }
+      cards[j].addEventListener('click', openModal);
+    }
+    
+    var closeBtn = document.querySelector('.close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+    
+    var prevBtn = document.querySelector('.prev-btn');
+    var nextBtn = document.querySelector('.next-btn');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(-1);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(1);
+      });
+    }
+    
+    var modal = document.getElementById('douyin-modal');
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+    }
+  }
+  
+  function navigateVideo(direction) {
+    if (videoIds.length === 0) return;
+    
+    currentIndex += direction;
+    if (currentIndex < 0) {
+      currentIndex = videoIds.length - 1;
+    } else if (currentIndex >= videoIds.length) {
+      currentIndex = 0;
+    }
+    
+    var videoId = videoIds[currentIndex];
+    var player = document.getElementById('douyin-player');
+    if (player && videoId) {
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+    }
+  }
+  
+  function openModal(e) {
+    console.log('[Douyin] Opening modal...');
+    var card = e.currentTarget;
+    var videoId = card.getAttribute('data-id');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    currentIndex = videoIds.indexOf(videoId);
+    
+    if (player && modal && videoId) {
+      pauseMusic();
+      
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.marginRight = '0px';
+    }
+  }
+  
+  function closeModal() {
+    console.log('[Douyin] Closing modal...');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    if (player) {
+      player.src = '';
+    }
+    
+    if (modal) {
+      modal.classList.remove('active');
+    }
+    
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    
+    resumeMusic();
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
     </div>
 </body>
 </html>

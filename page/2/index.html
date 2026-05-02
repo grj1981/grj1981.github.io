@@ -12,11 +12,11 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
 <meta property="og:type" content="website">
@@ -103,6 +103,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -129,22 +130,27 @@
   </li>
         <li class="menu-item menu-item-aigames">
 
-    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏<span class="badge">1</span></a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">42</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">10</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">12</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">81</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">92</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">28</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -152,11 +158,38 @@
     <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -178,7 +211,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%BA%8B%E4%BB%B6Event%E3%80%91/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/04/15/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BA%94%E5%AD%90%E6%A3%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -192,7 +225,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%BA%8B%E4%BB%B6Event%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【事件Event】</a>
+            <a href="/2026/04/15/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BA%94%E5%AD%90%E6%A3%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">Hexo 博客实战：五子棋小游戏开发指南</a>
         </h2>
 
         <div class="post-meta">
@@ -202,14 +235,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-02-05 16:43:10" itemprop="dateCreated datePublished" datetime="2025-02-05T16:43:10+08:00">2025-02-05</time>
+              <time title="创建时间：2026-04-15 20:00:00" itemprop="dateCreated datePublished" datetime="2026-04-15T20:00:00+08:00">2026-04-15</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-10 20:59:18" itemprop="dateModified" datetime="2026-01-10T20:59:18+08:00">2026-01-10</time>
+                <time title="修改时间：2026-04-25 21:26:24" itemprop="dateModified" datetime="2026-04-25T21:26:24+08:00">2026-04-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -217,16 +250,16 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                  <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">游戏开发</span></a>
                 </span>
             </span>
 
           
-            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%BA%8B%E4%BB%B6Event%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【事件Event】" title="阅读次数">
+            <span id="/2026/04/15/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BA%94%E5%AD%90%E6%A3%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo 博客实战：五子棋小游戏开发指南" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -241,8 +274,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%BA%8B%E4%BB%B6Event%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%BA%8B%E4%BB%B6Event%E3%80%91/" itemprop="commentCount"></span>
+    <a title="valine" href="/2026/04/15/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BA%94%E5%AD%90%E6%A3%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2026/04/15/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BA%94%E5%AD%90%E6%A3%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -257,35 +290,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="C-事件（Event）"><a href="#C-事件（Event）" class="headerlink" title="C# 事件（Event）"></a><strong>C# 事件（Event）</strong></h1><p>C# 事件（Event）是一种成员，用于将特定的事件通知发送给订阅者。事件通常用于实现观察者模式，它允许一个对象将状态的变化通知其他对象，而不需要知道这些对象的细节。</p>
-<p><strong>事件（Event）</strong> </p>
-<p>基本上说是一个用户操作，如按键、点击、鼠标移动等等，或者是一些提示信息，如系统生成的通知。应用程序需要在事件发生时响应事件。例如，中断。</p>
-<p>C# 中使用事件机制实现线程间的通信。</p>
-<p><strong>关键点</strong></p>
-<ul>
-<li><p>声明委托：定义事件将使用的委托类型。委托是一个函数签名。</p>
-</li>
-<li><p>声明事件：使用 event 关键字声明一个事件。</p>
-</li>
-<li><p>触发事件：在适当的时候调用事件，通知所有订阅者。</p>
-</li>
-<li><p>订阅和取消订阅事件：其他类可以通过 +&#x3D; 和 -&#x3D; 运算符订阅和取消订阅事件。</p>
-</li>
-</ul>
-<h1 id="通过事件使用委托"><a href="#通过事件使用委托" class="headerlink" title="通过事件使用委托"></a><strong>通过事件使用委托</strong></h1><p>事件在类中声明且生成，且通过使用同一个类或其他类中的委托与事件处理程序关联。包含事件的类用于发布事件。这被称为 发布器（publisher） 类。其他接受该事件的类被称为 订阅器（subscriber） 类。事件使用 发布-订阅（publisher-subscriber） 模型。</p>
-<p><strong>发布器（publisher）</strong> 是一个包含事件和委托定义的对象。事件和委托之间的联系也定义在这个对象中。发布器（publisher）类的对象调用这个事件，并通知其他的对象。</p>
-<p><strong>订阅器（subscriber）</strong> 是一个接受事件并提供事件处理程序的对象。在发布器（publisher）类中的委托调用订阅器（subscriber）类中的方法（事件处理程序）。</p>
-<h1 id="声明事件（Event）"><a href="#声明事件（Event）" class="headerlink" title="声明事件（Event）"></a><strong>声明事件（Event）</strong></h1><p>在类的内部声明事件，首先必须声明该事件的委托类型。例如：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public delegate void BoilerLogHandler(string status);</span><br></pre></td></tr></table></figure><br>然后，声明事件本身，使用 event 关键字：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 基于上面的委托定义事件</span><br><span class="line">public event BoilerLogHandler BoilerEventLog;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>上面的代码定义了一个名为 BoilerLogHandler 的委托和一个名为 BoilerEventLog 的事件，该事件在生成的时候会调用委托。</p>
-<p>以下示例展示了如何在 C# 中使用事件：</p>
-<p><strong>&gt; 实例:</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">namespace EventDemo</span><br><span class="line">&#123;</span><br><span class="line">    // 定义一个委托类型，用于事件处理程序</span><br><span class="line">    public delegate void NotifyEventHandler(object sender, EventArgs e);</span><br><span class="line"></span><br><span class="line">    // 发布者类</span><br><span class="line">    public class ProcessBusinessLogic</span><br><span class="line">    &#123;</span><br><span class="line">        // 声明事件</span><br><span class="line">        public event NotifyEventHandler ProcessCompleted;</span><br><span class="line"></span><br><span class="line">        // 触发事件的方法</span><br><span class="line">        protected virtual void OnProcessCompleted(EventArgs e)</span><br><span class="line">        &#123;</span><br><span class="line">            ProcessCompleted?.Invoke(this, e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 模拟业务逻辑过程并触发事件</span><br><span class="line">        public void StartProcess()</span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(&quot;Process Started!&quot;);</span><br><span class="line"></span><br><span class="line">            // 这里可以加入实际的业务逻辑</span><br><span class="line"></span><br><span class="line">            // 业务逻辑完成，触发事件</span><br><span class="line">            OnProcessCompleted(EventArgs.Empty);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 订阅者类</span><br><span class="line">    public class EventSubscriber</span><br><span class="line">    &#123;</span><br><span class="line">        public void Subscribe(ProcessBusinessLogic process)</span><br><span class="line">        &#123;</span><br><span class="line">            process.ProcessCompleted += Process_ProcessCompleted;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        private void Process_ProcessCompleted(object sender, EventArgs e)</span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(&quot;Process Completed!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    class Program</span><br><span class="line">    &#123;</span><br><span class="line">        static void Main(string[] args)</span><br><span class="line">        &#123;</span><br><span class="line">            ProcessBusinessLogic process = new ProcessBusinessLogic();</span><br><span class="line">            EventSubscriber subscriber = new EventSubscriber();</span><br><span class="line"></span><br><span class="line">            // 订阅事件</span><br><span class="line">            subscriber.Subscribe(process);</span><br><span class="line"></span><br><span class="line">            // 启动过程</span><br><span class="line">            process.StartProcess();</span><br><span class="line"></span><br><span class="line">            Console.ReadLine();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>继扫雷、俄罗斯方块之后，本文介绍五子棋 AI 对战游戏的开发。相比其他游戏，五子棋的核心难点在于<strong>AI 算法的实现</strong>：如何在有限时间内找到最优落子位置，同时平衡进攻与防守。</p>
+<p>五子棋是一个信息完全公开的零和博弈游戏，理论上可以通过搜索算法找到最优解。但实际应用中，我们需要考虑：</p>
+<ol>
+<li><strong>搜索空间巨大</strong>：15×15 棋盘有 225 个位置，搜索深度每增加一层，复杂度指数级增长</li>
+<li><strong>时间限制</strong>：玩家期望 AI 在几秒内做出决策，不能无限搜索</li>
+<li><strong>用户体验</strong>：AI 需要”合理”地犯错，给玩家获胜的机会</li>
+</ol>
+<p>本文重点讲解两个核心问题：</p>
+<ol>
+<li><strong>PJAX 兼容性处理</strong>：如何在静态博客中实现流畅的页面切换</li>
+<li><strong>AI 算法设计</strong>：如何实现具有不同难度的棋局评估与搜索</li>
+</ol>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">source/ai-games/gomoku/</span><br><span class="line">├── index.md                      # 游戏页面入口（HTML + CSS）</span><br><span class="line">└── modules/</span><br><span class="line">    ├── gomoku-config.js          # 配置模块（难度、分数常量）</span><br><span class="line">    ├── gomoku-utils.js           # 工具函数（深拷贝、存储）</span><br><span class="line">    ├── gomoku-core.js            # 棋盘核心（状态管理、胜负判定）</span><br><span class="line">    ├── gomoku-ai.js             # AI 引擎（搜索算法、评估函数）</span><br><span class="line">    ├── gomoku-ui.js              # UI 渲染（画布绘制、事件处理）</span><br><span class="line">    └── gomoku-main.js           # 游戏入口（整合模块、流程控制）</span><br><span class="line"></span><br><span class="line">source/ai-games/gamejs/</span><br><span class="line">└── game-manager.js               # 游戏生命周期管理器</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%BA%8B%E4%BB%B6Event%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2026/04/15/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BA%94%E5%AD%90%E6%A3%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -309,7 +329,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/04/03/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -323,7 +343,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【委托Delegate】</a>
+            <a href="/2026/04/03/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">Hexo博客集成抖音视频实战指南</a>
         </h2>
 
         <div class="post-meta">
@@ -333,14 +353,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-02-05 15:39:03" itemprop="dateCreated datePublished" datetime="2025-02-05T15:39:03+08:00">2025-02-05</time>
+              <time title="创建时间：2026-04-03 13:00:00" itemprop="dateCreated datePublished" datetime="2026-04-03T13:00:00+08:00">2026-04-03</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-10 20:59:18" itemprop="dateModified" datetime="2026-01-10T20:59:18+08:00">2026-01-10</time>
+                <time title="修改时间：2026-04-14 21:09:14" itemprop="dateModified" datetime="2026-04-14T21:09:14+08:00">2026-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -348,16 +368,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                  <a href="/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">Hexo博客搭建</span></a>
                 </span>
             </span>
 
           
-            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【委托Delegate】" title="阅读次数">
+            <span id="/2026/04/03/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo博客集成抖音视频实战指南" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -372,8 +388,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/" itemprop="commentCount"></span>
+    <a title="valine" href="/2026/04/03/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2026/04/03/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -388,28 +404,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="C-委托（Delegate）"><a href="#C-委托（Delegate）" class="headerlink" title="C# 委托（Delegate）"></a><strong>C# 委托（Delegate）</strong></h1><p>在 C# 中，委托（Delegate） 是一种类型安全的函数指针，它允许将方法作为参数传递给其他方法。</p>
-<p>C# 中的委托（Delegate）类似于 C 或 C++ 中函数的指针。委托（Delegate） 是存有对某个方法的引用的一种引用类型变量，引用可在运行时被改变。</p>
-<p>委托在 C# 中非常常见，用于事件处理、回调函数、LINQ 等操作。</p>
-<p>所有的委托（Delegate）都派生自 System.Delegate 类。</p>
-<h1 id="声明委托（Delegate）"><a href="#声明委托（Delegate）" class="headerlink" title="声明委托（Delegate）"></a><strong>声明委托（Delegate）</strong></h1><p>委托是一个引用类型，它定义了一个方法签名，可以用于存储指向该签名的方法。通过委托，你可以调用其他类中的方法。</p>
-<p>委托声明决定了可由该委托引用的方法。委托可指向一个与其具有相同标签的方法。</p>
-<p>声明委托的语法如下：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public delegate &lt;return type&gt; &lt;delegate-name&gt; &lt;parameter list&gt;</span><br></pre></td></tr></table></figure><br>中文格式说明：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public delegate 返回类型 委托名(参数类型 参数名, ...);</span><br></pre></td></tr></table></figure></p>
-<p>例如以下代码，我们定义一个接受两个整数并返回一个整数的委托：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public delegate int MathOperation(int x, int y);</span><br></pre></td></tr></table></figure></p>
-<p>以下例子的委托可被用于引用任何一个带有一个单一的 string 参数的方法，并返回一个 int 类型变量。<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public delegate int MyDelegate (string s);</span><br></pre></td></tr></table></figure></p>
-<h1 id="实例化委托（Delegate）"><a href="#实例化委托（Delegate）" class="headerlink" title="实例化委托（Delegate）"></a><strong>实例化委托（Delegate）</strong></h1><p>一旦声明了委托类型，委托对象必须使用 new 关键字来创建，且与一个特定的方法有关。当创建委托时，传递到 new 语句的参数就像方法调用一样书写，但是不带有参数。例如：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public delegate void printString(string s);</span><br><span class="line">...</span><br><span class="line">printString ps1 = new printString(WriteToScreen);</span><br><span class="line">printString ps2 = new printString(WriteToFile);</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>下面的实例演示了委托的声明、实例化和使用，该委托可用于引用带有一个整型参数的方法，并返回一个整型值。</p>
-<p><strong>&gt; 实例:</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">delegate int NumberChanger(int n);</span><br><span class="line">namespace DelegateAppl</span><br><span class="line">&#123;</span><br><span class="line">   class TestDelegate</span><br><span class="line">   &#123;</span><br><span class="line">      static int num = 10;</span><br><span class="line">      public static int AddNum(int p)</span><br><span class="line">      &#123;</span><br><span class="line">         num += p;</span><br><span class="line">         return num;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      public static int MultNum(int q)</span><br><span class="line">      &#123;</span><br><span class="line">         num *= q;</span><br><span class="line">         return num;</span><br><span class="line">      &#125;</span><br><span class="line">      public static int getNum()</span><br><span class="line">      &#123;</span><br><span class="line">         return num;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         // 创建委托实例</span><br><span class="line">         NumberChanger nc1 = new NumberChanger(AddNum);</span><br><span class="line">         NumberChanger nc2 = new NumberChanger(MultNum);</span><br><span class="line">         // 使用委托对象调用方法</span><br><span class="line">         nc1(25);</span><br><span class="line">         Console.WriteLine(&quot;Value of Num: &#123;0&#125;&quot;, getNum());</span><br><span class="line">         nc2(5);</span><br><span class="line">         Console.WriteLine(&quot;Value of Num: &#123;0&#125;&quot;, getNum());</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Value of Num: 35</span><br><span class="line">Value of Num: 175</span><br></pre></td></tr></table></figure>
-</code></pre>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>作为一名钓鱼爱好者，我在抖音分享了许多钓鱼视频。为了让博客访问者能够直观地浏览我的抖音作品，决定在Hexo博客中集成抖音视频相册功能。</p>
+<p>本文将详细介绍整个实现过程，从数据配置到页面展示，再到进阶优化，帮助你快速在博客中实现类似功能。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2026/04/03/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -433,7 +432,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/03/31/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E6%89%AB%E9%9B%B7%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -447,7 +446,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【索引器Indexer】</a>
+            <a href="/2026/03/31/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E6%89%AB%E9%9B%B7%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">Hexo 博客实战：扫雷小游戏开发指南</a>
         </h2>
 
         <div class="post-meta">
@@ -457,14 +456,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-02-05 15:23:12" itemprop="dateCreated datePublished" datetime="2025-02-05T15:23:12+08:00">2025-02-05</time>
+              <time title="创建时间：2026-03-31 21:00:00" itemprop="dateCreated datePublished" datetime="2026-03-31T21:00:00+08:00">2026-03-31</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-10 20:59:18" itemprop="dateModified" datetime="2026-01-10T20:59:18+08:00">2026-01-10</time>
+                <time title="修改时间：2026-04-01 20:31:57" itemprop="dateModified" datetime="2026-04-01T20:31:57+08:00">2026-04-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -472,16 +471,16 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                  <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">游戏开发</span></a>
                 </span>
             </span>
 
           
-            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【索引器Indexer】" title="阅读次数">
+            <span id="/2026/03/31/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E6%89%AB%E9%9B%B7%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo 博客实战：扫雷小游戏开发指南" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -496,8 +495,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/" itemprop="commentCount"></span>
+    <a title="valine" href="/2026/03/31/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E6%89%AB%E9%9B%B7%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2026/03/31/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E6%89%AB%E9%9B%B7%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -512,21 +511,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="C-索引器（Indexer）"><a href="#C-索引器（Indexer）" class="headerlink" title="C# 索引器（Indexer）"></a><strong>C# 索引器（Indexer）</strong></h1><p>索引器（Indexer） 允许一个对象可以像数组一样使用下标的方式来访问。</p>
-<p>当您为类定义一个索引器时，该类的行为就会像一个 虚拟数组（virtual array） 一样。您可以使用数组访问运算符 [ ] 来访问该类的的成员。</p>
-<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a><strong>语法</strong></h1><p>一维索引器的语法如下：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">element-type this[int index]</span><br><span class="line">&#123;</span><br><span class="line">   // get 访问器</span><br><span class="line">   get</span><br><span class="line">   &#123;</span><br><span class="line">      // 返回 index 指定的值</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   // set 访问器</span><br><span class="line">   set</span><br><span class="line">   &#123;</span><br><span class="line">      // 设置 index 指定的值</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h1 id="索引器（Indexer）的用途"><a href="#索引器（Indexer）的用途" class="headerlink" title="索引器（Indexer）的用途"></a><strong>索引器（Indexer）的用途</strong></h1><p>索引器的行为的声明在某种程度上类似于属性（property）。就像属性（property），您可使用 get 和 set 访问器来定义索引器。但是，属性返回或设置一个特定的数据成员，而索引器返回或设置对象实例的一个特定值。换句话说，它把实例数据分为更小的部分，并索引每个部分，获取或设置每个部分。</p>
-<p>定义一个属性（property）包括提供属性名称。索引器定义的时候不带有名称，但带有 this 关键字，它指向对象实例。下面的实例演示了这个概念：</p>
-<p><strong>&gt; 实例:</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace IndexerApplication</span><br><span class="line">&#123;</span><br><span class="line">   class IndexedNames</span><br><span class="line">   &#123;</span><br><span class="line">      private string[] namelist = new string[size];</span><br><span class="line">      static public int size = 10;</span><br><span class="line">      public IndexedNames()</span><br><span class="line">      &#123;</span><br><span class="line">         for (int i = 0; i &lt; size; i++)</span><br><span class="line">         namelist[i] = &quot;N. A.&quot;;</span><br><span class="line">      &#125;</span><br><span class="line">      public string this[int index]</span><br><span class="line">      &#123;</span><br><span class="line">         get</span><br><span class="line">         &#123;</span><br><span class="line">            string tmp;</span><br><span class="line"></span><br><span class="line">            if( index &gt;= 0 &amp;&amp; index &lt;= size-1 )</span><br><span class="line">            &#123;</span><br><span class="line">               tmp = namelist[index];</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">               tmp = &quot;&quot;;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            return ( tmp );</span><br><span class="line">         &#125;</span><br><span class="line">         set</span><br><span class="line">         &#123;</span><br><span class="line">            if( index &gt;= 0 &amp;&amp; index &lt;= size-1 )</span><br><span class="line">            &#123;</span><br><span class="line">               namelist[index] = value;</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         IndexedNames names = new IndexedNames();</span><br><span class="line">         names[0] = &quot;Zara&quot;;</span><br><span class="line">         names[1] = &quot;Riz&quot;;</span><br><span class="line">         names[2] = &quot;Nuha&quot;;</span><br><span class="line">         names[3] = &quot;Asif&quot;;</span><br><span class="line">         names[4] = &quot;Davinder&quot;;</span><br><span class="line">         names[5] = &quot;Sunil&quot;;</span><br><span class="line">         names[6] = &quot;Rubic&quot;;</span><br><span class="line">         for ( int i = 0; i &lt; IndexedNames.size; i++ )</span><br><span class="line">         &#123;</span><br><span class="line">            Console.WriteLine(names[i]);</span><br><span class="line">         &#125;</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>当上面的代码被编译和执行时，它会产生下列结果：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Zara</span><br><span class="line">Riz</span><br><span class="line">Nuha</span><br><span class="line">Asif</span><br><span class="line">Davinder</span><br><span class="line">Sunil</span><br><span class="line">Rubic</span><br><span class="line">N. A.</span><br><span class="line">N. A.</span><br><span class="line">N. A.</span><br></pre></td></tr></table></figure></p>
-<h1 id="重载索引器（Indexer）"><a href="#重载索引器（Indexer）" class="headerlink" title="重载索引器（Indexer）"></a><strong>重载索引器（Indexer）</strong></h1><p>索引器（Indexer）可被重载。索引器声明的时候也可带有多个参数，且每个参数可以是不同的类型。没有必要让索引器必须是整型的。C# 允许索引器可以是其他类型，例如，字符串类型。</p>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>继俄罗斯方块之后，本文讲解扫雷游戏的开发。扫雷是 Windows 系统经典的益智小游戏，核心玩法是揭开格子找出所有安全区域，同时避免触雷。</p>
+<p>相比俄罗斯方块，扫雷更侧重于逻辑推理和策略标记，需要实现数字计算、递归扩散、旗标标记等功能。</p>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><p>游戏放置在 <code>source/ai-games/minesweeper/</code> 目录下，文件结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">source/ai-games/minesweeper/</span><br><span class="line">├── index.md              # 游戏页面（HTML + 样式）</span><br><span class="line">└── minesweeper-game.js   # 游戏核心逻辑（约570行）</span><br></pre></td></tr></table></figure>
+
+<h2 id="游戏页面实现"><a href="#游戏页面实现" class="headerlink" title="游戏页面实现"></a>游戏页面实现</h2><h3 id="顶部状态栏"><a href="#顶部状态栏" class="headerlink" title="顶部状态栏"></a>顶部状态栏</h3><p>扫雷游戏采用经典的三段式状态栏设计：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;game-header&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;game-display&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;score&quot;</span>&gt;</span>10<span class="tag">&lt;/<span class="name">span</span>&gt;</span>   <span class="comment">&lt;!-- 剩余地雷数 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;face-btn&quot;</span>&gt;</span>😀<span class="tag">&lt;/<span class="name">button</span>&gt;</span>  <span class="comment">&lt;!-- 笑脸按钮 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;game-display&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;timer&quot;</span>&gt;</span>000<span class="tag">&lt;/<span class="name">span</span>&gt;</span>   <span class="comment">&lt;!-- 计时器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>剩余地雷数</strong>：初始为地雷总数，每插一面旗减1</li>
+<li><strong>笑脸按钮</strong>：点击重新开始游戏，不同状态显示不同表情</li>
+<li><strong>计时器</strong>：从第一次点击开始计时，秒数递增</li>
+</ul>
+<h3 id="难度选择"><a href="#难度选择" class="headerlink" title="难度选择"></a>难度选择</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">DIFFICULTY</span> = &#123;</span><br><span class="line">    <span class="attr">easy</span>: &#123; <span class="attr">cols</span>: <span class="number">9</span>, <span class="attr">rows</span>: <span class="number">9</span>, <span class="attr">mines</span>: <span class="number">10</span> &#125;,      <span class="comment">// 简单</span></span><br><span class="line">    <span class="attr">normal</span>: &#123; <span class="attr">cols</span>: <span class="number">16</span>, <span class="attr">rows</span>: <span class="number">16</span>, <span class="attr">mines</span>: <span class="number">40</span> &#125;,   <span class="comment">// 普通</span></span><br><span class="line">    <span class="attr">hard</span>: &#123; <span class="attr">cols</span>: <span class="number">30</span>, <span class="attr">rows</span>: <span class="number">16</span>, <span class="attr">mines</span>: <span class="number">99</span> &#125;     <span class="comment">// 困难</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>三种难度满足不同水平玩家的需求。</p>
+<h2 id="核心逻辑实现"><a href="#核心逻辑实现" class="headerlink" title="核心逻辑实现"></a>核心逻辑实现</h2><h3 id="游戏状态管理"><a href="#游戏状态管理" class="headerlink" title="游戏状态管理"></a>游戏状态管理</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> board = [];           <span class="comment">// 存储地雷和数字</span></span><br><span class="line"><span class="keyword">let</span> revealed = [];        <span class="comment">// 记录格子是否已揭开</span></span><br><span class="line"><span class="keyword">let</span> flagged = [];         <span class="comment">// 记录格子是否已插旗</span></span><br><span class="line"><span class="keyword">let</span> minePos = [];         <span class="comment">// 存储所有地雷位置</span></span><br><span class="line"><span class="keyword">let</span> firstClick = <span class="literal">true</span>;   <span class="comment">// 是否第一次点击</span></span><br><span class="line"><span class="keyword">let</span> gameOver = <span class="literal">false</span>;    <span class="comment">// 游戏是否结束</span></span><br><span class="line"><span class="keyword">let</span> win = <span class="literal">false</span>;         <span class="comment">// 是否胜利</span></span><br><span class="line"><span class="keyword">let</span> mineCount = <span class="variable constant_">MINES</span>;   <span class="comment">// 剩余地雷数</span></span><br><span class="line"><span class="keyword">let</span> revealCount = <span class="number">0</span>;     <span class="comment">// 已揭开格子数</span></span><br></pre></td></tr></table></figure>
+
+<p><code>board</code> 中：<code>-1</code> 表示地雷，<code>0-8</code> 表示周围地雷数量。</p>
+<h3 id="初始化棋盘"><a href="#初始化棋盘" class="headerlink" title="初始化棋盘"></a>初始化棋盘</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">initBoard</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> y = <span class="number">0</span>; y &lt; <span class="variable constant_">ROWS</span>; y++) &#123;</span><br><span class="line">        board[y] = [];</span><br><span class="line">        revealed[y] = [];</span><br><span class="line">        flagged[y] = [];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> x = <span class="number">0</span>; x &lt; <span class="variable constant_">COLS</span>; x++) &#123;</span><br><span class="line">            board[y][x] = <span class="number">0</span>;</span><br><span class="line">            revealed[y][x] = <span class="literal">false</span>;</span><br><span class="line">            flagged[y][x] = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2026/03/31/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E6%89%AB%E9%9B%B7%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -550,7 +557,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BF%84%E7%BD%97%E6%96%AF%E6%96%B9%E5%9D%97%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -564,7 +571,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【属性Property】</a>
+            <a href="/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BF%84%E7%BD%97%E6%96%AF%E6%96%B9%E5%9D%97%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">Hexo 博客实战：俄罗斯方块小游戏开发指南</a>
         </h2>
 
         <div class="post-meta">
@@ -574,14 +581,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-02-05 14:59:27" itemprop="dateCreated datePublished" datetime="2025-02-05T14:59:27+08:00">2025-02-05</time>
+              <time title="创建时间：2026-03-27 21:00:00" itemprop="dateCreated datePublished" datetime="2026-03-27T21:00:00+08:00">2026-03-27</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-10 20:59:18" itemprop="dateModified" datetime="2026-01-10T20:59:18+08:00">2026-01-10</time>
+                <time title="修改时间：2026-04-01 20:31:57" itemprop="dateModified" datetime="2026-04-01T20:31:57+08:00">2026-04-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -589,16 +596,16 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                  <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">游戏开发</span></a>
                 </span>
             </span>
 
           
-            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【属性Property】" title="阅读次数">
+            <span id="/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BF%84%E7%BD%97%E6%96%AF%E6%96%B9%E5%9D%97%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo 博客实战：俄罗斯方块小游戏开发指南" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -613,8 +620,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/" itemprop="commentCount"></span>
+    <a title="valine" href="/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BF%84%E7%BD%97%E6%96%AF%E6%96%B9%E5%9D%97%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BF%84%E7%BD%97%E6%96%AF%E6%96%B9%E5%9D%97%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -629,30 +636,34 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="C-属性（Property）"><a href="#C-属性（Property）" class="headerlink" title="C# 属性（Property）"></a><strong>C# 属性（Property）</strong></h1><p>C# 中的属性（Property）是类和结构体中用于封装数据的成员。它们提供了一种方式来定义类成员的访问和设置规则，通常用于隐藏字段（Fields）的内部实现细节，同时提供控制数据访问的机制。</p>
-<p>属性可以看作是对字段的包装器，通常由 get 和 set 访问器组成。</p>
-<p>属性（Property）不会确定存储位置。相反，它们具有可读写或计算它们值的 访问器（accessors）。</p>
-<p>例如，有一个名为 Student 的类，带有 age、name 和 code 的私有域。我们不能在类的范围以外直接访问这些域，但是我们可以拥有访问这些私有域的属性。</p>
-<h1 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a><strong>基本语法</strong></h1><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Person</span><br><span class="line">&#123;</span><br><span class="line">    private string name;</span><br><span class="line"></span><br><span class="line">    public string Name</span><br><span class="line">    &#123;</span><br><span class="line">        get &#123; return name; &#125;</span><br><span class="line">        set &#123; name = value; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>以上代码中，Name 属性封装了私有字段 name。get 访问器用于获取字段值，而 set 访问器用于设置字段值。</p>
-<h1 id="自动实现的属性"><a href="#自动实现的属性" class="headerlink" title="自动实现的属性"></a><strong>自动实现的属性</strong></h1><p>如果你只需要一个简单的属性，C# 允许使用自动实现的属性，这样你不需要显式地定义字段。</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class Person</span><br><span class="line">&#123;</span><br><span class="line">    public string Name &#123; get; set; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>在这种情况下，编译器会自动为 Name 属性生成一个私有的匿名字段来存储值。</p>
-<h1 id="只读属性"><a href="#只读属性" class="headerlink" title="只读属性"></a><strong>只读属性</strong></h1><p>如果你只需要一个只读属性，可以省略 set 访问器。</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Person</span><br><span class="line">&#123;</span><br><span class="line">    public string Name &#123; get; &#125;</span><br><span class="line"></span><br><span class="line">    public Person(string name)</span><br><span class="line">    &#123;</span><br><span class="line">        Name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h1 id="只写属性"><a href="#只写属性" class="headerlink" title="只写属性"></a><strong>只写属性</strong></h1><p>类似地，如果你只需要一个只写属性，可以省略 get 访问器。</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Person</span><br><span class="line">&#123;</span><br><span class="line">    private string name;</span><br><span class="line"></span><br><span class="line">    public string Name</span><br><span class="line">    &#123;</span><br><span class="line">        set &#123; name = value; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h1 id="自定义逻辑"><a href="#自定义逻辑" class="headerlink" title="自定义逻辑"></a><strong>自定义逻辑</strong></h1><p>你可以在 get 和 set 访问器中包含自定义的逻辑。</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class Person</span><br><span class="line">&#123;</span><br><span class="line">    private string name;</span><br><span class="line"></span><br><span class="line">    public string Name</span><br><span class="line">    &#123;</span><br><span class="line">        get &#123; return name; &#125;</span><br><span class="line">        set</span><br><span class="line">        &#123;</span><br><span class="line">            if (string.IsNullOrWhiteSpace(value))</span><br><span class="line">                throw new ArgumentException(&quot;Name cannot be empty.&quot;);</span><br><span class="line">            name = value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h1 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a><strong>计算属性</strong></h1>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>继上一篇文章介绍贪吃蛇小游戏的实现方案后，本文继续讲解俄罗斯方块游戏的开发。相比贪吃蛇，俄罗斯方块的实现更加复杂，涉及方块旋转、多行消除、速度递增等机制。</p>
+<p>通过这个案例，可以学习到如何用原生 JavaScript 实现经典的方块下落消除游戏。</p>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><p>游戏放置在 <code>source/ai-games/tetris/</code> 目录下，文件结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">source/ai-games/tetris/</span><br><span class="line">├── index.md          # 游戏页面（HTML + 样式）</span><br><span class="line">└── tetris-game.js    # 游戏核心逻辑（约394行）</span><br></pre></td></tr></table></figure>
+
+<p>与贪吃蛇相同的独立目录结构，便于管理和扩展更多游戏。</p>
+<h2 id="游戏页面实现"><a href="#游戏页面实现" class="headerlink" title="游戏页面实现"></a>游戏页面实现</h2><h3 id="Canvas-画布"><a href="#Canvas-画布" class="headerlink" title="Canvas 画布"></a>Canvas 画布</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;game-canvas&quot;</span> <span class="attr">width</span>=<span class="string">&quot;240&quot;</span> <span class="attr">height</span>=<span class="string">&quot;400&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>俄罗斯方块采用 12×20 网格，每个格子 20px，宽度较窄以适应竖屏布局。</p>
+<h3 id="样式设计"><a href="#样式设计" class="headerlink" title="样式设计"></a>样式设计</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">canvas</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid <span class="number">#2196F3</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">8px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#111</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">20px</span> <span class="built_in">rgba</span>(<span class="number">33</span>, <span class="number">150</span>, <span class="number">243</span>, <span class="number">0.3</span>);</span><br><span class="line">    touch-action: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用蓝色主题（<code>#2196F3</code>）与贪吃蛇的绿色区分开。</p>
+<h2 id="核心逻辑实现"><a href="#核心逻辑实现" class="headerlink" title="核心逻辑实现"></a>核心逻辑实现</h2><h3 id="方块形状定义"><a href="#方块形状定义" class="headerlink" title="方块形状定义"></a>方块形状定义</h3><p>游戏包含 7 种经典方块形状，用矩阵和颜色表示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">SHAPES</span> = &#123;</span><br><span class="line">    <span class="attr">I</span>: &#123; <span class="attr">matrix</span>: [[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]], <span class="attr">color</span>: <span class="string">&#x27;#00f5ff&#x27;</span> &#125;,  <span class="comment">// 青色长条</span></span><br><span class="line">    <span class="attr">O</span>: &#123; <span class="attr">matrix</span>: [[<span class="number">1</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">1</span>]], <span class="attr">color</span>: <span class="string">&#x27;#ffeb3b&#x27;</span> &#125;, <span class="comment">// 黄色方块</span></span><br><span class="line">    <span class="attr">T</span>: &#123; <span class="attr">matrix</span>: [[<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]], <span class="attr">color</span>: <span class="string">&#x27;#bf5af2&#x27;</span> &#125;, <span class="comment">// 紫色T形</span></span><br><span class="line">    <span class="attr">S</span>: &#123; <span class="attr">matrix</span>: [[<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>]], <span class="attr">color</span>: <span class="string">&#x27;#30d158&#x27;</span> &#125;, <span class="comment">// 绿色S形</span></span><br><span class="line">    <span class="attr">Z</span>: &#123; <span class="attr">matrix</span>: [[<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>]], <span class="attr">color</span>: <span class="string">&#x27;#ff375f&#x27;</span> &#125;, <span class="comment">// 红色Z形</span></span><br><span class="line">    <span class="attr">J</span>: &#123; <span class="attr">matrix</span>: [[<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]], <span class="attr">color</span>: <span class="string">&#x27;#0a84ff&#x27;</span> &#125;, <span class="comment">// 蓝色J形</span></span><br><span class="line">    <span class="attr">L</span>: &#123; <span class="attr">matrix</span>: [[<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]], <span class="attr">color</span>: <span class="string">&#x27;#ff9f0a&#x27;</span> &#125;  <span class="comment">// 橙色L形</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">SHAPE_KEYS</span> = [<span class="string">&#x27;I&#x27;</span>, <span class="string">&#x27;O&#x27;</span>, <span class="string">&#x27;T&#x27;</span>, <span class="string">&#x27;S&#x27;</span>, <span class="string">&#x27;Z&#x27;</span>, <span class="string">&#x27;J&#x27;</span>, <span class="string">&#x27;L&#x27;</span>];</span><br></pre></td></tr></table></figure>
+
+<p>每种方块用 0&#x2F;1 矩阵表示形状，1 表示方块存在的位置。</p>
+<h3 id="游戏状态管理"><a href="#游戏状态管理" class="headerlink" title="游戏状态管理"></a>游戏状态管理</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> board = [];           <span class="comment">// 12×20 游戏板，存储已落方块颜色</span></span><br><span class="line"><span class="keyword">let</span> currentPiece = <span class="literal">null</span>; <span class="comment">// 当前下落的方块</span></span><br><span class="line"><span class="keyword">let</span> currentX = <span class="number">0</span>;         <span class="comment">// 当前方块X坐标</span></span><br><span class="line"><span class="keyword">let</span> currentY = <span class="number">0</span>;        <span class="comment">// 当前方块Y坐标</span></span><br><span class="line"><span class="keyword">let</span> score = <span class="number">0</span>;            <span class="comment">// 得分</span></span><br><span class="line"><span class="keyword">let</span> dropInterval = <span class="number">800</span>;   <span class="comment">// 下落间隔（毫秒）</span></span><br></pre></td></tr></table></figure>
+
+<p><code>board</code> 是二维数组，存储已固定在底部的方块颜色，空位为 0。</p>
+<h3 id="随机生成方块"><a href="#随机生成方块" class="headerlink" title="随机生成方块"></a>随机生成方块</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">randomPiece</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> key = <span class="variable constant_">SHAPE_KEYS</span>[<span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="variable constant_">SHAPE_KEYS</span>.<span class="property">length</span>)];</span><br><span class="line">    <span class="keyword">const</span> shape = <span class="variable constant_">SHAPES</span>[key];</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">matrix</span>: shape.<span class="property">matrix</span>.<span class="title function_">map</span>(<span class="function"><span class="params">row</span> =&gt;</span> [...row]),  <span class="comment">// 深拷贝矩阵</span></span><br><span class="line">        <span class="attr">color</span>: shape.<span class="property">color</span></span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>map(row =&gt; [...row])</code> 实现矩阵的深拷贝，避免修改原始形状定义。</p>
+<h3 id="碰撞检测"><a href="#碰撞检测" class="headerlink" title="碰撞检测"></a>碰撞检测</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">checkCollision</span>(<span class="params">matrix, x, y</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> r = <span class="number">0</span>; r &lt; matrix.<span class="property">length</span>; r++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> c = <span class="number">0</span>; c &lt; matrix[r].<span class="property">length</span>; c++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (matrix[r][c]) &#123;</span><br><span class="line">                <span class="keyword">const</span> newX = x + c;</span><br><span class="line">                <span class="keyword">const</span> newY = y + r;</span><br><span class="line">                <span class="comment">// 边界检测</span></span><br><span class="line">                <span class="keyword">if</span> (newX &lt; <span class="number">0</span> || newX &gt;= <span class="variable constant_">COLS</span> || newY &gt;= <span class="variable constant_">ROWS</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                <span class="comment">// 与已落方块碰撞检测</span></span><br><span class="line">                <span class="keyword">if</span> (newY &gt;= <span class="number">0</span> &amp;&amp; board[newY][newX]) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>遍历方块的每个单元格，检查是否越界或与已落方块重叠。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BF%84%E7%BD%97%E6%96%AF%E6%96%B9%E5%9D%97%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -676,7 +687,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -690,7 +701,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【反射Reflection】</a>
+            <a href="/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">Hexo 博客实战：贪吃蛇小游戏开发指南</a>
         </h2>
 
         <div class="post-meta">
@@ -700,14 +711,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-02-05 14:27:15" itemprop="dateCreated datePublished" datetime="2025-02-05T14:27:15+08:00">2025-02-05</time>
+              <time title="创建时间：2026-03-27 20:00:00" itemprop="dateCreated datePublished" datetime="2026-03-27T20:00:00+08:00">2026-03-27</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-10 20:59:18" itemprop="dateModified" datetime="2026-01-10T20:59:18+08:00">2026-01-10</time>
+                <time title="修改时间：2026-04-01 20:31:57" itemprop="dateModified" datetime="2026-04-01T20:31:57+08:00">2026-04-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -715,16 +726,16 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                  <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">游戏开发</span></a>
                 </span>
             </span>
 
           
-            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【反射Reflection】" title="阅读次数">
+            <span id="/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo 博客实战：贪吃蛇小游戏开发指南" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -739,8 +750,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/" itemprop="commentCount"></span>
+    <a title="valine" href="/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -755,46 +766,45 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="C-反射（Reflection）"><a href="#C-反射（Reflection）" class="headerlink" title="C# 反射（Reflection）"></a><strong>C# 反射（Reflection）</strong></h1><p>反射指程序可以访问、检测和修改它本身状态或行为的一种能力。</p>
-<p>程序集包含模块，而模块包含类型，类型又包含成员。反射则提供了封装程序集、模块和类型的对象。</p>
-<p>您可以使用反射动态地创建类型的实例，将类型绑定到现有对象，或从现有对象中获取类型。然后，可以调用类型的方法或访问其字段和属性。</p>
-<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><p><strong>优点：</strong></p>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在静态博客中嵌入 JavaScript 小游戏是一种提升用户体验的好方法。之前用 Lua 为 Unity 实现过多种小游戏，现在尝试将经典的贪吃蛇游戏移植到 Hexo 博客中。</p>
+<p>本文将详细介绍如何在 Hexo 博客中实现一个可玩的贪吃蛇小游戏，包括游戏页面搭建、核心逻辑实现以及移动端适配。</p>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><p>游戏放置在 <code>source/ai-games/snake/</code> 目录下，文件结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">source/ai-games/snake/</span><br><span class="line">├── index.md          # 游戏页面（HTML + 样式）</span><br><span class="line">└── snake-game.js     # 游戏核心逻辑</span><br></pre></td></tr></table></figure>
+
+<p>这种独立目录的方式便于管理，每个游戏都有自己完整的资源。</p>
+<h2 id="游戏页面实现"><a href="#游戏页面实现" class="headerlink" title="游戏页面实现"></a>游戏页面实现</h2><p>游戏页面使用 Hexo 的 <code></code> 标签来嵌入原始 HTML 代码，这样可以避免 Hexo 对 HTML 标签进行转义。</p>
+<h3 id="Canvas-画布"><a href="#Canvas-画布" class="headerlink" title="Canvas 画布"></a>Canvas 画布</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;game-canvas&quot;</span> <span class="attr">width</span>=<span class="string">&quot;400&quot;</span> <span class="attr">height</span>=<span class="string">&quot;400&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>游戏采用 20×20 网格，每个格子 20px，整体画布大小为 400×400 像素。</p>
+<h3 id="样式设计"><a href="#样式设计" class="headerlink" title="样式设计"></a>样式设计</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">canvas</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid <span class="number">#4CAF50</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">8px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#111</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">20px</span> <span class="built_in">rgba</span>(<span class="number">76</span>, <span class="number">175</span>, <span class="number">80</span>, <span class="number">0.3</span>);</span><br><span class="line">    touch-action: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>暗色系背景配合绿色边框，营造游戏氛围。<code>touch-action: none</code> 用于禁止移动端默认触摸行为，避免游戏时页面滚动。</p>
+<h2 id="核心逻辑实现"><a href="#核心逻辑实现" class="headerlink" title="核心逻辑实现"></a>核心逻辑实现</h2><p>游戏逻辑全部封装在 <code>snake-game.js</code> 文件中，共约 309 行代码。</p>
+<h3 id="全局初始化函数"><a href="#全局初始化函数" class="headerlink" title="全局初始化函数"></a>全局初始化函数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">initSnakeGame</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 获取 DOM 元素</span></span><br><span class="line">    <span class="keyword">const</span> canvas = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;game-canvas&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>);</span><br><span class="line">    <span class="comment">// ... 初始化逻辑</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>将游戏初始化函数挂载到 <code>window</code> 对象上，便于 PJAX 页面切换后重新调用。</p>
+<h3 id="游戏配置"><a href="#游戏配置" class="headerlink" title="游戏配置"></a>游戏配置</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gridSize = <span class="number">20</span>;      <span class="comment">// 20x20 网格</span></span><br><span class="line"><span class="keyword">const</span> cellSize = <span class="number">20</span>;      <span class="comment">// 每个格子 20px</span></span><br><span class="line"><span class="keyword">let</span> snake = [</span><br><span class="line">    &#123;<span class="attr">x</span>: <span class="number">10</span>, <span class="attr">y</span>: <span class="number">10</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">x</span>: <span class="number">9</span>, <span class="attr">y</span>: <span class="number">10</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">x</span>: <span class="number">8</span>, <span class="attr">y</span>: <span class="number">10</span>&#125;</span><br><span class="line">];</span><br><span class="line"><span class="keyword">let</span> direction = <span class="string">&#x27;RIGHT&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> nextDirection = <span class="string">&#x27;RIGHT&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>蛇身使用数组存储，每个元素表示蛇的一节坐标。<code>direction</code> 和 <code>nextDirection</code> 分离的设计可以防止连续快速按键导致蛇身掉头自杀。</p>
+<h3 id="蛇的移动"><a href="#蛇的移动" class="headerlink" title="蛇的移动"></a>蛇的移动</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">move</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 应用下次方向（防止掉头）</span></span><br><span class="line">    <span class="keyword">const</span> opposite = &#123; <span class="string">&#x27;UP&#x27;</span>: <span class="string">&#x27;DOWN&#x27;</span>, <span class="string">&#x27;DOWN&#x27;</span>: <span class="string">&#x27;UP&#x27;</span>, <span class="string">&#x27;LEFT&#x27;</span>: <span class="string">&#x27;RIGHT&#x27;</span>, <span class="string">&#x27;RIGHT&#x27;</span>: <span class="string">&#x27;LEFT&#x27;</span> &#125;;</span><br><span class="line">    <span class="keyword">if</span> (nextDirection &amp;&amp; opposite[nextDirection] !== direction) &#123;</span><br><span class="line">        direction = nextDirection;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> head = snake[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> newHead = &#123; ...head &#125;;</span><br><span class="line">    <span class="keyword">switch</span> (direction) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;RIGHT&#x27;</span>: newHead.<span class="property">x</span>++; <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;LEFT&#x27;</span>:  newHead.<span class="property">x</span>--; <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;UP&#x27;</span>:    newHead.<span class="property">y</span>--; <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;DOWN&#x27;</span>:  newHead.<span class="property">y</span>++; <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断是否吃到食物</span></span><br><span class="line">    <span class="keyword">const</span> isEating = food &amp;&amp; newHead.<span class="property">x</span> === food.<span class="property">x</span> &amp;&amp; newHead.<span class="property">y</span> === food.<span class="property">y</span>;</span><br><span class="line">    <span class="keyword">let</span> newSnake = [newHead, ...snake];</span><br><span class="line">    <span class="keyword">if</span> (!isEating) newSnake.<span class="title function_">pop</span>();  <span class="comment">// 没吃到则移除尾部</span></span><br><span class="line"></span><br><span class="line">    snake = newSnake;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>核心思路：</p>
 <ul>
-<li><p>1、反射提高了程序的灵活性和扩展性。</p>
-</li>
-<li><p>2、降低耦合性，提高自适应能力。</p>
-</li>
-<li><p>3、它允许程序创建和控制任何类的对象，无需提前硬编码目标类。</p>
-</li>
+<li>每次移动在头部添加新方块</li>
+<li>吃到食物时不移除尾部，蛇身变长</li>
+<li>未吃到食物时移除尾部，保持蛇身长度不变</li>
 </ul>
-<p><strong>缺点：</strong></p>
-<ul>
-<li><p>1、性能问题：使用反射基本上是一种解释操作，用于字段和方法接入时要远慢于直接代码。因此反射机制主要应用在对灵活性和拓展性要求很高的系统框架上，普通程序不建议使用。</p>
-</li>
-<li><p>2、使用反射会模糊程序内部逻辑；程序员希望在源代码中看到程序的逻辑，反射却绕过了源代码的技术，因而会带来维护的问题，反射代码比相应的直接代码更复杂。</p>
-</li>
-</ul>
-<h1 id="反射（Reflection）的用途"><a href="#反射（Reflection）的用途" class="headerlink" title="反射（Reflection）的用途"></a><strong>反射（Reflection）的用途</strong></h1><p>反射（Reflection）有下列用途：</p>
-<ul>
-<li><p>它允许在运行时查看特性（attribute）信息。</p>
-</li>
-<li><p>它允许审查集合中的各种类型，以及实例化这些类型。</p>
-</li>
-<li><p>它允许延迟绑定的方法和属性（property）。</p>
-</li>
-<li><p>它允许在运行时创建新类型，然后使用这些类型执行一些任务。</p>
-</li>
-</ul>
-<h1 id="查看元数据"><a href="#查看元数据" class="headerlink" title="查看元数据"></a><strong>查看元数据</strong></h1><p>我们已经在上面的章节中提到过，使用反射（Reflection）可以查看特性（attribute）信息。</p>
-<p>System.Reflection 类的 MemberInfo 对象需要被初始化，用于发现与类相关的特性（attribute）。为了做到这点，您可以定义目标类的一个对象，如下：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.Reflection.MemberInfo info = typeof(MyClass);</span><br></pre></td></tr></table></figure></p>
-<p>下面的程序演示了这点：</p>
-<p><strong>&gt; 实例：</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">[AttributeUsage(AttributeTargets.All)]</span><br><span class="line">public class HelpAttribute : System.Attribute</span><br><span class="line">&#123;</span><br><span class="line">   public readonly string Url;</span><br><span class="line"></span><br><span class="line">   public string Topic  // Topic 是一个命名（named）参数</span><br><span class="line">   &#123;</span><br><span class="line">      get</span><br><span class="line">      &#123;</span><br><span class="line">         return topic;</span><br><span class="line">      &#125;</span><br><span class="line">      set</span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">         topic = value;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public HelpAttribute(string url)  // url 是一个定位（positional）参数</span><br><span class="line">   &#123;</span><br><span class="line">      this.Url = url;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   private string topic;</span><br><span class="line">&#125;</span><br><span class="line">[HelpAttribute(&quot;Information on the class MyClass&quot;)]</span><br><span class="line">class MyClass</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">namespace AttributeAppl</span><br><span class="line">&#123;</span><br><span class="line">   class Program</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         System.Reflection.MemberInfo info = typeof(MyClass);</span><br><span class="line">         object[] attributes = info.GetCustomAttributes(true);</span><br><span class="line">         for (int i = 0; i &lt; attributes.Length; i++)</span><br><span class="line">         &#123;</span><br><span class="line">            System.Console.WriteLine(attributes[i]);</span><br><span class="line">         &#125;</span><br><span class="line">         Console.ReadKey();</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>当上面的代码被编译和执行时，它会显示附加到类 MyClass 上的自定义特性：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HelpAttribute</span><br></pre></td></tr></table></figure></p>
+<h3 id="碰撞检测"><a href="#碰撞检测" class="headerlink" title="碰撞检测"></a>碰撞检测</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 边界碰撞</span></span><br><span class="line"><span class="keyword">if</span> (newHead.<span class="property">x</span> &lt; <span class="number">0</span> || newHead.<span class="property">x</span> &gt;= gridSize || </span><br><span class="line">    newHead.<span class="property">y</span> &lt; <span class="number">0</span> || newHead.<span class="property">y</span> &gt;= gridSize) &#123;</span><br><span class="line">    gameOver = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自身碰撞</span></span><br><span class="line"><span class="keyword">if</span> (newSnake.<span class="title function_">slice</span>(<span class="number">1</span>).<span class="title function_">some</span>(<span class="function"><span class="params">seg</span> =&gt;</span> seg.<span class="property">x</span> === newHead.<span class="property">x</span> &amp;&amp; seg.<span class="property">y</span> === newHead.<span class="property">y</span>)) &#123;</span><br><span class="line">    gameOver = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="食物生成"><a href="#食物生成" class="headerlink" title="食物生成"></a>食物生成</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">randomFood</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> x = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * gridSize);</span><br><span class="line">        <span class="keyword">const</span> y = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * gridSize);</span><br><span class="line">        <span class="comment">// 避开蛇身</span></span><br><span class="line">        <span class="keyword">if</span> (!snake.<span class="title function_">some</span>(<span class="function"><span class="params">seg</span> =&gt;</span> seg.<span class="property">x</span> === x &amp;&amp; seg.<span class="property">y</span> === y)) &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;x, y&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用循环尝试生成随机位置，直到找到不与蛇身重叠的位置。</p>
+<h3 id="绘制系统"><a href="#绘制系统" class="headerlink" title="绘制系统"></a>绘制系统</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">draw</span>(<span class="params"></span>) &#123;</span><br><span class="line">    ctx.<span class="title function_">clearRect</span>(<span class="number">0</span>, <span class="number">0</span>, canvas.<span class="property">width</span>, canvas.<span class="property">height</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制网格线</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt;= gridSize; i++) &#123;</span><br><span class="line">        <span class="comment">// ... 绘制横竖线</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制蛇身</span></span><br><span class="line">    snake.<span class="title function_">forEach</span>(<span class="function">(<span class="params">seg, idx</span>) =&gt;</span> &#123;</span><br><span class="line">        ctx.<span class="property">fillStyle</span> = idx === <span class="number">0</span> ? <span class="string">&#x27;#8bc34a&#x27;</span> : <span class="string">&#x27;#4CAF50&#x27;</span>;</span><br><span class="line">        ctx.<span class="title function_">fillRect</span>(seg.<span class="property">x</span> * cellSize + <span class="number">1</span>, seg.<span class="property">y</span> * cellSize + <span class="number">1</span>, </span><br><span class="line">                     cellSize - <span class="number">2</span>, cellSize - <span class="number">2</span>);</span><br><span class="line">        <span class="comment">// 蛇眼睛</span></span><br><span class="line">        <span class="keyword">if</span> (idx === <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// ... 绘制眼睛</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制食物</span></span><br><span class="line">    <span class="keyword">if</span> (food) &#123;</span><br><span class="line">        ctx.<span class="property">fillStyle</span> = <span class="string">&#x27;#f44336&#x27;</span>;</span><br><span class="line">        ctx.<span class="title function_">beginPath</span>();</span><br><span class="line">        ctx.<span class="title function_">arc</span>(food.<span class="property">x</span> * cellSize + cellSize / <span class="number">2</span>, </span><br><span class="line">                food.<span class="property">y</span> * cellSize + cellSize / <span class="number">2</span>, <span class="number">8</span>, <span class="number">0</span>, <span class="number">2</span> * <span class="title class_">Math</span>.<span class="property">PI</span>);</span><br><span class="line">        ctx.<span class="title function_">fill</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>绘制顺序：清空画布 → 网格线 → 蛇身 → 食物 → 游戏结束遮罩。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -818,7 +828,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -832,7 +842,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【特性Attribute】</a>
+            <a href="/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">VSCode 中搭建 OpenCode AI 编程助手完整指南</a>
         </h2>
 
         <div class="post-meta">
@@ -841,32 +851,26 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2025-02-05 11:57:31" itemprop="dateCreated datePublished" datetime="2025-02-05T11:57:31+08:00">2025-02-05</time>
+              <time title="创建时间：2026-03-24 20:00:00 / 修改时间：23:58:57" itemprop="dateCreated datePublished" datetime="2026-03-24T20:00:00+08:00">2026-03-24</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-10 20:59:18" itemprop="dateModified" datetime="2026-01-10T20:59:18+08:00">2026-01-10</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
                 </span>
             </span>
 
           
-            <span id="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【特性Attribute】" title="阅读次数">
+            <span id="/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="post-meta-item leancloud_visitors" data-flag-title="VSCode 中搭建 OpenCode AI 编程助手完整指南" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -881,8 +885,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/" itemprop="commentCount"></span>
+    <a title="valine" href="/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -897,42 +901,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="C-特性（Attribute）"><a href="#C-特性（Attribute）" class="headerlink" title="C# 特性（Attribute）"></a><strong>C# 特性（Attribute）</strong></h1><p>特性（Attribute）是用于在运行时传递程序中各种元素（比如类、方法、结构、枚举、组件等）的行为信息的声明性标签。您可以通过使用特性向程序添加声明性信息。一个声明性标签是通过放置在它所应用的元素前面的方括号（[ ]）来描述的。</p>
-<p>特性（Attribute）用于添加元数据，如编译器指令和注释、描述、方法、类等其他信息。.Net 框架提供了两种类型的特性：预定义特性和自定义特性。</p>
-<h1 id="规定特性（Attribute）"><a href="#规定特性（Attribute）" class="headerlink" title="规定特性（Attribute）"></a><strong>规定特性（Attribute）</strong></h1><p>规定特性（Attribute）的语法如下：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[attribute(positional_parameters, name_parameter = value, ...)]</span><br><span class="line">element</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>特性（Attribute）的名称和值是在方括号内规定的，放置在它所应用的元素之前。positional_parameters 规定必需的信息，name_parameter 规定可选的信息。</p>
-<h1 id="预定义特性（Attribute）"><a href="#预定义特性（Attribute）" class="headerlink" title="预定义特性（Attribute）"></a><strong>预定义特性（Attribute）</strong></h1><p>.Net 框架提供了三种预定义特性：
-	</p>
-<ul>
-<li><p>AttributeUsage</p>
-</li>
-<li><p>Conditional</p>
-</li>
-<li><p>Obsolete</p>
-</li>
-</ul>
-<h2 id="AttributeUsage"><a href="#AttributeUsage" class="headerlink" title="AttributeUsage"></a>AttributeUsage</h2><p>预定义特性 AttributeUsage 描述了如何使用一个自定义特性类。它规定了特性可应用到的项目的类型。</p>
-<p>规定该特性的语法如下：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[AttributeUsage(</span><br><span class="line">   validon,</span><br><span class="line">   AllowMultiple=allowmultiple,</span><br><span class="line">   Inherited=inherited</span><br><span class="line">)]</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>其中：</p>
-<ul>
-<li><p>参数 validon 规定特性可被放置的语言元素。它是枚举器 AttributeTargets 的值的组合。默认值是 AttributeTargets.All。</p>
-</li>
-<li><p>参数 allowmultiple（可选的）为该特性的 AllowMultiple 属性（property）提供一个布尔值。如果为 true，则该特性是多用的。默认值是 false（单用的）。</p>
-</li>
-<li><p>参数 inherited（可选的）为该特性的 Inherited 属性（property）提供一个布尔值。如果为 true，则该特性可被派生类继承。默认值是 false（不被继承）。</p>
-</li>
-</ul>
-<p>例如：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[AttributeUsage(AttributeTargets.Class |</span><br><span class="line">AttributeTargets.Constructor |</span><br><span class="line">AttributeTargets.Field |</span><br><span class="line">AttributeTargets.Method |</span><br><span class="line">AttributeTargets.Property, </span><br><span class="line">AllowMultiple = true)]</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="Conditional"><a href="#Conditional" class="headerlink" title="Conditional"></a>Conditional</h2>
+          <p>在 AI 编程工具蓬勃发展的今天，开源免费的 <a target="_blank" rel="noopener" href="https://github.com/anomalyco/opencode">OpenCode</a> 凭借其强大的功能和灵活的扩展性，已经成为超过 500 万开发者的首选。作为一个拥有 <strong>12 万 + GitHub Stars</strong> 的开源项目，OpenCode 提供了终端、桌面应用和 IDE 多种使用方式。本文将详细介绍如何在 VSCode 中搭建和使用 OpenCode，帮助你快速上手这款强大的 AI 编程助手。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -955,7 +927,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1023,20 +995,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-count">92</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1049,7 +1021,7 @@
         <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.bytefisher.top/" title="Weibo → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
       </span>
       <span class="links-of-author-item">
         <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
@@ -1059,7 +1031,7 @@
 
 
       </div>
-	  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <iframe id="music-player" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
 	  <div class="wechat_OA">
 		<span>欢迎关注我的公众号</span>
 		<!-- 这里添加你的二维码图片 -->
@@ -1095,6 +1067,26 @@
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
         
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
@@ -1110,6 +1102,7 @@
   
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
@@ -1187,8 +1180,37 @@ window.addEventListener('pjax:success', () => {
 
 
   
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -1237,7 +1259,330 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
   }, window.Valine);
 });
 </script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
 
+<style>
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  scrollbar-gutter: stable;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.modal::-webkit-scrollbar {
+  display: none !important;
+}
+
+.modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.modal-content {
+  position: relative;
+  width: min(71%, 340px);
+  max-width: calc((100vh - 100px) * 9 / 17.5);
+  height: auto;
+  aspect-ratio: 9 / 17.5;
+  max-height: calc(100vh - 100px);
+  margin: 0 auto;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: min(81%, 320px);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: min(94%, 300px);
+    max-width: calc((100vh - 80px) * 9 / 17.5);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+    max-height: calc(100vh - 80px);
+  }
+}
+
+.modal-content iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  border: none;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  left: auto;
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 10000;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+}
+
+.close-btn:hover {
+  color: #e74c3c;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  background: rgba(0,0,0,0.1);
+  border-radius: 50%;
+  line-height: 50px;
+  user-select: none;
+}
+
+.nav-btn:hover {
+  background: rgba(0,0,0,0.2);
+}
+
+.prev-btn {
+  left: 0;
+}
+
+.next-btn {
+  right: 15px;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: calc(100% - 60px);
+    max-width: calc((100vh - 100px) * 9 / 17.5);
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    line-height: 40px;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var musicIframe = null;
+  var musicDisplayStyle = '';
+  var isMusicPaused = false;
+  var videoIds = [];
+  var currentIndex = 0;
+  
+  function findMusicIframe() {
+    var iframes = document.getElementsByTagName('iframe');
+    for (var i = 0; i < iframes.length; i++) {
+      var src = iframes[i].src || '';
+      if (src.indexOf('music.163.com') > -1 || src.indexOf('outchain/player') > -1) {
+        return iframes[i];
+      }
+    }
+    console.log('[Douyin] Music iframe not found in', iframes.length, 'iframes');
+    return null;
+  }
+  
+  function pauseMusic() {
+    console.log('[Douyin] Trying to pause music...');
+    musicIframe = findMusicIframe();
+    
+    if (musicIframe) {
+      console.log('[Douyin] Music iframe found');
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=1') > -1) {
+        musicIframe.src = src.replace('auto=1', 'auto=0');
+        console.log('[Douyin] Changed auto=1 to auto=0');
+      }
+      isMusicPaused = true;
+    } else {
+      console.log('[Douyin] Music iframe NOT found!');
+    }
+  }
+  
+  function resumeMusic() {
+    console.log('[Douyin] Trying to resume music...');
+    
+    if (musicIframe && isMusicPaused) {
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=0') > -1) {
+        musicIframe.src = src.replace('auto=0', 'auto=1');
+        console.log('[Douyin] Changed auto=0 to auto=1');
+      }
+      isMusicPaused = false;
+    }
+  }
+  
+  function init() {
+    console.log('[Douyin] Initializing...');
+    var cards = document.querySelectorAll('.video-card');
+    console.log('[Douyin] Found', cards.length, 'video cards');
+    
+    videoIds = [];
+    for (var j = 0; j < cards.length; j++) {
+      var videoId = cards[j].getAttribute('data-id');
+      if (videoId) {
+        videoIds.push(videoId);
+      }
+      cards[j].addEventListener('click', openModal);
+    }
+    
+    var closeBtn = document.querySelector('.close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+    
+    var prevBtn = document.querySelector('.prev-btn');
+    var nextBtn = document.querySelector('.next-btn');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(-1);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(1);
+      });
+    }
+    
+    var modal = document.getElementById('douyin-modal');
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+    }
+  }
+  
+  function navigateVideo(direction) {
+    if (videoIds.length === 0) return;
+    
+    currentIndex += direction;
+    if (currentIndex < 0) {
+      currentIndex = videoIds.length - 1;
+    } else if (currentIndex >= videoIds.length) {
+      currentIndex = 0;
+    }
+    
+    var videoId = videoIds[currentIndex];
+    var player = document.getElementById('douyin-player');
+    if (player && videoId) {
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+    }
+  }
+  
+  function openModal(e) {
+    console.log('[Douyin] Opening modal...');
+    var card = e.currentTarget;
+    var videoId = card.getAttribute('data-id');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    currentIndex = videoIds.indexOf(videoId);
+    
+    if (player && modal && videoId) {
+      pauseMusic();
+      
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.marginRight = '0px';
+    }
+  }
+  
+  function closeModal() {
+    console.log('[Douyin] Closing modal...');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    if (player) {
+      player.src = '';
+    }
+    
+    if (modal) {
+      modal.classList.remove('active');
+    }
+    
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    
+    resumeMusic();
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
     </div>
 </body>
 </html>

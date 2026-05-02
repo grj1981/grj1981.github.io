@@ -12,11 +12,11 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
 <meta property="og:type" content="website">
@@ -103,6 +103,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -129,22 +130,27 @@
   </li>
         <li class="menu-item menu-item-aigames">
 
-    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏<span class="badge">1</span></a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">42</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">10</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">12</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">81</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">92</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">28</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -152,11 +158,38 @@
     <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -178,7 +211,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/02/25/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-24-02-24/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -192,7 +225,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/02/25/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-24-02-24/" class="post-title-link" itemprop="url">钓鱼日记[24.02.24]</a>
+            <a href="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/" class="post-title-link" itemprop="url">Unity3D游戏开发异步编程UniTask和Task</a>
         </h2>
 
         <div class="post-meta">
@@ -202,14 +235,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-02-25 19:21:05" itemprop="dateCreated datePublished" datetime="2024-02-25T19:21:05+08:00">2024-02-25</time>
+              <time title="创建时间：2025-01-22 11:11:59" itemprop="dateCreated datePublished" datetime="2025-01-22T11:11:59+08:00">2025-01-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-06-04 21:34:29" itemprop="dateModified" datetime="2024-06-04T21:34:29+08:00">2024-06-04</time>
+                <time title="修改时间：2026-01-10 20:59:18" itemprop="dateModified" datetime="2026-01-10T20:59:18+08:00">2026-01-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -217,12 +250,20 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
                 </span>
             </span>
 
           
-            <span id="/2024/02/25/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-24-02-24/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[24.02.24]" title="阅读次数">
+            <span id="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3D游戏开发异步编程UniTask和Task" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -237,8 +278,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2024/02/25/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-24-02-24/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/02/25/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-24-02-24/" itemprop="commentCount"></span>
+    <a title="valine" href="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -253,15 +294,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2月24日，星期六</p>
-<p>元宵节，气温骤降。在这样的日子里，我选择前往三一水库挑战红尾。为了应对可能的挑战，跟据以往的经验，由于水库红尾比较小，我准备选择软竿，搭配小钩，细线，希望能提高鱼儿的咬钩。于是我携带了特作伊吹12尺钓竿，搭配0.6主线，0.3子线以及2号无倒刺轻口袖进行作钓。</p>
-<p><img data-src="https://iili.io/JGhuM6F.md.jpg"></p>
-<p><img data-src="https://iili.io/JGhueZN.md.jpg"></p>
-<p>虽然降温，但鱼口异常的好，仿佛在庆祝元宵节的热闹。到达水库开始作钓不久，就开始上鱼。红尾虽然小，但数量众多，鱼情爆躁。然而，特作伊吹钓竿在这个时候却显得有些不适应，小鱼刺鱼过程中手感模糊，虽然是胴调钓竿，但鱼太小又发挥不了鱼竿的腰力，轻轻发力就变成了飞磕，体现不出伊吹的特性。然而，尽管有这些不足，我依然享受着双飞，连竿上鱼的快感，这正是钓鱼的魅力所在。</p>
-<p><img data-src="https://iili.io/JGhuiu4.md.jpg"></p>
+          <h1 id="await-关键字"><a href="#await-关键字" class="headerlink" title="await 关键字"></a><strong>await 关键字</strong></h1><p>在C#编程中，await 关键字用于异步编程，它通常与 async 关键字一起使用。await 用于暂停当前方法的执行，直到等待的异步任务完成。这样可以在不阻塞主线程的情况下执行耗时操作，如I&#x2F;O操作或网络请求。</p>
+<p>例如，假设有一个异步方法 GetDataAsync()，你可以这样使用 await：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public async Task&lt;string&gt; FetchDataAsync()</span><br><span class="line">&#123;</span><br><span class="line">    // 假设 GetDataAsync 是一个返回 Task&lt;string&gt; 的异步方法</span><br><span class="line">    string data = await GetDataAsync();</span><br><span class="line">    return data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>在这个例子中，await GetDataAsync() 会暂停 FetchDataAsync 方法的执行，直到 GetDataAsync 完成并返回结果。同时，控制权会返回给调用者，允许程序继续执行其他操作。</p>
+<p>在C#中使用await时，有几个关键要点需要注意，以确保异步代码的正确性和高效性：</p>
+<h2 id="async-方法必须返回-Task-或-Task"><a href="#async-方法必须返回-Task-或-Task" class="headerlink" title="async 方法必须返回 Task 或 Task&lt;T&gt;"></a>async 方法必须返回 Task 或 Task&lt;T&gt;</h2><p>使用 await 的方法必须标记为 async，并且返回类型应为 Task（无返回值）或 Task&lt;T&gt;（有返回值）。</p>
+<p>例如：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public async Task&lt;int&gt; CalculateAsync()</span><br><span class="line">&#123;</span><br><span class="line">    await Task.Delay(1000); // 模拟耗时操作</span><br><span class="line">    return 42;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="避免阻塞调用"><a href="#避免阻塞调用" class="headerlink" title="避免阻塞调用"></a>避免阻塞调用</h2><p>不要在 async 方法中使用 .Result 或 .Wait()，这会导致死锁或阻塞线程。</p>
+<p>例如，避免以下写法：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var result = SomeAsyncMethod().Result; // 错误：可能导致死锁</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="正确处理异常"><a href="#正确处理异常" class="headerlink" title="正确处理异常"></a>正确处理异常</h2><p>异步方法中的异常会被包装在 Task 中，可以通过 try-catch 捕获。</p>
+<p>例如：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">try</span><br><span class="line">&#123;</span><br><span class="line">    await SomeAsyncMethod();</span><br><span class="line">&#125;</span><br><span class="line">catch (Exception ex)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine($&quot;Error: &#123;ex.Message&#125;&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/02/25/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-24-02-24/#more" rel="contents">
+              <a class="btn" href="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -285,7 +338,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/12/06/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%BB%84%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -299,7 +352,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity堆叠消除小游戏摘要</a>
+            <a href="/2024/12/06/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%BB%84%E4%BB%B6/" class="post-title-link" itemprop="url">Unity3D游戏引擎组件</a>
         </h2>
 
         <div class="post-meta">
@@ -309,14 +362,262 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-01-31 18:11:16" itemprop="dateCreated datePublished" datetime="2024-01-31T18:11:16+08:00">2024-01-31</time>
+              <time title="创建时间：2024-12-06 11:59:03" itemprop="dateCreated datePublished" datetime="2024-12-06T11:59:03+08:00">2024-12-06</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-02-20 21:03:23" itemprop="dateModified" datetime="2024-02-20T21:03:23+08:00">2024-02-20</time>
+                <time title="修改时间：2026-01-10 20:59:18" itemprop="dateModified" datetime="2026-01-10T20:59:18+08:00">2026-01-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/12/06/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%BB%84%E4%BB%B6/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3D游戏引擎组件" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/12/06/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%BB%84%E4%BB%B6/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/12/06/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%BB%84%E4%BB%B6/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Mesh-网格"><a href="#Mesh-网格" class="headerlink" title="Mesh 网格"></a>Mesh 网格</h1><h2 id="Mesh-Filter"><a href="#Mesh-Filter" class="headerlink" title="Mesh Filter"></a>Mesh Filter</h2><p>官方手册地址：<a target="_blank" rel="noopener" href="https://docs.unity3d.com/cn/current/Manual/class-MeshFilter.html">Mesh Filter</a></p>
+<p>Mesh Filter 组件包含对网格的引用。该组件与同一个游戏对象上的 Mesh Renderer 组件配合使用；Mesh Renderer 组件渲染 Mesh Filt组件引用的网格。用于将网格数据应用到 3D 模型上。它是实现 3D 模型的重要组成部分之一，可以定义模型的形状和结构。</p>
+<p>Mesh Filter 可以将网格数据应用到 3D 模型上，从而定义模型的形状和结构。它通过读取网格数据，包括顶点、三角形面片等信息，来定义模的形状和结构。这些网格数据可以通过外部工具（例如 Blender、Maya 等）创建，也可以通过代码动态生成。</p>
+<p>Mesh Filter 提供了许多属性和方法，例如网格数据、法线、UV 坐标等，可以用来控制模型的形状和结构。另外，Mesh Filter<br>还支持动态修改网格数据，从而实现更加灵活的模型变形效果。</p>
+<h2 id="Mesh-Renderer"><a href="#Mesh-Renderer" class="headerlink" title="Mesh Renderer"></a>Mesh Renderer</h2><p>官方手册地址：<a target="_blank" rel="noopener" href="https://docs.unity3d.com/cn/current/Manual/class-MeshRenderer.html">Mesh Renderer</a></p>
+<p>Mesh Renderer 组件用于渲染网格。该组件与同一个游戏对象上的 Mesh Filter 组件配合使用；Mesh Renderer 组件渲染 Mesh Filter 组件引用的网格。</p>
+<p>用于将 3D 模型渲染到屏幕上。它是游戏中 3D 模型的重要组成部分之一，可以让游戏中的角色、场景和物品等立体化呈现。</p>
+<h2 id="Skinned-Mesh-Renderer"><a href="#Skinned-Mesh-Renderer" class="headerlink" title="Skinned Mesh Renderer"></a>Skinned Mesh Renderer</h2><p>官方手册地址：<a target="_blank" rel="noopener" href="https://docs.unity3d.com/cn/current/Manual/class-SkinnedMeshRenderer.html">Skinned Mesh Renderer</a></p>
+<p>Skinned Mesh Renderer 组件渲染一个可变形的网格。可变形网格包括蒙皮网格（具有骨骼和绑定姿势的网格）、具有混合形状的网格和运行布料模拟的网格。用于将骨骼动画应用到 3D 模型上。它是实现角色动画的重要组件之一，可以让游戏角色在运动中更加自然和流畅。</p>
+<p>Skinned Mesh Renderer 可以在 3D 模型上应用骨骼动画，使得模型能够根据动画数据进行变形，从而实现角色的动画效果。它使用骨骼系统来管理骨骼和骨骼权重，并将这些信息应用到 3D 模型上，从而实现动画的变形效果。</p>
+<p>Skinned Mesh Renderer 提供了许多属性和方法，例如骨骼系统、骨骼权重、动画剪辑、动画速度等，可以用来控制动画的播放和效果。另外，Skinned Mesh Renderer 还支持动态修改骨骼权重，从而实现更加灵活的动画效果。</p>
+<p>Skinned Mesh Renderer 是 Unity 中实现角色动画的重要组件之一，可以让游戏角色在运动中更加自然和流畅。它是游戏开发中不可或缺的工具，可以提高游戏的可玩性和视觉效果。</p>
+<h2 id="Text-Mesh"><a href="#Text-Mesh" class="headerlink" title="Text Mesh"></a>Text Mesh</h2><p>官方手册地址：<a target="_blank" rel="noopener" href="https://docs.unity3d.com/cn/current/Manual/class-TextMesh.html">Text Mesh</a></p>
+<p>用于将文本转换为 3D 网格，以便进行高效的渲染和交互。与 Unity 自带的 Text 组件和 TextMeshPro-Text 组件相比，Text Mesh 更加轻量级和高效，适用于需要大量文本渲染的场景。</p>
+<p>Text Mesh 可以用来渲染各种文本内容，例如游戏中的标签、计分板、物品名称等等。它能够将文本转换为 3D 网格，并使用 GPU 进行加速渲染，从而能够高效地处理大量文本内容。</p>
+<p>Text Mesh 组件提供了许多属性，例如字体、字体大小、颜色、对齐方式、行距、字间距等，可以用来调整文本的排版和格式化。另外，Text Mesh 还支持动态生成文本，可以通过代码来实现动态更新文本内容，从而满足游戏中各种动态文本渲染需求。</p>
+<p>Text Mesh 是 Unity 中非常高效的文本渲染组件，适用于需要大量文本渲染的场景，例如大量的标签、计分板、物品名称等等。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/12/06/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%BB%84%E4%BB%B6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/" class="post-title-link" itemprop="url">Unity3DRigidbody2D使用与优化</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-12-06 11:09:12" itemprop="dateCreated datePublished" datetime="2024-12-06T11:09:12+08:00">2024-12-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-01-10 20:59:18" itemprop="dateModified" datetime="2026-01-10T20:59:18+08:00">2026-01-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/" class="post-meta-item leancloud_visitors" data-flag-title="Unity3DRigidbody2D使用与优化" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="移动"><a href="#移动" class="headerlink" title="移动"></a>移动</h1><p>当gameobject被加上rigidbody2d组件时，如果想移动它，不要这样写：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">void Update()</span><br><span class="line">&#123;</span><br><span class="line">	this.transform.Translate (Vector3.left * speed * Time.deltaTime);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这种写法，主要针对无rigidbody2d的gameobject对象，否则，性能很差。<br>正确的写法：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void FixedUpdate()</span><br><span class="line">&#123;</span><br><span class="line">	rigidbody2D.MovePosition (rigidbody2D.position + Vector2.left * speed * Time.fixedDeltaTime);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void Start () </span><br><span class="line">&#123;</span><br><span class="line">	rigidbody2D.velocity = Vector2.left * speed;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h1 id="Body-Type属性"><a href="#Body-Type属性" class="headerlink" title="Body Type属性"></a>Body Type属性</h1><p>rigidbody2d最为重要的一个属性，不同的选项，不同的物理效果：</p>
+<h2 id="Dynamic（动态的）"><a href="#Dynamic（动态的）" class="headerlink" title="Dynamic（动态的）"></a>Dynamic（动态的）</h2><pre><code>具有完全的物理特性；
+会与所有类型的Rigidbody2D进行碰撞；
+是最常用的Rigidbody2D类型、也是默认的类型；
+是最耗费性能的类型；
+</code></pre>
+<h2 id="Kinematic（运动学）"><a href="#Kinematic（运动学）" class="headerlink" title="Kinematic（运动学）"></a>Kinematic（运动学）</h2><pre><code>仅在用户控制下运动，不会受到重力和AddForce等力相关函数的影响;
+只与Dynamic的Rigidbody2D发生碰撞（不勾选Use Full Kinematic Contacts）；
+不能通过力或碰撞改变速度，但是可以设置其速度和位置、旋转；
+比Dynamic性能高；
+</code></pre>
+<h2 id="Static-静态的"><a href="#Static-静态的" class="headerlink" title="Static (静态的)"></a>Static (静态的)</h2><pre><code>具有无限质量、不可移动的物体;
+velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
+只与Dynamic的Rigidbody2D发生碰撞;
+性能最高；
+</code></pre>
+<h1 id="Simulated-物理模拟"><a href="#Simulated-物理模拟" class="headerlink" title="Simulated 物理模拟"></a>Simulated 物理模拟</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity娃娃机小游戏摘要</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-08-15 17:22:54" itemprop="dateCreated datePublished" datetime="2024-08-15T17:22:54+08:00">2024-08-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-01-10 20:59:18" itemprop="dateModified" datetime="2026-01-10T20:59:18+08:00">2026-01-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -337,7 +638,7 @@
             </span>
 
           
-            <span id="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity堆叠消除小游戏摘要" title="阅读次数">
+            <span id="/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity娃娃机小游戏摘要" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -352,8 +653,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    <a title="valine" href="/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -368,15 +669,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Lua实现Unity堆叠消除小游戏，游戏功能每次随机生成四个不同形状的方块，将方块拖入10*10的格子棋盘，如果放入的棋盘格都有空格则可以放入方块，当放满一行或者一列时，消除满行满列的放入格。</p>
-<h2 id="创建拼图地图格数据"><a href="#创建拼图地图格数据" class="headerlink" title="- 创建拼图地图格数据"></a>- 创建拼图地图格数据</h2><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">---拼图地图格数据</span><br><span class="line">---@class ROPuzzleMapTileData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type number 位置标记</span><br><span class="line">    index = 0,</span><br><span class="line">    ---@type number 所在行</span><br><span class="line">    x = 0,</span><br><span class="line">    ---@type number 所在列</span><br><span class="line">    y = 0,</span><br><span class="line">    ---@type number 地图格上放置的方块ID  为0 表示空格</span><br><span class="line">    blockId = 0,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(index,x,y,id)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(index,x,y,id)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(index,x,y,id)</span><br><span class="line">    self.index = index</span><br><span class="line">    self.x = x</span><br><span class="line">    self.y = y</span><br><span class="line">    self.blockId = id</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+          <h1 id="游戏说明"><a href="#游戏说明" class="headerlink" title="游戏说明"></a>游戏说明</h1><p>游戏开始，下方随机生成不同品质小人，在场景中来回走动，不同品质的小人，移动速度不一样，被抓到后获得的积分也不一样。按住移动按钮，上方机械手臂会左右来回移动，当松开按钮，机械手臂会掉下来，当手臂下落碰到场景中小人时，检测当前手臂抓取范围内的小人，在抓取范围内的小人会被抓走。然后计算获得分数，如果机械手臂抓空，则碰到地面后手臂也会自动回弹，每轮游戏有4次抓取机会。</p>
+<h1 id="功能实现"><a href="#功能实现" class="headerlink" title="功能实现"></a>功能实现</h1><h2 id="移动的小人"><a href="#移动的小人" class="headerlink" title="移动的小人"></a>移动的小人</h2><p>创建移动小人AmusementParkDollMachineGameRole,跟据不同品质小人，移动速度不同实现小人在可控范围内随机位置移动。在移动过程中通过修改sortingOrder值来调整小人在不同位置的层级显示。小人在移动是播放walk动作，被抓住时拖放drag动作，同时将小人从场景节点移动到机械手臂抓取小人的节点内，当手臂上升时，小人跟着手臂一起向上移动，抓取结束移除被抓取的小人。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br></pre></td><td class="code"><pre><span class="line">---待抓取的游戏小人</span><br><span class="line">---@class AmusementParkDollMachineGameRole</span><br><span class="line">local m = &#123;</span><br><span class="line">    View = nil,</span><br><span class="line">    ---@type AmusementParkDollMachineRoleData</span><br><span class="line">    RoleData = nil,</span><br><span class="line">    ---@type Spine.Unity.SkeletonGraphic</span><br><span class="line">    Animation = nil,</span><br><span class="line">    ---@type number</span><br><span class="line">    EntityId = 0,</span><br><span class="line">    ---@type Vector3 下一个移动位置</span><br><span class="line">    NextPos = Vector3.New(0,0,0),</span><br><span class="line">    ---@type boolean 是否在移动中</span><br><span class="line">    IsMoving = false,</span><br><span class="line">    ---@type number 下一次开始移动的时间</span><br><span class="line">    NextMovieTimer = 0,</span><br><span class="line">    ---@type boolean 小人是否已成功创建</span><br><span class="line">    IsCreateRole = false,</span><br><span class="line">    ---@type boolean 小人是否被抓住</span><br><span class="line">    IsCatch = false,</span><br><span class="line">    ---@type UnityEngine.Collider2D 小人Collider</span><br><span class="line">    RoleCollider = nil,</span><br><span class="line">    RoleObj = nil,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(view)</span><br><span class="line">    local obj = Clone(m)</span><br><span class="line">    obj:Init(view)</span><br><span class="line">    return obj</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(view)</span><br><span class="line">    self.View = view</span><br><span class="line">    LuaCodeInterface.BindOutlet(self.View, self)</span><br><span class="line">    self.OnShowSpineSuccessDelegate = function(sender, args) self:OnShowSpineSuccess(sender, args) end</span><br><span class="line"></span><br><span class="line">    self.RoleCollider = self.View:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line"></span><br><span class="line">    self:AddListener()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:AddListener()</span><br><span class="line">    GameEntry.LuaEvent:Subscribe(UnityGameFramework.Runtime.ShowEntitySuccessEventArgs.EventId, self.OnShowSpineSuccessDelegate)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:RemoveListener()</span><br><span class="line">    GameEntry.LuaEvent:Unsubscribe(UnityGameFramework.Runtime.ShowEntitySuccessEventArgs.EventId, self.OnShowSpineSuccessDelegate)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---界面轮询。</span><br><span class="line">---@param elapseSeconds number</span><br><span class="line">---@param realElapseSeconds number</span><br><span class="line">---@return void</span><br><span class="line">function m:OnUpdate(elapseSeconds, realElapseSeconds)</span><br><span class="line">    if not self.IsCreateRole then</span><br><span class="line">        return</span><br><span class="line">    end</span><br><span class="line">    if self.RoleData == nil then</span><br><span class="line">        return</span><br><span class="line">    end</span><br><span class="line">    if self.IsCatch then</span><br><span class="line">        return</span><br><span class="line">    end</span><br><span class="line">    if not self.IsMoving then</span><br><span class="line">        if PlayerModule.GetServerTime() &gt; self.NextMovieTimer then</span><br><span class="line">            self:StartMove()</span><br><span class="line">        end</span><br><span class="line">        return</span><br><span class="line">    end</span><br><span class="line">    local direction = self.NextPos - self.View.transform.localPosition</span><br><span class="line">    if direction.magnitude &gt; self.RoleData.roleRareSpeed then</span><br><span class="line">        self.View.transform:Translate(direction.normalized * self.RoleData.roleRareSpeed * UnityEngine.Time.deltaTime)</span><br><span class="line">        self:ChangeRoleOrderZ()</span><br><span class="line">    else</span><br><span class="line">        self:StopMove()</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:ChangeOrder()</span><br><span class="line">    if self.RoleObj then</span><br><span class="line">        local canvas = self.View:GetComponentInParent(typeof(UnityEngine.Canvas))</span><br><span class="line">        setGameObjectLayers(self.RoleObj.transform, &quot;UI&quot;)</span><br><span class="line">        local renderers = self.RoleObj:GetComponentsInChildren(typeof(UnityEngine.Renderer))</span><br><span class="line">        for i = 0, renderers.Length - 1 do</span><br><span class="line">            renderers[i].sortingLayerID = LuaCodeInterface.SortingLayerNameToID(&quot;Default&quot;)</span><br><span class="line">            renderers[i].sortingOrder = canvas.sortingOrder + 1</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnShowSpineSuccess(sender, args)</span><br><span class="line">    if self.EntityId == args.Entity.Id then</span><br><span class="line">        self.RoleObj = args.Entity.gameObject</span><br><span class="line">        self.Animation = args.Entity.gameObject:GetComponentInChildren(typeof(Spine.Unity.SkeletonAnimation))</span><br><span class="line">        self.Animation.state:SetAnimation(0,&quot;idle&quot;, true)</span><br><span class="line">        self:StartMove()</span><br><span class="line">        self.IsCreateRole = true</span><br><span class="line">        self:ChangeOrder()</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---获取一个随机位置 坐标Z控制小人显示层级</span><br><span class="line">function m:GetRandomPos()</span><br><span class="line">    local rx = math.random(-self.View.transform.parent.rect.w/2,self.View.transform.parent.rect.w/2)</span><br><span class="line">    local ry = math.random(-self.View.transform.parent.rect.h/2,self.View.transform.parent.rect.h/2)</span><br><span class="line">    return Vector3.New(rx,ry,0)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---开始移动</span><br><span class="line">function m:StartMove()</span><br><span class="line">    self.IsMoving = true</span><br><span class="line">    self.NextPos = self:GetRandomPos()</span><br><span class="line">    if self.Animation then</span><br><span class="line">        self.Animation.state:SetEmptyAnimation(0, 0)</span><br><span class="line">        self.Animation.state:SetAnimation(0, &quot;walk&quot;, true)</span><br><span class="line">    end</span><br><span class="line">    self:RefreshWalkFaceTo()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---移动到目标位置停止移动</span><br><span class="line">function m:StopMove()</span><br><span class="line">    self.IsMoving = false</span><br><span class="line">    self.View.transform.localPosition = self.NextPos</span><br><span class="line">    self.NextMovieTimer = math.random(0,4) + PlayerModule.GetServerTime()</span><br><span class="line">    if self.Animation then</span><br><span class="line">        self.Animation.state:SetAnimation(0,&quot;idle&quot;, true)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---播放抓住状态</span><br><span class="line">function m:CatchState()</span><br><span class="line">    self.IsMoving = false</span><br><span class="line">    self.IsCatch = true</span><br><span class="line">    if self.Animation then</span><br><span class="line">        self.Animation.AnimationName = nil</span><br><span class="line">        self.Animation.state:SetEmptyAnimation(0, 0)</span><br><span class="line">        self.Animation.state:SetAnimation(0,&quot;drag&quot;, true)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---刷新移动朝向</span><br><span class="line">function m:RefreshWalkFaceTo()</span><br><span class="line">    local checkRet = self.NextPos.x - self.View.transform.localPosition.x</span><br><span class="line">    local localScale = self.View.transform.localScale</span><br><span class="line">    if checkRet &gt; 0 then</span><br><span class="line">        localScale.x = -math.abs(localScale.x)</span><br><span class="line">    else</span><br><span class="line">        localScale.x = math.abs(localScale.x)</span><br><span class="line">    end</span><br><span class="line">    self.View.transform.localScale = localScale</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@param roleData AmusementParkDollMachineRoleData</span><br><span class="line">function m:SetData(roleData)</span><br><span class="line">    self.RoleData = roleData</span><br><span class="line">    self.IsCreateRole = false</span><br><span class="line">    self.IsCatch = false</span><br><span class="line">    for i = 1, 4 do</span><br><span class="line">        self[&quot;Quality&quot;..i]:SetActive(self.RoleData.roleRare == i)</span><br><span class="line">    end</span><br><span class="line">    self.View.name = self.RoleData.cid</span><br><span class="line">    local pos = self:GetRandomPos()</span><br><span class="line">    self.View.transform.localPosition = pos</span><br><span class="line">    self:ChangeRoleOrderZ()</span><br><span class="line">    self.NextPos = self:GetRandomPos()</span><br><span class="line">    self:ShowSpine()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---改变小人移动Z值(移动是层级关系)</span><br><span class="line">function m:ChangeRoleOrderZ()</span><br><span class="line">    local pos =  self.View.transform.localPosition</span><br><span class="line">    ---设置小人移动的Z值</span><br><span class="line">    self.OrderZ.transform.localPosition = Vector3.New(0,0,(pos.y + 150)/100)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:ShowSpine()</span><br><span class="line">    self:HideEntity()</span><br><span class="line">    self.EntityId = GameEntry.Entity:GenerateEntityID()</span><br><span class="line">    GameEntry.Entity:ShowUIElement(self.EntityId, self.RoleData:GetCfgData().PlayerSpine, 0, self.SpineRoot.transform, Vector3.zero)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:HideEntity()</span><br><span class="line">    if self.EntityId ~= 0 then</span><br><span class="line">        GameEntry.Entity:HideEntity(self.EntityId)</span><br><span class="line">        self.EntityId = 0</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Dispose()</span><br><span class="line">    AssetUtil.UnloadAsset(self)</span><br><span class="line">    self:RemoveListener()</span><br><span class="line">    self:HideEntity()</span><br><span class="line"></span><br><span class="line">    LuaCodeInterface.ClearOutlet(self.View, self)</span><br><span class="line">    UnityEngine.Object.Destroy(self.View)</span><br><span class="line">    self.View = nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
 </code></pre>
-<h2 id="创建拼图游戏数据结构"><a href="#创建拼图游戏数据结构" class="headerlink" title="- 创建拼图游戏数据结构"></a>- 创建拼图游戏数据结构</h2><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line">---@class ROPuzzleGameData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type CfgRestaurantOperationPuzzleControlData</span><br><span class="line">    cfgPuzzleGameControlData = nil,</span><br><span class="line">    ---@type number 当前积分</span><br><span class="line">    score = 0,</span><br><span class="line">    ---@type ROPuzzleMapTileData[]</span><br><span class="line">    tileMaps = &#123;&#125;,</span><br><span class="line">    ---@type number 最大行数</span><br><span class="line">    maxLine = 10,</span><br><span class="line">    ---@type number 最大列数</span><br><span class="line">    maxColumn = 10,</span><br><span class="line">    ---@type number 单次生成的方块数量(上限为4)</span><br><span class="line">    randomBlock = &#123;&#125;,</span><br><span class="line">    ---@type boolean 游戏是否已经开始（点了开始按钮视为游戏开始）</span><br><span class="line">    isGameStart = false,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">local ROPuzzleMapTileData = require(&quot;IQIGame.Module.CommonActivity.RestaurantOperation.ROPuzzleGame.ROPuzzleMapTileData&quot;)</span><br><span class="line"></span><br><span class="line">function m.New(cfgData)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(cfgData)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(cfgData)</span><br><span class="line">    self.score = 0</span><br><span class="line">    self.cfgPuzzleGameControlData = cfgData</span><br><span class="line">    self.tileMaps = self:CreateTiles()</span><br><span class="line">    self.isGameStart = true</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---开始新游戏，创建拼图地图</span><br><span class="line">function m:CreateTiles()</span><br><span class="line">    local tab = &#123;&#125;</span><br><span class="line">    local index = 0</span><br><span class="line">    for line = 1, self.maxLine do</span><br><span class="line">        for column = 1, self.maxColumn do</span><br><span class="line">            index = index + 1</span><br><span class="line">            local tileData = ROPuzzleMapTileData.New(index,line,column,0)</span><br><span class="line">            tab[index] = tileData</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    return tab</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---随机生成四个方块</span><br><span class="line">function m:RefreshRandomBlock()</span><br><span class="line">    self.randomBlock = &#123;&#125;</span><br><span class="line">    local blockGroup = table.clone(self.cfgPuzzleGameControlData.BlockGroup)</span><br><span class="line">    ---洗牌操作</span><br><span class="line">    for i = #blockGroup, 2, -1 do</span><br><span class="line">        local random_index = math.random(i)</span><br><span class="line">        blockGroup[i], blockGroup[random_index] = blockGroup[random_index],blockGroup[i]</span><br><span class="line">    end</span><br><span class="line">    ---根据配置数据取方块</span><br><span class="line">    for i = 1, self.cfgPuzzleGameControlData.BlockNum do</span><br><span class="line">        local id = blockGroup[i]</span><br><span class="line">        table.insert(self.randomBlock,id)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---消除满行满列，并返回消除的行列</span><br><span class="line">---@return number, number[],number[] 消除的总行数，同时消除的行和列</span><br><span class="line">function m:Eliminate()</span><br><span class="line">    local lines = &#123;&#125;</span><br><span class="line">    local columns = &#123;&#125;</span><br><span class="line">    ---行检测</span><br><span class="line">    for i = 1, self.maxLine do</span><br><span class="line">        local isFull = true</span><br><span class="line">        for j = 1, self.maxColumn do</span><br><span class="line">            local pos = (i-1) * self.maxLine + j</span><br><span class="line">            if self.tileMaps[pos].blockId == 0 then</span><br><span class="line">                isFull = false</span><br><span class="line">                break</span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">        if isFull then</span><br><span class="line">            table.insert(lines,i)</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    ---列检测</span><br><span class="line">    for j = 1, self.maxColumn do</span><br><span class="line">        local isFull = true</span><br><span class="line">        for i = 1, self.maxLine do</span><br><span class="line">            local pos = (i-1) * self.maxLine + j</span><br><span class="line">            if self.tileMaps[pos].blockId == 0 then</span><br><span class="line">                isFull = false</span><br><span class="line">                break</span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">        if isFull then</span><br><span class="line">            table.insert(columns,j)</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    local totalNum = #lines + #columns</span><br><span class="line">    return totalNum,lines,columns</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---增加积分</span><br><span class="line">---@param score number</span><br><span class="line">function m:AddScore(score)</span><br><span class="line">    self.score = self.score + score</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---检测方块还有没有空地能放下</span><br><span class="line">---@param blockCell PuzzleGameBlockCell</span><br><span class="line">---@return boolean</span><br><span class="line">function m:CheckBlockCellCanPutDown(blockCell)</span><br><span class="line">    local posTab = blockCell.blockData</span><br><span class="line">    for i, tileData in pairs(self.tileMaps) do</span><br><span class="line">        ---找到了一个空格子</span><br><span class="line">        local canPutDown = false</span><br><span class="line">        if tileData.blockId == 0 then</span><br><span class="line">            ---所有检测点都满足返回true</span><br><span class="line">            for j, pos in pairs(posTab) do</span><br><span class="line"></span><br><span class="line">            end</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    return false</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>通过调用RefreshRandomBlock()方法，每次随机生成不重复的四个方块</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
+              <a class="btn" href="/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -400,7 +699,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -414,7 +713,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity连连看小游戏摘要</a>
+            <a href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity象素鸟小游戏摘要</a>
         </h2>
 
         <div class="post-meta">
@@ -424,14 +723,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-01-31 16:48:39" itemprop="dateCreated datePublished" datetime="2024-01-31T16:48:39+08:00">2024-01-31</time>
+              <time title="创建时间：2024-08-14 19:38:16" itemprop="dateCreated datePublished" datetime="2024-08-14T19:38:16+08:00">2024-08-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-02-20 21:03:23" itemprop="dateModified" datetime="2024-02-20T21:03:23+08:00">2024-02-20</time>
+                <time title="修改时间：2026-01-10 20:59:18" itemprop="dateModified" datetime="2026-01-10T20:59:18+08:00">2026-01-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -452,7 +751,7 @@
             </span>
 
           
-            <span id="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity连连看小游戏摘要" title="阅读次数">
+            <span id="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity象素鸟小游戏摘要" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -467,8 +766,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    <a title="valine" href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -483,14 +782,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>用Lua实现Unity连连看游戏要点记录：</p>
-<p>游戏功能描述，通过游戏关卡配置从水果类型中，生成指定类型水果及其数量，位置随机。连线要求最多支持两个拐点，三段线相连通才能消除。</p>
-<h2 id="创建游戏关卡数据结构"><a href="#创建游戏关卡数据结构" class="headerlink" title="- 创建游戏关卡数据结构"></a>- 创建游戏关卡数据结构</h2><p>创建关卡水果数据结构 ROFruitData</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">---水果连连看水果数据</span><br><span class="line">---@class ROFruitData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type number 配置ID</span><br><span class="line">    cid = nil,</span><br><span class="line">    ---@type boolean 是否消除</span><br><span class="line">    isClean = false,</span><br><span class="line">    ---@type number 所在位置</span><br><span class="line">    pos = 0,</span><br><span class="line">    ---@type number 行</span><br><span class="line">    x = 0,</span><br><span class="line">    ---@type number 列</span><br><span class="line">    y = 0,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(cid,clean)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(cid,clean)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(cid,clean)</span><br><span class="line">    self.cid = cid</span><br><span class="line">    self.isClean = clean</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@param pos number</span><br><span class="line">function m:SetPos(pos)</span><br><span class="line">    self.pos = pos</span><br><span class="line">    local x,y = self:GetX_Y()</span><br><span class="line">    self.x = x</span><br><span class="line">    self.y = y</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@return CfgRestaurantOperationFruitListData</span><br><span class="line">function m:GetCfgData()</span><br><span class="line">    if self.cid &gt; 0 then</span><br><span class="line">        return CfgRestaurantOperationFruitListTable[self.cid]</span><br><span class="line">    end</span><br><span class="line">    return nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---通过Pos获取格子位置 (每行10个格子)</span><br><span class="line">---@return number,number  行，列</span><br><span class="line">function m:GetX_Y()</span><br><span class="line">    local x = math.ceil(self.pos / 10)</span><br><span class="line">    local y = self.pos - 10 * (x-1)</span><br><span class="line">    return x,y</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
+          <p>Lua实现Unity象素鸟小游戏要点记录：</p>
+<h1 id="游戏玩法简介"><a href="#游戏玩法简介" class="headerlink" title="游戏玩法简介"></a>游戏玩法简介</h1><p>不用物理引擎实现像素鸟在障碍物之间飞行，通过配表配置小鸟向下的加速度和点击一次屏幕给小鸟赋值一次初始速度和向上加速度来模拟小鸟飞行。障碍物根据配置难度在固定距离随机生成。</p>
+<h1 id="功能实现简述"><a href="#功能实现简述" class="headerlink" title="功能实现简述"></a>功能实现简述</h1><h2 id="飞行障碍实现"><a href="#飞行障碍实现" class="headerlink" title="飞行障碍实现"></a>飞行障碍实现</h2><p>创建AmusementParkBirdObstacleCell障碍控件。游戏运行时，根据固定的配置距离，生成不同难度的障碍实例。障碍物分为上，下两部份，中间有可穿行的空隙。<br>	<br><strong>AmusementParkBirdObstacleCell</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">---@class AmusementParkBirdObstacleCell</span><br><span class="line">local m = &#123;</span><br><span class="line">    View = nil,</span><br><span class="line">    ---@type number 移动速度</span><br><span class="line">    Speed = 0,</span><br><span class="line">    ---@type UnityEngine.Collider2D</span><br><span class="line">    TopCollider2D = nil,</span><br><span class="line">    ---@type UnityEngine.Collider2D</span><br><span class="line">    BottomCollider2D = nil,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(view)</span><br><span class="line">    local obj = Clone(m)</span><br><span class="line">    obj:Init(view)</span><br><span class="line">    return obj</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(view)</span><br><span class="line">    self.View = view</span><br><span class="line">    LuaCodeInterface.BindOutlet(self.View, self)</span><br><span class="line"></span><br><span class="line">    self.TopCollider2D = self.View.transform:Find(&quot;Top&quot;).gameObject:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line">    self.BottomCollider2D = self.View.transform:Find(&quot;Bottom&quot;).gameObject:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line"></span><br><span class="line">    self:AddListener()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:AddListener()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:RemoveListener()</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---界面轮询。</span><br><span class="line">---@param elapseSeconds number</span><br><span class="line">---@param realElapseSeconds number</span><br><span class="line">---@return void</span><br><span class="line">function m:OnUpdate(elapseSeconds, realElapseSeconds)</span><br><span class="line">    self.View.transform:Translate(Vector3.New(self.Speed * UnityEngine.Time.deltaTime * -1, 0, 0))</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@param speed number</span><br><span class="line">function m:SetData(speed)</span><br><span class="line">    self.Speed = speed</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Dispose()</span><br><span class="line">    AssetUtil.UnloadAsset(self)</span><br><span class="line">    self:RemoveListener()</span><br><span class="line"></span><br><span class="line">    LuaCodeInterface.ClearOutlet(self.View, self)</span><br><span class="line">    UnityEngine.Object.Destroy(self.View)</span><br><span class="line">    self.View = nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
 </code></pre>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
+              <a class="btn" href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -514,7 +813,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -528,7 +827,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/" class="post-title-link" itemprop="url">钓鱼日记[23.12.16]</a>
+            <a href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity一笔画小游戏摘要</a>
         </h2>
 
         <div class="post-meta">
@@ -538,228 +837,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-12-16 20:21:05" itemprop="dateCreated datePublished" datetime="2023-12-16T20:21:05+08:00">2023-12-16</time>
+              <time title="创建时间：2024-08-14 19:12:39" itemprop="dateCreated datePublished" datetime="2024-08-14T19:12:39+08:00">2024-08-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-04 23:02:40" itemprop="dateModified" datetime="2024-01-04T23:02:40+08:00">2024-01-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.12.16]" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>12月16日，星期六</p>
-<p>今天是大降温的头一天，寒潮来袭。气温明显比昨天低了好几度，最高温度仅有7度。办完上午的事情后，我决定去河边钓鱼，看看这个寒冷的天气对鱼情的影响。</p>
-<p><img data-src="https://iili.io/JAcANwl.md.jpg"></p>
-<p><img data-src="https://iili.io/JAcAcjp.md.jpg"></p>
-<p>来到西来河边，我发现河水已经干涸了。回忆起夏天的时候，河里马口特别多，当时我玩路亚微物，钓上了好多美丽的马口。但是现在水太浅，温度又低，估计没有鱼儿了。况且，上周河边野钓，那么好的环境，水比较深，都没钓到鱼，这让我有些犹豫。于是，我决定改变原计划，去水库钓小红尾。 </p>
-<p><img data-src="https://iili.io/JAcAX8G.md.jpg"></p>
-<p>到了水库已经过了中午12点。虽然温度很低，但是水温并没有那么冷，感觉还可以。我打开包装袋，准备使用新买的虾拉饵料作钓。钓具方面，我选择了15尺的枯法师，配以小钩和细线。寒风迎面吹来，非常寒冷，水面波浪也相对较大。然而，令我欣喜的是，鱼儿们的咬口非常好。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/" class="post-title-link" itemprop="url">钓鱼日记[23.12.10]</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-10 21:01:05" itemprop="dateCreated datePublished" datetime="2023-12-10T21:01:05+08:00">2023-12-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-04 23:02:40" itemprop="dateModified" datetime="2024-01-04T23:02:40+08:00">2024-01-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.12.10]" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>12月10日，星期天</p>
-<p>今天是一个悠闲的周末，在寿安镇参加完一场热闹的酒席后，午后与表弟满怀期待地踏上了一段探秘之旅，我们的目标是一直传说中的南河旧沙场，那里据说是个钓鱼的好地方。从网络上朋友们晒出的满载而归的照片就可以看出，这里的鱼种颇为丰富。因为距离比较远，一直没有机会前往，幸运的是今天结束酒席我们便在附近，于是决定去实地探探。</p>
-<p><img data-src="https://iili.io/JuqGTBa.md.jpg"></p>
-<p>第一次踏上这片朴实的乡间，对于指向南河边的路途，我们了解甚少，我与表弟开车沿着曲折蜿蜒的小路前行，朝着心中模糊的目标寻找。沿路的风景如同幅幅静谧的田园画卷，然而美丽背后却隐藏着迷宫般的复杂，好几次我们信心满满地沿一条道路驶入，却不料终结于荒郊的尽头，只得无奈掉头，重新寻找踪迹。我们一次又一次地尝试，转进又转出, 终于在曲折迂回后，一条幽深的小径映入眼帘。摇晃的车辆随着小径的痕迹颠簸前行，终于我们抵达了心中期待已久的钓鱼之地。</p>
-<p><img data-src="https://iili.io/JuqGCmP.md.jpg"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现U3D弹幕飞行游戏摘要</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-06 11:04:38" itemprop="dateCreated datePublished" datetime="2023-12-06T11:04:38+08:00">2023-12-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-04 23:02:40" itemprop="dateModified" datetime="2024-01-04T23:02:40+08:00">2024-01-04</time>
+                <time title="修改时间：2026-01-10 20:59:18" itemprop="dateModified" datetime="2026-01-10T20:59:18+08:00">2026-01-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -780,7 +865,7 @@
             </span>
 
           
-            <span id="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现U3D弹幕飞行游戏摘要" title="阅读次数">
+            <span id="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Lua实现Unity一笔画小游戏摘要" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -795,8 +880,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    <a title="valine" href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -811,14 +896,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>用Lua实现Unity弹幕飞行游戏要点记录：</p>
-<h2 id="对象池"><a href="#对象池" class="headerlink" title="- 对象池"></a>- 对象池</h2><p>创建游戏中可循环利用的游戏对象池</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">---获取一个可用子弹</span><br><span class="line">---@return FlightGameBullet</span><br><span class="line">function m:GetBullet()</span><br><span class="line">    for i, v in pairs(self.flightGameBulletPool) do</span><br><span class="line">        if not v.active then</span><br><span class="line">            return v</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    ---如果没有可用子弹，动态创建一个新的子弹</span><br><span class="line">    local bulletCell = FlightGameBullet.New(UnityEngine.Object.Instantiate(self.BulletModel))</span><br><span class="line">    self.flightGameBulletPool[bulletCell.View:GetInstanceID()] = bulletCell</span><br><span class="line">    return bulletCell</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---回收子弹</span><br><span class="line">---@param bullet FlightGameBullet</span><br><span class="line">function m:RecycleBullet(bullet)</span><br><span class="line">    bullet.View.transform:SetParent(self.RecoveryNode.transform, false)</span><br><span class="line">    bullet:Reset()</span><br><span class="line">    self.flightGameBulletPool[bullet.View:GetInstanceID()] = bullet</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---获取一个未被激活的敌人</span><br><span class="line">---@return FlightGameEnemy</span><br><span class="line">function m:GetEnemy()</span><br><span class="line">    for i, v in pairs(self.flightGameEnemyPool) do</span><br><span class="line">        if not v.active and v:IsPlayDamageEnd() then</span><br><span class="line">            return v</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    ---如果没有未被激活的敌人，动态创建一个新的敌人</span><br><span class="line">    local enemy = FlightGameEnemy.New(UnityEngine.Object.Instantiate(self.EnemyModel),self.rootScene)</span><br><span class="line">    self.flightGameEnemyPool[enemy.View:GetInstanceID()] = enemy</span><br><span class="line">    return enemy</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---回收敌人设置成未激活状态</span><br><span class="line">---@param enemy FlightGameEnemy</span><br><span class="line">function m:RecycleEnemy(enemy)</span><br><span class="line">    enemy.View.transform:SetParent(self.RecoveryNode.transform, false)</span><br><span class="line">    enemy:Reset()</span><br><span class="line">    self.flightGameEnemyPool[enemy.View:GetInstanceID()] = enemy</span><br><span class="line">end</span><br><span class="line">--endregion Object Management</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          <p>用Lua实现Unity一笔画小游戏要点记录：</p>
+<h1 id="游戏玩法简介"><a href="#游戏玩法简介" class="headerlink" title="游戏玩法简介"></a>游戏玩法简介</h1><p>选择不同难度关卡开始游戏，每一关有多个方块小格，可以从任意一个方块格作为起点开始连接到下一个方块格，下一个方块格必须与起始格上下左右相邻。同一个方块格不能重复连接，成功连接后，目标方块格又成为新的起始方块格。以此类推直至将所有方块格连完。</p>
+<h1 id="功能实现简述"><a href="#功能实现简述" class="headerlink" title="功能实现简述"></a>功能实现简述</h1><h2 id="关卡难度"><a href="#关卡难度" class="headerlink" title="关卡难度"></a>关卡难度</h2><p>关卡难度选择，不同关卡制作不同prefab预设。prefab预设摆放所有要连接的格子位置信息节点。选择关卡开始游戏时，在每一个位置信息节点下生成一个游戏连接格实例对象。创建方格数据结构 AmusementParkOneConnectBlockData 和 视图显示控件AmusementParkOneConnectBlockCell</p>
+<p><strong>AmusementParkOneConnectBlockData</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">---@class AmusementParkOneConnectBlockData</span><br><span class="line">local m = &#123;</span><br><span class="line">    ---@type number</span><br><span class="line">    Index = 0,</span><br><span class="line">    ---@type number</span><br><span class="line">    X = 0,</span><br><span class="line">    ---@type number</span><br><span class="line">    Y = 0,</span><br><span class="line">    ---@type number 0 未连接,1 已连接</span><br><span class="line">    State = 0,</span><br><span class="line">    ---@type boolean 最新连通</span><br><span class="line">    IsFirst = false,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(index,x,y)</span><br><span class="line">    local o = Clone(m)</span><br><span class="line">    o:Init(index,x,y)</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(index,x,y)</span><br><span class="line">    self.Index = index</span><br><span class="line">    self.X = tonumber(x)</span><br><span class="line">    self.Y = tonumber(y)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m	</span><br></pre></td></tr></table></figure>
 </code></pre>
-<h2 id="碰撞检测"><a href="#碰撞检测" class="headerlink" title="- 碰撞检测"></a>- 碰撞检测</h2><p>实现场景中游戏对象的碰撞检测</p>
+<p><strong>AmusementParkOneConnectBlockCell</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">---@class AmusementParkOneConnectBlockCell</span><br><span class="line">local m = &#123;</span><br><span class="line">    View = nil,</span><br><span class="line">    ---@type AmusementParkOneConnectBlockData</span><br><span class="line">    BlockData = nil,</span><br><span class="line">    ---@type Vector3</span><br><span class="line">    StartPos = nil,</span><br><span class="line">    ---@type function</span><br><span class="line">    OnBeginDragCallBack = nil,</span><br><span class="line">    ---@type function</span><br><span class="line">    OnDragCallBack = nil,</span><br><span class="line">    ---@type UnityEngine.Collider2D</span><br><span class="line">    BlockCollider = nil,</span><br><span class="line">    ---@type UnityEngine.Collider2D</span><br><span class="line">    DrgCollider = nil,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(view)</span><br><span class="line">    local obj = Clone(m)</span><br><span class="line">    obj:Init(view)</span><br><span class="line">    return obj</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(view)</span><br><span class="line">    self.View = view</span><br><span class="line">    LuaCodeInterface.BindOutlet(self.View, self)</span><br><span class="line"></span><br><span class="line">    self.DelegateBtnSelf = function() self:OnClickBtnSelf() end</span><br><span class="line"></span><br><span class="line">    self.BlockCollider = self.View:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line">    self.DrgCollider = self.ImgDrag:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line"></span><br><span class="line">    self.StartPos = self.ImgDrag.transform.position</span><br><span class="line">    self.ImgDrag:GetComponent(&quot;UIDrag&quot;).onBeginDrag = function(eventData) self:OnBeginDrag(eventData) end</span><br><span class="line">    self.ImgDrag:GetComponent(&quot;UIDrag&quot;).onDrag = function(pointerEventData) self:OnDrag(pointerEventData) end</span><br><span class="line">    self.ImgDrag:GetComponent(&quot;UIDrag&quot;).onReachTargetSuccess = function(eventData) self:OnDragSuccess(eventData) end</span><br><span class="line">    self.ImgDrag:GetComponent(&quot;UIDrag&quot;).onReachTargetFailure = function(eventData) self:OnFailure(eventData) end</span><br><span class="line"></span><br><span class="line">    self:AddListener()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:AddListener()</span><br><span class="line">    self.View:GetComponent(&quot;Button&quot;).onClick:AddListener(self.DelegateBtnSelf)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:RemoveListener()</span><br><span class="line">    self.View:GetComponent(&quot;Button&quot;).onClick:RemoveListener(self.DelegateBtnSelf)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnClickBtnSelf()</span><br><span class="line">    if self.OnBeginDragCallBack then</span><br><span class="line">        self.OnBeginDragCallBack(self)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnBeginDrag()</span><br><span class="line">    if self.OnBeginDragCallBack then</span><br><span class="line">        self.OnBeginDragCallBack(self)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnDrag(eventData)</span><br><span class="line">    if self.OnDragCallBack then</span><br><span class="line">        self.OnDragCallBack(self)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnDragSuccess(eventData)</span><br><span class="line">    self.ImgDrag.transform.position = self.StartPos</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnFailure(eventData)</span><br><span class="line">    self.ImgDrag.transform.position = self.StartPos</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:UpdateView()</span><br><span class="line">    self.ImgDefault:SetActive(self.BlockData.State == 0)</span><br><span class="line">    self.ImgCheck:SetActive(self.BlockData.State == 1)</span><br><span class="line">    self.ImgTag:SetActive(self.BlockData.IsFirst)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@param blockData AmusementParkOneConnectBlockData</span><br><span class="line">function m:SetData(blockData)</span><br><span class="line">    self.BlockData = blockData</span><br><span class="line">    self.View.name = self.BlockData.Index</span><br><span class="line">    self:UpdateView()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Dispose()</span><br><span class="line">    AssetUtil.UnloadAsset(self)</span><br><span class="line">    self:RemoveListener()</span><br><span class="line">    self.OnBeginDragCallBack = nil</span><br><span class="line">    self.OnDragCallBack = nil</span><br><span class="line"></span><br><span class="line">    LuaCodeInterface.ClearOutlet(self.View, self)</span><br><span class="line">    UnityEngine.Object.Destroy(self.View)</span><br><span class="line">    self.View = nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</code></pre>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
+              <a class="btn" href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -841,7 +930,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -909,20 +998,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-count">92</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -935,7 +1024,7 @@
         <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.bytefisher.top/" title="Weibo → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
       </span>
       <span class="links-of-author-item">
         <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
@@ -945,7 +1034,7 @@
 
 
       </div>
-	  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <iframe id="music-player" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
 	  <div class="wechat_OA">
 		<span>欢迎关注我的公众号</span>
 		<!-- 这里添加你的二维码图片 -->
@@ -981,6 +1070,26 @@
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
         
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
@@ -996,6 +1105,7 @@
   
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
@@ -1073,8 +1183,37 @@ window.addEventListener('pjax:success', () => {
 
 
   
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -1123,7 +1262,330 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
   }, window.Valine);
 });
 </script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
 
+<style>
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  scrollbar-gutter: stable;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.modal::-webkit-scrollbar {
+  display: none !important;
+}
+
+.modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.modal-content {
+  position: relative;
+  width: min(71%, 340px);
+  max-width: calc((100vh - 100px) * 9 / 17.5);
+  height: auto;
+  aspect-ratio: 9 / 17.5;
+  max-height: calc(100vh - 100px);
+  margin: 0 auto;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: min(81%, 320px);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: min(94%, 300px);
+    max-width: calc((100vh - 80px) * 9 / 17.5);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+    max-height: calc(100vh - 80px);
+  }
+}
+
+.modal-content iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  border: none;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  left: auto;
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 10000;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+}
+
+.close-btn:hover {
+  color: #e74c3c;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  background: rgba(0,0,0,0.1);
+  border-radius: 50%;
+  line-height: 50px;
+  user-select: none;
+}
+
+.nav-btn:hover {
+  background: rgba(0,0,0,0.2);
+}
+
+.prev-btn {
+  left: 0;
+}
+
+.next-btn {
+  right: 15px;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: calc(100% - 60px);
+    max-width: calc((100vh - 100px) * 9 / 17.5);
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    line-height: 40px;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var musicIframe = null;
+  var musicDisplayStyle = '';
+  var isMusicPaused = false;
+  var videoIds = [];
+  var currentIndex = 0;
+  
+  function findMusicIframe() {
+    var iframes = document.getElementsByTagName('iframe');
+    for (var i = 0; i < iframes.length; i++) {
+      var src = iframes[i].src || '';
+      if (src.indexOf('music.163.com') > -1 || src.indexOf('outchain/player') > -1) {
+        return iframes[i];
+      }
+    }
+    console.log('[Douyin] Music iframe not found in', iframes.length, 'iframes');
+    return null;
+  }
+  
+  function pauseMusic() {
+    console.log('[Douyin] Trying to pause music...');
+    musicIframe = findMusicIframe();
+    
+    if (musicIframe) {
+      console.log('[Douyin] Music iframe found');
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=1') > -1) {
+        musicIframe.src = src.replace('auto=1', 'auto=0');
+        console.log('[Douyin] Changed auto=1 to auto=0');
+      }
+      isMusicPaused = true;
+    } else {
+      console.log('[Douyin] Music iframe NOT found!');
+    }
+  }
+  
+  function resumeMusic() {
+    console.log('[Douyin] Trying to resume music...');
+    
+    if (musicIframe && isMusicPaused) {
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=0') > -1) {
+        musicIframe.src = src.replace('auto=0', 'auto=1');
+        console.log('[Douyin] Changed auto=0 to auto=1');
+      }
+      isMusicPaused = false;
+    }
+  }
+  
+  function init() {
+    console.log('[Douyin] Initializing...');
+    var cards = document.querySelectorAll('.video-card');
+    console.log('[Douyin] Found', cards.length, 'video cards');
+    
+    videoIds = [];
+    for (var j = 0; j < cards.length; j++) {
+      var videoId = cards[j].getAttribute('data-id');
+      if (videoId) {
+        videoIds.push(videoId);
+      }
+      cards[j].addEventListener('click', openModal);
+    }
+    
+    var closeBtn = document.querySelector('.close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+    
+    var prevBtn = document.querySelector('.prev-btn');
+    var nextBtn = document.querySelector('.next-btn');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(-1);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(1);
+      });
+    }
+    
+    var modal = document.getElementById('douyin-modal');
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+    }
+  }
+  
+  function navigateVideo(direction) {
+    if (videoIds.length === 0) return;
+    
+    currentIndex += direction;
+    if (currentIndex < 0) {
+      currentIndex = videoIds.length - 1;
+    } else if (currentIndex >= videoIds.length) {
+      currentIndex = 0;
+    }
+    
+    var videoId = videoIds[currentIndex];
+    var player = document.getElementById('douyin-player');
+    if (player && videoId) {
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+    }
+  }
+  
+  function openModal(e) {
+    console.log('[Douyin] Opening modal...');
+    var card = e.currentTarget;
+    var videoId = card.getAttribute('data-id');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    currentIndex = videoIds.indexOf(videoId);
+    
+    if (player && modal && videoId) {
+      pauseMusic();
+      
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.marginRight = '0px';
+    }
+  }
+  
+  function closeModal() {
+    console.log('[Douyin] Closing modal...');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    if (player) {
+      player.src = '';
+    }
+    
+    if (modal) {
+      modal.classList.remove('active');
+    }
+    
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    
+    resumeMusic();
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
     </div>
 </body>
 </html>

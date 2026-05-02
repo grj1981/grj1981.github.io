@@ -12,11 +12,11 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
 <meta property="og:type" content="website">
@@ -103,6 +103,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -129,22 +130,27 @@
   </li>
         <li class="menu-item menu-item-aigames">
 
-    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>AI小游戏<span class="badge">1</span></a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">42</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">10</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">12</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">81</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">92</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">28</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -152,11 +158,38 @@
     <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -178,7 +211,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/08/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-08-06/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/11/26/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-26/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -192,7 +225,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/08/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-08-06/" class="post-title-link" itemprop="url">钓鱼日记[23.08.06]</a>
+            <a href="/2023/11/26/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-26/" class="post-title-link" itemprop="url">钓鱼日记[23.11.26]</a>
         </h2>
 
         <div class="post-meta">
@@ -202,7 +235,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-08-06 18:42:13" itemprop="dateCreated datePublished" datetime="2023-08-06T18:42:13+08:00">2023-08-06</time>
+              <time title="创建时间：2023-11-26 19:34:01" itemprop="dateCreated datePublished" datetime="2023-11-26T19:34:01+08:00">2023-11-26</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -222,7 +255,7 @@
             </span>
 
           
-            <span id="/2023/08/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-08-06/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.08.06]" title="阅读次数">
+            <span id="/2023/11/26/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-26/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.11.26]" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -237,8 +270,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/08/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-08-06/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/08/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-08-06/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/11/26/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-26/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/11/26/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-26/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -253,16 +286,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>周六：</p>
-<p>又到了周末，早早地和表弟约好周六一起去邛崃固驿河边的沙坑野钓。这个沙坑是过去用于采沙的地方，和河道相通，听说已经很多年没有采沙了。沙坑最深处可能达到了十多米。虽然水面不大，但每天都有很多钓友来这里钓鱼。为了尽早占领钓位，我们7点左右就出发了。对于我来说，这是第一次去这个地方，所以心里有些期待。</p>
-<p>通过固驿大桥后，我们沿着河边路一直往上游走。尽管才7点，沿河的钓友已经坐满了。整个河边区域都非常适合垂钓，水流很平缓，岸边的树木在阳光下显得特别美丽。河边还有一条钓友们踩出来的泥路，顺着河流蜿蜒向上，我觉得肯定有很多鱼躲藏在那里。虽然没能拍照，但下次一定要找个时间来这个河边探钓一下。</p>
-<p>大约走了2公里，我们抵达了今天的目的地——沙坑。从外面看，沙坑有个铁门，之前都是关着的，但最近开放了，可以直接开车去水边，非常方便。</p>
-<p>沙坑一边靠着山，靠山的那一边应该是最深的，不适合钓鱼，而且也比较危险。<br><img data-src="https://iili.io/JH6bGh7.md.jpg"></p>
-<p>靠近河边的一边，已经坐满了很多钓友，看起来应该比较容易钓到鱼。<br><img data-src="https://iili.io/JH6bMQ9.md.jpg"></p>
-<p>我们选了一个侧面入口处的钓位，感觉这个位置也不错，通过找底发现前面3米处是一个高坎，上面2米多深的水位，坎下将近有5米，我用13.5尺的狮子吼刚好钓到坎边，总体来说今天这个沙坑的鱼情并不好，周围钓友都说口比较少，我们也一样，可能要等好一会才会来一口，而且也经常钓不上来鱼，但是这个沙坑的鱼种确实很丰富。收竿的时候，我钓到了好几个品种的鱼，包括鲫鱼、鲤鱼、趴地虎、白条、黄尾鲴、土凤、三角锋、鳑皮、河虾和螃蟹。我的表弟甚至钓到了一条翘嘴。还有几条小黑鱼始终在我们钓位前面的水草下晃荡。我们钓上来的这些鱼个体都不大，大点的二，三两，但都是野生河鱼还是很巴适的，中途跑了四条鱼，我感觉要大一些，特别是最后跑的那条，起初又是挂底的感觉，抖动了两下鱼竿才开始游动，鱼没发力感觉不到大小，弯着鱼竿感觉到鱼在水下慢慢游动，持续几秒就脱钩了。唯一不好的地方是河边没有遮阳的地方，尽管打了伞，太阳还是很大，很热。也许这是今天鱼口不好的原因之一吧。</p>
+          <p>11月26日</p>
+<p>周日，今天阳光明媚，我决定下午去固驿砂坑钓鲫鱼。吃过午饭，驾车出发。在即将到达钓点的时候，遇到了一个经常去那钓鱼的钓友。他向我透露，前天有一个钓友不小心掉进砂坑的水里，结果不幸遇难了。这突如其来的消息让我感到非常吃惊，心情也变得沉重起来。面对这样的意外，我的内心也难以平静。于是我临时改变主意，决定不再前往砂坑，而是前往常去的三一水库垂钓。</p>
+<p><img data-src="https://iili.io/Jot5ONe.md.jpg"></p>
+<p>冬日的阳光难得，当阳光洒落在身上时，仿佛整个人都被温柔的光芒所包裹，带来一种温馨和安心的感觉。水库周围的游玩者很多，有的人携家人前来野外烧烤，也有不少钓鱼的爱好者在水库四周垂钓。</p>
+<p><img data-src="https://iili.io/Jot5Xl2.md.jpg"></p>
+<p>水面上，不知哪儿来的一群野鸭，它们成群结队地在水中嬉戏着，有的振翅飞翔，有的戏水追逐着彼此。它们那叽叽喳喳的叫声回荡在整个水库，充满了生机和活力。它们仿佛无忧无虑，没有任何包袱，就在这个美丽的冬日里，尽情享受着水中的快乐。这景象让人感到无比的自在和惬意，也给了我一些安抚，让我暂时忘却了刚刚得知的那个不幸的消息，让我懂得了生活中美好的一面，生命的宝贵以及它的脆弱。</p>
+<p><img data-src="https://iili.io/Jot5eDu.md.jpg"></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/08/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-08-06/#more" rel="contents">
+              <a class="btn" href="/2023/11/26/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-26/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -286,7 +319,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/08/02/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E6%80%81%E6%80%A7%E3%80%91/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/11/18/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-18/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -300,7 +333,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/08/02/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E6%80%81%E6%80%A7%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【多态性】</a>
+            <a href="/2023/11/18/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-18/" class="post-title-link" itemprop="url">钓鱼日记[23.11.18]</a>
         </h2>
 
         <div class="post-meta">
@@ -310,144 +343,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-08-02 14:52:07" itemprop="dateCreated datePublished" datetime="2023-08-02T14:52:07+08:00">2023-08-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-04 23:02:40" itemprop="dateModified" datetime="2024-01-04T23:02:40+08:00">2024-01-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/08/02/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E6%80%81%E6%80%A7%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【多态性】" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/08/02/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E6%80%81%E6%80%A7%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/08/02/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E6%80%81%E6%80%A7%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="C-多态性"><a href="#C-多态性" class="headerlink" title="- C# 多态性"></a>- C# 多态性</h2><p>多态是同一个行为具有多个不同表现形式或形态的能力。</p>
-<p>多态性意味着有多重形式。在面向对象编程范式中，多态性往往表现为”一个接口，多个功能”。</p>
-<p>多态性可以是静态的或动态的。在静态多态性中，函数的响应是在编译时发生的。在动态多态性中，函数的响应是在运行时发生的。</p>
-<p>在 C# 中，每个类型都是多态的，因为包括用户定义类型在内的所有类型都继承自 Object。</p>
-<p>多态就是同一个接口，使用不同的实例而执行不同操作，如图所示：</p>
-<p><img data-src="https://www.runoob.com/wp-content/uploads/2013/12/dt-java.png"></p>
-<p>现实中，比如我们按下 F1 键这个动作：</p>
-<ul>
-<li><p>如果当前在 Flash 界面下弹出的就是 AS 3 的帮助文档；</p>
-</li>
-<li><p>如果当前在 Word 下弹出的就是 Word 帮助；</p>
-</li>
-<li><p>在 Windows 下弹出的就是 Windows 帮助和支持。<br>同一个事件发生在不同的对象上会产生不同的结果。</p>
-</li>
-</ul>
-<h2 id="静态多态性"><a href="#静态多态性" class="headerlink" title="- 静态多态性"></a>- 静态多态性</h2><p>在编译时，函数和对象的连接机制被称为早期绑定，也被称为静态绑定。C# 提供了两种技术来实现静态多态性。分别为：</p>
-<ul>
-<li><p>函数重载</p>
-</li>
-<li><p>运算符重载</p>
-</li>
-<li></li>
-</ul>
-<p>运算符重载将在下一章节讨论，接下来我们将讨论函数重载。</p>
-<h2 id="函数重载"><a href="#函数重载" class="headerlink" title="- 函数重载"></a>- 函数重载</h2><p>您可以在同一个范围内对相同的函数名有多个定义。函数的定义必须彼此不同，可以是参数列表中的参数类型不同，也可以是参数个数不同。不能重载只有返回类型不同的函数声明。</p>
-<p>下面的实例演示了几个相同的函数 Add()，用于对不同个数参数进行相加处理：</p>
-<blockquote>
-<p><strong>实例</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace PolymorphismApplication</span><br><span class="line">&#123;</span><br><span class="line">    public class TestData  </span><br><span class="line">    &#123;  </span><br><span class="line">        public int Add(int a, int b, int c)  </span><br><span class="line">        &#123;  </span><br><span class="line">            return a + b + c;  </span><br><span class="line">        &#125;  </span><br><span class="line">        public int Add(int a, int b)  </span><br><span class="line">        &#123;  </span><br><span class="line">            return a + b;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    class Program  </span><br><span class="line">    &#123;  </span><br><span class="line">        static void Main(string[] args)  </span><br><span class="line">        &#123;  </span><br><span class="line">            TestData dataClass = new TestData();</span><br><span class="line">            int add1 = dataClass.Add(1, 2);  </span><br><span class="line">            int add2 = dataClass.Add(1, 2, 3);</span><br><span class="line"></span><br><span class="line">            Console.WriteLine(&quot;add1 :&quot; + add1);</span><br><span class="line">            Console.WriteLine(&quot;add2 :&quot; + add2);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>下面的实例演示了几个相同的函数 print()，用于打印不同的数据类型：</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/08/02/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E6%80%81%E6%80%A7%E3%80%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/07/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-22/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-22/" class="post-title-link" itemprop="url">钓鱼日记[23.07.22]</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-07-22 18:03:30" itemprop="dateCreated datePublished" datetime="2023-07-22T18:03:30+08:00">2023-07-22</time>
+              <time title="创建时间：2023-11-18 21:10:01" itemprop="dateCreated datePublished" datetime="2023-11-18T21:10:01+08:00">2023-11-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -467,7 +363,7 @@
             </span>
 
           
-            <span id="/2023/07/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-22/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.07.22]" title="阅读次数">
+            <span id="/2023/11/18/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-18/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.11.18]" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -482,8 +378,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/07/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-22/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-22/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/11/18/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-18/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/11/18/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-18/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -498,16 +394,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>又到了周末，虽然天气炎热，但钓鱼人的热情并没有被打消。上个周末去钓大鲤鱼的计划没能实现，我总结了一周，觉得主要原因是没有打窝。所以今天特意带了红虫颗粒和谷麦窝，准备在新的钓位上再次尝试。</p>
-<p>9点到达水库边，太阳早早地出来了。为了防晒，我选择了一个背靠大树的钓位，面对着水库。钓位的左侧是一个小湾子，形状像一个字母“C”，岸边都是树。本来这个湾子是个很好的钓位，但水质不好，垃圾也很多，连浮漂都站不起来。所以我选了一个稍微往外一点的位置。不多废话，选好钓位后，我先打窝。在3.6米的位置，我打了几把红虫颗粒，准备钓小鲫鱼。在6.3米的位置，我用长竿挂上玉米，准备钓大鲤鱼。</p>
-<p>一番准备之后，已经是9点半了。我决定先用12尺的玄武人Y钓一些小鱼回去喂乌龟。撮了两个大饵，抛入水中先找底。结果浮漂一入水就全没入水中，一提竿大弯弓水下没动静，感觉像挂底，习惯性的拿着鱼竿向上轻弹两下，突然一股具大的力道从鱼竿传到手撑，鱼竿差点脱手而去，鱼线带着嗖嗖嗖的声音往外串，，我急忙调整鱼竿的角度，左右晃动鱼竿，希望能让鱼竿弯起来。但感觉就像是牵了一头不听指挥的牛，一直往前冲。结果鱼脱钩了，4号袖钩都被拉直了。看着水面上翻起的夹着浑水的大水花，我的内心久久不能平静。过了几分钟，等我心情平复了一些，我分析了一下原因。这其实是跑鱼的正常现象。12尺的玄武人Y有点短，主线0.8号，子线0.4号，加上4号袖钩，这样的配置确实只适合钓小鱼。再加上水深只有60厘米，很难有鱼游动的空间。一想到这些，我不再那么懊恼了。钓鱼玩的就是一个过程，于是我收拾好心情，继续钓。</p>
-<p>刚刚跑了鱼，窝里肯定已经没有鱼了。于是我准备去玩路亚。上次的路亚装备还在，我准备玩飞蝇。出人意料的是，路亚鱼口很好，还解锁了鲈鱼。</p>
-<p>路亚上的第一条鲈鱼</p>
-<p><img data-src="https://iili.io/JH6bxmN.md.jpg"></p>
-<p>用2克小亮片上的第一条鲈鱼,咬口猛，中鱼瞬间有时会跳出水面洗腮</p>
+          <p>11月18日</p>
+<p>周六，今天的天气依然阴冷，吃过午饭，准备去西来两河口钓土凤。10月份在这里搭钓台钓土凤的经历还历历在目，当时土凤马口很多，但是今天我并没有准备搭钓台，而是打算用抄网竿装上镰刀头，在河边水草丛生的地方对着河面掏个草洞，用小短竿钓鲫鱼。</p>
+<p><img data-src="https://iili.io/JoKoxql.md.jpg"></p>
+<p>不久，我来到了河边，选定了一个水草丰茂的地方，开始准备掏草洞。首先，我用镰刀头在水草丛中对着河面割开一个口子，然后用抄网竿一路探入水下，将水下的水草清理干净。掏草洞是一项非常费力的活儿，需要大量的耐心和精细的动作，经过了差不多一个小时才勉强掏好了一个小草洞。</p>
+<p><img data-src="https://iili.io/JoKocLx.md.jpg"></p>
+<p>我拿出小短竿开始钓鱼。将新鲜的饵料挂在鱼钩上，然后轻轻放入河中。虽然水温很低，我还是坚持守在原地，期待着鱼儿的上钩。</p>
+<p><img data-src="https://iili.io/JoKoMdP.md.jpg"></p>
+<p><img data-src="https://iili.io/JoKoRee.md.jpg"></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/07/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-22/#more" rel="contents">
+              <a class="btn" href="/2023/11/18/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-18/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -531,7 +428,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/07/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-16/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/11/12/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-11/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -545,7 +442,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/07/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-16/" class="post-title-link" itemprop="url">钓鱼日记[23.07.16]</a>
+            <a href="/2023/11/12/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-11/" class="post-title-link" itemprop="url">钓鱼日记[23.11.11]</a>
         </h2>
 
         <div class="post-meta">
@@ -555,7 +452,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-07-16 18:25:27" itemprop="dateCreated datePublished" datetime="2023-07-16T18:25:27+08:00">2023-07-16</time>
+              <time title="创建时间：2023-11-12 20:20:01" itemprop="dateCreated datePublished" datetime="2023-11-12T20:20:01+08:00">2023-11-12</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -575,7 +472,7 @@
             </span>
 
           
-            <span id="/2023/07/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-16/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.07.16]" title="阅读次数">
+            <span id="/2023/11/12/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-11/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.11.11]" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -590,8 +487,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/07/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-16/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-16/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/11/12/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-11/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/11/12/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-11/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -606,12 +503,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>又到了令人开心和愉快的周末时光！原本计划这个周末去河边玩路亚微物钓鱼，不过上周下了几天雨，导致河水暴涨，无法安全地玩耍。为了保证安全，我决定改去三一水库钓小鱼，毕竟水库的深度只有大约1.5米，环境也很舒适。</p>
-<p>钓位环境<br><img data-src="https://iili.io/JH6bHmB.md.jpg"></p>
-<p>我准备了一根6.3米长的钓竿，上面挂玉米，打算用来钓鲤鱼；另外还有一根3.6米短竿，用来钓小鲫鱼。<br><img data-src="https://iili.io/JH6Dtqu.md.jpg"></p>
+          <p>11月11日</p>
+<p>周六，在小雨蒙蒙的天气里，我来到了离家不远的西来小河进行野钓。自从8月份刚清理完河道来钓了一次之后再没来过，记得上次空军了，希望今天能有好的收获。天气虽然有点冷，但是小河的景色依然很美，烟雨蒙蒙中，岸边的竹林似乎更加茂密了。旁边果园里的耙耙柑套上了白色的袋子，显得更加硕果累累。河面靠边的位置长满了嫩嫩的水草，我想下面应该藏了不少鱼吧。远处几个钓友早早来到河边垂钓，但似乎鱼情不太好。</p>
+<p><img data-src="https://iili.io/JCaHq8l.md.jpg"></p>
+<p><img data-src="https://iili.io/JCaHfa4.md.jpg"></p>
+<p>我找了一个宁静的位置，准备开始我的钓鱼之旅。今天用15尺独步搭配0.8主线，0.4子线，3号轻口袖，吃铅1.5克鲫鱼漂，准备钓鲫鱼。一切准备就绪，我将钩子下沉到水底，借着细雨中的清凉，我心旷神怡地等待着期盼的鱼儿上钩。不一会儿，我的浮漂忽然晃动起来，这意味着有鱼上钩了。我迅速将钓竿拉起，只见一条小鲤鱼在钩子上摆动，鱼儿身上的鳞片在雨中闪闪发光，非常漂亮。我将小鲤鱼放入小桶中，让它为自己的贪吃接受一下关禁闭的惩罚。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/07/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-07-16/#more" rel="contents">
+              <a class="btn" href="/2023/11/12/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-11/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -635,7 +534,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/07/07/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%9A%E9%A1%B9%E7%9B%AE%E9%87%8D%E5%AE%9A%E5%90%91%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E9%A1%B6%E7%BA%A7%E5%9F%9F%E5%90%8D/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/10/29/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-29/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -649,7 +548,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/07/07/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%9A%E9%A1%B9%E7%9B%AE%E9%87%8D%E5%AE%9A%E5%90%91%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E9%A1%B6%E7%BA%A7%E5%9F%9F%E5%90%8D/" class="post-title-link" itemprop="url">Hexo博客多项目重定向配置多个顶级域名</a>
+            <a href="/2023/10/29/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-29/" class="post-title-link" itemprop="url">钓鱼日记[23.10.28]</a>
         </h2>
 
         <div class="post-meta">
@@ -659,7 +558,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-07-07 17:59:34" itemprop="dateCreated datePublished" datetime="2023-07-07T17:59:34+08:00">2023-07-07</time>
+              <time title="创建时间：2023-10-29 18:10:01" itemprop="dateCreated datePublished" datetime="2023-10-29T18:10:01+08:00">2023-10-29</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -674,12 +573,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">Hexo博客搭建</span></a>
+                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
                 </span>
             </span>
 
           
-            <span id="/2023/07/07/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%9A%E9%A1%B9%E7%9B%AE%E9%87%8D%E5%AE%9A%E5%90%91%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E9%A1%B6%E7%BA%A7%E5%9F%9F%E5%90%8D/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo博客多项目重定向配置多个顶级域名" title="阅读次数">
+            <span id="/2023/10/29/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-29/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.10.28]" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -694,8 +593,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/07/07/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%9A%E9%A1%B9%E7%9B%AE%E9%87%8D%E5%AE%9A%E5%90%91%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E9%A1%B6%E7%BA%A7%E5%9F%9F%E5%90%8D/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/07/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%9A%E9%A1%B9%E7%9B%AE%E9%87%8D%E5%AE%9A%E5%90%91%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E9%A1%B6%E7%BA%A7%E5%9F%9F%E5%90%8D/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/10/29/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-29/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/10/29/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-29/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -710,23 +609,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="【Hexo】GitHub博客多项目重定向配置多个顶级域名"><a href="#【Hexo】GitHub博客多项目重定向配置多个顶级域名" class="headerlink" title="- 【Hexo】GitHub博客多项目重定向配置多个顶级域名"></a>- 【Hexo】GitHub博客多项目重定向配置多个顶级域名</h2><p>闲来无事用博客名新注册了一个域名：<a href="http://www.bytefisher.top/">www.bytefisher.top</a> 刚开通博客的时候随便注册了一个: <a target="_blank" rel="noopener" href="http://www.ai-fish.top/">www.ai-fish.top</a> 想着新域名和博客名称一致要好记一些，但是也不想直接替换原来的域名，毕竟花了钱买的，不能浪费。就想着给博客同时绑定两个顶级域名，然而GitHub Pages 只支持一个自定义域名，为了要兼容旧域名的访问，在网上一翻搜索查找，还真找到了一些方案：</p>
-<ul>
-<li><p>301重定向</p>
-</li>
-<li><p>服务器重定向</p>
-</li>
-<li><p>GitHub多项目重定向</p>
-</li>
-<li><p>域名注册商重定向</p>
-</li>
-</ul>
-<p>大概看了一下，对于向我这种新手小白，还是觉得GitHub多项目重定向这一方案要简单一些。那就先折腾简单的吧，另外几种方案有机会再尝试。</p>
-<h2 id="建立中转仓库"><a href="#建立中转仓库" class="headerlink" title="- 建立中转仓库"></a>- 建立中转仓库</h2><p>需要在 GitHub 上再新建一个仓库，用来中转旧域名 <a target="_blank" rel="noopener" href="http://www.ai-fish.top/">www.ai-fish.top</a> 中的访问到新的域名 <a href="http://www.bytefisher.top/">www.bytefisher.top</a> 中转仓库里面不会有过多内容。创建它只是为了存放 CNAME 文件 和 404.html文件，告诉 GitHub Pages 我们有两个域名而已。我创建了一个名为ByteFisher的仓库，正常情况下，访问这个仓库 GitHub Pages 的域名前缀为 用户名.github.io&#x2F;ByteFisher<br>图1 创建中转仓库 ByteFisher<br><img data-src="https://iili.io/HsjuVu1.png"></p>
-<h2 id="添加-GitHub-Pages-服务"><a href="#添加-GitHub-Pages-服务" class="headerlink" title="- 添加 GitHub Pages 服务"></a>- 添加 GitHub Pages 服务</h2><p>图2 中转仓库CNAME文件中填写旧的域名 ：<a target="_blank" rel="noopener" href="http://www.ai-fish.top/">www.ai-fish.top</a><br><img data-src="https://iili.io/HsjuN6v.png"><br>图3 修改博客主仓库中CNAME文件，填写新的域名：<a href="http://www.bytefisher.top/">www.bytefisher.top</a><br><img data-src="https://iili.io/Hsjuv8N.png"></p>
+          <p>10月28日</p>
+<p>清晨的太阳刚刚露出来，洒下了温暖的阳光，让整个水库散发出一片宁静和美丽。我又一次来到了这片熟悉的水域，呼吸着新鲜的空气，享受着宁静的钓鱼时刻。</p>
+<p><img data-src="https://iili.io/JfYaeEu.md.jpg"></p>
+<p>水库的风景依然令人陶醉。周围的树木郁郁葱葱，飘逸的花草点缀其中，映衬着湖光山色，美不胜收。晨光透过稀疏的树叶，洒在地面上，照得整个岸边一片金黄。湖面青山环抱，湖泊如镜，微风吹动，形成涟漪，荡起微波。水面映射着天空的蓝色，在这美景之中，有着一丝凉爽的水汽，令人心旷神怡。但细细观察，水质变差了一些，上面偶尔漂浮着散落的细碎物，蒙蔽了它的本来面貌。</p>
+<p><img data-src="https://iili.io/JfYa4TB.md.jpg"></p>
+<p><img data-src="https://iili.io/JfYawQ9.md.jpg"></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/07/07/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%9A%E9%A1%B9%E7%9B%AE%E9%87%8D%E5%AE%9A%E5%90%91%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E9%A1%B6%E7%BA%A7%E5%9F%9F%E5%90%8D/#more" rel="contents">
+              <a class="btn" href="/2023/10/29/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-29/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -750,7 +641,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/10/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-21/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -764,7 +655,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【继承】</a>
+            <a href="/2023/10/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-21/" class="post-title-link" itemprop="url">钓鱼日记[23.10.21]</a>
         </h2>
 
         <div class="post-meta">
@@ -774,7 +665,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-07-06 17:04:31" itemprop="dateCreated datePublished" datetime="2023-07-06T17:04:31+08:00">2023-07-06</time>
+              <time title="创建时间：2023-10-22 19:10:01" itemprop="dateCreated datePublished" datetime="2023-10-22T19:10:01+08:00">2023-10-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -789,16 +680,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
                 </span>
             </span>
 
           
-            <span id="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/" class="post-meta-item leancloud_visitors" data-flag-title="C#学习笔记【继承】" title="阅读次数">
+            <span id="/2023/10/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-21/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.10.21]" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -813,8 +700,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/10/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-21/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/10/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-21/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -829,27 +716,120 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="C-继承"><a href="#C-继承" class="headerlink" title="- C# 继承"></a>- C# 继承</h2><p>继承是面向对象程序设计中最重要的概念之一。继承允许我们根据一个类来定义另一个类，这使得创建和维护应用程序变得更容易。同时也有利于重用代码和节省开发时间。</p>
-<p>当创建一个类时，程序员不需要完全重新编写新的数据成员和成员函数，只需要设计一个新的类，继承了已有的类的成员即可。这个已有的类被称为的基类，这个新的类被称为派生类。</p>
-<p>继承的思想实现了 属于（IS-A） 关系。例如，哺乳动物 属于（IS-A） 动物，狗 属于（IS-A） 哺乳动物，因此狗 属于（IS-A） 动物。</p>
-<h2 id="基类和派生类"><a href="#基类和派生类" class="headerlink" title="- 基类和派生类"></a>- 基类和派生类</h2><p>一个类可以派生自多个类或接口，这意味着它可以从多个基类或接口继承数据和函数。</p>
-<p>C# 中创建派生类的语法如下：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;访问修饰符&gt; class &lt;基类&gt;</span><br><span class="line">&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br><span class="line">class &lt;派生类&gt; : &lt;基类&gt;</span><br><span class="line">&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>假设，有一个基类 Shape，它的派生类是 Rectangle：</p>
-<blockquote>
-<p><strong>实例</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace InheritanceApplication</span><br><span class="line">&#123;</span><br><span class="line">   class Shape</span><br><span class="line">   &#123;</span><br><span class="line">      public void setWidth(int w)</span><br><span class="line">      &#123;</span><br><span class="line">         width = w;</span><br><span class="line">      &#125;</span><br><span class="line">      public void setHeight(int h)</span><br><span class="line">      &#123;</span><br><span class="line">         height = h;</span><br><span class="line">      &#125;</span><br><span class="line">      protected int width;</span><br><span class="line">      protected int height;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   // 派生类</span><br><span class="line">   class Rectangle: Shape</span><br><span class="line">   &#123;</span><br><span class="line">      public int getArea()</span><br><span class="line">      &#123;</span><br><span class="line">         return (width * height);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   class RectangleTester</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         Rectangle Rect = new Rectangle();</span><br><span class="line"></span><br><span class="line">         Rect.setWidth(5);</span><br><span class="line">         Rect.setHeight(7);</span><br><span class="line"></span><br><span class="line">         // 打印对象的面积</span><br><span class="line">         Console.WriteLine(&quot;总面积： &#123;0&#125;&quot;,  Rect.getArea());</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
-<pre><code>总面积： 35
-</code></pre>
-<h2 id="基类的初始化"><a href="#基类的初始化" class="headerlink" title="- 基类的初始化"></a>- 基类的初始化</h2><p>派生类继承了基类的成员变量和成员方法。因此父类对象应在子类对象创建之前被创建。您可以在成员初始化列表中进行父类的初始化。</p>
-<p>下面的程序演示了这点：</p>
+          <p>10月21日<br>天气晴朗，我早早的来到了三一水库钓鱼。两个星期没来了，水库的水位终于上涨了一些，整个水库的风景更加美丽迷人。眺望湖面，一片平静，宛如一面明镜般的湖面，倒映着周围的山村和蓝天白云，景色宁静而美丽。此刻，朝霞的光辉穿过树叶，将湖面映照得如诗如画。</p>
+<p><img data-src="https://iili.io/JKeopls.md.jpg"></p>
+<p><img data-src="https://iili.io/JKeoDiX.md.jpg"></p>
+<p><img data-src="https://iili.io/JKeotVt.md.jpg"></p>
+<p><img data-src="https://iili.io/JKeomfn.md.jpg"></p>
+<p>我迅速准备好钓具，今天准备用12尺玄武人Y，搭配0.8号主线，0.4号子线，4号轻口袖，钓小红尾。正在我调漂找底的时候，拉起鱼竿，突然感觉有重量，空钩竟然中鱼了，鱼还不小。这个意外的惊喜来的太突然，是一尾土凤。这尾土凤身型挺大，顶着朝霞的余晖，在湖面上划出一道闪亮的弧线，仿佛一道天使的光芒。我顿时兴奋不已，俯身拉杆，与土凤展开了一场激烈的拉锏。鱼儿在湖面上跃出水面，惊艳了四周的景色。最终，我成功地将这尾大土凤收入囊中，心情无比的激动，心想今天肯定会是丰收的一天。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/10/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-21/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/10/14/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/14/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-14/" class="post-title-link" itemprop="url">钓鱼日记[23.10.14]</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-10-14 19:00:00" itemprop="dateCreated datePublished" datetime="2023-10-14T19:00:00+08:00">2023-10-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-01-04 23:02:40" itemprop="dateModified" datetime="2024-01-04T23:02:40+08:00">2024-01-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/10/14/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-14/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.10.14]" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/10/14/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-14/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/10/14/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-14/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>10月14日<br>阳光明媚的早晨我兴致勃勃地穿上了新买的60公分高的长筒水鞋,满怀期待地来到了上周的钓点。上周的钓鱼经历令我异常开心,然而那次狼狈的遛鱼却让我久久不能释怀,一条小鲤鱼竟然让我两只水鞋都装满了水,因此我特意买了一双更高的长筒水鞋。今天,我准备在同一个位置搭起钓台,使用6.75米的鱼竿,1.2号的主线和0.5号的子线,带上4号袖钩来钓马口和土凤。上次用的6.3米竿子感觉效果不错,今天用了更长的竿子,希望能钓的更好。</p>
+<p><img data-src="https://iili.io/JFvCka1.md.jpg"></p>
+<p>为了能更快地诱鱼,我用红虫颗粒打窝。</p>
+<p><img data-src="https://iili.io/JFvCWjj.md.jpg"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/10/14/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-14/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -872,7 +852,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -940,20 +920,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-count">92</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -966,7 +946,7 @@
         <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.bytefisher.top/" title="Weibo → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
       </span>
       <span class="links-of-author-item">
         <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
@@ -976,7 +956,7 @@
 
 
       </div>
-	  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <iframe id="music-player" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
 	  <div class="wechat_OA">
 		<span>欢迎关注我的公众号</span>
 		<!-- 这里添加你的二维码图片 -->
@@ -1012,6 +992,26 @@
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
         
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
@@ -1027,6 +1027,7 @@
   
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
@@ -1104,8 +1105,37 @@ window.addEventListener('pjax:success', () => {
 
 
   
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -1154,7 +1184,330 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
   }, window.Valine);
 });
 </script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
 
+<style>
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  scrollbar-gutter: stable;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.modal::-webkit-scrollbar {
+  display: none !important;
+}
+
+.modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.modal-content {
+  position: relative;
+  width: min(71%, 340px);
+  max-width: calc((100vh - 100px) * 9 / 17.5);
+  height: auto;
+  aspect-ratio: 9 / 17.5;
+  max-height: calc(100vh - 100px);
+  margin: 0 auto;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: min(81%, 320px);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: min(94%, 300px);
+    max-width: calc((100vh - 80px) * 9 / 17.5);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+    max-height: calc(100vh - 80px);
+  }
+}
+
+.modal-content iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  border: none;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  left: auto;
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 10000;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+}
+
+.close-btn:hover {
+  color: #e74c3c;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  background: rgba(0,0,0,0.1);
+  border-radius: 50%;
+  line-height: 50px;
+  user-select: none;
+}
+
+.nav-btn:hover {
+  background: rgba(0,0,0,0.2);
+}
+
+.prev-btn {
+  left: 0;
+}
+
+.next-btn {
+  right: 15px;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: calc(100% - 60px);
+    max-width: calc((100vh - 100px) * 9 / 17.5);
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    line-height: 40px;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var musicIframe = null;
+  var musicDisplayStyle = '';
+  var isMusicPaused = false;
+  var videoIds = [];
+  var currentIndex = 0;
+  
+  function findMusicIframe() {
+    var iframes = document.getElementsByTagName('iframe');
+    for (var i = 0; i < iframes.length; i++) {
+      var src = iframes[i].src || '';
+      if (src.indexOf('music.163.com') > -1 || src.indexOf('outchain/player') > -1) {
+        return iframes[i];
+      }
+    }
+    console.log('[Douyin] Music iframe not found in', iframes.length, 'iframes');
+    return null;
+  }
+  
+  function pauseMusic() {
+    console.log('[Douyin] Trying to pause music...');
+    musicIframe = findMusicIframe();
+    
+    if (musicIframe) {
+      console.log('[Douyin] Music iframe found');
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=1') > -1) {
+        musicIframe.src = src.replace('auto=1', 'auto=0');
+        console.log('[Douyin] Changed auto=1 to auto=0');
+      }
+      isMusicPaused = true;
+    } else {
+      console.log('[Douyin] Music iframe NOT found!');
+    }
+  }
+  
+  function resumeMusic() {
+    console.log('[Douyin] Trying to resume music...');
+    
+    if (musicIframe && isMusicPaused) {
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=0') > -1) {
+        musicIframe.src = src.replace('auto=0', 'auto=1');
+        console.log('[Douyin] Changed auto=0 to auto=1');
+      }
+      isMusicPaused = false;
+    }
+  }
+  
+  function init() {
+    console.log('[Douyin] Initializing...');
+    var cards = document.querySelectorAll('.video-card');
+    console.log('[Douyin] Found', cards.length, 'video cards');
+    
+    videoIds = [];
+    for (var j = 0; j < cards.length; j++) {
+      var videoId = cards[j].getAttribute('data-id');
+      if (videoId) {
+        videoIds.push(videoId);
+      }
+      cards[j].addEventListener('click', openModal);
+    }
+    
+    var closeBtn = document.querySelector('.close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+    
+    var prevBtn = document.querySelector('.prev-btn');
+    var nextBtn = document.querySelector('.next-btn');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(-1);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(1);
+      });
+    }
+    
+    var modal = document.getElementById('douyin-modal');
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+    }
+  }
+  
+  function navigateVideo(direction) {
+    if (videoIds.length === 0) return;
+    
+    currentIndex += direction;
+    if (currentIndex < 0) {
+      currentIndex = videoIds.length - 1;
+    } else if (currentIndex >= videoIds.length) {
+      currentIndex = 0;
+    }
+    
+    var videoId = videoIds[currentIndex];
+    var player = document.getElementById('douyin-player');
+    if (player && videoId) {
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+    }
+  }
+  
+  function openModal(e) {
+    console.log('[Douyin] Opening modal...');
+    var card = e.currentTarget;
+    var videoId = card.getAttribute('data-id');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    currentIndex = videoIds.indexOf(videoId);
+    
+    if (player && modal && videoId) {
+      pauseMusic();
+      
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.marginRight = '0px';
+    }
+  }
+  
+  function closeModal() {
+    console.log('[Douyin] Closing modal...');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    if (player) {
+      player.src = '';
+    }
+    
+    if (modal) {
+      modal.classList.remove('active');
+    }
+    
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    
+    resumeMusic();
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
     </div>
 </body>
 </html>
