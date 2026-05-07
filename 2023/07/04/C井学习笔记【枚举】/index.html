@@ -665,38 +665,63 @@ window.addEventListener('pjax:success', () => {
 
 <link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
 <script>
-NexT.utils.loadComments(document.querySelector('#waline-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', () => {
-    Waline.init({
-      el: '#waline-comments',
-      serverURL: 'https://waline.bytefisher.top/',
-      path: location.pathname,
-      lang: 'zh-CN' || 'zh-CN',
-      meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
-      requiredMeta: ["nick"] || ['nick'],
-      placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
-      avatar: 'retro' || 'retro',
-      pageSize: 10 || 10,
-      imageUploader: false,
-      comment: true,
-      visitor: true,
-      emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo'],
-      highlight: true
-    });
-  }, window.Waline);
-});
-</script>
-<script>
 (function() {
-  var els = document.querySelectorAll('.waline-comment-count');
-  if (!els.length) return;
-  NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/pageview.js', function() {
-    Waline.pageviewCount({
-      serverURL: 'https://waline.bytefisher.top/',
-      path: window.location.pathname,
-      update: false
+  var el = document.querySelector('#waline-comments');
+  if (el) {
+    NexT.utils.loadComments(el, function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
+        Waline.init({
+          el: '#waline-comments',
+          serverURL: 'https://waline.bytefisher.top/',
+          path: location.pathname,
+          lang: 'zh-CN' || 'zh-CN',
+          meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
+          requiredMeta: ["nick"] || ['nick'],
+          placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+          avatar: 'retro' || 'retro',
+          pageSize: 10 || 10,
+          imageUploader: false,
+          comment: true,
+          visitor: true,
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo'],
+          highlight: true
+        });
+        Waline.pageviewCount({
+          serverURL: 'https://waline.bytefisher.top/',
+          path: location.pathname
+        });
+      }, window.Waline);
     });
+  }
+
+  var countEls = document.querySelectorAll('.waline-comment-count');
+  if (!countEls.length) return;
+
+  var paths = [];
+  var pathMap = {};
+  countEls.forEach(function(el) {
+    var p = el.getAttribute('data-path');
+    if (p) {
+      paths.push(p);
+      pathMap[p] = el;
+    }
   });
+  if (!paths.length) return;
+
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', baseURL + '/api/article?type=count&lang=zh-CN');
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function() {
+    if (xhr.status !== 200) return;
+    var data = JSON.parse(xhr.responseText);
+    Object.keys(data).forEach(function(path) {
+      if (pathMap[path]) {
+        pathMap[path].innerText = data[path];
+      }
+    });
+  };
+  xhr.send(JSON.stringify(paths));
 })();
 </script>
 <!-- 抖音视频弹窗 -->
