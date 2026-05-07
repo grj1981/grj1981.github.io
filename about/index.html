@@ -289,7 +289,7 @@
 </tr>
 <tr>
 <td>电子邮箱</td>
-<td><a href="mailto:&#x32;&#55;&#49;&#x36;&#50;&#x33;&#56;&#x32;&#49;&#64;&#113;&#x71;&#x2e;&#99;&#111;&#109;">271623821@qq.com</a></td>
+<td><a href="mailto:&#50;&#55;&#49;&#54;&#x32;&#51;&#x38;&#50;&#x31;&#64;&#x71;&#x71;&#x2e;&#x63;&#x6f;&#x6d;">271623821@qq.com</a></td>
 </tr>
 </tbody></table>
 <hr>
@@ -637,6 +637,19 @@ NexT.utils.loadComments(document.querySelector('#waline-comments'), () => {
     });
   }, window.Waline);
 });
+</script>
+<script>
+(function() {
+  var els = document.querySelectorAll('.waline-comment-count');
+  if (!els.length) return;
+  NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/pageview.js', function() {
+    Waline.pageviewCount({
+      serverURL: 'https://waline.bytefisher.top/',
+      path: window.location.pathname,
+      update: false
+    });
+  });
+})();
 </script>
 <!-- 抖音视频弹窗 -->
 <div id="douyin-modal" class="modal">

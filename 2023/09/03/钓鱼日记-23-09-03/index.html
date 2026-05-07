@@ -680,6 +680,19 @@ NexT.utils.loadComments(document.querySelector('#waline-comments'), () => {
   }, window.Waline);
 });
 </script>
+<script>
+(function() {
+  var els = document.querySelectorAll('.waline-comment-count');
+  if (!els.length) return;
+  NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/pageview.js', function() {
+    Waline.pageviewCount({
+      serverURL: 'https://waline.bytefisher.top/',
+      path: window.location.pathname,
+      update: false
+    });
+  });
+})();
+</script>
 <!-- 抖音视频弹窗 -->
 <div id="douyin-modal" class="modal">
   <div class="modal-content">
