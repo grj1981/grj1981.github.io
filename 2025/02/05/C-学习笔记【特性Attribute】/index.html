@@ -739,10 +739,6 @@ window.addEventListener('pjax:success', () => {
           emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo'],
           highlight: true
         });
-        Waline.pageviewCount({
-          serverURL: 'https://waline.bytefisher.top/',
-          path: location.pathname
-        });
       }, window.Waline);
     });
   }
@@ -750,14 +746,17 @@ window.addEventListener('pjax:success', () => {
   var countEls = document.querySelectorAll('.waline-comment-count');
   if (!countEls.length) return;
 
-  var paths = [];
-  var pathMap = {};
-  countEls.forEach(function(el) {
-    var p = el.getAttribute('data-path');
-    if (p) {
-      paths.push(p);
-      pathMap[p] = el;
-    }
+    var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+    countEls.forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      fetch(baseURL + '/api/comment?type=count&url=' + encodeURIComponent(p))
+        .then(function(r) { return r.ok ? r.text() : ''; })
+        .then(function(text) {
+          if (text) { el.innerText = text; }
+        });
+    });
+  }
   });
   if (!paths.length) return;
 
