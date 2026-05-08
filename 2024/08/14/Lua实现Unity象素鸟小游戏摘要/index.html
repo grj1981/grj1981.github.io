@@ -1023,6 +1023,7 @@ window.addEventListener('pjax:success', () => {
 
   var el = document.querySelector('#waline-comments');
   if (el) {
+    updateCounts();
     NexT.utils.loadComments(el, function() {
       NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
         Waline.init({
@@ -1044,7 +1045,7 @@ window.addEventListener('pjax:success', () => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ path: location.pathname })
-        }).then(function() {
+        }).finally(function() {
           updateCounts();
         });
       }, window.Waline);
