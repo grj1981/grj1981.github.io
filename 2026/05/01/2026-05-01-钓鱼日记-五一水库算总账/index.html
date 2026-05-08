@@ -718,10 +718,12 @@ window.addEventListener('pjax:success', () => {
           emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo'],
           highlight: true
         });
+        var pathEl = document.querySelector('.waline-visitor-count');
+        var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
         fetch(baseURL + '/api/article', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ path: location.pathname })
+          body: JSON.stringify({ path: postPath })
         }).finally(function() {
           updateCounts();
         });

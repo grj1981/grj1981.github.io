@@ -289,7 +289,7 @@
 </tr>
 <tr>
 <td>电子邮箱</td>
-<td><a href="mailto:&#50;&#55;&#49;&#x36;&#50;&#x33;&#56;&#x32;&#x31;&#x40;&#113;&#113;&#x2e;&#x63;&#111;&#x6d;">271623821@qq.com</a></td>
+<td><a href="mailto:&#50;&#x37;&#x31;&#x36;&#50;&#x33;&#56;&#50;&#49;&#x40;&#x71;&#x71;&#46;&#x63;&#x6f;&#x6d;">271623821@qq.com</a></td>
 </tr>
 </tbody></table>
 <hr>
@@ -657,10 +657,12 @@ window.addEventListener('pjax:success', () => {
           emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo'],
           highlight: true
         });
+        var pathEl = document.querySelector('.waline-visitor-count');
+        var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
         fetch(baseURL + '/api/article', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ path: location.pathname })
+          body: JSON.stringify({ path: postPath })
         }).finally(function() {
           updateCounts();
         });
