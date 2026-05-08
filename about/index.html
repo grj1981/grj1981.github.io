@@ -289,7 +289,7 @@
 </tr>
 <tr>
 <td>电子邮箱</td>
-<td><a href="mailto:&#50;&#55;&#49;&#54;&#x32;&#51;&#56;&#50;&#49;&#64;&#113;&#113;&#x2e;&#99;&#111;&#x6d;">271623821@qq.com</a></td>
+<td><a href="mailto:&#50;&#x37;&#x31;&#x36;&#50;&#51;&#56;&#x32;&#x31;&#64;&#x71;&#113;&#46;&#x63;&#x6f;&#x6d;">271623821@qq.com</a></td>
 </tr>
 </tbody></table>
 <hr>
@@ -645,10 +645,18 @@ window.addEventListener('pjax:success', () => {
   var countEls = document.querySelectorAll('.waline-visitor-count');
   if (!countEls.length) return;
 
-  NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/pageview.js', function() {
-    Waline.pageviewCount({
-      serverURL: 'https://waline.bytefisher.top/'
-    });
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+  countEls.forEach(function(el) {
+    var p = el.getAttribute('data-path');
+    if (!p) return;
+    var url = decodeURIComponent(p);
+    fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+      .then(function(r) { return r.ok ? r.json() : null; })
+      .then(function(json) {
+        if (json && json.data && json.data[0] && json.data[0].time != null) {
+          el.innerText = json.data[0].time;
+        }
+      });
   });
 })();
 </script>

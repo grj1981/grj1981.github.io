@@ -686,10 +686,18 @@ window.addEventListener('pjax:success', () => {
   var countEls = document.querySelectorAll('.waline-visitor-count');
   if (!countEls.length) return;
 
-  NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/pageview.js', function() {
-    Waline.pageviewCount({
-      serverURL: 'https://waline.bytefisher.top/'
-    });
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+  countEls.forEach(function(el) {
+    var p = el.getAttribute('data-path');
+    if (!p) return;
+    var url = decodeURIComponent(p);
+    fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+      .then(function(r) { return r.ok ? r.json() : null; })
+      .then(function(json) {
+        if (json && json.data && json.data[0] && json.data[0].time != null) {
+          el.innerText = json.data[0].time;
+        }
+      });
   });
 })();
 </script>
