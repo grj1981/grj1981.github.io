@@ -284,7 +284,7 @@
       <span class="post-meta-item-text">Waline：</span>
     
     <a title="waline" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+      <span class="post-comments-count waline-visitor-count" data-path="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -682,21 +682,13 @@ window.addEventListener('pjax:success', () => {
     });
   }
 
-  var countEls = document.querySelectorAll('.waline-comment-count');
+  var countEls = document.querySelectorAll('.waline-visitor-count');
   if (!countEls.length) return;
 
-  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
-  countEls.forEach(function(el) {
-    var p = el.getAttribute('data-path');
-    if (!p) return;
-    var url = decodeURIComponent(p);
-    fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
-      .then(function(r) { return r.ok ? r.json() : null; })
-      .then(function(json) {
-        if (json && json.data && json.data[0] && json.data[0].time != null) {
-          el.innerText = json.data[0].time;
-        }
-      });
+  NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/pageview.js', function() {
+    Waline.pageviewCount({
+      serverURL: 'https://waline.bytefisher.top/'
+    });
   });
 })();
 </script>

@@ -265,7 +265,7 @@
       <span class="post-meta-item-text">Waline：</span>
     
     <a title="waline" href="/2023/12/02/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-02/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2023/12/02/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-02/" itemprop="commentCount"></span>
+      <span class="post-comments-count waline-visitor-count" data-path="/2023/12/02/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-02/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -365,7 +365,7 @@
       <span class="post-meta-item-text">Waline：</span>
     
     <a title="waline" href="/2023/11/26/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-26/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2023/11/26/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-26/" itemprop="commentCount"></span>
+      <span class="post-comments-count waline-visitor-count" data-path="/2023/11/26/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-26/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -466,7 +466,7 @@
       <span class="post-meta-item-text">Waline：</span>
     
     <a title="waline" href="/2023/11/18/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-18/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2023/11/18/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-18/" itemprop="commentCount"></span>
+      <span class="post-comments-count waline-visitor-count" data-path="/2023/11/18/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-18/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -568,7 +568,7 @@
       <span class="post-meta-item-text">Waline：</span>
     
     <a title="waline" href="/2023/11/12/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-11/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2023/11/12/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-11/" itemprop="commentCount"></span>
+      <span class="post-comments-count waline-visitor-count" data-path="/2023/11/12/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-11/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -667,7 +667,7 @@
       <span class="post-meta-item-text">Waline：</span>
     
     <a title="waline" href="/2023/10/29/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-29/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2023/10/29/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-29/" itemprop="commentCount"></span>
+      <span class="post-comments-count waline-visitor-count" data-path="/2023/10/29/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-29/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -767,7 +767,7 @@
       <span class="post-meta-item-text">Waline：</span>
     
     <a title="waline" href="/2023/10/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-21/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2023/10/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-21/" itemprop="commentCount"></span>
+      <span class="post-comments-count waline-visitor-count" data-path="/2023/10/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-21/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1145,21 +1145,13 @@ window.addEventListener('pjax:success', () => {
     });
   }
 
-  var countEls = document.querySelectorAll('.waline-comment-count');
+  var countEls = document.querySelectorAll('.waline-visitor-count');
   if (!countEls.length) return;
 
-  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
-  countEls.forEach(function(el) {
-    var p = el.getAttribute('data-path');
-    if (!p) return;
-    var url = decodeURIComponent(p);
-    fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
-      .then(function(r) { return r.ok ? r.json() : null; })
-      .then(function(json) {
-        if (json && json.data && json.data[0] && json.data[0].time != null) {
-          el.innerText = json.data[0].time;
-        }
-      });
+  NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/pageview.js', function() {
+    Waline.pageviewCount({
+      serverURL: 'https://waline.bytefisher.top/'
+    });
   });
 })();
 </script>
