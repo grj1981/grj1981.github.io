@@ -849,6 +849,25 @@ window.addEventListener('pjax:success', () => {
 <link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
 <script>
 (function() {
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+
+  function updateCounts() {
+    var countEls = document.querySelectorAll('.waline-visitor-count');
+    if (!countEls.length) return;
+    countEls.forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var url = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(json) {
+          if (json && json.data && json.data[0] && json.data[0].time != null) {
+            el.innerText = json.data[0].time;
+          }
+        });
+    });
+  }
+
   var el = document.querySelector('#waline-comments');
   if (el) {
     NexT.utils.loadComments(el, function() {
@@ -869,26 +888,12 @@ window.addEventListener('pjax:success', () => {
           emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo'],
           highlight: true
         });
+        updateCounts();
       }, window.Waline);
     });
+  } else {
+    updateCounts();
   }
-
-  var countEls = document.querySelectorAll('.waline-visitor-count');
-  if (!countEls.length) return;
-
-  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
-  countEls.forEach(function(el) {
-    var p = el.getAttribute('data-path');
-    if (!p) return;
-    var url = decodeURIComponent(p);
-    fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
-      .then(function(r) { return r.ok ? r.json() : null; })
-      .then(function(json) {
-        if (json && json.data && json.data[0] && json.data[0].time != null) {
-          el.innerText = json.data[0].time;
-        }
-      });
-  });
 })();
 </script>
 <!-- 抖音视频弹窗 -->
