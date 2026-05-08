@@ -699,11 +699,11 @@ window.addEventListener('pjax:success', () => {
     var p = el.getAttribute('data-path');
     if (!p) return;
     var url = decodeURIComponent(p);
-    fetch(baseURL + '/api/comment?type=count&url=' + encodeURIComponent(url))
+    fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
       .then(function(r) { return r.ok ? r.json() : null; })
       .then(function(json) {
-        if (json && json.data && json.data[0] != null) {
-          el.innerText = json.data[0];
+        if (json && json.data && json.data.PV != null) {
+          el.innerText = json.data.PV;
         }
       });
   });
