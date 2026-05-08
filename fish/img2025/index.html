@@ -800,11 +800,16 @@ window.addEventListener('pjax:success', () => {
           pageSize: 10 || 10,
           imageUploader: false,
           comment: true,
-          visitor: true,
           emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo'],
           highlight: true
         });
-        updateCounts();
+        fetch(baseURL + '/api/article', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: location.pathname })
+        }).then(function() {
+          updateCounts();
+        });
       }, window.Waline);
     });
   } else {
