@@ -737,9 +737,11 @@ window.addEventListener('pjax:success', () => {
     if (!p) return;
     var url = decodeURIComponent(p);
     fetch(baseURL + '/api/comment?type=count&url=' + encodeURIComponent(url))
-      .then(function(r) { return r.ok ? r.text() : ''; })
-      .then(function(text) {
-        if (text) { el.innerText = text; }
+      .then(function(r) { return r.ok ? r.json() : null; })
+      .then(function(json) {
+        if (json && json.data && json.data[0] != null) {
+          el.innerText = json.data[0];
+        }
       });
   });
 })();

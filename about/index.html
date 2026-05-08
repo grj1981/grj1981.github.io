@@ -289,7 +289,7 @@
 </tr>
 <tr>
 <td>电子邮箱</td>
-<td><a href="mailto:&#x32;&#55;&#49;&#x36;&#50;&#x33;&#x38;&#x32;&#49;&#x40;&#x71;&#113;&#x2e;&#99;&#x6f;&#x6d;">271623821@qq.com</a></td>
+<td><a href="mailto:&#50;&#55;&#x31;&#x36;&#50;&#51;&#x38;&#x32;&#49;&#x40;&#113;&#x71;&#46;&#x63;&#111;&#x6d;">271623821@qq.com</a></td>
 </tr>
 </tbody></table>
 <hr>
@@ -651,9 +651,11 @@ window.addEventListener('pjax:success', () => {
     if (!p) return;
     var url = decodeURIComponent(p);
     fetch(baseURL + '/api/comment?type=count&url=' + encodeURIComponent(url))
-      .then(function(r) { return r.ok ? r.text() : ''; })
-      .then(function(text) {
-        if (text) { el.innerText = text; }
+      .then(function(r) { return r.ok ? r.json() : null; })
+      .then(function(json) {
+        if (json && json.data && json.data[0] != null) {
+          el.innerText = json.data[0];
+        }
       });
   });
 })();
