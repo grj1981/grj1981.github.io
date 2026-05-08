@@ -907,34 +907,16 @@ window.addEventListener('pjax:success', () => {
   var countEls = document.querySelectorAll('.waline-comment-count');
   if (!countEls.length) return;
 
-    var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
-    countEls.forEach(function(el) {
-      var p = el.getAttribute('data-path');
-      if (!p) return;
-      fetch(baseURL + '/api/comment?type=count&url=' + encodeURIComponent(p))
-        .then(function(r) { return r.ok ? r.text() : ''; })
-        .then(function(text) {
-          if (text) { el.innerText = text; }
-        });
-    });
-  }
-  });
-  if (!paths.length) return;
-
   var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', baseURL + '/api/article?type=count&lang=zh-CN');
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.onload = function() {
-    if (xhr.status !== 200) return;
-    var data = JSON.parse(xhr.responseText);
-    Object.keys(data).forEach(function(path) {
-      if (pathMap[path]) {
-        pathMap[path].innerText = data[path];
-      }
-    });
-  };
-  xhr.send(JSON.stringify(paths));
+  countEls.forEach(function(el) {
+    var p = el.getAttribute('data-path');
+    if (!p) return;
+    fetch(baseURL + '/api/comment?type=count&url=' + encodeURIComponent(p))
+      .then(function(r) { return r.ok ? r.text() : ''; })
+      .then(function(text) {
+        if (text) { el.innerText = text; }
+      });
+  });
 })();
 </script>
 <!-- 抖音视频弹窗 -->
