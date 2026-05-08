@@ -766,8 +766,8 @@ window.addEventListener('pjax:success', () => {
     fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
       .then(function(r) { return r.ok ? r.json() : null; })
       .then(function(json) {
-        if (json && json.data && json.data.PV != null) {
-          el.innerText = json.data.PV;
+        if (json && json.data && json.data[0] && json.data[0].time != null) {
+          el.innerText = json.data[0].time;
         }
       });
   });
