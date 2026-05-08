@@ -289,7 +289,7 @@
 </tr>
 <tr>
 <td>电子邮箱</td>
-<td><a href="mailto:&#x32;&#x37;&#49;&#54;&#x32;&#x33;&#56;&#x32;&#49;&#x40;&#113;&#113;&#x2e;&#99;&#x6f;&#109;">271623821@qq.com</a></td>
+<td><a href="mailto:&#x32;&#55;&#49;&#x36;&#50;&#x33;&#x38;&#x32;&#49;&#x40;&#x71;&#113;&#x2e;&#99;&#x6f;&#x6d;">271623821@qq.com</a></td>
 </tr>
 </tbody></table>
 <hr>
@@ -649,7 +649,7 @@ window.addEventListener('pjax:success', () => {
   countEls.forEach(function(el) {
     var p = el.getAttribute('data-path');
     if (!p) return;
-    var url = p.replace(/^https?:\/\/[^\/]+/, '');
+    var url = decodeURIComponent(p);
     fetch(baseURL + '/api/comment?type=count&url=' + encodeURIComponent(url))
       .then(function(r) { return r.ok ? r.text() : ''; })
       .then(function(text) {
