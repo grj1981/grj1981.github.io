@@ -790,7 +790,8 @@ window.addEventListener('pjax:success', () => {
   countEls.forEach(function(el) {
     var p = el.getAttribute('data-path');
     if (!p) return;
-    fetch(baseURL + '/api/comment?type=count&url=' + encodeURIComponent(p))
+    var url = p.replace(/^https?:\/\/[^\/]+/, '');
+    fetch(baseURL + '/api/comment?type=count&url=' + encodeURIComponent(url))
       .then(function(r) { return r.ok ? r.text() : ''; })
       .then(function(text) {
         if (text) { el.innerText = text; }
