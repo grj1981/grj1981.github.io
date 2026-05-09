@@ -26,16 +26,17 @@
 <meta property="og:description" content="Lua实现Unity象素鸟小游戏要点记录： 游戏玩法简介不用物理引擎实现像素鸟在障碍物之间飞行，通过配表配置小鸟向下的加速度和点击一次屏幕给小鸟赋值一次初始速度和向上加速度来模拟小鸟飞行。障碍物根据配置难度在固定距离随机生成。 功能实现简述飞行障碍实现创建AmusementParkBirdObstacleCell障碍控件。游戏运行时，根据固定的配置距离，生成不同难度的障碍实例。障碍物分为上，下两部">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-14T11:38:16.000Z">
-<meta property="article:modified_time" content="2024-08-26T09:55:57.308Z">
+<meta property="article:modified_time" content="2026-05-09T06:18:25.650Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="IT">
 <meta property="article:tag" content="Lua">
 <meta property="article:tag" content="Unity3D">
+<meta property="article:tag" content="series:Lua游戏开发">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://www.bytefisher.top/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Lua实现Unity象素鸟小游戏摘要","description":"Lua实现Unity象素鸟小游戏要点记录： 游戏玩法简介不用物理引擎实现像素鸟在障碍物之间飞行，通过配表配置小鸟向下的加速度和点击一次屏幕给小鸟赋值一次初始速度和向上加速度来模拟小鸟飞行。障碍物根据配置难度在固定距离随机生成。 功能实现简述飞行障碍实现创建AmusementParkBirdObstacleCell障碍控件。游戏运行时，根据固定的配置距离，生成不同难度的障碍实例。障碍物分为上，下两部...","url":"https://www.bytefisher.top/2024/08/14/Lua实现Unity象素鸟小游戏摘要/","datePublished":"2024-08-14T11:38:16.000Z","dateModified":"2024-08-26T09:55:57.308Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2024/08/14/Lua实现Unity象素鸟小游戏摘要/"},"keywords":"Unity3D, IT, Lua"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Lua实现Unity象素鸟小游戏摘要","description":"Lua实现Unity象素鸟小游戏要点记录： 游戏玩法简介不用物理引擎实现像素鸟在障碍物之间飞行，通过配表配置小鸟向下的加速度和点击一次屏幕给小鸟赋值一次初始速度和向上加速度来模拟小鸟飞行。障碍物根据配置难度在固定距离随机生成。 功能实现简述飞行障碍实现创建AmusementParkBirdObstacleCell障碍控件。游戏运行时，根据固定的配置距离，生成不同难度的障碍实例。障碍物分为上，下两部...","url":"https://www.bytefisher.top/2024/08/14/Lua实现Unity象素鸟小游戏摘要/","datePublished":"2024-08-14T11:38:16.000Z","dateModified":"2026-05-09T06:18:25.650Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2024/08/14/Lua实现Unity象素鸟小游戏摘要/"},"keywords":"Unity3D, IT, Lua, series:Lua游戏开发"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Unity3D","item":"https://www.bytefisher.top/categories/Unity3D/"},{"@type":"ListItem","position":3,"name":"Lua实现Unity象素鸟小游戏摘要"}]}</script>
 
 
@@ -167,7 +168,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">41</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -259,7 +260,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-26 17:55:57" itemprop="dateModified" datetime="2024-08-26T17:55:57+08:00">2024-08-26</time>
+                <time title="修改时间：2026-05-09 14:18:25" itemprop="dateModified" datetime="2026-05-09T14:18:25+08:00">2026-05-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -673,7 +674,7 @@ end
 
 return AmusementParkGameFlappyBirdUI
 </code></pre>
-<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2024/08/15/Lua实现Unity娃娃机小游戏摘要/" class="related-post-item" title="Lua实现Unity娃娃机小游戏摘要"><span class="related-post-title">Lua实现Unity娃娃机小游戏摘要</span><span class="related-post-date">2024-08-15</span><span class="related-post-desc">游戏说明 游戏开始，下方随机生成不同品质小人，在场景中来回走动，不同品质的小人，移动速度不一样，被抓到后获得的积分也不一样。按住移动按钮，上方机械手臂会左右来回</span></a><a href="/2024/08/14/Lua实现Unity一笔画小游戏摘要/" class="related-post-item" title="Lua实现Unity一笔画小游戏摘要"><span class="related-post-title">Lua实现Unity一笔画小游戏摘要</span><span class="related-post-date">2024-08-14</span><span class="related-post-desc">用Lua实现Unity一笔画小游戏要点记录： 游戏玩法简介 选择不同难度关卡开始游戏，每一关有多个方块小格，可以从任意一个方块格作为起点开始连接到下一个方块格，</span></a><a href="/2024/07/03/Unity3D正交相机视野控制/" class="related-post-item" title="Unity3D正交相机视野控制"><span class="related-post-title">Unity3D正交相机视野控制</span><span class="related-post-date">2024-07-03</span><span class="related-post-desc">正交相机（Orthographic Camera） Unity3D中的正交相机（Orthographic Camera）是一种投影方式，它不同于透视相机（Per</span></a><a href="/2024/01/31/Lua实现Unity堆叠消除小游戏摘要/" class="related-post-item" title="Lua实现Unity堆叠消除小游戏摘要"><span class="related-post-title">Lua实现Unity堆叠消除小游戏摘要</span><span class="related-post-date">2024-01-31</span><span class="related-post-desc">Lua实现Unity堆叠消除小游戏，游戏功能每次随机生成四个不同形状的方块，将方块拖入10 10的格子棋盘，如果放入的棋盘格都有空格则可以放入方块，当放满一行或</span></a><a href="/2024/01/31/Lua实现Unity连连看小游戏摘要/" class="related-post-item" title="Lua实现Unity连连看小游戏摘要"><span class="related-post-title">Lua实现Unity连连看小游戏摘要</span><span class="related-post-date">2024-01-31</span><span class="related-post-desc">用Lua实现Unity连连看游戏要点记录： 游戏功能描述，通过游戏关卡配置从水果类型中，生成指定类型水果及其数量，位置随机。连线要求最多支持两个拐点，三段线相连</span></a><a href="/2023/12/06/Lua实现U3D弹幕飞行游戏摘要/" class="related-post-item" title="Lua实现U3D弹幕飞行游戏摘要"><span class="related-post-title">Lua实现U3D弹幕飞行游戏摘要</span><span class="related-post-date">2023-12-06</span><span class="related-post-desc">用Lua实现Unity弹幕飞行游戏要点记录： 对象池 创建游戏中可循环利用的游戏对象池 碰撞检测 实现场景中游戏对象的碰撞检测 子弹弹道实现 平行直线型 扇形功</span></a></div></div><div class="series-nav"><div class="series-nav-title">[object Object] 系列</div><div class="series-nav-progress">第 1/1 篇</div><div class="series-nav-links"></div></div>
+<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2024/08/15/Lua实现Unity娃娃机小游戏摘要/" class="related-post-item" title="Lua实现Unity娃娃机小游戏摘要"><span class="related-post-title">Lua实现Unity娃娃机小游戏摘要</span><span class="related-post-date">2024-08-15</span><span class="related-post-desc">游戏说明 游戏开始，下方随机生成不同品质小人，在场景中来回走动，不同品质的小人，移动速度不一样，被抓到后获得的积分也不一样。按住移动按钮，上方机械手臂会左右来回</span></a><a href="/2024/08/14/Lua实现Unity一笔画小游戏摘要/" class="related-post-item" title="Lua实现Unity一笔画小游戏摘要"><span class="related-post-title">Lua实现Unity一笔画小游戏摘要</span><span class="related-post-date">2024-08-14</span><span class="related-post-desc">用Lua实现Unity一笔画小游戏要点记录： 游戏玩法简介 选择不同难度关卡开始游戏，每一关有多个方块小格，可以从任意一个方块格作为起点开始连接到下一个方块格，</span></a><a href="/2024/01/31/Lua实现Unity堆叠消除小游戏摘要/" class="related-post-item" title="Lua实现Unity堆叠消除小游戏摘要"><span class="related-post-title">Lua实现Unity堆叠消除小游戏摘要</span><span class="related-post-date">2024-01-31</span><span class="related-post-desc">Lua实现Unity堆叠消除小游戏，游戏功能每次随机生成四个不同形状的方块，将方块拖入10 10的格子棋盘，如果放入的棋盘格都有空格则可以放入方块，当放满一行或</span></a><a href="/2024/01/31/Lua实现Unity连连看小游戏摘要/" class="related-post-item" title="Lua实现Unity连连看小游戏摘要"><span class="related-post-title">Lua实现Unity连连看小游戏摘要</span><span class="related-post-date">2024-01-31</span><span class="related-post-desc">用Lua实现Unity连连看游戏要点记录： 游戏功能描述，通过游戏关卡配置从水果类型中，生成指定类型水果及其数量，位置随机。连线要求最多支持两个拐点，三段线相连</span></a><a href="/2023/12/06/Lua实现U3D弹幕飞行游戏摘要/" class="related-post-item" title="Lua实现U3D弹幕飞行游戏摘要"><span class="related-post-title">Lua实现U3D弹幕飞行游戏摘要</span><span class="related-post-date">2023-12-06</span><span class="related-post-desc">用Lua实现Unity弹幕飞行游戏要点记录： 对象池 创建游戏中可循环利用的游戏对象池 碰撞检测 实现场景中游戏对象的碰撞检测 子弹弹道实现 平行直线型 扇形功</span></a><a href="/2024/07/03/Unity3D正交相机视野控制/" class="related-post-item" title="Unity3D正交相机视野控制"><span class="related-post-title">Unity3D正交相机视野控制</span><span class="related-post-date">2024-07-03</span><span class="related-post-desc">正交相机（Orthographic Camera） Unity3D中的正交相机（Orthographic Camera）是一种投影方式，它不同于透视相机（Per</span></a></div></div><div class="series-nav"><div class="series-nav-title">Lua游戏开发 系列</div><div class="series-nav-progress">第 5/6 篇</div><div class="series-nav-links"><a href="/2024/08/14/Lua实现Unity一笔画小游戏摘要/" class="series-nav-prev">Lua实现Unity一笔画小游戏摘要</a><a href="/2024/08/15/Lua实现Unity娃娃机小游戏摘要/" class="series-nav-next">Lua实现Unity娃娃机小游戏摘要</a></div></div>
     </div>
 
     
@@ -685,6 +686,7 @@ return AmusementParkGameFlappyBirdUI
               <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
               <a href="/tags/IT/" rel="tag"># IT</a>
               <a href="/tags/Lua/" rel="tag"># Lua</a>
+              <a href="/tags/series-Lua%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" rel="tag"># series:Lua游戏开发</a>
           </div>
 
         
@@ -788,7 +790,7 @@ return AmusementParkGameFlappyBirdUI
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">41</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
