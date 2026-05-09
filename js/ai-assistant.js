@@ -14,7 +14,7 @@
   function createBtn() {
     var btn = document.createElement('div');
     btn.id = 'ai-assistant-btn';
-    btn.innerHTML = '🤖';
+    btn.innerHTML = '🎣';
     btn.addEventListener('click', toggle);
     document.body.appendChild(btn);
   }
@@ -24,7 +24,7 @@
     panel.id = 'ai-assistant-panel';
     panel.innerHTML =
       '<div class="ai-header">' +
-        '<span>🤖 ' + CONFIG.botName + '</span>' +
+        '<span>🎣 ' + CONFIG.botName + '</span>' +
         '<button class="ai-close">&times;</button>' +
       '</div>' +
       '<div class="ai-messages" id="ai-msgs"></div>' +
