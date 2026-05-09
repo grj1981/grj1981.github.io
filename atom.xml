@@ -11,7 +11,51 @@
   <rights>All rights reserved 2026, 淡水鱼</rights>
   <subtitle>钓鱼爱好者的编程世界</subtitle>
   <title>ByteFisher</title>
-  <updated>2026-05-06T02:12:12.677Z</updated>
+  <updated>2026-05-09T02:52:20.420Z</updated>
+  <entry>
+    <author>
+      <name>淡水鱼</name>
+    </author>
+    <category term="Hexo博客搭建" scheme="https://www.bytefisher.top/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
+    <category term="Next主题" scheme="https://www.bytefisher.top/tags/Next%E4%B8%BB%E9%A2%98/"/>
+    <category term="Waline" scheme="https://www.bytefisher.top/tags/Waline/"/>
+    <category term="博客优化" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/"/>
+    <category term="评论系统" scheme="https://www.bytefisher.top/tags/%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/"/>
+    <id>https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/</id>
+    <link href="https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/"/>
+    <published>2026-05-09T12:00:00.000Z</published>
+    <summary>
+      <![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近对博客进行了一次全面的代码审查，发现三个高优先级的硬性问题：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>影响</th>
+<th>严重程度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RSS Feed 配置存在但依赖未安装</td>
+<td><code>/atom.xml</code> 无法生成，RSS 订阅失效</td>
+<td>🔴 高</td>
+</tr>
+<tr>
+<td>Sitemap 未配置</td>
+<td>搜索引擎爬取效率低，新文章收录慢</td>
+<td>🔴 高</td>
+</tr>
+<tr>
+<td>Valine 评论系统已停止维护</td>
+<td>存在安全风险，评论功能随时可能故障</td>
+<td>🔴 高</td>
+</tr>
+</tbody></table>
+<p>本文将详细记录这三项修复的完整过程，重点介绍 Valine 到 Waline 的平滑迁移方案。</p>]]>
+    </summary>
+    <title>Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移</title>
+    <updated>2026-05-09T02:52:20.420Z</updated>
+  </entry>
   <entry>
     <author>
       <name>淡水鱼</name>
@@ -655,40 +699,5 @@ TrimToSize()	void	将容量调整为实际元素数量以节省内存。
     </summary>
     <title>C#学习笔记【事件Event】</title>
     <updated>2025-02-05T09:44:00.842Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>淡水鱼</name>
-    </author>
-    <category term="C#" scheme="https://www.bytefisher.top/categories/C/"/>
-    <category term="IT" scheme="https://www.bytefisher.top/categories/IT/"/>
-    <category term="IT" scheme="https://www.bytefisher.top/tags/IT/"/>
-    <category term="C#" scheme="https://www.bytefisher.top/tags/C/"/>
-    <id>https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/</id>
-    <link href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/"/>
-    <published>2025-02-05T07:39:03.000Z</published>
-    <summary>
-      <![CDATA[<h1 id="C-委托（Delegate）"><a href="#C-委托（Delegate）" class="headerlink" title="C# 委托（Delegate）"></a><strong>C# 委托（Delegate）</strong></h1><p>在 C# 中，委托（Delegate） 是一种类型安全的函数指针，它允许将方法作为参数传递给其他方法。</p>
-<p>C# 中的委托（Delegate）类似于 C 或 C++ 中函数的指针。委托（Delegate） 是存有对某个方法的引用的一种引用类型变量，引用可在运行时被改变。</p>
-<p>委托在 C# 中非常常见，用于事件处理、回调函数、LINQ 等操作。</p>
-<p>所有的委托（Delegate）都派生自 System.Delegate 类。</p>
-<h1 id="声明委托（Delegate）"><a href="#声明委托（Delegate）" class="headerlink" title="声明委托（Delegate）"></a><strong>声明委托（Delegate）</strong></h1><p>委托是一个引用类型，它定义了一个方法签名，可以用于存储指向该签名的方法。通过委托，你可以调用其他类中的方法。</p>
-<p>委托声明决定了可由该委托引用的方法。委托可指向一个与其具有相同标签的方法。</p>
-<p>声明委托的语法如下：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public delegate &lt;return type&gt; &lt;delegate-name&gt; &lt;parameter list&gt;</span><br></pre></td></tr></table></figure><br>中文格式说明：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public delegate 返回类型 委托名(参数类型 参数名, ...);</span><br></pre></td></tr></table></figure></p>
-<p>例如以下代码，我们定义一个接受两个整数并返回一个整数的委托：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public delegate int MathOperation(int x, int y);</span><br></pre></td></tr></table></figure></p>
-<p>以下例子的委托可被用于引用任何一个带有一个单一的 string 参数的方法，并返回一个 int 类型变量。<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public delegate int MyDelegate (string s);</span><br></pre></td></tr></table></figure></p>
-<h1 id="实例化委托（Delegate）"><a href="#实例化委托（Delegate）" class="headerlink" title="实例化委托（Delegate）"></a><strong>实例化委托（Delegate）</strong></h1><p>一旦声明了委托类型，委托对象必须使用 new 关键字来创建，且与一个特定的方法有关。当创建委托时，传递到 new 语句的参数就像方法调用一样书写，但是不带有参数。例如：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public delegate void printString(string s);</span><br><span class="line">...</span><br><span class="line">printString ps1 = new printString(WriteToScreen);</span><br><span class="line">printString ps2 = new printString(WriteToFile);</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>下面的实例演示了委托的声明、实例化和使用，该委托可用于引用带有一个整型参数的方法，并返回一个整型值。</p>
-<p><strong>&gt; 实例:</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">delegate int NumberChanger(int n);</span><br><span class="line">namespace DelegateAppl</span><br><span class="line">&#123;</span><br><span class="line">   class TestDelegate</span><br><span class="line">   &#123;</span><br><span class="line">      static int num = 10;</span><br><span class="line">      public static int AddNum(int p)</span><br><span class="line">      &#123;</span><br><span class="line">         num += p;</span><br><span class="line">         return num;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      public static int MultNum(int q)</span><br><span class="line">      &#123;</span><br><span class="line">         num *= q;</span><br><span class="line">         return num;</span><br><span class="line">      &#125;</span><br><span class="line">      public static int getNum()</span><br><span class="line">      &#123;</span><br><span class="line">         return num;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         // 创建委托实例</span><br><span class="line">         NumberChanger nc1 = new NumberChanger(AddNum);</span><br><span class="line">         NumberChanger nc2 = new NumberChanger(MultNum);</span><br><span class="line">         // 使用委托对象调用方法</span><br><span class="line">         nc1(25);</span><br><span class="line">         Console.WriteLine(&quot;Value of Num: &#123;0&#125;&quot;, getNum());</span><br><span class="line">         nc2(5);</span><br><span class="line">         Console.WriteLine(&quot;Value of Num: &#123;0&#125;&quot;, getNum());</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Value of Num: 35</span><br><span class="line">Value of Num: 175</span><br></pre></td></tr></table></figure>
-</code></pre>]]>
-    </summary>
-    <title>C#学习笔记【委托Delegate】</title>
-    <updated>2025-02-05T08:41:10.010Z</updated>
   </entry>
 </feed>
