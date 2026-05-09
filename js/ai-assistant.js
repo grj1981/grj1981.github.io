@@ -14,7 +14,8 @@
   function createBtn() {
     var btn = document.createElement('div');
     btn.id = 'ai-assistant-btn';
-    btn.innerHTML = '🎣';
+    btn.title = 'AI 问答助手';
+    btn.innerHTML = '<span class="ai-btn-icon">🎣</span><span class="ai-btn-text">AI 助手</span>';
     btn.addEventListener('click', toggle);
     document.body.appendChild(btn);
   }

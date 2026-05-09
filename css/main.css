@@ -1318,7 +1318,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #4fffeb;
+  background: #0aff53;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3093,24 +3093,39 @@ body {
   position: fixed;
   bottom: 80px;
   right: 20px;
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #37c6c0, #32b2ad);
-  color: #fff;
-  font-size: 26px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 4px;
+  padding: 0 6px 0 14px;
+  height: 44px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #37c6c0, #32b2ad);
+  color: #fff;
   cursor: pointer;
   z-index: 9998;
   box-shadow: 0 4px 16px rgba(55,198,192,0.35);
-  transition: transform 0.3s, opacity 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s, opacity 0.3s, box-shadow 0.3s, padding 0.3s, width 0.3s;
   user-select: none;
 }
+#ai-assistant-btn .ai-btn-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+#ai-assistant-btn .ai-btn-text {
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 0;
+  opacity: 0;
+  transition: max-width 0.3s, opacity 0.3s;
+}
 #ai-assistant-btn:hover {
-  transform: scale(1.08);
+  padding: 0 14px 0 14px;
   box-shadow: 0 6px 24px rgba(55,198,192,0.45);
+}
+#ai-assistant-btn:hover .ai-btn-text {
+  max-width: 80px;
+  opacity: 1;
 }
 #ai-assistant-btn.hidden {
   opacity: 0;
