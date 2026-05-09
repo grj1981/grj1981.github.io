@@ -152,6 +152,7 @@
   }
 
   function init() {
+    if (document.getElementById('ai-assistant-btn')) return;
     createBtn();
     createPanel();
     addMsg('bot', CONFIG.welcomeMessage);
