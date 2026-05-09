@@ -11,7 +11,7 @@
   <rights>All rights reserved 2026, 淡水鱼</rights>
   <subtitle>钓鱼爱好者的编程世界</subtitle>
   <title>ByteFisher</title>
-  <updated>2026-05-09T10:23:33.273Z</updated>
+  <updated>2026-05-09T10:33:24.126Z</updated>
   <entry>
     <author>
       <name>淡水鱼</name>
@@ -26,9 +26,9 @@
     <id>https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%20AI%20%E9%97%AE%E7%AD%94%E5%8A%A9%E6%89%8B%EF%BC%9ADeepSeek%20API%20+%20Vercel%20Serverless%20+%20%E6%82%AC%E6%B5%AE%E7%90%83%E8%81%8A%E5%A4%A9%E9%9D%A2%E6%9D%BF/</id>
     <link href="https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%20AI%20%E9%97%AE%E7%AD%94%E5%8A%A9%E6%89%8B%EF%BC%9ADeepSeek%20API%20+%20Vercel%20Serverless%20+%20%E6%82%AC%E6%B5%AE%E7%90%83%E8%81%8A%E5%A4%A9%E9%9D%A2%E6%9D%BF/"/>
     <published>2026-05-09T14:00:00.000Z</published>
-    <summary>前言ByteFisher 博客已发布 95+ 篇文章，日均访问量稳定增长。随着读者增多，一个痛点越来越明显：静态博客缺少即时互动能力。 读者经常遇到的问题场景： “有没有 Unity 相关的入门教程？” “C 委托的用法在哪篇文章讲过？” “你们用的这个图床是什么？” 在之前，这些问题的唯一回答渠道是文章底部的评论区——读者留言，博主看到后回复，周期可能是几小时甚至几天。如果读者没有留下联系方式，...</summary>
+    <summary>前言ByteFisher 博客已发布 95+ 篇文章，一个痛点越来越明显：静态博客缺少即时互动能力。 读者经常遇到的问题场景： “有没有 Unity 相关的入门教程？” “C 委托的用法在哪篇文章讲过？” “你们用的这个图床是什么？” 在之前，这些问题的唯一回答渠道是文章底部的评论区——读者留言，博主看到后回复，周期可能是几小时甚至几天。如果读者没有留下联系方式，即使回复了对方也看不到。 为了解决...</summary>
     <title>Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板</title>
-    <updated>2026-05-09T10:23:33.273Z</updated>
+    <updated>2026-05-09T10:33:24.126Z</updated>
   </entry>
   <entry>
     <author>
@@ -61,7 +61,7 @@
     <id>https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/</id>
     <link href="https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/"/>
     <published>2026-05-09T12:00:00.000Z</published>
-    <summary>前言ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近对博客进行了一次全面的代码审查，发现三个高优先级的硬性问题： 问题 影响 严重程度 RSS Feed 配置存在但依赖未安装 /atom.xml 无法生成，RSS 订阅失效 🔴 高 Sitemap 未配置 搜索引擎爬取效率低，新文章收录慢 ...</summary>
+    <summary>前言ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近对博客进行了一次全面的代码审查，发现三个高优先级的硬性问题： 问题 影响 严重程度 RSS Feed 配置存在但依赖未安装 /atom.xml 无法生成，RSS 订阅失效 🔴 高 Sitemap 未配置 搜索引擎爬取效率低，新文章收录慢 �...</summary>
     <title>Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移</title>
     <updated>2026-05-09T06:18:25.487Z</updated>
   </entry>
@@ -192,10 +192,10 @@
     <category term="编程" scheme="https://www.bytefisher.top/categories/%E7%BC%96%E7%A8%8B/"/>
     <category term="游戏开发" scheme="https://www.bytefisher.top/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
     <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
+    <category term="AI" scheme="https://www.bytefisher.top/tags/AI/"/>
     <category term="JavaScript" scheme="https://www.bytefisher.top/tags/JavaScript/"/>
     <category term="游戏开发" scheme="https://www.bytefisher.top/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
     <category term="series:博客实战-小游戏" scheme="https://www.bytefisher.top/tags/series-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E6%B8%B8%E6%88%8F/"/>
-    <category term="AI" scheme="https://www.bytefisher.top/tags/AI/"/>
     <id>https://www.bytefisher.top/2026/04/15/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BA%94%E5%AD%90%E6%A3%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</id>
     <link href="https://www.bytefisher.top/2026/04/15/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BA%94%E5%AD%90%E6%A3%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/"/>
     <published>2026-04-15T12:00:00.000Z</published>
