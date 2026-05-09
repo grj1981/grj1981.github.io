@@ -37,7 +37,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2026/04/15/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BA%94%E5%AD%90%E6%A3%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo 博客实战：五子棋小游戏开发指南","description":"前言继扫雷、俄罗斯方块之后，本文介绍五子棋 AI 对战游戏的开发。相比其他游戏，五子棋的核心难点在于AI 算法的实现：如何在有限时间内找到最优落子位置，同时平衡进攻与防守。 五子棋是一个信息完全公开的零和博弈游戏，理论上可以通过搜索算法找到最优解。但实际应用中，我们需要考虑： 搜索空间巨大：15×15 棋盘有 225 个位置，搜索深度每增加一层，复杂度指数级增长 时间限制：玩家期望 AI 在几秒内...","url":"https://www.bytefisher.top/2026/04/15/Hexo-博客实战-五子棋小游戏开发指南/","datePublished":"2026-04-15T12:00:00.000Z","dateModified":"2026-05-09T06:18:25.496Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/04/15/Hexo-博客实战-五子棋小游戏开发指南/"},"keywords":"Hexo, JavaScript, 游戏开发, series:博客实战-小游戏, AI"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo 博客实战：五子棋小游戏开发指南","description":"前言继扫雷、俄罗斯方块之后，本文介绍五子棋 AI 对战游戏的开发。相比其他游戏，五子棋的核心难点在于AI 算法的实现：如何在有限时间内找到最优落子位置，同时平衡进攻与防守。 五子棋是一个信息完全公开的零和博弈游戏，理论上可以通过搜索算法找到最优解。但实际应用中，我们需要考虑： 搜索空间巨大：15×15 棋盘有 225 个位置，搜索深度每增加一层，复杂度指数级增长 时间限制：玩家期望 AI 在几秒内...","url":"https://www.bytefisher.top/2026/04/15/Hexo-博客实战-五子棋小游戏开发指南/","datePublished":"2026-04-15T12:00:00.000Z","dateModified":"2026-05-09T06:18:25.496Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/04/15/Hexo-博客实战-五子棋小游戏开发指南/"},"keywords":"Hexo, JavaScript, 游戏开发, AI, series:博客实战-小游戏"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"编程","item":"https://www.bytefisher.top/categories/编程/"},{"@type":"ListItem","position":3,"name":"Hexo 博客实战：五子棋小游戏开发指南"}]}</script>
 
 
@@ -701,8 +701,8 @@
               <a href="/tags/Hexo/" rel="tag"># Hexo</a>
               <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
               <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" rel="tag"># 游戏开发</a>
-              <a href="/tags/series-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E6%B8%B8%E6%88%8F/" rel="tag"># series:博客实战-小游戏</a>
               <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/series-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E6%B8%B8%E6%88%8F/" rel="tag"># series:博客实战-小游戏</a>
           </div>
 
         
@@ -1409,6 +1409,45 @@ body {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
+  }
+})();
+</script>
+
+<!-- Hero 打字机效果 -->
+<script>
+(function() {
+  function initHeroTyping() {
+    var el = document.getElementById('hero-typing');
+    if (!el) return;
+    var texts = ['编程世界', '数字乐园', '钓鱼天地', '技术博客'];
+    var textIndex = 0;
+    var charIndex = 0;
+    var isDeleting = false;
+
+    function type() {
+      var current = texts[textIndex];
+      if (isDeleting) {
+        el.textContent = current.substring(0, charIndex--);
+      } else {
+        el.textContent = current.substring(0, charIndex++);
+      }
+
+      if (!isDeleting && charIndex === current.length) {
+        setTimeout(function() { isDeleting = true; }, 2000);
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+      }
+
+      setTimeout(type, isDeleting ? 50 : 100);
+    }
+    type();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroTyping);
+  } else {
+    initHeroTyping();
   }
 })();
 </script>

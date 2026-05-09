@@ -220,6 +220,41 @@
 
           <div class="content index posts-expand">
             
+
+  <div class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">
+      <span class="hero-emoji">🎣</span>
+      ByteFisher
+    </h1>
+    <div class="hero-subtitle">
+      <span class="hero-prefix">钓鱼爱好者的</span>
+      <span class="hero-typing" id="hero-typing"></span>
+      <span class="hero-cursor">|</span>
+    </div>
+    <p class="hero-desc">分享游戏开发技术与钓鱼乐趣</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-value">94</span>
+        <span class="hero-stat-label">文章</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">7</span>
+        <span class="hero-stat-label">鱼获</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">5</span>
+        <span class="hero-stat-label">小游戏</span>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="/archives/" class="hero-btn hero-btn-primary">📚 浏览文章</a>
+      <a href="/fish/" class="hero-btn hero-btn-secondary">🎣 钓鱼相册</a>
+      <a href="/ai-games/" class="hero-btn hero-btn-secondary">🎮 玩小游戏</a>
+    </div>
+  </div>
+</div>
+
       
   
   
@@ -1497,6 +1532,45 @@ body {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
+  }
+})();
+</script>
+
+<!-- Hero 打字机效果 -->
+<script>
+(function() {
+  function initHeroTyping() {
+    var el = document.getElementById('hero-typing');
+    if (!el) return;
+    var texts = ['编程世界', '数字乐园', '钓鱼天地', '技术博客'];
+    var textIndex = 0;
+    var charIndex = 0;
+    var isDeleting = false;
+
+    function type() {
+      var current = texts[textIndex];
+      if (isDeleting) {
+        el.textContent = current.substring(0, charIndex--);
+      } else {
+        el.textContent = current.substring(0, charIndex++);
+      }
+
+      if (!isDeleting && charIndex === current.length) {
+        setTimeout(function() { isDeleting = true; }, 2000);
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+      }
+
+      setTimeout(type, isDeleting ? 50 : 100);
+    }
+    type();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroTyping);
+  } else {
+    initHeroTyping();
   }
 })();
 </script>
