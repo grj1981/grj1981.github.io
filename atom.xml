@@ -11,7 +11,24 @@
   <rights>All rights reserved 2026, 淡水鱼</rights>
   <subtitle>钓鱼爱好者的编程世界</subtitle>
   <title>ByteFisher</title>
-  <updated>2026-05-09T06:18:25.487Z</updated>
+  <updated>2026-05-09T08:49:22.426Z</updated>
+  <entry>
+    <author>
+      <name>淡水鱼</name>
+    </author>
+    <category term="Hexo博客搭建" scheme="https://www.bytefisher.top/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    <category term="series:Hexo博客搭建" scheme="https://www.bytefisher.top/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
+    <category term="Next主题" scheme="https://www.bytefisher.top/tags/Next%E4%B8%BB%E9%A2%98/"/>
+    <category term="博客优化" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/"/>
+    <category term="SEO" scheme="https://www.bytefisher.top/tags/SEO/"/>
+    <id>https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%BD%93%E9%AA%8C%E5%8D%87%E7%BA%A7%EF%BC%9ASEO%20%E4%BC%98%E5%8C%96%20+%20%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E5%A2%9E%E5%BC%BA%20+%20%E5%93%81%E7%89%8C%E8%A7%86%E8%A7%89%E9%87%8D%E6%9E%84/</id>
+    <link href="https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%BD%93%E9%AA%8C%E5%8D%87%E7%BA%A7%EF%BC%9ASEO%20%E4%BC%98%E5%8C%96%20+%20%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E5%A2%9E%E5%BC%BA%20+%20%E5%93%81%E7%89%8C%E8%A7%86%E8%A7%89%E9%87%8D%E6%9E%84/"/>
+    <published>2026-05-09T13:00:00.000Z</published>
+    <summary>前言上一篇《Hexo 博客三项基础修复》解决了 RSS、Sitemap、评论系统的高优先级硬性问题，博客具备了稳固的基础设施。但 Lighthouse 审查还暴露了更多问题： 类别 问题数 严重程度 SEO 4 项 🟡 中 体验 7 项 🟡 中 品牌 2 项 🟡 中 其中 SEO 问题影响搜索引擎发现和社交分享展示，体验问题影响读者停留和互动，品牌问题则关系到博客的识别度和专业性。 本文将依...</summary>
+    <title>Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构</title>
+    <updated>2026-05-09T08:49:22.426Z</updated>
+  </entry>
   <entry>
     <author>
       <name>淡水鱼</name>
@@ -26,7 +43,7 @@
     <id>https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/</id>
     <link href="https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/"/>
     <published>2026-05-09T12:00:00.000Z</published>
-    <summary>前言ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近对博客进行了一次全面的代码审查，发现三个高优先级的硬性问题： 问题 影响 严重程度 RSS Feed 配置存在但依赖未安装 /atom.xml 无法生成，RSS 订阅失效 🔴 高 Sitemap 未配置 搜索引擎爬取效率低，新文章收录慢 �...</summary>
+    <summary>前言ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近对博客进行了一次全面的代码审查，发现三个高优先级的硬性问题： 问题 影响 严重程度 RSS Feed 配置存在但依赖未安装 /atom.xml 无法生成，RSS 订阅失效 🔴 高 Sitemap 未配置 搜索引擎爬取效率低，新文章收录慢 ...</summary>
     <title>Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移</title>
     <updated>2026-05-09T06:18:25.487Z</updated>
   </entry>
@@ -340,21 +357,5 @@
     <summary>C 集合（Collection）集合（Collection）类是专门用于数据存储和检索的类。这些类提供了对栈（stack）、队列（queue）、列表（list）和哈希表（hash table）的支持。大多数集合类实现了相同的接口。 集合（Collection）类服务于不同的目的，如为元素动态分配内存，基于索引访问列表项等等。这些类创建 Object 类的对象的集合。在 C 中，Object 类是所...</summary>
     <title>C#学习笔记【集合Collection】</title>
     <updated>2026-05-09T06:18:25.381Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>淡水鱼</name>
-    </author>
-    <category term="C#" scheme="https://www.bytefisher.top/categories/C/"/>
-    <category term="IT" scheme="https://www.bytefisher.top/categories/IT/"/>
-    <category term="IT" scheme="https://www.bytefisher.top/tags/IT/"/>
-    <category term="C#" scheme="https://www.bytefisher.top/tags/C/"/>
-    <category term="series:C#学习笔记" scheme="https://www.bytefisher.top/tags/series-C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%BA%8B%E4%BB%B6Event%E3%80%91/</id>
-    <link href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%BA%8B%E4%BB%B6Event%E3%80%91/"/>
-    <published>2025-02-05T08:43:10.000Z</published>
-    <summary>C 事件（Event）C 事件（Event）是一种成员，用于将特定的事件通知发送给订阅者。事件通常用于实现观察者模式，它允许一个对象将状态的变化通知其他对象，而不需要知道这些对象的细节。 事件（Event） 基本上说是一个用户操作，如按键、点击、鼠标移动等等，或者是一些提示信息，如系统生成的通知。应用程序需要在事件发生时响应事件。例如，中断。 C 中使用事件机制实现线程间的通信。 关键点 声明委托...</summary>
-    <title>C#学习笔记【事件Event】</title>
-    <updated>2026-05-09T06:18:25.289Z</updated>
   </entry>
 </feed>
