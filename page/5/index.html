@@ -31,6 +31,9 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/page/5/">
 
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"ByteFisher","url":"https://www.bytefisher.top","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.bytefisher.top/search.json?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"}]}</script>
+
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
@@ -44,6 +47,15 @@
 
   <title>ByteFisher</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+      }
+    </script>
 
 
 
@@ -278,42 +290,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="C-特性（Attribute）"><a href="#C-特性（Attribute）" class="headerlink" title="C# 特性（Attribute）"></a><strong>C# 特性（Attribute）</strong></h1><p>特性（Attribute）是用于在运行时传递程序中各种元素（比如类、方法、结构、枚举、组件等）的行为信息的声明性标签。您可以通过使用特性向程序添加声明性信息。一个声明性标签是通过放置在它所应用的元素前面的方括号（[ ]）来描述的。</p>
-<p>特性（Attribute）用于添加元数据，如编译器指令和注释、描述、方法、类等其他信息。.Net 框架提供了两种类型的特性：预定义特性和自定义特性。</p>
-<h1 id="规定特性（Attribute）"><a href="#规定特性（Attribute）" class="headerlink" title="规定特性（Attribute）"></a><strong>规定特性（Attribute）</strong></h1><p>规定特性（Attribute）的语法如下：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[attribute(positional_parameters, name_parameter = value, ...)]</span><br><span class="line">element</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>特性（Attribute）的名称和值是在方括号内规定的，放置在它所应用的元素之前。positional_parameters 规定必需的信息，name_parameter 规定可选的信息。</p>
-<h1 id="预定义特性（Attribute）"><a href="#预定义特性（Attribute）" class="headerlink" title="预定义特性（Attribute）"></a><strong>预定义特性（Attribute）</strong></h1><p>.Net 框架提供了三种预定义特性：
-	</p>
-<ul>
-<li><p>AttributeUsage</p>
-</li>
-<li><p>Conditional</p>
-</li>
-<li><p>Obsolete</p>
-</li>
-</ul>
-<h2 id="AttributeUsage"><a href="#AttributeUsage" class="headerlink" title="AttributeUsage"></a>AttributeUsage</h2><p>预定义特性 AttributeUsage 描述了如何使用一个自定义特性类。它规定了特性可应用到的项目的类型。</p>
-<p>规定该特性的语法如下：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[AttributeUsage(</span><br><span class="line">   validon,</span><br><span class="line">   AllowMultiple=allowmultiple,</span><br><span class="line">   Inherited=inherited</span><br><span class="line">)]</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>其中：</p>
-<ul>
-<li><p>参数 validon 规定特性可被放置的语言元素。它是枚举器 AttributeTargets 的值的组合。默认值是 AttributeTargets.All。</p>
-</li>
-<li><p>参数 allowmultiple（可选的）为该特性的 AllowMultiple 属性（property）提供一个布尔值。如果为 true，则该特性是多用的。默认值是 false（单用的）。</p>
-</li>
-<li><p>参数 inherited（可选的）为该特性的 Inherited 属性（property）提供一个布尔值。如果为 true，则该特性可被派生类继承。默认值是 false（不被继承）。</p>
-</li>
-</ul>
-<p>例如：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[AttributeUsage(AttributeTargets.Class |</span><br><span class="line">AttributeTargets.Constructor |</span><br><span class="line">AttributeTargets.Field |</span><br><span class="line">AttributeTargets.Method |</span><br><span class="line">AttributeTargets.Property, </span><br><span class="line">AllowMultiple = true)]</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="Conditional"><a href="#Conditional" class="headerlink" title="Conditional"></a>Conditional</h2>
+          <p>C 特性（Attribute）特性（Attribute）是用于在运行时传递程序中各种元素（比如类、方法、结构、枚举、组件等）的行为信息的声明性标签。您可以通过使用特性向程序添加声明性信息。一个声明性标签是通过放置在它所应用的元素前面的方括号（ ）来描述的。 特性（Attribute）用于添加元数据，如编译器指令和注释、描述、方法、类等其他信息。.Net 框架提供了两种类型的特性：预定义特性和自定义...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -403,27 +383,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="C-接口-Interface"><a href="#C-接口-Interface" class="headerlink" title="C#接口(Interface)"></a><strong>C#接口(Interface)</strong></h1><p>接口定义了所有类继承接口时应遵循的语法合同。接口定义了语法合同 “是什么” 部分，派生类定义了语法合同 “怎么做” 部分。</p>
-<p>接口定义了属性、方法和事件，这些都是接口的成员。接口只包含了成员的声明。成员的定义是派生类的责任。接口提供了派生类应遵循的标准结构。</p>
-<p>接口使得实现接口的类或结构在形式上保持一致。</p>
-<p>抽象类在某种程度上与接口类似，但是，它们大多只是用在当只有少数方法由基类声明由派生类实现时。</p>
-<p>接口本身并不实现任何功能，它只是和声明实现该接口的对象订立一个必须实现哪些行为的契约。</p>
-<p>抽象类不能直接实例化，但允许派生出具体的，具有实际功能的类。</p>
-<h1 id="定义接口-MyInterface-cs"><a href="#定义接口-MyInterface-cs" class="headerlink" title="定义接口: MyInterface.cs"></a><strong>定义接口: MyInterface.cs</strong></h1><p>接口使用 interface 关键字声明，它与类的声明类似。接口声明默认是 public 的。下面是一个接口声明的实例：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface IMyInterface</span><br><span class="line">&#123;</span><br><span class="line">    void MethodToImplement();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>以上代码定义了接口 IMyInterface。通常接口命名以 I 字母开头，这个接口只有一个方法 MethodToImplement()，没有参数和返回值，当然我们可以按照需求设置参数和返回值。</p>
-<p>值得注意的是，该方法并没有具体的实现。</p>
-<h1 id="实现以上接口：InterfaceImplementer-cs"><a href="#实现以上接口：InterfaceImplementer-cs" class="headerlink" title="实现以上接口：InterfaceImplementer.cs"></a><strong>实现以上接口：InterfaceImplementer.cs</strong></h1><p><strong>&gt; 实例：</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">interface IMyInterface</span><br><span class="line">&#123;</span><br><span class="line">        // 接口成员</span><br><span class="line">    void MethodToImplement();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class InterfaceImplementer : IMyInterface</span><br><span class="line">&#123;</span><br><span class="line">    static void Main()</span><br><span class="line">    &#123;</span><br><span class="line">        InterfaceImplementer iImp = new InterfaceImplementer();</span><br><span class="line">        iImp.MethodToImplement();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void MethodToImplement()</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(&quot;MethodToImplement() called.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>InterfaceImplementer 类实现了 IMyInterface 接口，接口的实现与类的继承语法格式类似：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class InterfaceImplementer : IMyInterface</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>继承接口后，我们需要实现接口的方法 MethodToImplement() , 方法名必须与接口定义的方法名一致。</p>
+          <p>C 接口(Interface)接口定义了所有类继承接口时应遵循的语法合同。接口定义了语法合同 “是什么” 部分，派生类定义了语法合同 “怎么做” 部分。 接口定义了属性、方法和事件，这些都是接口的成员。接口只包含了成员的声明。成员的定义是派生类的责任。接口提供了派生类应遵循的标准结构。 接口使得实现接口的类或结构在形式上保持一致。 抽象类在某种程度上与接口类似，但是，它们大多只是用在当只有少数方法...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -517,27 +480,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="await-关键字"><a href="#await-关键字" class="headerlink" title="await 关键字"></a><strong>await 关键字</strong></h1><p>在C#编程中，await 关键字用于异步编程，它通常与 async 关键字一起使用。await 用于暂停当前方法的执行，直到等待的异步任务完成。这样可以在不阻塞主线程的情况下执行耗时操作，如I&#x2F;O操作或网络请求。</p>
-<p>例如，假设有一个异步方法 GetDataAsync()，你可以这样使用 await：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public async Task&lt;string&gt; FetchDataAsync()</span><br><span class="line">&#123;</span><br><span class="line">    // 假设 GetDataAsync 是一个返回 Task&lt;string&gt; 的异步方法</span><br><span class="line">    string data = await GetDataAsync();</span><br><span class="line">    return data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>在这个例子中，await GetDataAsync() 会暂停 FetchDataAsync 方法的执行，直到 GetDataAsync 完成并返回结果。同时，控制权会返回给调用者，允许程序继续执行其他操作。</p>
-<p>在C#中使用await时，有几个关键要点需要注意，以确保异步代码的正确性和高效性：</p>
-<h2 id="async-方法必须返回-Task-或-Task"><a href="#async-方法必须返回-Task-或-Task" class="headerlink" title="async 方法必须返回 Task 或 Task&lt;T&gt;"></a>async 方法必须返回 Task 或 Task&lt;T&gt;</h2><p>使用 await 的方法必须标记为 async，并且返回类型应为 Task（无返回值）或 Task&lt;T&gt;（有返回值）。</p>
-<p>例如：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public async Task&lt;int&gt; CalculateAsync()</span><br><span class="line">&#123;</span><br><span class="line">    await Task.Delay(1000); // 模拟耗时操作</span><br><span class="line">    return 42;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="避免阻塞调用"><a href="#避免阻塞调用" class="headerlink" title="避免阻塞调用"></a>避免阻塞调用</h2><p>不要在 async 方法中使用 .Result 或 .Wait()，这会导致死锁或阻塞线程。</p>
-<p>例如，避免以下写法：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var result = SomeAsyncMethod().Result; // 错误：可能导致死锁</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="正确处理异常"><a href="#正确处理异常" class="headerlink" title="正确处理异常"></a>正确处理异常</h2><p>异步方法中的异常会被包装在 Task 中，可以通过 try-catch 捕获。</p>
-<p>例如：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">try</span><br><span class="line">&#123;</span><br><span class="line">    await SomeAsyncMethod();</span><br><span class="line">&#125;</span><br><span class="line">catch (Exception ex)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine($&quot;Error: &#123;ex.Message&#125;&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
+          <p>await 关键字在C 编程中，await 关键字用于异步编程，它通常与 async 关键字一起使用。await 用于暂停当前方法的执行，直到等待的异步任务完成。这样可以在不阻塞主线程的情况下执行耗时操作，如I& x2F;O操作或网络请求。 例如，假设有一个异步方法 GetDataAsync()，你可以这样使用 await： 123456public async Task&lt;string&gt...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/#more" rel="contents">
+              <a class="btn" href="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -627,26 +573,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Mesh-网格"><a href="#Mesh-网格" class="headerlink" title="Mesh 网格"></a>Mesh 网格</h1><h2 id="Mesh-Filter"><a href="#Mesh-Filter" class="headerlink" title="Mesh Filter"></a>Mesh Filter</h2><p>官方手册地址：<a target="_blank" rel="noopener" href="https://docs.unity3d.com/cn/current/Manual/class-MeshFilter.html">Mesh Filter</a></p>
-<p>Mesh Filter 组件包含对网格的引用。该组件与同一个游戏对象上的 Mesh Renderer 组件配合使用；Mesh Renderer 组件渲染 Mesh Filt组件引用的网格。用于将网格数据应用到 3D 模型上。它是实现 3D 模型的重要组成部分之一，可以定义模型的形状和结构。</p>
-<p>Mesh Filter 可以将网格数据应用到 3D 模型上，从而定义模型的形状和结构。它通过读取网格数据，包括顶点、三角形面片等信息，来定义模的形状和结构。这些网格数据可以通过外部工具（例如 Blender、Maya 等）创建，也可以通过代码动态生成。</p>
-<p>Mesh Filter 提供了许多属性和方法，例如网格数据、法线、UV 坐标等，可以用来控制模型的形状和结构。另外，Mesh Filter<br>还支持动态修改网格数据，从而实现更加灵活的模型变形效果。</p>
-<h2 id="Mesh-Renderer"><a href="#Mesh-Renderer" class="headerlink" title="Mesh Renderer"></a>Mesh Renderer</h2><p>官方手册地址：<a target="_blank" rel="noopener" href="https://docs.unity3d.com/cn/current/Manual/class-MeshRenderer.html">Mesh Renderer</a></p>
-<p>Mesh Renderer 组件用于渲染网格。该组件与同一个游戏对象上的 Mesh Filter 组件配合使用；Mesh Renderer 组件渲染 Mesh Filter 组件引用的网格。</p>
-<p>用于将 3D 模型渲染到屏幕上。它是游戏中 3D 模型的重要组成部分之一，可以让游戏中的角色、场景和物品等立体化呈现。</p>
-<h2 id="Skinned-Mesh-Renderer"><a href="#Skinned-Mesh-Renderer" class="headerlink" title="Skinned Mesh Renderer"></a>Skinned Mesh Renderer</h2><p>官方手册地址：<a target="_blank" rel="noopener" href="https://docs.unity3d.com/cn/current/Manual/class-SkinnedMeshRenderer.html">Skinned Mesh Renderer</a></p>
-<p>Skinned Mesh Renderer 组件渲染一个可变形的网格。可变形网格包括蒙皮网格（具有骨骼和绑定姿势的网格）、具有混合形状的网格和运行布料模拟的网格。用于将骨骼动画应用到 3D 模型上。它是实现角色动画的重要组件之一，可以让游戏角色在运动中更加自然和流畅。</p>
-<p>Skinned Mesh Renderer 可以在 3D 模型上应用骨骼动画，使得模型能够根据动画数据进行变形，从而实现角色的动画效果。它使用骨骼系统来管理骨骼和骨骼权重，并将这些信息应用到 3D 模型上，从而实现动画的变形效果。</p>
-<p>Skinned Mesh Renderer 提供了许多属性和方法，例如骨骼系统、骨骼权重、动画剪辑、动画速度等，可以用来控制动画的播放和效果。另外，Skinned Mesh Renderer 还支持动态修改骨骼权重，从而实现更加灵活的动画效果。</p>
-<p>Skinned Mesh Renderer 是 Unity 中实现角色动画的重要组件之一，可以让游戏角色在运动中更加自然和流畅。它是游戏开发中不可或缺的工具，可以提高游戏的可玩性和视觉效果。</p>
-<h2 id="Text-Mesh"><a href="#Text-Mesh" class="headerlink" title="Text Mesh"></a>Text Mesh</h2><p>官方手册地址：<a target="_blank" rel="noopener" href="https://docs.unity3d.com/cn/current/Manual/class-TextMesh.html">Text Mesh</a></p>
-<p>用于将文本转换为 3D 网格，以便进行高效的渲染和交互。与 Unity 自带的 Text 组件和 TextMeshPro-Text 组件相比，Text Mesh 更加轻量级和高效，适用于需要大量文本渲染的场景。</p>
-<p>Text Mesh 可以用来渲染各种文本内容，例如游戏中的标签、计分板、物品名称等等。它能够将文本转换为 3D 网格，并使用 GPU 进行加速渲染，从而能够高效地处理大量文本内容。</p>
-<p>Text Mesh 组件提供了许多属性，例如字体、字体大小、颜色、对齐方式、行距、字间距等，可以用来调整文本的排版和格式化。另外，Text Mesh 还支持动态生成文本，可以通过代码来实现动态更新文本内容，从而满足游戏中各种动态文本渲染需求。</p>
-<p>Text Mesh 是 Unity 中非常高效的文本渲染组件，适用于需要大量文本渲染的场景，例如大量的标签、计分板、物品名称等等。</p>
+          <p>Mesh 网格Mesh Filter官方手册地址：Mesh Filter Mesh Filter 组件包含对网格的引用。该组件与同一个游戏对象上的 Mesh Renderer 组件配合使用；Mesh Renderer 组件渲染 Mesh Filt组件引用的网格。用于将网格数据应用到 3D 模型上。它是实现 3D 模型的重要组成部分之一，可以定义模型的形状和结构。 Mesh Filter 可以将网格...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/12/06/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%BB%84%E4%BB%B6/#more" rel="contents">
+              <a class="btn" href="/2024/12/06/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%BB%84%E4%BB%B6/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -736,30 +666,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="移动"><a href="#移动" class="headerlink" title="移动"></a>移动</h1><p>当gameobject被加上rigidbody2d组件时，如果想移动它，不要这样写：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">void Update()</span><br><span class="line">&#123;</span><br><span class="line">	this.transform.Translate (Vector3.left * speed * Time.deltaTime);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这种写法，主要针对无rigidbody2d的gameobject对象，否则，性能很差。<br>正确的写法：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void FixedUpdate()</span><br><span class="line">&#123;</span><br><span class="line">	rigidbody2D.MovePosition (rigidbody2D.position + Vector2.left * speed * Time.fixedDeltaTime);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void Start () </span><br><span class="line">&#123;</span><br><span class="line">	rigidbody2D.velocity = Vector2.left * speed;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h1 id="Body-Type属性"><a href="#Body-Type属性" class="headerlink" title="Body Type属性"></a>Body Type属性</h1><p>rigidbody2d最为重要的一个属性，不同的选项，不同的物理效果：</p>
-<h2 id="Dynamic（动态的）"><a href="#Dynamic（动态的）" class="headerlink" title="Dynamic（动态的）"></a>Dynamic（动态的）</h2><pre><code>具有完全的物理特性；
-会与所有类型的Rigidbody2D进行碰撞；
-是最常用的Rigidbody2D类型、也是默认的类型；
-是最耗费性能的类型；
-</code></pre>
-<h2 id="Kinematic（运动学）"><a href="#Kinematic（运动学）" class="headerlink" title="Kinematic（运动学）"></a>Kinematic（运动学）</h2><pre><code>仅在用户控制下运动，不会受到重力和AddForce等力相关函数的影响;
-只与Dynamic的Rigidbody2D发生碰撞（不勾选Use Full Kinematic Contacts）；
-不能通过力或碰撞改变速度，但是可以设置其速度和位置、旋转；
-比Dynamic性能高；
-</code></pre>
-<h2 id="Static-静态的"><a href="#Static-静态的" class="headerlink" title="Static (静态的)"></a>Static (静态的)</h2><pre><code>具有无限质量、不可移动的物体;
-velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
-只与Dynamic的Rigidbody2D发生碰撞;
-性能最高；
-</code></pre>
-<h1 id="Simulated-物理模拟"><a href="#Simulated-物理模拟" class="headerlink" title="Simulated 物理模拟"></a>Simulated 物理模拟</h1>
+          <p>移动当gameobject被加上rigidbody2d组件时，如果想移动它，不要这样写： 1234void Update()& 123; this.transform.Translate (Vector3.left speed Time.deltaTime);& 125; 这种写法，主要针对无rigidbody2d的gameobject对象，否则，性能很差。正确的写法： 123456789void...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/#more" rel="contents">
+              <a class="btn" href="/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -859,13 +769,10 @@ velocity、AddForce、gravity、MovePosition、MoveRotation都不可用;
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="游戏说明"><a href="#游戏说明" class="headerlink" title="游戏说明"></a>游戏说明</h1><p>游戏开始，下方随机生成不同品质小人，在场景中来回走动，不同品质的小人，移动速度不一样，被抓到后获得的积分也不一样。按住移动按钮，上方机械手臂会左右来回移动，当松开按钮，机械手臂会掉下来，当手臂下落碰到场景中小人时，检测当前手臂抓取范围内的小人，在抓取范围内的小人会被抓走。然后计算获得分数，如果机械手臂抓空，则碰到地面后手臂也会自动回弹，每轮游戏有4次抓取机会。</p>
-<h1 id="功能实现"><a href="#功能实现" class="headerlink" title="功能实现"></a>功能实现</h1><h2 id="移动的小人"><a href="#移动的小人" class="headerlink" title="移动的小人"></a>移动的小人</h2><p>创建移动小人AmusementParkDollMachineGameRole,跟据不同品质小人，移动速度不同实现小人在可控范围内随机位置移动。在移动过程中通过修改sortingOrder值来调整小人在不同位置的层级显示。小人在移动是播放walk动作，被抓住时拖放drag动作，同时将小人从场景节点移动到机械手臂抓取小人的节点内，当手臂上升时，小人跟着手臂一起向上移动，抓取结束移除被抓取的小人。</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br></pre></td><td class="code"><pre><span class="line">---待抓取的游戏小人</span><br><span class="line">---@class AmusementParkDollMachineGameRole</span><br><span class="line">local m = &#123;</span><br><span class="line">    View = nil,</span><br><span class="line">    ---@type AmusementParkDollMachineRoleData</span><br><span class="line">    RoleData = nil,</span><br><span class="line">    ---@type Spine.Unity.SkeletonGraphic</span><br><span class="line">    Animation = nil,</span><br><span class="line">    ---@type number</span><br><span class="line">    EntityId = 0,</span><br><span class="line">    ---@type Vector3 下一个移动位置</span><br><span class="line">    NextPos = Vector3.New(0,0,0),</span><br><span class="line">    ---@type boolean 是否在移动中</span><br><span class="line">    IsMoving = false,</span><br><span class="line">    ---@type number 下一次开始移动的时间</span><br><span class="line">    NextMovieTimer = 0,</span><br><span class="line">    ---@type boolean 小人是否已成功创建</span><br><span class="line">    IsCreateRole = false,</span><br><span class="line">    ---@type boolean 小人是否被抓住</span><br><span class="line">    IsCatch = false,</span><br><span class="line">    ---@type UnityEngine.Collider2D 小人Collider</span><br><span class="line">    RoleCollider = nil,</span><br><span class="line">    RoleObj = nil,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function m.New(view)</span><br><span class="line">    local obj = Clone(m)</span><br><span class="line">    obj:Init(view)</span><br><span class="line">    return obj</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Init(view)</span><br><span class="line">    self.View = view</span><br><span class="line">    LuaCodeInterface.BindOutlet(self.View, self)</span><br><span class="line">    self.OnShowSpineSuccessDelegate = function(sender, args) self:OnShowSpineSuccess(sender, args) end</span><br><span class="line"></span><br><span class="line">    self.RoleCollider = self.View:GetComponent(typeof(UnityEngine.Collider2D))</span><br><span class="line"></span><br><span class="line">    self:AddListener()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:AddListener()</span><br><span class="line">    GameEntry.LuaEvent:Subscribe(UnityGameFramework.Runtime.ShowEntitySuccessEventArgs.EventId, self.OnShowSpineSuccessDelegate)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:RemoveListener()</span><br><span class="line">    GameEntry.LuaEvent:Unsubscribe(UnityGameFramework.Runtime.ShowEntitySuccessEventArgs.EventId, self.OnShowSpineSuccessDelegate)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---界面轮询。</span><br><span class="line">---@param elapseSeconds number</span><br><span class="line">---@param realElapseSeconds number</span><br><span class="line">---@return void</span><br><span class="line">function m:OnUpdate(elapseSeconds, realElapseSeconds)</span><br><span class="line">    if not self.IsCreateRole then</span><br><span class="line">        return</span><br><span class="line">    end</span><br><span class="line">    if self.RoleData == nil then</span><br><span class="line">        return</span><br><span class="line">    end</span><br><span class="line">    if self.IsCatch then</span><br><span class="line">        return</span><br><span class="line">    end</span><br><span class="line">    if not self.IsMoving then</span><br><span class="line">        if PlayerModule.GetServerTime() &gt; self.NextMovieTimer then</span><br><span class="line">            self:StartMove()</span><br><span class="line">        end</span><br><span class="line">        return</span><br><span class="line">    end</span><br><span class="line">    local direction = self.NextPos - self.View.transform.localPosition</span><br><span class="line">    if direction.magnitude &gt; self.RoleData.roleRareSpeed then</span><br><span class="line">        self.View.transform:Translate(direction.normalized * self.RoleData.roleRareSpeed * UnityEngine.Time.deltaTime)</span><br><span class="line">        self:ChangeRoleOrderZ()</span><br><span class="line">    else</span><br><span class="line">        self:StopMove()</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:ChangeOrder()</span><br><span class="line">    if self.RoleObj then</span><br><span class="line">        local canvas = self.View:GetComponentInParent(typeof(UnityEngine.Canvas))</span><br><span class="line">        setGameObjectLayers(self.RoleObj.transform, &quot;UI&quot;)</span><br><span class="line">        local renderers = self.RoleObj:GetComponentsInChildren(typeof(UnityEngine.Renderer))</span><br><span class="line">        for i = 0, renderers.Length - 1 do</span><br><span class="line">            renderers[i].sortingLayerID = LuaCodeInterface.SortingLayerNameToID(&quot;Default&quot;)</span><br><span class="line">            renderers[i].sortingOrder = canvas.sortingOrder + 1</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:OnShowSpineSuccess(sender, args)</span><br><span class="line">    if self.EntityId == args.Entity.Id then</span><br><span class="line">        self.RoleObj = args.Entity.gameObject</span><br><span class="line">        self.Animation = args.Entity.gameObject:GetComponentInChildren(typeof(Spine.Unity.SkeletonAnimation))</span><br><span class="line">        self.Animation.state:SetAnimation(0,&quot;idle&quot;, true)</span><br><span class="line">        self:StartMove()</span><br><span class="line">        self.IsCreateRole = true</span><br><span class="line">        self:ChangeOrder()</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---获取一个随机位置 坐标Z控制小人显示层级</span><br><span class="line">function m:GetRandomPos()</span><br><span class="line">    local rx = math.random(-self.View.transform.parent.rect.w/2,self.View.transform.parent.rect.w/2)</span><br><span class="line">    local ry = math.random(-self.View.transform.parent.rect.h/2,self.View.transform.parent.rect.h/2)</span><br><span class="line">    return Vector3.New(rx,ry,0)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---开始移动</span><br><span class="line">function m:StartMove()</span><br><span class="line">    self.IsMoving = true</span><br><span class="line">    self.NextPos = self:GetRandomPos()</span><br><span class="line">    if self.Animation then</span><br><span class="line">        self.Animation.state:SetEmptyAnimation(0, 0)</span><br><span class="line">        self.Animation.state:SetAnimation(0, &quot;walk&quot;, true)</span><br><span class="line">    end</span><br><span class="line">    self:RefreshWalkFaceTo()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---移动到目标位置停止移动</span><br><span class="line">function m:StopMove()</span><br><span class="line">    self.IsMoving = false</span><br><span class="line">    self.View.transform.localPosition = self.NextPos</span><br><span class="line">    self.NextMovieTimer = math.random(0,4) + PlayerModule.GetServerTime()</span><br><span class="line">    if self.Animation then</span><br><span class="line">        self.Animation.state:SetAnimation(0,&quot;idle&quot;, true)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---播放抓住状态</span><br><span class="line">function m:CatchState()</span><br><span class="line">    self.IsMoving = false</span><br><span class="line">    self.IsCatch = true</span><br><span class="line">    if self.Animation then</span><br><span class="line">        self.Animation.AnimationName = nil</span><br><span class="line">        self.Animation.state:SetEmptyAnimation(0, 0)</span><br><span class="line">        self.Animation.state:SetAnimation(0,&quot;drag&quot;, true)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---刷新移动朝向</span><br><span class="line">function m:RefreshWalkFaceTo()</span><br><span class="line">    local checkRet = self.NextPos.x - self.View.transform.localPosition.x</span><br><span class="line">    local localScale = self.View.transform.localScale</span><br><span class="line">    if checkRet &gt; 0 then</span><br><span class="line">        localScale.x = -math.abs(localScale.x)</span><br><span class="line">    else</span><br><span class="line">        localScale.x = math.abs(localScale.x)</span><br><span class="line">    end</span><br><span class="line">    self.View.transform.localScale = localScale</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---@param roleData AmusementParkDollMachineRoleData</span><br><span class="line">function m:SetData(roleData)</span><br><span class="line">    self.RoleData = roleData</span><br><span class="line">    self.IsCreateRole = false</span><br><span class="line">    self.IsCatch = false</span><br><span class="line">    for i = 1, 4 do</span><br><span class="line">        self[&quot;Quality&quot;..i]:SetActive(self.RoleData.roleRare == i)</span><br><span class="line">    end</span><br><span class="line">    self.View.name = self.RoleData.cid</span><br><span class="line">    local pos = self:GetRandomPos()</span><br><span class="line">    self.View.transform.localPosition = pos</span><br><span class="line">    self:ChangeRoleOrderZ()</span><br><span class="line">    self.NextPos = self:GetRandomPos()</span><br><span class="line">    self:ShowSpine()</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---改变小人移动Z值(移动是层级关系)</span><br><span class="line">function m:ChangeRoleOrderZ()</span><br><span class="line">    local pos =  self.View.transform.localPosition</span><br><span class="line">    ---设置小人移动的Z值</span><br><span class="line">    self.OrderZ.transform.localPosition = Vector3.New(0,0,(pos.y + 150)/100)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:ShowSpine()</span><br><span class="line">    self:HideEntity()</span><br><span class="line">    self.EntityId = GameEntry.Entity:GenerateEntityID()</span><br><span class="line">    GameEntry.Entity:ShowUIElement(self.EntityId, self.RoleData:GetCfgData().PlayerSpine, 0, self.SpineRoot.transform, Vector3.zero)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:HideEntity()</span><br><span class="line">    if self.EntityId ~= 0 then</span><br><span class="line">        GameEntry.Entity:HideEntity(self.EntityId)</span><br><span class="line">        self.EntityId = 0</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function m:Dispose()</span><br><span class="line">    AssetUtil.UnloadAsset(self)</span><br><span class="line">    self:RemoveListener()</span><br><span class="line">    self:HideEntity()</span><br><span class="line"></span><br><span class="line">    LuaCodeInterface.ClearOutlet(self.View, self)</span><br><span class="line">    UnityEngine.Object.Destroy(self.View)</span><br><span class="line">    self.View = nil</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">return m</span><br></pre></td></tr></table></figure>
-</code></pre>
+          <p>游戏说明游戏开始，下方随机生成不同品质小人，在场景中来回走动，不同品质的小人，移动速度不一样，被抓到后获得的积分也不一样。按住移动按钮，上方机械手臂会左右来回移动，当松开按钮，机械手臂会掉下来，当手臂下落碰到场景中小人时，检测当前手臂抓取范围内的小人，在抓取范围内的小人会被抓走。然后计算获得分数，如果机械手臂抓空，则碰到地面后手臂也会自动回弹，每轮游戏有4次抓取机会。 功能实现移动的小人创建移动小...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
+              <a class="btn" href="/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
                 阅读全文 &raquo;
               </a>
             </div>

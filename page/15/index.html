@@ -31,6 +31,9 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/page/15/">
 
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"ByteFisher","url":"https://www.bytefisher.top","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.bytefisher.top/search.json?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"}]}</script>
+
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
@@ -44,6 +47,15 @@
 
   <title>ByteFisher</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+      }
+    </script>
 
 
 
@@ -284,27 +296,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Python3-集合"><a href="#Python3-集合" class="headerlink" title="- Python3 集合"></a>- Python3 集合</h2><p>集合（set）是一个无序的不重复元素序列。</p>
-<p>可以使用大括号 { } 或者 set() 函数创建集合，注意：创建一个空集合必须用 set() 而不是 { }，因为 { } 是用来创建一个空字典。</p>
-<p>创建格式：</p>
-<pre><code>parame = {value01,value02,...}
-或者
-set(value)
-</code></pre>
-<blockquote>
-<p><strong>实例:</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; basket = &#123;&#x27;apple&#x27;, &#x27;orange&#x27;, &#x27;apple&#x27;, &#x27;pear&#x27;, &#x27;orange&#x27;, &#x27;banana&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; print(basket)                      # 这里演示的是去重功能</span><br><span class="line">&#123;&#x27;orange&#x27;, &#x27;banana&#x27;, &#x27;pear&#x27;, &#x27;apple&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; &#x27;orange&#x27; in basket                 # 快速判断元素是否在集合内</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; &#x27;crabgrass&#x27; in basket</span><br><span class="line">False</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; # 下面展示两个集合间的运算.</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; a = set(&#x27;abracadabra&#x27;)</span><br><span class="line">&gt;&gt;&gt; b = set(&#x27;alacazam&#x27;)</span><br><span class="line">&gt;&gt;&gt; a                                  </span><br><span class="line">&#123;&#x27;a&#x27;, &#x27;r&#x27;, &#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; a - b                              # 集合a中包含而集合b中不包含的元素</span><br><span class="line">&#123;&#x27;r&#x27;, &#x27;d&#x27;, &#x27;b&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; a | b                              # 集合a或b中包含的所有元素</span><br><span class="line">&#123;&#x27;a&#x27;, &#x27;c&#x27;, &#x27;r&#x27;, &#x27;d&#x27;, &#x27;b&#x27;, &#x27;m&#x27;, &#x27;z&#x27;, &#x27;l&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; a &amp; b                              # 集合a和b中都包含了的元素</span><br><span class="line">&#123;&#x27;a&#x27;, &#x27;c&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; a ^ b                              # 不同时包含于a和b的元素</span><br><span class="line">&#123;&#x27;r&#x27;, &#x27;d&#x27;, &#x27;b&#x27;, &#x27;m&#x27;, &#x27;z&#x27;, &#x27;l&#x27;&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>类似列表推导式，同样集合支持集合推导式(Set comprehension):</p>
-</blockquote>
-<blockquote>
-<p><strong>实例:</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a = &#123;x for x in &#x27;abracadabra&#x27; if x not in &#x27;abc&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; a</span><br><span class="line">&#123;&#x27;r&#x27;, &#x27;d&#x27;&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
+          <p>Python3 集合集合（set）是一个无序的不重复元素序列。 可以使用大括号 { } 或者 set() 函数创建集合，注意：创建一个空集合必须用 set() 而不是 { }，因为 { } 是用来创建一个空字典。 创建格式： parame = {value01,value02,...} 或者 set(value) 实例: 12345678910111213141516171819202122&gt...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88%E3%80%91/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -400,27 +395,10 @@ set(value)
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Python3-字典"><a href="#Python3-字典" class="headerlink" title="- Python3 字典"></a>- Python3 字典</h2><p>字典是另一种可变容器模型，且可存储任意类型对象。</p>
-<p>字典的每个键值 key&#x3D;&gt;value 对用冒号 : 分割，每个对之间用逗号(,)分割，整个字典包括在花括号 {} 中 ,格式如下所示：</p>
-<p>d &#x3D; {key1 : value1, key2 : value2, key3 : value3 }<br>注意：dict 作为 Python 的关键字和内置函数，变量名不建议命名为 dict。</p>
-<p>键必须是唯一的，但值则不必。</p>
-<p>值可以取任何数据类型，但键必须是不可变的，如字符串，数字。</p>
-<p>一个简单的字典实例：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tinydict = &#123;&#x27;name&#x27;: &#x27;runoob&#x27;, &#x27;likes&#x27;: 123, &#x27;url&#x27;: &#x27;www.runoob.com&#x27;&#125;</span><br></pre></td></tr></table></figure><br>也可如此创建字典：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tinydict1 = &#123; &#x27;abc&#x27;: 456 &#125;</span><br><span class="line">tinydict2 = &#123; &#x27;abc&#x27;: 123, 98.6: 37 &#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="创建空字典"><a href="#创建空字典" class="headerlink" title="- 创建空字典"></a>- 创建空字典</h2><p>使用大括号 { } 创建空字典：</p>
-<blockquote>
-<p><strong>实例:</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 使用大括号 &#123;&#125; 来创建空字典</span><br><span class="line">emptyDict = &#123;&#125;</span><br><span class="line"> </span><br><span class="line"># 打印字典</span><br><span class="line">print(emptyDict)</span><br><span class="line"> </span><br><span class="line"># 查看字典的数量</span><br><span class="line">print(&quot;Length:&quot;, len(emptyDict))</span><br><span class="line"> </span><br><span class="line"># 查看类型</span><br><span class="line">print(type(emptyDict))</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>以上实例输出结果：</p>
-<pre><code>{}
-Length: 0
-&lt;class &#39;dict&#39;&gt;
-</code></pre>
-<p>使用内建函数 dict() 创建字典：</p>
+          <p>Python3 字典字典是另一种可变容器模型，且可存储任意类型对象。 字典的每个键值 key& x3D;&gt;value 对用冒号 : 分割，每个对之间用逗号(,)分割，整个字典包括在花括号 {} 中 ,格式如下所示： d & x3D; {key1 : value1, key2 : value2, key3 : value3 }注意：dict 作为 Python 的关键字和内置函数，变量名不建议...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E5%85%B8%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E5%85%B8%E3%80%91/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -516,37 +494,10 @@ Length: 0
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Python3-元组"><a href="#Python3-元组" class="headerlink" title="- Python3 元组"></a>- Python3 元组</h2><p>Python 的元组与列表类似，不同之处在于元组的元素不能修改。</p>
-<p>元组使用小括号 ( )，列表使用方括号 [ ]。</p>
-<p>元组创建很简单，只需要在括号中添加元素，并使用逗号隔开即可。</p>
-<blockquote>
-<p><strong>实例:</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tup1 = (&#x27;Google&#x27;, &#x27;Runoob&#x27;, 1997, 2000)</span><br><span class="line">&gt;&gt;&gt; tup2 = (1, 2, 3, 4, 5 )</span><br><span class="line">&gt;&gt;&gt; tup3 = &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;   #  不需要括号也可以</span><br><span class="line">&gt;&gt;&gt; type(tup3)</span><br><span class="line">&lt;class &#x27;tuple&#x27;&gt;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>创建空元组</p>
-</blockquote>
-<pre><code>tup1 = ()
-</code></pre>
-<p>元组中只包含一个元素时，需要在元素后面添加逗号 , ，否则括号会被当作运算符使用：</p>
-<blockquote>
-<p><strong>实例:</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tup1 = (50)</span><br><span class="line">&gt;&gt;&gt; type(tup1)     # 不加逗号，类型为整型</span><br><span class="line">&lt;class &#x27;int&#x27;&gt;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; tup1 = (50,)</span><br><span class="line">&gt;&gt;&gt; type(tup1)     # 加上逗号，类型为元组</span><br><span class="line">&lt;class &#x27;tuple&#x27;&gt;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>元组与字符串类似，下标索引从 0 开始，可以进行截取，组合等。</p>
-</blockquote>
-<h2 id="访问元组"><a href="#访问元组" class="headerlink" title="- 访问元组"></a>- 访问元组</h2><p>元组可以使用下标索引来访问元组中的值，如下实例:</p>
-<blockquote>
-<p><strong>实例:</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tup1 = (&#x27;Google&#x27;, &#x27;Runoob&#x27;, 1997, 2000)</span><br><span class="line">tup2 = (1, 2, 3, 4, 5, 6, 7 )</span><br><span class="line"> </span><br><span class="line">print (&quot;tup1[0]: &quot;, tup1[0])</span><br><span class="line">print (&quot;tup2[1:5]: &quot;, tup2[1:5])</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>以上实例输出结果：</p>
-<pre><code>tup1[0]:  Google
-tup2[1:5]:  (2, 3, 4, 5)
-</code></pre>
+          <p>Python3 元组Python 的元组与列表类似，不同之处在于元组的元素不能修改。 元组使用小括号 ( )，列表使用方括号 。 元组创建很简单，只需要在括号中添加元素，并使用逗号隔开即可。 实例: 12345&gt;&gt;&gt; tup1 = (& x27;Google& x27;, & x27;Runoob& x27;, 1997, 2000)&gt;&gt;&gt; tup2 = (1,...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%85%83%E7%BB%84%E3%80%91/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -642,25 +593,10 @@ tup2[1:5]:  (2, 3, 4, 5)
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Python3-列表"><a href="#Python3-列表" class="headerlink" title="- Python3 列表"></a>- Python3 列表</h2><p>序列是 Python 中最基本的数据结构。<br>序列中的每个值都有对应的位置值，称之为索引，第一个索引是 0，第二个索引是 1，依此类推。<br>Python 有 6 个序列的内置类型，但最常见的是列表和元组。<br>列表都可以进行的操作包括索引，切片，加，乘，检查成员。此外，Python 已经内置确定序列的长度以及确定最大和最小的元素的方法。<br>列表是最常用的 Python 数据类型，它可以作为一个方括号内的逗号分隔值出现。<br>列表的数据项不需要具有相同的类型<br>创建一个列表，只要把逗号分隔的不同的数据项使用方括号括起来即可。如下所示：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list1 = [&#x27;Google&#x27;, &#x27;Runoob&#x27;, 1997, 2000]</span><br><span class="line">list2 = [1, 2, 3, 4, 5 ]</span><br><span class="line">list3 = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]</span><br><span class="line">list4 = [&#x27;red&#x27;, &#x27;green&#x27;, &#x27;blue&#x27;, &#x27;yellow&#x27;, &#x27;white&#x27;, &#x27;black&#x27;]</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>访问列表中的值<br>与字符串的索引一样，列表索引从 0 开始，第二个索引是 1，依此类推。</p>
-<p>通过索引列表可以进行截取、组合等操作。</p>
-<blockquote>
-<p><strong>实例:</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list = [&#x27;red&#x27;, &#x27;green&#x27;, &#x27;blue&#x27;, &#x27;yellow&#x27;, &#x27;white&#x27;, &#x27;black&#x27;]</span><br><span class="line">print( list[0] )</span><br><span class="line">print( list[1] )</span><br><span class="line">print( list[2] )</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>以上实例输出结果：</p>
-<pre><code>red
-green
-blue
-</code></pre>
-<p>索引也可以从尾部开始，最后一个元素的索引为 -1，往前一位为 -2，以此类推。</p>
+          <p>Python3 列表序列是 Python 中最基本的数据结构。序列中的每个值都有对应的位置值，称之为索引，第一个索引是 0，第二个索引是 1，依此类推。Python 有 6 个序列的内置类型，但最常见的是列表和元组。列表都可以进行的操作包括索引，切片，加，乘，检查成员。此外，Python 已经内置确定序列的长度以及确定最大和最小的元素的方法。列表是最常用的 Python 数据类型，它可以作为一个方...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%88%97%E8%A1%A8%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%88%97%E8%A1%A8%E3%80%91/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -756,19 +692,10 @@ blue
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Python3-字符串"><a href="#Python3-字符串" class="headerlink" title="- Python3 字符串"></a>- Python3 字符串</h2><p>字符串是 Python 中最常用的数据类型。我们可以使用引号( ‘ 或 “ )来创建字符串。<br>创建字符串很简单，只要为变量分配一个值即可。例如：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27;</span><br><span class="line">var2 = &quot;Runoob&quot;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Python-访问字符串中的值"><a href="#Python-访问字符串中的值" class="headerlink" title="- Python 访问字符串中的值"></a>- Python 访问字符串中的值</h2><p>Python 不支持单字符类型，单字符在 Python 中也是作为一个字符串使用。<br>Python 访问子字符串，可以使用方括号 [] 来截取字符串，字符串的截取的语法格式如下：<br>	<br>	变量[头下标:尾下标]</p>
-<p>索引值以 0 为开始值，-1 为从末尾的开始位置。</p>
-<p>如下实例：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27;</span><br><span class="line">var2 = &quot;Runoob&quot;</span><br><span class="line"> </span><br><span class="line">print (&quot;var1[0]: &quot;, var1[0])</span><br><span class="line">print (&quot;var2[1:5]: &quot;, var2[1:5])</span><br></pre></td></tr></table></figure><br>以上实例执行结果：</p>
-<pre><code>var1[0]:  H
-var2[1:5]:  unoo
-</code></pre>
-<h2 id="Python-字符串更新"><a href="#Python-字符串更新" class="headerlink" title="- Python 字符串更新"></a>- Python 字符串更新</h2><p>你可以截取字符串的一部分并与其他字段拼接，如下实例：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27; </span><br><span class="line">print (&quot;已更新字符串 : &quot;, var1[:6] + &#x27;Runoob!&#x27;)</span><br></pre></td></tr></table></figure><br>以上实例执行结果</p>
-<pre><code>已更新字符串 :  Hello Runoob!
-</code></pre>
+          <p>Python3 字符串字符串是 Python 中最常用的数据类型。我们可以使用引号( ‘ 或 “ )来创建字符串。创建字符串很简单，只要为变量分配一个值即可。例如： 12var1 = & x27;Hello World!& x27;var2 = &quot;Runoob&quot; Python 访问字符串中的值Python 不支持单字符类型，单字符在 Python 中也是作为一个字符串使用。Py...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -864,18 +791,10 @@ var2[1:5]:  unoo
     <div class="post-body" itemprop="articleBody">
 
       
-          <hr>
-<h2 id="Github使用之git回退到某个历史版本"><a href="#Github使用之git回退到某个历史版本" class="headerlink" title="- Github使用之git回退到某个历史版本:"></a>- Github使用之git回退到某个历史版本:</h2><p><strong>1. 查找历史版本</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 使用git log命令查看所有的历史版本，获取你git的某个历史版本的id,假设查到历史版本的id</span><br><span class="line">&gt; 是:fae6966548e3ae76cfa7f38a461c438cf75ba965</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p><strong>2. 恢复到历史版本</strong><br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; $ git reset --hard fae6966548e3ae76cfa7f38a461c438cf75ba965</span><br></pre></td></tr></table></figure><br><strong>3. 把修改推到远程服务器</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; $ git push -f -u origin master</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="git如何避免”warning-LF-will-be-replaced-by-CRLF“提示？"><a href="#git如何避免”warning-LF-will-be-replaced-by-CRLF“提示？" class="headerlink" title="- git如何避免”warning: LF will be replaced by CRLF“提示？"></a>- git如何避免”warning: LF will be replaced by CRLF“提示？</h2><p>在Windows下使用Git进行修改提交时，控制台显示了如下输出内容：1warning: in the working copy of ‘styles&#x2F;global.css’, CRLF will be replaced by LF the next time Git touches it这是因为目前的Git仓库由于跨操作系统操作而引发了部分文件的换行符转换问题。具体来说，Linux、macOS、Windows操作系统对于文本文件的换行符有不同的标准，因此一个文件如果与上次操作的系统环境不同，Git自然会在文件对比时识别到标识符被修改，从而引发提示。LF和CR字符在不同的操作系统中被用作操作符，其中LF（0x0A, \n）的初始定义是将光标从当前位置下移一行，不涉及移动到该行行首位置的动作，而CR（0x0D, \r）的原始含义则是将光标前移到当前行的行首，不涉及下移的动作。Linux系操作系统（含macOS，虽然它在OSX时期曾经使用过CR）使用LF直接表示光标换行+移到行首；Windows组合使用了CRLF（0x0D 0x0A, \r\n），无疑是符合标准语义的做法。尽管这不是一个Bug或错误，但还是可以通过如下方式对Git进行配置，以避免在每次提交代码时显示：</p>
-<p><strong>Linux&#x2F;macOS系统下在提交代码时自动将CRLF转换为LF</strong><br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; $ git config --global core.autocrlf input</span><br></pre></td></tr></table></figure><br><strong>Windows系统下在提交代码时自动将LF转换为CRLF</strong><br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; git config --global core.autocrlf true</span><br></pre></td></tr></table></figure></p>
+          <p>Github使用之git回退到某个历史版本:1. 查找历史版本 12&gt; 使用git log命令查看所有的历史版本，获取你git的某个历史版本的id,假设查到历史版本的id&gt; 是:fae6966548e3ae76cfa7f38a461c438cf75ba965 2. 恢复到历史版本 1&gt; $ git reset hard fae6966548e3ae76cfa7f38a461c43...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/16/git%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/#more" rel="contents">
+              <a class="btn" href="/2023/05/16/git%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/">
                 阅读全文 &raquo;
               </a>
             </div>

@@ -18,12 +18,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
-  <meta name="description" content="前言继俄罗斯方块之后，本文讲解扫雷游戏的开发。扫雷是 Windows 系统经典的益智小游戏，核心玩法是揭开格子找出所有安全区域，同时避免触雷。 相比俄罗斯方块，扫雷更侧重于逻辑推理和策略标记，需要实现数字计算、递归扩散、旗标标记等功能。 项目结构游戏放置在 source&#x2F;ai-games&#x2F;minesweeper&#x2F; 目录下，文件结构如下： 123source&#x2F;ai-games&#x2F;minesweeper">
+  <meta name="description" content="前言继俄罗斯方块之后，本文讲解扫雷游戏的开发。扫雷是 Windows 系统经典的益智小游戏，核心玩法是揭开格子找出所有安全区域，同时避免触雷。 相比俄罗斯方块，扫雷更侧重于逻辑推理和策略标记，需要实现数字计算、递归扩散、旗标标记等功能。 项目结构游戏放置在 source&#x2F;ai games&#x2F;minesweeper&#x2F; 目录下，文件结构如下： 123source&#x2F;ai games&#x2F;minesweeper">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo 博客实战：扫雷小游戏开发指南">
 <meta property="og:url" content="https://www.bytefisher.top/2026/03/31/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E6%89%AB%E9%9B%B7%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/index.html">
 <meta property="og:site_name" content="ByteFisher">
-<meta property="og:description" content="前言继俄罗斯方块之后，本文讲解扫雷游戏的开发。扫雷是 Windows 系统经典的益智小游戏，核心玩法是揭开格子找出所有安全区域，同时避免触雷。 相比俄罗斯方块，扫雷更侧重于逻辑推理和策略标记，需要实现数字计算、递归扩散、旗标标记等功能。 项目结构游戏放置在 source&#x2F;ai-games&#x2F;minesweeper&#x2F; 目录下，文件结构如下： 123source&#x2F;ai-games&#x2F;minesweeper">
+<meta property="og:description" content="前言继俄罗斯方块之后，本文讲解扫雷游戏的开发。扫雷是 Windows 系统经典的益智小游戏，核心玩法是揭开格子找出所有安全区域，同时避免触雷。 相比俄罗斯方块，扫雷更侧重于逻辑推理和策略标记，需要实现数字计算、递归扩散、旗标标记等功能。 项目结构游戏放置在 source&#x2F;ai games&#x2F;minesweeper&#x2F; 目录下，文件结构如下： 123source&#x2F;ai games&#x2F;minesweeper">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-31T13:00:00.000Z">
 <meta property="article:modified_time" content="2026-03-31T04:48:17.353Z">
@@ -34,6 +34,9 @@
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://www.bytefisher.top/2026/03/31/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E6%89%AB%E9%9B%B7%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo 博客实战：扫雷小游戏开发指南","description":"前言继俄罗斯方块之后，本文讲解扫雷游戏的开发。扫雷是 Windows 系统经典的益智小游戏，核心玩法是揭开格子找出所有安全区域，同时避免触雷。 相比俄罗斯方块，扫雷更侧重于逻辑推理和策略标记，需要实现数字计算、递归扩散、旗标标记等功能。 项目结构游戏放置在 source/ai games/minesweeper/ 目录下，文件结构如下： 123source/ai games/minesweeper...","url":"https://www.bytefisher.top/2026/03/31/Hexo-博客实战-扫雷小游戏开发指南/","datePublished":"2026-03-31T13:00:00.000Z","dateModified":"2026-03-31T04:48:17.353Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/03/31/Hexo-博客实战-扫雷小游戏开发指南/"},"keywords":"Hexo, JavaScript, 游戏开发"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"编程","item":"https://www.bytefisher.top/categories/编程/"},{"@type":"ListItem","position":3,"name":"Hexo 博客实战：扫雷小游戏开发指南"}]}</script>
 
 
 <script id="page-configurations">
@@ -48,6 +51,15 @@
 
   <title>Hexo 博客实战：扫雷小游戏开发指南 | ByteFisher</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+      }
+    </script>
 
 
 
@@ -279,6 +291,7 @@
   </span>
   
   
+            <div class="post-description">前言继俄罗斯方块之后，本文讲解扫雷游戏的开发。扫雷是 Windows 系统经典的益智小游戏，核心玩法是揭开格子找出所有安全区域，同时避免触雷。 相比俄罗斯方块，扫雷更侧重于逻辑推理和策略标记，需要实现数字计算、递归扩散、旗标标记等功能。 项目结构游戏放置在 source/ai games/minesweeper/ 目录下，文件结构如下： 123source/ai games/minesweeper...</div>
 
         </div>
       </header>

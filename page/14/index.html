@@ -31,6 +31,9 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/page/14/">
 
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"ByteFisher","url":"https://www.bytefisher.top","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.bytefisher.top/search.json?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"}]}</script>
+
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
@@ -44,6 +47,15 @@
 
   <title>ByteFisher</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+      }
+    </script>
 
 
 
@@ -284,38 +296,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Python3-标准库概览"><a href="#Python3-标准库概览" class="headerlink" title="- Python3 标准库概览"></a>- Python3 标准库概览</h2><p>Python 标准库非常庞大，所提供的组件涉及范围十分广泛，使用标准库我们可以让您轻松地完成各种任务。</p>
-<p>以下是一些 Python3 标准库中的模块：</p>
-<ul>
-<li><p>os 模块：os 模块提供了许多与操作系统交互的函数，例如创建、移动和删除文件和目录，以及访问环境变量等。</p>
-</li>
-<li><p>sys 模块：sys 模块提供了与 Python 解释器和系统相关的功能，例如解释器的版本和路径，以及与 stdin、stdout 和 stderr 相关的信息。</p>
-</li>
-<li><p>time 模块：time 模块提供了处理时间的函数，例如获取当前时间、格式化日期和时间、计时等。</p>
-</li>
-<li><p>datetime 模块：datetime 模块提供了更高级的日期和时间处理函数，例如处理时区、计算时间差、计算日期差等。</p>
-</li>
-<li><p>random 模块：random 模块提供了生成随机数的函数，例如生成随机整数、浮点数、序列等。</p>
-</li>
-<li><p>math 模块：math 模块提供了数学函数，例如三角函数、对数函数、指数函数、常数等。</p>
-</li>
-<li><p>re 模块：re 模块提供了正则表达式处理函数，可以用于文本搜索、替换、分割等。</p>
-</li>
-<li><p>json 模块：json 模块提供了 JSON 编码和解码函数，可以将 Python 对象转换为 JSON 格式，并从 JSON 格式中解析出 Python 对象。</p>
-</li>
-<li><p>urllib 模块：urllib 模块提供了访问网页和处理 URL 的功能，包括下载文件、发送 POST 请求、处理 cookies 等。</p>
-</li>
-</ul>
-<h2 id="操作系统接口"><a href="#操作系统接口" class="headerlink" title="- 操作系统接口"></a>- 操作系统接口</h2><p>os模块提供了不少与操作系统相关联的函数。</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import os</span><br><span class="line">&gt;&gt;&gt; os.getcwd()      # 返回当前的工作目录</span><br><span class="line">&#x27;C:\\Python34&#x27;</span><br><span class="line">&gt;&gt;&gt; os.chdir(&#x27;/server/accesslogs&#x27;)   # 修改当前的工作目录</span><br><span class="line">&gt;&gt;&gt; os.system(&#x27;mkdir today&#x27;)   # 执行系统命令 mkdir </span><br><span class="line">0</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>建议使用 “import os” 风格而非 “from os import *”。这样可以保证随操作系统不同而有所变化的 os.open() 不会覆盖内置函数 open()。</p>
-<p>在使用 os 这样的大型模块时内置的 dir() 和 help() 函数非常有用:<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import os</span><br><span class="line">&gt;&gt;&gt; dir(os)</span><br><span class="line">&lt;returns a list of all module functions&gt;</span><br><span class="line">&gt;&gt;&gt; help(os)</span><br><span class="line">&lt;returns an extensive manual page created from the module&#x27;s docstrings&gt;</span><br></pre></td></tr></table></figure><br>针对日常的文件和目录管理任务，:mod:shutil 模块提供了一个易于使用的高级接口:</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import shutil</span><br><span class="line">&gt;&gt;&gt; shutil.copyfile(&#x27;data.db&#x27;, &#x27;archive.db&#x27;)</span><br><span class="line">&gt;&gt;&gt; shutil.move(&#x27;/build/executables&#x27;, &#x27;installdir&#x27;)</span><br></pre></td></tr></table></figure>
-</code></pre>
+          <p>Python3 标准库概览Python 标准库非常庞大，所提供的组件涉及范围十分广泛，使用标准库我们可以让您轻松地完成各种任务。 以下是一些 Python3 标准库中的模块： os 模块：os 模块提供了许多与操作系统交互的函数，例如创建、移动和删除文件和目录，以及访问环境变量等。 sys 模块：sys 模块提供了与 Python 解释器和系统相关的功能，例如解释器的版本和路径，以及与 stdin...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/06/08/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%E3%80%91/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -411,38 +395,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Python3-面向对象"><a href="#Python3-面向对象" class="headerlink" title="Python3 面向对象"></a>Python3 面向对象</h2><p>Python从设计之初就已经是一门面向对象的语言，正因为如此，在Python中创建一个类和对象是很容易的。本章节我们将详细介绍Python的面向对象编程。</p>
-<p>如果你以前没有接触过面向对象的编程语言，那你可能需要先了解一些面向对象语言的一些基本特征，在头脑里头形成一个基本的面向对象的概念，这样有助于你更容易的学习Python的面向对象编程。</p>
-<p>接下来我们先来简单的了解下面向对象的一些基本特征。</p>
-<h2 id="面向对象技术简介"><a href="#面向对象技术简介" class="headerlink" title="- 面向对象技术简介"></a>- 面向对象技术简介</h2><ul>
-<li><p>类(Class): 用来描述具有相同的属性和方法的对象的集合。它定义了该集合中每个对象所共有的属性和方法。对象是类的实例。<br>方法：类中定义的函数。</p>
-</li>
-<li><p>类变量：类变量在整个实例化的对象中是公用的。类变量定义在类中且在函数体之外。类变量通常不作为实例变量使用。</p>
-</li>
-<li><p>数据成员：类变量或者实例变量用于处理类及其实例对象的相关的数据。</p>
-</li>
-<li><p>方法重写：如果从父类继承的方法不能满足子类的需求，可以对其进行改写，这个过程叫方法的覆盖（override），也称为方法的重写。</p>
-</li>
-<li><p>局部变量：定义在方法中的变量，只作用于当前实例的类。</p>
-</li>
-<li><p>实例变量：在类的声明中，属性是用变量来表示的，这种变量就称为实例变量，实例变量就是一个用 self 修饰的变量。</p>
-</li>
-<li><p>继承：即一个派生类（derived class）继承基类（base class）的字段和方法。继承也允许把一个派生类的对象作为一个基类对象对待。例如，有这样一个设计：一个Dog类型的对象派生自Animal类，这是模拟”是一个（is-a）”关系（例图，Dog是一个Animal）。</p>
-</li>
-<li><p>实例化：创建一个类的实例，类的具体对象。</p>
-</li>
-<li><p>对象：通过类定义的数据结构实例。对象包括两个数据成员（类变量和实例变量）和方法。<br>和其它编程语言相比，Python 在尽可能不增加新的语法和语义的情况下加入了类机制。</p>
-</li>
-</ul>
-<p>Python中的类提供了面向对象编程的所有基本功能：类的继承机制允许多个基类，派生类可以覆盖基类中的任何方法，方法中可以调用基类中的同名方法。</p>
-<p>对象可以包含任意数量和类型的数据。</p>
-<h2 id="类定义"><a href="#类定义" class="headerlink" title="- 类定义"></a>- 类定义</h2><p>语法格式如下：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class ClassName:</span><br><span class="line">    &lt;statement-1&gt;</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    &lt;statement-N&gt;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>类实例化后，可以使用其属性，实际上，创建一个类之后，可以通过类名访问其属性。</p>
+          <p>Python3 面向对象Python从设计之初就已经是一门面向对象的语言，正因为如此，在Python中创建一个类和对象是很容易的。本章节我们将详细介绍Python的面向对象编程。 如果你以前没有接触过面向对象的编程语言，那你可能需要先了解一些面向对象语言的一些基本特征，在头脑里头形成一个基本的面向对象的概念，这样有助于你更容易的学习Python的面向对象编程。 接下来我们先来简单的了解下面向对象的...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/06/06/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9D%A2%E5%90%91%E5%AF%B9%E5%90%91%E3%80%91/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -534,37 +490,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>夏天已经来了，天气一热，很多大鱼都会上钩，比如鲤鱼、草鱼、青鱼等。</p>
-<p>想要钓到这些大鱼，有一种食物是必不可少的，那就是玉米。</p>
-<p>玉米被称为“素饵之王”，在野外垂钓中，不管是新鲜的，还是发酵的，都是用来垂钓的。</p>
-<p>但玉米在水里不会形成雾气，所以口感很淡，而且玉米的个头很大，而且野生的大鱼不多，用玉米钓鱼很难成功。</p>
-<p>我们要理智的使用玉米，在垂钓中没有什么鱼饵是万能的，玉米好不好，关键就在于我们用的好不好。想要用玉米钓到大鱼，必须要有三样东西。</p>
-<p><strong>- 第一，看鱼的情况，看是不是要用玉米</strong></p>
-<p>以上所述，即使是“万能饵”，也不是每一种饵料都能得到鱼儿的喜爱，一种饵料好不好，要看鱼儿在用的时候情况。</p>
-<p>我们要钓鱼的是一条警惕性很高的野生大鱼，在自然的环境下，他们会以草籽、水草、水果和谷物等天然的食物为食，所以他们更喜欢吃一些味道比较淡的天然食物。因此，用玉米来钓鱼并不是什么难事。</p>
-<p>不过，野外的大鱼并不多，要想钓到大鱼，就得用诱饵，而玉米又不是雾化的，所以我们要用粉末状的诱饵。</p>
-<p>所以，我们不能只用玉米粒来打窝，可以在窝料里加点玉米粉，也可以加点鱼饵。</p>
-<p><strong>- 第二，你买到的东西，未必就有你自己做的好</strong></p>
-<p>在许多情况下，我们都会使用到发酵的玉米，特别是在垂钓鲤鱼时，更是如此。这是因为，在夏季，锦鲤的食物会沉入水中，由于温度高，会迅速发酵，散发出酒香。鲤鱼习惯于食用发酵食品，所以我们用发酵过的玉米来钓鱼，很合他们的胃口。</p>
-<p>很多垂钓爱好者都觉得，他们卖的是老玉米，味道更好。</p>
-<p>但是实际上，我们自己煮出来的玉米往往比从外面买来的玉米更有效。由于自家煮制的玉米面，可以根据本地鱼肉的味道来调配，所用的玉米面和其他食材，都更新鲜。</p>
-<p>许多人不想自己煮，一方面是因为加工过程繁琐，还不如买两包，动动手指头就能送到；二是他自己做的玉米面没有经过任何处理，在夏天的高温下，玉米面煮的太久就会坏掉，而在夏天煮的太久又太麻烦。</p>
-<p>因此，有时间的垂钓朋友，我觉得自己可以用自己浸泡的玉米粒，与买来的玉米粒进行比较，看看鱼儿们更喜欢哪个。</p>
-<p>如果水温超过25℃，应该果断地改用嫩玉米粒，因为在水温较暖和时，使用嫩玉米钓草鱼的效果非常好，如果水域中的草鱼较多，很容易钓到爆护。下面，我们就讲下夏季用嫩玉米钓草鱼的4个技巧。</p>
-<p><strong>- 第三，使用嫩玉米</strong></p>
-<p>一、使用新鲜的甜玉米或水果玉米</p>
-<p>草鱼在高温天气时，非常喜欢吃嫩玉米，对嫩玉米中的甜玉米更为喜欢，甜玉米中的水果玉米则最好用。在用刀削玉米粒时，尽量削的深一些，让玉米粒成块地粘在一起，打窝诱鱼的效果更好。</p>
-<p>二、玉米中要加白酒和糖</p>
-<p>在夏季的炎热天气，嫩玉米粒很容易发酵变酸，垂钓效果就会大打折扣。为了防止嫩玉米粒发酵变质，可以在其中添加少量的白酒，保鲜效果很好。此外，还可以在嫩玉米中添加少量的糖，用来增加甜度，提高鱼饵的适口性，果葡糖浆或者蜂蜜都可以。</p>
-<p>三、在玉米中添加诱食剂</p>
-<p>每500克嫩玉米粒，可以添加1毫升的多巴盐和0.5毫升的鱼阿法，对草鱼的诱食效果非常好，能够增加窝子里草鱼的饥饿感和兴奋程度，让鱼口变得更好。</p>
-<p>四、正确的打窝方法</p>
-<p>草鱼是中下层鱼类，但不是底栖鱼类，不会老老实实底部窝子里吃食。想要把很多的草鱼诱到钓点里，钓鱼人需要持续地打窝，每分钟打一勺嫩玉米粒下去，每勺10~20粒嫩玉米，只要保持住较高的打窝频率，就能够钓到较多的草鱼。</p>
-<p><img data-src="http://iili.io/HSg1Je9.md.jpg"></p>
-<p>图1（水库环境）</p>
-<p><img data-src="http://iili.io/HSglL6Q.md.jpg"></p>
-<p>图2（22年夏天三一水库用嫩玉米连竿小草鱼）</p>
-
+          <p>夏天已经来了，天气一热，很多大鱼都会上钩，比如鲤鱼、草鱼、青鱼等。 想要钓到这些大鱼，有一种食物是必不可少的，那就是玉米。 玉米被称为“素饵之王”，在野外垂钓中，不管是新鲜的，还是发酵的，都是用来垂钓的。 但玉米在水里不会形成雾气，所以口感很淡，而且玉米的个头很大，而且野生的大鱼不多，用玉米钓鱼很难成功。 我们要理智的使用玉米，在垂钓中没有什么鱼饵是万能的，玉米好不好，关键就在于我们用的好不好。想...</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/06/02/%E5%A4%8F%E5%AD%A3%E5%AB%A9%E7%8E%89%E7%B1%B3%E9%92%93%E8%8D%89%E9%B1%BC/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -655,29 +589,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Python3-迭代器与生成器"><a href="#Python3-迭代器与生成器" class="headerlink" title="- Python3 迭代器与生成器"></a>- Python3 迭代器与生成器</h2><h2 id="迭代器"><a href="#迭代器" class="headerlink" title="- 迭代器"></a>- 迭代器</h2><p>迭代是Python最强大的功能之一，是访问集合元素的一种方式。</p>
-<p>迭代器是一个可以记住遍历的位置的对象。</p>
-<p>迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退。</p>
-<p>迭代器有两个基本的方法：iter() 和 next()。</p>
-<p>字符串，列表或元组对象都可用于创建迭代器：</p>
-<blockquote>
-<p><strong>实例(Python 3.0+):</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list=[1,2,3,4]</span><br><span class="line">&gt;&gt;&gt; it = iter(list)    # 创建迭代器对象</span><br><span class="line">&gt;&gt;&gt; print (next(it))   # 输出迭代器的下一个元素</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; print (next(it))</span><br><span class="line">2</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>迭代器对象可以使用常规for语句进行遍历：</p>
-</blockquote>
-<blockquote>
-<p><strong>实例(Python 3.0+):</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list=[1,2,3,4]</span><br><span class="line">it = iter(list)    # 创建迭代器对象</span><br><span class="line">for x in it:</span><br><span class="line">    print (x, end=&quot; &quot;)</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>执行以上程序，输出结果如下：</p>
-</blockquote>
-<pre><code>1 2 3 4
-</code></pre>
-<p>也可以使用 next() 函数：</p>
+          <p>Python3 迭代器与生成器 迭代器迭代是Python最强大的功能之一，是访问集合元素的一种方式。 迭代器是一个可以记住遍历的位置的对象。 迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退。 迭代器有两个基本的方法：iter() 和 next()。 字符串，列表或元组对象都可用于创建迭代器： 实例(Python 3.0+): 1234567&gt;&gt;...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8%E3%80%91/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -773,41 +688,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Python-推导式"><a href="#Python-推导式" class="headerlink" title="- Python 推导式"></a>- Python 推导式</h2><p>Python 推导式是一种独特的数据处理方式，可以从一个数据序列构建另一个新的数据序列的结构体。</p>
-<p>Python 支持各种数据结构的推导式：</p>
-<ul>
-<li><p>列表(list)推导式</p>
-</li>
-<li><p>字典(dict)推导式</p>
-</li>
-<li><p>集合(set)推导式</p>
-</li>
-<li><p>元组(tuple)推导式</p>
-</li>
-</ul>
-<h2 id="列表推导式"><a href="#列表推导式" class="headerlink" title="- 列表推导式"></a>- 列表推导式</h2><p>列表推导式格式为：</p>
-<pre><code>[表达式 for 变量 in 列表] 
-[out_exp_res for out_exp in input_list]
-</code></pre>
-<p>或者 </p>
-<pre><code>[表达式 for 变量 in 列表 if 条件]
-[out_exp_res for out_exp in input_list if condition]
-</code></pre>
-<p>out_exp_res：列表生成元素表达式，可以是有返回值的函数。<br>for out_exp in input_list：迭代 input_list 将 out_exp 传入到 out_exp_res 表达式中。<br>if condition：条件语句，可以过滤列表中不符合条件的值。<br>过滤掉长度小于或等于3的字符串列表，并将剩下的转换成大写字母：</p>
-<blockquote>
-<p><strong>实例：</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; names = [&#x27;Bob&#x27;,&#x27;Tom&#x27;,&#x27;alice&#x27;,&#x27;Jerry&#x27;,&#x27;Wendy&#x27;,&#x27;Smith&#x27;]</span><br><span class="line">&gt;&gt;&gt; new_names = [name.upper()for name in names if len(name)&gt;3]</span><br><span class="line">&gt;&gt;&gt; print(new_names)</span><br><span class="line">[&#x27;ALICE&#x27;, &#x27;JERRY&#x27;, &#x27;WENDY&#x27;, &#x27;SMITH&#x27;]</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>计算 30 以内可以被 3 整除的整数：</p>
-<blockquote>
-<p><strong>实例：</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; multiples = [i for i in range(30) if i % 3 == 0]</span><br><span class="line">&gt;&gt;&gt; print(multiples)</span><br><span class="line">[0, 3, 6, 9, 12, 15, 18, 21, 24, 27]</span><br></pre></td></tr></table></figure>
-</code></pre>
+          <p>Python 推导式Python 推导式是一种独特的数据处理方式，可以从一个数据序列构建另一个新的数据序列的结构体。 Python 支持各种数据结构的推导式： 列表(list)推导式 字典(dict)推导式 集合(set)推导式 元组(tuple)推导式 列表推导式列表推导式格式为： 表达式 for 变量 in 列表 out exp res for out exp in input list 或者...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A8%E5%AF%BC%E5%BC%8F%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/06/01/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A8%E5%AF%BC%E5%BC%8F%E3%80%91/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -903,36 +787,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Python3-数字-Number"><a href="#Python3-数字-Number" class="headerlink" title="- Python3 数字(Number)"></a>- Python3 数字(Number)</h2><p>Python 数字数据类型用于存储数值。</p>
-<p>数据类型是不允许改变的,这就意味着如果改变数字数据类型的值，将重新分配内存空间。</p>
-<p>以下实例在变量赋值时 Number 对象将被创建：</p>
-<pre><code>var1 = 1
-var2 = 10
-</code></pre>
-<p>您也可以使用del语句删除一些数字对象的引用。</p>
-<p>del语句的语法是：</p>
-<pre><code>del var1[,var2[,var3[....,varN]]]
-</code></pre>
-<p>您可以通过使用del语句删除单个或多个对象的引用，例如：</p>
-<pre><code>del var
-del var_a, var_b
-</code></pre>
-<p>Python 支持三种不同的数值类型：</p>
-<ul>
-<li><p><strong>整型(int)</strong> - 通常被称为是整型或整数，是正或负整数，不带小数点。Python3 整型是没有限制大小的，可以当作 Long 类型使用，所以 Python3 没有 Python2 的 Long 类型。布尔(bool)是整型的子类型。</p>
-</li>
-<li><p><strong>浮点型(float)</strong> - 浮点型由整数部分与小数部分组成，浮点型也可以使用科学计数法表示（2.5e2 &#x3D; 2.5 x 102 &#x3D; 250）</p>
-</li>
-<li><p><strong>复数( (complex))</strong> - 复数由实数部分和虚数部分构成，可以用a + bj,或者complex(a,b)表示， 复数的实部a和虚部b都是浮点型。</p>
-</li>
-</ul>
-<p>我们可以使用十六进制和八进制来代表整数：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; number = 0xA0F # 十六进制</span><br><span class="line">&gt;&gt;&gt; number</span><br><span class="line">2575</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; number=0o37 # 八进制</span><br><span class="line">&gt;&gt;&gt; number</span><br><span class="line">31</span><br><span class="line"></span><br><span class="line">int	float	complex</span><br><span class="line">10	0.0	3.14j</span><br><span class="line">100	15.20	45.j</span><br><span class="line">-786	-21.9	9.322e-36j</span><br><span class="line">080	32.3e+18	.876j</span><br><span class="line">-0490	-90.	-.6545+0J</span><br><span class="line">-0x260	-32.54e100	3e+26J</span><br><span class="line">0x69	70.2E-12	4.53e-7j</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>Python支持复数，复数由实数部分和虚数部分构成，可以用a + bj,或者complex(a,b)表示， 复数的实部a和虚部b都是浮点型。</p>
+          <p>Python3 数字(Number)Python 数字数据类型用于存储数值。 数据类型是不允许改变的,这就意味着如果改变数字数据类型的值，将重新分配内存空间。 以下实例在变量赋值时 Number 对象将被创建： var1 = 1 var2 = 10 您也可以使用del语句删除一些数字对象的引用。 del语句的语法是： del var1 ,var2 ,var3 ....,varN 您可以通过使用de...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%95%B0%E5%AD%97%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%95%B0%E5%AD%97%E3%80%91/">
                 阅读全文 &raquo;
               </a>
             </div>

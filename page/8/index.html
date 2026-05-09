@@ -31,6 +31,9 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/page/8/">
 
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"ByteFisher","url":"https://www.bytefisher.top","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.bytefisher.top/search.json?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"}]}</script>
+
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
@@ -44,6 +47,15 @@
 
   <title>ByteFisher</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+      }
+    </script>
 
 
 
@@ -288,14 +300,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>用Lua实现Unity弹幕飞行游戏要点记录：</p>
-<h2 id="对象池"><a href="#对象池" class="headerlink" title="- 对象池"></a>- 对象池</h2><p>创建游戏中可循环利用的游戏对象池</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">---获取一个可用子弹</span><br><span class="line">---@return FlightGameBullet</span><br><span class="line">function m:GetBullet()</span><br><span class="line">    for i, v in pairs(self.flightGameBulletPool) do</span><br><span class="line">        if not v.active then</span><br><span class="line">            return v</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    ---如果没有可用子弹，动态创建一个新的子弹</span><br><span class="line">    local bulletCell = FlightGameBullet.New(UnityEngine.Object.Instantiate(self.BulletModel))</span><br><span class="line">    self.flightGameBulletPool[bulletCell.View:GetInstanceID()] = bulletCell</span><br><span class="line">    return bulletCell</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---回收子弹</span><br><span class="line">---@param bullet FlightGameBullet</span><br><span class="line">function m:RecycleBullet(bullet)</span><br><span class="line">    bullet.View.transform:SetParent(self.RecoveryNode.transform, false)</span><br><span class="line">    bullet:Reset()</span><br><span class="line">    self.flightGameBulletPool[bullet.View:GetInstanceID()] = bullet</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---获取一个未被激活的敌人</span><br><span class="line">---@return FlightGameEnemy</span><br><span class="line">function m:GetEnemy()</span><br><span class="line">    for i, v in pairs(self.flightGameEnemyPool) do</span><br><span class="line">        if not v.active and v:IsPlayDamageEnd() then</span><br><span class="line">            return v</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    ---如果没有未被激活的敌人，动态创建一个新的敌人</span><br><span class="line">    local enemy = FlightGameEnemy.New(UnityEngine.Object.Instantiate(self.EnemyModel),self.rootScene)</span><br><span class="line">    self.flightGameEnemyPool[enemy.View:GetInstanceID()] = enemy</span><br><span class="line">    return enemy</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">---回收敌人设置成未激活状态</span><br><span class="line">---@param enemy FlightGameEnemy</span><br><span class="line">function m:RecycleEnemy(enemy)</span><br><span class="line">    enemy.View.transform:SetParent(self.RecoveryNode.transform, false)</span><br><span class="line">    enemy:Reset()</span><br><span class="line">    self.flightGameEnemyPool[enemy.View:GetInstanceID()] = enemy</span><br><span class="line">end</span><br><span class="line">--endregion Object Management</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="碰撞检测"><a href="#碰撞检测" class="headerlink" title="- 碰撞检测"></a>- 碰撞检测</h2><p>实现场景中游戏对象的碰撞检测</p>
+          <p>用Lua实现Unity弹幕飞行游戏要点记录： 对象池创建游戏中可循环利用的游戏对象池 123456789101112131415161718192021222324252627282930313233343536373839404142434445 获取一个可用子弹 @return FlightGameBulletfunction m:GetBullet() for i, v in pairs(s...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#more" rel="contents">
+              <a class="btn" href="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -387,15 +395,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>12月2日</p>
-<p>周六，阴冷的冬日，我决定去三一水库钓小红尾。此次的钓鱼之旅，我特意选择了15尺枯法师7，想和以前经常使用的15尺普天元独步，进行一个详细的对比。在网上，对于15尺枯法师7的评论褒贬不一，相对于其他尺寸而言，人们普遍认为15尺是整个枯7系列最不好的一款，持感重头，整体偏软。 </p>
-<p><img data-src="https://iili.io/JIFdS7R.md.jpg"></p>
-<p><img data-src="https://iili.io/JIFde1a.md.jpg"></p>
-<p>刚开始使用枯法师的时候，确实能感受到比独步有明显的重头感，相比于15尺独步，枯7的竿身要细一些，竿壁也更厚。我发现15尺枯法师7，在抛投时和独步一样都比较精准，但刺鱼没有独步那么犀利，独步龙凤尾，刺鱼没延迟很直接。然而，枯法师7代的腰力明显优于独步，当我遇到相同的鱼情时，独步只是竿稍前两节稍微弯曲，就能将鱼飞出水面，而枯法师则能更大幅度地弯曲，甚至大弯弓。</p>
-<p><img data-src="https://iili.io/JIFdhzP.md.jpg"></p>
+          <p>12月2日 周六，阴冷的冬日，我决定去三一水库钓小红尾。此次的钓鱼之旅，我特意选择了15尺枯法师7，想和以前经常使用的15尺普天元独步，进行一个详细的对比。在网上，对于15尺枯法师7的评论褒贬不一，相对于其他尺寸而言，人们普遍认为15尺是整个枯7系列最不好的一款，持感重头，整体偏软。 刚开始使用枯法师的时候，确实能感受到比独步有明显的重头感，相比于15尺独步，枯7的竿身要细一些，竿壁也更厚。我发现...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/12/02/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-02/#more" rel="contents">
+              <a class="btn" href="/2023/12/02/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-02/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -487,16 +490,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>11月26日</p>
-<p>周日，今天阳光明媚，我决定下午去固驿砂坑钓鲫鱼。吃过午饭，驾车出发。在即将到达钓点的时候，遇到了一个经常去那钓鱼的钓友。他向我透露，前天有一个钓友不小心掉进砂坑的水里，结果不幸遇难了。这突如其来的消息让我感到非常吃惊，心情也变得沉重起来。面对这样的意外，我的内心也难以平静。于是我临时改变主意，决定不再前往砂坑，而是前往常去的三一水库垂钓。</p>
-<p><img data-src="https://iili.io/Jot5ONe.md.jpg"></p>
-<p>冬日的阳光难得，当阳光洒落在身上时，仿佛整个人都被温柔的光芒所包裹，带来一种温馨和安心的感觉。水库周围的游玩者很多，有的人携家人前来野外烧烤，也有不少钓鱼的爱好者在水库四周垂钓。</p>
-<p><img data-src="https://iili.io/Jot5Xl2.md.jpg"></p>
-<p>水面上，不知哪儿来的一群野鸭，它们成群结队地在水中嬉戏着，有的振翅飞翔，有的戏水追逐着彼此。它们那叽叽喳喳的叫声回荡在整个水库，充满了生机和活力。它们仿佛无忧无虑，没有任何包袱，就在这个美丽的冬日里，尽情享受着水中的快乐。这景象让人感到无比的自在和惬意，也给了我一些安抚，让我暂时忘却了刚刚得知的那个不幸的消息，让我懂得了生活中美好的一面，生命的宝贵以及它的脆弱。</p>
-<p><img data-src="https://iili.io/Jot5eDu.md.jpg"></p>
+          <p>11月26日 周日，今天阳光明媚，我决定下午去固驿砂坑钓鲫鱼。吃过午饭，驾车出发。在即将到达钓点的时候，遇到了一个经常去那钓鱼的钓友。他向我透露，前天有一个钓友不小心掉进砂坑的水里，结果不幸遇难了。这突如其来的消息让我感到非常吃惊，心情也变得沉重起来。面对这样的意外，我的内心也难以平静。于是我临时改变主意，决定不再前往砂坑，而是前往常去的三一水库垂钓。 冬日的阳光难得，当阳光洒落在身上时，仿佛整个...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/11/26/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-26/#more" rel="contents">
+              <a class="btn" href="/2023/11/26/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-26/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -588,17 +585,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>11月18日</p>
-<p>周六，今天的天气依然阴冷，吃过午饭，准备去西来两河口钓土凤。10月份在这里搭钓台钓土凤的经历还历历在目，当时土凤马口很多，但是今天我并没有准备搭钓台，而是打算用抄网竿装上镰刀头，在河边水草丛生的地方对着河面掏个草洞，用小短竿钓鲫鱼。</p>
-<p><img data-src="https://iili.io/JoKoxql.md.jpg"></p>
-<p>不久，我来到了河边，选定了一个水草丰茂的地方，开始准备掏草洞。首先，我用镰刀头在水草丛中对着河面割开一个口子，然后用抄网竿一路探入水下，将水下的水草清理干净。掏草洞是一项非常费力的活儿，需要大量的耐心和精细的动作，经过了差不多一个小时才勉强掏好了一个小草洞。</p>
-<p><img data-src="https://iili.io/JoKocLx.md.jpg"></p>
-<p>我拿出小短竿开始钓鱼。将新鲜的饵料挂在鱼钩上，然后轻轻放入河中。虽然水温很低，我还是坚持守在原地，期待着鱼儿的上钩。</p>
-<p><img data-src="https://iili.io/JoKoMdP.md.jpg"></p>
-<p><img data-src="https://iili.io/JoKoRee.md.jpg"></p>
+          <p>11月18日 周六，今天的天气依然阴冷，吃过午饭，准备去西来两河口钓土凤。10月份在这里搭钓台钓土凤的经历还历历在目，当时土凤马口很多，但是今天我并没有准备搭钓台，而是打算用抄网竿装上镰刀头，在河边水草丛生的地方对着河面掏个草洞，用小短竿钓鲫鱼。 不久，我来到了河边，选定了一个水草丰茂的地方，开始准备掏草洞。首先，我用镰刀头在水草丛中对着河面割开一个口子，然后用抄网竿一路探入水下，将水下的水草清理...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/11/18/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-18/#more" rel="contents">
+              <a class="btn" href="/2023/11/18/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-18/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -690,14 +680,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>11月11日</p>
-<p>周六，在小雨蒙蒙的天气里，我来到了离家不远的西来小河进行野钓。自从8月份刚清理完河道来钓了一次之后再没来过，记得上次空军了，希望今天能有好的收获。天气虽然有点冷，但是小河的景色依然很美，烟雨蒙蒙中，岸边的竹林似乎更加茂密了。旁边果园里的耙耙柑套上了白色的袋子，显得更加硕果累累。河面靠边的位置长满了嫩嫩的水草，我想下面应该藏了不少鱼吧。远处几个钓友早早来到河边垂钓，但似乎鱼情不太好。</p>
-<p><img data-src="https://iili.io/JCaHq8l.md.jpg"></p>
-<p><img data-src="https://iili.io/JCaHfa4.md.jpg"></p>
-<p>我找了一个宁静的位置，准备开始我的钓鱼之旅。今天用15尺独步搭配0.8主线，0.4子线，3号轻口袖，吃铅1.5克鲫鱼漂，准备钓鲫鱼。一切准备就绪，我将钩子下沉到水底，借着细雨中的清凉，我心旷神怡地等待着期盼的鱼儿上钩。不一会儿，我的浮漂忽然晃动起来，这意味着有鱼上钩了。我迅速将钓竿拉起，只见一条小鲤鱼在钩子上摆动，鱼儿身上的鳞片在雨中闪闪发光，非常漂亮。我将小鲤鱼放入小桶中，让它为自己的贪吃接受一下关禁闭的惩罚。</p>
+          <p>11月11日 周六，在小雨蒙蒙的天气里，我来到了离家不远的西来小河进行野钓。自从8月份刚清理完河道来钓了一次之后再没来过，记得上次空军了，希望今天能有好的收获。天气虽然有点冷，但是小河的景色依然很美，烟雨蒙蒙中，岸边的竹林似乎更加茂密了。旁边果园里的耙耙柑套上了白色的袋子，显得更加硕果累累。河面靠边的位置长满了嫩嫩的水草，我想下面应该藏了不少鱼吧。远处几个钓友早早来到河边垂钓，但似乎鱼情不太好。...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/11/12/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-11/#more" rel="contents">
+              <a class="btn" href="/2023/11/12/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-11/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -789,15 +775,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>10月28日</p>
-<p>清晨的太阳刚刚露出来，洒下了温暖的阳光，让整个水库散发出一片宁静和美丽。我又一次来到了这片熟悉的水域，呼吸着新鲜的空气，享受着宁静的钓鱼时刻。</p>
-<p><img data-src="https://iili.io/JfYaeEu.md.jpg"></p>
-<p>水库的风景依然令人陶醉。周围的树木郁郁葱葱，飘逸的花草点缀其中，映衬着湖光山色，美不胜收。晨光透过稀疏的树叶，洒在地面上，照得整个岸边一片金黄。湖面青山环抱，湖泊如镜，微风吹动，形成涟漪，荡起微波。水面映射着天空的蓝色，在这美景之中，有着一丝凉爽的水汽，令人心旷神怡。但细细观察，水质变差了一些，上面偶尔漂浮着散落的细碎物，蒙蔽了它的本来面貌。</p>
-<p><img data-src="https://iili.io/JfYa4TB.md.jpg"></p>
-<p><img data-src="https://iili.io/JfYawQ9.md.jpg"></p>
+          <p>10月28日 清晨的太阳刚刚露出来，洒下了温暖的阳光，让整个水库散发出一片宁静和美丽。我又一次来到了这片熟悉的水域，呼吸着新鲜的空气，享受着宁静的钓鱼时刻。 水库的风景依然令人陶醉。周围的树木郁郁葱葱，飘逸的花草点缀其中，映衬着湖光山色，美不胜收。晨光透过稀疏的树叶，洒在地面上，照得整个岸边一片金黄。湖面青山环抱，湖泊如镜，微风吹动，形成涟漪，荡起微波。水面映射着天空的蓝色，在这美景之中，有着一丝...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/10/29/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-29/#more" rel="contents">
+              <a class="btn" href="/2023/10/29/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-29/">
                 阅读全文 &raquo;
               </a>
             </div>

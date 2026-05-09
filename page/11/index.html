@@ -31,6 +31,9 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/page/11/">
 
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"ByteFisher","url":"https://www.bytefisher.top","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.bytefisher.top/search.json?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"}]}</script>
+
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
@@ -44,6 +47,15 @@
 
   <title>ByteFisher</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+      }
+    </script>
 
 
 
@@ -284,27 +296,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="C-继承"><a href="#C-继承" class="headerlink" title="- C# 继承"></a>- C# 继承</h2><p>继承是面向对象程序设计中最重要的概念之一。继承允许我们根据一个类来定义另一个类，这使得创建和维护应用程序变得更容易。同时也有利于重用代码和节省开发时间。</p>
-<p>当创建一个类时，程序员不需要完全重新编写新的数据成员和成员函数，只需要设计一个新的类，继承了已有的类的成员即可。这个已有的类被称为的基类，这个新的类被称为派生类。</p>
-<p>继承的思想实现了 属于（IS-A） 关系。例如，哺乳动物 属于（IS-A） 动物，狗 属于（IS-A） 哺乳动物，因此狗 属于（IS-A） 动物。</p>
-<h2 id="基类和派生类"><a href="#基类和派生类" class="headerlink" title="- 基类和派生类"></a>- 基类和派生类</h2><p>一个类可以派生自多个类或接口，这意味着它可以从多个基类或接口继承数据和函数。</p>
-<p>C# 中创建派生类的语法如下：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;访问修饰符&gt; class &lt;基类&gt;</span><br><span class="line">&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br><span class="line">class &lt;派生类&gt; : &lt;基类&gt;</span><br><span class="line">&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>假设，有一个基类 Shape，它的派生类是 Rectangle：</p>
-<blockquote>
-<p><strong>实例</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace InheritanceApplication</span><br><span class="line">&#123;</span><br><span class="line">   class Shape</span><br><span class="line">   &#123;</span><br><span class="line">      public void setWidth(int w)</span><br><span class="line">      &#123;</span><br><span class="line">         width = w;</span><br><span class="line">      &#125;</span><br><span class="line">      public void setHeight(int h)</span><br><span class="line">      &#123;</span><br><span class="line">         height = h;</span><br><span class="line">      &#125;</span><br><span class="line">      protected int width;</span><br><span class="line">      protected int height;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   // 派生类</span><br><span class="line">   class Rectangle: Shape</span><br><span class="line">   &#123;</span><br><span class="line">      public int getArea()</span><br><span class="line">      &#123;</span><br><span class="line">         return (width * height);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   class RectangleTester</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         Rectangle Rect = new Rectangle();</span><br><span class="line"></span><br><span class="line">         Rect.setWidth(5);</span><br><span class="line">         Rect.setHeight(7);</span><br><span class="line"></span><br><span class="line">         // 打印对象的面积</span><br><span class="line">         Console.WriteLine(&quot;总面积： &#123;0&#125;&quot;,  Rect.getArea());</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
-<pre><code>总面积： 35
-</code></pre>
-<h2 id="基类的初始化"><a href="#基类的初始化" class="headerlink" title="- 基类的初始化"></a>- 基类的初始化</h2><p>派生类继承了基类的成员变量和成员方法。因此父类对象应在子类对象创建之前被创建。您可以在成员初始化列表中进行父类的初始化。</p>
-<p>下面的程序演示了这点：</p>
+          <p>C 继承继承是面向对象程序设计中最重要的概念之一。继承允许我们根据一个类来定义另一个类，这使得创建和维护应用程序变得更容易。同时也有利于重用代码和节省开发时间。 当创建一个类时，程序员不需要完全重新编写新的数据成员和成员函数，只需要设计一个新的类，继承了已有的类的成员即可。这个已有的类被称为的基类，这个新的类被称为派生类。 继承的思想实现了 属于（IS A） 关系。例如，哺乳动物 属于（IS A）...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%A7%E6%89%BF%E3%80%91/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -400,30 +395,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="C-类（Class）"><a href="#C-类（Class）" class="headerlink" title="- C# 类（Class）"></a>- C# 类（Class）</h2><p>当你定义一个类时，你定义了一个数据类型的蓝图。这实际上并没有定义任何的数据，但它定义了类的名称意味着什么，也就是说，类的对象由什么组成及在这个对象上可执行什么操作。对象是类的实例。构成类的方法和变量称为类的成员。</p>
-<h2 id="类的定义"><a href="#类的定义" class="headerlink" title="- 类的定义"></a>- 类的定义</h2><p>类的定义是以关键字 class 开始，后跟类的名称。类的主体，包含在一对花括号内。下面是类定义的一般形式：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;access specifier&gt; class  class_name</span><br><span class="line">&#123;</span><br><span class="line">    // member variables</span><br><span class="line">    &lt;access specifier&gt; &lt;data type&gt; variable1;</span><br><span class="line">    &lt;access specifier&gt; &lt;data type&gt; variable2;</span><br><span class="line">    ...</span><br><span class="line">    &lt;access specifier&gt; &lt;data type&gt; variableN;</span><br><span class="line">    // member methods</span><br><span class="line">    &lt;access specifier&gt; &lt;return type&gt; method1(parameter_list)</span><br><span class="line">    &#123;</span><br><span class="line">        // method body</span><br><span class="line">    &#125;</span><br><span class="line">    &lt;access specifier&gt; &lt;return type&gt; method2(parameter_list)</span><br><span class="line">    &#123;</span><br><span class="line">        // method body</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">    &lt;access specifier&gt; &lt;return type&gt; methodN(parameter_list)</span><br><span class="line">    &#123;</span><br><span class="line">        // method body</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>请注意：</p>
-<ul>
-<li><p>访问标识符 <access specifier> 指定了对类及其成员的访问规则。如果没有指定，则使用默认的访问标识符。类的默认访问标识符是 internal，成员的默认访问标识符是 private。</p>
-</li>
-<li><p>数据类型 <data type> 指定了变量的类型，返回类型 <return type> 指定了返回的方法返回的数据类型。</p>
-</li>
-<li><p>如果要访问类的成员，你要使用点（.）运算符。</p>
-</li>
-<li><p>点运算符链接了对象的名称和成员的名称。</p>
-</li>
-</ul>
-<p>下面的实例说明了目前为止所讨论的概念：</p>
-<blockquote>
-<p><strong>实例</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace BoxApplication</span><br><span class="line">&#123;</span><br><span class="line">    class Box</span><br><span class="line">    &#123;</span><br><span class="line">       public double length;   // 长度</span><br><span class="line">       public double breadth;  // 宽度</span><br><span class="line">       public double height;   // 高度</span><br><span class="line">    &#125;</span><br><span class="line">    class Boxtester</span><br><span class="line">    &#123;</span><br><span class="line">        static void Main(string[] args)</span><br><span class="line">        &#123;</span><br><span class="line">            Box Box1 = new Box();        // 声明 Box1，类型为 Box</span><br><span class="line">            Box Box2 = new Box();        // 声明 Box2，类型为 Box</span><br><span class="line">            double volume = 0.0;         // 体积</span><br><span class="line"></span><br><span class="line">            // Box1 详述</span><br><span class="line">            Box1.height = 5.0;</span><br><span class="line">            Box1.length = 6.0;</span><br><span class="line">            Box1.breadth = 7.0;</span><br><span class="line"></span><br><span class="line">            // Box2 详述</span><br><span class="line">            Box2.height = 10.0;</span><br><span class="line">            Box2.length = 12.0;</span><br><span class="line">            Box2.breadth = 13.0;</span><br><span class="line">           </span><br><span class="line">            // Box1 的体积</span><br><span class="line">            volume = Box1.height * Box1.length * Box1.breadth;</span><br><span class="line">            Console.WriteLine(&quot;Box1 的体积： &#123;0&#125;&quot;,  volume);</span><br><span class="line"></span><br><span class="line">            // Box2 的体积</span><br><span class="line">            volume = Box2.height * Box2.length * Box2.breadth;</span><br><span class="line">            Console.WriteLine(&quot;Box2 的体积： &#123;0&#125;&quot;, volume);</span><br><span class="line">            Console.ReadKey();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
+          <p>C 类（Class）当你定义一个类时，你定义了一个数据类型的蓝图。这实际上并没有定义任何的数据，但它定义了类的名称意味着什么，也就是说，类的对象由什么组成及在这个对象上可执行什么操作。对象是类的实例。构成类的方法和变量称为类的成员。 类的定义类的定义是以关键字 class 开始，后跟类的名称。类的主体，包含在一对花括号内。下面是类定义的一般形式： 1234567891011121314151617...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B1%BB%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/07/06/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B1%BB%E3%80%91/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -519,27 +494,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="C-枚举（Enum）"><a href="#C-枚举（Enum）" class="headerlink" title="- C# 枚举（Enum）"></a>- C# 枚举（Enum）</h2><p>枚举是一组命名整型常量。枚举类型是使用 enum 关键字声明的。</p>
-<p>C# 枚举是值类型。换句话说，枚举包含自己的值，且不能继承或传递继承。</p>
-<p>枚举类名建议带上 Enum 后缀，枚举成员名称需要全大写，单词间用下划线隔开。</p>
-<p>说明： 枚举其实就是特殊的常量类，且构造方法被默认强制是私有。</p>
-<p>正例： 枚举名字： DealStatusEnum， 成员名称： SUCCESS &#x2F; UNKOWN_REASON</p>
-<h2 id="声明-enum-变量"><a href="#声明-enum-变量" class="headerlink" title="- 声明 enum 变量"></a>- 声明 enum 变量</h2><p>声明枚举的一般语法：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">enum &lt;enum_name&gt;</span><br><span class="line">&#123; </span><br><span class="line">    enumeration list </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><br>其中，</p>
-<pre><code>enum_name 指定枚举的类型名称。
-enumeration list 是一个用逗号分隔的标识符列表。
-</code></pre>
-<p>枚举列表中的每个符号代表一个整数值，一个比它前面的符号大的整数值。默认情况下，第一个枚举符号的值是 0.例如：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">enum Days &#123; Sun, Mon, tue, Wed, thu, Fri, Sat &#125;;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>下面的实例演示了枚举变量的用法：</p>
-<blockquote>
-<p><strong>实例</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">public class EnumTest</span><br><span class="line">&#123;</span><br><span class="line">    enum Day &#123; Sun, Mon, Tue, Wed, Thu, Fri, Sat &#125;;</span><br><span class="line"></span><br><span class="line">    static void Main()</span><br><span class="line">    &#123;</span><br><span class="line">        int x = (int)Day.Sun;</span><br><span class="line">        int y = (int)Day.Fri;</span><br><span class="line">        Console.WriteLine(&quot;Sun = &#123;0&#125;&quot;, x);</span><br><span class="line">        Console.WriteLine(&quot;Fri = &#123;0&#125;&quot;, y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
+          <p>C 枚举（Enum）枚举是一组命名整型常量。枚举类型是使用 enum 关键字声明的。 C 枚举是值类型。换句话说，枚举包含自己的值，且不能继承或传递继承。 枚举类名建议带上 Enum 后缀，枚举成员名称需要全大写，单词间用下划线隔开。 说明： 枚举其实就是特殊的常量类，且构造方法被默认强制是私有。 正例： 枚举名字： DealStatusEnum， 成员名称： SUCCESS & x2F; UNK...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%9E%9A%E4%B8%BE%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%9E%9A%E4%B8%BE%E3%80%91/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -635,41 +593,10 @@ enumeration list 是一个用逗号分隔的标识符列表。
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="C-结构体（Struct）"><a href="#C-结构体（Struct）" class="headerlink" title="- C# 结构体（Struct）"></a>- C# 结构体（Struct）</h2><p>在 C# 中，结构体是值类型数据结构。它使得一个单一变量可以存储各种数据类型的相关数据。struct 关键字用于创建结构体。</p>
-<p>结构体是用来代表一个记录。假设您想跟踪图书馆中书的动态。您可能想跟踪每本书的以下属性：</p>
-<ul>
-<li><p>Title</p>
-</li>
-<li><p>Author</p>
-</li>
-<li><p>Subject</p>
-</li>
-<li><p>Book ID</p>
-</li>
-</ul>
-<h2 id="定义结构体"><a href="#定义结构体" class="headerlink" title="- 定义结构体"></a>- 定义结构体</h2><p>为了定义一个结构体，您必须使用 struct 语句。struct 语句为程序定义了一个带有多个成员的新的数据类型。</p>
-<p>例如，您可以按照如下的方式声明 Book 结构：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct Books</span><br><span class="line">&#123;</span><br><span class="line">   public string title;</span><br><span class="line">   public string author;</span><br><span class="line">   public string subject;</span><br><span class="line">   public int book_id;</span><br><span class="line">&#125;;  </span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>下面的程序演示了结构的用法：</p>
-<blockquote>
-<p><strong>实例</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.Text;</span><br><span class="line">     </span><br><span class="line">struct Books</span><br><span class="line">&#123;</span><br><span class="line">   public string title;</span><br><span class="line">   public string author;</span><br><span class="line">   public string subject;</span><br><span class="line">   public int book_id;</span><br><span class="line">&#125;;  </span><br><span class="line"></span><br><span class="line">public class testStructure</span><br><span class="line">&#123;</span><br><span class="line">   public static void Main(string[] args)</span><br><span class="line">   &#123;</span><br><span class="line"></span><br><span class="line">      Books Book1;        /* 声明 Book1，类型为 Books */</span><br><span class="line">      Books Book2;        /* 声明 Book2，类型为 Books */</span><br><span class="line"></span><br><span class="line">      /* book 1 详述 */</span><br><span class="line">      Book1.title = &quot;C Programming&quot;;</span><br><span class="line">      Book1.author = &quot;Nuha Ali&quot;;</span><br><span class="line">      Book1.subject = &quot;C Programming Tutorial&quot;;</span><br><span class="line">      Book1.book_id = 6495407;</span><br><span class="line"></span><br><span class="line">      /* book 2 详述 */</span><br><span class="line">      Book2.title = &quot;Telecom Billing&quot;;</span><br><span class="line">      Book2.author = &quot;Zara Ali&quot;;</span><br><span class="line">      Book2.subject =  &quot;Telecom Billing Tutorial&quot;;</span><br><span class="line">      Book2.book_id = 6495700;</span><br><span class="line"></span><br><span class="line">      /* 打印 Book1 信息 */</span><br><span class="line">      Console.WriteLine( &quot;Book 1 title : &#123;0&#125;&quot;, Book1.title);</span><br><span class="line">      Console.WriteLine(&quot;Book 1 author : &#123;0&#125;&quot;, Book1.author);</span><br><span class="line">      Console.WriteLine(&quot;Book 1 subject : &#123;0&#125;&quot;, Book1.subject);</span><br><span class="line">      Console.WriteLine(&quot;Book 1 book_id :&#123;0&#125;&quot;, Book1.book_id);</span><br><span class="line"></span><br><span class="line">      /* 打印 Book2 信息 */</span><br><span class="line">      Console.WriteLine(&quot;Book 2 title : &#123;0&#125;&quot;, Book2.title);</span><br><span class="line">      Console.WriteLine(&quot;Book 2 author : &#123;0&#125;&quot;, Book2.author);</span><br><span class="line">      Console.WriteLine(&quot;Book 2 subject : &#123;0&#125;&quot;, Book2.subject);</span><br><span class="line">      Console.WriteLine(&quot;Book 2 book_id : &#123;0&#125;&quot;, Book2.book_id);      </span><br><span class="line"></span><br><span class="line">      Console.ReadKey();</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
-<pre><code>Book 1 title : C Programming
-Book 1 author : Nuha Ali
-Book 1 subject : C Programming Tutorial
-Book 1 book_id : 6495407
-Book 2 title : Telecom Billing
-Book 2 author : Zara Ali
-Book 2 subject : Telecom Billing Tutorial
-Book 2 book_id : 6495700
-</code></pre>
+          <p>C 结构体（Struct）在 C 中，结构体是值类型数据结构。它使得一个单一变量可以存储各种数据类型的相关数据。struct 关键字用于创建结构体。 结构体是用来代表一个记录。假设您想跟踪图书馆中书的动态。您可能想跟踪每本书的以下属性： Title Author Subject Book ID 定义结构体为了定义一个结构体，您必须使用 struct 语句。struct 语句为程序定义了一个带有多个...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%93%E6%9E%84%E4%BD%93Struct%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%93%E6%9E%84%E4%BD%93Struct%E3%80%91/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -765,40 +692,10 @@ Book 2 book_id : 6495700
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="C-字符串（String）"><a href="#C-字符串（String）" class="headerlink" title="- C# 字符串（String）"></a>- C# 字符串（String）</h2><p>在 C# 中，您可以使用字符数组来表示字符串，但是，更常见的做法是使用 string 关键字来声明一个字符串变量。string 关键字是 System.String 类的别名。</p>
-<h2 id="创建-String-对象"><a href="#创建-String-对象" class="headerlink" title="- 创建 String 对象"></a>- 创建 String 对象</h2><p>您可以使用以下方法之一来创建 string 对象：</p>
-<ul>
-<li><p>通过给 String 变量指定一个字符串</p>
-</li>
-<li><p>通过使用 String 类构造函数</p>
-</li>
-<li><p>通过使用字符串串联运算符（ + ）</p>
-</li>
-<li><p>通过检索属性或调用一个返回字符串的方法</p>
-</li>
-<li><p>通过格式化方法来转换一个值或对象为它的字符串表示形式</p>
-</li>
-</ul>
-<p>下面的实例演示了这点：</p>
-<blockquote>
-<p><strong>实例</strong></p>
-</blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">namespace StringApplication</span><br><span class="line">&#123;</span><br><span class="line">    class Program</span><br><span class="line">    &#123;</span><br><span class="line">        static void Main(string[] args)</span><br><span class="line">        &#123;</span><br><span class="line">           //字符串，字符串连接</span><br><span class="line">            string fname, lname;</span><br><span class="line">            fname = &quot;Rowan&quot;;</span><br><span class="line">            lname = &quot;Atkinson&quot;;</span><br><span class="line"></span><br><span class="line">            string fullname = fname + lname;</span><br><span class="line">            Console.WriteLine(&quot;Full Name: &#123;0&#125;&quot;, fullname);</span><br><span class="line"></span><br><span class="line">            //通过使用 string 构造函数</span><br><span class="line">            char[] letters = &#123; &#x27;H&#x27;, &#x27;e&#x27;, &#x27;l&#x27;, &#x27;l&#x27;,&#x27;o&#x27; &#125;;</span><br><span class="line">            string greetings = new string(letters);</span><br><span class="line">            Console.WriteLine(&quot;Greetings: &#123;0&#125;&quot;, greetings);</span><br><span class="line"></span><br><span class="line">            //方法返回字符串</span><br><span class="line">            string[] sarray = &#123; &quot;Hello&quot;, &quot;From&quot;, &quot;Tutorials&quot;, &quot;Point&quot; &#125;;</span><br><span class="line">            string message = String.Join(&quot; &quot;, sarray);</span><br><span class="line">            Console.WriteLine(&quot;Message: &#123;0&#125;&quot;, message);</span><br><span class="line"></span><br><span class="line">            //用于转化值的格式化方法</span><br><span class="line">            DateTime waiting = new DateTime(2012, 10, 10, 17, 58, 1);</span><br><span class="line">            string chat = String.Format(&quot;Message sent at &#123;0:t&#125; on &#123;0:D&#125;&quot;,</span><br><span class="line">            waiting);</span><br><span class="line">            Console.WriteLine(&quot;Message: &#123;0&#125;&quot;, chat);</span><br><span class="line">            Console.ReadKey() ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
-<pre><code>Full Name: RowanAtkinson
-Greetings: Hello
-Message: Hello From Tutorials Point
-Message: Message sent at 17:58 on Wednesday, 10 October 2012
-</code></pre>
-<h2 id="String-类的属性"><a href="#String-类的属性" class="headerlink" title="- String 类的属性"></a>- String 类的属性</h2><p>String 类有以下两个属性：</p>
-<pre><code>序号	 属性名称 &amp; 描述
-1	Chars 在当前 String 对象中获取 Char 对象的指定位置。
-2	Length 在当前的 String 对象中获取字符数。
-</code></pre>
+          <p>C 字符串（String）在 C 中，您可以使用字符数组来表示字符串，但是，更常见的做法是使用 string 关键字来声明一个字符串变量。string 关键字是 System.String 类的别名。 创建 String 对象您可以使用以下方法之一来创建 string 对象： 通过给 String 变量指定一个字符串 通过使用 String 类构造函数 通过使用字符串串联运算符（ + ） 通过检索...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/07/03/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/#more" rel="contents">
+              <a class="btn" href="/2023/07/03/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -890,10 +787,10 @@ Message: Message sent at 17:58 on Wednesday, 10 October 2012
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>今天周日，阴天适合钓鱼，9点多来到三一水库钓红尾。这个水库我是常客了，周末没事几乎都会来，所以对这个水库的鱼情还是比较了解，小黄尾，白条，小鲫鱼比较多，几乎没大鱼，偶尔能上个小鲤鱼，毕竟钓鱼免费，钓钓小鱼玩一下还是可以的。今天的目标鱼和往常一样主钓小黄尾和白条。鱼竿12尺玄武人Y，1号主线，0.4子线4号轻口袖，拉饵，从9点半到下午5点，连竿不断，中途竞然还一竿上了3尾白条，到下午收竿估计钓了300多尾，但是个体太小，好多都是挂起来的，下周换2号钩试试说不定能钓更多。<br>装备搭配：12尺玄武人Y，1号主线，0.4子线4号轻口袖<br><img data-src="https://iili.io/HijrPs4.md.jpg"><br>鱼获展示1<br><img data-src="https://iili.io/HijrL12.md.jpg"><br>鱼获展示2</p>
+          <p>今天周日，阴天适合钓鱼，9点多来到三一水库钓红尾。这个水库我是常客了，周末没事几乎都会来，所以对这个水库的鱼情还是比较了解，小黄尾，白条，小鲫鱼比较多，几乎没大鱼，偶尔能上个小鲤鱼，毕竟钓鱼免费，钓钓小鱼玩一下还是可以的。今天的目标鱼和往常一样主钓小黄尾和白条。鱼竿12尺玄武人Y，1号主线，0.4子线4号轻口袖，拉饵，从9点半到下午5点，连竿不断，中途竞然还一竿上了3尾白条，到下午收竿估计钓了30...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/07/03/%E6%89%8B%E7%AB%BF%E6%8A%BD%E7%99%BD%E6%9D%A1/#more" rel="contents">
+              <a class="btn" href="/2023/07/03/%E6%89%8B%E7%AB%BF%E6%8A%BD%E7%99%BD%E6%9D%A1/">
                 阅读全文 &raquo;
               </a>
             </div>

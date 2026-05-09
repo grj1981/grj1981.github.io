@@ -18,12 +18,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
-  <meta name="description" content="- Python3 JSON 数据解析JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。 Python3 中可以使用 json 模块来对 JSON 数据进行编解码，它包含了两个函数： json.dumps(): 对数据进行编码。json.loads(): 对数据进行解码。 在 json 的编解码过程中，Python 的原始类型与 json 类型会相互转">
+  <meta name="description" content="Python3 JSON 数据解析JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。 Python3 中可以使用 json 模块来对 JSON 数据进行编解码，它包含了两个函数： json.dumps(): 对数据进行编码。json.loads(): 对数据进行解码。 在 json 的编解码过程中，Python 的原始类型与 json 类型会相互转换，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python学习笔记【JSON】">
 <meta property="og:url" content="https://www.bytefisher.top/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90JSON%E3%80%91/index.html">
 <meta property="og:site_name" content="ByteFisher">
-<meta property="og:description" content="- Python3 JSON 数据解析JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。 Python3 中可以使用 json 模块来对 JSON 数据进行编解码，它包含了两个函数： json.dumps(): 对数据进行编码。json.loads(): 对数据进行解码。 在 json 的编解码过程中，Python 的原始类型与 json 类型会相互转">
+<meta property="og:description" content="Python3 JSON 数据解析JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。 Python3 中可以使用 json 模块来对 JSON 数据进行编解码，它包含了两个函数： json.dumps(): 对数据进行编码。json.loads(): 对数据进行解码。 在 json 的编解码过程中，Python 的原始类型与 json 类型会相互转换，">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2016/04/json-dumps-loads.png">
 <meta property="article:published_time" content="2023-06-25T10:03:08.000Z">
@@ -35,6 +35,9 @@
 <meta name="twitter:image" content="https://www.runoob.com/wp-content/uploads/2016/04/json-dumps-loads.png">
 
 <link rel="canonical" href="https://www.bytefisher.top/2023/06/25/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90JSON%E3%80%91/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Python学习笔记【JSON】","description":"Python3 JSON 数据解析JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。 Python3 中可以使用 json 模块来对 JSON 数据进行编解码，它包含了两个函数： json.dumps(): 对数据进行编码。json.loads(): 对数据进行解码。 在 json 的编解码过程中，Python 的原始类型与 json 类型会相互转换，...","url":"https://www.bytefisher.top/2023/06/25/Python学习笔记【JSON】/","datePublished":"2023-06-25T10:03:08.000Z","dateModified":"2024-08-26T09:55:57.309Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/06/25/Python学习笔记【JSON】/"},"keywords":"IT, Python"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"IT","item":"https://www.bytefisher.top/categories/IT/"},{"@type":"ListItem","position":3,"name":"Python学习笔记【JSON】"}]}</script>
 
 
 <script id="page-configurations">
@@ -49,6 +52,15 @@
 
   <title>Python学习笔记【JSON】 | ByteFisher</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+      }
+    </script>
 
 
 
@@ -286,6 +298,7 @@
   </span>
   
   
+            <div class="post-description">Python3 JSON 数据解析JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。 Python3 中可以使用 json 模块来对 JSON 数据进行编解码，它包含了两个函数： json.dumps(): 对数据进行编码。json.loads(): 对数据进行解码。 在 json 的编解码过程中，Python 的原始类型与 json 类型会相互转换，...</div>
 
         </div>
       </header>

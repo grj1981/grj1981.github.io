@@ -31,6 +31,9 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/">
 
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"ByteFisher","url":"https://www.bytefisher.top","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.bytefisher.top/search.json?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"}]}</script>
+
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
@@ -44,6 +47,15 @@
 
   <title>ByteFisher</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+      }
+    </script>
 
 
 
@@ -274,35 +286,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近对博客进行了一次全面的代码审查，发现三个高优先级的硬性问题：</p>
-<table>
-<thead>
-<tr>
-<th>问题</th>
-<th>影响</th>
-<th>严重程度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>RSS Feed 配置存在但依赖未安装</td>
-<td><code>/atom.xml</code> 无法生成，RSS 订阅失效</td>
-<td>🔴 高</td>
-</tr>
-<tr>
-<td>Sitemap 未配置</td>
-<td>搜索引擎爬取效率低，新文章收录慢</td>
-<td>🔴 高</td>
-</tr>
-<tr>
-<td>Valine 评论系统已停止维护</td>
-<td>存在安全风险，评论功能随时可能故障</td>
-<td>🔴 高</td>
-</tr>
-</tbody></table>
-<p>本文将详细记录这三项修复的完整过程，重点介绍 Valine 到 Waline 的平滑迁移方案。</p>
+          <p>前言ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近对博客进行了一次全面的代码审查，发现三个高优先级的硬性问题： 问题 影响 严重程度 RSS Feed 配置存在但依赖未安装 /atom.xml 无法生成，RSS 订阅失效 🔴 高 Sitemap 未配置 搜索引擎爬取效率低，新文章收录慢 �...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/#more" rel="contents">
+              <a class="btn" href="/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -394,17 +381,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>一号才刚去花碑水库算完账，五条大鲤鱼入户，三条鲢鳙放流，回来发了朋友圈，评论区炸了一整天。本来想着五一剩下的几天就在家歇歇，把手上的酸劲儿缓一缓——结果三号早上七点，手机就响了。</p>
-<p>老表打来的：”起来了没有？我已经到花碑了，今天口好得很，赶紧来！”</p>
-<p>我看了眼时间，七点刚过。一号那天蒙蒙细雨钓了一天，胳膊到现在还隐隐发酸。但老表这电话来得突然，人都到水库边了，我要是说不去，这顿饭以后还吃不吃了？钓鱼人都懂——“来都来了”，这四个字就是最大的魔咒。我咬着牙从床上爬起来，简单洗漱完，拎起装备就往外走。</p>
-<p>后备箱里的东西基本还是五一那天收杆时的原样——波纹鲤K6.3还绑着2.0主线，子线盒里1.5的子线也还有几副。我检查了一遍，饵料、散炮、窝料、抄网、鱼护、大鱼桶，一样不少。挂上挡就往花碑方向开。</p>
-<p>到水库边的时候已经快九点半了。老表坐在上次我那个钓位上，表情说不上好看。我问怎么样了，他摆摆手，说两小时了就上了一条小鲫鱼，漂都跟定海神针似的。我看了眼他的鱼护——空的，水都没沾湿。</p>
-<p>行吧，看来今天还是得我来。</p>
-<p>我在他旁边找了个位置，离他大概七八米远。这套流程已经熟得不能再熟了——架竿、调漂、找底、打窝。装备跟一号一模一样：波纹鲤K6.3，2.0主线配1.5子线，新关东2号钩。饵料方面我这次做了点调整——撮饵加散炮，撮饵主攻鲤鱼，散炮用来诱鱼聚窝。这搭配一号那天还没试过，今天正好验证一下效果。</p>
-<p>一切准备就绪，挂上撮饵，散了几个散炮下去，抛下第一竿。水面平静得很，偶尔有几条白条在水皮上打花。老表在旁边看着我，眼神里写满了”我倒要看看你能钓成什么样”。</p>
+          <p>一号才刚去花碑水库算完账，五条大鲤鱼入户，三条鲢鳙放流，回来发了朋友圈，评论区炸了一整天。本来想着五一剩下的几天就在家歇歇，把手上的酸劲儿缓一缓——结果三号早上七点，手机就响了。 老表打来的：”起来了没有？我已经到花碑了，今天口好得很，赶紧来！” 我看了眼时间，七点刚过。一号那天蒙蒙细雨钓了一天，胳膊到现在还隐隐发酸。但老表这电话来得突然，人都到水库边了，我要是说不去，这顿饭以后还吃不吃了？钓鱼人...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2026/05/04/2026-05-04-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E4%BA%94%E4%B8%80%E8%BF%9E%E6%88%98%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93/#more" rel="contents">
+              <a class="btn" href="/2026/05/04/2026-05-04-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E4%BA%94%E4%B8%80%E8%BF%9E%E6%88%98%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -496,21 +476,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>上次收杆时说过，五一回来算总账。</p>
-<p>言出必行。</p>
-<p>五月一号，天还没亮就醒了。窗外淅淅沥沥的雨声让我心里一凉——天气预报没说下雨啊。打开手机一看，蒙蒙细雨，温度不高，气压倒是稳定。我一拍大腿：这不就是钓大鱼的天吗？阴雨天，大物靠岸，今天不爆护都对不起这天气！</p>
-<p>抄起装备就出发。后备箱里波纹鲤K6.3已经擦得锃亮，线组也提前绑好了——2.0主线+1.5子线，新关东2号钩。上次1.0子线被切得怀疑人生，今天直接加粗。对了，这次特地换了个大鱼桶，上次那个小桶三条鱼就塞满了，今天五一必须安排到位。</p>
-<p><img data-src="https://iili.io/BLa6Q5P.png"></p>
-<p>到水库的时候岸边已经有不少人了，好位置基本都被占了。我沿着水边走了一圈，找了个相对宽敞的空位坐下来。雨丝细细密密的，水面泛着一层涟漪。调漂、找底、打窝，一套流程走完，挂上老坛玉米抛下第一竿。</p>
-<p>抽了支烟的功夫，浮漂轻轻点了一下。</p>
-<p>我瞬间坐直了身子，眼睛死死盯着那枚红绿相间的浮漂。又过了大概两分钟，浮漂出现了一个标准的鲤鱼口——先点两下，然后稳稳地斜着沉了下去。等到黑漂的瞬间，我猛地扬竿刺鱼！</p>
-<p>杆身传来的第一感觉让我心跳都漏了一拍——好重！</p>
-<p><img data-src="https://iili.io/BLa6igV.png"></p>
-<p>波纹鲤K6.3的腰身瞬间弯成一道漂亮的弧线，竿梢几乎扎进水里。鱼线切水的声音在雨幕中格外清脆——“嗡——嗡——“，那是只有大鱼才拉得出来的声音。</p>
-<p><img data-src="https://iili.io/BLa6P0Q.png"></p>
+          <p>上次收杆时说过，五一回来算总账。 言出必行。 五月一号，天还没亮就醒了。窗外淅淅沥沥的雨声让我心里一凉——天气预报没说下雨啊。打开手机一看，蒙蒙细雨，温度不高，气压倒是稳定。我一拍大腿：这不就是钓大鱼的天吗？阴雨天，大物靠岸，今天不爆护都对不起这天气！ 抄起装备就出发。后备箱里波纹鲤K6.3已经擦得锃亮，线组也提前绑好了——2.0主线+1.5子线，新关东2号钩。上次1.0子线被切得怀疑人生，今天直...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2026/05/01/2026-05-01-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E4%BA%94%E4%B8%80%E6%B0%B4%E5%BA%93%E7%AE%97%E6%80%BB%E8%B4%A6/#more" rel="contents">
+              <a class="btn" href="/2026/05/01/2026-05-01-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E4%BA%94%E4%B8%80%E6%B0%B4%E5%BA%93%E7%AE%97%E6%80%BB%E8%B4%A6/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -596,12 +565,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在上一篇文章《Hexo博客集成抖音视频实战指南》中，我们详细介绍了如何在Hexo博客中集成抖音视频相册功能，包括数据层设计、页面模板、弹窗播放等核心实现。</p>
-<p>然而，在实际使用过程中，我发现弹窗播放存在几个体验问题：视频内容没有垂直居中、弹窗内部出现滚动条、底部进度条和”看更多”区域被遮挡。这些问题严重影响了用户的观看体验。</p>
-<p>本文作为续篇，将深入分析这些问题背后的技术根因，并提供完整的修复方案。</p>
+          <p>前言在上一篇文章《Hexo博客集成抖音视频实战指南》中，我们详细介绍了如何在Hexo博客中集成抖音视频相册功能，包括数据层设计、页面模板、弹窗播放等核心实现。 然而，在实际使用过程中，我发现弹窗播放存在几个体验问题：视频内容没有垂直居中、弹窗内部出现滚动条、底部进度条和”看更多”区域被遮挡。这些问题严重影响了用户的观看体验。 本文作为续篇，将深入分析这些问题背后的技术根因，并提供完整的修复方案。...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2026/04/29/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%EF%BC%88%E7%BB%AD%EF%BC%89-%E5%BC%B9%E7%AA%97%E6%92%AD%E6%94%BE%E4%BD%93%E9%AA%8C%E4%BC%98%E5%8C%96/#more" rel="contents">
+              <a class="btn" href="/2026/04/29/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%EF%BC%88%E7%BB%AD%EF%BC%89-%E5%BC%B9%E7%AA%97%E6%92%AD%E6%94%BE%E4%BD%93%E9%AA%8C%E4%BC%98%E5%8C%96/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -697,16 +664,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>继<a href="/2026/04/20/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">光影拼图游戏开发指南（功能篇）</a>介绍功能实现后，本篇聚焦优化过程中解决的 <strong>7 个 P0 级集成问题</strong> 与运行 Bug。问题的根源在于：Phase 1&#x2F;Phase 2 的优化模块代码已完成，但未正确集成到游戏主流程中。</p>
-<p>本文重点讲解：</p>
-<ol>
-<li><strong>模块集成问题</strong>：优化代码为何闲置，如何激活</li>
-<li><strong>集成修复</strong>：6 大模块重构</li>
-<li><strong>Bug 修复</strong>：融入具体集成章节中</li>
-</ol>
+          <p>前言继光影拼图游戏开发指南（功能篇）介绍功能实现后，本篇聚焦优化过程中解决的 7 个 P0 级集成问题 与运行 Bug。问题的根源在于：Phase 1& x2F;Phase 2 的优化模块代码已完成，但未正确集成到游戏主流程中。 本文重点讲解： 模块集成问题：优化代码为何闲置，如何激活 集成修复：6 大模块重构 Bug 修复：融入具体集成章节中 问题发现：从文档到实战在对光影拼图项目进行代码审查时...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2026/04/28/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97%EF%BC%88%E4%BC%98%E5%8C%96%E7%AF%87%EF%BC%89/#more" rel="contents">
+              <a class="btn" href="/2026/04/28/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97%EF%BC%88%E4%BC%98%E5%8C%96%E7%AF%87%EF%BC%89/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -798,19 +759,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>上周你在水库里想干嘛？把我的达摩浮漂拖走了还不过瘾，还连续切我1.0子线、2.0主线？真把这水库当你家开的了？</p>
-<p><strong>今天我就是来算账的。</strong></p>
-<p>周六一大早就醒了，比上班还积极。到水库边才八点半，晨雾还没散尽，水面飘着一层薄薄的水汽。还是上次那个钓位，还是那套装备——6.3米鱼竿+2.0主线+1.0子线。挂饵抛竿，我就不信这个邪了。</p>
-<p><img data-src="https://iili.io/KOgskQ9.jpg"></p>
-<p>下杆不到十分钟，浮漂一个黑漂闷了下去！我条件反射提竿——</p>
-<p><strong>好家伙，中鱼了！</strong></p>
-<p>杆身瞬间弯成满月，线切水的声音”呜呜”响。绝对是条大物，手心全是汗。遛了大概两三分钟，鱼劲刚松了点，我刚想往岸边带——</p>
-<p>“嘣”的一声，杆梢弹了回来。</p>
-<p><strong>子线又双叒叕切了。</strong></p>
-<p><img data-src="https://iili.io/qXc6vfe.jpg"></p>
+          <p>上周你在水库里想干嘛？把我的达摩浮漂拖走了还不过瘾，还连续切我1.0子线、2.0主线？真把这水库当你家开的了？ 今天我就是来算账的。 周六一大早就醒了，比上班还积极。到水库边才八点半，晨雾还没散尽，水面飘着一层薄薄的水汽。还是上次那个钓位，还是那套装备——6.3米鱼竿+2.0主线+1.0子线。挂饵抛竿，我就不信这个邪了。 下杆不到十分钟，浮漂一个黑漂闷了下去！我条件反射提竿—— 好家伙，中鱼了！...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2026/04/26/2026-04-26-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93%E5%A4%8D%E4%BB%87/#more" rel="contents">
+              <a class="btn" href="/2026/04/26/2026-04-26-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93%E5%A4%8D%E4%BB%87/">
                 阅读全文 &raquo;
               </a>
             </div>

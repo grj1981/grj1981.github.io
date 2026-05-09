@@ -34,6 +34,8 @@
 <link rel="canonical" href="https://www.bytefisher.top/guestbook/">
 
 
+
+
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
@@ -47,6 +49,15 @@
   <title>给我留言吧 | ByteFisher
 </title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+      }
+    </script>
 
 
 
@@ -224,6 +235,7 @@
 </h1>
 
 <div class="post-meta">
+    <div class="post-description">欢迎来到我的博客！ 欢迎在这里留言！任何问题都可以在这里留言，我会及时回复的，添加email可以获得更快的回复速度，在nickname栏目输入QQ号可以直接获取你的QQ头像。</div>
   
 
 </div>
