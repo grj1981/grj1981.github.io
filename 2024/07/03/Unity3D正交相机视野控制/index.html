@@ -94,6 +94,8 @@
   </style>
 </noscript>
 
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#37c6c0">
 <link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
 </head>
 
@@ -399,6 +401,28 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
   
 
 
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Unity3D正交相机视野控制",
+    "author": { "@type": "Person", "name": "淡水鱼" },
+    "datePublished": "2024-07-03T03:52:16.000Z",
+    "dateModified": "2026-05-09T06:18:25.854Z",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.bytefisher.top/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/" },
+    "publisher": { "@type": "Person", "name": "淡水鱼" }
+  }
+  </script>
+  <div class="post-share">
+    <span class="post-share-label">分享：</span>
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2024%2F07%2F03%2FUnity3D%25E6%25AD%25A3%25E4%25BA%25A4%25E7%259B%25B8%25E6%259C%25BA%25E8%25A7%2586%25E9%2587%258E%25E6%258E%25A7%25E5%2588%25B6%2F&amp;title=Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6" target="_blank" rel="noopener" title="分享到微博">
+      <i class="fab fa-weibo"></i>
+    </a>
+    <a href="#" onclick="navigator.clipboard.writeText(location.href);var t=this;t.innerHTML='<i class=fa fa-check></i>';setTimeout(function(){t.innerHTML='<i class=fa fa-link></i>'},1500);return false" title="复制链接">
+      <i class="fa fa-link"></i>
+    </a>
+  </div>
   
 
 
@@ -1128,8 +1152,81 @@ body {
 
 
 
+<!-- 深色模式切换 -->
+<button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
+  <i class="fa fa-moon-o"></i>
+  <i class="fa fa-sun-o"></i>
+</button>
+<script data-pjax>
+(function() {
+  var btn = document.getElementById('darkmode-toggle');
+  if (!btn) return;
+  if (document.body.classList.contains('dark-mode')) btn.classList.add('on');
+  btn.addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+    btn.classList.toggle('on');
+    localStorage.setItem('blog-darkmode', document.body.classList.contains('dark-mode') ? '1' : '0');
+  });
+  if (localStorage.getItem('blog-darkmode') === '1') {
+    document.body.classList.add('dark-mode');
+    btn.classList.add('on');
+  }
+})();
+</script>
+
 <!-- AI 博客助手 -->
 <script src="/js/ai-assistant.js" data-pjax></script>
+
+<script data-pjax>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<!-- 热门文章侧边栏 -->
+<script data-pjax>
+(function() {
+  var container = document.querySelector('.sidebar-inner');
+  if (!container) return;
+
+  var existEl = document.getElementById('hot-posts-widget');
+  if (existEl) return;
+
+  var widget = document.createElement('div');
+  widget.id = 'hot-posts-widget';
+  widget.className = 'sidebar-widget hot-posts-widget';
+  widget.innerHTML = '<div class="sidebar-widget-title"><i class="fa fa-fire"></i> 热门文章</div>' +
+    '<div class="sidebar-widget-body" id="hot-posts-list">' +
+    '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">加载中...</p></div>';
+  container.appendChild(widget);
+
+  fetch('https://bytefisher-ai.vercel.app/api/hot-articles?limit=5')
+    .then(function(r) { return r.json(); })
+    .then(function(res) {
+      var el = document.getElementById('hot-posts-list');
+      if (!el) return;
+      if (res.errno !== 0 || !res.data || !res.data.length) {
+        el.innerHTML = '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">暂无数据</p>';
+        return;
+      }
+      var html = '<ul style="list-style:none;padding:0;margin:0;">';
+      res.data.forEach(function(item, i) {
+        html += '<li style="padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' +
+          '<span style="color:#37c6c0;font-weight:700;margin-right:4px;">' + (i+1) + '.</span>' +
+          '<a href="' + item.url + '" style="color:#555;text-decoration:none;border:none;" title="' + (item.title || '') + '">' +
+          (item.title || item.url) + '</a>' +
+          '<span style="color:#ccc;margin-left:4px;font-size:10px;">' + item.count + '℃</span>' +
+        '</li>';
+      });
+      html += '</ul>';
+      el.innerHTML = html;
+    })
+    .catch(function() {
+      var el = document.getElementById('hot-posts-list');
+      if (el) el.innerHTML = '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">加载失败</p>';
+    });
+})();
+</script>
     </div>
 </body>
 </html>

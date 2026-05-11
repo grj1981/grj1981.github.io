@@ -89,6 +89,8 @@
   </style>
 </noscript>
 
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#37c6c0">
 <link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
 </head>
 
@@ -261,6 +263,35 @@
     </div>
   </div>
 </div>
+
+
+<div class="featured-section">
+  <div class="featured-title">📖 推荐阅读</div>
+  <div class="featured-grid">
+    
+    <a href="/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%20AI%20%E9%97%AE%E7%AD%94%E5%8A%A9%E6%89%8B%EF%BC%9ADeepSeek%20API%20+%20Vercel%20Serverless%20+%20%E6%82%AC%E6%B5%AE%E7%90%83%E8%81%8A%E5%A4%A9%E9%9D%A2%E6%9D%BF/" class="featured-card">
+      <div class="featured-card-title">Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板</div>
+      <div class="featured-card-date">2026-05-09</div>
+    </a>
+    
+    <a href="/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%BD%93%E9%AA%8C%E5%8D%87%E7%BA%A7%EF%BC%9ASEO%20%E4%BC%98%E5%8C%96%20+%20%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E5%A2%9E%E5%BC%BA%20+%20%E5%93%81%E7%89%8C%E8%A7%86%E8%A7%89%E9%87%8D%E6%9E%84/" class="featured-card">
+      <div class="featured-card-title">Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构</div>
+      <div class="featured-card-date">2026-05-09</div>
+    </a>
+    
+    <a href="/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/" class="featured-card">
+      <div class="featured-card-title">Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移</div>
+      <div class="featured-card-date">2026-05-09</div>
+    </a>
+    
+    <a href="/2026/05/04/2026-05-04-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E4%BA%94%E4%B8%80%E8%BF%9E%E6%88%98%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93/" class="featured-card">
+      <div class="featured-card-title">五一连战花碑水库，爆护50斤——老表两小时空军，我连竿到手酸</div>
+      <div class="featured-card-date">2026-05-04</div>
+    </a>
+    
+  </div>
+</div>
+
 
       
   
@@ -1588,8 +1619,81 @@ body {
 
 
 
+<!-- 深色模式切换 -->
+<button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
+  <i class="fa fa-moon-o"></i>
+  <i class="fa fa-sun-o"></i>
+</button>
+<script data-pjax>
+(function() {
+  var btn = document.getElementById('darkmode-toggle');
+  if (!btn) return;
+  if (document.body.classList.contains('dark-mode')) btn.classList.add('on');
+  btn.addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+    btn.classList.toggle('on');
+    localStorage.setItem('blog-darkmode', document.body.classList.contains('dark-mode') ? '1' : '0');
+  });
+  if (localStorage.getItem('blog-darkmode') === '1') {
+    document.body.classList.add('dark-mode');
+    btn.classList.add('on');
+  }
+})();
+</script>
+
 <!-- AI 博客助手 -->
 <script src="/js/ai-assistant.js" data-pjax></script>
+
+<script data-pjax>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<!-- 热门文章侧边栏 -->
+<script data-pjax>
+(function() {
+  var container = document.querySelector('.sidebar-inner');
+  if (!container) return;
+
+  var existEl = document.getElementById('hot-posts-widget');
+  if (existEl) return;
+
+  var widget = document.createElement('div');
+  widget.id = 'hot-posts-widget';
+  widget.className = 'sidebar-widget hot-posts-widget';
+  widget.innerHTML = '<div class="sidebar-widget-title"><i class="fa fa-fire"></i> 热门文章</div>' +
+    '<div class="sidebar-widget-body" id="hot-posts-list">' +
+    '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">加载中...</p></div>';
+  container.appendChild(widget);
+
+  fetch('https://bytefisher-ai.vercel.app/api/hot-articles?limit=5')
+    .then(function(r) { return r.json(); })
+    .then(function(res) {
+      var el = document.getElementById('hot-posts-list');
+      if (!el) return;
+      if (res.errno !== 0 || !res.data || !res.data.length) {
+        el.innerHTML = '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">暂无数据</p>';
+        return;
+      }
+      var html = '<ul style="list-style:none;padding:0;margin:0;">';
+      res.data.forEach(function(item, i) {
+        html += '<li style="padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' +
+          '<span style="color:#37c6c0;font-weight:700;margin-right:4px;">' + (i+1) + '.</span>' +
+          '<a href="' + item.url + '" style="color:#555;text-decoration:none;border:none;" title="' + (item.title || '') + '">' +
+          (item.title || item.url) + '</a>' +
+          '<span style="color:#ccc;margin-left:4px;font-size:10px;">' + item.count + '℃</span>' +
+        '</li>';
+      });
+      html += '</ul>';
+      el.innerHTML = html;
+    })
+    .catch(function() {
+      var el = document.getElementById('hot-posts-list');
+      if (el) el.innerHTML = '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">加载失败</p>';
+    });
+})();
+</script>
     </div>
 </body>
 </html>
