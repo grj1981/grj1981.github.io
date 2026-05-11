@@ -1313,7 +1313,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ffff87;
+  background: #f1ffd2;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3560,11 +3560,30 @@ figure.highlight table {
   color: #fff;
   transform: translateY(-2px);
 }
+.hot-posts-widget {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+.hot-posts-widget .sidebar-widget-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 10px;
+}
+.hot-posts-widget .sidebar-widget-title .fa-fire {
+  color: #ff6b6b;
+}
 .hot-posts-widget .sidebar-widget-body {
-  padding: 6px 0;
+  padding: 0;
   font-size: 13px;
   line-height: 1.6;
   color: #555;
+  max-height: 240px;
+  overflow-y: auto;
 }
 .hot-posts-widget .sidebar-widget-body ul li a:hover {
   color: #37c6c0;
