@@ -1318,7 +1318,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #813291;
+  background: #d5ff34;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3276,6 +3276,123 @@ body {
     bottom: 70px;
     right: 12px;
     max-height: none;
+  }
+}
+.fish-quick-nav {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-bottom: 74px;
+}
+.fish-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px;
+  border-radius: 40px;
+  background: linear-gradient(135deg, rgba(55,198,192,0.1), rgba(55,198,192,0.05));
+  border: 1px solid rgba(55,198,192,0.2);
+  text-decoration: none;
+  border-bottom: none;
+  transition: all 0.3s;
+}
+.fish-nav-btn:hover {
+  background: #37c6c0;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(55,198,192,0.3);
+}
+.fish-nav-btn .fish-nav-icon {
+  font-size: 18px;
+}
+.fish-nav-btn .fish-nav-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: inherit;
+}
+.fish-dashboard {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+.fish-dashboard h1 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+.dash-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 30px;
+}
+.dash-stat-card {
+  text-align: center;
+  padding: 20px 12px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(55,198,192,0.08), rgba(55,198,192,0.03));
+  border: 1px solid rgba(55,198,192,0.12);
+}
+.dash-stat-card .dash-stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #37c6c0;
+  display: block;
+}
+.dash-stat-card .dash-stat-label {
+  font-size: 13px;
+  color: #888;
+  margin-top: 6px;
+}
+.dash-chart-wrap {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+@media (max-width: 600px) {
+  .dash-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.fish-map-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+.fish-map-page h1 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+.fish-map-container {
+  height: 500px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  border: 1px solid #eee;
+}
+.map-legend {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 13px;
+  color: #888;
+}
+.map-legend .legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 0 4px 0 14px;
+  vertical-align: middle;
+}
+.map-legend .legend-dot:first-child {
+  margin-left: 0;
+}
+@media (max-width: 600px) {
+  .fish-map-container {
+    height: 360px;
   }
 }
 @-moz-keyframes blink {

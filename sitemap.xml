@@ -2,6 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.bytefisher.top/fish/map/index.html</loc>
+    
+    <lastmod>2026-05-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bytefisher.top/fish/map/spots.json</loc>
+    
+    <lastmod>2026-05-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bytefisher.top/fish/index.html</loc>
+    
+    <lastmod>2026-05-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bytefisher.top/fish/dashboard/index.html</loc>
+    
+    <lastmod>2026-05-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.bytefisher.top/douyin/videos.json</loc>
     
     <lastmod>2026-05-11</lastmod>
@@ -75,15 +111,6 @@
   
   <url>
     <loc>https://www.bytefisher.top/ai-games/index.html</loc>
-    
-    <lastmod>2026-05-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.bytefisher.top/fish/index.html</loc>
     
     <lastmod>2026-05-09</lastmod>
     
@@ -1222,14 +1249,14 @@
   </url>
   
   <url>
-    <loc>https://www.bytefisher.top/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1/</loc>
+    <loc>https://www.bytefisher.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.bytefisher.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</loc>
+    <loc>https://www.bytefisher.top/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1/</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1448,14 +1475,14 @@
   </url>
   
   <url>
-    <loc>https://www.bytefisher.top/categories/%E9%92%93%E9%B1%BC/</loc>
+    <loc>https://www.bytefisher.top/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.bytefisher.top/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</loc>
+    <loc>https://www.bytefisher.top/categories/%E9%92%93%E9%B1%BC/</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
