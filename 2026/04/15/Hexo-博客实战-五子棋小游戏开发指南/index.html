@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <link rel="preconnect" href="https://iili.io">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -16,7 +20,7 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="前言继扫雷、俄罗斯方块之后，本文介绍五子棋 AI 对战游戏的开发。相比其他游戏，五子棋的核心难点在于AI 算法的实现：如何在有限时间内找到最优落子位置，同时平衡进攻与防守。 五子棋是一个信息完全公开的零和博弈游戏，理论上可以通过搜索算法找到最优解。但实际应用中，我们需要考虑： 搜索空间巨大：15×15 棋盘有 225 个位置，搜索深度每增加一层，复杂度指数级增长 时间限制：玩家期望 AI 在几秒内">
 <meta property="og:type" content="article">
@@ -142,7 +146,7 @@
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">9</span></a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-aigames">
@@ -687,7 +691,7 @@
 <li><a href="/ai-games/minesweeper/">💣 扫雷游戏</a></li>
 <li><a href="/ai-games/tetris/">🧱 俄罗斯方块</a></li>
 </ul>
-<div class="series-nav"><div class="series-nav-title">博客实战-小游戏 系列</div><div class="series-nav-progress">第 4/6 篇</div><div class="series-nav-links"><a href="/2026/03/31/Hexo-博客实战-扫雷小游戏开发指南/" class="series-nav-prev">Hexo 博客实战：扫雷小游戏开发指南</a><a href="/2026/04/20/Hexo-博客实战-光影拼图游戏开发指南/" class="series-nav-next">Hexo 博客实战：光影拼图游戏开发指南</a></div></div><div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2026/04/28/Hexo-博客实战-光影拼图游戏开发指南（优化篇）/" class="related-post-item" title="Hexo 博客实战：光影拼图游戏开发指南（优化篇）"><span class="related-post-title">Hexo 博客实战：光影拼图游戏开发指南（优化篇）</span><span class="related-post-date">2026-04-28</span><span class="related-post-desc">前言 继[光影拼图游戏开发指南（功能篇）](/2026/04/20/Hexo 博客实战 光影拼图游戏开发指南/)介绍功能实现后，本篇聚焦优化过程中解决的 7 个</span></a><a href="/2026/04/20/Hexo-博客实战-光影拼图游戏开发指南/" class="related-post-item" title="Hexo 博客实战：光影拼图游戏开发指南"><span class="related-post-title">Hexo 博客实战：光影拼图游戏开发指南</span><span class="related-post-date">2026-04-20</span><span class="related-post-desc">前言 继[五子棋](/ai games/gomoku/)之后，本文介绍光影拼图游戏的开发。相比其他游戏，拼图的核心难点在于 图片处理与碎片管理 ：如何将一张图片</span></a><a href="/2026/03/31/Hexo-博客实战-扫雷小游戏开发指南/" class="related-post-item" title="Hexo 博客实战：扫雷小游戏开发指南"><span class="related-post-title">Hexo 博客实战：扫雷小游戏开发指南</span><span class="related-post-date">2026-03-31</span><span class="related-post-desc">前言 继俄罗斯方块之后，本文讲解扫雷游戏的开发。扫雷是 Windows 系统经典的益智小游戏，核心玩法是揭开格子找出所有安全区域，同时避免触雷。 相比俄罗斯方块</span></a><a href="/2026/03/27/Hexo-博客实战-俄罗斯方块小游戏开发指南/" class="related-post-item" title="Hexo 博客实战：俄罗斯方块小游戏开发指南"><span class="related-post-title">Hexo 博客实战：俄罗斯方块小游戏开发指南</span><span class="related-post-date">2026-03-27</span><span class="related-post-desc">前言 继上一篇文章介绍贪吃蛇小游戏的实现方案后，本文继续讲解俄罗斯方块游戏的开发。相比贪吃蛇，俄罗斯方块的实现更加复杂，涉及方块旋转、多行消除、速度递增等机制。</span></a><a href="/2026/03/27/Hexo-博客实战-贪吃蛇小游戏开发指南/" class="related-post-item" title="Hexo 博客实战：贪吃蛇小游戏开发指南"><span class="related-post-title">Hexo 博客实战：贪吃蛇小游戏开发指南</span><span class="related-post-date">2026-03-27</span><span class="related-post-desc">前言 在静态博客中嵌入 JavaScript 小游戏是一种提升用户体验的好方法。之前用 Lua 为 Unity 实现过多种小游戏，现在尝试将经典的贪吃蛇游戏移植</span></a><a href="/2026/05/09/Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板/" class="related-post-item" title="Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板"><span class="related-post-title">Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">前言 ByteFisher 博客已发布 95+ 篇文章，一个痛点越来越明显： 静态博客缺少即时互动能力 。 读者经常遇到的问题场景： "有没有 Unity 相关</span></a></div></div>
+<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2026/04/28/Hexo-博客实战-光影拼图游戏开发指南（优化篇）/" class="related-post-item" title="Hexo 博客实战：光影拼图游戏开发指南（优化篇）"><span class="related-post-title">Hexo 博客实战：光影拼图游戏开发指南（优化篇）</span><span class="related-post-date">2026-04-28</span><span class="related-post-desc">前言 继[光影拼图游戏开发指南（功能篇）](/2026/04/20/Hexo 博客实战 光影拼图游戏开发指南/)介绍功能实现后，本篇聚焦优化过程中解决的 7 个</span></a><a href="/2026/04/20/Hexo-博客实战-光影拼图游戏开发指南/" class="related-post-item" title="Hexo 博客实战：光影拼图游戏开发指南"><span class="related-post-title">Hexo 博客实战：光影拼图游戏开发指南</span><span class="related-post-date">2026-04-20</span><span class="related-post-desc">前言 继[五子棋](/ai games/gomoku/)之后，本文介绍光影拼图游戏的开发。相比其他游戏，拼图的核心难点在于 图片处理与碎片管理 ：如何将一张图片</span></a><a href="/2026/03/31/Hexo-博客实战-扫雷小游戏开发指南/" class="related-post-item" title="Hexo 博客实战：扫雷小游戏开发指南"><span class="related-post-title">Hexo 博客实战：扫雷小游戏开发指南</span><span class="related-post-date">2026-03-31</span><span class="related-post-desc">前言 继俄罗斯方块之后，本文讲解扫雷游戏的开发。扫雷是 Windows 系统经典的益智小游戏，核心玩法是揭开格子找出所有安全区域，同时避免触雷。 相比俄罗斯方块</span></a><a href="/2026/03/27/Hexo-博客实战-俄罗斯方块小游戏开发指南/" class="related-post-item" title="Hexo 博客实战：俄罗斯方块小游戏开发指南"><span class="related-post-title">Hexo 博客实战：俄罗斯方块小游戏开发指南</span><span class="related-post-date">2026-03-27</span><span class="related-post-desc">前言 继上一篇文章介绍贪吃蛇小游戏的实现方案后，本文继续讲解俄罗斯方块游戏的开发。相比贪吃蛇，俄罗斯方块的实现更加复杂，涉及方块旋转、多行消除、速度递增等机制。</span></a><a href="/2026/03/27/Hexo-博客实战-贪吃蛇小游戏开发指南/" class="related-post-item" title="Hexo 博客实战：贪吃蛇小游戏开发指南"><span class="related-post-title">Hexo 博客实战：贪吃蛇小游戏开发指南</span><span class="related-post-date">2026-03-27</span><span class="related-post-desc">前言 在静态博客中嵌入 JavaScript 小游戏是一种提升用户体验的好方法。之前用 Lua 为 Unity 实现过多种小游戏，现在尝试将经典的贪吃蛇游戏移植</span></a><a href="/2026/05/09/Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板/" class="related-post-item" title="Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板"><span class="related-post-title">Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">前言 ByteFisher 博客已发布 95+ 篇文章，一个痛点越来越明显： 静态博客缺少即时互动能力 。 读者经常遇到的问题场景： "有没有 Unity 相关</span></a></div></div><div class="series-nav"><div class="series-nav-title">博客实战-小游戏 系列</div><div class="series-nav-progress">第 4/6 篇</div><div class="series-nav-links"><a href="/2026/03/31/Hexo-博客实战-扫雷小游戏开发指南/" class="series-nav-prev">Hexo 博客实战：扫雷小游戏开发指南</a><a href="/2026/04/20/Hexo-博客实战-光影拼图游戏开发指南/" class="series-nav-next">Hexo 博客实战：光影拼图游戏开发指南</a></div></div>
     </div>
 
     
@@ -724,6 +728,8 @@
   
   
 
+
+  
 
 
           </div>
@@ -1449,6 +1455,8 @@ body {
   }
 })();
 </script>
+
+
 
 <!-- AI 博客助手 -->
 <script src="/js/ai-assistant.js" data-pjax></script>

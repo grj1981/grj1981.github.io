@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <link rel="preconnect" href="https://iili.io">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -16,7 +20,7 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="C 类（Class）当你定义一个类时，你定义了一个数据类型的蓝图。这实际上并没有定义任何的数据，但它定义了类的名称意味着什么，也就是说，类的对象由什么组成及在这个对象上可执行什么操作。对象是类的实例。构成类的方法和变量称为类的成员。 类的定义类的定义是以关键字 class 开始，后跟类的名称。类的主体，包含在一对花括号内。下面是类定义的一般形式： 1234567891011121314151617">
 <meta property="og:type" content="article">
@@ -140,7 +144,7 @@
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">9</span></a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-aigames">
@@ -416,7 +420,7 @@ s2 的变量 num： 6
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Class2</span><br><span class="line">&#123;</span><br><span class="line">    public Class2(int Value)  &#123;...&#125;  //构造函数0</span><br><span class="line">    public Class2(String Value) &#123;...&#125;  //构造函数1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Program</span><br><span class="line">&#123;</span><br><span class="line">    static void Main()</span><br><span class="line">    &#123;</span><br><span class="line">        Class2 a = new Class2();   //错误！没有无参数的构造函数</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>在以上的代码中至少有一个显式定义的构造函数，编译器不会创建任何额外的构造函数，在 Main() 中如果试图用不带参数的构造函数创建新的实例，因为没有无参数的构造函数，所以编译器就会产生一条错误信息。</p>
-<div class="series-nav"><div class="series-nav-title">C#学习笔记 系列</div><div class="series-nav-progress">第 9/22 篇</div><div class="series-nav-links"><a href="/2023/07/04/C井学习笔记【枚举】/" class="series-nav-prev">C#学习笔记【枚举】</a><a href="/2023/07/06/C井学习笔记【继承】/" class="series-nav-next">C#学习笔记【继承】</a></div></div><div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2025/05/19/C-学习笔记【行为树】/" class="related-post-item" title="C#学习笔记【行为树】"><span class="related-post-title">C#学习笔记【行为树】</span><span class="related-post-date">2025-05-19</span><span class="related-post-desc">行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策</span></a><a href="/2025/04/17/C-学习笔记【取消异步操作】/" class="related-post-item" title="C#学习笔记【取消异步操作】"><span class="related-post-title">C#学习笔记【取消异步操作】</span><span class="related-post-date">2025-04-17</span><span class="related-post-desc">基本概念 CancellationTokenSource 是一个类，用于创建一个取消令牌 (CancellationToken)，并通过该令牌来通知一个或多个异</span></a><a href="/2025/03/14/C-学习笔记【DOTween库】/" class="related-post-item" title="C#学习笔记【DOTween库】"><span class="related-post-title">C#学习笔记【DOTween库】</span><span class="related-post-date">2025-03-14</span><span class="related-post-desc">DOTween 库详细用法教程 DOTween 是一个用于 Unity 的强大且灵活的动画库，它使用链式语法来创建和控制动画，使得代码更加简洁和易读。下面详细介</span></a><a href="/2025/02/05/C-学习笔记【集合Collection】/" class="related-post-item" title="C#学习笔记【集合Collection】"><span class="related-post-title">C#学习笔记【集合Collection】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 集合（Collection） 集合（Collection）类是专门用于数据存储和检索的类。这些类提供了对栈（stack）、队列（queue）、列表（list</span></a><a href="/2025/02/05/C-学习笔记【事件Event】/" class="related-post-item" title="C#学习笔记【事件Event】"><span class="related-post-title">C#学习笔记【事件Event】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 事件（Event） C 事件（Event）是一种成员，用于将特定的事件通知发送给订阅者。事件通常用于实现观察者模式，它允许一个对象将状态的变化通知其他对象，</span></a><a href="/2025/02/05/C-学习笔记【委托Delegate】/" class="related-post-item" title="C#学习笔记【委托Delegate】"><span class="related-post-title">C#学习笔记【委托Delegate】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 委托（Delegate） 在 C 中，委托（Delegate） 是一种类型安全的函数指针，它允许将方法作为参数传递给其他方法。 C 中的委托（Delegat</span></a></div></div>
+<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2025/05/19/C-学习笔记【行为树】/" class="related-post-item" title="C#学习笔记【行为树】"><span class="related-post-title">C#学习笔记【行为树】</span><span class="related-post-date">2025-05-19</span><span class="related-post-desc">行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策</span></a><a href="/2025/04/17/C-学习笔记【取消异步操作】/" class="related-post-item" title="C#学习笔记【取消异步操作】"><span class="related-post-title">C#学习笔记【取消异步操作】</span><span class="related-post-date">2025-04-17</span><span class="related-post-desc">基本概念 CancellationTokenSource 是一个类，用于创建一个取消令牌 (CancellationToken)，并通过该令牌来通知一个或多个异</span></a><a href="/2025/03/14/C-学习笔记【DOTween库】/" class="related-post-item" title="C#学习笔记【DOTween库】"><span class="related-post-title">C#学习笔记【DOTween库】</span><span class="related-post-date">2025-03-14</span><span class="related-post-desc">DOTween 库详细用法教程 DOTween 是一个用于 Unity 的强大且灵活的动画库，它使用链式语法来创建和控制动画，使得代码更加简洁和易读。下面详细介</span></a><a href="/2025/02/05/C-学习笔记【集合Collection】/" class="related-post-item" title="C#学习笔记【集合Collection】"><span class="related-post-title">C#学习笔记【集合Collection】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 集合（Collection） 集合（Collection）类是专门用于数据存储和检索的类。这些类提供了对栈（stack）、队列（queue）、列表（list</span></a><a href="/2025/02/05/C-学习笔记【事件Event】/" class="related-post-item" title="C#学习笔记【事件Event】"><span class="related-post-title">C#学习笔记【事件Event】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 事件（Event） C 事件（Event）是一种成员，用于将特定的事件通知发送给订阅者。事件通常用于实现观察者模式，它允许一个对象将状态的变化通知其他对象，</span></a><a href="/2025/02/05/C-学习笔记【委托Delegate】/" class="related-post-item" title="C#学习笔记【委托Delegate】"><span class="related-post-title">C#学习笔记【委托Delegate】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 委托（Delegate） 在 C 中，委托（Delegate） 是一种类型安全的函数指针，它允许将方法作为参数传递给其他方法。 C 中的委托（Delegat</span></a></div></div><div class="series-nav"><div class="series-nav-title">C#学习笔记 系列</div><div class="series-nav-progress">第 9/22 篇</div><div class="series-nav-links"><a href="/2023/07/04/C井学习笔记【枚举】/" class="series-nav-prev">C#学习笔记【枚举】</a><a href="/2023/07/06/C井学习笔记【继承】/" class="series-nav-next">C#学习笔记【继承】</a></div></div>
     </div>
 
     
@@ -451,6 +455,8 @@ s2 的变量 num： 6
   
   
 
+
+  
 
 
           </div>
@@ -1176,6 +1182,8 @@ body {
   }
 })();
 </script>
+
+
 
 <!-- AI 博客助手 -->
 <script src="/js/ai-assistant.js" data-pjax></script>

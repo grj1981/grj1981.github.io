@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <link rel="preconnect" href="https://iili.io">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -16,7 +20,7 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="C 继承继承是面向对象程序设计中最重要的概念之一。继承允许我们根据一个类来定义另一个类，这使得创建和维护应用程序变得更容易。同时也有利于重用代码和节省开发时间。 当创建一个类时，程序员不需要完全重新编写新的数据成员和成员函数，只需要设计一个新的类，继承了已有的类的成员即可。这个已有的类被称为的基类，这个新的类被称为派生类。 继承的思想实现了 属于（IS A） 关系。例如，哺乳动物 属于（IS A）">
 <meta property="og:type" content="article">
@@ -140,7 +144,7 @@
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">9</span></a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-aigames">
@@ -375,7 +379,7 @@ Fields -- In the base class
 <pre><code>father
 son
 </code></pre>
-<div class="series-nav"><div class="series-nav-title">C#学习笔记 系列</div><div class="series-nav-progress">第 10/22 篇</div><div class="series-nav-links"><a href="/2023/07/06/C井学习笔记【类】/" class="series-nav-prev">C#学习笔记【类】</a><a href="/2023/08/02/C井学习笔记【多态性】/" class="series-nav-next">C#学习笔记【多态性】</a></div></div><div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2025/05/19/C-学习笔记【行为树】/" class="related-post-item" title="C#学习笔记【行为树】"><span class="related-post-title">C#学习笔记【行为树】</span><span class="related-post-date">2025-05-19</span><span class="related-post-desc">行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策</span></a><a href="/2025/04/17/C-学习笔记【取消异步操作】/" class="related-post-item" title="C#学习笔记【取消异步操作】"><span class="related-post-title">C#学习笔记【取消异步操作】</span><span class="related-post-date">2025-04-17</span><span class="related-post-desc">基本概念 CancellationTokenSource 是一个类，用于创建一个取消令牌 (CancellationToken)，并通过该令牌来通知一个或多个异</span></a><a href="/2025/03/14/C-学习笔记【DOTween库】/" class="related-post-item" title="C#学习笔记【DOTween库】"><span class="related-post-title">C#学习笔记【DOTween库】</span><span class="related-post-date">2025-03-14</span><span class="related-post-desc">DOTween 库详细用法教程 DOTween 是一个用于 Unity 的强大且灵活的动画库，它使用链式语法来创建和控制动画，使得代码更加简洁和易读。下面详细介</span></a><a href="/2025/02/05/C-学习笔记【集合Collection】/" class="related-post-item" title="C#学习笔记【集合Collection】"><span class="related-post-title">C#学习笔记【集合Collection】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 集合（Collection） 集合（Collection）类是专门用于数据存储和检索的类。这些类提供了对栈（stack）、队列（queue）、列表（list</span></a><a href="/2025/02/05/C-学习笔记【事件Event】/" class="related-post-item" title="C#学习笔记【事件Event】"><span class="related-post-title">C#学习笔记【事件Event】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 事件（Event） C 事件（Event）是一种成员，用于将特定的事件通知发送给订阅者。事件通常用于实现观察者模式，它允许一个对象将状态的变化通知其他对象，</span></a><a href="/2025/02/05/C-学习笔记【委托Delegate】/" class="related-post-item" title="C#学习笔记【委托Delegate】"><span class="related-post-title">C#学习笔记【委托Delegate】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 委托（Delegate） 在 C 中，委托（Delegate） 是一种类型安全的函数指针，它允许将方法作为参数传递给其他方法。 C 中的委托（Delegat</span></a></div></div>
+<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2025/05/19/C-学习笔记【行为树】/" class="related-post-item" title="C#学习笔记【行为树】"><span class="related-post-title">C#学习笔记【行为树】</span><span class="related-post-date">2025-05-19</span><span class="related-post-desc">行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策</span></a><a href="/2025/04/17/C-学习笔记【取消异步操作】/" class="related-post-item" title="C#学习笔记【取消异步操作】"><span class="related-post-title">C#学习笔记【取消异步操作】</span><span class="related-post-date">2025-04-17</span><span class="related-post-desc">基本概念 CancellationTokenSource 是一个类，用于创建一个取消令牌 (CancellationToken)，并通过该令牌来通知一个或多个异</span></a><a href="/2025/03/14/C-学习笔记【DOTween库】/" class="related-post-item" title="C#学习笔记【DOTween库】"><span class="related-post-title">C#学习笔记【DOTween库】</span><span class="related-post-date">2025-03-14</span><span class="related-post-desc">DOTween 库详细用法教程 DOTween 是一个用于 Unity 的强大且灵活的动画库，它使用链式语法来创建和控制动画，使得代码更加简洁和易读。下面详细介</span></a><a href="/2025/02/05/C-学习笔记【集合Collection】/" class="related-post-item" title="C#学习笔记【集合Collection】"><span class="related-post-title">C#学习笔记【集合Collection】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 集合（Collection） 集合（Collection）类是专门用于数据存储和检索的类。这些类提供了对栈（stack）、队列（queue）、列表（list</span></a><a href="/2025/02/05/C-学习笔记【事件Event】/" class="related-post-item" title="C#学习笔记【事件Event】"><span class="related-post-title">C#学习笔记【事件Event】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 事件（Event） C 事件（Event）是一种成员，用于将特定的事件通知发送给订阅者。事件通常用于实现观察者模式，它允许一个对象将状态的变化通知其他对象，</span></a><a href="/2025/02/05/C-学习笔记【委托Delegate】/" class="related-post-item" title="C#学习笔记【委托Delegate】"><span class="related-post-title">C#学习笔记【委托Delegate】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 委托（Delegate） 在 C 中，委托（Delegate） 是一种类型安全的函数指针，它允许将方法作为参数传递给其他方法。 C 中的委托（Delegat</span></a></div></div><div class="series-nav"><div class="series-nav-title">C#学习笔记 系列</div><div class="series-nav-progress">第 10/22 篇</div><div class="series-nav-links"><a href="/2023/07/06/C井学习笔记【类】/" class="series-nav-prev">C#学习笔记【类】</a><a href="/2023/08/02/C井学习笔记【多态性】/" class="series-nav-next">C#学习笔记【多态性】</a></div></div>
     </div>
 
     
@@ -410,6 +414,8 @@ son
   
   
 
+
+  
 
 
           </div>
@@ -1135,6 +1141,8 @@ body {
   }
 })();
 </script>
+
+
 
 <!-- AI 博客助手 -->
 <script src="/js/ai-assistant.js" data-pjax></script>

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <link rel="preconnect" href="https://iili.io">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -16,7 +20,7 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="C 接口(Interface)接口定义了所有类继承接口时应遵循的语法合同。接口定义了语法合同 “是什么” 部分，派生类定义了语法合同 “怎么做” 部分。 接口定义了属性、方法和事件，这些都是接口的成员。接口只包含了成员的声明。成员的定义是派生类的责任。接口提供了派生类应遵循的标准结构。 接口使得实现接口的类或结构在形式上保持一致。 抽象类在某种程度上与接口类似，但是，它们大多只是用在当只有少数方法">
 <meta property="og:type" content="article">
@@ -140,7 +144,7 @@
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">9</span></a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-aigames">
@@ -352,7 +356,7 @@
 <p>接口成员被定义为公共的，但抽象类的成员也可以是私有的、受保护的、内部的或受保护的内部成员（其中受保护的内部成员只能在应用程序的代码或派生类中访问）。</p>
 <p>此外接口不能包含字段、构造函数、析构函数、静态成员或常量。</p>
 <p>还有一点，我们在VS中实现接口时会发现有2个选项，一个是实现接口，一个是显示实现接口。实现接口就是我们平常理解的实现接口，而显示实现接口的话，实现的方法是属于接口的，而不是属于实现类的。</p>
-<div class="series-nav"><div class="series-nav-title">C#学习笔记 系列</div><div class="series-nav-progress">第 12/22 篇</div><div class="series-nav-links"><a href="/2023/08/02/C井学习笔记【多态性】/" class="series-nav-prev">C#学习笔记【多态性】</a><a href="/2025/02/05/C-学习笔记【特性Attribute】/" class="series-nav-next">C#学习笔记【特性Attribute】</a></div></div><div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2025/05/19/C-学习笔记【行为树】/" class="related-post-item" title="C#学习笔记【行为树】"><span class="related-post-title">C#学习笔记【行为树】</span><span class="related-post-date">2025-05-19</span><span class="related-post-desc">行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策</span></a><a href="/2025/04/17/C-学习笔记【取消异步操作】/" class="related-post-item" title="C#学习笔记【取消异步操作】"><span class="related-post-title">C#学习笔记【取消异步操作】</span><span class="related-post-date">2025-04-17</span><span class="related-post-desc">基本概念 CancellationTokenSource 是一个类，用于创建一个取消令牌 (CancellationToken)，并通过该令牌来通知一个或多个异</span></a><a href="/2025/03/14/C-学习笔记【DOTween库】/" class="related-post-item" title="C#学习笔记【DOTween库】"><span class="related-post-title">C#学习笔记【DOTween库】</span><span class="related-post-date">2025-03-14</span><span class="related-post-desc">DOTween 库详细用法教程 DOTween 是一个用于 Unity 的强大且灵活的动画库，它使用链式语法来创建和控制动画，使得代码更加简洁和易读。下面详细介</span></a><a href="/2025/02/05/C-学习笔记【集合Collection】/" class="related-post-item" title="C#学习笔记【集合Collection】"><span class="related-post-title">C#学习笔记【集合Collection】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 集合（Collection） 集合（Collection）类是专门用于数据存储和检索的类。这些类提供了对栈（stack）、队列（queue）、列表（list</span></a><a href="/2025/02/05/C-学习笔记【事件Event】/" class="related-post-item" title="C#学习笔记【事件Event】"><span class="related-post-title">C#学习笔记【事件Event】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 事件（Event） C 事件（Event）是一种成员，用于将特定的事件通知发送给订阅者。事件通常用于实现观察者模式，它允许一个对象将状态的变化通知其他对象，</span></a><a href="/2025/02/05/C-学习笔记【委托Delegate】/" class="related-post-item" title="C#学习笔记【委托Delegate】"><span class="related-post-title">C#学习笔记【委托Delegate】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 委托（Delegate） 在 C 中，委托（Delegate） 是一种类型安全的函数指针，它允许将方法作为参数传递给其他方法。 C 中的委托（Delegat</span></a></div></div>
+<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2025/05/19/C-学习笔记【行为树】/" class="related-post-item" title="C#学习笔记【行为树】"><span class="related-post-title">C#学习笔记【行为树】</span><span class="related-post-date">2025-05-19</span><span class="related-post-desc">行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策</span></a><a href="/2025/04/17/C-学习笔记【取消异步操作】/" class="related-post-item" title="C#学习笔记【取消异步操作】"><span class="related-post-title">C#学习笔记【取消异步操作】</span><span class="related-post-date">2025-04-17</span><span class="related-post-desc">基本概念 CancellationTokenSource 是一个类，用于创建一个取消令牌 (CancellationToken)，并通过该令牌来通知一个或多个异</span></a><a href="/2025/03/14/C-学习笔记【DOTween库】/" class="related-post-item" title="C#学习笔记【DOTween库】"><span class="related-post-title">C#学习笔记【DOTween库】</span><span class="related-post-date">2025-03-14</span><span class="related-post-desc">DOTween 库详细用法教程 DOTween 是一个用于 Unity 的强大且灵活的动画库，它使用链式语法来创建和控制动画，使得代码更加简洁和易读。下面详细介</span></a><a href="/2025/02/05/C-学习笔记【集合Collection】/" class="related-post-item" title="C#学习笔记【集合Collection】"><span class="related-post-title">C#学习笔记【集合Collection】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 集合（Collection） 集合（Collection）类是专门用于数据存储和检索的类。这些类提供了对栈（stack）、队列（queue）、列表（list</span></a><a href="/2025/02/05/C-学习笔记【事件Event】/" class="related-post-item" title="C#学习笔记【事件Event】"><span class="related-post-title">C#学习笔记【事件Event】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 事件（Event） C 事件（Event）是一种成员，用于将特定的事件通知发送给订阅者。事件通常用于实现观察者模式，它允许一个对象将状态的变化通知其他对象，</span></a><a href="/2025/02/05/C-学习笔记【委托Delegate】/" class="related-post-item" title="C#学习笔记【委托Delegate】"><span class="related-post-title">C#学习笔记【委托Delegate】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 委托（Delegate） 在 C 中，委托（Delegate） 是一种类型安全的函数指针，它允许将方法作为参数传递给其他方法。 C 中的委托（Delegat</span></a></div></div><div class="series-nav"><div class="series-nav-title">C#学习笔记 系列</div><div class="series-nav-progress">第 12/22 篇</div><div class="series-nav-links"><a href="/2023/08/02/C井学习笔记【多态性】/" class="series-nav-prev">C#学习笔记【多态性】</a><a href="/2025/02/05/C-学习笔记【特性Attribute】/" class="series-nav-next">C#学习笔记【特性Attribute】</a></div></div>
     </div>
 
     
@@ -387,6 +391,8 @@
   
   
 
+
+  
 
 
           </div>
@@ -1112,6 +1118,8 @@ body {
   }
 })();
 </script>
+
+
 
 <!-- AI 博客助手 -->
 <script src="/js/ai-assistant.js" data-pjax></script>

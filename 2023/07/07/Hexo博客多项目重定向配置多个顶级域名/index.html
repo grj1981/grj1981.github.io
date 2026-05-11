@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <link rel="preconnect" href="https://iili.io">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -16,7 +20,7 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="【Hexo】GitHub博客多项目重定向配置多个顶级域名闲来无事用博客名新注册了一个域名：www.bytefisher.top 刚开通博客的时候随便注册了一个: www.ai fish.top 想着新域名和博客名称一致要好记一些，但是也不想直接替换原来的域名，毕竟花了钱买的，不能浪费。就想着给博客同时绑定两个顶级域名，然而GitHub Pages 只支持一个自定义域名，为了要兼容旧域名的访问，在网">
 <meta property="og:type" content="article">
@@ -151,7 +155,7 @@
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">9</span></a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-aigames">
@@ -340,7 +344,7 @@
 <h2 id="运行测试"><a href="#运行测试" class="headerlink" title="- 运行测试"></a>- 运行测试</h2><p>将博客发布到GitHub测试，在浏览器地址栏输入新的域名：<a href="http://www.bytefisher.top/">www.bytefisher.top</a> 将直接开启博客主面，在浏览器地址栏输入旧的域名：<a target="_blank" rel="noopener" href="http://www.ai-fish.top/">www.ai-fish.top</a> 将会出现一个正在启用新域名的跳转页面，5秒倒计时结束跳转到新域名 <a href="http://www.bytefisher.top/">www.bytefisher.top</a><br>图9 跳转提示<br><img data-src="https://iili.io/HsjugwX.png"></p>
 <h2 id="评论和留言版不可用处理"><a href="#评论和留言版不可用处理" class="headerlink" title="- 评论和留言版不可用处理"></a>- 评论和留言版不可用处理</h2><p>如果你的博客开启了LeanCloud评论和留言版功能，更新域名后可能会导致评论和留言版不可用。只需进入LeanCloud 安全中心添加更新新的web安全域名就可以了。<br>图10 更新Web安全域名<br><img data-src="https://iili.io/HsjuS9I.png"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="- 总结"></a>- 总结</h2><p>一个GitHub Pages的仓库只能有一个 CNAME 文件，我们只能告知 GitHub 我们的一个域名。要让 GitHub Pages 支持两个域名，我们需要建两个仓库，在中转仓库，什么都不放，这样会触发 404，在 404.html里实现js跳转到新的域名就可以了。</p>
-<div class="series-nav"><div class="series-nav-title">Hexo博客搭建 系列</div><div class="series-nav-progress">第 3/6 篇</div><div class="series-nav-links"><a href="/2023/06/29/Next主题新增微信公众号二维码/" class="series-nav-prev">Next主题新增微信公众号二维码</a><a href="/2026/05/09/Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移/" class="series-nav-next">Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移</a></div></div><div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2023/06/29/Next主题新增微信公众号二维码/" class="related-post-item" title="Next主题新增微信公众号二维码"><span class="related-post-title">Next主题新增微信公众号二维码</span><span class="related-post-date">2023-06-29</span><span class="related-post-desc">获取微信公众号二维码图片 从公众号管理后台下载公众号二维码图片，如下图所示。将选中的图片放入主题目录下的./themes/next/source/images/</span></a><a href="/2023/06/26/Next主题添加网易云音乐/" class="related-post-item" title="Next主题添加网易云音乐"><span class="related-post-title">Next主题添加网易云音乐</span><span class="related-post-date">2023-06-26</span><span class="related-post-desc">【Hexo】Next主题添加网易云音乐 使用网易云音乐插件给 Next主题博客添加网易云音乐，具体步骤如下： 生成网易云外链播放器 进入 [网易云音乐](htt</span></a><a href="/2026/05/09/Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板/" class="related-post-item" title="Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板"><span class="related-post-title">Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">前言 ByteFisher 博客已发布 95+ 篇文章，一个痛点越来越明显： 静态博客缺少即时互动能力 。 读者经常遇到的问题场景： "有没有 Unity 相关</span></a><a href="/2026/05/09/Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构/" class="related-post-item" title="Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构"><span class="related-post-title">Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">前言 上一篇《Hexo 博客三项基础修复》解决了 RSS、Sitemap、评论系统的高优先级硬性问题，博客具备了稳固的基础设施。但 Lighthouse 审查还</span></a><a href="/2026/05/09/Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移/" class="related-post-item" title="Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移"><span class="related-post-title">Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">前言 ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近</span></a></div></div>
+<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2023/06/29/Next主题新增微信公众号二维码/" class="related-post-item" title="Next主题新增微信公众号二维码"><span class="related-post-title">Next主题新增微信公众号二维码</span><span class="related-post-date">2023-06-29</span><span class="related-post-desc">获取微信公众号二维码图片 从公众号管理后台下载公众号二维码图片，如下图所示。将选中的图片放入主题目录下的./themes/next/source/images/</span></a><a href="/2023/06/26/Next主题添加网易云音乐/" class="related-post-item" title="Next主题添加网易云音乐"><span class="related-post-title">Next主题添加网易云音乐</span><span class="related-post-date">2023-06-26</span><span class="related-post-desc">【Hexo】Next主题添加网易云音乐 使用网易云音乐插件给 Next主题博客添加网易云音乐，具体步骤如下： 生成网易云外链播放器 进入 [网易云音乐](htt</span></a><a href="/2026/05/09/Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板/" class="related-post-item" title="Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板"><span class="related-post-title">Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">前言 ByteFisher 博客已发布 95+ 篇文章，一个痛点越来越明显： 静态博客缺少即时互动能力 。 读者经常遇到的问题场景： "有没有 Unity 相关</span></a><a href="/2026/05/09/Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构/" class="related-post-item" title="Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构"><span class="related-post-title">Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">前言 上一篇《Hexo 博客三项基础修复》解决了 RSS、Sitemap、评论系统的高优先级硬性问题，博客具备了稳固的基础设施。但 Lighthouse 审查还</span></a><a href="/2026/05/09/Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移/" class="related-post-item" title="Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移"><span class="related-post-title">Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">前言 ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近</span></a></div></div><div class="series-nav"><div class="series-nav-title">Hexo博客搭建 系列</div><div class="series-nav-progress">第 3/6 篇</div><div class="series-nav-links"><a href="/2023/06/29/Next主题新增微信公众号二维码/" class="series-nav-prev">Next主题新增微信公众号二维码</a><a href="/2026/05/09/Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移/" class="series-nav-next">Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移</a></div></div>
     </div>
 
     
@@ -375,6 +379,8 @@
   
   
 
+
+  
 
 
           </div>
@@ -1100,6 +1106,8 @@ body {
   }
 })();
 </script>
+
+
 
 <!-- AI 博客助手 -->
 <script src="/js/ai-assistant.js" data-pjax></script>

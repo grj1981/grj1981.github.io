@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <link rel="preconnect" href="https://iili.io">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -16,7 +20,7 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="Python3 元组Python 的元组与列表类似，不同之处在于元组的元素不能修改。 元组使用小括号 ( )，列表使用方括号 。 元组创建很简单，只需要在括号中添加元素，并使用逗号隔开即可。 实例: 12345&gt;&gt;&gt; tup1 &#x3D; (&amp; x27;Google&amp; x27;, &amp; x27;Runoob&amp; x27;, 1997, 2000)&gt;&gt;&gt; tup2 &#x3D; (1,">
 <meta property="og:type" content="article">
@@ -140,7 +144,7 @@
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">9</span></a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-aigames">
@@ -426,7 +430,7 @@ tup[1:4]	(&#39;Runoob&#39;, &#39;Taobao&#39;, &#39;Wiki&#39;)	截取元素，从
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tup = (&#x27;r&#x27;, &#x27;u&#x27;, &#x27;n&#x27;, &#x27;o&#x27;, &#x27;o&#x27;, &#x27;b&#x27;)</span><br><span class="line">&gt;&gt;&gt; tup[0] = &#x27;g&#x27;     # 不支持修改元素</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">TypeError: &#x27;tuple&#x27; object does not support item assignment</span><br><span class="line">&gt;&gt;&gt; id(tup)     # 查看内存地址</span><br><span class="line">4440687904</span><br><span class="line">&gt;&gt;&gt; tup = (1,2,3)</span><br><span class="line">&gt;&gt;&gt; id(tup)</span><br><span class="line">4441088800    # 内存地址不一样了</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>从以上实例可以看出，重新赋值的元组 tup，绑定到新的对象了，不是修改了原来的对象。</p>
-<div class="series-nav"><div class="series-nav-title">Python学习笔记 系列</div><div class="series-nav-progress">第 3/14 篇</div><div class="series-nav-links"><a href="/2023/05/29/Python学习笔记【列表】/" class="series-nav-prev">Python学习笔记【列表】</a><a href="/2023/05/29/Python学习笔记【字典】/" class="series-nav-next">Python学习笔记【字典】</a></div></div><div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2023/06/25/Python学习笔记【JSON】/" class="related-post-item" title="Python学习笔记【JSON】"><span class="related-post-title">Python学习笔记【JSON】</span><span class="related-post-date">2023-06-25</span><span class="related-post-desc">Python3 JSON 数据解析 JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。 Python3 中可以使用</span></a><a href="/2023/06/25/Python学习笔记【XML解析】/" class="related-post-item" title="Python学习笔记【XML解析】"><span class="related-post-title">Python学习笔记【XML解析】</span><span class="related-post-date">2023-06-25</span><span class="related-post-desc">Python3 XML 解析 什么是 XML？ XML 指可扩展标记语言（eXtensible Markup Language），标准通用标记语言的子集，是一种</span></a><a href="/2023/06/25/Python学习笔记【多线程】/" class="related-post-item" title="Python学习笔记【多线程】"><span class="related-post-title">Python学习笔记【多线程】</span><span class="related-post-date">2023-06-25</span><span class="related-post-desc">Python3 多线程 多线程类似于同时执行多个不同程序，多线程运行有如下优点： 使用线程可以把占据长时间的程序中的任务放到后台去处理。 用户界面可以更加吸引人</span></a><a href="/2023/06/21/Python学习笔记【正则表达式】/" class="related-post-item" title="Python学习笔记【正则表达式】"><span class="related-post-title">Python学习笔记【正则表达式】</span><span class="related-post-date">2023-06-21</span><span class="related-post-desc">Python3 正则表达式 正则表达式是一个特殊的字符序列，它能帮助你方便的检查一个字符串是否与某种模式匹配。 Python 自1.5版本起增加了re 模块，它</span></a><a href="/2023/06/08/Python学习笔记【标准库概览】/" class="related-post-item" title="Python学习笔记【标准库概览】"><span class="related-post-title">Python学习笔记【标准库概览】</span><span class="related-post-date">2023-06-08</span><span class="related-post-desc">Python3 标准库概览 Python 标准库非常庞大，所提供的组件涉及范围十分广泛，使用标准库我们可以让您轻松地完成各种任务。 以下是一些 Python3 </span></a><a href="/2023/06/06/Python学习笔记【面向对向】/" class="related-post-item" title="Python学习笔记【面向对向】"><span class="related-post-title">Python学习笔记【面向对向】</span><span class="related-post-date">2023-06-06</span><span class="related-post-desc">Python3 面向对象 Python从设计之初就已经是一门面向对象的语言，正因为如此，在Python中创建一个类和对象是很容易的。本章节我们将详细介绍Pyth</span></a></div></div>
+<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2023/06/25/Python学习笔记【JSON】/" class="related-post-item" title="Python学习笔记【JSON】"><span class="related-post-title">Python学习笔记【JSON】</span><span class="related-post-date">2023-06-25</span><span class="related-post-desc">Python3 JSON 数据解析 JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。 Python3 中可以使用</span></a><a href="/2023/06/25/Python学习笔记【XML解析】/" class="related-post-item" title="Python学习笔记【XML解析】"><span class="related-post-title">Python学习笔记【XML解析】</span><span class="related-post-date">2023-06-25</span><span class="related-post-desc">Python3 XML 解析 什么是 XML？ XML 指可扩展标记语言（eXtensible Markup Language），标准通用标记语言的子集，是一种</span></a><a href="/2023/06/25/Python学习笔记【多线程】/" class="related-post-item" title="Python学习笔记【多线程】"><span class="related-post-title">Python学习笔记【多线程】</span><span class="related-post-date">2023-06-25</span><span class="related-post-desc">Python3 多线程 多线程类似于同时执行多个不同程序，多线程运行有如下优点： 使用线程可以把占据长时间的程序中的任务放到后台去处理。 用户界面可以更加吸引人</span></a><a href="/2023/06/21/Python学习笔记【正则表达式】/" class="related-post-item" title="Python学习笔记【正则表达式】"><span class="related-post-title">Python学习笔记【正则表达式】</span><span class="related-post-date">2023-06-21</span><span class="related-post-desc">Python3 正则表达式 正则表达式是一个特殊的字符序列，它能帮助你方便的检查一个字符串是否与某种模式匹配。 Python 自1.5版本起增加了re 模块，它</span></a><a href="/2023/06/08/Python学习笔记【标准库概览】/" class="related-post-item" title="Python学习笔记【标准库概览】"><span class="related-post-title">Python学习笔记【标准库概览】</span><span class="related-post-date">2023-06-08</span><span class="related-post-desc">Python3 标准库概览 Python 标准库非常庞大，所提供的组件涉及范围十分广泛，使用标准库我们可以让您轻松地完成各种任务。 以下是一些 Python3 </span></a><a href="/2023/06/06/Python学习笔记【面向对向】/" class="related-post-item" title="Python学习笔记【面向对向】"><span class="related-post-title">Python学习笔记【面向对向】</span><span class="related-post-date">2023-06-06</span><span class="related-post-desc">Python3 面向对象 Python从设计之初就已经是一门面向对象的语言，正因为如此，在Python中创建一个类和对象是很容易的。本章节我们将详细介绍Pyth</span></a></div></div><div class="series-nav"><div class="series-nav-title">Python学习笔记 系列</div><div class="series-nav-progress">第 3/14 篇</div><div class="series-nav-links"><a href="/2023/05/29/Python学习笔记【列表】/" class="series-nav-prev">Python学习笔记【列表】</a><a href="/2023/05/29/Python学习笔记【字典】/" class="series-nav-next">Python学习笔记【字典】</a></div></div>
     </div>
 
     
@@ -461,6 +465,8 @@ tup[1:4]	(&#39;Runoob&#39;, &#39;Taobao&#39;, &#39;Wiki&#39;)	截取元素，从
   
   
 
+
+  
 
 
           </div>
@@ -1186,6 +1192,8 @@ body {
   }
 })();
 </script>
+
+
 
 <!-- AI 博客助手 -->
 <script src="/js/ai-assistant.js" data-pjax></script>
