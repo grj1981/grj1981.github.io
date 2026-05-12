@@ -1357,7 +1357,7 @@ if ('serviceWorker' in navigator) {
     '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">加载中...</p></div>';
   container.appendChild(widget);
 
-  fetch('https://api.bytefisher.top/api/hot-articles')
+  fetch('/api/hot-articles.json')
     .then(function(r) { return r.json(); })
     .then(function(res) {
       var el = document.getElementById('hot-posts-list');
