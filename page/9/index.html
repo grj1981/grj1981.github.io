@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <link rel="preconnect" href="https://iili.io">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
+<meta name="theme-color" content="#37c6c0">
 <meta name="generator" content="Hexo 8.1.1">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#37c6c0">
+
+<meta http-equiv="Permissions-Policy" content="encrypted-media=*">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -16,7 +23,7 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
 <meta property="og:type" content="website">
@@ -30,6 +37,9 @@
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://www.bytefisher.top/page/9/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"ByteFisher","url":"https://www.bytefisher.top","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.bytefisher.top/search.json?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"}]}</script>
 
 
 <script id="page-configurations">
@@ -46,6 +56,15 @@
   
 
 
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dc50e0997d43c3a8dbf2afdb3fdff233";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -73,8 +92,8 @@
   </style>
 </noscript>
 
-  <!--相册弹出js-->
-  <script type="text/javascript" src="/js/lightbox-plus-jquery.min.js"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#37c6c0">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -135,7 +154,7 @@
   </li>
         <li class="menu-item menu-item-douyin">
 
-    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">45</span></a>
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">46</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -145,12 +164,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">93</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">96</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">28</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -207,6 +226,339 @@
 
           <div class="content index posts-expand">
             
+
+  <div class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">
+      <span class="hero-emoji">🎣</span>
+      ByteFisher
+    </h1>
+    <div class="hero-subtitle">
+      <span class="hero-prefix">钓鱼爱好者的</span>
+      <span class="hero-typing" id="hero-typing"></span>
+      <span class="hero-cursor">|</span>
+    </div>
+    <p class="hero-desc">分享游戏开发技术与钓鱼乐趣</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-value">96</span>
+        <span class="hero-stat-label">文章</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">7</span>
+        <span class="hero-stat-label">鱼获</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">5</span>
+        <span class="hero-stat-label">小游戏</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">46</span>
+        <span class="hero-stat-label">抖音作品</span>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="/archives/" class="hero-btn hero-btn-primary">📚 浏览文章</a>
+      <a href="/fish/" class="hero-btn hero-btn-secondary">🎣 钓鱼相册</a>
+      <a href="/ai-games/" class="hero-btn hero-btn-secondary">🎮 玩小游戏</a>
+      <a href="/douyin/" class="hero-btn hero-btn-secondary">🎬 抖音作品</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="featured-section">
+  <div class="featured-title">📖 推荐阅读</div>
+  <div class="featured-grid">
+    
+    <a href="/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%20AI%20%E9%97%AE%E7%AD%94%E5%8A%A9%E6%89%8B%EF%BC%9ADeepSeek%20API%20+%20Vercel%20Serverless%20+%20%E6%82%AC%E6%B5%AE%E7%90%83%E8%81%8A%E5%A4%A9%E9%9D%A2%E6%9D%BF/" class="featured-card">
+      <div class="featured-card-title">Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板</div>
+      <div class="featured-card-date">2026-05-09</div>
+    </a>
+    
+    <a href="/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%BD%93%E9%AA%8C%E5%8D%87%E7%BA%A7%EF%BC%9ASEO%20%E4%BC%98%E5%8C%96%20+%20%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E5%A2%9E%E5%BC%BA%20+%20%E5%93%81%E7%89%8C%E8%A7%86%E8%A7%89%E9%87%8D%E6%9E%84/" class="featured-card">
+      <div class="featured-card-title">Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构</div>
+      <div class="featured-card-date">2026-05-09</div>
+    </a>
+    
+    <a href="/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/" class="featured-card">
+      <div class="featured-card-title">Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移</div>
+      <div class="featured-card-date">2026-05-09</div>
+    </a>
+    
+    <a href="/2026/05/04/2026-05-04-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E4%BA%94%E4%B8%80%E8%BF%9E%E6%88%98%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93/" class="featured-card">
+      <div class="featured-card-title">五一连战花碑水库，爆护50斤——老表两小时空军，我连竿到手酸</div>
+      <div class="featured-card-date">2026-05-04</div>
+    </a>
+    
+  </div>
+</div>
+
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/11/12/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/11/12/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-11/" class="post-title-link" itemprop="url">钓鱼日记[23.11.11]</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-11-12 20:20:01" itemprop="dateCreated datePublished" datetime="2023-11-12T20:20:01+08:00">2023-11-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2023/11/12/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-11/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2023/11/12/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-11/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>11月11日 周六，在小雨蒙蒙的天气里，我来到了离家不远的西来小河进行野钓。自从8月份刚清理完河道来钓了一次之后再没来过，记得上次空军了，希望今天能有好的收获。天气虽然有点冷，但是小河的景色依然很美，烟雨蒙蒙中，岸边的竹林似乎更加茂密了。旁边果园里的耙耙柑套上了白色的袋子，显得更加硕果累累。河面靠边的位置长满了嫩嫩的水草，我想下面应该藏了不少鱼吧。远处几个钓友早早来到河边垂钓，但似乎鱼情不太好。...</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/11/12/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-11/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/10/29/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-29/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/29/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-29/" class="post-title-link" itemprop="url">钓鱼日记[23.10.28]</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-10-29 18:10:01" itemprop="dateCreated datePublished" datetime="2023-10-29T18:10:01+08:00">2023-10-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2023/10/29/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-29/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2023/10/29/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-29/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>10月28日 清晨的太阳刚刚露出来，洒下了温暖的阳光，让整个水库散发出一片宁静和美丽。我又一次来到了这片熟悉的水域，呼吸着新鲜的空气，享受着宁静的钓鱼时刻。 水库的风景依然令人陶醉。周围的树木郁郁葱葱，飘逸的花草点缀其中，映衬着湖光山色，美不胜收。晨光透过稀疏的树叶，洒在地面上，照得整个岸边一片金黄。湖面青山环抱，湖泊如镜，微风吹动，形成涟漪，荡起微波。水面映射着天空的蓝色，在这美景之中，有着一丝...</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/10/29/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-29/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/10/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-21/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-21/" class="post-title-link" itemprop="url">钓鱼日记[23.10.21]</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-10-22 19:10:01" itemprop="dateCreated datePublished" datetime="2023-10-22T19:10:01+08:00">2023-10-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2023/10/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-21/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2023/10/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-21/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>10月21日天气晴朗，我早早的来到了三一水库钓鱼。两个星期没来了，水库的水位终于上涨了一些，整个水库的风景更加美丽迷人。眺望湖面，一片平静，宛如一面明镜般的湖面，倒映着周围的山村和蓝天白云，景色宁静而美丽。此刻，朝霞的光辉穿过树叶，将湖面映照得如诗如画。 我迅速准备好钓具，今天准备用12尺玄武人Y，搭配0.8号主线，0.4号子线，4号轻口袖，钓小红尾。正在我调漂找底的时候，拉起鱼竿，突然感觉有重量...</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/10/22/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-21/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -237,13 +589,6 @@
 
               <time title="创建时间：2023-10-14 19:00:00" itemprop="dateCreated datePublished" datetime="2023-10-14T19:00:00+08:00">2023-10-14</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-04 23:02:40" itemprop="dateModified" datetime="2024-01-04T23:02:40+08:00">2024-01-04</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -255,23 +600,16 @@
             </span>
 
           
-            <span id="/2023/10/14/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-14/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.10.14]" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
   
   <span class="post-meta-item">
     
       <span class="post-meta-item-icon">
         <i class="far fa-comment"></i>
       </span>
-      <span class="post-meta-item-text">Valine：</span>
+      <span class="post-meta-item-text">Waline：</span>
     
-    <a title="valine" href="/2023/10/14/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-14/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/10/14/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-14/" itemprop="commentCount"></span>
+    <a title="waline" href="/2023/10/14/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-14/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2023/10/14/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-14/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -286,13 +624,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>10月14日<br>阳光明媚的早晨我兴致勃勃地穿上了新买的60公分高的长筒水鞋,满怀期待地来到了上周的钓点。上周的钓鱼经历令我异常开心,然而那次狼狈的遛鱼却让我久久不能释怀,一条小鲤鱼竟然让我两只水鞋都装满了水,因此我特意买了一双更高的长筒水鞋。今天,我准备在同一个位置搭起钓台,使用6.75米的鱼竿,1.2号的主线和0.5号的子线,带上4号袖钩来钓马口和土凤。上次用的6.3米竿子感觉效果不错,今天用了更长的竿子,希望能钓的更好。</p>
-<p><img data-src="https://iili.io/JFvCka1.md.jpg"></p>
-<p>为了能更快地诱鱼,我用红虫颗粒打窝。</p>
-<p><img data-src="https://iili.io/JFvCWjj.md.jpg"></p>
+          <p>10月14日阳光明媚的早晨我兴致勃勃地穿上了新买的60公分高的长筒水鞋,满怀期待地来到了上周的钓点。上周的钓鱼经历令我异常开心,然而那次狼狈的遛鱼却让我久久不能释怀,一条小鲤鱼竟然让我两只水鞋都装满了水,因此我特意买了一双更高的长筒水鞋。今天,我准备在同一个位置搭起钓台,使用6.75米的鱼竿,1.2号的主线和0.5号的子线,带上4号袖钩来钓马口和土凤。上次用的6.3米竿子感觉效果不错,今天用了更长...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/10/14/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-14/#more" rel="contents">
+              <a class="btn" href="/2023/10/14/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-14/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -342,13 +677,6 @@
 
               <time title="创建时间：2023-10-06 19:10:20" itemprop="dateCreated datePublished" datetime="2023-10-06T19:10:20+08:00">2023-10-06</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-04 23:02:40" itemprop="dateModified" datetime="2024-01-04T23:02:40+08:00">2024-01-04</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -360,23 +688,16 @@
             </span>
 
           
-            <span id="/2023/10/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-05/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.10.05]" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
   
   <span class="post-meta-item">
     
       <span class="post-meta-item-icon">
         <i class="far fa-comment"></i>
       </span>
-      <span class="post-meta-item-text">Valine：</span>
+      <span class="post-meta-item-text">Waline：</span>
     
-    <a title="valine" href="/2023/10/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-05/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/10/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-05/" itemprop="commentCount"></span>
+    <a title="waline" href="/2023/10/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-05/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2023/10/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-05/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -391,15 +712,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>好久没更新钓鱼日志了，国庆大假还有两天结束，今天决定去西来古镇野河探钓一下，由于河边在修路，不好停车，今年都没去那钓过鱼，去年河里的白条，麦线鱼挺多。</p>
-<p>10月5号，天气阴沉，上午9点半来到河边。两岸水草很多，河中间走水比较厉害，我决定用6.3米的鱼竿钓浅滩。那有很多小鱼在炸水，线组搭配1.2号的主线，0.4号的子线，配备了4号的鱼钩，水深大约1米左右。刚抛几竿就开始上小马口，咬口很凶猛，但是由于鱼竿比较粗硬，小鱼在起竿的时候比较容易弹掉。</p>
-<p>开始上鱼不久，我突然就感受到了不一样的拉力，鱼不大但窜的特别厉害。一两多的小鱼，都能把我的鱼竿拉成大弯弓，以为是来了鲤鱼，结果鱼出水后惊奇地发现竟然是花骨鱼，以前没有这种鱼。突然钓到这种鱼让我感觉非常惊喜。今天的鱼情特别好，马口一直连竿，中途还有一条小鲤鱼上了钩。总的来说，我获得了几十条马口鱼，九条花骨鱼和一条鲤鱼。收获颇丰。</p>
-<p><img data-src="https://iili.io/J2N3Y0B.md.jpg"></p>
-<p>第一尾花骨鱼</p>
-<p><img data-src="https://iili.io/J2N3uxj.md.jpg"></p>
+          <p>好久没更新钓鱼日志了，国庆大假还有两天结束，今天决定去西来古镇野河探钓一下，由于河边在修路，不好停车，今年都没去那钓过鱼，去年河里的白条，麦线鱼挺多。 10月5号，天气阴沉，上午9点半来到河边。两岸水草很多，河中间走水比较厉害，我决定用6.3米的鱼竿钓浅滩。那有很多小鱼在炸水，线组搭配1.2号的主线，0.4号的子线，配备了4号的鱼钩，水深大约1米左右。刚抛几竿就开始上小马口，咬口很凶猛，但是由于鱼...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/10/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-05/#more" rel="contents">
+              <a class="btn" href="/2023/10/06/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-10-05/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -449,13 +765,6 @@
 
               <time title="创建时间：2023-10-02 17:21:53" itemprop="dateCreated datePublished" datetime="2023-10-02T17:21:53+08:00">2023-10-02</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-04 23:02:40" itemprop="dateModified" datetime="2024-01-04T23:02:40+08:00">2024-01-04</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -467,23 +776,16 @@
             </span>
 
           
-            <span id="/2023/10/02/%E5%9B%BD%E5%BA%86%E6%B8%B8%E6%B8%B8%E8%A7%88%E8%AF%BA%E6%B0%B4%E6%B2%B3%E4%B8%AD%E5%B3%B0%E6%B4%9E/" class="post-meta-item leancloud_visitors" data-flag-title="诺水河中峰洞游记" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
   
   <span class="post-meta-item">
     
       <span class="post-meta-item-icon">
         <i class="far fa-comment"></i>
       </span>
-      <span class="post-meta-item-text">Valine：</span>
+      <span class="post-meta-item-text">Waline：</span>
     
-    <a title="valine" href="/2023/10/02/%E5%9B%BD%E5%BA%86%E6%B8%B8%E6%B8%B8%E8%A7%88%E8%AF%BA%E6%B0%B4%E6%B2%B3%E4%B8%AD%E5%B3%B0%E6%B4%9E/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/10/02/%E5%9B%BD%E5%BA%86%E6%B8%B8%E6%B8%B8%E8%A7%88%E8%AF%BA%E6%B0%B4%E6%B2%B3%E4%B8%AD%E5%B3%B0%E6%B4%9E/" itemprop="commentCount"></span>
+    <a title="waline" href="/2023/10/02/%E5%9B%BD%E5%BA%86%E6%B8%B8%E6%B8%B8%E8%A7%88%E8%AF%BA%E6%B0%B4%E6%B2%B3%E4%B8%AD%E5%B3%B0%E6%B4%9E/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2023/10/02/%E5%9B%BD%E5%BA%86%E6%B8%B8%E6%B8%B8%E8%A7%88%E8%AF%BA%E6%B0%B4%E6%B2%B3%E4%B8%AD%E5%B3%B0%E6%B4%9E/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -498,335 +800,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2023年国庆长假，我陪媳妇回娘家，第二天大家决定去探索中国西南部令人神往的自然奇观——诺水河中峰洞。这个位于通江县的景点以其壮丽的溶洞景观和令人陶醉的自然美景而闻名于世。在这次旅程中，我将带你穿越洞穴，欣赏天然钟乳石的奇迹，领略五彩斑斓的魅力，并感受如同探险的刺激。</p>
-<p><img data-src="https://iili.io/J2NFcB4.md.jpg"></p>
-<p>高山耸立，云雾缭绕在青峰之间</p>
-<p>诺水河中峰洞位于通江县境内，被壮丽的山峰环绕，洞口隐藏在丛山峻岭之中，云雾飘渺，宛如仙境一般。国庆期间，我和家人一起出发，期待在这个壮丽的自然胜地度过难忘的时光。</p>
-<p><img data-src="https://iili.io/J2NFv3B.md.jpg"></p>
-<p>山高云雾缭绕，崖壁通道仙境之旅</p>
+          <p>2023年国庆长假，我陪媳妇回娘家，第二天大家决定去探索中国西南部令人神往的自然奇观——诺水河中峰洞。这个位于通江县的景点以其壮丽的溶洞景观和令人陶醉的自然美景而闻名于世。在这次旅程中，我将带你穿越洞穴，欣赏天然钟乳石的奇迹，领略五彩斑斓的魅力，并感受如同探险的刺激。 高山耸立，云雾缭绕在青峰之间 诺水河中峰洞位于通江县境内，被壮丽的山峰环绕，洞口隐藏在丛山峻岭之中，云雾飘渺，宛如仙境一般。国庆期...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/10/02/%E5%9B%BD%E5%BA%86%E6%B8%B8%E6%B8%B8%E8%A7%88%E8%AF%BA%E6%B0%B4%E6%B2%B3%E4%B8%AD%E5%B3%B0%E6%B4%9E/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/09/17/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-17/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/17/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-17/" class="post-title-link" itemprop="url">钓鱼日记[23.09.17]</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-09-17 18:00:20" itemprop="dateCreated datePublished" datetime="2023-09-17T18:00:20+08:00">2023-09-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-04 23:02:40" itemprop="dateModified" datetime="2024-01-04T23:02:40+08:00">2024-01-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/09/17/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-17/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.09.17]" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/09/17/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-17/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/09/17/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-17/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>9月16日（星期六）阴<br>转眼又到了秋天，这是一年中的第二个钓鱼黄金季节。秋天的天气逐渐转凉，气温适宜，使得鱼类活动活跃起来。它们开始准备过冬，需要摄取更多的食物，所以秋季成为钓鱼的最佳时机。秋天也是农作物的收获季节，人们需要忙碌地收割果实、蔬菜和谷物，并进行后续的加工和储存工作。而对于种植柑橘等果树的果农来说，秋季是套袋最忙碌的时期，套袋需要大量的人工操作，包括为果实选取合适的袋子、将果实轻柔地放入袋中，然后绑紧袋子，这一过程需要耗费大量的时间和劳动力。家里也种了一些粑粑柑，这些天媳妇和老妈正忙着给粑粑柑套袋，恰逢周末本来也想尽一点自己的绵薄之力。但套袋的实际操作让我感到吃力，一会蹲一会站，一会又需要弓着身子弯子腰，手上还忙个不停，简直比连续加通宵班还累，没套好二十个果子，就感觉头晕，于是决定去水库钓鱼放松一下。</p>
-<p>晚上下过雨，树叶上还有很多水</p>
-<p><img data-src="https://iili.io/JH64ucP.md.jpg"><br>关鸡的围栏</p>
-<p><img data-src="https://iili.io/JH64Bwb.md.jpg"><br>感觉这果子还长的挺快，都这么大个了</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/09/17/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-17/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/09/03/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-03/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/03/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-03/" class="post-title-link" itemprop="url">钓鱼日记[23.09.03]</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-09-03 19:10:20" itemprop="dateCreated datePublished" datetime="2023-09-03T19:10:20+08:00">2023-09-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-04 23:02:40" itemprop="dateModified" datetime="2024-01-04T23:02:40+08:00">2024-01-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/09/03/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-03/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.09.03]" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/09/03/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-03/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/09/03/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-03/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>又到了开心愉快的周末钓鱼时间。家养的乌龟正在蜕皮，似乎又长大了一些，胃口也变大了。每次钓回来的小鱼都不够它们吃，所以下定决心这周要多钓些小鱼回来。<br>9月2日（星期六）多云转晴<br>今天天气很好，上午阴凉的气温在20多度，非常适合钓鱼。一早就整理好钓竿、钓箱、活鱼桶、大钓伞、鱼护包、路亚包，还带了两只海竿，车厢里满满当当。信心满满地向水库出发，今天一定要钓到大鱼。<br>信心满满的出发<br><img data-src="https://iili.io/J9fg7KQ.md.jpg"></p>
-<p>到达水库后，看到水面几乎干涸了。这几百亩的水域中只有中间还有些许水，而且都很浅。用13.5尺竿子抛出去都只有20CM左右水深。显然，要钓到大鱼是不可能了。但水质混浊，按照以往的经验，应该还是能钓到小鲫鱼的。没有再犹豫，开始垂钓。刚开始没多久，旁边的钓友就中了一条大约三两重的鲶鱼，而且他那个位置水更浅，只能使用七星票。这让我不禁感到意外，怎么这么浅的水域也能钓到如此大的鲶鱼呢？之前在水较深的时候也才曾钓到过最大2两重的鲶鱼，这一瞬间又激起了我的信心。连续抛竿作钓，窝里的小白条越来越多，而且都非常小。有时候甚至不带饵料，空钩也能钓到鱼。更让人惊讶的是，我使用的双钩竟然能够一次中三条鱼。</p>
-<p>双钩奇迹<br><img data-src="https://iili.io/J9fgIDu.md.jpg"></p>
-<p>钓了一个小时，窝里全是这种小白条，一条小鲫鱼都没钓到。这时候一家人带着一个可爱活泼的小女孩也来钓鱼。小女孩大约10岁，看到我在钓鱼，不停地询问我是否钓到了鱼。我告诉她，只钓到了一些非常小的鱼。一听有鱼可钓，小女孩兴奋地吵着她爸爸要钓鱼。她的爸爸将手中的鱼竿递给了她。没过多久，小女孩高兴地叫喊起来：“中鱼了，中鱼了，好大！”我转头看去，果然小女孩手上的鱼竿弯成了弧形，鱼在鱼竿的牵引下划过一段弧线，便被挑上岸，是一条大约2两重的小鲤鱼。我几乎不敢相信，竟然能在这样浅的水域钓到鲤鱼。也许钓友们经常调侃的那些新手“大礼包”是真实存在的。看着小女孩脸上洋溢着灿烂的笑容，就像阳光穿透云层，她的喜悦像一道明媚的彩虹，让人感受到了她对钓鱼的内心快乐。我相信，不管过了多久，这一刻都将成为小女孩最深刻的记忆，就像我儿子6岁时和我一起去河边钓鱼，那次钓到的差不多有三两重的鲫鱼一样，他时不时会在我面前炫耀一下。</p>
-<p>看到小女孩钓上了鲤鱼，我更加相信，肯定能钓到鲫鱼。可能是水太浅，鱼儿进窝速度较慢。我需要慢慢诱鱼，因此保持了大约一分钟一竿的频率坚持拉饵作钓。果然，坚持了一段时间后终于上了第一条小鲫鱼，尽管个体相较之前的钓获稍小。到了午后，窝里的鱼越来越多，从岸上看去有一片黑压压的鱼群。小白条占多数，不过鲫鱼数量也不少，我开始连竿钓起了小鲫鱼。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/09/03/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-09-03/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/08/21/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-08-21/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/08/21/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-08-21/" class="post-title-link" itemprop="url">钓鱼日记[23.08.21]</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-08-21 19:49:29" itemprop="dateCreated datePublished" datetime="2023-08-21T19:49:29+08:00">2023-08-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-04 23:02:40" itemprop="dateModified" datetime="2024-01-04T23:02:40+08:00">2024-01-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/08/21/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-08-21/" class="post-meta-item leancloud_visitors" data-flag-title="钓鱼日记[23.08.21]" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/08/21/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-08-21/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/08/21/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-08-21/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>这几天一直很忙，一直没有时间更新我钓鱼的日志。不过抽空的时候，我整理了一下上个周末的钓鱼经历。</p>
-<p>周六早上（8月19日），我早早起来来到了水库边。这是我第一次如此一大早来到水库，欣赏着大雨后的清晨，水库的美景让我心旷神怡。在远方的地平线上，高山峰峦起伏地矗立着，与蔚蓝的天空相接，峰巅的雄伟挺拔清晰可见。</p>
-<p>清晨的水库风光<br><img data-src="https://iili.io/JH6bhrb.md.jpg"></p>
-<p>按照我平时的习惯，我使用拉饵的方式钓小鲫鱼。然而这次窝子里的小白条鱼特别多，甚至在饵料没到位之前，水面上就已经黑压压一片。浮漂被小鱼拉来拉去，四号鱼钩根本钓不上鱼，毕竟鱼儿太小了。</p>
-<p>我钓到了一只透明的河虾，它晶莹剔透，美得令人赏心悦目。</p>
-<p>晶莹剔透的透明河虾<br><img data-src="https://iili.io/JH6bWBe.md.jpg"></p>
-<p>微风拂过的波光粼粼水面<br><img data-src="https://iili.io/JH6bgCF.md.jpg"></p>
-<p>水面上盘旋觅食的水鸟<br><img data-src="https://iili.io/JH6bw2j.md.jpg"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/08/21/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-08-21/#more" rel="contents">
+              <a class="btn" href="/2023/10/02/%E5%9B%BD%E5%BA%86%E6%B8%B8%E6%B8%B8%E8%A7%88%E8%AF%BA%E6%B0%B4%E6%B2%B3%E4%B8%AD%E5%B3%B0%E6%B4%9E/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -917,7 +894,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-count">96</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -930,7 +907,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -953,7 +930,7 @@
 
 
       </div>
-	  <iframe id="music-player" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <iframe id="music-player" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
 	  <div class="wechat_OA">
 		<span>欢迎关注我的公众号</span>
 		<!-- 这里添加你的二维码图片 -->
@@ -979,15 +956,13 @@
 
 <div class="copyright">
   
-  &copy; 
+  &copy; 2023 – 
   <span itemprop="copyrightYear">2026</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">淡水鱼</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
-  </div>
         
 <div class="busuanzi-count">
   <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -1154,32 +1129,63 @@ window.addEventListener('pjax:success', () => {
   
 
 
+<link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
 <script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
+(function() {
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+
+  function updateCounts() {
+    var countEls = document.querySelectorAll('.waline-visitor-count');
+    if (!countEls.length) return;
+    countEls.forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var url = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(json) {
+          if (json && json.data && json.data[0] && json.data[0].time != null) {
+            el.innerText = json.data[0].time;
+          }
+        });
     });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : false,
-      notify     : false,
-      appId      : '8SGHVqNSzlIvUsQekb6EVL2z-gzGzoHsz',
-      appKey     : 'kM6zUKBTanjH10n2gcXV8OTE',
-      placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
-      avatar     : 'retro',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : true,
-      lang       : '' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : true,
-      serverURLs : ''
+  }
+
+  var el = document.querySelector('#waline-comments');
+  if (el) {
+    updateCounts();
+    NexT.utils.loadComments(el, function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
+        Waline.init({
+          el: '#waline-comments',
+          serverURL: 'https://waline.bytefisher.top/',
+          path: location.pathname,
+          lang: 'zh-CN' || 'zh-CN',
+          meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
+          requiredMeta: ["nick"] || ['nick'],
+          placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+          avatar: 'retro' || 'retro',
+          pageSize: 10 || 10,
+          imageUploader: false,
+          comment: true,
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo'],
+          highlight: true
+        });
+        var pathEl = document.querySelector('.waline-visitor-count');
+        var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
+        fetch(baseURL + '/api/article', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: postPath })
+        }).finally(function() {
+          updateCounts();
+        });
+      }, window.Waline);
     });
-  }, window.Valine);
-});
+  } else {
+    updateCounts();
+  }
+})();
 </script>
 <!-- 抖音视频弹窗 -->
 <div id="douyin-modal" class="modal">
@@ -1503,6 +1509,126 @@ body {
   } else {
     init();
   }
+})();
+</script>
+
+<!-- Hero 打字机效果 -->
+<script>
+(function() {
+  function initHeroTyping() {
+    var el = document.getElementById('hero-typing');
+    if (!el) return;
+    var texts = ['编程世界', '数字乐园', '钓鱼天地', '技术博客'];
+    var textIndex = 0;
+    var charIndex = 0;
+    var isDeleting = false;
+
+    function type() {
+      var current = texts[textIndex];
+      if (isDeleting) {
+        el.textContent = current.substring(0, charIndex--);
+      } else {
+        el.textContent = current.substring(0, charIndex++);
+      }
+
+      if (!isDeleting && charIndex === current.length) {
+        setTimeout(function() { isDeleting = true; }, 2000);
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+      }
+
+      setTimeout(type, isDeleting ? 50 : 100);
+    }
+    type();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroTyping);
+  } else {
+    initHeroTyping();
+  }
+})();
+</script>
+
+
+
+<!-- 深色模式切换 -->
+<button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
+  <i class="fa fa-moon-o"></i>
+  <i class="fa fa-sun-o"></i>
+</button>
+<script data-pjax>
+(function() {
+  var btn = document.getElementById('darkmode-toggle');
+  if (!btn) return;
+  if (document.body.classList.contains('dark-mode')) btn.classList.add('on');
+  btn.addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+    btn.classList.toggle('on');
+    localStorage.setItem('blog-darkmode', document.body.classList.contains('dark-mode') ? '1' : '0');
+  });
+  if (localStorage.getItem('blog-darkmode') === '1') {
+    document.body.classList.add('dark-mode');
+    btn.classList.add('on');
+  }
+})();
+</script>
+
+<!-- AI 博客助手 -->
+<script src="/js/ai-assistant.js" data-pjax></script>
+
+<script data-pjax>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<!-- 热门文章侧边栏 -->
+<script data-pjax>
+(function() {
+  var container = document.querySelector('.sidebar-inner');
+  if (!container) return;
+
+  var existEl = document.getElementById('hot-posts-widget');
+  if (existEl) return;
+
+  var widget = document.createElement('div');
+  widget.id = 'hot-posts-widget';
+  widget.className = 'sidebar-widget hot-posts-widget';
+  widget.innerHTML = '<div class="sidebar-widget-title"><i class="fa fa-fire"></i> 热门文章</div>' +
+    '<div class="sidebar-widget-body" id="hot-posts-list">' +
+    '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">加载中...</p></div>';
+  container.appendChild(widget);
+
+  fetch('/api/hot-articles.json')
+    .then(function(r) { return r.json(); })
+    .then(function(res) {
+      var el = document.getElementById('hot-posts-list');
+      if (!el) return;
+      if (res.errno !== 0 || !res.data || !res.data.length) {
+        el.innerHTML = '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">暂无数据</p>';
+        return;
+      }
+      var html = '<ul style="list-style:none;padding:0;margin:0;">';
+      res.data.forEach(function(item, i) {
+        html += '<li style="padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' +
+          '<span style="color:#37c6c0;font-weight:700;margin-right:4px;">' + (i+1) + '.</span>' +
+          '<a href="' + item.url + '" style="color:#555;text-decoration:none;border:none;" title="' + (item.title || '') + '">' +
+          (item.title || item.url) + '</a>' +
+          '<span style="color:#ccc;margin-left:4px;font-size:10px;">' + item.count + '℃</span>' +
+        '</li>';
+      });
+      html += '</ul>';
+      el.innerHTML = html;
+      if (window.pjax && window.pjax.refresh) {
+        window.pjax.refresh(document.getElementById('hot-posts-widget'));
+      }
+    })
+    .catch(function() {
+      var el = document.getElementById('hot-posts-list');
+      if (el) el.innerHTML = '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">加载失败</p>';
+    });
 })();
 </script>
     </div>
