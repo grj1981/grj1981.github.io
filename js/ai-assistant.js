@@ -2,7 +2,7 @@
 
 (function() {
   var CONFIG = {
-    apiEndpoint: 'https://1348117437-dcymb4q4im.ap-chengdu.tencentscf.com/chat',
+    apiEndpoint: 'https://bytefisher-ai.vercel.app/api/chat',
     botName: 'ByteBot',
     welcomeMessage: '🎣 欢迎来到 ByteFisher 博客！\n\n我是 ByteBot，可以帮你：\n📖 推荐文章\n💡 解答技术问题\n🎯 了解博客内容\n\n有什么想了解的？',
     placeholder: '输入你的问题...'
