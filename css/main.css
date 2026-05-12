@@ -1183,7 +1183,7 @@ pre .javascript .function {
 .github-corner svg {
   border: 0;
   color: #fff;
-  fill: #222;
+  fill: #37c6c0;
   position: absolute;
   right: 0;
   top: 0;
@@ -1194,7 +1194,7 @@ pre .javascript .function {
     display: none;
   }
   .github-corner svg {
-    color: #222;
+    color: #37c6c0;
     fill: #fff;
   }
   .github-corner .github-corner:hover .octo-arm {
@@ -1313,7 +1313,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #74258b;
+  background: #3ca498;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1555,7 +1555,7 @@ pre .javascript .function {
   width: 100%;
 }
 .with-love {
-  color: #ff0000;
+  color: #37c6c0;
   display: inline-block;
   margin: 0 5px;
 }
@@ -1974,6 +1974,9 @@ pre .javascript .function {
   .post-meta-item-icon {
     display: inline-block;
   }
+}
+.post-meta-item-text {
+  display: none;
 }
 @media (max-width: 991px) {
   .post-meta-item-text {
