@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="前言上一篇《Hexo 博客三项基础修复》解决了 RSS、Sitemap、评论系统的高优先级硬性问题，博客具备了稳固的基础设施。但 Lighthouse 审查还暴露了更多问题： 类别 问题数 严重程度 SEO 4 项 🟡 中 体验 7 项 🟡 中 品牌 2 项 🟡 中 其中 SEO 问题影响搜索引擎发现和社交分享展示，体验问题影响读者停留和互动，品牌问题则关系到博客的识别度和专业性。 本文将依">
 <meta property="og:type" content="article">
@@ -514,19 +514,6 @@
   
 
 
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构",
-    "author": { "@type": "Person", "name": "淡水鱼" },
-    "datePublished": "2026-05-09T13:00:00.000Z",
-    "dateModified": "2026-05-09T08:49:22.426Z",
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%BD%93%E9%AA%8C%E5%8D%87%E7%BA%A7%EF%BC%9ASEO%20%E4%BC%98%E5%8C%96%20+%20%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E5%A2%9E%E5%BC%BA%20+%20%E5%93%81%E7%89%8C%E8%A7%86%E8%A7%89%E9%87%8D%E6%9E%84/" },
-    "publisher": { "@type": "Person", "name": "淡水鱼" }
-  }
-  </script>
   <div class="post-share">
     <span class="post-share-label">分享：</span>
     <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2026%2F05%2F09%2FHexo%2520%25E5%258D%259A%25E5%25AE%25A2%25E4%25BD%2593%25E9%25AA%258C%25E5%258D%2587%25E7%25BA%25A7%25EF%25BC%259ASEO%2520%25E4%25BC%2598%25E5%258C%2596%2520%2B%2520%25E7%2594%25A8%25E6%2588%25B7%25E4%25BD%2593%25E9%25AA%258C%25E5%25A2%259E%25E5%25BC%25BA%2520%2B%2520%25E5%2593%2581%25E7%2589%258C%25E8%25A7%2586%25E8%25A7%2589%25E9%2587%258D%25E6%259E%2584%2F&amp;title=Hexo%20%E5%8D%9A%E5%AE%A2%E4%BD%93%E9%AA%8C%E5%8D%87%E7%BA%A7%EF%BC%9ASEO%20%E4%BC%98%E5%8C%96%20%2B%20%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E5%A2%9E%E5%BC%BA%20%2B%20%E5%93%81%E7%89%8C%E8%A7%86%E8%A7%89%E9%87%8D%E6%9E%84" target="_blank" rel="noopener" title="分享到微博">
@@ -536,7 +523,6 @@
       <i class="fa fa-link"></i>
     </a>
   </div>
-  
 
 
           </div>

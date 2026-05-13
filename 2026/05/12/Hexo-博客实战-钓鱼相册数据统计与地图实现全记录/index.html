@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="前言ByteFisher 博客上线了两年，积累了 7 个钓鱼相册、500+ 张照片。但一直有个遗憾：相册只是按年份一字排开，缺少两个关键视角。 一是数据视角——5 年钓了多少鱼？哪个鱼种最多？哪年最高产？这些信息分散在上百个 HTML 页面里，读者无从感知。 二是空间视角——日记里提到的”花碑水库””三一水库””固驿沙坑”到底在哪里？活动范围覆盖了多大区域？ 本文完整记录两个功能的实现过程：鱼获数">
 <meta property="og:type" content="article">
@@ -541,19 +541,6 @@
   
 
 
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Hexo 博客实战：钓鱼相册数据统计与地图实现全记录",
-    "author": { "@type": "Person", "name": "淡水鱼" },
-    "datePublished": "2026-05-12T14:00:00.000Z",
-    "dateModified": "2026-05-13T02:42:21.222Z",
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.bytefisher.top/2026/05/12/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E9%92%93%E9%B1%BC%E7%9B%B8%E5%86%8C%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E5%85%A8%E8%AE%B0%E5%BD%95/" },
-    "publisher": { "@type": "Person", "name": "淡水鱼" }
-  }
-  </script>
   <div class="post-share">
     <span class="post-share-label">分享：</span>
     <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2026%2F05%2F12%2FHexo-%25E5%258D%259A%25E5%25AE%25A2%25E5%25AE%259E%25E6%2588%2598-%25E9%2592%2593%25E9%25B1%25BC%25E7%259B%25B8%25E5%2586%258C%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%259F%25E8%25AE%25A1%25E4%25B8%258E%25E5%259C%25B0%25E5%259B%25BE%25E5%25AE%259E%25E7%258E%25B0%25E5%2585%25A8%25E8%25AE%25B0%25E5%25BD%2595%2F&amp;title=Hexo%20%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98%EF%BC%9A%E9%92%93%E9%B1%BC%E7%9B%B8%E5%86%8C%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E5%85%A8%E8%AE%B0%E5%BD%95" target="_blank" rel="noopener" title="分享到微博">
@@ -563,7 +550,6 @@
       <i class="fa fa-link"></i>
     </a>
   </div>
-  
 
 
           </div>

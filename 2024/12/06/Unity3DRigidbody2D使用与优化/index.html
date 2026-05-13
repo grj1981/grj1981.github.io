@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="移动当gameobject被加上rigidbody2d组件时，如果想移动它，不要这样写： 1234void Update()&amp; 123; this.transform.Translate (Vector3.left speed Time.deltaTime);&amp; 125; 这种写法，主要针对无rigidbody2d的gameobject对象，否则，性能很差。正确的写法： 123456789void">
 <meta property="og:type" content="article">
@@ -42,7 +42,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Unity3DRigidbody2D使用与优化","description":"移动当gameobject被加上rigidbody2d组件时，如果想移动它，不要这样写： 1234void Update()& 123; this.transform.Translate (Vector3.left speed Time.deltaTime);& 125; 这种写法，主要针对无rigidbody2d的gameobject对象，否则，性能很差。正确的写法： 123456789void...","url":"https://www.bytefisher.top/2024/12/06/Unity3DRigidbody2D使用与优化/","datePublished":"2024-12-06T03:09:12.000Z","dateModified":"2026-05-09T06:18:25.844Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2024/12/06/Unity3DRigidbody2D使用与优化/"},"keywords":"Unity3D, IT, series:Unity3D基础"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Unity3DRigidbody2D使用与优化","description":"移动当gameobject被加上rigidbody2d组件时，如果想移动它，不要这样写： 1234void Update()& 123; this.transform.Translate (Vector3.left speed Time.deltaTime);& 125; 这种写法，主要针对无rigidbody2d的gameobject对象，否则，性能很差。正确的写法： 123456789void...","url":"https://www.bytefisher.top/2024/12/06/Unity3DRigidbody2D使用与优化/","datePublished":"2024-12-06T03:09:12.000Z","dateModified":"2026-05-09T06:18:25.844Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2024/12/06/Unity3DRigidbody2D使用与优化/"},"keywords":"IT, Unity3D, series:Unity3D基础"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Unity3D","item":"https://www.bytefisher.top/categories/Unity3D/"},{"@type":"ListItem","position":3,"name":"Unity3DRigidbody2D使用与优化"}]}</script>
 
 
@@ -358,8 +358,8 @@ Joint2D的约束效果;
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
               <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
               <a href="/tags/series-Unity3D%E5%9F%BA%E7%A1%80/" rel="tag"># series:Unity3D基础</a>
           </div>
 
@@ -385,19 +385,6 @@ Joint2D的约束效果;
   
 
 
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Unity3DRigidbody2D使用与优化",
-    "author": { "@type": "Person", "name": "淡水鱼" },
-    "datePublished": "2024-12-06T03:09:12.000Z",
-    "dateModified": "2026-05-09T06:18:25.844Z",
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.bytefisher.top/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/" },
-    "publisher": { "@type": "Person", "name": "淡水鱼" }
-  }
-  </script>
   <div class="post-share">
     <span class="post-share-label">分享：</span>
     <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2024%2F12%2F06%2FUnity3DRigidbody2D%25E4%25BD%25BF%25E7%2594%25A8%25E4%25B8%258E%25E4%25BC%2598%25E5%258C%2596%2F&amp;title=Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96" target="_blank" rel="noopener" title="分享到微博">
@@ -407,7 +394,6 @@ Joint2D的约束效果;
       <i class="fa fa-link"></i>
     </a>
   </div>
-  
 
 
           </div>

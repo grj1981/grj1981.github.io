@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="针对 Visual Studio 2022 用户，要打造一个高效率的“本地 AI 程序员”，关键在于选择一款能与 VS 2022 深度集成、且支持连接本地模型（如 Ollama）的插件。目前最高效的方案是使用 Visual Studio 的插件 Copilot (第三方开源版，非官方) 配合 Ollama。 以下是部署全流程： 方案架构 核心引擎: Ollama。负责在本地运行 DeepSeek.">
 <meta property="og:type" content="article">
@@ -43,8 +43,8 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-%E6%8F%92%E4%BB%B6-%E6%89%93%E9%80%A0%E9%AB%98%E6%95%88%E7%8E%87%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0-AI-%E7%A8%8B%E5%BA%8F%E5%91%98%E2%80%9D/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员”","description":"针对 Visual Studio 2022 用户，要打造一个高效率的“本地 AI 程序员”，关键在于选择一款能与 VS 2022 深度集成、且支持连接本地模型（如 Ollama）的插件。目前最高效的方案是使用 Visual Studio 的插件 Copilot (第三方开源版，非官方) 配合 Ollama。 以下是部署全流程： 方案架构 核心引擎: Ollama。负责在本地运行 DeepSeek...","url":"https://www.bytefisher.top/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-插件-打造高效率的“本地-AI-程序员”/","datePublished":"2026-03-10T15:31:44.000Z","dateModified":"2026-05-09T06:18:25.692Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-插件-打造高效率的“本地-AI-程序员”/"},"keywords":"Unity3D, IT, C#, series:AI编程助手"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Unity3D","item":"https://www.bytefisher.top/categories/Unity3D/"},{"@type":"ListItem","position":3,"name":"Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员”"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员”","description":"针对 Visual Studio 2022 用户，要打造一个高效率的“本地 AI 程序员”，关键在于选择一款能与 VS 2022 深度集成、且支持连接本地模型（如 Ollama）的插件。目前最高效的方案是使用 Visual Studio 的插件 Copilot (第三方开源版，非官方) 配合 Ollama。 以下是部署全流程： 方案架构 核心引擎: Ollama。负责在本地运行 DeepSeek...","url":"https://www.bytefisher.top/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-插件-打造高效率的“本地-AI-程序员”/","datePublished":"2026-03-10T15:31:44.000Z","dateModified":"2026-05-09T06:18:25.692Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-插件-打造高效率的“本地-AI-程序员”/"},"keywords":"C#, IT, Unity3D, series:AI编程助手"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"C#","item":"https://www.bytefisher.top/categories/C/"},{"@type":"ListItem","position":3,"name":"Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员”"}]}</script>
 
 
 <script id="page-configurations">
@@ -268,11 +268,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -392,9 +392,9 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
-              <a href="/tags/IT/" rel="tag"># IT</a>
               <a href="/tags/C/" rel="tag"># C#</a>
+              <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
               <a href="/tags/series-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/" rel="tag"># series:AI编程助手</a>
           </div>
 
@@ -420,19 +420,6 @@
   
 
 
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员”",
-    "author": { "@type": "Person", "name": "淡水鱼" },
-    "datePublished": "2026-03-10T15:31:44.000Z",
-    "dateModified": "2026-05-09T06:18:25.692Z",
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.bytefisher.top/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-%E6%8F%92%E4%BB%B6-%E6%89%93%E9%80%A0%E9%AB%98%E6%95%88%E7%8E%87%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0-AI-%E7%A8%8B%E5%BA%8F%E5%91%98%E2%80%9D/" },
-    "publisher": { "@type": "Person", "name": "淡水鱼" }
-  }
-  </script>
   <div class="post-share">
     <span class="post-share-label">分享：</span>
     <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2026%2F03%2F10%2FOllama-DeepSeek-Coder-V2-Visual-Studio-Copilot-%25E6%258F%2592%25E4%25BB%25B6-%25E6%2589%2593%25E9%2580%25A0%25E9%25AB%2598%25E6%2595%2588%25E7%258E%2587%25E7%259A%2584%25E2%2580%259C%25E6%259C%25AC%25E5%259C%25B0-AI-%25E7%25A8%258B%25E5%25BA%258F%25E5%2591%2598%25E2%2580%259D%2F&amp;title=Ollama%20%2B%20DeepSeek-Coder-V2%20%2B%20Visual%20Studio%20%2B%20Copilot(%E6%8F%92%E4%BB%B6)%E6%89%93%E9%80%A0%E9%AB%98%E6%95%88%E7%8E%87%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0%20AI%20%E7%A8%8B%E5%BA%8F%E5%91%98%E2%80%9D" target="_blank" rel="noopener" title="分享到微博">
@@ -442,7 +429,6 @@
       <i class="fa fa-link"></i>
     </a>
   </div>
-  
 
 
           </div>

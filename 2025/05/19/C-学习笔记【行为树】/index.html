@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策逻辑，每个节点代表一个行为或条件。下面是对Unity行为树的概要及用法的解释： 行为树概要节点类型 选择器（Selector）：会从上到下依次尝试子节点，直到有一个子节点成功执行。 序列器（Sequence）：会从上到下依次执行子节点，直到">
 <meta property="og:type" content="article">
@@ -43,8 +43,8 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/05/19/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%A1%8C%E4%B8%BA%E6%A0%91%E3%80%91/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C#学习笔记【行为树】","description":"行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策逻辑，每个节点代表一个行为或条件。下面是对Unity行为树的概要及用法的解释： 行为树概要节点类型 选择器（Selector）：会从上到下依次尝试子节点，直到有一个子节点成功执行。 序列器（Sequence）：会从上到下依次执行子节点，直到...","url":"https://www.bytefisher.top/2025/05/19/C-学习笔记【行为树】/","datePublished":"2025-05-19T08:18:34.000Z","dateModified":"2026-05-09T06:18:25.369Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/05/19/C-学习笔记【行为树】/"},"keywords":"Unity3D, IT, C#, series:C#学习笔记"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Unity3D","item":"https://www.bytefisher.top/categories/Unity3D/"},{"@type":"ListItem","position":3,"name":"C#学习笔记【行为树】"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C#学习笔记【行为树】","description":"行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策逻辑，每个节点代表一个行为或条件。下面是对Unity行为树的概要及用法的解释： 行为树概要节点类型 选择器（Selector）：会从上到下依次尝试子节点，直到有一个子节点成功执行。 序列器（Sequence）：会从上到下依次执行子节点，直到...","url":"https://www.bytefisher.top/2025/05/19/C-学习笔记【行为树】/","datePublished":"2025-05-19T08:18:34.000Z","dateModified":"2026-05-09T06:18:25.369Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/05/19/C-学习笔记【行为树】/"},"keywords":"C#, IT, series:C#学习笔记, Unity3D"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"C#","item":"https://www.bytefisher.top/categories/C/"},{"@type":"ListItem","position":3,"name":"C#学习笔记【行为树】"}]}</script>
 
 
 <script id="page-configurations">
@@ -268,11 +268,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -418,10 +418,10 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
-              <a href="/tags/IT/" rel="tag"># IT</a>
               <a href="/tags/C/" rel="tag"># C#</a>
+              <a href="/tags/IT/" rel="tag"># IT</a>
               <a href="/tags/series-C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># series:C#学习笔记</a>
+              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
           </div>
 
         
@@ -446,19 +446,6 @@
   
 
 
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "C#学习笔记【行为树】",
-    "author": { "@type": "Person", "name": "淡水鱼" },
-    "datePublished": "2025-05-19T08:18:34.000Z",
-    "dateModified": "2026-05-09T06:18:25.369Z",
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.bytefisher.top/2025/05/19/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%A1%8C%E4%B8%BA%E6%A0%91%E3%80%91/" },
-    "publisher": { "@type": "Person", "name": "淡水鱼" }
-  }
-  </script>
   <div class="post-share">
     <span class="post-share-label">分享：</span>
     <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2025%2F05%2F19%2FC-%25E5%25AD%25A6%25E4%25B9%25A0%25E7%25AC%2594%25E8%25AE%25B0%25E3%2580%2590%25E8%25A1%258C%25E4%25B8%25BA%25E6%25A0%2591%25E3%2580%2591%2F&amp;title=C%23%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%A1%8C%E4%B8%BA%E6%A0%91%E3%80%91" target="_blank" rel="noopener" title="分享到微博">
@@ -468,7 +455,6 @@
       <i class="fa fa-link"></i>
     </a>
   </div>
-  
 
 
           </div>

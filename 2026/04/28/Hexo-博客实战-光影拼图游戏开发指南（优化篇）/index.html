@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="前言继光影拼图游戏开发指南（功能篇）介绍功能实现后，本篇聚焦优化过程中解决的 7 个 P0 级集成问题 与运行 Bug。问题的根源在于：Phase 1&amp; x2F;Phase 2 的优化模块代码已完成，但未正确集成到游戏主流程中。 本文重点讲解： 模块集成问题：优化代码为何闲置，如何激活 集成修复：6 大模块重构 Bug 修复：融入具体集成章节中 问题发现：从文档到实战在对光影拼图项目进行代码审查时">
 <meta property="og:type" content="article">
@@ -683,19 +683,6 @@
   
 
 
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Hexo 博客实战：光影拼图游戏开发指南（优化篇）",
-    "author": { "@type": "Person", "name": "淡水鱼" },
-    "datePublished": "2026-04-28T13:00:00.000Z",
-    "dateModified": "2026-05-09T06:18:25.518Z",
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.bytefisher.top/2026/04/28/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97%EF%BC%88%E4%BC%98%E5%8C%96%E7%AF%87%EF%BC%89/" },
-    "publisher": { "@type": "Person", "name": "淡水鱼" }
-  }
-  </script>
   <div class="post-share">
     <span class="post-share-label">分享：</span>
     <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2026%2F04%2F28%2FHexo-%25E5%258D%259A%25E5%25AE%25A2%25E5%25AE%259E%25E6%2588%2598-%25E5%2585%2589%25E5%25BD%25B1%25E6%258B%25BC%25E5%259B%25BE%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E6%258C%2587%25E5%258D%2597%25EF%25BC%2588%25E4%25BC%2598%25E5%258C%2596%25E7%25AF%2587%25EF%25BC%2589%2F&amp;title=Hexo%20%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98%EF%BC%9A%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97%EF%BC%88%E4%BC%98%E5%8C%96%E7%AF%87%EF%BC%89" target="_blank" rel="noopener" title="分享到微博">
@@ -705,7 +692,6 @@
       <i class="fa fa-link"></i>
     </a>
   </div>
-  
 
 
           </div>
