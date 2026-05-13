@@ -198,6 +198,11 @@
     <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
 
   </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>rss</a>
+
+  </li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -386,6 +391,23 @@
       <i class="fa fa-link"></i>
     </a>
   </div>
+
+  
+  <div class="post-author-bio">
+    <div class="post-author-avatar">
+      <img src="/images/avatar.gif" alt="淡水鱼">
+    </div>
+    <div class="post-author-info">
+      <div class="post-author-name">淡水鱼</div>
+      <div class="post-author-desc">钓鱼爱好者 &amp; Unity 游戏开发者，分享编程技术与钓鱼经验。</div>
+      <div class="post-author-links">
+        <a href="https://github.com/grj1981" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="/atom.xml" title="RSS 订阅"><i class="fa fa-rss"></i></a>
+        <a href="mailto:271623821@qq.com" title="联系我"><i class="fa fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  
 
 
           </div>
@@ -720,8 +742,8 @@ window.addEventListener('pjax:success', () => {
           path: location.pathname,
           lang: 'zh-CN' || 'zh-CN',
           meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
-          requiredMeta: ["nick"] || ['nick'],
-          placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+          requiredMeta: ["nick","mail"] || ['nick'],
+          placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
           avatar: 'retro' || 'retro',
           pageSize: 10 || 10,
           imageUploader: false,
