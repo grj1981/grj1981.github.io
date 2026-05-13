@@ -1,22 +1,62 @@
-var CACHE_NAME = 'bytefisher-v1';
+var CACHE_NAME = 'bytefisher-v2';
 var urlsToCache = [
   '/',
   '/css/main.css',
-  '/js/main.js'
+  '/js/utils.js',
+  '/js/next-boot.js',
+  '/js/motion.js'
 ];
 
 self.addEventListener('install', function(event) {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
-      return cache.addAll(urlsToCache);
+      return cache.addAll(urlsToCache).catch(function() {});
+    })
+  );
+});
+
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+    caches.keys().then(function(keys) {
+      return Promise.all(
+        keys.filter(function(k) { return k !== CACHE_NAME; }).map(function(k) { return caches.delete(k); })
+      );
     })
   );
 });
 
 self.addEventListener('fetch', function(event) {
+  var req = event.request;
+
+  // Only handle GET requests
+  if (req.method !== 'GET') return;
+
+  // Network-first for HTML pages (fresh content)
+  if (req.headers.get('Accept') && req.headers.get('Accept').indexOf('text/html') !== -1) {
+    event.respondWith(
+      fetch(req).then(function(res) {
+        var copy = res.clone();
+        caches.open(CACHE_NAME).then(function(cache) { cache.put(req, copy); });
+        return res;
+      }).catch(function() {
+        return caches.match(req);
+      })
+    );
+    return;
+  }
+
+  // Cache-first for static assets
   event.respondWith(
-    caches.match(event.request).then(function(response) {
-      return response || fetch(event.request);
+    caches.match(req).then(function(cached) {
+      if (cached) return cached;
+      return fetch(req).then(function(res) {
+        var copy = res.clone();
+        caches.open(CACHE_NAME).then(function(cache) { cache.put(req, copy); });
+        return res;
+      });
+    }).catch(function() {
+      return fetch(req);
     })
   );
 });
