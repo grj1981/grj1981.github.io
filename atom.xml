@@ -11,7 +11,42 @@
   <rights>All rights reserved 2026, 淡水鱼</rights>
   <subtitle>钓鱼爱好者的编程世界</subtitle>
   <title>ByteFisher</title>
-  <updated>2026-05-09T10:33:24.126Z</updated>
+  <updated>2026-05-13T02:42:21.222Z</updated>
+  <entry>
+    <author>
+      <name>淡水鱼</name>
+    </author>
+    <category term="Hexo博客搭建" scheme="https://www.bytefisher.top/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    <category term="series:Hexo博客搭建" scheme="https://www.bytefisher.top/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
+    <category term="Next主题" scheme="https://www.bytefisher.top/tags/Next%E4%B8%BB%E9%A2%98/"/>
+    <category term="博客优化" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/"/>
+    <category term="SEO" scheme="https://www.bytefisher.top/tags/SEO/"/>
+    <category term="PWA" scheme="https://www.bytefisher.top/tags/PWA/"/>
+    <id>https://www.bytefisher.top/2026/05/12/Hexo-%E5%8D%9A%E5%AE%A2%E4%BA%8C%E6%AC%A1%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E4%BB%8E%E6%80%A7%E8%83%BD%E5%8E%8B%E7%BC%A9%E5%88%B0%E5%93%81%E7%89%8C%E6%89%93%E7%A3%A8%E5%85%A8%E8%AE%B0%E5%BD%95/</id>
+    <link href="https://www.bytefisher.top/2026/05/12/Hexo-%E5%8D%9A%E5%AE%A2%E4%BA%8C%E6%AC%A1%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E4%BB%8E%E6%80%A7%E8%83%BD%E5%8E%8B%E7%BC%A9%E5%88%B0%E5%93%81%E7%89%8C%E6%89%93%E7%A3%A8%E5%85%A8%E8%AE%B0%E5%BD%95/"/>
+    <published>2026-05-12T14:00:00.000Z</published>
+    <summary>前言ByteFisher 博客第一期优化（RSS 修复、AI 助手、评论迁移等）完成后，博客能正常跑了，但离”好用”还有距离。 梳理了一下发现几类问题： 配置层：Google Analytics 的 tracking ID 填的是 G XXXXXXXXXX——占位符，从未生效。About 页面还在说”评论系统：LeanCloud”——实际上早换了 Waline。 代码层：lightbox plus...</summary>
+    <title>Hexo 博客二次优化实战：从性能压缩到品牌打磨全记录</title>
+    <updated>2026-05-13T02:42:21.222Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>淡水鱼</name>
+    </author>
+    <category term="Hexo博客搭建" scheme="https://www.bytefisher.top/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    <category term="钓鱼" scheme="https://www.bytefisher.top/tags/%E9%92%93%E9%B1%BC/"/>
+    <category term="series:Hexo博客搭建" scheme="https://www.bytefisher.top/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
+    <category term="Next主题" scheme="https://www.bytefisher.top/tags/Next%E4%B8%BB%E9%A2%98/"/>
+    <category term="博客优化" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/"/>
+    <id>https://www.bytefisher.top/2026/05/12/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E9%92%93%E9%B1%BC%E7%9B%B8%E5%86%8C%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E5%85%A8%E8%AE%B0%E5%BD%95/</id>
+    <link href="https://www.bytefisher.top/2026/05/12/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E9%92%93%E9%B1%BC%E7%9B%B8%E5%86%8C%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E5%85%A8%E8%AE%B0%E5%BD%95/"/>
+    <published>2026-05-12T14:00:00.000Z</published>
+    <summary>前言ByteFisher 博客上线了两年，积累了 7 个钓鱼相册、500+ 张照片。但一直有个遗憾：相册只是按年份一字排开，缺少两个关键视角。 一是数据视角——5 年钓了多少鱼？哪个鱼种最多？哪年最高产？这些信息分散在上百个 HTML 页面里，读者无从感知。 二是空间视角——日记里提到的”花碑水库””三一水库””固驿沙坑”到底在哪里？活动范围覆盖了多大区域？ 本文完整记录两个功能的实现过程：鱼获数...</summary>
+    <title>Hexo 博客实战：钓鱼相册数据统计与地图实现全记录</title>
+    <updated>2026-05-13T02:42:21.222Z</updated>
+  </entry>
   <entry>
     <author>
       <name>淡水鱼</name>
@@ -323,41 +358,5 @@
     <summary>行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策逻辑，每个节点代表一个行为或条件。下面是对Unity行为树的概要及用法的解释： 行为树概要节点类型 选择器（Selector）：会从上到下依次尝试子节点，直到有一个子节点成功执行。 序列器（Sequence）：会从上到下依次执行子节点，直到...</summary>
     <title>C#学习笔记【行为树】</title>
     <updated>2026-05-09T06:18:25.369Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>淡水鱼</name>
-    </author>
-    <category term="Unity3D" scheme="https://www.bytefisher.top/categories/Unity3D/"/>
-    <category term="C#" scheme="https://www.bytefisher.top/categories/C/"/>
-    <category term="IT" scheme="https://www.bytefisher.top/categories/IT/"/>
-    <category term="Unity3D" scheme="https://www.bytefisher.top/tags/Unity3D/"/>
-    <category term="IT" scheme="https://www.bytefisher.top/tags/IT/"/>
-    <category term="C#" scheme="https://www.bytefisher.top/tags/C/"/>
-    <category term="series:C#学习笔记" scheme="https://www.bytefisher.top/tags/series-C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>https://www.bytefisher.top/2025/04/17/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%96%E6%B6%88%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E3%80%91/</id>
-    <link href="https://www.bytefisher.top/2025/04/17/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%96%E6%B6%88%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E3%80%91/"/>
-    <published>2025-04-17T06:17:54.000Z</published>
-    <summary>基本概念CancellationTokenSource 是一个类，用于创建一个取消令牌 (CancellationToken)，并通过该令牌来通知一个或多个异步操作取消请求。CancellationToken 是一个结构体，用于传递取消通知。 创建 CancellationTokenSource首先，你需要创建一个 CancellationTokenSource 对象。 1234567891011...</summary>
-    <title>C#学习笔记【取消异步操作】</title>
-    <updated>2026-05-09T06:18:25.306Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>淡水鱼</name>
-    </author>
-    <category term="C#" scheme="https://www.bytefisher.top/categories/C/"/>
-    <category term="IT" scheme="https://www.bytefisher.top/categories/IT/"/>
-    <category term="IT" scheme="https://www.bytefisher.top/tags/IT/"/>
-    <category term="C#" scheme="https://www.bytefisher.top/tags/C/"/>
-    <category term="series:C#学习笔记" scheme="https://www.bytefisher.top/tags/series-C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>https://www.bytefisher.top/2025/03/14/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90DOTween%E5%BA%93%E3%80%91/</id>
-    <link href="https://www.bytefisher.top/2025/03/14/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90DOTween%E5%BA%93%E3%80%91/"/>
-    <published>2025-03-14T08:52:24.000Z</published>
-    <summary>
-      <![CDATA[DOTween 库详细用法教程DOTween 是一个用于 Unity 的强大且灵活的动画库，它使用链式语法来创建和控制动画，使得代码更加简洁和易读。下面详细介绍 DOTween 的用法。 安装 DOTween你可以通过 Unity 的包管理器来安装 DOTween。步骤如下： 打开 Unity 的 Package Manager（可以通过 Window &gt; Package Manager 打...]]>
-    </summary>
-    <title>C#学习笔记【DOTween库】</title>
-    <updated>2026-05-09T06:18:25.278Z</updated>
   </entry>
 </feed>

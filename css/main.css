@@ -1313,7 +1313,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #3ca498;
+  background: #c718ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3531,6 +3531,57 @@ figure.highlight table {
   .fish-map-container {
     height: 360px;
   }
+}
+.pin-marker {
+  position: relative;
+  width: var(--d);
+  height: var(--h);
+  cursor: pointer;
+}
+.pin-marker .pin-head {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--d);
+  height: var(--d);
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--c1), var(--c2));
+  border: 3px solid #fff;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-sizing: border-box;
+}
+.pin-marker .pin-head::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  width: 35%;
+  height: 28%;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.45) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.pin-marker .pin-icon {
+  font-size: var(--fs);
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+}
+.pin-marker .pin-tail {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: var(--tw) solid transparent;
+  border-right: var(--tw) solid transparent;
+  border-top: var(--th) solid var(--c2);
+  z-index: 1;
 }
 .archive-summary {
   text-align: center;

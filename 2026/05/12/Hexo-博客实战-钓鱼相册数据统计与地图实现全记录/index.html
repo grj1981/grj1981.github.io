@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <link rel="preconnect" href="https://iili.io">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#37c6c0">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#37c6c0">
+
+<meta http-equiv="Permissions-Policy" content="encrypted-media=*">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+  <meta name="description" content="前言ByteFisher 博客上线了两年，积累了 7 个钓鱼相册、500+ 张照片。但一直有个遗憾：相册只是按年份一字排开，缺少两个关键视角。 一是数据视角——5 年钓了多少鱼？哪个鱼种最多？哪年最高产？这些信息分散在上百个 HTML 页面里，读者无从感知。 二是空间视角——日记里提到的”花碑水库””三一水库””固驿沙坑”到底在哪里？活动范围覆盖了多大区域？ 本文完整记录两个功能的实现过程：鱼获数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 博客实战：钓鱼相册数据统计与地图实现全记录">
+<meta property="og:url" content="https://www.bytefisher.top/2026/05/12/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E9%92%93%E9%B1%BC%E7%9B%B8%E5%86%8C%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E5%85%A8%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="前言ByteFisher 博客上线了两年，积累了 7 个钓鱼相册、500+ 张照片。但一直有个遗憾：相册只是按年份一字排开，缺少两个关键视角。 一是数据视角——5 年钓了多少鱼？哪个鱼种最多？哪年最高产？这些信息分散在上百个 HTML 页面里，读者无从感知。 二是空间视角——日记里提到的”花碑水库””三一水库””固驿沙坑”到底在哪里？活动范围覆盖了多大区域？ 本文完整记录两个功能的实现过程：鱼获数">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-05-12T14:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-13T02:42:21.222Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Next主题">
+<meta property="article:tag" content="series:Hexo博客搭建">
+<meta property="article:tag" content="博客优化">
+<meta property="article:tag" content="钓鱼">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.bytefisher.top/2026/05/12/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E9%92%93%E9%B1%BC%E7%9B%B8%E5%86%8C%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E5%85%A8%E8%AE%B0%E5%BD%95/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo 博客实战：钓鱼相册数据统计与地图实现全记录","description":"前言ByteFisher 博客上线了两年，积累了 7 个钓鱼相册、500+ 张照片。但一直有个遗憾：相册只是按年份一字排开，缺少两个关键视角。 一是数据视角——5 年钓了多少鱼？哪个鱼种最多？哪年最高产？这些信息分散在上百个 HTML 页面里，读者无从感知。 二是空间视角——日记里提到的”花碑水库””三一水库””固驿沙坑”到底在哪里？活动范围覆盖了多大区域？ 本文完整记录两个功能的实现过程：鱼获数...","url":"https://www.bytefisher.top/2026/05/12/Hexo-博客实战-钓鱼相册数据统计与地图实现全记录/","datePublished":"2026-05-12T14:00:00.000Z","dateModified":"2026-05-13T02:42:21.222Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/05/12/Hexo-博客实战-钓鱼相册数据统计与地图实现全记录/"},"keywords":"钓鱼, series:Hexo博客搭建, Hexo, Next主题, 博客优化"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Hexo博客搭建","item":"https://www.bytefisher.top/categories/Hexo博客搭建/"},{"@type":"ListItem","position":3,"name":"Hexo 博客实战：钓鱼相册数据统计与地图实现全记录"}]}</script>
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Hexo 博客实战：钓鱼相册数据统计与地图实现全记录 | ByteFisher</title>
+  
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dc50e0997d43c3a8dbf2afdb3fdff233";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#37c6c0">
+<link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-aigames">
+
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">46</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">98</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/05/12/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E9%92%93%E9%B1%BC%E7%9B%B8%E5%86%8C%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E5%85%A8%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo 博客实战：钓鱼相册数据统计与地图实现全记录
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-05-12 22:00:00" itemprop="dateCreated datePublished" datetime="2026-05-12T22:00:00+08:00">2026-05-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">Hexo博客搭建</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2026/05/12/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E9%92%93%E9%B1%BC%E7%9B%B8%E5%86%8C%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E5%85%A8%E8%AE%B0%E5%BD%95/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2026/05/12/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E9%92%93%E9%B1%BC%E7%9B%B8%E5%86%8C%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E5%85%A8%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">前言ByteFisher 博客上线了两年，积累了 7 个钓鱼相册、500+ 张照片。但一直有个遗憾：相册只是按年份一字排开，缺少两个关键视角。 一是数据视角——5 年钓了多少鱼？哪个鱼种最多？哪年最高产？这些信息分散在上百个 HTML 页面里，读者无从感知。 二是空间视角——日记里提到的”花碑水库””三一水库””固驿沙坑”到底在哪里？活动范围覆盖了多大区域？ 本文完整记录两个功能的实现过程：鱼获数...</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>ByteFisher 博客上线了两年，积累了 7 个钓鱼相册、500+ 张照片。但一直有个遗憾：<strong>相册只是按年份一字排开，缺少两个关键视角</strong>。</p>
+<p>一是<strong>数据视角</strong>——5 年钓了多少鱼？哪个鱼种最多？哪年最高产？这些信息分散在上百个 HTML 页面里，读者无从感知。</p>
+<p>二是<strong>空间视角</strong>——日记里提到的”花碑水库””三一水库””固驿沙坑”到底在哪里？活动范围覆盖了多大区域？</p>
+<p>本文完整记录两个功能的实现过程：鱼获数据 Dashboard 和钓鱼地图。这不是一篇”纯教程”，而是踩坑实录——包括坐标偏移、CDN 被墙、API 改版等你在官方文档里查不到的坑。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="一、整体架构"><a href="#一、整体架构" class="headerlink" title="一、整体架构"></a>一、整体架构</h2><p>两个功能虽然同属”钓鱼特色模块”，但技术路线完全不同：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">┌──────────────────────────────────────────────────────────┐</span><br><span class="line">│ 构建时 (hexo g)                 │ 运行时 (浏览器)         │</span><br><span class="line">│                                │                        │</span><br><span class="line">│  fish-dashboard-data.js        │  fish-dashboard.js      │</span><br><span class="line">│  └─ 扫描 img*/index.md         │  └─ fetch data.json     │</span><br><span class="line">│  └─ 匹配 data-lightbox 计数     │  └─ Chart.js 渲染        │</span><br><span class="line">│  └─ 输出 data.json              │                        │</span><br><span class="line">│                                │                        │</span><br><span class="line">│  spots.json (手工维护)          │  fish-map.js            │</span><br><span class="line">│  └─ 13个钓点的坐标/鱼种/描述     │  └─ 动态加载高德 JS API  │</span><br><span class="line">│                                │  └─ CircleMarker 渲染    │</span><br><span class="line">└──────────────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<p>Dashboard 走”构建时计算 → 输出静态 JSON”的路线，地图走”运行时动态渲染”的路线，选择依据很简单：</p>
+<ul>
+<li>Dashboard 的数据变化频率低（加一张照片才需要更新），构建时算好最省性能</li>
+<li>地图是交互式组件，必须运行时渲染</li>
+</ul>
+<hr>
+<h2 id="二、鱼获数据-Dashboard"><a href="#二、鱼获数据-Dashboard" class="headerlink" title="二、鱼获数据 Dashboard"></a>二、鱼获数据 Dashboard</h2><h3 id="2-1-数据自动采集"><a href="#2-1-数据自动采集" class="headerlink" title="2.1 数据自动采集"></a>2.1 数据自动采集</h3><p>初期想过用手工维护 <code>data.json</code>，但在相册里加了 3 次照片、改了 3 次数据后，我放弃了——这不该是人干的事。</p>
+<p>思路转变：<strong>相册本身已经包含了数据</strong>。每个相册页面用 <code>data-lightbox</code> 属性标记照片，我只需要在构建时数一下出现次数就好。</p>
+<p>写了一个 Hexo Generator：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// scripts/generators/fish-dashboard-data.js</span></span><br><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line">hexo.<span class="property">extend</span>.<span class="property">generator</span>.<span class="title function_">register</span>(<span class="string">&#x27;fish-dashboard-data&#x27;</span>, <span class="keyword">function</span>(<span class="params">locals</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> fishSourceDir = path.<span class="title function_">join</span>(hexo.<span class="property">source_dir</span>, <span class="string">&#x27;fish&#x27;</span>);</span><br><span class="line">  <span class="keyword">var</span> config = hexo.<span class="property">config</span>.<span class="property">fish_dashboard</span> || &#123;&#125;;</span><br><span class="line">  <span class="keyword">var</span> entries = fs.<span class="title function_">readdirSync</span>(fishSourceDir, &#123; <span class="attr">withFileTypes</span>: <span class="literal">true</span> &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> yearlyData = [];</span><br><span class="line">  <span class="keyword">var</span> totalPhotos = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  entries.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">entry</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!entry.<span class="title function_">isDirectory</span>()) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (!entry.<span class="property">name</span>.<span class="title function_">match</span>(<span class="regexp">/^img/</span>)) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> indexPath = path.<span class="title function_">join</span>(fishSourceDir, entry.<span class="property">name</span>, <span class="string">&#x27;index.md&#x27;</span>);</span><br><span class="line">    <span class="keyword">var</span> content = fs.<span class="title function_">readFileSync</span>(indexPath, <span class="string">&#x27;utf-8&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> fishMatches = content.<span class="title function_">match</span>(<span class="regexp">/data-lightbox=&quot;fishPhotos&quot;/g</span>);</span><br><span class="line">    <span class="keyword">var</span> siteMatches = content.<span class="title function_">match</span>(<span class="regexp">/data-lightbox=&quot;anglingSite&quot;/g</span>);</span><br><span class="line">    <span class="keyword">var</span> count = (fishMatches ? fishMatches.<span class="property">length</span> : <span class="number">0</span>)</span><br><span class="line">              + (siteMatches ? siteMatches.<span class="property">length</span> : <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    totalPhotos += count;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> yearMatch = entry.<span class="property">name</span>.<span class="title function_">match</span>(<span class="regexp">/^img(\d&#123;4&#125;)$/</span>);</span><br><span class="line">    <span class="keyword">if</span> (yearMatch) &#123;</span><br><span class="line">      yearlyData.<span class="title function_">push</span>(&#123;</span><br><span class="line">        <span class="attr">year</span>: <span class="built_in">parseInt</span>(yearMatch[<span class="number">1</span>], <span class="number">10</span>),</span><br><span class="line">        <span class="attr">count</span>: count</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  yearlyData.<span class="title function_">sort</span>(<span class="keyword">function</span>(<span class="params">a, b</span>) &#123; <span class="keyword">return</span> a.<span class="property">year</span> - b.<span class="property">year</span>; &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> data = &#123;</span><br><span class="line">    <span class="attr">totalPhotos</span>: totalPhotos,</span><br><span class="line">    <span class="attr">totalYears</span>: yearlyData.<span class="property">length</span>,</span><br><span class="line">    <span class="attr">yearlyData</span>: yearlyData,</span><br><span class="line">    <span class="attr">speciesStats</span>: config.<span class="property">speciesStats</span> || &#123;&#125;,</span><br><span class="line">    <span class="attr">topMonths</span>: config.<span class="property">topMonths</span> || [],</span><br><span class="line">    <span class="attr">bestSpots</span>: config.<span class="property">bestSpots</span> || []</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;fish/dashboard/data.json&#x27;</span>,</span><br><span class="line">    <span class="attr">data</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(data, <span class="literal">null</span>, <span class="number">2</span>),</span><br><span class="line">    <span class="attr">layout</span>: <span class="literal">false</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Generator 负责自动化部分（照片数量、年份统计），鱼种分布和最佳钓点这类无法从文件名推断的数据，放在 <code>_config.yml</code> 中配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">fish_dashboard:</span></span><br><span class="line">  <span class="attr">speciesStats:</span></span><br><span class="line">    <span class="string">红尾鲴:</span> <span class="number">220</span></span><br><span class="line">    <span class="string">鲫鱼:</span> <span class="number">180</span></span><br><span class="line">    <span class="string">鲤鱼:</span> <span class="number">95</span></span><br><span class="line">    <span class="string">草鱼:</span> <span class="number">72</span></span><br><span class="line">    <span class="string">鳊鱼:</span> <span class="number">1</span></span><br><span class="line">    <span class="string">青鱼:</span> <span class="number">0</span></span><br><span class="line">    <span class="string">其他:</span> <span class="number">133</span></span><br><span class="line">  <span class="attr">topMonths:</span> [<span class="string">&quot;五月&quot;</span>, <span class="string">&quot;十月&quot;</span>, <span class="string">&quot;四月&quot;</span>, <span class="string">&quot;三月&quot;</span>]</span><br><span class="line">  <span class="attr">bestSpots:</span> [<span class="string">&quot;花碑水库&quot;</span>, <span class="string">&quot;野河&quot;</span>, <span class="string">&quot;三一水库&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>生成的数据结构：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;totalPhotos&quot;</span><span class="punctuation">:</span> <span class="number">546</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;totalYears&quot;</span><span class="punctuation">:</span> <span class="number">5</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;yearlyData&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span> <span class="attr">&quot;year&quot;</span><span class="punctuation">:</span> <span class="number">2022</span><span class="punctuation">,</span> <span class="attr">&quot;count&quot;</span><span class="punctuation">:</span> <span class="number">95</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span> <span class="attr">&quot;year&quot;</span><span class="punctuation">:</span> <span class="number">2023</span><span class="punctuation">,</span> <span class="attr">&quot;count&quot;</span><span class="punctuation">:</span> <span class="number">120</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span> <span class="attr">&quot;year&quot;</span><span class="punctuation">:</span> <span class="number">2024</span><span class="punctuation">,</span> <span class="attr">&quot;count&quot;</span><span class="punctuation">:</span> <span class="number">58</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span> <span class="attr">&quot;year&quot;</span><span class="punctuation">:</span> <span class="number">2025</span><span class="punctuation">,</span> <span class="attr">&quot;count&quot;</span><span class="punctuation">:</span> <span class="number">65</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span> <span class="attr">&quot;year&quot;</span><span class="punctuation">:</span> <span class="number">2026</span><span class="punctuation">,</span> <span class="attr">&quot;count&quot;</span><span class="punctuation">:</span> <span class="number">73</span> <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;speciesStats&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;红尾鲴&quot;</span><span class="punctuation">:</span> <span class="number">220</span><span class="punctuation">,</span> <span class="attr">&quot;鲫鱼&quot;</span><span class="punctuation">:</span> <span class="number">180</span><span class="punctuation">,</span> <span class="attr">&quot;鲤鱼&quot;</span><span class="punctuation">:</span> <span class="number">95</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;草鱼&quot;</span><span class="punctuation">:</span> <span class="number">72</span><span class="punctuation">,</span> <span class="attr">&quot;鳊鱼&quot;</span><span class="punctuation">:</span> <span class="number">1</span><span class="punctuation">,</span> <span class="attr">&quot;青鱼&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span> <span class="attr">&quot;其他&quot;</span><span class="punctuation">:</span> <span class="number">133</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-Chart-js-可视化"><a href="#2-2-Chart-js-可视化" class="headerlink" title="2.2 Chart.js 可视化"></a>2.2 Chart.js 可视化</h3><p>页面结构很简单：4 张统计卡片 + 2 个 Chart.js 画布。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- source/fish/dashboard/index.md --&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;fish-dashboard&quot;</span>&gt;</span></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span></span>🎣 鱼获数据统计<span class="language-xml"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;dash-stats-grid&quot;</span> <span class="attr">id</span>=<span class="string">&quot;dash-stats&quot;</span>&gt;</span></span></span><br><span class="line"><span class="code">    &lt;div class=&quot;dash-stat-card&quot;&gt;</span></span><br><span class="line"><span class="code">      &lt;span class=&quot;dash-stat-value&quot; id=&quot;total-photos&quot;&gt;-&lt;/span&gt;</span></span><br><span class="line"><span class="code">      &lt;span class=&quot;dash-stat-label&quot;&gt;总照片数&lt;/span&gt;</span></span><br><span class="line"><span class="code">    &lt;/div&gt;</span></span><br><span class="line"><span class="code">    &lt;div class=&quot;dash-stat-card&quot;&gt;</span></span><br><span class="line"><span class="code">      &lt;span class=&quot;dash-stat-value&quot; id=&quot;total-years&quot;&gt;-&lt;/span&gt;</span></span><br><span class="line"><span class="code">      &lt;span class=&quot;dash-stat-label&quot;&gt;钓鱼年数&lt;/span&gt;</span></span><br><span class="line"><span class="code">    &lt;/div&gt;</span></span><br><span class="line"><span class="code">    &lt;div class=&quot;dash-stat-card&quot;&gt;</span></span><br><span class="line"><span class="code">      &lt;span class=&quot;dash-stat-value&quot; id=&quot;avg-yearly&quot;&gt;-&lt;/span&gt;</span></span><br><span class="line"><span class="code">      &lt;span class=&quot;dash-stat-label&quot;&gt;年均鱼获&lt;/span&gt;</span></span><br><span class="line"><span class="code">    &lt;/div&gt;</span></span><br><span class="line"><span class="code">    &lt;div class=&quot;dash-stat-card&quot;&gt;</span></span><br><span class="line"><span class="code">      &lt;span class=&quot;dash-stat-value&quot; id=&quot;best-year&quot;&gt;-&lt;/span&gt;</span></span><br><span class="line"><span class="code">      &lt;span class=&quot;dash-stat-label&quot;&gt;最高产年份&lt;/span&gt;</span></span><br><span class="line"><span class="code">    &lt;/div&gt;</span></span><br><span class="line"><span class="code">  &lt;/div&gt;</span></span><br><span class="line"><span class="code"></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;dash-chart-wrap&quot;</span>&gt;</span></span></span><br><span class="line"><span class="code">    &lt;canvas id=&quot;yearlyChart&quot;&gt;&lt;/canvas&gt;</span></span><br><span class="line"><span class="code">  &lt;/div&gt;</span></span><br><span class="line"><span class="code">  &lt;div class=&quot;dash-chart-wrap&quot;&gt;</span></span><br><span class="line"><span class="code">    &lt;canvas id=&quot;speciesChart&quot;&gt;&lt;/canvas&gt;</span></span><br><span class="line"><span class="code">  &lt;/div&gt;</span></span><br><span class="line"><span class="code">&lt;/div&gt;</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/chart.js&quot;</span> <span class="attr">data-pjax</span>&gt;</span></span><span class="language-xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/fish-dashboard.js&quot;</span> <span class="attr">data-pjax</span>&gt;</span></span><span class="language-xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>JS 部分比较直接——fetch JSON → 填充卡片 → 渲染两个图表。唯一需要注意的就是 <strong>PJAX 兼容</strong>：给 <code>&lt;script&gt;</code> 加上 <code>data-pjax</code> 属性，确保 PJAX 导航后脚本能重新执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// source/js/fish-dashboard.js（核心摘要）</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">init</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="title function_">fetch</span>(<span class="string">&#x27;/fish/dashboard/data.json&#x27;</span>)</span><br><span class="line">    .<span class="title function_">then</span>(<span class="keyword">function</span>(<span class="params">r</span>) &#123; <span class="keyword">return</span> r.<span class="title function_">json</span>(); &#125;)</span><br><span class="line">    .<span class="title function_">then</span>(<span class="keyword">function</span>(<span class="params">data</span>) &#123;</span><br><span class="line">      <span class="title function_">renderStats</span>(data);</span><br><span class="line">      <span class="title function_">renderYearlyChart</span>(data);</span><br><span class="line">      <span class="title function_">renderSpeciesChart</span>(data);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">renderYearlyChart</span>(<span class="params">data</span>) &#123;</span><br><span class="line">  <span class="keyword">new</span> <span class="title class_">Chart</span>(<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;yearlyChart&#x27;</span>), &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;bar&#x27;</span>,</span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">      <span class="attr">labels</span>: data.<span class="property">yearlyData</span>.<span class="title function_">map</span>(<span class="keyword">function</span>(<span class="params">d</span>) &#123; <span class="keyword">return</span> d.<span class="property">year</span>; &#125;),</span><br><span class="line">      <span class="attr">datasets</span>: [&#123;</span><br><span class="line">        <span class="attr">label</span>: <span class="string">&#x27;鱼获照片数&#x27;</span>,</span><br><span class="line">        <span class="attr">data</span>: data.<span class="property">yearlyData</span>.<span class="title function_">map</span>(<span class="keyword">function</span>(<span class="params">d</span>) &#123; <span class="keyword">return</span> d.<span class="property">count</span>; &#125;),</span><br><span class="line">        <span class="attr">backgroundColor</span>: <span class="string">&#x27;rgba(55, 198, 192, 0.6)&#x27;</span>,</span><br><span class="line">        <span class="attr">borderColor</span>: <span class="string">&#x27;#37c6c0&#x27;</span>,</span><br><span class="line">        <span class="attr">borderWidth</span>: <span class="number">2</span>,</span><br><span class="line">        <span class="attr">borderRadius</span>: <span class="number">6</span></span><br><span class="line">      &#125;]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">options</span>: &#123;</span><br><span class="line">      <span class="attr">responsive</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">plugins</span>: &#123;</span><br><span class="line">        <span class="attr">title</span>: &#123; <span class="attr">display</span>: <span class="literal">true</span>, <span class="attr">text</span>: <span class="string">&#x27;历年鱼获数量趋势&#x27;</span>, <span class="attr">font</span>: &#123; <span class="attr">size</span>: <span class="number">16</span> &#125; &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-踩坑小结"><a href="#2-3-踩坑小结" class="headerlink" title="2.3 踩坑小结"></a>2.3 踩坑小结</h3><table>
+<thead>
+<tr>
+<th>坑</th>
+<th>原因</th>
+<th>解决</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Chart.js CDN 加载后但数据未 fetch 完</td>
+<td>网络竞争条件</td>
+<td>用 <code>DOMContentLoaded</code> 确保 DOM 就绪</td>
+</tr>
+<tr>
+<td>PJAX 切换页面后图表消失</td>
+<td>脚本未重新执行</td>
+<td><code>data-pjax</code> 属性</td>
+</tr>
+<tr>
+<td><code>data-lightbox</code> 计数不准</td>
+<td>风景照和鱼获照使用不同属性</td>
+<td>两种属性分别统计后求和</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="三、钓鱼地图-1-0：Leaflet-OpenStreetMap"><a href="#三、钓鱼地图-1-0：Leaflet-OpenStreetMap" class="headerlink" title="三、钓鱼地图 1.0：Leaflet + OpenStreetMap"></a>三、钓鱼地图 1.0：Leaflet + OpenStreetMap</h2><h3 id="3-1-初始方案"><a href="#3-1-初始方案" class="headerlink" title="3.1 初始方案"></a>3.1 初始方案</h3><p>选用 Leaflet.js 的理由很充分：6KB（压缩后）、零依赖、API 清爽。配上 OpenStreetMap 的免费瓦片，代码量极小：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// v1 初始实现</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">init</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> map = L.<span class="title function_">map</span>(<span class="string">&#x27;fish-map&#x27;</span>).<span class="title function_">setView</span>([<span class="number">30.6</span>, <span class="number">103.5</span>], <span class="number">11</span>);</span><br><span class="line"></span><br><span class="line">  L.<span class="title function_">tileLayer</span>(<span class="string">&#x27;https://&#123;s&#125;.tile.openstreetmap.org/&#123;z&#125;/&#123;x&#125;/&#123;y&#125;.png&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">attribution</span>: <span class="string">&#x27;&amp;copy; OpenStreetMap&#x27;</span>,</span><br><span class="line">    <span class="attr">maxZoom</span>: <span class="number">18</span></span><br><span class="line">  &#125;).<span class="title function_">addTo</span>(map);</span><br><span class="line"></span><br><span class="line">  <span class="title function_">fetch</span>(<span class="string">&#x27;/fish/map/spots.json&#x27;</span>)</span><br><span class="line">    .<span class="title function_">then</span>(<span class="keyword">function</span>(<span class="params">r</span>) &#123; <span class="keyword">return</span> r.<span class="title function_">json</span>(); &#125;)</span><br><span class="line">    .<span class="title function_">then</span>(<span class="keyword">function</span>(<span class="params">data</span>) &#123;</span><br><span class="line">      data.<span class="property">spots</span>.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">spot</span>) &#123;</span><br><span class="line">        L.<span class="title function_">circleMarker</span>([spot.<span class="property">lat</span>, spot.<span class="property">lng</span>], &#123;</span><br><span class="line">          <span class="attr">radius</span>: <span class="title class_">Math</span>.<span class="title function_">min</span>(<span class="number">8</span> + spot.<span class="property">photos</span> * <span class="number">0.4</span>, <span class="number">24</span>),</span><br><span class="line">          <span class="attr">color</span>: <span class="string">&#x27;#37c6c0&#x27;</span>,</span><br><span class="line">          <span class="attr">fillColor</span>: <span class="string">&#x27;#37c6c0&#x27;</span>,</span><br><span class="line">          <span class="attr">fillOpacity</span>: <span class="number">0.6</span>,</span><br><span class="line">          <span class="attr">weight</span>: <span class="number">2</span></span><br><span class="line">        &#125;).<span class="title function_">addTo</span>(map).<span class="title function_">bindPopup</span>(</span><br><span class="line">          <span class="string">&#x27;&lt;b&gt;&#x27;</span> + spot.<span class="property">name</span> + <span class="string">&#x27;&lt;/b&gt;&lt;br&gt;&#x27;</span> +</span><br><span class="line">          <span class="string">&#x27;📸 &#x27;</span> + spot.<span class="property">photos</span> + <span class="string">&#x27; 张照片&lt;br&gt;&#x27;</span> +</span><br><span class="line">          <span class="string">&#x27;🎣 &#x27;</span> + spot.<span class="property">species</span>.<span class="title function_">join</span>(<span class="string">&#x27;、&#x27;</span>)</span><br><span class="line">        );</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>十几个小时的代码量，看起来一切正常。</p>
+<h3 id="3-2-坐标偏移——GCJ-02-vs-WGS-84"><a href="#3-2-坐标偏移——GCJ-02-vs-WGS-84" class="headerlink" title="3.2 坐标偏移——GCJ-02 vs WGS-84"></a>3.2 坐标偏移——GCJ-02 vs WGS-84</h3><p>第一次在地图上看到标记位置时，所有钓点都偏了大约 500 米。这是因为国内手机 GPS 记录的是 <strong>GCJ-02（火星坐标系）</strong>，而全球通用的 OSM 用的是 <strong>WGS-84</strong>。这两种坐标系之间有个非线性偏移——Google 和高德都是”境外用 WGS-84，境内用 GCJ-02，坐标互转需要对偏移算法逆向求解”。</p>
+<p>于是写了 35 行坐标转换代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// GCJ-02 → WGS-84 坐标转换</span></span><br><span class="line"><span class="keyword">var</span> <span class="variable constant_">PI</span> = <span class="title class_">Math</span>.<span class="property">PI</span>;</span><br><span class="line"><span class="keyword">var</span> A = <span class="number">6378245.0</span>;</span><br><span class="line"><span class="keyword">var</span> <span class="variable constant_">EE</span> = <span class="number">0.00669342162296594323</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">transformLat</span>(<span class="params">x, y</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> ret = -<span class="number">100.0</span> + <span class="number">2.0</span> * x + <span class="number">3.0</span> * y + <span class="number">0.2</span> * y * y</span><br><span class="line">          + <span class="number">0.1</span> * x * y + <span class="number">0.2</span> * <span class="title class_">Math</span>.<span class="title function_">sqrt</span>(<span class="title class_">Math</span>.<span class="title function_">abs</span>(x));</span><br><span class="line">  ret += (<span class="number">20.0</span> * <span class="title class_">Math</span>.<span class="title function_">sin</span>(<span class="number">6.0</span> * x * <span class="variable constant_">PI</span>) + <span class="number">20.0</span> * <span class="title class_">Math</span>.<span class="title function_">sin</span>(<span class="number">2.0</span> * x * <span class="variable constant_">PI</span>)) * <span class="number">2.0</span> / <span class="number">3.0</span>;</span><br><span class="line">  ret += (<span class="number">20.0</span> * <span class="title class_">Math</span>.<span class="title function_">sin</span>(y * <span class="variable constant_">PI</span>) + <span class="number">40.0</span> * <span class="title class_">Math</span>.<span class="title function_">sin</span>(y / <span class="number">3.0</span> * <span class="variable constant_">PI</span>)) * <span class="number">2.0</span> / <span class="number">3.0</span>;</span><br><span class="line">  ret += (<span class="number">160.0</span> * <span class="title class_">Math</span>.<span class="title function_">sin</span>(y / <span class="number">12.0</span> * <span class="variable constant_">PI</span>) + <span class="number">320.0</span> * <span class="title class_">Math</span>.<span class="title function_">sin</span>(y * <span class="variable constant_">PI</span> / <span class="number">30.0</span>)) * <span class="number">2.0</span> / <span class="number">3.0</span>;</span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">transformLng</span>(<span class="params">x, y</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> ret = <span class="number">300.0</span> + x + <span class="number">2.0</span> * y + <span class="number">0.1</span> * x * x</span><br><span class="line">          + <span class="number">0.1</span> * x * y + <span class="number">0.1</span> * <span class="title class_">Math</span>.<span class="title function_">sqrt</span>(<span class="title class_">Math</span>.<span class="title function_">abs</span>(x));</span><br><span class="line">  ret += (<span class="number">20.0</span> * <span class="title class_">Math</span>.<span class="title function_">sin</span>(<span class="number">6.0</span> * x * <span class="variable constant_">PI</span>) + <span class="number">20.0</span> * <span class="title class_">Math</span>.<span class="title function_">sin</span>(<span class="number">2.0</span> * x * <span class="variable constant_">PI</span>)) * <span class="number">2.0</span> / <span class="number">3.0</span>;</span><br><span class="line">  ret += (<span class="number">20.0</span> * <span class="title class_">Math</span>.<span class="title function_">sin</span>(x * <span class="variable constant_">PI</span>) + <span class="number">40.0</span> * <span class="title class_">Math</span>.<span class="title function_">sin</span>(x / <span class="number">3.0</span> * <span class="variable constant_">PI</span>)) * <span class="number">2.0</span> / <span class="number">3.0</span>;</span><br><span class="line">  ret += (<span class="number">150.0</span> * <span class="title class_">Math</span>.<span class="title function_">sin</span>(x / <span class="number">12.0</span> * <span class="variable constant_">PI</span>) + <span class="number">300.0</span> * <span class="title class_">Math</span>.<span class="title function_">sin</span>(x / <span class="number">30.0</span> * <span class="variable constant_">PI</span>)) * <span class="number">2.0</span> / <span class="number">3.0</span>;</span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">gcj02ToWgs84</span>(<span class="params">lat, lng</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> dLat = <span class="title function_">transformLat</span>(lng - <span class="number">105.0</span>, lat - <span class="number">35.0</span>);</span><br><span class="line">  <span class="keyword">var</span> dLng = <span class="title function_">transformLng</span>(lng - <span class="number">105.0</span>, lat - <span class="number">35.0</span>);</span><br><span class="line">  <span class="keyword">var</span> radLat = lat / <span class="number">180.0</span> * <span class="variable constant_">PI</span>;</span><br><span class="line">  <span class="keyword">var</span> magic = <span class="title class_">Math</span>.<span class="title function_">sin</span>(radLat);</span><br><span class="line">  magic = <span class="number">1</span> - <span class="variable constant_">EE</span> * magic * magic;</span><br><span class="line">  <span class="keyword">var</span> sqrtMagic = <span class="title class_">Math</span>.<span class="title function_">sqrt</span>(magic);</span><br><span class="line">  dLat = (dLat * <span class="number">180.0</span>) / ((A * (<span class="number">1</span> - <span class="variable constant_">EE</span>)) / (magic * sqrtMagic) * <span class="variable constant_">PI</span>);</span><br><span class="line">  dLng = (dLng * <span class="number">180.0</span>) / (A / sqrtMagic * <span class="title class_">Math</span>.<span class="title function_">cos</span>(radLat) * <span class="variable constant_">PI</span>);</span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">lat</span>: lat - dLat, <span class="attr">lng</span>: lng - dLng &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码的本质是对高德开源的 GCJ-02 加密算法做逆向逼近——先用多项式拟合出偏移量，再从原始坐标中减去这个偏移量。参数 A 和 EE 直接取自克拉索夫斯基椭球体。不是 100% 精确（GCJ-02 到 WGS-84 的转换本身就是个病态问题，没有精确解析解），但对于展示钓点位置来说，误差在 10 米以内，完全可以接受。</p>
+<h3 id="3-3-数据准备"><a href="#3-3-数据准备" class="headerlink" title="3.3 数据准备"></a>3.3 数据准备</h3><p>13 个钓点，覆盖四川成都周边的水库、河流、沙坑和溪流：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;spots&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;三一水库&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;水库&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;lat&quot;</span><span class="punctuation">:</span> <span class="number">30.34</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;lng&quot;</span><span class="punctuation">:</span> <span class="number">103.49</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;year&quot;</span><span class="punctuation">:</span> <span class="number">2026</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;photos&quot;</span><span class="punctuation">:</span> <span class="number">230</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;species&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;红尾鲴&quot;</span><span class="punctuation">,</span> <span class="string">&quot;鲫鱼&quot;</span><span class="punctuation">,</span> <span class="string">&quot;鲤鱼&quot;</span><span class="punctuation">,</span> <span class="string">&quot;草鱼&quot;</span><span class="punctuation">,</span> <span class="string">&quot;鲈鱼&quot;</span><span class="punctuation">,</span> <span class="string">&quot;其它&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;desc&quot;</span><span class="punctuation">:</span> <span class="string">&quot;主力钓点，多次爆护，小红尾鲴多&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;古镇小河钓点1&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;河流&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;lat&quot;</span><span class="punctuation">:</span> <span class="number">30.2989</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;lng&quot;</span><span class="punctuation">:</span> <span class="number">103.5116</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;year&quot;</span><span class="punctuation">:</span> <span class="number">2022</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;photos&quot;</span><span class="punctuation">:</span> <span class="number">27</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;species&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;鲫鱼&quot;</span><span class="punctuation">,</span> <span class="string">&quot;鲤鱼&quot;</span><span class="punctuation">,</span> <span class="string">&quot;白条&quot;</span><span class="punctuation">,</span> <span class="string">&quot;老虎鱼&quot;</span><span class="punctuation">,</span> <span class="string">&quot;其它&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;desc&quot;</span><span class="punctuation">:</span> <span class="string">&quot;古镇小河，水面水葫芦多&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;通江鲢鱼牵&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;溪流&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;lat&quot;</span><span class="punctuation">:</span> <span class="number">31.9187</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;lng&quot;</span><span class="punctuation">:</span> <span class="number">107.3374</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;year&quot;</span><span class="punctuation">:</span> <span class="number">2023</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;photos&quot;</span><span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;species&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;鲫鱼&quot;</span><span class="punctuation">,</span> <span class="string">&quot;马口&quot;</span><span class="punctuation">,</span> <span class="string">&quot;白条&quot;</span><span class="punctuation">,</span> <span class="string">&quot;溪石斑&quot;</span><span class="punctuation">,</span> <span class="string">&quot;金麦线&quot;</span><span class="punctuation">,</span> <span class="string">&quot;其它&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;desc&quot;</span><span class="punctuation">:</span> <span class="string">&quot;山区溪流钓溪石斑&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>照片数最多的钓点（三一水库，230 张）自动成为地图默认中心，气泡半径按 <code>8 + photos * 0.4</code> 线性映射，上限 24px。</p>
+<h3 id="3-4-坑：坐标顺序搞反了"><a href="#3-4-坑：坐标顺序搞反了" class="headerlink" title="3.4 坑：坐标顺序搞反了"></a>3.4 坑：坐标顺序搞反了</h3><p>本地开发环境测试时，有一半的标记点跑到了非洲西海岸。查了半天发现 Leaflet 的 <code>L.circleMarker</code> 接收的是 <code>[lat, lng]</code>，而我脑子里一直以为是 <code>[lng, lat]</code>。在 <code>spots.json</code> 里写的是 <code>{ lat: 30.34, lng: 103.49 }</code>，传参时拆成 <code>[30.34, 103.49]</code> 才对——但我写的却是 <code>[spot.lng, spot.lat]</code>。</p>
+<p>修了两次才彻底记住：<strong>Leaflet &#x3D; [纬度, 经度]；Mapbox&#x2F;高德 &#x3D; [经度, 纬度]</strong>。</p>
+<hr>
+<h2 id="四、钓鱼地图-2-0：迁移到高德-JS-API"><a href="#四、钓鱼地图-2-0：迁移到高德-JS-API" class="headerlink" title="四、钓鱼地图 2.0：迁移到高德 JS API"></a>四、钓鱼地图 2.0：迁移到高德 JS API</h2><h3 id="4-1-国内加载不了"><a href="#4-1-国内加载不了" class="headerlink" title="4.1 国内加载不了"></a>4.1 国内加载不了</h3><p>Lealet 版部署上线后，在浏览器看到的是一片空白加”地图加载失败”。打开 F12 → Console，问题一目了然：</p>
+<ul>
+<li><code>unpkg.com/leaflet@1.9.4/dist/leaflet.js</code> —— <strong>请求被阻断</strong></li>
+<li><code>tile.openstreetmap.org/...png</code> —— <strong>瓦片服务器不可用</strong></li>
+</ul>
+<p>两个资源都依赖境外 CDN，在国内不开代理就无法加载。</p>
+<h3 id="4-2-换高德-JS-API"><a href="#4-2-换高德-JS-API" class="headerlink" title="4.2 换高德 JS API"></a>4.2 换高德 JS API</h3><p>快速评估了三个方案：</p>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>操作量</th>
+<th>坐标处理</th>
+<th>国内访问</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Leaflet + 国内 CDN + 天地图</td>
+<td>中</td>
+<td>需保留 GCJ-02→WGS-84</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>高德 JS API</strong></td>
+<td><strong>小</strong></td>
+<td><strong>原生支持 GCJ-02，删除转换代码</strong></td>
+<td><strong>✅</strong></td>
+</tr>
+<tr>
+<td>百度地图</td>
+<td>大</td>
+<td>需转换到 BD-09</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<p>选了高德，因为可以直接删掉那 35 行坐标纠偏代码——<code>spots.json</code> 里的 GCJ-02 坐标原封不动传进去。</p>
+<h3 id="4-3-动态加载脚本"><a href="#4-3-动态加载脚本" class="headerlink" title="4.3 动态加载脚本"></a>4.3 动态加载脚本</h3><p>NexT 启用了 PJAX（无刷新页面切换），如果直接把高德 SDK 写在 <code>&lt;script&gt;</code> 标签里，PJAX 导航后不会自动重新初始化。解决策略：<strong>把 SDK 加载逻辑封装在 fish-map.js 内部，第一次加载后设置缓存标志</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">loadAmap</span>(<span class="params">callback</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="title class_">AMap</span> !== <span class="string">&#x27;undefined&#x27;</span>) &#123;</span><br><span class="line">    <span class="title function_">callback</span>();  <span class="comment">// 已加载过，直接回调</span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="property">_AMapSecurityConfig</span> = &#123;</span><br><span class="line">    <span class="attr">securityJsCode</span>: <span class="string">&#x27;xxx&#x27;</span>  <span class="comment">// 高德安全密钥</span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">var</span> script = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">  script.<span class="property">src</span> = <span class="string">&#x27;https://webapi.amap.com/maps?v=2.0&amp;key=xxx&#x27;</span>;</span><br><span class="line">  script.<span class="property">onload</span> = callback;</span><br><span class="line">  script.<span class="property">onerror</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;fish-map&#x27;</span>).<span class="property">innerHTML</span> =</span><br><span class="line">      <span class="string">&#x27;&lt;p&gt;地图加载失败 🐟&lt;/p&gt;&#x27;</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">head</span>.<span class="title function_">appendChild</span>(script);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">start</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> el = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;fish-map&#x27;</span>);</span><br><span class="line">  <span class="keyword">if</span> (!el) <span class="keyword">return</span>;</span><br><span class="line">  <span class="title function_">loadAmap</span>(init);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;DOMContentLoaded&#x27;</span>, start);</span><br></pre></td></tr></table></figure>
+
+<p>页面上的 HTML 也从两行（Leaflet CSS + JS）精简到一行：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">- &lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/leaflet@1.9.4/dist/leaflet.css&quot; /&gt;</span></span><br><span class="line"><span class="deletion">- &lt;script src=&quot;https://unpkg.com/leaflet@1.9.4/dist/leaflet.js&quot; data-pjax&gt;&lt;/script&gt;</span></span><br><span class="line">&lt;script src=&quot;/js/fish-map.js&quot; data-pjax&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-4-踩坑：TypeError-Cannot-read-properties-of-undefined（reading-‘addListener’）"><a href="#4-4-踩坑：TypeError-Cannot-read-properties-of-undefined（reading-‘addListener’）" class="headerlink" title="4.4 踩坑：TypeError: Cannot read properties of undefined（reading ‘addListener’）"></a>4.4 踩坑：TypeError: Cannot read properties of undefined（reading ‘addListener’）</h3><p>这是整个开发过程中卡得最久的一个 Bug。</p>
+<p>迁移完代码后页面仍然一片空白。F12 Console 看到：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fish-map.js:84 [FishMap] 错误: TypeError: Cannot read properties of undefined (reading &#x27;addListener&#x27;)</span><br><span class="line">    at fish-map.js:78:22</span><br><span class="line">    at Array.forEach (&lt;anonymous&gt;)</span><br><span class="line">    at fish-map.js:51:20</span><br></pre></td></tr></table></figure>
+
+<p>定位到第 78 行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">AMap</span>.<span class="property">event</span>.<span class="title function_">addListener</span>(marker, <span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  info.<span class="title function_">open</span>(map, marker.<span class="title function_">getCenter</span>());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>高德 JS API <strong>v2.0 移除了 <code>AMap.event</code> 命名空间</strong>。所有事件方法直接挂载在对象实例上：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">- AMap.event.addListener(marker, &#x27;click&#x27;, function() &#123;</span></span><br><span class="line"><span class="addition">+ marker.on(&#x27;click&#x27;, function() &#123;</span></span><br><span class="line">    info.open(map, marker.getCenter());</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>改完这一行就正常了。在官方文档里翻了几十分钟没找到关于 <code>AMap.event</code> 的废弃说明——它在 v1.4 的文档里还存在，但 v2.0 的参考手册直接没有这个命名空间了。</p>
+<h3 id="4-5-安全密钥与-localhost-白名单"><a href="#4-5-安全密钥与-localhost-白名单" class="headerlink" title="4.5 安全密钥与 localhost 白名单"></a>4.5 安全密钥与 localhost 白名单</h3><p>高德开放平台在 2021 年 12 月之后申请的 API Key 要求同时配置 <strong>securityJsCode（安全密钥）</strong>。配置方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">_AMapSecurityConfig</span> = &#123;</span><br><span class="line">  <span class="attr">securityJsCode</span>: <span class="string">&#x27;8210555...&#x27;</span>  <span class="comment">// 你的安全密钥</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这段配置必须在加载 SDK 之前设置，所以动态加载方案天然满足这个顺序要求。</p>
+<p>然后本地测试又卡住了：高德的安全域名配置不支持 <code>localhost</code> 和 <code>127.0.0.1</code>，加了会提示”不符合规范的域名”。解决方案是走 <strong>安全密钥验证</strong> 而非域名白名单验证——只要正确设置了 <code>securityJsCode</code>，SDK 就不会检查域名。</p>
+<h3 id="4-6-最终版本"><a href="#4-6-最终版本" class="headerlink" title="4.6 最终版本"></a>4.6 最终版本</h3><p>迁移完的 <code>fish-map.js</code> 从 105 行精简到 97 行（去掉了坐标转换代码）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// source/js/fish-map.js（最终版本）</span></span><br><span class="line">(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> typeColors = &#123;</span><br><span class="line">    <span class="string">&#x27;水库&#x27;</span>: <span class="string">&#x27;#37c6c0&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;河流&#x27;</span>: <span class="string">&#x27;#6bcb77&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;沙坑&#x27;</span>: <span class="string">&#x27;#f0a050&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;溪流&#x27;</span>: <span class="string">&#x27;#4d96ff&#x27;</span></span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">loadAmap</span>(<span class="params">callback</span>) &#123; <span class="comment">/* ... 动态加载逻辑 ... */</span> &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">init</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> map = <span class="keyword">new</span> <span class="title class_">AMap</span>.<span class="title class_">Map</span>(<span class="string">&#x27;fish-map&#x27;</span>, &#123; <span class="attr">zoom</span>: <span class="number">12</span>, <span class="attr">resizeEnable</span>: <span class="literal">true</span> &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="title function_">fetch</span>(<span class="string">&#x27;/fish/map/spots.json&#x27;</span>)</span><br><span class="line">      .<span class="title function_">then</span>(<span class="keyword">function</span>(<span class="params">r</span>) &#123; <span class="keyword">return</span> r.<span class="title function_">json</span>(); &#125;)</span><br><span class="line">      .<span class="title function_">then</span>(<span class="keyword">function</span>(<span class="params">data</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> topSpot = data.<span class="property">spots</span>.<span class="title function_">reduce</span>(<span class="keyword">function</span>(<span class="params">a, b</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> a.<span class="property">photos</span> &gt; b.<span class="property">photos</span> ? a : b;</span><br><span class="line">        &#125;);</span><br><span class="line">        map.<span class="title function_">setCenter</span>([topSpot.<span class="property">lng</span>, topSpot.<span class="property">lat</span>]);</span><br><span class="line"></span><br><span class="line">        data.<span class="property">spots</span>.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">spot</span>) &#123;</span><br><span class="line">          <span class="keyword">var</span> radius = <span class="title class_">Math</span>.<span class="title function_">min</span>(<span class="number">8</span> + spot.<span class="property">photos</span> * <span class="number">0.4</span>, <span class="number">24</span>);</span><br><span class="line">          <span class="keyword">var</span> color = typeColors[spot.<span class="property">type</span>] || <span class="string">&#x27;#c9c9c9&#x27;</span>;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">var</span> marker = <span class="keyword">new</span> <span class="title class_">AMap</span>.<span class="title class_">CircleMarker</span>(&#123;</span><br><span class="line">            <span class="attr">center</span>: [spot.<span class="property">lng</span>, spot.<span class="property">lat</span>],</span><br><span class="line">            <span class="attr">radius</span>: radius,</span><br><span class="line">            <span class="attr">fillColor</span>: color,</span><br><span class="line">            <span class="attr">fillOpacity</span>: <span class="number">0.6</span>,</span><br><span class="line">            <span class="attr">strokeColor</span>: <span class="string">&#x27;#fff&#x27;</span>,</span><br><span class="line">            <span class="attr">strokeWeight</span>: <span class="number">2</span></span><br><span class="line">          &#125;);</span><br><span class="line">          marker.<span class="title function_">setMap</span>(map);</span><br><span class="line"></span><br><span class="line">          <span class="keyword">var</span> info = <span class="keyword">new</span> <span class="title class_">AMap</span>.<span class="title class_">InfoWindow</span>(&#123;</span><br><span class="line">            <span class="attr">content</span>: <span class="title function_">buildPopupContent</span>(spot),</span><br><span class="line">            <span class="attr">offset</span>: <span class="keyword">new</span> <span class="title class_">AMap</span>.<span class="title class_">Pixel</span>(<span class="number">0</span>, -<span class="number">20</span>)</span><br><span class="line">          &#125;);</span><br><span class="line"></span><br><span class="line">          marker.<span class="title function_">on</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            info.<span class="title function_">open</span>(map, marker.<span class="title function_">getCenter</span>());</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 自动定位到照片数最多的钓点 → 地图中心</span></span><br><span class="line">  <span class="comment">// 气泡颜色按类型区分</span></span><br><span class="line">  <span class="comment">// 点击气泡弹出信息窗体</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>最终效果：</p>
+<ul>
+<li>✅ <strong>国内用户不需要代理</strong>，高德 SDK 和瓦片都走国内 CDN</li>
+<li>✅ <strong>PJAX 兼容</strong>，动态加载方案适配无刷新导航</li>
+<li>✅ <strong>坐标零转换</strong>，GCJ-02 直出高德地图</li>
+<li>✅ <strong>自备降级</strong>，SDK 加载失败或数据 fetch 失败都有友好提示</li>
+</ul>
+<hr>
+<h2 id="五、数据流对比"><a href="#五、数据流对比" class="headerlink" title="五、数据流对比"></a>五、数据流对比</h2><p>两个功能的数据流完全不同：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Dashboard（构建时计算）：</span><br><span class="line">  hexo g</span><br><span class="line">    → fish-dashboard-data.js（Generator）</span><br><span class="line">    → 扫描 source/fish/img*/index.md</span><br><span class="line">    → 正则匹配 data-lightbox 属性</span><br><span class="line">    → 输出 public/fish/dashboard/data.json</span><br><span class="line">  hexo s（浏览器）</span><br><span class="line">    → fish-dashboard.js fetch data.json</span><br><span class="line">    → Chart.js 渲染柱状图 + 环形图</span><br><span class="line">    → 4 张统计卡片填充数值</span><br><span class="line"></span><br><span class="line">地图（运行时渲染）：</span><br><span class="line">  手工维护 source/fish/map/spots.json</span><br><span class="line">  hexo g 直接复制到 public/fish/map/spots.json</span><br><span class="line">  hexo s（浏览器）</span><br><span class="line">    → fish-map.js 动态加载高德 SDK</span><br><span class="line">    → fetch spots.json</span><br><span class="line">    → AMap.CircleMarker 逐个渲染</span><br><span class="line">    → AMap.InfoWindow 绑定点击事件</span><br></pre></td></tr></table></figure>
+
+<p>核心区别：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Dashboard</th>
+<th>钓鱼地图</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据源</td>
+<td>自动扫描相册文件</td>
+<td>手工维护 JSON</td>
+</tr>
+<tr>
+<td>构建阶段</td>
+<td>Generator 做数据聚合</td>
+<td>纯静态文件拷贝</td>
+</tr>
+<tr>
+<td>渲染时机</td>
+<td>构建时完成 → 运行时只展示</td>
+<td>完全运行时渲染</td>
+</tr>
+<tr>
+<td>更新方式</td>
+<td>加照片后 <code>hexo g</code> 自动更新</td>
+<td>新增钓点需手动改 spots.json</td>
+</tr>
+<tr>
+<td>外部依赖</td>
+<td>Chart.js（CDN）</td>
+<td>高德 JS API（动态加载）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="六、总结与后续"><a href="#六、总结与后续" class="headerlink" title="六、总结与后续"></a>六、总结与后续</h2><p>两个功能上线后，钓鱼相册从”一个只陈列照片的页面”变成了<strong>数据展示 + 空间叙事</strong>的组合体验：</p>
+<ul>
+<li>点开 Dashboard，一眼看到 5 年钓了 546 张照片、鱼种分布饼图、历年趋势柱状图</li>
+<li>点开钓鱼地图，13 个钓点在卫星图上按类型着色排列，照片越多气泡越大</li>
+</ul>
+<p>从技术角度看，没有太复杂的东西——就是几个 Hexo Generator + 两个图表 + 一个地图 SDK。但坑确实踩了不少，尤其是坐标转换和地图迁移。</p>
+<p>后续还有一些可以优化的地方：</p>
+<ol>
+<li><strong>图床迁移</strong> —— 当前所有图片托管在 iili.io 免费图床，有挂服风险，后续考虑迁移到 OSS 或 Cloudflare R2</li>
+<li><strong>Dashboard 与 spots.json 联动</strong> —— 现在 Spot 数据需要手工维护，理想状态是 Generator 自动从相册中提取钓点位置</li>
+<li><strong>地图点聚合</strong> —— 成都周边的钓点集中在邛崃区域，缩小时气泡重叠严重，可以加 <code>AMap.MarkerCluster</code> 做聚合</li>
+</ol>
+<blockquote>
+<p>📊 查看 <a href="/fish/dashboard/">鱼获数据统计</a><br>🗺️ 查看 <a href="/fish/map/">钓鱼地图</a></p>
+</blockquote>
+<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2026/05/12/Hexo-博客二次优化实战-从性能压缩到品牌打磨全记录/" class="related-post-item" title="Hexo 博客二次优化实战：从性能压缩到品牌打磨全记录"><span class="related-post-title">Hexo 博客二次优化实战：从性能压缩到品牌打磨全记录</span><span class="related-post-date">2026-05-12</span><span class="related-post-desc">前言 ByteFisher 博客第一期优化（RSS 修复、AI 助手、评论迁移等）完成后，博客能正常跑了，但离"好用"还有距离。 梳理了一下发现几类问题： 配置</span></a><a href="/2026/05/09/Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板/" class="related-post-item" title="Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板"><span class="related-post-title">Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">前言 ByteFisher 博客已发布 95+ 篇文章，一个痛点越来越明显： 静态博客缺少即时互动能力 。 读者经常遇到的问题场景： "有没有 Unity 相关</span></a><a href="/2026/05/09/Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构/" class="related-post-item" title="Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构"><span class="related-post-title">Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">前言 上一篇《Hexo 博客三项基础修复》解决了 RSS、Sitemap、评论系统的高优先级硬性问题，博客具备了稳固的基础设施。但 Lighthouse 审查还</span></a><a href="/2026/05/09/Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移/" class="related-post-item" title="Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移"><span class="related-post-title">Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">前言 ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近</span></a><a href="/2026/04/29/Hexo博客集成抖音视频实战指南（续）-弹窗播放体验优化/" class="related-post-item" title="Hexo博客集成抖音视频实战指南（续）- 弹窗播放体验优化"><span class="related-post-title">Hexo博客集成抖音视频实战指南（续）- 弹窗播放体验优化</span><span class="related-post-date">2026-04-29</span><span class="related-post-desc">前言 在上一篇文章《Hexo博客集成抖音视频实战指南》中，我们详细介绍了如何在Hexo博客中集成抖音视频相册功能，包括数据层设计、页面模板、弹窗播放等核心实现。</span></a><a href="/2026/04/03/Hexo博客集成抖音视频实战指南/" class="related-post-item" title="Hexo博客集成抖音视频实战指南"><span class="related-post-title">Hexo博客集成抖音视频实战指南</span><span class="related-post-date">2026-04-03</span><span class="related-post-desc">前言 作为一名钓鱼爱好者，我在抖音分享了许多钓鱼视频。为了让博客访问者能够直观地浏览我的抖音作品，决定在Hexo博客中集成抖音视频相册功能。 本文将详细介绍整个</span></a></div></div><div class="series-nav"><div class="series-nav-title">Hexo博客搭建 系列</div><div class="series-nav-progress">第 8/8 篇</div><div class="series-nav-links"><a href="/2026/05/12/Hexo-博客二次优化实战-从性能压缩到品牌打磨全记录/" class="series-nav-prev">Hexo 博客二次优化实战：从性能压缩到品牌打磨全记录</a></div></div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%92%93%E9%B1%BC/" rel="tag"># 钓鱼</a>
+              <a href="/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag"># series:Hexo博客搭建</a>
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/Next%E4%B8%BB%E9%A2%98/" rel="tag"># Next主题</a>
+              <a href="/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/" rel="tag"># 博客优化</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%20AI%20%E9%97%AE%E7%AD%94%E5%8A%A9%E6%89%8B%EF%BC%9ADeepSeek%20API%20+%20Vercel%20Serverless%20+%20%E6%82%AC%E6%B5%AE%E7%90%83%E8%81%8A%E5%A4%A9%E9%9D%A2%E6%9D%BF/" rel="prev" title="Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板">
+      <i class="fa fa-chevron-left"></i> Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/05/12/Hexo-%E5%8D%9A%E5%AE%A2%E4%BA%8C%E6%AC%A1%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E4%BB%8E%E6%80%A7%E8%83%BD%E5%8E%8B%E7%BC%A9%E5%88%B0%E5%93%81%E7%89%8C%E6%89%93%E7%A3%A8%E5%85%A8%E8%AE%B0%E5%BD%95/" rel="next" title="Hexo 博客二次优化实战：从性能压缩到品牌打磨全记录">
+      Hexo 博客二次优化实战：从性能压缩到品牌打磨全记录 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Hexo 博客实战：钓鱼相册数据统计与地图实现全记录",
+    "author": { "@type": "Person", "name": "淡水鱼" },
+    "datePublished": "2026-05-12T14:00:00.000Z",
+    "dateModified": "2026-05-13T02:42:21.222Z",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.bytefisher.top/2026/05/12/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E9%92%93%E9%B1%BC%E7%9B%B8%E5%86%8C%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E5%85%A8%E8%AE%B0%E5%BD%95/" },
+    "publisher": { "@type": "Person", "name": "淡水鱼" }
+  }
+  </script>
+  <div class="post-share">
+    <span class="post-share-label">分享：</span>
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2026%2F05%2F12%2FHexo-%25E5%258D%259A%25E5%25AE%25A2%25E5%25AE%259E%25E6%2588%2598-%25E9%2592%2593%25E9%25B1%25BC%25E7%259B%25B8%25E5%2586%258C%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%259F%25E8%25AE%25A1%25E4%25B8%258E%25E5%259C%25B0%25E5%259B%25BE%25E5%25AE%259E%25E7%258E%25B0%25E5%2585%25A8%25E8%25AE%25B0%25E5%25BD%2595%2F&amp;title=Hexo%20%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98%EF%BC%9A%E9%92%93%E9%B1%BC%E7%9B%B8%E5%86%8C%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E5%85%A8%E8%AE%B0%E5%BD%95" target="_blank" rel="noopener" title="分享到微博">
+      <i class="fab fa-weibo"></i>
+    </a>
+    <a href="#" onclick="navigator.clipboard.writeText(location.href);var t=this;t.innerHTML='<i class=fa fa-check></i>';setTimeout(function(){t.innerHTML='<i class=fa fa-link></i>'},1500);return false" title="复制链接">
+      <i class="fa fa-link"></i>
+    </a>
+  </div>
+  
+
+
+          </div>
+          
+    <div class="comments" id="waline-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">一、整体架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%B1%BC%E8%8E%B7%E6%95%B0%E6%8D%AE-Dashboard"><span class="nav-number">3.</span> <span class="nav-text">二、鱼获数据 Dashboard</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%95%B0%E6%8D%AE%E8%87%AA%E5%8A%A8%E9%87%87%E9%9B%86"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 数据自动采集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Chart-js-%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Chart.js 可视化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E8%B8%A9%E5%9D%91%E5%B0%8F%E7%BB%93"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 踩坑小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E9%92%93%E9%B1%BC%E5%9C%B0%E5%9B%BE-1-0%EF%BC%9ALeaflet-OpenStreetMap"><span class="nav-number">4.</span> <span class="nav-text">三、钓鱼地图 1.0：Leaflet + OpenStreetMap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%88%9D%E5%A7%8B%E6%96%B9%E6%A1%88"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 初始方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%9D%90%E6%A0%87%E5%81%8F%E7%A7%BB%E2%80%94%E2%80%94GCJ-02-vs-WGS-84"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 坐标偏移——GCJ-02 vs WGS-84</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 数据准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E5%9D%91%EF%BC%9A%E5%9D%90%E6%A0%87%E9%A1%BA%E5%BA%8F%E6%90%9E%E5%8F%8D%E4%BA%86"><span class="nav-number">4.4.</span> <span class="nav-text">3.4 坑：坐标顺序搞反了</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%92%93%E9%B1%BC%E5%9C%B0%E5%9B%BE-2-0%EF%BC%9A%E8%BF%81%E7%A7%BB%E5%88%B0%E9%AB%98%E5%BE%B7-JS-API"><span class="nav-number">5.</span> <span class="nav-text">四、钓鱼地图 2.0：迁移到高德 JS API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%9B%BD%E5%86%85%E5%8A%A0%E8%BD%BD%E4%B8%8D%E4%BA%86"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 国内加载不了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E6%8D%A2%E9%AB%98%E5%BE%B7-JS-API"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 换高德 JS API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E8%84%9A%E6%9C%AC"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 动态加载脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E8%B8%A9%E5%9D%91%EF%BC%9ATypeError-Cannot-read-properties-of-undefined%EF%BC%88reading-%E2%80%98addListener%E2%80%99%EF%BC%89"><span class="nav-number">5.4.</span> <span class="nav-text">4.4 踩坑：TypeError: Cannot read properties of undefined（reading ‘addListener’）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-%E5%AE%89%E5%85%A8%E5%AF%86%E9%92%A5%E4%B8%8E-localhost-%E7%99%BD%E5%90%8D%E5%8D%95"><span class="nav-number">5.5.</span> <span class="nav-text">4.5 安全密钥与 localhost 白名单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-%E6%9C%80%E7%BB%88%E7%89%88%E6%9C%AC"><span class="nav-number">5.6.</span> <span class="nav-text">4.6 最终版本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%AF%B9%E6%AF%94"><span class="nav-number">6.</span> <span class="nav-text">五、数据流对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E6%80%BB%E7%BB%93%E4%B8%8E%E5%90%8E%E7%BB%AD"><span class="nav-number">7.</span> <span class="nav-text">六、总结与后续</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe id="music-player" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2023 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
+<script>
+(function() {
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+
+  function updateCounts() {
+    var countEls = document.querySelectorAll('.waline-visitor-count');
+    if (!countEls.length) return;
+    countEls.forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var url = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(json) {
+          if (json && json.data && json.data[0] && json.data[0].time != null) {
+            el.innerText = json.data[0].time;
+          }
+        });
+    });
+  }
+
+  var el = document.querySelector('#waline-comments');
+  if (el) {
+    updateCounts();
+    NexT.utils.loadComments(el, function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
+        Waline.init({
+          el: '#waline-comments',
+          serverURL: 'https://waline.bytefisher.top/',
+          path: location.pathname,
+          lang: 'zh-CN' || 'zh-CN',
+          meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
+          requiredMeta: ["nick"] || ['nick'],
+          placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+          avatar: 'retro' || 'retro',
+          pageSize: 10 || 10,
+          imageUploader: false,
+          comment: true,
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo'],
+          highlight: true
+        });
+        var pathEl = document.querySelector('.waline-visitor-count');
+        var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
+        fetch(baseURL + '/api/article', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: postPath })
+        }).finally(function() {
+          updateCounts();
+        });
+      }, window.Waline);
+    });
+  } else {
+    updateCounts();
+  }
+})();
+</script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
+
+<style>
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  scrollbar-gutter: stable;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.modal::-webkit-scrollbar {
+  display: none !important;
+}
+
+.modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.modal-content {
+  position: relative;
+  width: min(71%, 340px);
+  max-width: calc((100vh - 100px) * 9 / 17.5);
+  height: auto;
+  aspect-ratio: 9 / 17.5;
+  max-height: calc(100vh - 100px);
+  margin: 0 auto;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: min(81%, 320px);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: min(94%, 300px);
+    max-width: calc((100vh - 80px) * 9 / 17.5);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+    max-height: calc(100vh - 80px);
+  }
+}
+
+.modal-content iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  border: none;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  left: auto;
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 10000;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+}
+
+.close-btn:hover {
+  color: #e74c3c;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  background: rgba(0,0,0,0.1);
+  border-radius: 50%;
+  line-height: 50px;
+  user-select: none;
+}
+
+.nav-btn:hover {
+  background: rgba(0,0,0,0.2);
+}
+
+.prev-btn {
+  left: 0;
+}
+
+.next-btn {
+  right: 15px;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: calc(100% - 60px);
+    max-width: calc((100vh - 100px) * 9 / 17.5);
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    line-height: 40px;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var musicIframe = null;
+  var musicDisplayStyle = '';
+  var isMusicPaused = false;
+  var videoIds = [];
+  var currentIndex = 0;
+  
+  function findMusicIframe() {
+    var iframes = document.getElementsByTagName('iframe');
+    for (var i = 0; i < iframes.length; i++) {
+      var src = iframes[i].src || '';
+      if (src.indexOf('music.163.com') > -1 || src.indexOf('outchain/player') > -1) {
+        return iframes[i];
+      }
+    }
+    console.log('[Douyin] Music iframe not found in', iframes.length, 'iframes');
+    return null;
+  }
+  
+  function pauseMusic() {
+    console.log('[Douyin] Trying to pause music...');
+    musicIframe = findMusicIframe();
+    
+    if (musicIframe) {
+      console.log('[Douyin] Music iframe found');
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=1') > -1) {
+        musicIframe.src = src.replace('auto=1', 'auto=0');
+        console.log('[Douyin] Changed auto=1 to auto=0');
+      }
+      isMusicPaused = true;
+    } else {
+      console.log('[Douyin] Music iframe NOT found!');
+    }
+  }
+  
+  function resumeMusic() {
+    console.log('[Douyin] Trying to resume music...');
+    
+    if (musicIframe && isMusicPaused) {
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=0') > -1) {
+        musicIframe.src = src.replace('auto=0', 'auto=1');
+        console.log('[Douyin] Changed auto=0 to auto=1');
+      }
+      isMusicPaused = false;
+    }
+  }
+  
+  function init() {
+    console.log('[Douyin] Initializing...');
+    var cards = document.querySelectorAll('.video-card');
+    console.log('[Douyin] Found', cards.length, 'video cards');
+    
+    videoIds = [];
+    for (var j = 0; j < cards.length; j++) {
+      var videoId = cards[j].getAttribute('data-id');
+      if (videoId) {
+        videoIds.push(videoId);
+      }
+      cards[j].addEventListener('click', openModal);
+    }
+    
+    var closeBtn = document.querySelector('.close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+    
+    var prevBtn = document.querySelector('.prev-btn');
+    var nextBtn = document.querySelector('.next-btn');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(-1);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(1);
+      });
+    }
+    
+    var modal = document.getElementById('douyin-modal');
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+    }
+  }
+  
+  function navigateVideo(direction) {
+    if (videoIds.length === 0) return;
+    
+    currentIndex += direction;
+    if (currentIndex < 0) {
+      currentIndex = videoIds.length - 1;
+    } else if (currentIndex >= videoIds.length) {
+      currentIndex = 0;
+    }
+    
+    var videoId = videoIds[currentIndex];
+    var player = document.getElementById('douyin-player');
+    if (player && videoId) {
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+    }
+  }
+  
+  function openModal(e) {
+    console.log('[Douyin] Opening modal...');
+    var card = e.currentTarget;
+    var videoId = card.getAttribute('data-id');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    currentIndex = videoIds.indexOf(videoId);
+    
+    if (player && modal && videoId) {
+      pauseMusic();
+      
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.marginRight = '0px';
+    }
+  }
+  
+  function closeModal() {
+    console.log('[Douyin] Closing modal...');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    if (player) {
+      player.src = '';
+    }
+    
+    if (modal) {
+      modal.classList.remove('active');
+    }
+    
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    
+    resumeMusic();
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+<!-- Hero 打字机效果 -->
+<script>
+(function() {
+  function initHeroTyping() {
+    var el = document.getElementById('hero-typing');
+    if (!el) return;
+    var texts = ['编程世界', '数字乐园', '钓鱼天地', '技术博客'];
+    var textIndex = 0;
+    var charIndex = 0;
+    var isDeleting = false;
+
+    function type() {
+      var current = texts[textIndex];
+      if (isDeleting) {
+        el.textContent = current.substring(0, charIndex--);
+      } else {
+        el.textContent = current.substring(0, charIndex++);
+      }
+
+      if (!isDeleting && charIndex === current.length) {
+        setTimeout(function() { isDeleting = true; }, 2000);
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+      }
+
+      setTimeout(type, isDeleting ? 50 : 100);
+    }
+    type();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroTyping);
+  } else {
+    initHeroTyping();
+  }
+})();
+</script>
+
+
+
+<!-- 深色模式切换 -->
+<button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
+  <i class="fa fa-moon-o"></i>
+  <i class="fa fa-sun-o"></i>
+</button>
+<script data-pjax>
+(function() {
+  var btn = document.getElementById('darkmode-toggle');
+  if (!btn) return;
+  if (document.body.classList.contains('dark-mode')) btn.classList.add('on');
+  btn.addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+    btn.classList.toggle('on');
+    localStorage.setItem('blog-darkmode', document.body.classList.contains('dark-mode') ? '1' : '0');
+  });
+  if (localStorage.getItem('blog-darkmode') === '1') {
+    document.body.classList.add('dark-mode');
+    btn.classList.add('on');
+  }
+})();
+</script>
+
+<!-- AI 博客助手 -->
+<script src="/js/ai-assistant.js" data-pjax></script>
+
+<script data-pjax>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<!-- 热门文章侧边栏 -->
+<script data-pjax>
+(function() {
+  var container = document.querySelector('.sidebar-inner');
+  if (!container) return;
+
+  var existEl = document.getElementById('hot-posts-widget');
+  if (existEl) return;
+
+  var widget = document.createElement('div');
+  widget.id = 'hot-posts-widget';
+  widget.className = 'sidebar-widget hot-posts-widget';
+  widget.innerHTML = '<div class="sidebar-widget-title"><i class="fa fa-fire"></i> 热门文章</div>' +
+    '<div class="sidebar-widget-body" id="hot-posts-list">' +
+    '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">加载中...</p></div>';
+  container.appendChild(widget);
+
+  fetch('/api/hot-articles.json')
+    .then(function(r) { return r.json(); })
+    .then(function(res) {
+      var el = document.getElementById('hot-posts-list');
+      if (!el) return;
+      if (res.errno !== 0 || !res.data || !res.data.length) {
+        el.innerHTML = '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">暂无数据</p>';
+        return;
+      }
+      var html = '<ul style="list-style:none;padding:0;margin:0;">';
+      res.data.forEach(function(item, i) {
+        html += '<li style="padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' +
+          '<span style="color:#37c6c0;font-weight:700;margin-right:4px;">' + (i+1) + '.</span>' +
+          '<a href="' + item.url + '" style="color:#555;text-decoration:none;border:none;" title="' + (item.title || '') + '">' +
+          (item.title || item.url) + '</a>' +
+          '<span style="color:#ccc;margin-left:4px;font-size:10px;">' + item.count + '℃</span>' +
+        '</li>';
+      });
+      html += '</ul>';
+      el.innerHTML = html;
+      if (window.pjax && window.pjax.refresh) {
+        window.pjax.refresh(document.getElementById('hot-posts-widget'));
+      }
+    })
+    .catch(function() {
+      var el = document.getElementById('hot-posts-list');
+      if (el) el.innerHTML = '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">加载失败</p>';
+    });
+})();
+</script>
+    </div>
+</body>
+</html>

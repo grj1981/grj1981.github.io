@@ -189,9 +189,9 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
     if (keywords.length === 1 && keywords[0] === '') {
-      resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>';
+      resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i><p style="color:#999;margin-top:10px;font-size:14px;">输入关键词搜索</p></div>';
     } else if (resultItems.length === 0) {
-      resultContent.innerHTML = '<div id="no-result"><i class="far fa-frown fa-5x"></i></div>';
+      resultContent.innerHTML = '<div id="no-result"><i class="far fa-frown fa-5x"></i><p style="color:#999;margin-top:10px;font-size:14px;">未找到相关结果</p></div>';
     } else {
       resultItems.sort((resultLeft, resultRight) => {
         if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
@@ -207,8 +207,14 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const fetchData = () => {
+    if (!isfetched) {
+      document.getElementById('no-result').innerHTML = '<i class="fa fa-spinner fa-pulse fa-3x"></i><p style="color:#999;margin-top:10px;font-size:14px;">正在加载搜索数据...</p>';
+    }
     fetch(CONFIG.root + searchPath)
-      .then(response => response.text())
+      .then(response => {
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        return response.text();
+      })
       .then(res => {
         // Get the contents from search data
         isfetched = true;
@@ -227,8 +233,15 @@ document.addEventListener('DOMContentLoaded', () => {
           return data;
         });
         // Remove loading animation
-        document.getElementById('no-result').innerHTML = '<i class="fa fa-search fa-5x"></i>';
+        document.getElementById('no-result').innerHTML = '<i class="fa fa-search fa-5x"></i><p style="color:#999;margin-top:10px;font-size:14px;">输入关键词搜索</p>';
         inputEventFunction();
+      })
+      .catch(err => {
+        console.error('[Search] 搜索数据加载失败:', err);
+        document.getElementById('no-result').innerHTML =
+          '<i class="fa fa-exclamation-triangle" style="color:#e74c3c;font-size:36px;"></i>' +
+          '<p style="color:#e74c3c;margin-top:10px;font-size:14px;">搜索数据加载失败</p>' +
+          '<p style="color:#999;margin-top:6px;font-size:12px;cursor:pointer;" onclick="location.reload()">点击刷新页面重试</p>';
       });
   };
 
