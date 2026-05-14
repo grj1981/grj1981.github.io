@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.bytefisher.top/douyin/videos.json</loc>
+    
+    <lastmod>2026-05-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.bytefisher.top/2023/06/26/Next%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90/</loc>
     
     <lastmod>2026-05-14</lastmod>
@@ -408,15 +417,6 @@
   
   <url>
     <loc>https://www.bytefisher.top/fish/dashboard/index.html</loc>
-    
-    <lastmod>2026-05-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.bytefisher.top/douyin/videos.json</loc>
     
     <lastmod>2026-05-11</lastmod>
     
@@ -1360,6 +1360,13 @@
   </url>
   
   <url>
+    <loc>https://www.bytefisher.top/tags/series-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://www.bytefisher.top/tags/OpenCode/</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -1368,13 +1375,6 @@
   
   <url>
     <loc>https://www.bytefisher.top/tags/Qwen/</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.bytefisher.top/tags/series-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1495,14 +1495,14 @@
   </url>
   
   <url>
-    <loc>https://www.bytefisher.top/categories/AI/</loc>
+    <loc>https://www.bytefisher.top/categories/Python/</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.bytefisher.top/categories/Python/</loc>
+    <loc>https://www.bytefisher.top/categories/AI/</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
