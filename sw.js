@@ -1,4 +1,4 @@
-var CACHE_NAME = 'bytefisher-v2';
+var CACHE_NAME = 'bytefisher-v3';
 var urlsToCache = [
   '/',
   '/css/main.css',
@@ -31,6 +31,9 @@ self.addEventListener('fetch', function(event) {
 
   // Only handle GET requests
   if (req.method !== 'GET') return;
+
+  // Ignore non-http/https requests (chrome-extension, data, blob, etc.)
+  if (req.url.indexOf('http') !== 0) return;
 
   // Network-first for HTML pages (fresh content)
   if (req.headers.get('Accept') && req.headers.get('Accept').indexOf('text/html') !== -1) {
