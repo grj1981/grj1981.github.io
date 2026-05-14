@@ -96,7 +96,7 @@
     <id>https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/</id>
     <link href="https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/"/>
     <published>2026-05-09T12:00:00.000Z</published>
-    <summary>前言ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近对博客进行了一次全面的代码审查，发现三个高优先级的硬性问题： 问题 影响 严重程度 RSS Feed 配置存在但依赖未安装 /atom.xml 无法生成，RSS 订阅失效 🔴 高 Sitemap 未配置 搜索引擎爬取效率低，新文章收录慢 ...</summary>
+    <summary>前言ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近对博客进行了一次全面的代码审查，发现三个高优先级的硬性问题： 问题 影响 严重程度 RSS Feed 配置存在但依赖未安装 /atom.xml 无法生成，RSS 订阅失效 🔴 高 Sitemap 未配置 搜索引擎爬取效率低，新文章收录慢 �...</summary>
     <title>Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移</title>
     <updated>2026-05-09T06:18:25.487Z</updated>
   </entry>
@@ -191,9 +191,9 @@
     <category term="AI" scheme="https://www.bytefisher.top/categories/AI/"/>
     <category term="IT" scheme="https://www.bytefisher.top/tags/IT/"/>
     <category term="AI" scheme="https://www.bytefisher.top/tags/AI/"/>
+    <category term="series:AI编程助手" scheme="https://www.bytefisher.top/tags/series-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/"/>
     <category term="OpenCode" scheme="https://www.bytefisher.top/tags/OpenCode/"/>
     <category term="Qwen" scheme="https://www.bytefisher.top/tags/Qwen/"/>
-    <category term="series:AI编程助手" scheme="https://www.bytefisher.top/tags/series-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/"/>
     <id>https://www.bytefisher.top/2026/04/21/OpenCode%E4%B8%AD%E6%8E%A5%E5%85%A5Qwen%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</id>
     <link href="https://www.bytefisher.top/2026/04/21/OpenCode%E4%B8%AD%E6%8E%A5%E5%85%A5Qwen%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/"/>
     <published>2026-04-21T12:00:00.000Z</published>
@@ -314,8 +314,8 @@
     <category term="AI" scheme="https://www.bytefisher.top/categories/AI/"/>
     <category term="IT" scheme="https://www.bytefisher.top/tags/IT/"/>
     <category term="AI" scheme="https://www.bytefisher.top/tags/AI/"/>
-    <category term="OpenCode" scheme="https://www.bytefisher.top/tags/OpenCode/"/>
     <category term="series:AI编程助手" scheme="https://www.bytefisher.top/tags/series-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/"/>
+    <category term="OpenCode" scheme="https://www.bytefisher.top/tags/OpenCode/"/>
     <id>https://www.bytefisher.top/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/</id>
     <link href="https://www.bytefisher.top/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/"/>
     <published>2026-03-24T12:00:00.000Z</published>
