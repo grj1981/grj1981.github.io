@@ -9,6 +9,8 @@
 }
 .gallery img{
 	width: 200px;
+	height: 150px;
+	object-fit: cover;
 	margin: 4px;
 	transition: transform 0.3s ease, box-shadow 0.3s ease;
 	border: 2px solid #37c6c0;
@@ -46,6 +48,7 @@
 @media (max-width: 768px) {
 	.gallery img {
 		width: 150px;
+		height: 113px;
 		margin: 3px;
 	}
 	.gallery .img-number {
@@ -57,6 +60,7 @@
 @media (max-width: 480px) {
 	.gallery img {
 		width: 120px;
+		height: 90px;
 		margin: 2px;
 	}
 	.gallery .img-number {
