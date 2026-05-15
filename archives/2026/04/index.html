@@ -247,7 +247,7 @@
         <span>｜</span>
         <span>最新更新：2026-04-26</span>
         <span>｜</span>
-        <span>最早文章：2023-12-16</span>
+        <span>最早文章：2024-02-25</span>
       </div>
 
       
@@ -715,7 +715,7 @@ window.addEventListener('pjax:success', () => {
     countEls.forEach(function(el) {
       var p = el.getAttribute('data-path');
       if (!p) return;
-      var url = decodeURIComponent(p);
+      var url = p;
       fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
         .then(function(r) { return r.ok ? r.json() : null; })
         .then(function(json) {

@@ -772,7 +772,7 @@ window.addEventListener('pjax:success', () => {
     countEls.forEach(function(el) {
       var p = el.getAttribute('data-path');
       if (!p) return;
-      var url = decodeURIComponent(p);
+      var url = p;
       fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
         .then(function(r) { return r.ok ? r.json() : null; })
         .then(function(json) {
