@@ -750,23 +750,28 @@ window.addEventListener('pjax:success', () => {
 <script>
 (function() {
   var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
-  function refreshVisitors() {
-    var els = document.querySelectorAll('.waline-visitor-count');
-    els.forEach(function(el) {
-      var path = el.getAttribute('data-path');
-      if (!path) return;
-      fetch(baseURL + '/api/article?path=' + encodeURIComponent(path) + '&type=time')
+  function fetchAll() {
+    document.querySelectorAll('.waline-visitor-count').forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(p) + '&type=time')
         .then(function(r) { return r.json(); })
         .then(function(d) {
-          if (d && d.data && d.data[0] && d.data[0].time > 0) {
-            el.textContent = d.data[0].time;
-          }
+          var t = d && d.data && d.data[0] && d.data[0].time;
+          if (t > 0) el.textContent = t;
         });
     });
   }
-  if (document.readyState === 'complete') { refreshVisitors(); }
-  else { window.addEventListener('load', refreshVisitors); }
-  setTimeout(refreshVisitors, 1500);
+  // Run immediately, after 2s, and after 4s (handles PJAX + Waline load)
+  if (document.readyState === 'complete') { fetchAll(); }
+  else { window.addEventListener('load', fetchAll); }
+  setTimeout(fetchAll, 2000);
+  setTimeout(fetchAll, 4000);
+  // MutationObserver: if anything changes the span text, fix it
+  document.querySelectorAll('.waline-visitor-count').forEach(function(el) {
+    var obs = new MutationObserver(function() { fetchAll(); });
+    obs.observe(el, { characterData: true, childList: true, subtree: true });
+  });
 })();
 </script>
 <!-- 抖音视频弹窗 -->

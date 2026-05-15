@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <link rel="preconnect" href="https://iili.io">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#37c6c0">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#37c6c0">
+
+<meta http-equiv="Permissions-Policy" content="encrypted-media=*">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+  <meta name="description" content="Python3 字符串字符串是 Python 中最常用的数据类型。我们可以使用引号( ‘ 或 “ )来创建字符串。创建字符串很简单，只要为变量分配一个值即可。例如： 12var1 &#x3D; &amp; x27;Hello World!&amp; x27;var2 &#x3D; &quot;Runoob&quot; Python 访问字符串中的值Python 不支持单字符类型，单字符在 Python 中也是作为一个字符串使用。Py">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python学习笔记【字符串】">
+<meta property="og:url" content="https://www.bytefisher.top/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/index.html">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="Python3 字符串字符串是 Python 中最常用的数据类型。我们可以使用引号( ‘ 或 “ )来创建字符串。创建字符串很简单，只要为变量分配一个值即可。例如： 12var1 &#x3D; &amp; x27;Hello World!&amp; x27;var2 &#x3D; &quot;Runoob&quot; Python 访问字符串中的值Python 不支持单字符类型，单字符在 Python 中也是作为一个字符串使用。Py">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-29T02:32:43.000Z">
+<meta property="article:modified_time" content="2026-05-14T08:31:52.699Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="IT">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="series:Python学习笔记">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.bytefisher.top/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Python学习笔记【字符串】","description":"Python3 字符串字符串是 Python 中最常用的数据类型。我们可以使用引号( ‘ 或 “ )来创建字符串。创建字符串很简单，只要为变量分配一个值即可。例如： 12var1 = & x27;Hello World!& x27;var2 = &quot;Runoob&quot; Python 访问字符串中的值Python 不支持单字符类型，单字符在 Python 中也是作为一个字符串使用。Py...","url":"https://www.bytefisher.top/2023/05/29/Python学习笔记【字符串】/","datePublished":"2023-05-29T02:32:43.000Z","dateModified":"2026-05-14T08:31:52.699Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/05/29/Python学习笔记【字符串】/"},"keywords":"IT, Python, series:Python学习笔记"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"IT","item":"https://www.bytefisher.top/categories/IT/"},{"@type":"ListItem","position":3,"name":"Python学习笔记【字符串】"}]}</script>
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Python学习笔记【字符串】 | ByteFisher</title>
+  
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dc50e0997d43c3a8dbf2afdb3fdff233";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#37c6c0">
+<link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-aigames">
+
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">46</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">99</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">47</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>rss</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python学习笔记【字符串】
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-29 10:32:43" itemprop="dateCreated datePublished" datetime="2023-05-29T10:32:43+08:00">2023-05-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">Python3 字符串字符串是 Python 中最常用的数据类型。我们可以使用引号( ‘ 或 “ )来创建字符串。创建字符串很简单，只要为变量分配一个值即可。例如： 12var1 = & x27;Hello World!& x27;var2 = &quot;Runoob&quot; Python 访问字符串中的值Python 不支持单字符类型，单字符在 Python 中也是作为一个字符串使用。Py...</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Python3-字符串"><a href="#Python3-字符串" class="headerlink" title="- Python3 字符串"></a>- Python3 字符串</h2><p>字符串是 Python 中最常用的数据类型。我们可以使用引号( ‘ 或 “ )来创建字符串。<br>创建字符串很简单，只要为变量分配一个值即可。例如：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27;</span><br><span class="line">var2 = &quot;Runoob&quot;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Python-访问字符串中的值"><a href="#Python-访问字符串中的值" class="headerlink" title="- Python 访问字符串中的值"></a>- Python 访问字符串中的值</h2><p>Python 不支持单字符类型，单字符在 Python 中也是作为一个字符串使用。<br>Python 访问子字符串，可以使用方括号 [] 来截取字符串，字符串的截取的语法格式如下：<br>	<br>	变量[头下标:尾下标]</p>
+<p>索引值以 0 为开始值，-1 为从末尾的开始位置。</p>
+<p>如下实例：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27;</span><br><span class="line">var2 = &quot;Runoob&quot;</span><br><span class="line"> </span><br><span class="line">print (&quot;var1[0]: &quot;, var1[0])</span><br><span class="line">print (&quot;var2[1:5]: &quot;, var2[1:5])</span><br></pre></td></tr></table></figure><br>以上实例执行结果：</p>
+<pre><code>var1[0]:  H
+var2[1:5]:  unoo
+</code></pre>
+<h2 id="Python-字符串更新"><a href="#Python-字符串更新" class="headerlink" title="- Python 字符串更新"></a>- Python 字符串更新</h2><p>你可以截取字符串的一部分并与其他字段拼接，如下实例：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var1 = &#x27;Hello World!&#x27; </span><br><span class="line">print (&quot;已更新字符串 : &quot;, var1[:6] + &#x27;Runoob!&#x27;)</span><br></pre></td></tr></table></figure><br>以上实例执行结果</p>
+<pre><code>已更新字符串 :  Hello Runoob!
+</code></pre>
+<span id="more"></span>
+<h2 id="Python-转义字符"><a href="#Python-转义字符" class="headerlink" title="- Python 转义字符"></a>- Python 转义字符</h2><p>在需要在字符中使用特殊字符时，python 用反斜杠 \ 转义字符。如下表：</p>
+<pre><code>\(在行尾时)	续行符	
+&gt;&gt;&gt; print(&quot;line1 \
+... line2 \
+... line3&quot;)
+line1 line2 line3
+&gt;&gt;&gt; 
+</code></pre>
+<hr>
+<pre><code>\\	反斜杠符号	
+&gt;&gt;&gt; print(&quot;\\&quot;)
+\
+&gt;&gt;&gt;
+</code></pre>
+<hr>
+<pre><code>\&#39;	单引号	
+&gt;&gt;&gt; print(&#39;\&#39;&#39;)
+&#39;
+</code></pre>
+<hr>
+<pre><code>\&quot;	双引号	
+&gt;&gt;&gt; print(&quot;\&quot;&quot;)
+&quot;
+</code></pre>
+<hr>
+<pre><code>\a	响铃	
+&gt;&gt;&gt; print(&quot;\a&quot;)执行后电脑有响声。
+</code></pre>
+<hr>
+<pre><code>\b	退格(Backspace)	
+&gt;&gt;&gt; print(&quot;Hello \b World!&quot;)
+Hello World!
+</code></pre>
+<hr>
+<pre><code>\000	空	
+&gt;&gt;&gt; print(&quot;\000&quot;)
+</code></pre>
+<hr>
+<pre><code>&gt;&gt;&gt; 
+\n	换行	
+&gt;&gt;&gt; print(&quot;\n&quot;)
+</code></pre>
+<hr>
+<pre><code>&gt;&gt;&gt;
+\v	纵向制表符	
+&gt;&gt;&gt; print(&quot;Hello \v World!&quot;)
+Hello 
+       World!
+&gt;&gt;&gt;
+</code></pre>
+<hr>
+<pre><code>\t	横向制表符	
+&gt;&gt;&gt; print(&quot;Hello \t World!&quot;)
+Hello      World!
+&gt;&gt;&gt;
+</code></pre>
+<hr>
+<pre><code>\r	回车，将 \r 后面的内容移到字符串开头，并逐一替换开头部分的字符，直至将 \r 后面的内容完全替换完成。	
+&gt;&gt;&gt; print(&quot;Hello\rWorld!&quot;)
+World!
+&gt;&gt;&gt; print(&#39;google runoob taobao\r123456&#39;)
+123456 runoob taobao
+</code></pre>
+<hr>
+<pre><code>\f	换页	
+&gt;&gt;&gt; print(&quot;Hello \f World!&quot;)
+Hello 
+       World!
+&gt;&gt;&gt; 
+</code></pre>
+<hr>
+<pre><code>\yyy	八进制数，y 代表 0~7 的字符，例如：\012 代表换行。	
+&gt;&gt;&gt; print(&quot;\110\145\154\154\157\40\127\157\162\154\144\41&quot;)
+Hello World!
+</code></pre>
+<hr>
+<pre><code>\xyy	十六进制数，以 \x 开头，y 代表的字符，例如：\x0a 代表换行	
+&gt;&gt;&gt; print(&quot;\x48\x65\x6c\x6c\x6f\x20\x57\x6f\x72\x6c\x64\x21&quot;)
+Hello World!
+</code></pre>
+<hr>
+<pre><code>\other	其它的字符以普通格式输出	 
+</code></pre>
+<p><strong>使用 \r 实现百分比进度实例：</strong><br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line"></span><br><span class="line">for i in range(101):</span><br><span class="line">    print(&quot;\r&#123;:3&#125;%&quot;.format(i),end=&#x27; &#x27;)</span><br><span class="line">    time.sleep(0.05)</span><br></pre></td></tr></table></figure><br>以下实例，我们使用了不同的转义字符来演示单引号、换行符、制表符、退格符、换页符、ASCII、二进制、八进制数和十六进制数的效果：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">print(&#x27;\&#x27;Hello, world!\&#x27;&#x27;)  # 输出：&#x27;Hello, world!&#x27;</span><br><span class="line"></span><br><span class="line">print(&quot;Hello, world!\nHow are you?&quot;)  # 输出：Hello, world!</span><br><span class="line">                                        #       How are you?</span><br><span class="line"></span><br><span class="line">print(&quot;Hello, world!\tHow are you?&quot;)  # 输出：Hello, world!    How are you?</span><br><span class="line"></span><br><span class="line">print(&quot;Hello,\b world!&quot;)  # 输出：Hello world!</span><br><span class="line"></span><br><span class="line">print(&quot;Hello,\f world!&quot;)  # 输出：</span><br><span class="line">                           # Hello,</span><br><span class="line">                           #  world!</span><br><span class="line"></span><br><span class="line">print(&quot;A 对应的 ASCII 值为：&quot;, ord(&#x27;A&#x27;))  # 输出：A 对应的 ASCII 值为： 65</span><br><span class="line"></span><br><span class="line">print(&quot;\x41 为 A 的 ASCII 代码&quot;)  # 输出：A 为 A 的 ASCII 代码</span><br><span class="line"></span><br><span class="line">decimal_number = 42</span><br><span class="line">binary_number = bin(decimal_number)  # 十进制转换为二进制</span><br><span class="line">print(&#x27;转换为二进制:&#x27;, binary_number)  # 转换为二进制: 0b101010</span><br><span class="line"></span><br><span class="line">octal_number = oct(decimal_number)  # 十进制转换为八进制</span><br><span class="line">print(&#x27;转换为八进制:&#x27;, octal_number)  # 转换为八进制: 0o52</span><br><span class="line"></span><br><span class="line">hexadecimal_number = hex(decimal_number)  # 十进制转换为十六进制</span><br><span class="line">print(&#x27;转换为十六进制:&#x27;, hexadecimal_number) # 转换为十六进制: 0x2a</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="Python-字符串运算符"><a href="#Python-字符串运算符" class="headerlink" title="- Python 字符串运算符"></a>- Python 字符串运算符</h2><p>下表实例变量 a 值为字符串 “Hello”，b 变量值为 “Python”：</p>
+<p>操作符 描述 实例</p>
+<pre><code>+	字符串连接	a + b 输出结果： HelloPython
+*	重复输出字符串	a*2 输出结果：HelloHello
+[]	通过索引获取字符串中字符	a[1] 输出结果 e
+[ : ]	截取字符串中的一部分，遵循左闭右开原则，str[0:2] 是不包含第 3 个字符的。	a[1:4] 输出结果 ell
+in	成员运算符 - 如果字符串中包含给定的字符返回 True	&#39;H&#39; in a 输出结果 True
+not in	成员运算符 - 如果字符串中不包含给定的字符返回 True	&#39;M&#39; not in a 输出结果 True
+r/R	原始字符串 - 原始字符串：所有的字符串都是直接按照字面的意思来使用，没有转义特殊或不能打印的字符。 
+		原始字符串除在字符串的第一个引号前加上字母 r（可以大小写）以外，与普通字符串有着几乎完全相同的语法。	
+print( r&#39;\n&#39; )
+print( R&#39;\n&#39; )
+%	格式字符串 请看下一节内容。
+</code></pre>
+<p><strong>实例(Python 3.0+)</strong>：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">a = &quot;Hello&quot;</span><br><span class="line">b = &quot;Python&quot;</span><br><span class="line"> </span><br><span class="line">print(&quot;a + b 输出结果：&quot;, a + b)</span><br><span class="line">print(&quot;a * 2 输出结果：&quot;, a * 2)</span><br><span class="line">print(&quot;a[1] 输出结果：&quot;, a[1])</span><br><span class="line">print(&quot;a[1:4] 输出结果：&quot;, a[1:4])</span><br><span class="line"> </span><br><span class="line">if( &quot;H&quot; in a) :</span><br><span class="line">    print(&quot;H 在变量 a 中&quot;)</span><br><span class="line">else :</span><br><span class="line">    print(&quot;H 不在变量 a 中&quot;)</span><br><span class="line"> </span><br><span class="line">if( &quot;M&quot; not in a) :</span><br><span class="line">    print(&quot;M 不在变量 a 中&quot;)</span><br><span class="line">else :</span><br><span class="line">    print(&quot;M 在变量 a 中&quot;)</span><br><span class="line"> </span><br><span class="line">print (r&#x27;\n&#x27;)</span><br><span class="line">print (R&#x27;\n&#x27;)</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>以上实例输出结果为：</p>
+<pre><code>a + b 输出结果： HelloPython
+a * 2 输出结果： HelloHello
+a[1] 输出结果： e
+a[1:4] 输出结果： ell
+H 在变量 a 中
+M 不在变量 a 中
+\n
+\n
+</code></pre>
+<h2 id="Python-字符串格式化"><a href="#Python-字符串格式化" class="headerlink" title="- Python 字符串格式化"></a>- Python 字符串格式化</h2><p>Python 支持格式化字符串的输出 。尽管这样可能会用到非常复杂的表达式，但最基本的用法是将一个值插入到一个有字符串格式符 %s<br>的字符串中。</p>
+<p>在 Python 中，字符串格式化使用与 C 中 sprintf 函数一样的语法。</p>
+<p><strong>实例(Python 3.0+)：</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print (&quot;我叫 %s 今年 %d 岁!&quot; % (&#x27;小明&#x27;, 10))</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>以上实例输出结果：</p>
+<pre><code>我叫 小明 今年 10 岁!
+</code></pre>
+<p><strong>python字符串格式化符号:</strong></p>
+<pre><code>符   号	描述
+  %c	 格式化字符及其ASCII码
+  %s	 格式化字符串
+  %d	 格式化整数
+  %u	 格式化无符号整型
+  %o	 格式化无符号八进制数
+  %x	 格式化无符号十六进制数
+  %X	 格式化无符号十六进制数（大写）
+  %f	 格式化浮点数字，可指定小数点后的精度
+  %e	 用科学计数法格式化浮点数
+  %E	 作用同%e，用科学计数法格式化浮点数
+  %g	 %f和%e的简写
+  %G	 %f 和 %E 的简写
+  %p	 用十六进制数格式化变量的地址
+</code></pre>
+<p><strong>格式化操作符辅助指令:</strong></p>
+<p>符号	功能</p>
+<pre><code>*	定义宽度或者小数点精度
+-	用做左对齐
++	在正数前面显示加号( + )
+&lt;sp&gt;	在正数前面显示空格
+#	在八进制数前面显示零(&#39;0&#39;)，在十六进制前面显示&#39;0x&#39;或者&#39;0X&#39;(取决于用的是&#39;x&#39;还是&#39;X&#39;)
+0	显示的数字前面填充&#39;0&#39;而不是默认的空格
+%	&#39;%%&#39;输出一个单一的&#39;%&#39;
+(var)	映射变量(字典参数)
+m.n.	m 是显示的最小总宽度,n 是小数点后的位数(如果可用的话)
+Python2.6 开始，新增了一种格式化字符串的函数 str.format()，它增强了字符串格式化的功能。
+</code></pre>
+<h2 id="Python三引号"><a href="#Python三引号" class="headerlink" title="- Python三引号"></a>- Python三引号</h2><p>python三引号允许一个字符串跨多行，字符串中可以包含换行符、制表符以及其他特殊字符。实例如下</p>
+<p><strong>实例(Python 3.0+)：</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">para_str = &quot;&quot;&quot;这是一个多行字符串的实例</span><br><span class="line">多行字符串可以使用制表符</span><br><span class="line">TAB ( \t )。</span><br><span class="line">也可以使用换行符 [ \n ]。</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">print (para_str)</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>以上实例执行结果为：</p>
+<pre><code>这是一个多行字符串的实例
+多行字符串可以使用制表符
+TAB (    )。
+也可以使用换行符 [ 
+ ]。
+</code></pre>
+<p>三引号让程序员从引号和特殊字符串的泥潭里面解脱出来，自始至终保持一小块字符串的格式是所谓的WYSIWYG（所见即所得）格式的。</p>
+<p>一个典型的用例是，当你需要一块HTML或者SQL时，这时用字符串组合，特殊字符串转义将会非常的繁琐。</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">errHTML = &#x27;&#x27;&#x27;</span><br><span class="line">&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;</span><br><span class="line">Friends CGI Demo&lt;/TITLE&gt;&lt;/HEAD&gt;</span><br><span class="line">&lt;BODY&gt;&lt;H3&gt;ERROR&lt;/H3&gt;</span><br><span class="line">&lt;B&gt;%s&lt;/B&gt;&lt;P&gt;</span><br><span class="line">&lt;FORM&gt;&lt;INPUT TYPE=button VALUE=Back</span><br><span class="line">ONCLICK=&quot;window.history.back()&quot;&gt;&lt;/FORM&gt;</span><br><span class="line">&lt;/BODY&gt;&lt;/HTML&gt;</span><br><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line">cursor.execute(&#x27;&#x27;&#x27;</span><br><span class="line">CREATE TABLE users (  </span><br><span class="line">login VARCHAR(8), </span><br><span class="line">uid INTEGER,</span><br><span class="line">prid INTEGER)</span><br><span class="line">&#x27;&#x27;&#x27;)</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p><strong>f-string</strong><br>f-string 是 python3.6 之后版本添加的，称之为字面量格式化字符串，是新的格式化字符串的语法。</p>
+<p>之前我们习惯用百分号 (%):</p>
+<p>实例：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; name = &#x27;Runoob&#x27;</span><br><span class="line">&gt;&gt;&gt; &#x27;Hello %s&#x27; % name</span><br><span class="line">&#x27;Hello Runoob&#x27;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>f-string 格式化字符串以 f 开头，后面跟着字符串，字符串中的表达式用大括号 {} 包起来，它会将变量或表达式计算后的值替换进去，实例如下：</p>
+<p><strong>实例</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; name = &#x27;Runoob&#x27;</span><br><span class="line">&gt;&gt;&gt; f&#x27;Hello &#123;name&#125;&#x27;  # 替换变量</span><br><span class="line">&#x27;Hello Runoob&#x27;</span><br><span class="line">&gt;&gt;&gt; f&#x27;&#123;1+2&#125;&#x27;         # 使用表达式</span><br><span class="line">&#x27;3&#x27;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; w = &#123;&#x27;name&#x27;: &#x27;Runoob&#x27;, &#x27;url&#x27;: &#x27;www.runoob.com&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; f&#x27;&#123;w[&quot;name&quot;]&#125;: &#123;w[&quot;url&quot;]&#125;&#x27;</span><br><span class="line">&#x27;Runoob: www.runoob.com&#x27;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>用了这种方式明显更简单了，不用再去判断使用 %s，还是 %d。</p>
+<p>在 Python 3.8 的版本中可以使用 &#x3D; 符号来拼接运算表达式与结果：</p>
+<p><strong>实例</strong></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; x = 1</span><br><span class="line">&gt;&gt;&gt; print(f&#x27;&#123;x+1&#125;&#x27;)   # Python 3.6</span><br><span class="line">2</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; x = 1</span><br><span class="line">&gt;&gt;&gt; print(f&#x27;&#123;x+1=&#125;&#x27;)   # Python 3.8</span><br><span class="line">x+1=2</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p><strong>Unicode 字符串</strong><br>在Python2中，普通字符串是以8位ASCII码进行存储的，而Unicode字符串则存储为16位unicode字符串，这样能够表示更多的字符集。使用的语法是在字符串前面加上前缀 u。</p>
+<p>在Python3中，所有的字符串都是Unicode字符串。</p>
+<h2 id="Python-的字符串内建函数"><a href="#Python-的字符串内建函数" class="headerlink" title="- Python 的字符串内建函数"></a>- Python 的字符串内建函数</h2><p>Python 的字符串常用内建函数如下：</p>
+<p>序号	方法及描述</p>
+<pre><code>1	
+capitalize()
+将字符串的第一个字符转换为大写
+</code></pre>
+<hr>
+<pre><code>2	
+center(width, fillchar)
+
+返回一个指定的宽度 width 居中的字符串，fillchar 为填充的字符，默认为空格。
+</code></pre>
+<hr>
+<pre><code>3	
+count(str, beg= 0,end=len(string))
+
+
+返回 str 在 string 里面出现的次数，如果 beg 或者 end 指定则返回指定范围内 str 出现的次数
+</code></pre>
+<hr>
+<pre><code>4	
+bytes.decode(encoding=&quot;utf-8&quot;, errors=&quot;strict&quot;)
+
+
+Python3 中没有 decode 方法，但我们可以使用 bytes 对象的 decode() 方法来解码给定的 bytes 对象，这个 bytes 
+对象可以由 str.encode() 来编码返回。
+</code></pre>
+<hr>
+<pre><code>5	
+encode(encoding=&#39;UTF-8&#39;,errors=&#39;strict&#39;)
+
+
+以 encoding 指定的编码格式编码字符串，如果出错默认报一个ValueError 的异常，除非 errors 指定的是&#39;ignore&#39;
+或者&#39;replace&#39;
+</code></pre>
+<hr>
+<pre><code>6	
+endswith(suffix, beg=0, end=len(string))
+检查字符串是否以 suffix 结束，如果 beg 或者 end 指定则检查指定的范围内是否以 suffix 结束，如果是，返回 True,
+否则返回 False。
+</code></pre>
+<hr>
+<pre><code>7	
+expandtabs(tabsize=8)
+
+
+把字符串 string 中的 tab 符号转为空格，tab 符号默认的空格数是 8 。
+</code></pre>
+<hr>
+<pre><code>8	
+find(str, beg=0, end=len(string))
+
+
+检测 str 是否包含在字符串中，如果指定范围 beg 和 end ，则检查是否包含在指定范围内，如果包含返回开始的索引值，
+否则返回-1
+</code></pre>
+<hr>
+<pre><code>9	
+index(str, beg=0, end=len(string))
+
+
+跟find()方法一样，只不过如果str不在字符串中会报一个异常。
+</code></pre>
+<hr>
+<pre><code>10	
+isalnum()
+
+
+如果字符串至少有一个字符并且所有字符都是字母或数字则返 回 True，否则返回 False
+</code></pre>
+<hr>
+<pre><code>11	
+isalpha()
+
+
+如果字符串至少有一个字符并且所有字符都是字母或中文字则返回 True, 否则返回 False
+</code></pre>
+<hr>
+<pre><code>12	
+isdigit()
+
+
+如果字符串只包含数字则返回 True 否则返回 False..
+</code></pre>
+<hr>
+<pre><code>13	
+islower()
+
+
+如果字符串中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是小写，则返回 True，否则返回 False
+</code></pre>
+<hr>
+<pre><code>14	
+isnumeric()
+
+
+如果字符串中只包含数字字符，则返回 True，否则返回 False
+</code></pre>
+<hr>
+<pre><code>15	
+isspace()
+
+
+如果字符串中只包含空白，则返回 True，否则返回 False.
+</code></pre>
+<hr>
+<pre><code>16	
+istitle()
+
+
+如果字符串是标题化的(见 title())则返回 True，否则返回 False
+</code></pre>
+<hr>
+<pre><code>17	
+isupper()
+
+
+如果字符串中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是大写，则返回 True，否则返回 False
+</code></pre>
+<hr>
+<pre><code>18	
+join(seq)
+
+
+以指定字符串作为分隔符，将 seq 中所有的元素(的字符串表示)合并为一个新的字符串
+</code></pre>
+<hr>
+<pre><code>19	
+len(string)
+
+
+返回字符串长度
+</code></pre>
+<hr>
+<pre><code>20	
+ljust(width[, fillchar])
+
+
+返回一个原字符串左对齐,并使用 fillchar 填充至长度 width 的新字符串，fillchar 默认为空格。
+</code></pre>
+<hr>
+<pre><code>21	
+lower()
+
+
+转换字符串中所有大写字符为小写.
+</code></pre>
+<hr>
+<pre><code>22	
+lstrip()
+
+
+截掉字符串左边的空格或指定字符。
+</code></pre>
+<hr>
+<pre><code>23	
+maketrans()
+
+
+创建字符映射的转换表，对于接受两个参数的最简单的调用方式，第一个参数是字符串，表示需要转换的字符，第二个参数也
+是字符串表示转换的目标。
+</code></pre>
+<hr>
+<pre><code>24	
+max(str)
+
+
+返回字符串 str 中最大的字母。
+</code></pre>
+<hr>
+<pre><code>25	
+min(str)
+
+
+返回字符串 str 中最小的字母。
+</code></pre>
+<hr>
+<pre><code>26	
+replace(old, new [, max])
+
+
+把 将字符串中的 old 替换成 new,如果 max 指定，则替换不超过 max 次。
+</code></pre>
+<hr>
+<pre><code>27	
+rfind(str, beg=0,end=len(string))
+
+
+类似于 find()函数，不过是从右边开始查找.
+</code></pre>
+<hr>
+<pre><code>28	
+rindex( str, beg=0, end=len(string))
+
+
+类似于 index()，不过是从右边开始.
+</code></pre>
+<hr>
+<pre><code>29	
+rjust(width,[, fillchar])
+
+
+返回一个原字符串右对齐,并使用fillchar(默认空格）填充至长度 width 的新字符串
+</code></pre>
+<hr>
+<pre><code>30	
+rstrip()
+
+
+删除字符串末尾的空格或指定字符。
+</code></pre>
+<hr>
+<pre><code>31	
+split(str=&quot;&quot;, num=string.count(str))
+
+
+以 str 为分隔符截取字符串，如果 num 有指定值，则仅截取 num+1 个子字符串
+</code></pre>
+<hr>
+<pre><code>32	
+splitlines([keepends])
+
+
+按照行(&#39;\r&#39;, &#39;\r\n&#39;, \n&#39;)分隔，返回一个包含各行作为元素的列表，如果参数 keepends 为 False，不包含换行
+符，如果为 True，则保留换行符。
+</code></pre>
+<hr>
+<pre><code>33	
+startswith(substr, beg=0,end=len(string))
+
+
+检查字符串是否是以指定子字符串 substr 开头，是则返回 True，否则返回 False。如果beg 和 end 指定值，则在指定
+范围内检查。
+</code></pre>
+<hr>
+<pre><code>34	
+strip([chars])
+
+
+在字符串上执行 lstrip()和 rstrip()
+</code></pre>
+<hr>
+<pre><code>35	
+swapcase()
+
+
+将字符串中大写转换为小写，小写转换为大写
+</code></pre>
+<hr>
+<pre><code>36	
+title()
+
+
+返回&quot;标题化&quot;的字符串,就是说所有单词都是以大写开始，其余字母均为小写(见 istitle())
+</code></pre>
+<hr>
+<pre><code>37	
+translate(table, deletechars=&quot;&quot;)
+
+
+根据 table 给出的表(包含 256 个字符)转换 string 的字符, 要过滤掉的字符放到 deletechars 参数中
+</code></pre>
+<hr>
+<pre><code>38	
+upper()
+
+
+转换字符串中的小写字母为大写
+</code></pre>
+<hr>
+<pre><code>39	
+zfill (width)
+
+
+返回长度为 width 的字符串，原字符串右对齐，前面填充0
+</code></pre>
+<hr>
+<pre><code>40	
+isdecimal()
+
+
+检查字符串是否只包含十进制字符，如果是返回 true，否则返回 false。
+</code></pre>
+<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2023/06/25/Python学习笔记【JSON】/" class="related-post-item" title="Python学习笔记【JSON】"><span class="related-post-title">Python学习笔记【JSON】</span><span class="related-post-date">2023-06-25</span><span class="related-post-desc">Python3 JSON 数据解析 JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。 Python3 中可以使用</span></a><a href="/2023/06/25/Python学习笔记【XML解析】/" class="related-post-item" title="Python学习笔记【XML解析】"><span class="related-post-title">Python学习笔记【XML解析】</span><span class="related-post-date">2023-06-25</span><span class="related-post-desc">Python3 XML 解析 什么是 XML？ XML 指可扩展标记语言（eXtensible Markup Language），标准通用标记语言的子集，是一种</span></a><a href="/2023/06/25/Python学习笔记【多线程】/" class="related-post-item" title="Python学习笔记【多线程】"><span class="related-post-title">Python学习笔记【多线程】</span><span class="related-post-date">2023-06-25</span><span class="related-post-desc">Python3 多线程 多线程类似于同时执行多个不同程序，多线程运行有如下优点： 使用线程可以把占据长时间的程序中的任务放到后台去处理。 用户界面可以更加吸引人</span></a><a href="/2023/06/21/Python学习笔记【正则表达式】/" class="related-post-item" title="Python学习笔记【正则表达式】"><span class="related-post-title">Python学习笔记【正则表达式】</span><span class="related-post-date">2023-06-21</span><span class="related-post-desc">Python3 正则表达式 正则表达式是一个特殊的字符序列，它能帮助你方便的检查一个字符串是否与某种模式匹配。 Python 自1.5版本起增加了re 模块，它</span></a><a href="/2023/06/08/Python学习笔记【标准库概览】/" class="related-post-item" title="Python学习笔记【标准库概览】"><span class="related-post-title">Python学习笔记【标准库概览】</span><span class="related-post-date">2023-06-08</span><span class="related-post-desc">Python3 标准库概览 Python 标准库非常庞大，所提供的组件涉及范围十分广泛，使用标准库我们可以让您轻松地完成各种任务。 以下是一些 Python3 </span></a><a href="/2023/06/06/Python学习笔记【面向对向】/" class="related-post-item" title="Python学习笔记【面向对向】"><span class="related-post-title">Python学习笔记【面向对向】</span><span class="related-post-date">2023-06-06</span><span class="related-post-desc">Python3 面向对象 Python从设计之初就已经是一门面向对象的语言，正因为如此，在Python中创建一个类和对象是很容易的。本章节我们将详细介绍Pyth</span></a></div></div><div class="series-nav"><div class="series-nav-title">Python学习笔记 系列</div><div class="series-nav-progress">第 1/14 篇</div><div class="series-nav-links"><a href="/2023/05/29/Python学习笔记【列表】/" class="series-nav-next">Python学习笔记【列表】</a></div></div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/series-Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># series:Python学习笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/05/16/git%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/" rel="prev" title="git相关操作整理">
+      <i class="fa fa-chevron-left"></i> git相关操作整理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%88%97%E8%A1%A8%E3%80%91/" rel="next" title="Python学习笔记【列表】">
+      Python学习笔记【列表】 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+  <div class="post-share">
+    <span class="post-share-label">分享：</span>
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2023%2F05%2F29%2FPython%25E5%25AD%25A6%25E4%25B9%25A0%25E7%25AC%2594%25E8%25AE%25B0%25E3%2580%2590%25E5%25AD%2597%25E7%25AC%25A6%25E4%25B8%25B2%25E3%2580%2591%2F&amp;title=Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%91" target="_blank" rel="noopener" title="分享到微博">
+      <i class="fab fa-weibo"></i>
+    </a>
+    <a href="#" onclick="navigator.clipboard.writeText(location.href);var t=this;t.innerHTML='<i class=fa fa-check></i>';setTimeout(function(){t.innerHTML='<i class=fa fa-link></i>'},1500);return false" title="复制链接">
+      <i class="fa fa-link"></i>
+    </a>
+  </div>
+
+  
+  <div class="post-author-bio">
+    <div class="post-author-avatar">
+      <img src="/images/avatar2.gif" alt="淡水鱼">
+    </div>
+    <div class="post-author-info">
+      <div class="post-author-name">淡水鱼</div>
+      <div class="post-author-desc">钓鱼爱好者 &amp; Unity 游戏开发者，分享编程技术与钓鱼经验。</div>
+      <div class="post-author-links">
+        <a href="https://github.com/grj1981" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="/atom.xml" title="RSS 订阅"><i class="fa fa-rss"></i></a>
+        <a href="mailto:271623821@qq.com" title="联系我"><i class="fa fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  
+
+
+          </div>
+          
+    <div class="comments" id="waline-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python3-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.</span> <span class="nav-text">- Python3 字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-%E8%AE%BF%E9%97%AE%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%80%BC"><span class="nav-number">2.</span> <span class="nav-text">- Python 访问字符串中的值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9B%B4%E6%96%B0"><span class="nav-number">3.</span> <span class="nav-text">- Python 字符串更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="nav-number">4.</span> <span class="nav-text">- Python 转义字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.</span> <span class="nav-text">- Python 字符串运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="nav-number">6.</span> <span class="nav-text">- Python 字符串格式化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python%E4%B8%89%E5%BC%95%E5%8F%B7"><span class="nav-number">7.</span> <span class="nav-text">- Python三引号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0"><span class="nav-number">8.</span> <span class="nav-text">- Python 的字符串内建函数</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe id="music-player" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2023 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
+<script>
+(function() {
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+
+  function updateCounts() {
+    var countEls = document.querySelectorAll('.waline-visitor-count');
+    if (!countEls.length) return;
+    countEls.forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var url = p;
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(json) {
+          if (json && json.data && json.data[0] && json.data[0].time != null) {
+            el.innerText = json.data[0].time;
+          }
+        });
+    });
+  }
+
+  var el = document.querySelector('#waline-comments');
+  if (el) {
+    updateCounts();
+    NexT.utils.loadComments(el, function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
+        Waline.init({
+          el: '#waline-comments',
+          serverURL: 'https://waline.bytefisher.top/',
+          path: location.pathname,
+          lang: 'zh-CN' || 'zh-CN',
+          meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
+          requiredMeta: ["nick"] || ['nick'],
+          placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
+          avatar: 'retro' || 'retro',
+          pageSize: 10 || 10,
+          imageUploader: false,
+          pageview: false,
+          comment: true,
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo'],
+          highlight: true
+        });
+        var pathEl = document.querySelector('.waline-visitor-count');
+        var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
+        fetch(baseURL + '/api/article', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: postPath })
+        }).finally(function() {
+          setTimeout(updateCounts, 300);
+        });
+      }, window.Waline);
+    });
+  } else {
+    updateCounts();
+  }
+})();
+</script>
+
+<script>
+(function() {
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+  function fetchAll() {
+    document.querySelectorAll('.waline-visitor-count').forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(p) + '&type=time')
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          var t = d && d.data && d.data[0] && d.data[0].time;
+          if (t > 0) el.textContent = t;
+        });
+    });
+  }
+  // Run immediately, after 2s, and after 4s (handles PJAX + Waline load)
+  if (document.readyState === 'complete') { fetchAll(); }
+  else { window.addEventListener('load', fetchAll); }
+  setTimeout(fetchAll, 2000);
+  setTimeout(fetchAll, 4000);
+  // MutationObserver: if anything changes the span text, fix it
+  document.querySelectorAll('.waline-visitor-count').forEach(function(el) {
+    var obs = new MutationObserver(function() { fetchAll(); });
+    obs.observe(el, { characterData: true, childList: true, subtree: true });
+  });
+})();
+</script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
+
+<style>
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  scrollbar-gutter: stable;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.modal::-webkit-scrollbar {
+  display: none !important;
+}
+
+.modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.modal-content {
+  position: relative;
+  width: min(71%, 340px);
+  max-width: calc((100vh - 100px) * 9 / 17.5);
+  height: auto;
+  aspect-ratio: 9 / 17.5;
+  max-height: calc(100vh - 100px);
+  margin: 0 auto;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: min(81%, 320px);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: min(94%, 300px);
+    max-width: calc((100vh - 80px) * 9 / 17.5);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+    max-height: calc(100vh - 80px);
+  }
+}
+
+.modal-content iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  border: none;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  left: auto;
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 10000;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+}
+
+.close-btn:hover {
+  color: #e74c3c;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  background: rgba(0,0,0,0.1);
+  border-radius: 50%;
+  line-height: 50px;
+  user-select: none;
+}
+
+.nav-btn:hover {
+  background: rgba(0,0,0,0.2);
+}
+
+.prev-btn {
+  left: 0;
+}
+
+.next-btn {
+  right: 15px;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: calc(100% - 60px);
+    max-width: calc((100vh - 100px) * 9 / 17.5);
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    line-height: 40px;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var musicIframe = null;
+  var musicDisplayStyle = '';
+  var isMusicPaused = false;
+  var videoIds = [];
+  var currentIndex = 0;
+  
+  function findMusicIframe() {
+    var iframes = document.getElementsByTagName('iframe');
+    for (var i = 0; i < iframes.length; i++) {
+      var src = iframes[i].src || '';
+      if (src.indexOf('music.163.com') > -1 || src.indexOf('outchain/player') > -1) {
+        return iframes[i];
+      }
+    }
+    console.log('[Douyin] Music iframe not found in', iframes.length, 'iframes');
+    return null;
+  }
+  
+  function pauseMusic() {
+    console.log('[Douyin] Trying to pause music...');
+    musicIframe = findMusicIframe();
+    
+    if (musicIframe) {
+      console.log('[Douyin] Music iframe found');
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=1') > -1) {
+        musicIframe.src = src.replace('auto=1', 'auto=0');
+        console.log('[Douyin] Changed auto=1 to auto=0');
+      }
+      isMusicPaused = true;
+    } else {
+      console.log('[Douyin] Music iframe NOT found!');
+    }
+  }
+  
+  function resumeMusic() {
+    console.log('[Douyin] Trying to resume music...');
+    
+    if (musicIframe && isMusicPaused) {
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=0') > -1) {
+        musicIframe.src = src.replace('auto=0', 'auto=1');
+        console.log('[Douyin] Changed auto=0 to auto=1');
+      }
+      isMusicPaused = false;
+    }
+  }
+  
+  function init() {
+    console.log('[Douyin] Initializing...');
+    var cards = document.querySelectorAll('.video-card');
+    console.log('[Douyin] Found', cards.length, 'video cards');
+    
+    videoIds = [];
+    for (var j = 0; j < cards.length; j++) {
+      var videoId = cards[j].getAttribute('data-id');
+      if (videoId) {
+        videoIds.push(videoId);
+      }
+      cards[j].addEventListener('click', openModal);
+    }
+    
+    var closeBtn = document.querySelector('.close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+    
+    var prevBtn = document.querySelector('.prev-btn');
+    var nextBtn = document.querySelector('.next-btn');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(-1);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(1);
+      });
+    }
+    
+    var modal = document.getElementById('douyin-modal');
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+    }
+  }
+  
+  function navigateVideo(direction) {
+    if (videoIds.length === 0) return;
+    
+    currentIndex += direction;
+    if (currentIndex < 0) {
+      currentIndex = videoIds.length - 1;
+    } else if (currentIndex >= videoIds.length) {
+      currentIndex = 0;
+    }
+    
+    var videoId = videoIds[currentIndex];
+    var player = document.getElementById('douyin-player');
+    if (player && videoId) {
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+    }
+  }
+  
+  function openModal(e) {
+    console.log('[Douyin] Opening modal...');
+    var card = e.currentTarget;
+    var videoId = card.getAttribute('data-id');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    currentIndex = videoIds.indexOf(videoId);
+    
+    if (player && modal && videoId) {
+      pauseMusic();
+      
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.marginRight = '0px';
+    }
+  }
+  
+  function closeModal() {
+    console.log('[Douyin] Closing modal...');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    if (player) {
+      player.src = '';
+    }
+    
+    if (modal) {
+      modal.classList.remove('active');
+    }
+    
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    
+    resumeMusic();
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+<!-- Hero 打字机效果 -->
+<script>
+(function() {
+  function initHeroTyping() {
+    var el = document.getElementById('hero-typing');
+    if (!el) return;
+    var texts = ['编程世界', '数字乐园', '钓鱼天地', '技术博客'];
+    var textIndex = 0;
+    var charIndex = 0;
+    var isDeleting = false;
+
+    function type() {
+      var current = texts[textIndex];
+      if (isDeleting) {
+        el.textContent = current.substring(0, charIndex--);
+      } else {
+        el.textContent = current.substring(0, charIndex++);
+      }
+
+      if (!isDeleting && charIndex === current.length) {
+        setTimeout(function() { isDeleting = true; }, 2000);
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+      }
+
+      setTimeout(type, isDeleting ? 50 : 100);
+    }
+    type();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroTyping);
+  } else {
+    initHeroTyping();
+  }
+})();
+</script>
+
+
+
+<!-- 深色模式切换 -->
+<button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
+  <i class="fa fa-moon-o"></i>
+  <i class="fa fa-sun-o"></i>
+</button>
+<script data-pjax>
+(function() {
+  var btn = document.getElementById('darkmode-toggle');
+  if (!btn) return;
+  if (document.body.classList.contains('dark-mode')) btn.classList.add('on');
+  btn.addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+    btn.classList.toggle('on');
+    localStorage.setItem('blog-darkmode', document.body.classList.contains('dark-mode') ? '1' : '0');
+  });
+  if (localStorage.getItem('blog-darkmode') === '1') {
+    document.body.classList.add('dark-mode');
+    btn.classList.add('on');
+  }
+})();
+</script>
+
+<!-- AI 博客助手 -->
+<script src="/js/ai-assistant.js" data-pjax></script>
+
+<script data-pjax>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<!-- 热门文章侧边栏 -->
+<script data-pjax>
+(function() {
+  var container = document.querySelector('.sidebar-inner');
+  if (!container) return;
+
+  var existEl = document.getElementById('hot-posts-widget');
+  if (existEl) return;
+
+  var widget = document.createElement('div');
+  widget.id = 'hot-posts-widget';
+  widget.className = 'sidebar-widget hot-posts-widget';
+  widget.innerHTML = '<div class="sidebar-widget-title"><i class="fa fa-fire"></i> 热门文章</div>' +
+    '<div class="sidebar-widget-body" id="hot-posts-list">' +
+    '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">加载中...</p></div>';
+  container.appendChild(widget);
+
+  fetch('/api/hot-articles.json')
+    .then(function(r) { return r.json(); })
+    .then(function(res) {
+      var el = document.getElementById('hot-posts-list');
+      if (!el) return;
+      if (res.errno !== 0 || !res.data || !res.data.length) {
+        el.innerHTML = '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">暂无数据</p>';
+        return;
+      }
+      var html = '<ul style="list-style:none;padding:0;margin:0;">';
+      res.data.forEach(function(item, i) {
+        html += '<li style="padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' +
+          '<span style="color:#37c6c0;font-weight:700;margin-right:4px;">' + (i+1) + '.</span>' +
+          '<a href="' + item.url + '" style="color:#555;text-decoration:none;border:none;" title="' + (item.title || '') + '">' +
+          (item.title || item.url) + '</a>' +
+          '<span style="color:#ccc;margin-left:4px;font-size:10px;">' + item.count + '℃</span>' +
+        '</li>';
+      });
+      html += '</ul>';
+      el.innerHTML = html;
+      if (window.pjax && window.pjax.refresh) {
+        window.pjax.refresh(document.getElementById('hot-posts-widget'));
+      }
+    })
+    .catch(function() {
+      var el = document.getElementById('hot-posts-list');
+      if (el) el.innerHTML = '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">加载失败</p>';
+    });
+})();
+</script>
+    </div>
+</body>
+</html>
