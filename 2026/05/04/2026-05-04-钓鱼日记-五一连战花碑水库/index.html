@@ -787,6 +787,7 @@ window.addEventListener('pjax:success', () => {
           avatar: 'retro' || 'retro',
           pageSize: 10 || 10,
           imageUploader: false,
+          pageview: false,
           comment: true,
           emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo'],
           highlight: true
@@ -798,7 +799,7 @@ window.addEventListener('pjax:success', () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ path: postPath })
         }).finally(function() {
-          updateCounts();
+          setTimeout(updateCounts, 300);
         });
       }, window.Waline);
     });
