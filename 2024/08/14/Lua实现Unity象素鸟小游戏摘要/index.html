@@ -1103,6 +1103,29 @@ window.addEventListener('pjax:success', () => {
   }
 })();
 </script>
+
+<script>
+(function() {
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+  function refreshVisitors() {
+    var els = document.querySelectorAll('.waline-visitor-count');
+    els.forEach(function(el) {
+      var path = el.getAttribute('data-path');
+      if (!path) return;
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(path) + '&type=time')
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          if (d && d.data && d.data[0] && d.data[0].time != null) {
+            el.textContent = d.data[0].time;
+          }
+        });
+    });
+  }
+  if (document.readyState === 'complete') { refreshVisitors(); }
+  else { window.addEventListener('load', refreshVisitors); }
+  setTimeout(refreshVisitors, 1500);
+})();
+</script>
 <!-- 抖音视频弹窗 -->
 <div id="douyin-modal" class="modal">
   <div class="modal-content">

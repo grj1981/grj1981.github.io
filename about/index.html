@@ -350,7 +350,7 @@
 </tr>
 <tr>
 <td>电子邮箱</td>
-<td><a href="mailto:&#x32;&#x37;&#49;&#x36;&#x32;&#51;&#56;&#50;&#x31;&#64;&#113;&#113;&#x2e;&#99;&#x6f;&#109;">271623821@qq.com</a></td>
+<td><a href="mailto:&#50;&#55;&#49;&#54;&#50;&#x33;&#56;&#x32;&#49;&#64;&#x71;&#x71;&#x2e;&#x63;&#x6f;&#109;">271623821@qq.com</a></td>
 </tr>
 </tbody></table>
 <hr>
@@ -734,6 +734,29 @@ window.addEventListener('pjax:success', () => {
   } else {
     updateCounts();
   }
+})();
+</script>
+
+<script>
+(function() {
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+  function refreshVisitors() {
+    var els = document.querySelectorAll('.waline-visitor-count');
+    els.forEach(function(el) {
+      var path = el.getAttribute('data-path');
+      if (!path) return;
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(path) + '&type=time')
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          if (d && d.data && d.data[0] && d.data[0].time != null) {
+            el.textContent = d.data[0].time;
+          }
+        });
+    });
+  }
+  if (document.readyState === 'complete') { refreshVisitors(); }
+  else { window.addEventListener('load', refreshVisitors); }
+  setTimeout(refreshVisitors, 1500);
 })();
 </script>
 <!-- 抖音视频弹窗 -->
