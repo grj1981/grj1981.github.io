@@ -1125,14 +1125,14 @@ window.addEventListener('pjax:success', () => {
     countEls.forEach(function(el) {
       var p = el.getAttribute('data-path');
       if (!p) return;
-      var url = p;
+      var url = decodeURIComponent(p);
       fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
         .then(function(r) { return r.ok ? r.json() : null; })
         .then(function(json) {
           if (json && json.data && json.data[0] && json.data[0].time != null) {
             el.innerText = json.data[0].time;
           }
-        });
+        }).catch(function(){});
     });
   }
 
@@ -1144,7 +1144,7 @@ window.addEventListener('pjax:success', () => {
         Waline.init({
           el: '#waline-comments',
           serverURL: 'https://waline.bytefisher.top/',
-          path: location.pathname,
+          path: decodeURIComponent(location.pathname),
           lang: 'zh-CN' || 'zh-CN',
           meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
           requiredMeta: ["nick"] || ['nick'],
@@ -1181,7 +1181,8 @@ window.addEventListener('pjax:success', () => {
     document.querySelectorAll('.waline-visitor-count').forEach(function(el) {
       var p = el.getAttribute('data-path');
       if (!p) return;
-      fetch(baseURL + '/api/article?path=' + encodeURIComponent(p) + '&type=time')
+      var d = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(d) + '&type=time')
         .then(function(r) { return r.json(); })
         .then(function(d) {
           var t = d && d.data && d.data[0] && d.data[0].time;

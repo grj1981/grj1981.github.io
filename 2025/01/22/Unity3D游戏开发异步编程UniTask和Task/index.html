@@ -43,8 +43,8 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Unity3D游戏开发异步编程UniTask和Task","description":"await 关键字在C 编程中，await 关键字用于异步编程，它通常与 async 关键字一起使用。await 用于暂停当前方法的执行，直到等待的异步任务完成。这样可以在不阻塞主线程的情况下执行耗时操作，如I& x2F;O操作或网络请求。 例如，假设有一个异步方法 GetDataAsync()，你可以这样使用 await： 123456public async Task&lt;string&gt...","url":"https://www.bytefisher.top/2025/01/22/Unity3D游戏开发异步编程UniTask和Task/","datePublished":"2025-01-22T03:11:59.000Z","dateModified":"2026-05-14T08:31:52.701Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/01/22/Unity3D游戏开发异步编程UniTask和Task/"},"keywords":"Unity3D, IT, C#, series:Unity3D基础"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Unity3D","item":"https://www.bytefisher.top/categories/Unity3D/"},{"@type":"ListItem","position":3,"name":"Unity3D游戏开发异步编程UniTask和Task"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Unity3D游戏开发异步编程UniTask和Task","description":"await 关键字在C 编程中，await 关键字用于异步编程，它通常与 async 关键字一起使用。await 用于暂停当前方法的执行，直到等待的异步任务完成。这样可以在不阻塞主线程的情况下执行耗时操作，如I& x2F;O操作或网络请求。 例如，假设有一个异步方法 GetDataAsync()，你可以这样使用 await： 123456public async Task&lt;string&gt...","url":"https://www.bytefisher.top/2025/01/22/Unity3D游戏开发异步编程UniTask和Task/","datePublished":"2025-01-22T03:11:59.000Z","dateModified":"2026-05-14T08:31:52.701Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/01/22/Unity3D游戏开发异步编程UniTask和Task/"},"keywords":"C#, IT, Unity3D, series:Unity3D基础"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"C#","item":"https://www.bytefisher.top/categories/C/"},{"@type":"ListItem","position":3,"name":"Unity3D游戏开发异步编程UniTask和Task"}]}</script>
 
 
 <script id="page-configurations">
@@ -273,11 +273,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -420,9 +420,9 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
-              <a href="/tags/IT/" rel="tag"># IT</a>
               <a href="/tags/C/" rel="tag"># C#</a>
+              <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
               <a href="/tags/series-Unity3D%E5%9F%BA%E7%A1%80/" rel="tag"># series:Unity3D基础</a>
           </div>
 
@@ -787,14 +787,14 @@ window.addEventListener('pjax:success', () => {
     countEls.forEach(function(el) {
       var p = el.getAttribute('data-path');
       if (!p) return;
-      var url = p;
+      var url = decodeURIComponent(p);
       fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
         .then(function(r) { return r.ok ? r.json() : null; })
         .then(function(json) {
           if (json && json.data && json.data[0] && json.data[0].time != null) {
             el.innerText = json.data[0].time;
           }
-        });
+        }).catch(function(){});
     });
   }
 
@@ -806,7 +806,7 @@ window.addEventListener('pjax:success', () => {
         Waline.init({
           el: '#waline-comments',
           serverURL: 'https://waline.bytefisher.top/',
-          path: location.pathname,
+          path: decodeURIComponent(location.pathname),
           lang: 'zh-CN' || 'zh-CN',
           meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
           requiredMeta: ["nick"] || ['nick'],
@@ -843,7 +843,8 @@ window.addEventListener('pjax:success', () => {
     document.querySelectorAll('.waline-visitor-count').forEach(function(el) {
       var p = el.getAttribute('data-path');
       if (!p) return;
-      fetch(baseURL + '/api/article?path=' + encodeURIComponent(p) + '&type=time')
+      var d = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(d) + '&type=time')
         .then(function(r) { return r.json(); })
         .then(function(d) {
           var t = d && d.data && d.data[0] && d.data[0].time;

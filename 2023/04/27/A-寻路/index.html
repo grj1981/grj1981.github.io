@@ -41,7 +41,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2023/04/27/A-%E5%AF%BB%E8%B7%AF/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"A*寻路","description":"A 寻路算法是一种常用的路径规划算法，用于在图或者网格中找到最短路径。它基于启发式搜索，综合了Dijkstra算法和贪心算法的优点，通过估算当前节点到目标节点的代价，选择最合适的节点进行探索。 具体原理如下： 创建一个起点节点和一个目标节点。从起点开始探索，并将起点加入开放列表。 对于当前节点，计算该节点到目标节点的估算成本（一般使用曼哈顿距离或欧几里得距离），并将其加入已探索列表。 探索当前节点...","url":"https://www.bytefisher.top/2023/04/27/A-寻路/","datePublished":"2023-04-27T10:17:20.000Z","dateModified":"2026-05-14T08:31:52.683Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/04/27/A-寻路/"},"keywords":"Unity3D, IT"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"A*寻路","description":"A 寻路算法是一种常用的路径规划算法，用于在图或者网格中找到最短路径。它基于启发式搜索，综合了Dijkstra算法和贪心算法的优点，通过估算当前节点到目标节点的代价，选择最合适的节点进行探索。 具体原理如下： 创建一个起点节点和一个目标节点。从起点开始探索，并将起点加入开放列表。 对于当前节点，计算该节点到目标节点的估算成本（一般使用曼哈顿距离或欧几里得距离），并将其加入已探索列表。 探索当前节点...","url":"https://www.bytefisher.top/2023/04/27/A-寻路/","datePublished":"2023-04-27T10:17:20.000Z","dateModified":"2026-05-14T08:31:52.683Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/04/27/A-寻路/"},"keywords":"IT, Unity3D"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Unity3D","item":"https://www.bytefisher.top/categories/Unity3D/"},{"@type":"ListItem","position":3,"name":"A*寻路"}]}</script>
 
 
@@ -347,8 +347,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
               <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
           </div>
 
         
@@ -711,14 +711,14 @@ window.addEventListener('pjax:success', () => {
     countEls.forEach(function(el) {
       var p = el.getAttribute('data-path');
       if (!p) return;
-      var url = p;
+      var url = decodeURIComponent(p);
       fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
         .then(function(r) { return r.ok ? r.json() : null; })
         .then(function(json) {
           if (json && json.data && json.data[0] && json.data[0].time != null) {
             el.innerText = json.data[0].time;
           }
-        });
+        }).catch(function(){});
     });
   }
 
@@ -730,7 +730,7 @@ window.addEventListener('pjax:success', () => {
         Waline.init({
           el: '#waline-comments',
           serverURL: 'https://waline.bytefisher.top/',
-          path: location.pathname,
+          path: decodeURIComponent(location.pathname),
           lang: 'zh-CN' || 'zh-CN',
           meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
           requiredMeta: ["nick"] || ['nick'],
@@ -767,7 +767,8 @@ window.addEventListener('pjax:success', () => {
     document.querySelectorAll('.waline-visitor-count').forEach(function(el) {
       var p = el.getAttribute('data-path');
       if (!p) return;
-      fetch(baseURL + '/api/article?path=' + encodeURIComponent(p) + '&type=time')
+      var d = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(d) + '&type=time')
         .then(function(r) { return r.json(); })
         .then(function(d) {
           var t = d && d.data && d.data[0] && d.data[0].time;

@@ -43,7 +43,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Unity3D正交相机视野控制","description":"正交相机（Orthographic Camera）Unity3D中的正交相机（Orthographic Camera）是一种投影方式，它不同于透视相机（Perspective Camera）的投影方式。在正交相机中，物体在视野中的大小与其与相机的距离无关，也就是说，所有物体在相机视野中呈现的大小是相同的。 Unity3D的正交相机可以看作是一个在固定位置的照相机，它将三维空间中的物体投影到一个二维...","url":"https://www.bytefisher.top/2024/07/03/Unity3D正交相机视野控制/","datePublished":"2024-07-03T03:52:16.000Z","dateModified":"2026-05-14T08:31:52.701Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2024/07/03/Unity3D正交相机视野控制/"},"keywords":"Unity3D, IT, Lua, series:Unity3D基础"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Unity3D正交相机视野控制","description":"正交相机（Orthographic Camera）Unity3D中的正交相机（Orthographic Camera）是一种投影方式，它不同于透视相机（Perspective Camera）的投影方式。在正交相机中，物体在视野中的大小与其与相机的距离无关，也就是说，所有物体在相机视野中呈现的大小是相同的。 Unity3D的正交相机可以看作是一个在固定位置的照相机，它将三维空间中的物体投影到一个二维...","url":"https://www.bytefisher.top/2024/07/03/Unity3D正交相机视野控制/","datePublished":"2024-07-03T03:52:16.000Z","dateModified":"2026-05-14T08:31:52.701Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2024/07/03/Unity3D正交相机视野控制/"},"keywords":"IT, Unity3D, Lua, series:Unity3D基础"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Unity3D","item":"https://www.bytefisher.top/categories/Unity3D/"},{"@type":"ListItem","position":3,"name":"Unity3D正交相机视野控制"}]}</script>
 
 
@@ -374,8 +374,8 @@ X、Y、Z分量决定。物体在相机视野中的大小实际上是由这个�
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
               <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
               <a href="/tags/Lua/" rel="tag"># Lua</a>
               <a href="/tags/series-Unity3D%E5%9F%BA%E7%A1%80/" rel="tag"># series:Unity3D基础</a>
           </div>
@@ -741,14 +741,14 @@ window.addEventListener('pjax:success', () => {
     countEls.forEach(function(el) {
       var p = el.getAttribute('data-path');
       if (!p) return;
-      var url = p;
+      var url = decodeURIComponent(p);
       fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
         .then(function(r) { return r.ok ? r.json() : null; })
         .then(function(json) {
           if (json && json.data && json.data[0] && json.data[0].time != null) {
             el.innerText = json.data[0].time;
           }
-        });
+        }).catch(function(){});
     });
   }
 
@@ -760,7 +760,7 @@ window.addEventListener('pjax:success', () => {
         Waline.init({
           el: '#waline-comments',
           serverURL: 'https://waline.bytefisher.top/',
-          path: location.pathname,
+          path: decodeURIComponent(location.pathname),
           lang: 'zh-CN' || 'zh-CN',
           meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
           requiredMeta: ["nick"] || ['nick'],
@@ -797,7 +797,8 @@ window.addEventListener('pjax:success', () => {
     document.querySelectorAll('.waline-visitor-count').forEach(function(el) {
       var p = el.getAttribute('data-path');
       if (!p) return;
-      fetch(baseURL + '/api/article?path=' + encodeURIComponent(p) + '&type=time')
+      var d = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(d) + '&type=time')
         .then(function(r) { return r.json(); })
         .then(function(d) {
           var t = d && d.data && d.data[0] && d.data[0].time;
