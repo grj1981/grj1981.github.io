@@ -795,7 +795,7 @@ window.addEventListener('pjax:success', () => {
       fetch(baseURL + '/api/article?path=' + encodeURIComponent(path) + '&type=time')
         .then(function(r) { return r.json(); })
         .then(function(d) {
-          if (d && d.data && d.data[0] && d.data[0].time != null) {
+          if (d && d.data && d.data[0] && d.data[0].time > 0) {
             el.textContent = d.data[0].time;
           }
         });
