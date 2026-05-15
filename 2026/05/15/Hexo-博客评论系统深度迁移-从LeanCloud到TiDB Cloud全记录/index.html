@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <link rel="preconnect" href="https://iili.io">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#37c6c0">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#37c6c0">
+
+<meta http-equiv="Permissions-Policy" content="encrypted-media=*">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+  <meta name="description" content="前言ByteFisher 博客的评论系统使用 Waline（部署于 Vercel） + LeanCloud（国内版）的组合已运行一年多，积累了 19 条评论和 137 篇文章阅读计数。一切看似稳定，直到某天发现了一个 ETIMEDOUT 报错…… 这篇文章记录了从发现问题、方案选型、数据库迁移到最终落地的完整过程，特别整理了迁移过程中遇到的 7 个坑，希望能给同样使用 Waline + LeanC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 博客评论系统深度迁移：从 LeanCloud + Waline 到 TiDB Cloud 全记录">
+<meta property="og:url" content="https://www.bytefisher.top/2026/05/15/Hexo-%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E6%B7%B1%E5%BA%A6%E8%BF%81%E7%A7%BB-%E4%BB%8ELeanCloud%E5%88%B0TiDB%20Cloud%E5%85%A8%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="前言ByteFisher 博客的评论系统使用 Waline（部署于 Vercel） + LeanCloud（国内版）的组合已运行一年多，积累了 19 条评论和 137 篇文章阅读计数。一切看似稳定，直到某天发现了一个 ETIMEDOUT 报错…… 这篇文章记录了从发现问题、方案选型、数据库迁移到最终落地的完整过程，特别整理了迁移过程中遇到的 7 个坑，希望能给同样使用 Waline + LeanC">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-05-15T12:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-15T08:49:00.626Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="TiDB">
+<meta property="article:tag" content="Waline">
+<meta property="article:tag" content="series:Hexo博客搭建">
+<meta property="article:tag" content="博客优化">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="评论系统">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.bytefisher.top/2026/05/15/Hexo-%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E6%B7%B1%E5%BA%A6%E8%BF%81%E7%A7%BB-%E4%BB%8ELeanCloud%E5%88%B0TiDB%20Cloud%E5%85%A8%E8%AE%B0%E5%BD%95/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo 博客评论系统深度迁移：从 LeanCloud + Waline 到 TiDB Cloud 全记录","description":"前言ByteFisher 博客的评论系统使用 Waline（部署于 Vercel） + LeanCloud（国内版）的组合已运行一年多，积累了 19 条评论和 137 篇文章阅读计数。一切看似稳定，直到某天发现了一个 ETIMEDOUT 报错…… 这篇文章记录了从发现问题、方案选型、数据库迁移到最终落地的完整过程，特别整理了迁移过程中遇到的 7 个坑，希望能给同样使用 Waline + LeanC...","url":"https://www.bytefisher.top/2026/05/15/Hexo-博客评论系统深度迁移-从LeanCloud到TiDB Cloud全记录/","datePublished":"2026-05-15T12:00:00.000Z","dateModified":"2026-05-15T08:49:00.626Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/05/15/Hexo-博客评论系统深度迁移-从LeanCloud到TiDB Cloud全记录/"},"keywords":"series:Hexo博客搭建, Hexo, Waline, 博客优化, 评论系统, TiDB, 数据库"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Hexo博客搭建","item":"https://www.bytefisher.top/categories/Hexo博客搭建/"},{"@type":"ListItem","position":3,"name":"Hexo 博客评论系统深度迁移：从 LeanCloud + Waline 到 TiDB Cloud 全记录"}]}</script>
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Hexo 博客评论系统深度迁移：从 LeanCloud + Waline 到 TiDB Cloud 全记录 | ByteFisher</title>
+  
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dc50e0997d43c3a8dbf2afdb3fdff233";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#37c6c0">
+<link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-aigames">
+
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">46</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">100</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">49</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>rss</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/05/15/Hexo-%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E6%B7%B1%E5%BA%A6%E8%BF%81%E7%A7%BB-%E4%BB%8ELeanCloud%E5%88%B0TiDB%20Cloud%E5%85%A8%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo 博客评论系统深度迁移：从 LeanCloud + Waline 到 TiDB Cloud 全记录
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-05-15 20:00:00" itemprop="dateCreated datePublished" datetime="2026-05-15T20:00:00+08:00">2026-05-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">Hexo博客搭建</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2026/05/15/Hexo-%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E6%B7%B1%E5%BA%A6%E8%BF%81%E7%A7%BB-%E4%BB%8ELeanCloud%E5%88%B0TiDB%20Cloud%E5%85%A8%E8%AE%B0%E5%BD%95/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2026/05/15/Hexo-%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E6%B7%B1%E5%BA%A6%E8%BF%81%E7%A7%BB-%E4%BB%8ELeanCloud%E5%88%B0TiDB%20Cloud%E5%85%A8%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">前言ByteFisher 博客的评论系统使用 Waline（部署于 Vercel） + LeanCloud（国内版）的组合已运行一年多，积累了 19 条评论和 137 篇文章阅读计数。一切看似稳定，直到某天发现了一个 ETIMEDOUT 报错…… 这篇文章记录了从发现问题、方案选型、数据库迁移到最终落地的完整过程，特别整理了迁移过程中遇到的 7 个坑，希望能给同样使用 Waline + LeanC...</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>ByteFisher 博客的评论系统使用 Waline（部署于 Vercel） + LeanCloud（国内版）的组合已运行一年多，积累了 19 条评论和 137 篇文章阅读计数。一切看似稳定，直到某天发现了一个 ETIMEDOUT 报错……</p>
+<p>这篇文章记录了从发现问题、方案选型、数据库迁移到最终落地的完整过程，特别整理了迁移过程中遇到的 7 个坑，希望能给同样使用 Waline + LeanCloud 组合的博主一些参考。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="一、问题的源头"><a href="#一、问题的源头" class="headerlink" title="一、问题的源头"></a>一、问题的源头</h2><h3 id="1-1-突如其来的连接超时"><a href="#1-1-突如其来的连接超时" class="headerlink" title="1.1 突如其来的连接超时"></a>1.1 突如其来的连接超时</h3><p>某天更新博客后，发现控制台持续报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WalineComment.vue:194 Get comment data failed with 500:</span><br><span class="line">connect ETIMEDOUT 106.75.100.17:443</span><br><span class="line">[N/A GET https://8sghvqns.lc-cn-n1-shared.com/1.1/classes/Comment]</span><br></pre></td></tr></table></figure>
+
+<p>表象是 Vercel（海外服务器）向 LeanCloud 国内节点（上海）发起的 TCP 连接全部超时。从国内网络实测却能正常连接：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从国内网络测试</span></span><br><span class="line">$ curl https://8sghvqns.lc-cn-n1-shared.com/1.1/classes/Comment -I</span><br><span class="line">HTTP_CODE:200 TIME:2s  <span class="comment"># ✅ 国内网络正常</span></span><br></pre></td></tr></table></figure>
+
+<p>Vercel 的服务器部署在 AWS&#x2F;GCP 美西区域，而 LeanCloud 上海节点的跨境网络不稳定是常见现象。之前还能用是因为旧的出口 IP 还能连通，但这终究是随时会爆的雷。</p>
+<h3 id="1-2-更大的定时炸弹"><a href="#1-2-更大的定时炸弹" class="headerlink" title="1.2 更大的定时炸弹"></a>1.2 更大的定时炸弹</h3><p>排查过程中，发现 LeanCloud 官方公告：</p>
+<blockquote>
+<p><strong>LeanCloud 将于 2027 年 1 月 12 日停止对外提供服务。</strong></p>
+</blockquote>
+<p>距离停服只剩不到 8 个月。即使这次勉强修好连接，2027 年 1 月还是要迁移——不如一步到位。</p>
+<h3 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h3><table>
+<thead>
+<tr>
+<th>组件</th>
+<th>用途</th>
+<th>影响程度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Waline 服务端（Vercel）</td>
+<td>评论读写、阅读计数</td>
+<td>🔴 核心功能全部中断</td>
+</tr>
+<tr>
+<td><code>scripts/generators/hot-articles.js</code></td>
+<td>Hexo 构建时获取热门文章</td>
+<td>🔴 侧边栏热门文章空</td>
+</tr>
+<tr>
+<td><code>api/hot-articles.js</code></td>
+<td>Vercel Serverless 热门文章 API</td>
+<td>🟡 降级可用</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、方案选型"><a href="#二、方案选型" class="headerlink" title="二、方案选型"></a>二、方案选型</h2><h3 id="2-1-核心条件"><a href="#2-1-核心条件" class="headerlink" title="2.1 核心条件"></a>2.1 核心条件</h3><table>
+<thead>
+<tr>
+<th>条件</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>国内无需代理访问</td>
+<td>博主和多数读者在国内</td>
+</tr>
+<tr>
+<td>Waline 原生支持</td>
+<td>不改 Waline 代码</td>
+</tr>
+<tr>
+<td>免费额度够用</td>
+<td>个人博客，数据量小</td>
+</tr>
+<tr>
+<td>2027 年后不会停服</td>
+<td>这次迁移要管很多年</td>
+</tr>
+</tbody></table>
+<h3 id="2-2-候选方案对比"><a href="#2-2-候选方案对比" class="headerlink" title="2.2 候选方案对比"></a>2.2 候选方案对比</h3><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>国内访问</th>
+<th>免费额度</th>
+<th>Waline 支持</th>
+<th>公司背景</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LeanCloud 国际版</td>
+<td>✅</td>
+<td>开发版</td>
+<td>✅ 原生</td>
+<td>2027 年停服</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Turso (SQLite)</td>
+<td>⚠️</td>
+<td>9GB</td>
+<td>❌ 不支持</td>
+<td>Turso (美国)</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>MongoDB Atlas</td>
+<td>⚠️ 慢</td>
+<td>512MB</td>
+<td>✅ 原生</td>
+<td>MongoDB Inc</td>
+<td>🟡</td>
+</tr>
+<tr>
+<td><strong>TiDB Cloud</strong></td>
+<td>✅ <strong>流畅</strong></td>
+<td><strong>5GB</strong></td>
+<td>✅ <strong>原生</strong></td>
+<td><strong>PingCAP (中国)</strong></td>
+<td><strong>✅</strong></td>
+</tr>
+</tbody></table>
+<h3 id="2-3-选择-TiDB-Cloud-的理由"><a href="#2-3-选择-TiDB-Cloud-的理由" class="headerlink" title="2.3 选择 TiDB Cloud 的理由"></a>2.3 选择 TiDB Cloud 的理由</h3><table>
+<thead>
+<tr>
+<th>因素</th>
+<th>评价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PingCAP 是北京公司</strong></td>
+<td>控制台国内访问流畅，不担心被墙</td>
+</tr>
+<tr>
+<td><strong>5GB 免费额度</strong></td>
+<td>19 条评论 + 137 条计数十年也用不完</td>
+</tr>
+<tr>
+<td><strong>Waline 原生支持</strong></td>
+<td>直接设置 <code>TIDB_*</code> 环境变量即可</td>
+</tr>
+<tr>
+<td><strong>MySQL 兼容</strong></td>
+<td>迁移数据时 SQL 语法完全兼容，工具链丰富</td>
+</tr>
+<tr>
+<td><strong>长期稳定</strong></td>
+<td>PingCAP 是 TiDB 的创始公司，不会突然停服</td>
+</tr>
+</tbody></table>
+<p>最终决策：<strong>Waline + TiDB Cloud（Serverless）</strong>。</p>
+<hr>
+<h2 id="三、LeanCloud-数据导出"><a href="#三、LeanCloud-数据导出" class="headerlink" title="三、LeanCloud 数据导出"></a>三、LeanCloud 数据导出</h2><h3 id="3-1-控制台导出"><a href="#3-1-控制台导出" class="headerlink" title="3.1 控制台导出"></a>3.1 控制台导出</h3><p>在 LeanCloud 国内版控制台 → 数据存储 → 分别导出两张表：</p>
+<table>
+<thead>
+<tr>
+<th>表名</th>
+<th>用途</th>
+<th>记录数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Comment</code></td>
+<td>评论内容</td>
+<td>19 条</td>
+</tr>
+<tr>
+<td><code>Counter</code></td>
+<td>阅读计数</td>
+<td>137 条</td>
+</tr>
+</tbody></table>
+<h3 id="3-2-导出格式"><a href="#3-2-导出格式" class="headerlink" title="3.2 导出格式"></a>3.2 导出格式</h3><p>LeanCloud 的导出格式是 <strong>tar.gz</strong> 压缩包，内含 <strong>JSONL（JSON Lines）</strong> 文件。格式特殊：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第 1 行是元数据</span></span><br><span class="line">#filetype<span class="punctuation">:</span>JSON-streaming <span class="punctuation">&#123;</span><span class="attr">&quot;type&quot;</span><span class="punctuation">:</span><span class="string">&quot;Class&quot;</span><span class="punctuation">,</span><span class="attr">&quot;class&quot;</span><span class="punctuation">:</span><span class="string">&quot;Comment&quot;</span><span class="punctuation">&#125;</span></span><br><span class="line"><span class="comment">// 每行是一个 JSON 对象</span></span><br><span class="line"><span class="punctuation">&#123;</span><span class="attr">&quot;nick&quot;</span><span class="punctuation">:</span><span class="string">&quot;Anonymous&quot;</span><span class="punctuation">,</span><span class="attr">&quot;comment&quot;</span><span class="punctuation">:</span><span class="string">&quot;测试&quot;</span><span class="punctuation">,</span><span class="attr">&quot;url&quot;</span><span class="punctuation">:</span><span class="string">&quot;/guestbook/&quot;</span><span class="punctuation">,</span>...<span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#123;</span><span class="attr">&quot;nick&quot;</span><span class="punctuation">:</span><span class="string">&quot;用户&quot;</span><span class="punctuation">,</span><span class="attr">&quot;comment&quot;</span><span class="punctuation">:</span><span class="string">&quot;文章内容&quot;</span><span class="punctuation">,</span><span class="attr">&quot;url&quot;</span><span class="punctuation">:</span><span class="string">&quot;/2026/05/04/...&quot;</span><span class="punctuation">,</span>...<span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>每个 JSON 行的字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>objectId</code></td>
+<td>String</td>
+<td>LeanCloud 唯一 ID（24 位）</td>
+</tr>
+<tr>
+<td><code>comment</code></td>
+<td>Text</td>
+<td>评论正文</td>
+</tr>
+<tr>
+<td><code>nick</code> &#x2F; <code>mail</code> &#x2F; <code>link</code></td>
+<td>String</td>
+<td>用户信息</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>String</td>
+<td>文章路径（<strong>原始中文</strong>）</td>
+</tr>
+<tr>
+<td><code>pid</code> &#x2F; <code>rid</code></td>
+<td>String&#x2F;null</td>
+<td>父子评论引用 ID</td>
+</tr>
+<tr>
+<td><code>createdAt</code> &#x2F; <code>updatedAt</code></td>
+<td>ISO 时间</td>
+<td>时间戳</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>坑 1</strong>：JSONL 不是标准 JSON 数组，不能直接用 <code>JSON.parse()</code> 读取。需要用 <code>JSON.parse(line)</code> 逐行解析。</p>
+</blockquote>
+<hr>
+<h2 id="四、TiDB-Cloud-部署"><a href="#四、TiDB-Cloud-部署" class="headerlink" title="四、TiDB Cloud 部署"></a>四、TiDB Cloud 部署</h2><h3 id="4-1-注册与建库"><a href="#4-1-注册与建库" class="headerlink" title="4.1 注册与建库"></a>4.1 注册与建库</h3><ol>
+<li>打开 <a target="_blank" rel="noopener" href="https://tidbcloud.com/">tidbcloud.com</a> → GitHub 账号登录</li>
+<li>选择 <strong>Serverless Tier</strong>（免费 5GB）</li>
+<li>配置参数：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cluster Name</td>
+<td><code>bytefisher-waline</code></td>
+</tr>
+<tr>
+<td>区域</td>
+<td><strong>AWS Singapore (ap-southeast-1)</strong></td>
+</tr>
+<tr>
+<td>数据库</td>
+<td><code>waline</code></td>
+</tr>
+</tbody></table>
+<p>选 Singapore 区域的原因：离国内和 Vercel（美东）的延迟都较低。</p>
+<h3 id="4-2-获取连接信息"><a href="#4-2-获取连接信息" class="headerlink" title="4.2 获取连接信息"></a>4.2 获取连接信息</h3><p>创建后拿到：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HOST: gateway01.ap-southeast-1.prod.aws.tidbcloud.com</span><br><span class="line">PORT: 4000</span><br><span class="line">USER: xxx.root</span><br></pre></td></tr></table></figure>
+
+<p>在 TiDB Cloud 的 <strong>SQL Editor</strong> 中执行建库：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> DATABASE waline;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="五、数据导入-TiDB"><a href="#五、数据导入-TiDB" class="headerlink" title="五、数据导入 TiDB"></a>五、数据导入 TiDB</h2><h3 id="5-1-表结构"><a href="#5-1-表结构" class="headerlink" title="5.1 表结构"></a>5.1 表结构</h3><p>Waline 的 TiDB 适配器使用 MySQL 兼容模式，需要创建以下表：</p>
+<table>
+<thead>
+<tr>
+<th>表名</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>wl_Comment</code></td>
+<td>评论数据</td>
+</tr>
+<tr>
+<td><code>wl_Counter</code></td>
+<td>阅读计数</td>
+</tr>
+<tr>
+<td><code>wl_Users</code></td>
+<td>用户信息（含第三方 OAuth 字段）</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>坑 2</strong>：<code>wl_Users</code> 表创建时如果缺少 <code>github</code>、<code>twitter</code> 等 OAuth 字段，管理后台 GitHub 登录会报 <code>Unknown column &#39;github&#39;</code> 错误。建表时一定要包含所有社交登录字段。</p>
+</blockquote>
+<h3 id="5-2-数据迁移"><a href="#5-2-数据迁移" class="headerlink" title="5.2 数据迁移"></a>5.2 数据迁移</h3><p>从 LeanCloud JSONL → TiDB SQL 的转换注意：</p>
+<p><strong>Comment 表字段映射：</strong></p>
+<table>
+<thead>
+<tr>
+<th>LeanCloud</th>
+<th>TiDB</th>
+<th>转换逻辑</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>objectId</code></td>
+<td><code>id</code></td>
+<td>String → 按时间排序后分配自增整数</td>
+</tr>
+<tr>
+<td><code>comment</code></td>
+<td><code>comment</code></td>
+<td>直接映射</td>
+</tr>
+<tr>
+<td><code>pid</code> &#x2F; <code>rid</code></td>
+<td><code>pid</code> &#x2F; <code>rid</code></td>
+<td><strong>坑 3</strong>：LeanCloud 存的是 objectId 字符串，TiDB 用自增整数，需要用 Map 重映射</td>
+</tr>
+<tr>
+<td><code>createdAt</code></td>
+<td><code>createdAt</code></td>
+<td>ISO 时间戳 → TIMESTAMP</td>
+</tr>
+<tr>
+<td><code>insertedAt</code> 对象</td>
+<td><code>insertedAt</code></td>
+<td><code>{&quot;__type&quot;:&quot;Date&quot;,&quot;iso&quot;:&quot;...&quot;}</code> 需要特殊解析</td>
+</tr>
+</tbody></table>
+<p><strong>Counter 表字段映射：</strong></p>
+<table>
+<thead>
+<tr>
+<th>LeanCloud</th>
+<th>TiDB</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>url</code></td>
+<td><code>url</code></td>
+<td>文章路径</td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td><code>time</code></td>
+<td>阅读计数</td>
+</tr>
+</tbody></table>
+<h3 id="5-3-导入脚本"><a href="#5-3-导入脚本" class="headerlink" title="5.3 导入脚本"></a>5.3 导入脚本</h3><p>编写 Node.js 脚本，连接 TiDB 后执行批量插入。核心逻辑：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 读取 JSONL → 解析每行为 JSON 对象</span></span><br><span class="line"><span class="keyword">const</span> lines = content.<span class="title function_">split</span>(<span class="string">&#x27;\n&#x27;</span>).<span class="title function_">filter</span>(<span class="function"><span class="params">l</span> =&gt;</span> l.<span class="title function_">trim</span>());</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> line <span class="keyword">of</span> lines) &#123;</span><br><span class="line">  <span class="keyword">if</span> (line.<span class="title function_">startsWith</span>(<span class="string">&#x27;#&#x27;</span>)) <span class="keyword">continue</span>;</span><br><span class="line">  <span class="keyword">const</span> obj = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(line);</span><br><span class="line">  results.<span class="title function_">push</span>(obj);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 按时间排序，分配自增 ID</span></span><br><span class="line">rawComments.<span class="title function_">sort</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> <span class="keyword">new</span> <span class="title class_">Date</span>(a.<span class="property">createdAt</span>) - <span class="keyword">new</span> <span class="title class_">Date</span>(b.<span class="property">createdAt</span>));</span><br><span class="line"><span class="keyword">const</span> idMap = &#123;&#125;;</span><br><span class="line">rawComments.<span class="title function_">forEach</span>(<span class="function">(<span class="params">r, i</span>) =&gt;</span> &#123; idMap[r.<span class="property">objectId</span>] = i + <span class="number">1</span>; &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 重映射 pid/rid</span></span><br><span class="line"><span class="keyword">const</span> pid = r.<span class="property">pid</span> ? (idMap[r.<span class="property">pid</span>] || <span class="literal">null</span>) : <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">const</span> rid = r.<span class="property">rid</span> ? (idMap[r.<span class="property">rid</span>] || <span class="literal">null</span>) : <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="六、Vercel-环境变量配置"><a href="#六、Vercel-环境变量配置" class="headerlink" title="六、Vercel 环境变量配置"></a>六、Vercel 环境变量配置</h2><p>这是最关键的一步——Waline 通过环境变量确定使用哪个数据库。</p>
+<h3 id="6-1-删除旧环境变量"><a href="#6-1-删除旧环境变量" class="headerlink" title="6.1 删除旧环境变量"></a>6.1 删除旧环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LEAN_ID          <span class="comment"># 已不需要</span></span><br><span class="line">LEAN_KEY         <span class="comment"># 已不需要  </span></span><br><span class="line">LEAN_MASTER_KEY  <span class="comment"># 已不需要</span></span><br><span class="line">LEAN_SERVER      <span class="comment"># 已不需要</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-新增-TiDB-环境变量"><a href="#6-2-新增-TiDB-环境变量" class="headerlink" title="6.2 新增 TiDB 环境变量"></a>6.2 新增 TiDB 环境变量</h3><table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>TIDB_HOST</code></td>
+<td>TiDB 连接地址</td>
+</tr>
+<tr>
+<td><code>TIDB_PORT</code></td>
+<td><code>4000</code></td>
+</tr>
+<tr>
+<td><code>TIDB_USER</code></td>
+<td>用户名</td>
+</tr>
+<tr>
+<td><code>TIDB_PASSWORD</code></td>
+<td>密码</td>
+</tr>
+<tr>
+<td><code>TIDB_DB</code></td>
+<td><code>waline</code></td>
+</tr>
+<tr>
+<td><code>TIDB_PREFIX</code></td>
+<td><code>wl_</code></td>
+</tr>
+<tr>
+<td><code>JWT_TOKEN</code></td>
+<td>随机字符串（管理后台登录密钥）</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>坑 4</strong>：环境变量名不能写错。之前误将 <code>TIDB_USER</code> 写成了 <code>IDB_USER</code>（少了开头的 T），Waline 连接不上数据库，但也不报错——仅 Function Logs 中有一条 <code>No valid storage found</code> 警告。排查了很长时间才发现少了个字母。</p>
+</blockquote>
+<h3 id="6-3-配置验证"><a href="#6-3-配置验证" class="headerlink" title="6.3 配置验证"></a>6.3 配置验证</h3><p>配置完成后，访问 <code>https://waline.bytefisher.top/ui</code>，登录管理后台确认：</p>
+<ul>
+<li>Comment 表显示 19+ 条旧评论</li>
+<li>Counter 表显示 137+ 条计数</li>
+<li>新发评论能正常入库</li>
+</ul>
+<hr>
+<h2 id="七、迁移后的修复（踩坑合集）"><a href="#七、迁移后的修复（踩坑合集）" class="headerlink" title="七、迁移后的修复（踩坑合集）"></a>七、迁移后的修复（踩坑合集）</h2><p>数据迁移完成只是第一步，后面还有几个坑需要填平。</p>
+<h3 id="7-1-坑-5：计数器-URL-编码不匹配（四次反复）"><a href="#7-1-坑-5：计数器-URL-编码不匹配（四次反复）" class="headerlink" title="7.1 坑 5：计数器 URL 编码不匹配（四次反复）"></a>7.1 坑 5：计数器 URL 编码不匹配（四次反复）</h3><p>这是整个迁移过程中最折磨人的问题，来回改了四次才最终解决。</p>
+<p><strong>问题现象</strong>：文章页阅读计数显示为 0，但 Counter 表中确实有数据。</p>
+<p><strong>根因</strong>：URL 编码格式不一致。</p>
+<p>Waline 的数据流是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">博客页面 (data-path 属性) → Waline API 请求 → Waline 服务端解码 → TiDB 查询</span><br></pre></td></tr></table></figure>
+
+<p>每个环节都可能引入编码差异：</p>
+<table>
+<thead>
+<tr>
+<th>编码格式</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>原始中文</td>
+<td><code>/2026/05/14/Hexo-博客图床迁移实战-从iili.io到Cloudflare Workers+工具链改造全记录/</code></td>
+</tr>
+<tr>
+<td>URL 编码</td>
+<td><code>/2026/05/14/Hexo-%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A.../</code></td>
+</tr>
+<tr>
+<td>双重编码</td>
+<td><code>%2F2026%2F05%2F14%2FHexo-%25E5%258D%259A%25E5%25AE%25A2...</code></td>
+</tr>
+</tbody></table>
+<p>每次格式转换都可能改变路径字符，导致数据库查不到记录。</p>
+<p><strong>四次修复过程：</strong></p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>数据库格式</th>
+<th>Waline 查询格式</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>原始导入</td>
+<td>原始中文</td>
+<td>原始中文</td>
+<td>❌ Waline查询时编码不匹配</td>
+</tr>
+<tr>
+<td>第一次修复</td>
+<td>URL 编码</td>
+<td>URL 编码</td>
+<td>❌ Waline解码后匹配不上</td>
+</tr>
+<tr>
+<td>第二次修复</td>
+<td>去尾斜杠</td>
+<td>带尾斜杠</td>
+<td>❌ Waline用带斜杠的查</td>
+</tr>
+<tr>
+<td><strong>最终</strong></td>
+<td><strong>原始中文 + 尾斜杠</strong></td>
+<td><strong>原始中文 + 尾斜杠</strong></td>
+<td><strong>✅ 匹配</strong></td>
+</tr>
+</tbody></table>
+<p><strong>最终结论</strong>：Counter 表和 Comment 表的 URL 格式必须统一为<strong>原始中文 + 尾斜杠</strong>（与 Waline 服务端 <code>decodeURI()</code> 后的格式一致）。</p>
+<p>另外，前端 JS 中获取计数时，需要正确的编码链：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 正确的编码链</span></span><br><span class="line"><span class="keyword">var</span> p = el.<span class="title function_">getAttribute</span>(<span class="string">&#x27;data-path&#x27;</span>); <span class="comment">// 原始中文</span></span><br><span class="line"><span class="title function_">fetch</span>(baseURL + <span class="string">&#x27;/api/article?path=&#x27;</span> + <span class="built_in">encodeURIComponent</span>(p) + <span class="string">&#x27;&amp;type=time&#x27;</span>)</span><br><span class="line"><span class="comment">// Waline 服务端 decodeURIComponent → 原始中文 → 匹配数据库</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-2-坑-6：评论刷新后消失"><a href="#7-2-坑-6：评论刷新后消失" class="headerlink" title="7.2 坑 6：评论刷新后消失"></a>7.2 坑 6：评论刷新后消失</h3><p><strong>问题</strong>：新评论发成功了（管理后台能看到），但刷新页面后不显示。</p>
+<p>排查了一通才发现——<strong>Waline Vercel 函数实例缓存了旧查询结果</strong>，新评论写入数据库但 API 返回的是旧缓存。</p>
+<p><strong>修复方法</strong>：</p>
+<ol>
+<li>直接调 API 确认正常：<code>/api/comment?path=/guestbook/&amp;pageSize=20</code></li>
+<li>强制 Vercel <strong>冷启动重新部署</strong>（Deployments → Redeploy）</li>
+<li>清除浏览器缓存&#x2F;Service Worker 缓存</li>
+</ol>
+<p>之后再发新评论，刷新即可正常加载。</p>
+<h3 id="7-3-坑-7：Waline-init-选项不被支持"><a href="#7-3-坑-7：Waline-init-选项不被支持" class="headerlink" title="7.3 坑 7：Waline.init 选项不被支持"></a>7.3 坑 7：Waline.init 选项不被支持</h3><p><strong>问题</strong>：NexT 主题的 waline.swig 中调用了 <code>Waline.init()</code>，传入了几个不被 <code>@waline/client@2</code> 支持的选项：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❌ 会有问题的版本</span></span><br><span class="line"><span class="title class_">Waline</span>.<span class="title function_">init</span>(&#123;</span><br><span class="line">  <span class="attr">el</span>: <span class="string">&#x27;#waline-comments&#x27;</span>,</span><br><span class="line">  <span class="attr">serverURL</span>: <span class="string">&#x27;https://waline.bytefisher.top/&#x27;</span>,</span><br><span class="line">  <span class="attr">imageUploader</span>: <span class="literal">false</span>,  <span class="comment">// 不存在此选项</span></span><br><span class="line">  <span class="attr">pageview</span>: <span class="literal">false</span>,       <span class="comment">// 不存在</span></span><br><span class="line">  <span class="attr">comment</span>: <span class="literal">true</span>,         <span class="comment">// 不存在</span></span><br><span class="line">  <span class="attr">highlight</span>: <span class="literal">true</span>        <span class="comment">// 不存在</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Waline v2 遇到不认识的选项会直接抛出错误，导致整个初始化中断——评论不显示、计数不更新。</p>
+<p><strong>修复方法</strong>：精简 init 配置，只保留被支持的选项：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ✅ 正常的版本</span></span><br><span class="line"><span class="title class_">Waline</span>.<span class="title function_">init</span>(&#123;</span><br><span class="line">  <span class="attr">el</span>: <span class="string">&#x27;#waline-comments&#x27;</span>,</span><br><span class="line">  <span class="attr">serverURL</span>: <span class="string">&#x27;https://waline.bytefisher.top/&#x27;</span>,</span><br><span class="line">  <span class="attr">path</span>: location.<span class="property">pathname</span>,</span><br><span class="line">  <span class="attr">lang</span>: <span class="string">&#x27;zh-CN&#x27;</span>,</span><br><span class="line">  <span class="attr">meta</span>: [<span class="string">&#x27;nick&#x27;</span>, <span class="string">&#x27;mail&#x27;</span>, <span class="string">&#x27;link&#x27;</span>],</span><br><span class="line">  <span class="attr">requiredMeta</span>: [<span class="string">&#x27;nick&#x27;</span>],</span><br><span class="line">  <span class="attr">placeholder</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  <span class="attr">avatar</span>: <span class="string">&#x27;retro&#x27;</span>,</span><br><span class="line">  <span class="attr">pageSize</span>: <span class="number">10</span>,</span><br><span class="line">  <span class="attr">emoji</span>: [<span class="string">&#x27;//unpkg.com/@waline/emojis@1.2.0/weibo&#x27;</span>]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-4-计数显示修复（前端-JS）"><a href="#7-4-计数显示修复（前端-JS）" class="headerlink" title="7.4 计数显示修复（前端 JS）"></a>7.4 计数显示修复（前端 JS）</h3><p>计数器 API 调用成功后，还需要确保前端 DOM 更新。在 <code>waline.swig</code> 中加了独立的计数获取脚本：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> baseURL = <span class="string">&#x27;https://waline.bytefisher.top/&#x27;</span>.<span class="title function_">replace</span>(<span class="regexp">/\/+$/</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">fetchAll</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;.waline-visitor-count&#x27;</span>).<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">el</span>) &#123;</span><br><span class="line">      <span class="keyword">var</span> p = el.<span class="title function_">getAttribute</span>(<span class="string">&#x27;data-path&#x27;</span>);</span><br><span class="line">      <span class="keyword">if</span> (!p) <span class="keyword">return</span>;</span><br><span class="line">      <span class="title function_">fetch</span>(baseURL + <span class="string">&#x27;/api/article?path=&#x27;</span> + <span class="built_in">encodeURIComponent</span>(p) + <span class="string">&#x27;&amp;type=time&#x27;</span>)</span><br><span class="line">        .<span class="title function_">then</span>(<span class="keyword">function</span>(<span class="params">r</span>) &#123; <span class="keyword">return</span> r.<span class="title function_">json</span>(); &#125;)</span><br><span class="line">        .<span class="title function_">then</span>(<span class="keyword">function</span>(<span class="params">d</span>) &#123;</span><br><span class="line">          <span class="keyword">var</span> t = d &amp;&amp; d.<span class="property">data</span> &amp;&amp; d.<span class="property">data</span>[<span class="number">0</span>] &amp;&amp; d.<span class="property">data</span>[<span class="number">0</span>].<span class="property">time</span>;</span><br><span class="line">          <span class="keyword">if</span> (t &gt; <span class="number">0</span>) el.<span class="property">textContent</span> = t;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 多层保障</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="property">readyState</span> === <span class="string">&#x27;complete&#x27;</span>) &#123; <span class="title function_">fetchAll</span>(); &#125;</span><br><span class="line">  <span class="keyword">else</span> &#123; <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, fetchAll); &#125;</span><br><span class="line">  <span class="built_in">setTimeout</span>(fetchAll, <span class="number">2000</span>);</span><br><span class="line">  <span class="built_in">setTimeout</span>(fetchAll, <span class="number">4000</span>);</span><br><span class="line">  <span class="comment">// MutationObserver 监控 DOM 变化</span></span><br><span class="line">  <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;.waline-visitor-count&#x27;</span>).<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">el</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> obs = <span class="keyword">new</span> <span class="title class_">MutationObserver</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123; <span class="title function_">fetchAll</span>(); &#125;);</span><br><span class="line">    obs.<span class="title function_">observe</span>(el, &#123; <span class="attr">characterData</span>: <span class="literal">true</span>, <span class="attr">childList</span>: <span class="literal">true</span>, <span class="attr">subtree</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="八、热门文章生成改造"><a href="#八、热门文章生成改造" class="headerlink" title="八、热门文章生成改造"></a>八、热门文章生成改造</h2><p>原有的 <code>hot-articles.js</code> 生成器直连 LeanCloud API 获取阅读计数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❌ 旧的实现（依赖 LeanCloud）</span></span><br><span class="line"><span class="keyword">var</span> opts = &#123;</span><br><span class="line">  <span class="attr">hostname</span>: <span class="string">&#x27;8sghvqns.lc-cn-n1-shared.com&#x27;</span>,</span><br><span class="line">  <span class="attr">path</span>: <span class="string">&#x27;/1.1/classes/Counter?order=-count&amp;limit=300&#x27;</span>,</span><br><span class="line">  <span class="attr">headers</span>: &#123; <span class="string">&#x27;X-LC-Id&#x27;</span>: appId, <span class="string">&#x27;X-LC-Key&#x27;</span>: appKey + <span class="string">&#x27;,master&#x27;</span> &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>迁移后改为<strong>在 Hexo 构建时直接查询 TiDB</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ✅ 新的实现（直连 TiDB）</span></span><br><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">&#x27;mysql2/promise&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> pool = mysql.<span class="title function_">createPool</span>(&#123;</span><br><span class="line">  <span class="attr">host</span>: <span class="string">&#x27;gateway01.ap-southeast-1.prod.aws.tidbcloud.com&#x27;</span>,</span><br><span class="line">  <span class="attr">port</span>: <span class="number">4000</span>,</span><br><span class="line">  <span class="attr">user</span>: <span class="string">&#x27;xxx.root&#x27;</span>,</span><br><span class="line">  <span class="attr">password</span>: <span class="string">&#x27;xxx&#x27;</span>,</span><br><span class="line">  <span class="attr">database</span>: <span class="string">&#x27;waline&#x27;</span>,</span><br><span class="line">  <span class="attr">ssl</span>: &#123; <span class="attr">rejectUnauthorized</span>: <span class="literal">true</span> &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> [rows] = <span class="keyword">await</span> pool.<span class="title function_">execute</span>(</span><br><span class="line">  <span class="string">&#x27;SELECT url, time FROM wl_Counter WHERE url LIKE &quot;/20%/%&quot; AND time &gt; 0 ORDER BY time DESC LIMIT 300&#x27;</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>这样 <code>hexo g</code> 时直接从 TiDB 拉取最新阅读计数，生成 <code>api/hot-articles.json</code>，不依赖外部 API 的稳定性。</p>
+<hr>
+<h2 id="九、最终架构"><a href="#九、最终架构" class="headerlink" title="九、最终架构"></a>九、最终架构</h2><h3 id="系统拓扑"><a href="#系统拓扑" class="headerlink" title="系统拓扑"></a>系统拓扑</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">用户浏览器 (www.bytefisher.top)</span><br><span class="line">  ├── 发表评论 ──→ Waline 服务端 (Vercel) ──→ TiDB Cloud (Singapore)</span><br><span class="line">  ├── 加载评论 ──→ Waline 服务端 (Vercel) ──→ TiDB Cloud (Singapore)</span><br><span class="line">  ├── 阅读计数 ──→ Waline 服务端 (Vercel) ──→ TiDB Cloud (Singapore)</span><br><span class="line">  └── 热门文章 ──→ 读取 hexo 生成的静态 JSON (构建时从 TiDB 拉取)</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据库表"><a href="#数据库表" class="headerlink" title="数据库表"></a>数据库表</h3><table>
+<thead>
+<tr>
+<th>表名</th>
+<th>用途</th>
+<th>数据量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>wl_Comment</code></td>
+<td>评论内容、用户信息</td>
+<td>21 条</td>
+</tr>
+<tr>
+<td><code>wl_Counter</code></td>
+<td>文章阅读计数</td>
+<td>133 条</td>
+</tr>
+<tr>
+<td><code>wl_Users</code></td>
+<td>管理后台用户</td>
+<td>1 条</td>
+</tr>
+</tbody></table>
+<h3 id="Vercel-环境变量（最终版）"><a href="#Vercel-环境变量（最终版）" class="headerlink" title="Vercel 环境变量（最终版）"></a>Vercel 环境变量（最终版）</h3><table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>TIDB_HOST</code> &#x2F; <code>TIDB_PORT</code> &#x2F; <code>TIDB_USER</code> &#x2F; <code>TIDB_PASSWORD</code></td>
+<td>TiDB 连接</td>
+</tr>
+<tr>
+<td><code>TIDB_DB</code> &#x2F; <code>TIDB_PREFIX</code></td>
+<td>数据库和表前缀</td>
+</tr>
+<tr>
+<td><code>JWT_TOKEN</code></td>
+<td>管理后台登录密钥</td>
+</tr>
+<tr>
+<td><code>SITE_NAME</code> &#x2F; <code>SITE_URL</code></td>
+<td>站点信息</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="十、总结"><a href="#十、总结" class="headerlink" title="十、总结"></a>十、总结</h2><h3 id="踩坑清单"><a href="#踩坑清单" class="headerlink" title="踩坑清单"></a>踩坑清单</h3><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>坑</th>
+<th>耗时</th>
+<th>教训</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>JSONL 格式解析</td>
+<td>0.5h</td>
+<td>LeanCloud 导出的不是标准 JSON</td>
+</tr>
+<tr>
+<td>2</td>
+<td>wl_Users 缺 OAuth 字段</td>
+<td>0.5h</td>
+<td>建表需包含全部字段</td>
+</tr>
+<tr>
+<td>3</td>
+<td>pid&#x2F;rid 引用重映射</td>
+<td>1h</td>
+<td>自增 ID 需要重新关联</td>
+</tr>
+<tr>
+<td>4</td>
+<td>TIDB_USER 写错变量名</td>
+<td>1h</td>
+<td>少了 T 字母排查很久</td>
+</tr>
+<tr>
+<td>5</td>
+<td>URL 编码不匹配（改了4次）</td>
+<td><strong>4h</strong></td>
+<td>记录中文 URL 要统一格式</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Vercel 实例缓存</td>
+<td>0.5h</td>
+<td>冷启动重新部署即可</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Waline.init 不被支持的选项</td>
+<td>1h</td>
+<td>精简配置，只留有效选项</td>
+</tr>
+</tbody></table>
+<h3 id="迁移前后对比"><a href="#迁移前后对比" class="headerlink" title="迁移前后对比"></a>迁移前后对比</h3><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>迁移前</th>
+<th>迁移后</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据库</td>
+<td>LeanCloud 国内版</td>
+<td>TiDB Cloud（新加坡）</td>
+</tr>
+<tr>
+<td>免费额度</td>
+<td>依赖 LeanCloud 开发版</td>
+<td>5GB Serverless</td>
+</tr>
+<tr>
+<td>连接稳定性</td>
+<td>❌ Vercel 跨境超时</td>
+<td>✅ 海外→海外低延迟</td>
+</tr>
+<tr>
+<td>停服风险</td>
+<td>2027-01-12</td>
+<td>无（PingCAP 持续运营）</td>
+</tr>
+<tr>
+<td>构建时的热门文章</td>
+<td>直连 LeanCloud API</td>
+<td>直连 TiDB SQL</td>
+</tr>
+<tr>
+<td>评论前端 JS</td>
+<td>含不被支持的选项</td>
+<td>精简配置 + 独立计数脚本</td>
+</tr>
+</tbody></table>
+<h3 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h3><ul>
+<li>评论功能正常（19 条旧评论 + 新评论持久化）</li>
+<li>阅读计数实时更新（133 条记录）</li>
+<li>管理后台可用（GitHub 登录 + 评论管理）</li>
+<li>首页热门文章正常显示（构建时自动获取）</li>
+<li>管理后台：<code>https://waline.bytefisher.top/ui</code></li>
+</ul>
+<p>这次迁移虽然踩了不少坑，但结果是可靠的：TiDB Cloud 作为 PingCAP 的核心产品，配合 Waline 的原生支持，可以保证博客评论系统长期稳定运行。</p>
+<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2026/05/09/Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移/" class="related-post-item" title="Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移"><span class="related-post-title">Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">前言ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近对博客进行了一次全面的代码审查，发现三个高优先级的硬性问题： 问题 影响 严重程度 RSS Feed 配置存在但依赖未安装 /atom.xml 无法生成，RSS 订阅失效 🔴 高 Sitemap 未配置 搜索引擎爬取效率低，新文章收录慢 ...</span></a><a href="/2026/05/14/Hexo-博客图床迁移实战-从iili.io到Cloudflare Workers+工具链改造全记录/" class="related-post-item" title="Hexo 博客图床迁移实战：从 iili.io 到 Cloudflare Workers + 相册维护工具链改造全记录"><span class="related-post-title">Hexo 博客图床迁移实战：从 iili.io 到 Cloudflare Workers + 相册维护工具链改造全记录</span><span class="related-post-date">2026-05-14</span><span class="related-post-desc">前言ByteFisher 博客从建站第一天起，所有图片就托管在 iili.io（FreeImage.Host）——一个免费的第三方图床。免费的东西往往最贵——你不知道它什么时候会关停、限速、删图、或者域名变更。 之前也一直想着要迁移，但 546 张相册图片 + 257 张文章配图 + 46 张抖音封面，总数近 850 张，想想就头大。直到有一天用 DevTools 看了一眼图片加载时间： 1iil...</span></a><a href="/2026/05/12/Hexo-博客二次优化实战-从性能压缩到品牌打磨全记录/" class="related-post-item" title="Hexo 博客二次优化实战：从性能压缩到品牌打磨全记录"><span class="related-post-title">Hexo 博客二次优化实战：从性能压缩到品牌打磨全记录</span><span class="related-post-date">2026-05-12</span><span class="related-post-desc">前言ByteFisher 博客第一期优化（RSS 修复、AI 助手、评论迁移等）完成后，博客能正常跑了，但离”好用”还有距离。 梳理了一下发现几类问题： 配置层：Google Analytics 的 tracking ID 填的是 G XXXXXXXXXX——占位符，从未生效。About 页面还在说”评论系统：LeanCloud”——实际上早换了 Waline。 代码层：lightbox plus...</span></a><a href="/2026/05/12/Hexo-博客实战-钓鱼相册数据统计与地图实现全记录/" class="related-post-item" title="Hexo 博客实战：钓鱼相册数据统计与地图实现全记录"><span class="related-post-title">Hexo 博客实战：钓鱼相册数据统计与地图实现全记录</span><span class="related-post-date">2026-05-12</span><span class="related-post-desc">前言ByteFisher 博客上线了两年，积累了 7 个钓鱼相册、500+ 张照片。但一直有个遗憾：相册只是按年份一字排开，缺少两个关键视角。 一是数据视角——5 年钓了多少鱼？哪个鱼种最多？哪年最高产？这些信息分散在上百个 HTML 页面里，读者无从感知。 二是空间视角——日记里提到的”花碑水库””三一水库””固驿沙坑”到底在哪里？活动范围覆盖了多大区域？ 本文完整记录两个功能的实现过程：鱼获数...</span></a><a href="/2026/05/09/Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板/" class="related-post-item" title="Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板"><span class="related-post-title">Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">前言ByteFisher 博客已发布 95+ 篇文章，一个痛点越来越明显：静态博客缺少即时互动能力。 读者经常遇到的问题场景： “有没有 Unity 相关的入门教程？” “C 委托的用法在哪篇文章讲过？” “你们用的这个图床是什么？” 在之前，这些问题的唯一回答渠道是文章底部的评论区——读者留言，博主看到后回复，周期可能是几小时甚至几天。如果读者没有留下联系方式，即使回复了对方也看不到。 为了解决...</span></a><a href="/2026/05/09/Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构/" class="related-post-item" title="Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构"><span class="related-post-title">Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">前言上一篇《Hexo 博客三项基础修复》解决了 RSS、Sitemap、评论系统的高优先级硬性问题，博客具备了稳固的基础设施。但 Lighthouse 审查还暴露了更多问题： 类别 问题数 严重程度 SEO 4 项 🟡 中 体验 7 项 🟡 中 品牌 2 项 🟡 中 其中 SEO 问题影响搜索引擎发现和社交分享展示，体验问题影响读者停留和互动，品牌问题则关系到博客的识别度和专业性。 本文将依...</span></a></div></div><div class="series-nav"><div class="series-nav-title">Hexo博客搭建 系列</div><div class="series-nav-progress">第 10/10 篇</div><div class="series-nav-links"><a href="/2026/05/14/Hexo-博客图床迁移实战-从iili.io到Cloudflare Workers+工具链改造全记录/" class="series-nav-prev">Hexo 博客图床迁移实战：从 iili.io 到 Cloudflare Workers + 相册维护工具链改造全记录</a></div></div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag"># series:Hexo博客搭建</a>
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/Waline/" rel="tag"># Waline</a>
+              <a href="/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/" rel="tag"># 博客优化</a>
+              <a href="/tags/%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/" rel="tag"># 评论系统</a>
+              <a href="/tags/TiDB/" rel="tag"># TiDB</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/05/14/Hexo-%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%E8%BF%81%E7%A7%BB%E5%AE%9E%E6%88%98-%E4%BB%8Eiili.io%E5%88%B0Cloudflare%20Workers+%E5%B7%A5%E5%85%B7%E9%93%BE%E6%94%B9%E9%80%A0%E5%85%A8%E8%AE%B0%E5%BD%95/" rel="prev" title="Hexo 博客图床迁移实战：从 iili.io 到 Cloudflare Workers + 相册维护工具链改造全记录">
+      <i class="fa fa-chevron-left"></i> Hexo 博客图床迁移实战：从 iili.io 到 Cloudflare Workers + 相册维护工具链改造全记录
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+  <div class="post-share">
+    <span class="post-share-label">分享：</span>
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2026%2F05%2F15%2FHexo-%25E5%258D%259A%25E5%25AE%25A2%25E8%25AF%2584%25E8%25AE%25BA%25E7%25B3%25BB%25E7%25BB%259F%25E6%25B7%25B1%25E5%25BA%25A6%25E8%25BF%2581%25E7%25A7%25BB-%25E4%25BB%258ELeanCloud%25E5%2588%25B0TiDB%2520Cloud%25E5%2585%25A8%25E8%25AE%25B0%25E5%25BD%2595%2F&amp;title=Hexo%20%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E6%B7%B1%E5%BA%A6%E8%BF%81%E7%A7%BB%EF%BC%9A%E4%BB%8E%20LeanCloud%20%2B%20Waline%20%E5%88%B0%20TiDB%20Cloud%20%E5%85%A8%E8%AE%B0%E5%BD%95" target="_blank" rel="noopener" title="分享到微博">
+      <i class="fab fa-weibo"></i>
+    </a>
+    <a href="#" onclick="navigator.clipboard.writeText(location.href);var t=this;t.innerHTML='<i class=fa fa-check></i>';setTimeout(function(){t.innerHTML='<i class=fa fa-link></i>'},1500);return false" title="复制链接">
+      <i class="fa fa-link"></i>
+    </a>
+  </div>
+
+  
+  <div class="post-author-bio">
+    <div class="post-author-avatar">
+      <img src="/images/avatar2.gif" alt="淡水鱼">
+    </div>
+    <div class="post-author-info">
+      <div class="post-author-name">淡水鱼</div>
+      <div class="post-author-desc">钓鱼爱好者 &amp; Unity 游戏开发者，分享编程技术与钓鱼经验。</div>
+      <div class="post-author-links">
+        <a href="https://github.com/grj1981" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="/atom.xml" title="RSS 订阅"><i class="fa fa-rss"></i></a>
+        <a href="mailto:271623821@qq.com" title="联系我"><i class="fa fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  
+
+
+          </div>
+          
+    <div class="comments" id="waline-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%97%AE%E9%A2%98%E7%9A%84%E6%BA%90%E5%A4%B4"><span class="nav-number">2.</span> <span class="nav-text">一、问题的源头</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E7%AA%81%E5%A6%82%E5%85%B6%E6%9D%A5%E7%9A%84%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 突如其来的连接超时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E6%9B%B4%E5%A4%A7%E7%9A%84%E5%AE%9A%E6%97%B6%E7%82%B8%E5%BC%B9"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 更大的定时炸弹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%B1%E5%93%8D%E8%8C%83%E5%9B%B4"><span class="nav-number">2.3.</span> <span class="nav-text">影响范围</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%96%B9%E6%A1%88%E9%80%89%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">二、方案选型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%A0%B8%E5%BF%83%E6%9D%A1%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 核心条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%80%99%E9%80%89%E6%96%B9%E6%A1%88%E5%AF%B9%E6%AF%94"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 候选方案对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E9%80%89%E6%8B%A9-TiDB-Cloud-%E7%9A%84%E7%90%86%E7%94%B1"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 选择 TiDB Cloud 的理由</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81LeanCloud-%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA"><span class="nav-number">4.</span> <span class="nav-text">三、LeanCloud 数据导出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%8E%A7%E5%88%B6%E5%8F%B0%E5%AF%BC%E5%87%BA"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 控制台导出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%AF%BC%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 导出格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81TiDB-Cloud-%E9%83%A8%E7%BD%B2"><span class="nav-number">5.</span> <span class="nav-text">四、TiDB Cloud 部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%BB%BA%E5%BA%93"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 注册与建库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E8%8E%B7%E5%8F%96%E8%BF%9E%E6%8E%A5%E4%BF%A1%E6%81%AF"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 获取连接信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5-TiDB"><span class="nav-number">6.</span> <span class="nav-text">五、数据导入 TiDB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 表结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB"><span class="nav-number">6.2.</span> <span class="nav-text">5.2 数据迁移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-%E5%AF%BC%E5%85%A5%E8%84%9A%E6%9C%AC"><span class="nav-number">6.3.</span> <span class="nav-text">5.3 导入脚本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81Vercel-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE"><span class="nav-number">7.</span> <span class="nav-text">六、Vercel 环境变量配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E5%88%A0%E9%99%A4%E6%97%A7%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">7.1.</span> <span class="nav-text">6.1 删除旧环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E6%96%B0%E5%A2%9E-TiDB-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">7.2.</span> <span class="nav-text">6.2 新增 TiDB 环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-%E9%85%8D%E7%BD%AE%E9%AA%8C%E8%AF%81"><span class="nav-number">7.3.</span> <span class="nav-text">6.3 配置验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E8%BF%81%E7%A7%BB%E5%90%8E%E7%9A%84%E4%BF%AE%E5%A4%8D%EF%BC%88%E8%B8%A9%E5%9D%91%E5%90%88%E9%9B%86%EF%BC%89"><span class="nav-number">8.</span> <span class="nav-text">七、迁移后的修复（踩坑合集）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-%E5%9D%91-5%EF%BC%9A%E8%AE%A1%E6%95%B0%E5%99%A8-URL-%E7%BC%96%E7%A0%81%E4%B8%8D%E5%8C%B9%E9%85%8D%EF%BC%88%E5%9B%9B%E6%AC%A1%E5%8F%8D%E5%A4%8D%EF%BC%89"><span class="nav-number">8.1.</span> <span class="nav-text">7.1 坑 5：计数器 URL 编码不匹配（四次反复）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-%E5%9D%91-6%EF%BC%9A%E8%AF%84%E8%AE%BA%E5%88%B7%E6%96%B0%E5%90%8E%E6%B6%88%E5%A4%B1"><span class="nav-number">8.2.</span> <span class="nav-text">7.2 坑 6：评论刷新后消失</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-%E5%9D%91-7%EF%BC%9AWaline-init-%E9%80%89%E9%A1%B9%E4%B8%8D%E8%A2%AB%E6%94%AF%E6%8C%81"><span class="nav-number">8.3.</span> <span class="nav-text">7.3 坑 7：Waline.init 选项不被支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-%E8%AE%A1%E6%95%B0%E6%98%BE%E7%A4%BA%E4%BF%AE%E5%A4%8D%EF%BC%88%E5%89%8D%E7%AB%AF-JS%EF%BC%89"><span class="nav-number">8.4.</span> <span class="nav-text">7.4 计数显示修复（前端 JS）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E7%83%AD%E9%97%A8%E6%96%87%E7%AB%A0%E7%94%9F%E6%88%90%E6%94%B9%E9%80%A0"><span class="nav-number">9.</span> <span class="nav-text">八、热门文章生成改造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E3%80%81%E6%9C%80%E7%BB%88%E6%9E%B6%E6%9E%84"><span class="nav-number">10.</span> <span class="nav-text">九、最终架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%8B%93%E6%89%91"><span class="nav-number">10.1.</span> <span class="nav-text">系统拓扑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8"><span class="nav-number">10.2.</span> <span class="nav-text">数据库表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vercel-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%EF%BC%88%E6%9C%80%E7%BB%88%E7%89%88%EF%BC%89"><span class="nav-number">10.3.</span> <span class="nav-text">Vercel 环境变量（最终版）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-number">11.</span> <span class="nav-text">十、总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B8%A9%E5%9D%91%E6%B8%85%E5%8D%95"><span class="nav-number">11.1.</span> <span class="nav-text">踩坑清单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%81%E7%A7%BB%E5%89%8D%E5%90%8E%E5%AF%B9%E6%AF%94"><span class="nav-number">11.2.</span> <span class="nav-text">迁移前后对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C"><span class="nav-number">11.3.</span> <span class="nav-text">最终效果</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe id="music-player" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2023 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
+<script>
+(function() {
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+
+  function updateCounts() {
+    var countEls = document.querySelectorAll('.waline-visitor-count');
+    if (!countEls.length) return;
+    countEls.forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var url = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(json) {
+          if (json && json.data && json.data[0] && json.data[0].time != null) {
+            el.innerText = json.data[0].time;
+          }
+        }).catch(function(){});
+    });
+  }
+
+  var el = document.querySelector('#waline-comments');
+  if (el) {
+    updateCounts();
+    NexT.utils.loadComments(el, function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
+        Waline.init({
+          el: '#waline-comments',
+          serverURL: 'https://waline.bytefisher.top/',
+          path: location.pathname,
+          lang: 'zh-CN' || 'zh-CN',
+          meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
+          requiredMeta: ["nick"] || ['nick'],
+          placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
+          avatar: 'retro' || 'retro',
+          pageSize: 10 || 10,
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
+        });
+        var pathEl = document.querySelector('.waline-visitor-count');
+        var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
+        fetch(baseURL + '/api/article', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: postPath })
+        }).finally(function() {
+          setTimeout(updateCounts, 300);
+        });
+      }, window.Waline);
+    });
+  } else {
+    updateCounts();
+  }
+})();
+</script>
+
+<script>
+(function() {
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+  function fetchAll() {
+    document.querySelectorAll('.waline-visitor-count').forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var d = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(d) + '&type=time')
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          var t = d && d.data && d.data[0] && d.data[0].time;
+          if (t > 0) el.textContent = t;
+        });
+    });
+  }
+  // Run immediately, after 2s, and after 4s (handles PJAX + Waline load)
+  if (document.readyState === 'complete') { fetchAll(); }
+  else { window.addEventListener('load', fetchAll); }
+  setTimeout(fetchAll, 2000);
+  setTimeout(fetchAll, 4000);
+  // MutationObserver: if anything changes the span text, fix it
+  document.querySelectorAll('.waline-visitor-count').forEach(function(el) {
+    var obs = new MutationObserver(function() { fetchAll(); });
+    obs.observe(el, { characterData: true, childList: true, subtree: true });
+  });
+})();
+</script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
+
+<style>
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  scrollbar-gutter: stable;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.modal::-webkit-scrollbar {
+  display: none !important;
+}
+
+.modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.modal-content {
+  position: relative;
+  width: min(71%, 340px);
+  max-width: calc((100vh - 100px) * 9 / 17.5);
+  height: auto;
+  aspect-ratio: 9 / 17.5;
+  max-height: calc(100vh - 100px);
+  margin: 0 auto;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: min(81%, 320px);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: min(94%, 300px);
+    max-width: calc((100vh - 80px) * 9 / 17.5);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+    max-height: calc(100vh - 80px);
+  }
+}
+
+.modal-content iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  border: none;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  left: auto;
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 10000;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+}
+
+.close-btn:hover {
+  color: #e74c3c;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  background: rgba(0,0,0,0.1);
+  border-radius: 50%;
+  line-height: 50px;
+  user-select: none;
+}
+
+.nav-btn:hover {
+  background: rgba(0,0,0,0.2);
+}
+
+.prev-btn {
+  left: 0;
+}
+
+.next-btn {
+  right: 15px;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: calc(100% - 60px);
+    max-width: calc((100vh - 100px) * 9 / 17.5);
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    line-height: 40px;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var musicIframe = null;
+  var musicDisplayStyle = '';
+  var isMusicPaused = false;
+  var videoIds = [];
+  var currentIndex = 0;
+  
+  function findMusicIframe() {
+    var iframes = document.getElementsByTagName('iframe');
+    for (var i = 0; i < iframes.length; i++) {
+      var src = iframes[i].src || '';
+      if (src.indexOf('music.163.com') > -1 || src.indexOf('outchain/player') > -1) {
+        return iframes[i];
+      }
+    }
+    console.log('[Douyin] Music iframe not found in', iframes.length, 'iframes');
+    return null;
+  }
+  
+  function pauseMusic() {
+    console.log('[Douyin] Trying to pause music...');
+    musicIframe = findMusicIframe();
+    
+    if (musicIframe) {
+      console.log('[Douyin] Music iframe found');
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=1') > -1) {
+        musicIframe.src = src.replace('auto=1', 'auto=0');
+        console.log('[Douyin] Changed auto=1 to auto=0');
+      }
+      isMusicPaused = true;
+    } else {
+      console.log('[Douyin] Music iframe NOT found!');
+    }
+  }
+  
+  function resumeMusic() {
+    console.log('[Douyin] Trying to resume music...');
+    
+    if (musicIframe && isMusicPaused) {
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=0') > -1) {
+        musicIframe.src = src.replace('auto=0', 'auto=1');
+        console.log('[Douyin] Changed auto=0 to auto=1');
+      }
+      isMusicPaused = false;
+    }
+  }
+  
+  function init() {
+    console.log('[Douyin] Initializing...');
+    var cards = document.querySelectorAll('.video-card');
+    console.log('[Douyin] Found', cards.length, 'video cards');
+    
+    videoIds = [];
+    for (var j = 0; j < cards.length; j++) {
+      var videoId = cards[j].getAttribute('data-id');
+      if (videoId) {
+        videoIds.push(videoId);
+      }
+      cards[j].addEventListener('click', openModal);
+    }
+    
+    var closeBtn = document.querySelector('.close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+    
+    var prevBtn = document.querySelector('.prev-btn');
+    var nextBtn = document.querySelector('.next-btn');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(-1);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(1);
+      });
+    }
+    
+    var modal = document.getElementById('douyin-modal');
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+    }
+  }
+  
+  function navigateVideo(direction) {
+    if (videoIds.length === 0) return;
+    
+    currentIndex += direction;
+    if (currentIndex < 0) {
+      currentIndex = videoIds.length - 1;
+    } else if (currentIndex >= videoIds.length) {
+      currentIndex = 0;
+    }
+    
+    var videoId = videoIds[currentIndex];
+    var player = document.getElementById('douyin-player');
+    if (player && videoId) {
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+    }
+  }
+  
+  function openModal(e) {
+    console.log('[Douyin] Opening modal...');
+    var card = e.currentTarget;
+    var videoId = card.getAttribute('data-id');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    currentIndex = videoIds.indexOf(videoId);
+    
+    if (player && modal && videoId) {
+      pauseMusic();
+      
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.marginRight = '0px';
+    }
+  }
+  
+  function closeModal() {
+    console.log('[Douyin] Closing modal...');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    if (player) {
+      player.src = '';
+    }
+    
+    if (modal) {
+      modal.classList.remove('active');
+    }
+    
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    
+    resumeMusic();
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+<!-- Hero 打字机效果 -->
+<script>
+(function() {
+  function initHeroTyping() {
+    var el = document.getElementById('hero-typing');
+    if (!el) return;
+    var texts = ['编程世界', '数字乐园', '钓鱼天地', '技术博客'];
+    var textIndex = 0;
+    var charIndex = 0;
+    var isDeleting = false;
+
+    function type() {
+      var current = texts[textIndex];
+      if (isDeleting) {
+        el.textContent = current.substring(0, charIndex--);
+      } else {
+        el.textContent = current.substring(0, charIndex++);
+      }
+
+      if (!isDeleting && charIndex === current.length) {
+        setTimeout(function() { isDeleting = true; }, 2000);
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+      }
+
+      setTimeout(type, isDeleting ? 50 : 100);
+    }
+    type();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroTyping);
+  } else {
+    initHeroTyping();
+  }
+})();
+</script>
+
+
+
+<!-- 深色模式切换 -->
+<button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
+  <i class="fa fa-moon-o"></i>
+  <i class="fa fa-sun-o"></i>
+</button>
+<script data-pjax>
+(function() {
+  var btn = document.getElementById('darkmode-toggle');
+  if (!btn) return;
+  if (document.body.classList.contains('dark-mode')) btn.classList.add('on');
+  btn.addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+    btn.classList.toggle('on');
+    localStorage.setItem('blog-darkmode', document.body.classList.contains('dark-mode') ? '1' : '0');
+  });
+  if (localStorage.getItem('blog-darkmode') === '1') {
+    document.body.classList.add('dark-mode');
+    btn.classList.add('on');
+  }
+})();
+</script>
+
+<!-- AI 博客助手 -->
+<script src="/js/ai-assistant.js" data-pjax></script>
+
+<script data-pjax>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<!-- 热门文章侧边栏 -->
+<script data-pjax>
+(function() {
+  var container = document.querySelector('.sidebar-inner');
+  if (!container) return;
+
+  var existEl = document.getElementById('hot-posts-widget');
+  if (existEl) return;
+
+  var widget = document.createElement('div');
+  widget.id = 'hot-posts-widget';
+  widget.className = 'sidebar-widget hot-posts-widget';
+  widget.innerHTML = '<div class="sidebar-widget-title"><i class="fa fa-fire"></i> 热门文章</div>' +
+    '<div class="sidebar-widget-body" id="hot-posts-list">' +
+    '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">加载中...</p></div>';
+  container.appendChild(widget);
+
+  fetch('/api/hot-articles.json')
+    .then(function(r) { return r.json(); })
+    .then(function(res) {
+      var el = document.getElementById('hot-posts-list');
+      if (!el) return;
+      if (res.errno !== 0 || !res.data || !res.data.length) {
+        el.innerHTML = '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">暂无数据</p>';
+        return;
+      }
+      var html = '<ul style="list-style:none;padding:0;margin:0;">';
+      res.data.forEach(function(item, i) {
+        html += '<li style="padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' +
+          '<span style="color:#37c6c0;font-weight:700;margin-right:4px;">' + (i+1) + '.</span>' +
+          '<a href="' + item.url + '" style="color:#555;text-decoration:none;border:none;" title="' + (item.title || '') + '">' +
+          (item.title || item.url) + '</a>' +
+          '<span style="color:#ccc;margin-left:4px;font-size:10px;">' + item.count + '℃</span>' +
+        '</li>';
+      });
+      html += '</ul>';
+      el.innerHTML = html;
+      if (window.pjax && window.pjax.refresh) {
+        window.pjax.refresh(document.getElementById('hot-posts-widget'));
+      }
+    })
+    .catch(function() {
+      var el = document.getElementById('hot-posts-list');
+      if (el) el.innerHTML = '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">加载失败</p>';
+    });
+})();
+</script>
+    </div>
+</body>
+</html>

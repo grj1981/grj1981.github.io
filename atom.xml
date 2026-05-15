@@ -11,7 +11,26 @@
   <rights>All rights reserved 2026, 淡水鱼</rights>
   <subtitle>钓鱼爱好者的编程世界</subtitle>
   <title>ByteFisher</title>
-  <updated>2026-05-14T12:16:45.594Z</updated>
+  <updated>2026-05-15T08:49:00.626Z</updated>
+  <entry>
+    <author>
+      <name>淡水鱼</name>
+    </author>
+    <category term="Hexo博客搭建" scheme="https://www.bytefisher.top/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    <category term="series:Hexo博客搭建" scheme="https://www.bytefisher.top/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
+    <category term="Waline" scheme="https://www.bytefisher.top/tags/Waline/"/>
+    <category term="博客优化" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/"/>
+    <category term="评论系统" scheme="https://www.bytefisher.top/tags/%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/"/>
+    <category term="TiDB" scheme="https://www.bytefisher.top/tags/TiDB/"/>
+    <category term="数据库" scheme="https://www.bytefisher.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <id>https://www.bytefisher.top/2026/05/15/Hexo-%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E6%B7%B1%E5%BA%A6%E8%BF%81%E7%A7%BB-%E4%BB%8ELeanCloud%E5%88%B0TiDB%20Cloud%E5%85%A8%E8%AE%B0%E5%BD%95/</id>
+    <link href="https://www.bytefisher.top/2026/05/15/Hexo-%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E6%B7%B1%E5%BA%A6%E8%BF%81%E7%A7%BB-%E4%BB%8ELeanCloud%E5%88%B0TiDB%20Cloud%E5%85%A8%E8%AE%B0%E5%BD%95/"/>
+    <published>2026-05-15T12:00:00.000Z</published>
+    <summary>前言ByteFisher 博客的评论系统使用 Waline（部署于 Vercel） + LeanCloud（国内版）的组合已运行一年多，积累了 19 条评论和 137 篇文章阅读计数。一切看似稳定，直到某天发现了一个 ETIMEDOUT 报错…… 这篇文章记录了从发现问题、方案选型、数据库迁移到最终落地的完整过程，特别整理了迁移过程中遇到的 7 个坑，希望能给同样使用 Waline + LeanC...</summary>
+    <title>Hexo 博客评论系统深度迁移：从 LeanCloud + Waline 到 TiDB Cloud 全记录</title>
+    <updated>2026-05-15T08:49:00.626Z</updated>
+  </entry>
   <entry>
     <author>
       <name>淡水鱼</name>
@@ -114,7 +133,7 @@
     <id>https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/</id>
     <link href="https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/"/>
     <published>2026-05-09T12:00:00.000Z</published>
-    <summary>前言ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近对博客进行了一次全面的代码审查，发现三个高优先级的硬性问题： 问题 影响 严重程度 RSS Feed 配置存在但依赖未安装 /atom.xml 无法生成，RSS 订阅失效 🔴 高 Sitemap 未配置 搜索引擎爬取效率低，新文章收录慢 �...</summary>
+    <summary>前言ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近对博客进行了一次全面的代码审查，发现三个高优先级的硬性问题： 问题 影响 严重程度 RSS Feed 配置存在但依赖未安装 /atom.xml 无法生成，RSS 订阅失效 🔴 高 Sitemap 未配置 搜索引擎爬取效率低，新文章收录慢 ...</summary>
     <title>Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移</title>
     <updated>2026-05-14T08:31:52.689Z</updated>
   </entry>
@@ -340,23 +359,5 @@
     <summary>在 AI 编程工具蓬勃发展的今天，开源免费的 OpenCode 凭借其强大的功能和灵活的扩展性，已经成为超过 500 万开发者的首选。作为一个拥有 12 万 + GitHub Stars 的开源项目，OpenCode 提供了终端、桌面应用和 IDE 多种使用方式。本文将详细介绍如何在 VSCode 中搭建和使用 OpenCode，帮助你快速上手这款强大的 AI 编程助手。 一、什么是 OpenCo...</summary>
     <title>VSCode 中搭建 OpenCode AI 编程助手完整指南</title>
     <updated>2026-05-14T08:31:52.703Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>淡水鱼</name>
-    </author>
-    <category term="Unity3D" scheme="https://www.bytefisher.top/categories/Unity3D/"/>
-    <category term="C#" scheme="https://www.bytefisher.top/categories/C/"/>
-    <category term="IT" scheme="https://www.bytefisher.top/categories/IT/"/>
-    <category term="Unity3D" scheme="https://www.bytefisher.top/tags/Unity3D/"/>
-    <category term="IT" scheme="https://www.bytefisher.top/tags/IT/"/>
-    <category term="C#" scheme="https://www.bytefisher.top/tags/C/"/>
-    <category term="series:AI编程助手" scheme="https://www.bytefisher.top/tags/series-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/"/>
-    <id>https://www.bytefisher.top/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-%E6%8F%92%E4%BB%B6-%E6%89%93%E9%80%A0%E9%AB%98%E6%95%88%E7%8E%87%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0-AI-%E7%A8%8B%E5%BA%8F%E5%91%98%E2%80%9D/</id>
-    <link href="https://www.bytefisher.top/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-%E6%8F%92%E4%BB%B6-%E6%89%93%E9%80%A0%E9%AB%98%E6%95%88%E7%8E%87%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0-AI-%E7%A8%8B%E5%BA%8F%E5%91%98%E2%80%9D/"/>
-    <published>2026-03-10T15:31:44.000Z</published>
-    <summary>针对 Visual Studio 2022 用户，要打造一个高效率的“本地 AI 程序员”，关键在于选择一款能与 VS 2022 深度集成、且支持连接本地模型（如 Ollama）的插件。目前最高效的方案是使用 Visual Studio 的插件 Copilot (第三方开源版，非官方) 配合 Ollama。 以下是部署全流程： 方案架构 核心引擎: Ollama。负责在本地运行 DeepSeek...</summary>
-    <title>Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员”</title>
-    <updated>2026-05-14T08:31:52.696Z</updated>
   </entry>
 </feed>
