@@ -889,18 +889,14 @@ window.addEventListener('pjax:success', () => {
         Waline.init({
           el: '#waline-comments',
           serverURL: 'https://waline.bytefisher.top/',
-          path: decodeURIComponent(location.pathname),
+          path: location.pathname,
           lang: 'zh-CN' || 'zh-CN',
           meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
           requiredMeta: ["nick"] || ['nick'],
           placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
           avatar: 'retro' || 'retro',
           pageSize: 10 || 10,
-          imageUploader: false,
-          pageview: false,
-          comment: true,
-          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo'],
-          highlight: true
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
         });
         var pathEl = document.querySelector('.waline-visitor-count');
         var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;

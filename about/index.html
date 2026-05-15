@@ -350,7 +350,7 @@
 </tr>
 <tr>
 <td>电子邮箱</td>
-<td><a href="mailto:&#x32;&#x37;&#49;&#x36;&#50;&#51;&#x38;&#x32;&#x31;&#x40;&#x71;&#x71;&#x2e;&#x63;&#111;&#x6d;">271623821@qq.com</a></td>
+<td><a href="mailto:&#50;&#55;&#49;&#54;&#50;&#51;&#56;&#50;&#x31;&#64;&#113;&#x71;&#46;&#x63;&#111;&#x6d;">271623821@qq.com</a></td>
 </tr>
 </tbody></table>
 <hr>
@@ -707,18 +707,14 @@ window.addEventListener('pjax:success', () => {
         Waline.init({
           el: '#waline-comments',
           serverURL: 'https://waline.bytefisher.top/',
-          path: decodeURIComponent(location.pathname),
+          path: location.pathname,
           lang: 'zh-CN' || 'zh-CN',
           meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
           requiredMeta: ["nick"] || ['nick'],
           placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
           avatar: 'retro' || 'retro',
           pageSize: 10 || 10,
-          imageUploader: false,
-          pageview: false,
-          comment: true,
-          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo'],
-          highlight: true
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
         });
         var pathEl = document.querySelector('.waline-visitor-count');
         var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;

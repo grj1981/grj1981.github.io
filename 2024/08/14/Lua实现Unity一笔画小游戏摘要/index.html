@@ -43,7 +43,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Lua实现Unity一笔画小游戏摘要","description":"用Lua实现Unity一笔画小游戏要点记录： 游戏玩法简介选择不同难度关卡开始游戏，每一关有多个方块小格，可以从任意一个方块格作为起点开始连接到下一个方块格，下一个方块格必须与起始格上下左右相邻。同一个方块格不能重复连接，成功连接后，目标方块格又成为新的起始方块格。以此类推直至将所有方块格连完。 功能实现简述关卡难度关卡难度选择，不同关卡制作不同prefab预设。prefab预设摆放所有要连接的格...","url":"https://www.bytefisher.top/2024/08/14/Lua实现Unity一笔画小游戏摘要/","datePublished":"2024-08-14T11:12:39.000Z","dateModified":"2026-05-14T08:31:52.694Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2024/08/14/Lua实现Unity一笔画小游戏摘要/"},"keywords":"IT, Unity3D, Lua, series:Lua游戏开发"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Lua实现Unity一笔画小游戏摘要","description":"用Lua实现Unity一笔画小游戏要点记录： 游戏玩法简介选择不同难度关卡开始游戏，每一关有多个方块小格，可以从任意一个方块格作为起点开始连接到下一个方块格，下一个方块格必须与起始格上下左右相邻。同一个方块格不能重复连接，成功连接后，目标方块格又成为新的起始方块格。以此类推直至将所有方块格连完。 功能实现简述关卡难度关卡难度选择，不同关卡制作不同prefab预设。prefab预设摆放所有要连接的格...","url":"https://www.bytefisher.top/2024/08/14/Lua实现Unity一笔画小游戏摘要/","datePublished":"2024-08-14T11:12:39.000Z","dateModified":"2026-05-14T08:31:52.694Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2024/08/14/Lua实现Unity一笔画小游戏摘要/"},"keywords":"Unity3D, IT, Lua, series:Lua游戏开发"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Unity3D","item":"https://www.bytefisher.top/categories/Unity3D/"},{"@type":"ListItem","position":3,"name":"Lua实现Unity一笔画小游戏摘要"}]}</script>
 
 
@@ -342,8 +342,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/IT/" rel="tag"># IT</a>
               <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
+              <a href="/tags/IT/" rel="tag"># IT</a>
               <a href="/tags/Lua/" rel="tag"># Lua</a>
               <a href="/tags/series-Lua%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" rel="tag"># series:Lua游戏开发</a>
           </div>
@@ -728,18 +728,14 @@ window.addEventListener('pjax:success', () => {
         Waline.init({
           el: '#waline-comments',
           serverURL: 'https://waline.bytefisher.top/',
-          path: decodeURIComponent(location.pathname),
+          path: location.pathname,
           lang: 'zh-CN' || 'zh-CN',
           meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
           requiredMeta: ["nick"] || ['nick'],
           placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
           avatar: 'retro' || 'retro',
           pageSize: 10 || 10,
-          imageUploader: false,
-          pageview: false,
-          comment: true,
-          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo'],
-          highlight: true
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
         });
         var pathEl = document.querySelector('.waline-visitor-count');
         var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;

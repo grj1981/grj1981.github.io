@@ -42,7 +42,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2023/06/27/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%AF%E7%A9%BA%E7%B1%BB%E5%9E%8BNullable%E3%80%91/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C#学习笔记【C#可空类型Nullable】","description":"C 可空类型（Nullable） C 单问号 ? 与 双问号 ??? 单问号用于对 int、double、bool 等无法直接赋值为 null 的数据类型进行 null 的赋值，意思是这个数据类型是 Nullable 类型的。 1int? i = 3;等同于： 1Nullable&lt;int&gt; i = new Nullable&lt;int&gt;(3); int i; //默认值0 in...","url":"https://www.bytefisher.top/2023/06/27/C井学习笔记【可空类型Nullable】/","datePublished":"2023-06-27T08:59:12.000Z","dateModified":"2026-05-14T08:31:52.686Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/06/27/C井学习笔记【可空类型Nullable】/"},"keywords":"C#, IT, series:C#学习笔记"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C#学习笔记【C#可空类型Nullable】","description":"C 可空类型（Nullable） C 单问号 ? 与 双问号 ??? 单问号用于对 int、double、bool 等无法直接赋值为 null 的数据类型进行 null 的赋值，意思是这个数据类型是 Nullable 类型的。 1int? i = 3;等同于： 1Nullable&lt;int&gt; i = new Nullable&lt;int&gt;(3); int i; //默认值0 in...","url":"https://www.bytefisher.top/2023/06/27/C井学习笔记【可空类型Nullable】/","datePublished":"2023-06-27T08:59:12.000Z","dateModified":"2026-05-14T08:31:52.686Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/06/27/C井学习笔记【可空类型Nullable】/"},"keywords":"IT, C#, series:C#学习笔记"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"C#","item":"https://www.bytefisher.top/categories/C/"},{"@type":"ListItem","position":3,"name":"C#学习笔记【C#可空类型Nullable】"}]}</script>
 
 
@@ -356,8 +356,8 @@ int? ii; //默认值null
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/C/" rel="tag"># C#</a>
               <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/C/" rel="tag"># C#</a>
               <a href="/tags/series-C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># series:C#学习笔记</a>
           </div>
 
@@ -741,18 +741,14 @@ window.addEventListener('pjax:success', () => {
         Waline.init({
           el: '#waline-comments',
           serverURL: 'https://waline.bytefisher.top/',
-          path: decodeURIComponent(location.pathname),
+          path: location.pathname,
           lang: 'zh-CN' || 'zh-CN',
           meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
           requiredMeta: ["nick"] || ['nick'],
           placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
           avatar: 'retro' || 'retro',
           pageSize: 10 || 10,
-          imageUploader: false,
-          pageview: false,
-          comment: true,
-          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo'],
-          highlight: true
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
         });
         var pathEl = document.querySelector('.waline-visitor-count');
         var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
