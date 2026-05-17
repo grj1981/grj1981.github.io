@@ -11,7 +11,44 @@
   <rights>All rights reserved 2026, 淡水鱼</rights>
   <subtitle>钓鱼爱好者的编程世界</subtitle>
   <title>ByteFisher</title>
-  <updated>2026-05-12T16:12:38.665Z</updated>
+  <updated>2026-05-16T11:39:33.771Z</updated>
+  <entry>
+    <author>
+      <name>淡水鱼</name>
+    </author>
+    <category term="Hexo博客搭建" scheme="https://www.bytefisher.top/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    <category term="series:Hexo博客搭建" scheme="https://www.bytefisher.top/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
+    <category term="博客优化" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/"/>
+    <category term="Waline" scheme="https://www.bytefisher.top/tags/Waline/"/>
+    <category term="评论系统" scheme="https://www.bytefisher.top/tags/%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/"/>
+    <category term="TiDB" scheme="https://www.bytefisher.top/tags/TiDB/"/>
+    <category term="数据库" scheme="https://www.bytefisher.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <id>https://www.bytefisher.top/2026/05/15/Hexo-%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E6%B7%B1%E5%BA%A6%E8%BF%81%E7%A7%BB-%E4%BB%8ELeanCloud%E5%88%B0TiDB%20Cloud%E5%85%A8%E8%AE%B0%E5%BD%95/</id>
+    <link href="https://www.bytefisher.top/2026/05/15/Hexo-%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E6%B7%B1%E5%BA%A6%E8%BF%81%E7%A7%BB-%E4%BB%8ELeanCloud%E5%88%B0TiDB%20Cloud%E5%85%A8%E8%AE%B0%E5%BD%95/"/>
+    <published>2026-05-15T12:00:00.000Z</published>
+    <summary>前言ByteFisher 博客的评论系统使用 Waline（部署于 Vercel） + LeanCloud（国内版）的组合已运行一年多，积累了 19 条评论和 137 篇文章阅读计数。一切看似稳定，直到某天发现了一个 ETIMEDOUT 报错…… 这篇文章记录了从发现问题、方案选型、数据库迁移到最终落地的完整过程，特别整理了迁移过程中遇到的 7 个坑，希望能给同样使用 Waline + LeanC...</summary>
+    <title>Hexo 博客评论系统深度迁移：从 LeanCloud + Waline 到 TiDB Cloud 全记录</title>
+    <updated>2026-05-16T11:39:33.771Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>淡水鱼</name>
+    </author>
+    <category term="Hexo博客搭建" scheme="https://www.bytefisher.top/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    <category term="series:Hexo博客搭建" scheme="https://www.bytefisher.top/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
+    <category term="博客优化" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/"/>
+    <category term="WebP" scheme="https://www.bytefisher.top/tags/WebP/"/>
+    <category term="Cloudflare" scheme="https://www.bytefisher.top/tags/Cloudflare/"/>
+    <category term="CDN" scheme="https://www.bytefisher.top/tags/CDN/"/>
+    <id>https://www.bytefisher.top/2026/05/14/Hexo-%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%E8%BF%81%E7%A7%BB%E5%AE%9E%E6%88%98-%E4%BB%8Eiili.io%E5%88%B0Cloudflare%20Workers+%E5%B7%A5%E5%85%B7%E9%93%BE%E6%94%B9%E9%80%A0%E5%85%A8%E8%AE%B0%E5%BD%95/</id>
+    <link href="https://www.bytefisher.top/2026/05/14/Hexo-%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%E8%BF%81%E7%A7%BB%E5%AE%9E%E6%88%98-%E4%BB%8Eiili.io%E5%88%B0Cloudflare%20Workers+%E5%B7%A5%E5%85%B7%E9%93%BE%E6%94%B9%E9%80%A0%E5%85%A8%E8%AE%B0%E5%BD%95/"/>
+    <published>2026-05-14T12:00:00.000Z</published>
+    <summary>前言ByteFisher 博客从建站第一天起，所有图片就托管在 iili.io（FreeImage.Host）——一个免费的第三方图床。免费的东西往往最贵——你不知道它什么时候会关停、限速、删图、或者域名变更。 之前也一直想着要迁移，但 546 张相册图片 + 257 张文章配图 + 46 张抖音封面，总数近 850 张，想想就头大。直到有一天用 DevTools 看了一眼图片加载时间： 1iil...</summary>
+    <title>Hexo 博客图床迁移实战：从 iili.io 到 Cloudflare Workers + 相册维护工具链改造全记录</title>
+    <updated>2026-05-16T11:39:33.770Z</updated>
+  </entry>
   <entry>
     <author>
       <name>淡水鱼</name>
@@ -90,8 +127,8 @@
     <category term="series:Hexo博客搭建" scheme="https://www.bytefisher.top/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
     <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
     <category term="Next主题" scheme="https://www.bytefisher.top/tags/Next%E4%B8%BB%E9%A2%98/"/>
-    <category term="Waline" scheme="https://www.bytefisher.top/tags/Waline/"/>
     <category term="博客优化" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/"/>
+    <category term="Waline" scheme="https://www.bytefisher.top/tags/Waline/"/>
     <category term="评论系统" scheme="https://www.bytefisher.top/tags/%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/"/>
     <id>https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/</id>
     <link href="https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/"/>
@@ -113,7 +150,7 @@
     <published>2026-05-04T12:00:00.000Z</published>
     <summary>一号才刚去花碑水库算完账，五条大鲤鱼入户，三条鲢鳙放流，回来发了朋友圈，评论区炸了一整天。本来想着五一剩下的几天就在家歇歇，把手上的酸劲儿缓一缓——结果三号早上七点，手机就响了。 老表打来的：”起来了没有？我已经到花碑了，今天口好得很，赶紧来！” 我看了眼时间，七点刚过。一号那天蒙蒙细雨钓了一天，胳膊到现在还隐隐发酸。但老表这电话来得突然，人都到水库边了，我要是说不去，这顿饭以后还吃不吃了？钓鱼人...</summary>
     <title>五一连战花碑水库，爆护50斤——老表两小时空军，我连竿到手酸</title>
-    <updated>2026-05-12T13:42:10.084Z</updated>
+    <updated>2026-05-16T11:39:33.768Z</updated>
   </entry>
   <entry>
     <author>
@@ -128,7 +165,7 @@
     <published>2026-05-01T12:00:00.000Z</published>
     <summary>上次收杆时说过，五一回来算总账。 言出必行。 五月一号，天还没亮就醒了。窗外淅淅沥沥的雨声让我心里一凉——天气预报没说下雨啊。打开手机一看，蒙蒙细雨，温度不高，气压倒是稳定。我一拍大腿：这不就是钓大鱼的天吗？阴雨天，大物靠岸，今天不爆护都对不起这天气！ 抄起装备就出发。后备箱里波纹鲤K6.3已经擦得锃亮，线组也提前绑好了——2.0主线+1.5子线，新关东2号钩。上次1.0子线被切得怀疑人生，今天直...</summary>
     <title>五一蒙蒙细雨，波纹鲤K6.3大战水库大鲤</title>
-    <updated>2026-05-12T13:42:10.083Z</updated>
+    <updated>2026-05-16T11:39:33.768Z</updated>
   </entry>
   <entry>
     <author>
@@ -181,7 +218,7 @@
     <published>2026-04-26T01:00:00.000Z</published>
     <summary>上周你在水库里想干嘛？把我的达摩浮漂拖走了还不过瘾，还连续切我1.0子线、2.0主线？真把这水库当你家开的了？ 今天我就是来算账的。 周六一大早就醒了，比上班还积极。到水库边才八点半，晨雾还没散尽，水面飘着一层薄薄的水汽。还是上次那个钓位，还是那套装备——6.3米鱼竿+2.0主线+1.0子线。挂饵抛竿，我就不信这个邪了。 下杆不到十分钟，浮漂一个黑漂闷了下去！我条件反射提竿—— 好家伙，中鱼了！...</summary>
     <title>上周你拖走我浮漂的嚣张劲儿呢？ 今天线组全换</title>
-    <updated>2026-05-12T13:42:10.082Z</updated>
+    <updated>2026-05-16T11:39:33.767Z</updated>
   </entry>
   <entry>
     <author>
@@ -322,41 +359,5 @@
     <summary>在 AI 编程工具蓬勃发展的今天，开源免费的 OpenCode 凭借其强大的功能和灵活的扩展性，已经成为超过 500 万开发者的首选。作为一个拥有 12 万 + GitHub Stars 的开源项目，OpenCode 提供了终端、桌面应用和 IDE 多种使用方式。本文将详细介绍如何在 VSCode 中搭建和使用 OpenCode，帮助你快速上手这款强大的 AI 编程助手。 一、什么是 OpenCo...</summary>
     <title>VSCode 中搭建 OpenCode AI 编程助手完整指南</title>
     <updated>2026-05-12T13:42:10.136Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>淡水鱼</name>
-    </author>
-    <category term="C#" scheme="https://www.bytefisher.top/categories/C/"/>
-    <category term="Unity3D" scheme="https://www.bytefisher.top/categories/Unity3D/"/>
-    <category term="IT" scheme="https://www.bytefisher.top/categories/IT/"/>
-    <category term="C#" scheme="https://www.bytefisher.top/tags/C/"/>
-    <category term="IT" scheme="https://www.bytefisher.top/tags/IT/"/>
-    <category term="Unity3D" scheme="https://www.bytefisher.top/tags/Unity3D/"/>
-    <category term="series:AI编程助手" scheme="https://www.bytefisher.top/tags/series-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/"/>
-    <id>https://www.bytefisher.top/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-%E6%8F%92%E4%BB%B6-%E6%89%93%E9%80%A0%E9%AB%98%E6%95%88%E7%8E%87%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0-AI-%E7%A8%8B%E5%BA%8F%E5%91%98%E2%80%9D/</id>
-    <link href="https://www.bytefisher.top/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-%E6%8F%92%E4%BB%B6-%E6%89%93%E9%80%A0%E9%AB%98%E6%95%88%E7%8E%87%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0-AI-%E7%A8%8B%E5%BA%8F%E5%91%98%E2%80%9D/"/>
-    <published>2026-03-10T15:31:44.000Z</published>
-    <summary>针对 Visual Studio 2022 用户，要打造一个高效率的“本地 AI 程序员”，关键在于选择一款能与 VS 2022 深度集成、且支持连接本地模型（如 Ollama）的插件。目前最高效的方案是使用 Visual Studio 的插件 Copilot (第三方开源版，非官方) 配合 Ollama。 以下是部署全流程： 方案架构 核心引擎: Ollama。负责在本地运行 DeepSeek...</summary>
-    <title>Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员”</title>
-    <updated>2026-05-12T13:42:10.119Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>淡水鱼</name>
-    </author>
-    <category term="C#" scheme="https://www.bytefisher.top/categories/C/"/>
-    <category term="Unity3D" scheme="https://www.bytefisher.top/categories/Unity3D/"/>
-    <category term="IT" scheme="https://www.bytefisher.top/categories/IT/"/>
-    <category term="C#" scheme="https://www.bytefisher.top/tags/C/"/>
-    <category term="IT" scheme="https://www.bytefisher.top/tags/IT/"/>
-    <category term="series:C#学习笔记" scheme="https://www.bytefisher.top/tags/series-C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <category term="Unity3D" scheme="https://www.bytefisher.top/tags/Unity3D/"/>
-    <id>https://www.bytefisher.top/2025/05/19/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%A1%8C%E4%B8%BA%E6%A0%91%E3%80%91/</id>
-    <link href="https://www.bytefisher.top/2025/05/19/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%A1%8C%E4%B8%BA%E6%A0%91%E3%80%91/"/>
-    <published>2025-05-19T08:18:34.000Z</published>
-    <summary>行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策逻辑，每个节点代表一个行为或条件。下面是对Unity行为树的概要及用法的解释： 行为树概要节点类型 选择器（Selector）：会从上到下依次尝试子节点，直到有一个子节点成功执行。 序列器（Sequence）：会从上到下依次执行子节点，直到...</summary>
-    <title>C#学习笔记【行为树】</title>
-    <updated>2026-05-12T13:42:10.091Z</updated>
   </entry>
 </feed>

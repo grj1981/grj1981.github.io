@@ -8,7 +8,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#37c6c0">
-<meta name="generator" content="Hexo 8.1.1">
+<meta name="generator" content="Hexo 8.1.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
   <meta name="description" content="C 数组（Array）数组是一个存储相同类型元素的固定大小的顺序集合。数组是用来存储数据的集合，通常认为数组是一个同一类型变量的集合。 声明数组变量并不是声明 number0、number1、…、number99 一个个单独的变量，而是声明一个就像 numbers 这样的变量，然后使用 numbers 0 、numbers 1 、…、numbers 99 来表示一个个单独的变量。数组中某个指定的元">
 <meta property="og:type" content="article">
@@ -34,7 +34,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2014/04/two_dimensional_arrays.jpg">
 <meta property="article:published_time" content="2023-06-28T07:40:48.000Z">
-<meta property="article:modified_time" content="2026-05-12T13:42:10.094Z">
+<meta property="article:modified_time" content="2026-05-16T11:39:33.770Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="C#">
 <meta property="article:tag" content="IT">
@@ -44,7 +44,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2023/06/28/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%95%B0%E7%BB%84%E3%80%91/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C#学习笔记【C#数组】","description":"C 数组（Array）数组是一个存储相同类型元素的固定大小的顺序集合。数组是用来存储数据的集合，通常认为数组是一个同一类型变量的集合。 声明数组变量并不是声明 number0、number1、…、number99 一个个单独的变量，而是声明一个就像 numbers 这样的变量，然后使用 numbers 0 、numbers 1 、…、numbers 99 来表示一个个单独的变量。数组中某个指定的元...","url":"https://www.bytefisher.top/2023/06/28/C井学习笔记【数组】/","datePublished":"2023-06-28T07:40:48.000Z","dateModified":"2026-05-12T13:42:10.094Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/06/28/C井学习笔记【数组】/"},"keywords":"C#, IT, series:C#学习笔记"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C#学习笔记【C#数组】","description":"C 数组（Array）数组是一个存储相同类型元素的固定大小的顺序集合。数组是用来存储数据的集合，通常认为数组是一个同一类型变量的集合。 声明数组变量并不是声明 number0、number1、…、number99 一个个单独的变量，而是声明一个就像 numbers 这样的变量，然后使用 numbers 0 、numbers 1 、…、numbers 99 来表示一个个单独的变量。数组中某个指定的元...","url":"https://www.bytefisher.top/2023/06/28/C井学习笔记【数组】/","datePublished":"2023-06-28T07:40:48.000Z","dateModified":"2026-05-16T11:39:33.770Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/06/28/C井学习笔记【数组】/"},"keywords":"IT, C#, series:C#学习笔记"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"C#","item":"https://www.bytefisher.top/categories/C/"},{"@type":"ListItem","position":3,"name":"C#学习笔记【C#数组】"}]}</script>
 
 
@@ -161,7 +161,7 @@
   </li>
         <li class="menu-item menu-item-douyin">
 
-    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">46</span></a>
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">48</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -171,17 +171,22 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">98</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">100</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">44</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">49</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
 
     <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>rss</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -422,7 +427,7 @@ Element[9] = 109
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int [ , , ] m;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <h4 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h4><p>多维数组最简单的形式是二维数组。一个二维数组，在本质上，是一个一维数组的列表。</p>
-<p>一个二维数组可以被认为是一个带有 x 行和 y 列的表格。下面是一个二维数组，包含 3 行和 4 列：<br><img data-src="https://www.runoob.com/wp-content/uploads/2014/04/two_dimensional_arrays.jpg"></p>
+<p>一个二维数组可以被认为是一个带有 x 行和 y 列的表格。下面是一个二维数组，包含 3 行和 4 列：<br><img data-src="https://www.runoob.com/wp-content/uploads/2014/04/two_dimensional_arrays.jpg" alt="展示3行4列的二维数组表格结构示意图"></p>
 <h4 id="C-中的二维数组"><a href="#C-中的二维数组" class="headerlink" title="C# 中的二维数组"></a>C# 中的二维数组</h4><p>因此，数组中的每个元素是使用形式为 a[ i , j ] 的元素名称来标识的，其中 a 是数组名称，i 和 j 是唯一标识 a 中每个元素的下标。</p>
 <p><strong>初始化二维数组</strong><br>多维数组可以通过在括号内为每行指定值来进行初始化。下面是一个带有 3 行 4 列的数组。</p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int [,] a = new int [3,4] &#123;</span><br><span class="line"> &#123;0, 1, 2, 3&#125; ,   /*  初始化索引号为 0 的行 */</span><br><span class="line"> &#123;4, 5, 6, 7&#125; ,   /*  初始化索引号为 1 的行 */</span><br><span class="line"> &#123;8, 9, 10, 11&#125;   /*  初始化索引号为 2 的行 */</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -572,8 +577,8 @@ a[4][1] = 8
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/C/" rel="tag"># C#</a>
               <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/C/" rel="tag"># C#</a>
               <a href="/tags/series-C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># series:C#学习笔记</a>
           </div>
 
@@ -599,19 +604,6 @@ a[4][1] = 8
   
 
 
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "C#学习笔记【C#数组】",
-    "author": { "@type": "Person", "name": "淡水鱼" },
-    "datePublished": "2023-06-28T07:40:48.000Z",
-    "dateModified": "2026-05-12T13:42:10.094Z",
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.bytefisher.top/2023/06/28/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%95%B0%E7%BB%84%E3%80%91/" },
-    "publisher": { "@type": "Person", "name": "淡水鱼" }
-  }
-  </script>
   <div class="post-share">
     <span class="post-share-label">分享：</span>
     <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2023%2F06%2F28%2FC%25E4%25BA%2595%25E5%25AD%25A6%25E4%25B9%25A0%25E7%25AC%2594%25E8%25AE%25B0%25E3%2580%2590%25E6%2595%25B0%25E7%25BB%2584%25E3%2580%2591%2F&amp;title=C%23%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90C%23%E6%95%B0%E7%BB%84%E3%80%91" target="_blank" rel="noopener" title="分享到微博">
@@ -620,6 +612,22 @@ a[4][1] = 8
     <a href="#" onclick="navigator.clipboard.writeText(location.href);var t=this;t.innerHTML='<i class=fa fa-check></i>';setTimeout(function(){t.innerHTML='<i class=fa fa-link></i>'},1500);return false" title="复制链接">
       <i class="fa fa-link"></i>
     </a>
+  </div>
+
+  
+  <div class="post-author-bio">
+    <div class="post-author-avatar">
+      <img src="/images/avatar2.gif" alt="淡水鱼">
+    </div>
+    <div class="post-author-info">
+      <div class="post-author-name">淡水鱼</div>
+      <div class="post-author-desc">钓鱼爱好者 &amp; Unity 游戏开发者，分享编程技术与钓鱼经验。</div>
+      <div class="post-author-links">
+        <a href="https://github.com/grj1981" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="/atom.xml" title="RSS 订阅"><i class="fa fa-rss"></i></a>
+        <a href="mailto:271623821@qq.com" title="联系我"><i class="fa fa-envelope"></i></a>
+      </div>
+    </div>
   </div>
   
 
@@ -689,7 +697,7 @@ a[4][1] = 8
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -702,7 +710,7 @@ a[4][1] = 8
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-count">49</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -942,7 +950,7 @@ window.addEventListener('pjax:success', () => {
           if (json && json.data && json.data[0] && json.data[0].time != null) {
             el.innerText = json.data[0].time;
           }
-        });
+        }).catch(function(){});
     });
   }
 
@@ -958,13 +966,10 @@ window.addEventListener('pjax:success', () => {
           lang: 'zh-CN' || 'zh-CN',
           meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
           requiredMeta: ["nick"] || ['nick'],
-          placeholder: "输入你的评论\n昵称为必填项目，输入QQ号可以直接获取用户名和头像，并且省去了填写邮箱的麻烦！\n虽然email不是必选，但是填写了email可以收到推送通知哦！",
+          placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
           avatar: 'retro' || 'retro',
           pageSize: 10 || 10,
-          imageUploader: false,
-          comment: true,
-          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo'],
-          highlight: true
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
         });
         var pathEl = document.querySelector('.waline-visitor-count');
         var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
@@ -973,13 +978,42 @@ window.addEventListener('pjax:success', () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ path: postPath })
         }).finally(function() {
-          updateCounts();
+          setTimeout(updateCounts, 300);
         });
       }, window.Waline);
     });
   } else {
     updateCounts();
   }
+})();
+</script>
+
+<script>
+(function() {
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+  function fetchAll() {
+    document.querySelectorAll('.waline-visitor-count').forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var d = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(d) + '&type=time')
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          var t = d && d.data && d.data[0] && d.data[0].time;
+          if (t > 0) el.textContent = t;
+        });
+    });
+  }
+  // Run immediately, after 2s, and after 4s (handles PJAX + Waline load)
+  if (document.readyState === 'complete') { fetchAll(); }
+  else { window.addEventListener('load', fetchAll); }
+  setTimeout(fetchAll, 2000);
+  setTimeout(fetchAll, 4000);
+  // MutationObserver: if anything changes the span text, fix it
+  document.querySelectorAll('.waline-visitor-count').forEach(function(el) {
+    var obs = new MutationObserver(function() { fetchAll(); });
+    obs.observe(el, { characterData: true, childList: true, subtree: true });
+  });
 })();
 </script>
 <!-- 抖音视频弹窗 -->

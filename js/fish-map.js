@@ -2,10 +2,10 @@
 
 (function() {
   var typeColors = {
-    '水库': '#37c6c0',
-    '河流': '#6bcb77',
-    '沙坑': '#f0a050',
-    '溪流': '#4d96ff'
+    '水库': { start: '#FF6B6B', end: '#EE5A24' },
+    '河流': { start: '#FFB347', end: '#E67E22' },
+    '沙坑': { start: '#FF6B9D', end: '#E84393' },
+    '溪流': { start: '#4FC3F7', end: '#0984E3' }
   };
 
   function loadAmap(callback) {
@@ -24,6 +24,17 @@
       if (el) el.innerHTML = '<p style="text-align:center;color:#999;padding:40px;">地图加载失败 🐟</p>';
     };
     document.head.appendChild(script);
+  }
+
+  function createPinHtml(colors, size) {
+    var d = size + 6;
+    var th = Math.round(d * 0.32);
+    var h = d + th;
+    var tw = Math.round(d * 0.5);
+    var fs = Math.round(d * 0.38);
+    return '<div class="pin-marker" style="--d:' + d + 'px;--h:' + h + 'px;--c1:' + colors.start + ';--c2:' + colors.end + ';--tw:' + tw + 'px;--th:' + th + 'px;--fs:' + fs + 'px">' +
+      '<div class="pin-head"><span class="pin-icon">🐟</span></div>' +
+      '<div class="pin-tail"></div></div>';
   }
 
   function init() {
@@ -49,18 +60,17 @@
         map.setCenter([topSpot.lng, topSpot.lat]);
 
         data.spots.forEach(function(spot) {
-          var color = typeColors[spot.type] || '#c9c9c9';
-          var radius = 8 + spot.photos * 0.4;
-          radius = Math.min(radius, 24);
+          var colors = typeColors[spot.type] || { start: '#ccc', end: '#aaa' };
+          var headSize = Math.round(24 + spot.photos * 0.5);
+          headSize = Math.min(headSize, 44);
+          var d = headSize + 6;
+          var h = d + Math.round(d * 0.32);
 
-          var marker = new AMap.CircleMarker({
-            center: [spot.lng, spot.lat],
-            radius: radius,
-            fillColor: color,
-            fillOpacity: 0.6,
-            strokeColor: '#fff',
-            strokeWeight: 2,
-            zIndex: 10
+          var marker = new AMap.Marker({
+            position: [spot.lng, spot.lat],
+            content: createPinHtml(colors, headSize),
+            offset: new AMap.Pixel(-Math.round(d / 2), -h),
+            zIndex: 12
           });
           marker.setMap(map);
 
@@ -76,7 +86,7 @@
           });
 
           marker.on('click', function() {
-            info.open(map, marker.getCenter());
+            info.open(map, marker.getPosition());
           });
         });
       })
