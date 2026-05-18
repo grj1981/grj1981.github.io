@@ -108,9 +108,19 @@
 	flex: 1;
 }
 @media (max-width: 480px) {
+	.album-nav {
+		gap: 4px;
+		padding: 0 4px;
+	}
 	.album-nav-btn {
-		font-size: 12px;
-		padding: 5px 12px;
+		font-size: 11px;
+		padding: 5px 8px;
+	}
+}
+@media (max-width: 360px) {
+	.album-nav {
+		flex-wrap: wrap;
+		justify-content: center;
 	}
 }
 
