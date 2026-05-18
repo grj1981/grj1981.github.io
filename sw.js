@@ -1,4 +1,4 @@
-var CACHE_NAME = 'bytefisher-v3';
+var CACHE_NAME = 'bytefisher-v4';
 var urlsToCache = [
   '/',
   '/css/main.css',

@@ -99,6 +99,8 @@ if (typeof window.GameManager === 'undefined') {
             gameName = 'gomoku';
         } else if (path.includes('/puzzle/')) {
             gameName = 'puzzle';
+        } else if (path.includes('/flappy/')) {
+            gameName = 'flappy';
         }
         
         return gameName;
