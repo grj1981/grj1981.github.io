@@ -35,6 +35,9 @@ self.addEventListener('fetch', function(event) {
   // Ignore non-http/https requests (chrome-extension, data, blob, etc.)
   if (req.url.indexOf('http') !== 0) return;
 
+  // Passthrough cross-origin requests (CDN images, external resources)
+  if (req.url.indexOf(self.location.origin) !== 0) return;
+
   // Network-first for HTML pages (fresh content)
   if (req.headers.get('Accept') && req.headers.get('Accept').indexOf('text/html') !== -1) {
     event.respondWith(
@@ -59,7 +62,7 @@ self.addEventListener('fetch', function(event) {
         return res;
       });
     }).catch(function() {
-      return fetch(req);
+      return fetch(req).catch(function() {});
     })
   );
 });
