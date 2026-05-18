@@ -11,7 +11,7 @@
   <rights>All rights reserved 2026, 淡水鱼</rights>
   <subtitle>钓鱼爱好者的编程世界</subtitle>
   <title>ByteFisher</title>
-  <updated>2026-05-15T08:49:00.626Z</updated>
+  <updated>2026-05-15T10:28:34.225Z</updated>
   <entry>
     <author>
       <name>淡水鱼</name>
@@ -29,7 +29,7 @@
     <published>2026-05-15T12:00:00.000Z</published>
     <summary>前言ByteFisher 博客的评论系统使用 Waline（部署于 Vercel） + LeanCloud（国内版）的组合已运行一年多，积累了 19 条评论和 137 篇文章阅读计数。一切看似稳定，直到某天发现了一个 ETIMEDOUT 报错…… 这篇文章记录了从发现问题、方案选型、数据库迁移到最终落地的完整过程，特别整理了迁移过程中遇到的 7 个坑，希望能给同样使用 Waline + LeanC...</summary>
     <title>Hexo 博客评论系统深度迁移：从 LeanCloud + Waline 到 TiDB Cloud 全记录</title>
-    <updated>2026-05-15T08:49:00.626Z</updated>
+    <updated>2026-05-15T10:28:34.225Z</updated>
   </entry>
   <entry>
     <author>
@@ -133,7 +133,7 @@
     <id>https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/</id>
     <link href="https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/"/>
     <published>2026-05-09T12:00:00.000Z</published>
-    <summary>前言ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近对博客进行了一次全面的代码审查，发现三个高优先级的硬性问题： 问题 影响 严重程度 RSS Feed 配置存在但依赖未安装 /atom.xml 无法生成，RSS 订阅失效 🔴 高 Sitemap 未配置 搜索引擎爬取效率低，新文章收录慢 ...</summary>
+    <summary>前言ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近对博客进行了一次全面的代码审查，发现三个高优先级的硬性问题： 问题 影响 严重程度 RSS Feed 配置存在但依赖未安装 /atom.xml 无法生成，RSS 订阅失效 🔴 高 Sitemap 未配置 搜索引擎爬取效率低，新文章收录慢 �...</summary>
     <title>Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移</title>
     <updated>2026-05-14T08:31:52.689Z</updated>
   </entry>
@@ -150,7 +150,7 @@
     <published>2026-05-04T12:00:00.000Z</published>
     <summary>一号才刚去花碑水库算完账，五条大鲤鱼入户，三条鲢鳙放流，回来发了朋友圈，评论区炸了一整天。本来想着五一剩下的几天就在家歇歇，把手上的酸劲儿缓一缓——结果三号早上七点，手机就响了。 老表打来的：”起来了没有？我已经到花碑了，今天口好得很，赶紧来！” 我看了眼时间，七点刚过。一号那天蒙蒙细雨钓了一天，胳膊到现在还隐隐发酸。但老表这电话来得突然，人都到水库边了，我要是说不去，这顿饭以后还吃不吃了？钓鱼人...</summary>
     <title>五一连战花碑水库，爆护50斤——老表两小时空军，我连竿到手酸</title>
-    <updated>2026-05-15T02:03:24.384Z</updated>
+    <updated>2026-05-15T10:28:33.950Z</updated>
   </entry>
   <entry>
     <author>
@@ -165,7 +165,7 @@
     <published>2026-05-01T12:00:00.000Z</published>
     <summary>上次收杆时说过，五一回来算总账。 言出必行。 五月一号，天还没亮就醒了。窗外淅淅沥沥的雨声让我心里一凉——天气预报没说下雨啊。打开手机一看，蒙蒙细雨，温度不高，气压倒是稳定。我一拍大腿：这不就是钓大鱼的天吗？阴雨天，大物靠岸，今天不爆护都对不起这天气！ 抄起装备就出发。后备箱里波纹鲤K6.3已经擦得锃亮，线组也提前绑好了——2.0主线+1.5子线，新关东2号钩。上次1.0子线被切得怀疑人生，今天直...</summary>
     <title>五一蒙蒙细雨，波纹鲤K6.3大战水库大鲤</title>
-    <updated>2026-05-15T02:03:24.384Z</updated>
+    <updated>2026-05-15T10:28:33.943Z</updated>
   </entry>
   <entry>
     <author>
@@ -193,9 +193,9 @@
     <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
     <category term="JavaScript" scheme="https://www.bytefisher.top/tags/JavaScript/"/>
     <category term="游戏开发" scheme="https://www.bytefisher.top/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
-    <category term="series:博客实战-小游戏" scheme="https://www.bytefisher.top/tags/series-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E6%B8%B8%E6%88%8F/"/>
     <category term="Canvas" scheme="https://www.bytefisher.top/tags/Canvas/"/>
     <category term="性能优化" scheme="https://www.bytefisher.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    <category term="series:博客实战-小游戏" scheme="https://www.bytefisher.top/tags/series-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E6%B8%B8%E6%88%8F/"/>
     <id>https://www.bytefisher.top/2026/04/28/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97%EF%BC%88%E4%BC%98%E5%8C%96%E7%AF%87%EF%BC%89/</id>
     <link href="https://www.bytefisher.top/2026/04/28/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97%EF%BC%88%E4%BC%98%E5%8C%96%E7%AF%87%EF%BC%89/"/>
     <published>2026-04-28T13:00:00.000Z</published>
@@ -218,7 +218,7 @@
     <published>2026-04-26T01:00:00.000Z</published>
     <summary>上周你在水库里想干嘛？把我的达摩浮漂拖走了还不过瘾，还连续切我1.0子线、2.0主线？真把这水库当你家开的了？ 今天我就是来算账的。 周六一大早就醒了，比上班还积极。到水库边才八点半，晨雾还没散尽，水面飘着一层薄薄的水汽。还是上次那个钓位，还是那套装备——6.3米鱼竿+2.0主线+1.0子线。挂饵抛竿，我就不信这个邪了。 下杆不到十分钟，浮漂一个黑漂闷了下去！我条件反射提竿—— 好家伙，中鱼了！...</summary>
     <title>上周你拖走我浮漂的嚣张劲儿呢？ 今天线组全换</title>
-    <updated>2026-05-15T02:03:24.380Z</updated>
+    <updated>2026-05-15T10:28:33.925Z</updated>
   </entry>
   <entry>
     <author>
@@ -247,8 +247,8 @@
     <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
     <category term="JavaScript" scheme="https://www.bytefisher.top/tags/JavaScript/"/>
     <category term="游戏开发" scheme="https://www.bytefisher.top/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
-    <category term="series:博客实战-小游戏" scheme="https://www.bytefisher.top/tags/series-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E6%B8%B8%E6%88%8F/"/>
     <category term="Canvas" scheme="https://www.bytefisher.top/tags/Canvas/"/>
+    <category term="series:博客实战-小游戏" scheme="https://www.bytefisher.top/tags/series-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E6%B8%B8%E6%88%8F/"/>
     <category term="响应式设计" scheme="https://www.bytefisher.top/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1/"/>
     <id>https://www.bytefisher.top/2026/04/20/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</id>
     <link href="https://www.bytefisher.top/2026/04/20/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/"/>
