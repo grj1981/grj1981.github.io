@@ -11,7 +11,22 @@
   <rights>All rights reserved 2026, 淡水鱼</rights>
   <subtitle>钓鱼爱好者的编程世界</subtitle>
   <title>ByteFisher</title>
-  <updated>2026-05-15T10:28:34.225Z</updated>
+  <updated>2026-05-18T04:08:19.559Z</updated>
+  <entry>
+    <author>
+      <name>淡水鱼</name>
+    </author>
+    <category term="钓鱼日记" scheme="https://www.bytefisher.top/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/"/>
+    <category term="钓鱼" scheme="https://www.bytefisher.top/tags/%E9%92%93%E9%B1%BC/"/>
+    <category term="钓鱼日记" scheme="https://www.bytefisher.top/tags/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/"/>
+    <category term="series:钓鱼日记" scheme="https://www.bytefisher.top/tags/series-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/"/>
+    <id>https://www.bytefisher.top/2026/05/16/2026-05-16-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93%E6%96%B0%E9%B1%BC%E7%A7%8D/</id>
+    <link href="https://www.bytefisher.top/2026/05/16/2026-05-16-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93%E6%96%B0%E9%B1%BC%E7%A7%8D/"/>
+    <published>2026-05-16T12:00:00.000Z</published>
+    <summary>四月下旬到现在，花碑水库已经连战三次了。第一次被切子线拖走浮漂，气得回去发狠写了两千字复仇宣言。第二次五一蒙蒙细雨，波纹鲤K6.3五条大鲤三条鲢鳙入户，连本带利讨了回来。第三次五一约上老表，十二加六十八斤爆护，老表两小时空军被我一个人填了坑。 三部曲写完，群里钓友都说我这是要把花碑水库钓绝的节奏。 周六早上九点，我拎着装备出门的时候还在想：花碑水库的鱼，你们准备好了没有？ 后备箱里的装备已经是固定...</summary>
+    <title>花碑水库再开新图鉴——淡水银鳕鱼入护，程序员调整策略立竿见影</title>
+    <updated>2026-05-18T04:08:19.559Z</updated>
+  </entry>
   <entry>
     <author>
       <name>淡水鱼</name>
@@ -133,7 +148,7 @@
     <id>https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/</id>
     <link href="https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/"/>
     <published>2026-05-09T12:00:00.000Z</published>
-    <summary>前言ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近对博客进行了一次全面的代码审查，发现三个高优先级的硬性问题： 问题 影响 严重程度 RSS Feed 配置存在但依赖未安装 /atom.xml 无法生成，RSS 订阅失效 🔴 高 Sitemap 未配置 搜索引擎爬取效率低，新文章收录慢 ...</summary>
+    <summary>前言ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近对博客进行了一次全面的代码审查，发现三个高优先级的硬性问题： 问题 影响 严重程度 RSS Feed 配置存在但依赖未安装 /atom.xml 无法生成，RSS 订阅失效 🔴 高 Sitemap 未配置 搜索引擎爬取效率低，新文章收录慢 �...</summary>
     <title>Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移</title>
     <updated>2026-05-14T08:31:52.689Z</updated>
   </entry>
@@ -342,22 +357,5 @@
     <summary>前言在静态博客中嵌入 JavaScript 小游戏是一种提升用户体验的好方法。之前用 Lua 为 Unity 实现过多种小游戏，现在尝试将经典的贪吃蛇游戏移植到 Hexo 博客中。 本文将详细介绍如何在 Hexo 博客中实现一个可玩的贪吃蛇小游戏，包括游戏页面搭建、核心逻辑实现以及移动端适配。 项目结构游戏放置在 source/ai games/snake/ 目录下，文件结构如下： 123sour...</summary>
     <title>Hexo 博客实战：贪吃蛇小游戏开发指南</title>
     <updated>2026-05-14T08:31:52.693Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>淡水鱼</name>
-    </author>
-    <category term="IT" scheme="https://www.bytefisher.top/categories/IT/"/>
-    <category term="AI" scheme="https://www.bytefisher.top/categories/AI/"/>
-    <category term="IT" scheme="https://www.bytefisher.top/tags/IT/"/>
-    <category term="AI" scheme="https://www.bytefisher.top/tags/AI/"/>
-    <category term="series:AI编程助手" scheme="https://www.bytefisher.top/tags/series-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/"/>
-    <category term="OpenCode" scheme="https://www.bytefisher.top/tags/OpenCode/"/>
-    <id>https://www.bytefisher.top/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/</id>
-    <link href="https://www.bytefisher.top/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/"/>
-    <published>2026-03-24T12:00:00.000Z</published>
-    <summary>在 AI 编程工具蓬勃发展的今天，开源免费的 OpenCode 凭借其强大的功能和灵活的扩展性，已经成为超过 500 万开发者的首选。作为一个拥有 12 万 + GitHub Stars 的开源项目，OpenCode 提供了终端、桌面应用和 IDE 多种使用方式。本文将详细介绍如何在 VSCode 中搭建和使用 OpenCode，帮助你快速上手这款强大的 AI 编程助手。 一、什么是 OpenCo...</summary>
-    <title>VSCode 中搭建 OpenCode AI 编程助手完整指南</title>
-    <updated>2026-05-14T08:31:52.703Z</updated>
   </entry>
 </feed>
