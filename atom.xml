@@ -11,7 +11,26 @@
   <rights>All rights reserved 2026, 淡水鱼</rights>
   <subtitle>钓鱼爱好者的编程世界</subtitle>
   <title>ByteFisher</title>
-  <updated>2026-05-18T04:32:03.843Z</updated>
+  <updated>2026-05-19T09:08:00.745Z</updated>
+  <entry>
+    <author>
+      <name>淡水鱼</name>
+    </author>
+    <category term="编程" scheme="https://www.bytefisher.top/categories/%E7%BC%96%E7%A8%8B/"/>
+    <category term="游戏开发" scheme="https://www.bytefisher.top/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
+    <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
+    <category term="JavaScript" scheme="https://www.bytefisher.top/tags/JavaScript/"/>
+    <category term="游戏开发" scheme="https://www.bytefisher.top/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
+    <category term="series:博客实战-小游戏" scheme="https://www.bytefisher.top/tags/series-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E6%B8%B8%E6%88%8F/"/>
+    <category term="Canvas" scheme="https://www.bytefisher.top/tags/Canvas/"/>
+    <category term="响应式设计" scheme="https://www.bytefisher.top/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1/"/>
+    <id>https://www.bytefisher.top/2026/05/19/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E9%B8%9F%E9%97%AF%E5%85%B3%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</id>
+    <link href="https://www.bytefisher.top/2026/05/19/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E9%B8%9F%E9%97%AF%E5%85%B3%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/"/>
+    <published>2026-05-19T12:00:00.000Z</published>
+    <summary>前言继光影拼图之后，本文将介绍博客系列第六款小游戏——Flappy Byte（小鸟闯关） 的开发。这是一款向经典 Flappy Bird 致敬的像素风作品，也是系列中第一款实时物理模拟游戏。 相比之前几款游戏，小鸟闯关在技术实现上有本质区别： 游戏 核心机制 技术难点 交互方式 五子棋 AI 博弈 Minimax 搜索树 点击落子 贪吃蛇 方向控制 蛇身移动逻辑 键盘方向键 俄罗斯方块 方块堆叠...</summary>
+    <title>Hexo 博客实战：小鸟闯关游戏开发指南</title>
+    <updated>2026-05-19T09:08:00.745Z</updated>
+  </entry>
   <entry>
     <author>
       <name>淡水鱼</name>
@@ -340,22 +359,5 @@
     <summary>前言继上一篇文章介绍贪吃蛇小游戏的实现方案后，本文继续讲解俄罗斯方块游戏的开发。相比贪吃蛇，俄罗斯方块的实现更加复杂，涉及方块旋转、多行消除、速度递增等机制。 通过这个案例，可以学习到如何用原生 JavaScript 实现经典的方块下落消除游戏。 项目结构游戏放置在 source/ai games/tetris/ 目录下，文件结构如下： 123source/ai games/tetris/├──...</summary>
     <title>Hexo 博客实战：俄罗斯方块小游戏开发指南</title>
     <updated>2026-05-14T08:31:52.691Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>淡水鱼</name>
-    </author>
-    <category term="编程" scheme="https://www.bytefisher.top/categories/%E7%BC%96%E7%A8%8B/"/>
-    <category term="游戏开发" scheme="https://www.bytefisher.top/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
-    <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
-    <category term="JavaScript" scheme="https://www.bytefisher.top/tags/JavaScript/"/>
-    <category term="游戏开发" scheme="https://www.bytefisher.top/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
-    <category term="series:博客实战-小游戏" scheme="https://www.bytefisher.top/tags/series-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E6%B8%B8%E6%88%8F/"/>
-    <id>https://www.bytefisher.top/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</id>
-    <link href="https://www.bytefisher.top/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/"/>
-    <published>2026-03-27T12:00:00.000Z</published>
-    <summary>前言在静态博客中嵌入 JavaScript 小游戏是一种提升用户体验的好方法。之前用 Lua 为 Unity 实现过多种小游戏，现在尝试将经典的贪吃蛇游戏移植到 Hexo 博客中。 本文将详细介绍如何在 Hexo 博客中实现一个可玩的贪吃蛇小游戏，包括游戏页面搭建、核心逻辑实现以及移动端适配。 项目结构游戏放置在 source/ai games/snake/ 目录下，文件结构如下： 123sour...</summary>
-    <title>Hexo 博客实战：贪吃蛇小游戏开发指南</title>
-    <updated>2026-05-14T08:31:52.693Z</updated>
   </entry>
 </feed>
