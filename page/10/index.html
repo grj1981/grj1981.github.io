@@ -166,7 +166,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">110</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">117</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -248,7 +248,7 @@
     <p class="hero-desc">分享游戏开发技术与钓鱼乐趣</p>
     <div class="hero-stats">
       <div class="hero-stat">
-        <span class="hero-stat-value">110</span>
+        <span class="hero-stat-value">117</span>
         <span class="hero-stat-label">文章</span>
       </div>
       <div class="hero-stat">
@@ -535,6 +535,20 @@
 
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
 
@@ -542,7 +556,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -556,7 +570,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity堆叠消除小游戏摘要</a>
+            <a href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity一笔画小游戏摘要</a>
         </h2>
 
         <div class="post-meta">
@@ -566,7 +580,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-01-31 18:11:16" itemprop="dateCreated datePublished" datetime="2024-01-31T18:11:16+08:00">2024-01-31</time>
+              <time title="创建时间：2024-08-14 19:12:39" itemprop="dateCreated datePublished" datetime="2024-08-14T19:12:39+08:00">2024-08-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -595,8 +609,8 @@
       </span>
       <span class="post-meta-item-text">Waline：</span>
     
-    <a title="waline" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    <a title="waline" href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -611,10 +625,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Lua实现Unity堆叠消除小游戏，游戏功能每次随机生成四个不同形状的方块，将方块拖入10 10的格子棋盘，如果放入的棋盘格都有空格则可以放入方块，当放满一行或者一列时，消除满行满列的放入格。 创建拼图地图格数据123456789101112131415161718192021222324252627 拼图地图格数据 @class ROPuzzleMapTileDatalocal m = & 12...</p>
+          <p>用Lua实现Unity一笔画小游戏要点记录： 游戏玩法简介选择不同难度关卡开始游戏，每一关有多个方块小格，可以从任意一个方块格作为起点开始连接到下一个方块格，下一个方块格必须与起始格上下左右相邻。同一个方块格不能重复连接，成功连接后，目标方块格又成为新的起始方块格。以此类推直至将所有方块格连完。 功能实现简述关卡难度关卡难度选择，不同关卡制作不同prefab预设。prefab预设摆放所有要连接的格...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+              <a class="btn" href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -638,7 +652,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -652,7 +666,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity连连看小游戏摘要</a>
+            <a href="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/" class="post-title-link" itemprop="url">Unity3D正交相机视野控制</a>
         </h2>
 
         <div class="post-meta">
@@ -662,7 +676,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-01-31 16:48:39" itemprop="dateCreated datePublished" datetime="2024-01-31T16:48:39+08:00">2024-01-31</time>
+              <time title="创建时间：2024-07-03 11:52:16" itemprop="dateCreated datePublished" datetime="2024-07-03T11:52:16+08:00">2024-07-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -691,8 +705,8 @@
       </span>
       <span class="post-meta-item-text">Waline：</span>
     
-    <a title="waline" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    <a title="waline" href="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -707,10 +721,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>用Lua实现Unity连连看游戏要点记录： 游戏功能描述，通过游戏关卡配置从水果类型中，生成指定类型水果及其数量，位置随机。连线要求最多支持两个拐点，三段线相连通才能消除。 创建游戏关卡数据结构创建关卡水果数据结构 ROFruitData 12345678910111213141516171819202122232425262728293031323334353637383940414243444...</p>
+          <p>正交相机（Orthographic Camera）Unity3D中的正交相机（Orthographic Camera）是一种投影方式，它不同于透视相机（Perspective Camera）的投影方式。在正交相机中，物体在视野中的大小与其与相机的距离无关，也就是说，所有物体在相机视野中呈现的大小是相同的。 Unity3D的正交相机可以看作是一个在固定位置的照相机，它将三维空间中的物体投影到一个二维...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+              <a class="btn" href="/2024/07/03/Unity3D%E6%AD%A3%E4%BA%A4%E7%9B%B8%E6%9C%BA%E8%A7%86%E9%87%8E%E6%8E%A7%E5%88%B6/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -734,7 +748,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/06/21/Unity3D%E8%BE%93%E5%85%A5%E6%8E%A7%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -748,7 +762,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/" class="post-title-link" itemprop="url">钓鱼日记[23.12.16]</a>
+            <a href="/2024/06/21/Unity3D%E8%BE%93%E5%85%A5%E6%8E%A7%E5%88%B6/" class="post-title-link" itemprop="url">Unity3D输入控制</a>
         </h2>
 
         <div class="post-meta">
@@ -758,183 +772,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-12-16 20:21:05" itemprop="dateCreated datePublished" datetime="2023-12-16T20:21:05+08:00">2023-12-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>12月16日，星期六 今天是大降温的头一天，寒潮来袭。气温明显比昨天低了好几度，最高温度仅有7度。办完上午的事情后，我决定去河边钓鱼，看看这个寒冷的天气对鱼情的影响。 来到西来河边，我发现河水已经干涸了。回忆起夏天的时候，河里马口特别多，当时我玩路亚微物，钓上了好多美丽的马口。但是现在水太浅，温度又低，估计没有鱼儿了。况且，上周河边野钓，那么好的环境，水比较深，都没钓到鱼，这让我有些犹豫。于是，我...</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/" class="post-title-link" itemprop="url">钓鱼日记[23.12.10]</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-10 21:01:05" itemprop="dateCreated datePublished" datetime="2023-12-10T21:01:05+08:00">2023-12-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>12月10日，星期天 今天是一个悠闲的周末，在寿安镇参加完一场热闹的酒席后，午后与表弟满怀期待地踏上了一段探秘之旅，我们的目标是一直传说中的南河旧沙场，那里据说是个钓鱼的好地方。从网络上朋友们晒出的满载而归的照片就可以看出，这里的鱼种颇为丰富。因为距离比较远，一直没有机会前往，幸运的是今天结束酒席我们便在附近，于是决定去实地探探。 第一次踏上这片朴实的乡间，对于指向南河边的路途，我们了解甚少，我与...</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现U3D弹幕飞行游戏摘要</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-06 11:04:38" itemprop="dateCreated datePublished" datetime="2023-12-06T11:04:38+08:00">2023-12-06</time>
+              <time title="创建时间：2024-06-21 11:45:25" itemprop="dateCreated datePublished" datetime="2024-06-21T11:45:25+08:00">2024-06-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -948,10 +786,6 @@
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
                 </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
-                </span>
             </span>
 
           
@@ -963,8 +797,8 @@
       </span>
       <span class="post-meta-item-text">Waline：</span>
     
-    <a title="waline" href="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    <a title="waline" href="/2024/06/21/Unity3D%E8%BE%93%E5%85%A5%E6%8E%A7%E5%88%B6/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2024/06/21/Unity3D%E8%BE%93%E5%85%A5%E6%8E%A7%E5%88%B6/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -979,10 +813,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>用Lua实现Unity弹幕飞行游戏要点记录： 对象池创建游戏中可循环利用的游戏对象池 123456789101112131415161718192021222324252627282930313233343536373839404142434445 获取一个可用子弹 @return FlightGameBulletfunction m:GetBullet() for i, v in pairs(s...</p>
+          <p>鼠标键盘鼠标键盘输入控制，Input类,要在Update()函数中检测 鼠标点击0左键 1右键 2滚轮 按下鼠标左键： Input.GetMouseButtonDown(0) 持续按下鼠标左键： Input.GetMouseButton(0) 抬起鼠标左键： Input.GetMouseButtonUp(0) GetMouseButtonDown()和GetMouseButtonUp()成对出现...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+              <a class="btn" href="/2024/06/21/Unity3D%E8%BE%93%E5%85%A5%E6%8E%A7%E5%88%B6/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1006,7 +840,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2023/12/02/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-02/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1020,7 +854,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/12/02/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-02/" class="post-title-link" itemprop="url">钓鱼日记[23.12.02]</a>
+            <a href="/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/" class="post-title-link" itemprop="url">Unity3D物体Transform</a>
         </h2>
 
         <div class="post-meta">
@@ -1030,7 +864,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-12-02 20:11:01" itemprop="dateCreated datePublished" datetime="2023-12-02T20:11:01+08:00">2023-12-02</time>
+              <time title="创建时间：2024-06-19 17:05:14" itemprop="dateCreated datePublished" datetime="2024-06-19T17:05:14+08:00">2024-06-19</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1038,7 +872,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
                 </span>
             </span>
 
@@ -1051,8 +889,8 @@
       </span>
       <span class="post-meta-item-text">Waline：</span>
     
-    <a title="waline" href="/2023/12/02/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-02/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2023/12/02/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-02/" itemprop="commentCount"></span>
+    <a title="waline" href="/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1067,10 +905,194 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>12月2日 周六，阴冷的冬日，我决定去三一水库钓小红尾。此次的钓鱼之旅，我特意选择了15尺枯法师7，想和以前经常使用的15尺普天元独步，进行一个详细的对比。在网上，对于15尺枯法师7的评论褒贬不一，相对于其他尺寸而言，人们普遍认为15尺是整个枯7系列最不好的一款，持感重头，整体偏软。 刚开始使用枯法师的时候，确实能感受到比独步有明显的重头感，相比于15尺独步，枯7的竿身要细一些，竿壁也更厚。我发现...</p>
+          <p>Transform维持物体之间的父子级 获取位置获取世界空间中的位置: transform.position 相对父物体位置: transform.localPosition 获取旋转获取物体在世界空间旋转值(四元素)：transform.rotation 获取物体相对父物体旋转值(四元素)：transform.localRotation 获取物体在世界空间旋转值(Euler 度为单位): tra...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/12/02/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-02/">
+              <a class="btn" href="/2024/06/19/Unity3D%E7%89%A9%E4%BD%93Transform/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/06/19/Unity3D%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/06/19/Unity3D%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF/" class="post-title-link" itemprop="url">Unity3D游戏场景</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-06-19 15:05:23" itemprop="dateCreated datePublished" datetime="2024-06-19T15:05:23+08:00">2024-06-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2024/06/19/Unity3D%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2024/06/19/Unity3D%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>场景类 Scene 获取当前活动场景Scene scene = SceneManager.GetActiveScene(); 场景名称Debug.Log(scene.name); 是否加载Debug.Log(scene.isLoaded); 场景路径Debug.Log(scene.path); 场景索引Debug.Log(scene.buildIndex); 获取场景内物体数量GameObject...</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/19/Unity3D%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/" class="post-title-link" itemprop="url">Unity3D路径权限</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-06-19 14:25:43" itemprop="dateCreated datePublished" datetime="2024-06-19T14:25:43+08:00">2024-06-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Application 游戏数据文件夹路径(只读，打包加密压缩)Debug.Log(Application.dataPath); D:/UnityTest/TestUnity2021Project/New Unity Project/Assets 持久化文件夹路径Debug.Log(Application.persistentDataPath); C:/Users/gongrenjun/AppDa...</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1093,7 +1115,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1161,7 +1183,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">110</span>
+          <span class="site-state-item-count">117</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

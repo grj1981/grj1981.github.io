@@ -25,25 +25,25 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
-  <meta name="description" content="1.1 浠€涔堟槸 LuaLua 鏄竴绉嶈交閲忋€佸皬宸с€佸彲鎵╁睍鐨勮剼鏈瑷€锛岀敱宸磋タ閲岀害鐑唴鍗㈠ぉ涓绘暀澶у锛圥UC Rio锛夌殑 Roberto Ierusalimschy銆乄aldemar Celes 鍜?Luiz Henrique de Figueiredo 浜?1993 骞村紑鍙戙€傚悕瀛?”Lua” 鍦ㄨ憽钀勭墮璇腑鎰忎负 ”鏈堜寒”銆?Lua 鐨勮璁″摬瀛﹀彲">
+  <meta name="description" content="1.1 什么是 LuaLua 是一种轻量、小巧、可扩展的脚本语言，由巴西里约热内卢天主教大学（PUC Rio）的 Roberto Ierusalimschy、Waldemar Celes 和 Luiz Henrique de Figueiredo 于 1993 年开发。名字 “Lua” 在葡萄牙语中意为 “月亮”。 Lua 的设计哲学可以概括为三个词：轻量、可嵌入、高效。它不是一个用来编写独立大型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Lua 绠€浠嬩笌鐜鎼缓">
+<meta property="og:title" content="Lua 简介与环境搭建">
 <meta property="og:url" content="https://www.bytefisher.top/2025/06/01/Lua%E6%95%99%E7%A8%8B-01-Lua%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="ByteFisher">
-<meta property="og:description" content="1.1 浠€涔堟槸 LuaLua 鏄竴绉嶈交閲忋€佸皬宸с€佸彲鎵╁睍鐨勮剼鏈瑷€锛岀敱宸磋タ閲岀害鐑唴鍗㈠ぉ涓绘暀澶у锛圥UC Rio锛夌殑 Roberto Ierusalimschy銆乄aldemar Celes 鍜?Luiz Henrique de Figueiredo 浜?1993 骞村紑鍙戙€傚悕瀛?”Lua” 鍦ㄨ憽钀勭墮璇腑鎰忎负 ”鏈堜寒”銆?Lua 鐨勮璁″摬瀛﹀彲">
+<meta property="og:description" content="1.1 什么是 LuaLua 是一种轻量、小巧、可扩展的脚本语言，由巴西里约热内卢天主教大学（PUC Rio）的 Roberto Ierusalimschy、Waldemar Celes 和 Luiz Henrique de Figueiredo 于 1993 年开发。名字 “Lua” 在葡萄牙语中意为 “月亮”。 Lua 的设计哲学可以概括为三个词：轻量、可嵌入、高效。它不是一个用来编写独立大型">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-06-01T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-19T10:57:27.336Z">
+<meta property="article:modified_time" content="2026-05-19T11:03:06.286Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="Lua">
-<meta property="article:tag" content="series:Lua鍩虹鏁欑▼">
-<meta property="article:tag" content="鏁欑▼">
+<meta property="article:tag" content="series:Lua基础教程">
+<meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/06/01/Lua%E6%95%99%E7%A8%8B-01-Lua%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Lua 绠€浠嬩笌鐜鎼缓","description":"1.1 浠€涔堟槸 LuaLua 鏄竴绉嶈交閲忋€佸皬宸с€佸彲鎵╁睍鐨勮剼鏈瑷€锛岀敱宸磋タ閲岀害鐑唴鍗㈠ぉ涓绘暀澶у锛圥UC Rio锛夌殑 Roberto Ierusalimschy銆乄aldemar Celes 鍜?Luiz Henrique de Figueiredo 浜?1993 骞村紑鍙戙€傚悕瀛?”Lua” 鍦ㄨ憽钀勭墮璇腑鎰忎负 ”鏈堜寒”銆?Lua 鐨勮璁″摬瀛﹀彲...","url":"https://www.bytefisher.top/2025/06/01/Lua教程-01-Lua简介与环境搭建/","datePublished":"2025-06-01T00:00:00.000Z","dateModified":"2026-05-19T10:57:27.336Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/06/01/Lua教程-01-Lua简介与环境搭建/"},"keywords":"Lua, 鏁欑▼, series:Lua鍩虹鏁欑▼"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Lua","item":"https://www.bytefisher.top/categories/Lua/"},{"@type":"ListItem","position":3,"name":"Lua 绠€浠嬩笌鐜鎼缓"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Lua 简介与环境搭建","description":"1.1 什么是 LuaLua 是一种轻量、小巧、可扩展的脚本语言，由巴西里约热内卢天主教大学（PUC Rio）的 Roberto Ierusalimschy、Waldemar Celes 和 Luiz Henrique de Figueiredo 于 1993 年开发。名字 “Lua” 在葡萄牙语中意为 “月亮”。 Lua 的设计哲学可以概括为三个词：轻量、可嵌入、高效。它不是一个用来编写独立大型...","url":"https://www.bytefisher.top/2025/06/01/Lua教程-01-Lua简介与环境搭建/","datePublished":"2025-06-01T00:00:00.000Z","dateModified":"2026-05-19T11:03:06.286Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/06/01/Lua教程-01-Lua简介与环境搭建/"},"keywords":"Lua, 教程, series:Lua基础教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Lua","item":"https://www.bytefisher.top/categories/Lua/"},{"@type":"ListItem","position":3,"name":"Lua 简介与环境搭建"}]}</script>
 
 
 <script id="page-configurations">
@@ -56,7 +56,7 @@
   };
 </script>
 
-  <title>Lua 绠€浠嬩笌鐜鎼缓 | ByteFisher</title>
+  <title>Lua 简介与环境搭建 | ByteFisher</title>
   
 
 
@@ -170,7 +170,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">110</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">117</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -255,7 +255,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Lua 绠€浠嬩笌鐜鎼缓
+          Lua 简介与环境搭建
         </h1>
 
         <div class="post-meta">
@@ -277,7 +277,7 @@
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%8F%81%E6%AC%91%E2%96%BC/" itemprop="url" rel="index"><span itemprop="name">鏁欑▼</span></a>
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
                 </span>
             </span>
 
@@ -303,7 +303,7 @@
   </span>
   
   
-            <div class="post-description">1.1 浠€涔堟槸 LuaLua 鏄竴绉嶈交閲忋€佸皬宸с€佸彲鎵╁睍鐨勮剼鏈瑷€锛岀敱宸磋タ閲岀害鐑唴鍗㈠ぉ涓绘暀澶у锛圥UC Rio锛夌殑 Roberto Ierusalimschy銆乄aldemar Celes 鍜?Luiz Henrique de Figueiredo 浜?1993 骞村紑鍙戙€傚悕瀛?”Lua” 鍦ㄨ憽钀勭墮璇腑鎰忎负 ”鏈堜寒”銆?Lua 鐨勮璁″摬瀛﹀彲...</div>
+            <div class="post-description">1.1 什么是 LuaLua 是一种轻量、小巧、可扩展的脚本语言，由巴西里约热内卢天主教大学（PUC Rio）的 Roberto Ierusalimschy、Waldemar Celes 和 Luiz Henrique de Figueiredo 于 1993 年开发。名字 “Lua” 在葡萄牙语中意为 “月亮”。 Lua 的设计哲学可以概括为三个词：轻量、可嵌入、高效。它不是一个用来编写独立大型...</div>
 
         </div>
       </header>
@@ -314,48 +314,50 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1-1-浠€涔堟槸-Lua"><a href="#1-1-浠€涔堟槸-Lua" class="headerlink" title="1.1 浠€涔堟槸 Lua"></a>1.1 浠€涔堟槸 Lua</h2><p>Lua 鏄竴绉嶈交閲忋€佸皬宸с€佸彲鎵╁睍鐨勮剼鏈瑷€锛岀敱宸磋タ閲岀害鐑唴鍗㈠ぉ涓绘暀澶у锛圥UC-Rio锛夌殑 Roberto Ierusalimschy銆乄aldemar Celes 鍜?Luiz Henrique de Figueiredo 浜?1993 骞村紑鍙戙€傚悕瀛?”Lua” 鍦ㄨ憽钀勭墮璇腑鎰忎负 **”鏈堜寒”<strong>銆?<br>Lua 鐨勮璁″摬瀛﹀彲浠ユ鎷负涓変釜璇嶏細</strong>杞婚噺銆佸彲宓屽叆銆侀珮鏁?*銆傚畠涓嶆槸涓€涓敤鏉ョ紪鍐欑嫭绔嬪ぇ鍨嬪簲鐢ㄧ殑”澶ц瑷€”锛岃€屾槸涓€涓?*鑳舵按璇█**鈥斺€旇宓屽叆鍒板叾浠栧涓荤▼搴忎腑锛屼负瀹夸富鎻愪緵鐏垫椿鐨勮剼鏈兘鍔涖€?</p>
-<h3 id="Lua-鐨勬牳蹇冪壒鎬"><a href="#Lua-鐨勬牳蹇冪壒鎬" class="headerlink" title="Lua 鐨勬牳蹇冪壒鎬?"></a>Lua 鐨勬牳蹇冪壒鎬?</h3><ul>
-<li>**绠€娲佷紭闆?*锛氳娉曠畝鍗曪紝璇箟娓呮櫚锛屼粎鏈夌害 20 涓叧閿瓧</li>
-<li>**鍔ㄦ€佺被鍨?*锛氬彉閲忔棤绫诲瀷澹版槑锛岃繍琛屾椂纭畾绫诲瀷</li>
-<li><strong>鑷姩鍐呭瓨绠＄悊</strong>锛氬熀浜庢爣璁?娓呴櫎锛圡ark-and-Sweep锛夌殑鍨冨溇鍥炴敹</li>
-<li>**涓€绛夊嚱鏁?*锛氬嚱鏁版槸绗竴绫诲€硷紝鍙祴鍊肩粰鍙橀噺銆佷綔涓哄弬鏁颁紶閫掋€佷綔涓鸿繑鍥炲€?- **琛紙Table锛?*锛歀ua 鍞竴鐨勬暟鎹粨鏋勫鍣紝鍚屾椂涔熸槸鏁扮粍銆佸瓧鍏搞€佹ā鍧椼€佺被绛夌殑缁熶竴瀹炵幇</li>
-<li>**鍗忕▼锛圕oroutine锛?*锛氳交閲忕骇骞跺彂鏀寔</li>
-<li>**鍙祵鍏ユ€?*锛欳 API 瀹屽杽锛屽彲杞绘澗闆嗘垚鍒?C&#x2F;C++ 绋嬪簭涓?</li>
+        <h2 id="1-1-什么是-Lua"><a href="#1-1-什么是-Lua" class="headerlink" title="1.1 什么是 Lua"></a>1.1 什么是 Lua</h2><p>Lua 是一种轻量、小巧、可扩展的脚本语言，由巴西里约热内卢天主教大学（PUC-Rio）的 Roberto Ierusalimschy、Waldemar Celes 和 Luiz Henrique de Figueiredo 于 1993 年开发。名字 “Lua” 在葡萄牙语中意为 <strong>“月亮”</strong>。</p>
+<p>Lua 的设计哲学可以概括为三个词：<strong>轻量、可嵌入、高效</strong>。它不是一个用来编写独立大型应用的”大语言”，而是一个<strong>胶水语言</strong>——被嵌入到其他宿主程序中，为宿主提供灵活的脚本能力。</p>
+<h3 id="Lua-的核心特性"><a href="#Lua-的核心特性" class="headerlink" title="Lua 的核心特性"></a>Lua 的核心特性</h3><ul>
+<li><strong>简洁优雅</strong>：语法简单，语义清晰，仅有约 20 个关键字</li>
+<li><strong>动态类型</strong>：变量无类型声明，运行时确定类型</li>
+<li><strong>自动内存管理</strong>：基于标记-清除（Mark-and-Sweep）的垃圾回收</li>
+<li><strong>一等函数</strong>：函数是第一类值，可赋值给变量、作为参数传递、作为返回值</li>
+<li><strong>表（Table）</strong>：Lua 唯一的数据结构容器，同时也是数组、字典、模块、类等的统一实现</li>
+<li><strong>协程（Coroutine）</strong>：轻量级并发支持</li>
+<li><strong>可嵌入性</strong>：C API 完善，可轻松集成到 C&#x2F;C++ 程序中</li>
 </ul>
-<h3 id="Lua-鐨勫簲鐢ㄥ満鏅"><a href="#Lua-鐨勫簲鐢ㄥ満鏅" class="headerlink" title="Lua 鐨勫簲鐢ㄥ満鏅?"></a>Lua 鐨勫簲鐢ㄥ満鏅?</h3><table>
+<h3 id="Lua-的应用场景"><a href="#Lua-的应用场景" class="headerlink" title="Lua 的应用场景"></a>Lua 的应用场景</h3><table>
 <thead>
 <tr>
-<th>棰嗗煙</th>
-<th>浠ｈ〃妗堜緥</th>
+<th>领域</th>
+<th>代表案例</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>娓告垙寮€鍙?</td>
-<td>Unity锛圶Lua&#x2F;ToLua锛夈€乄orld of Warcraft锛堟彃浠讹級銆丷oblox銆丆orona SDK</td>
+<td>游戏开发</td>
+<td>Unity（XLua&#x2F;ToLua）、World of Warcraft（插件）、Roblox、Corona SDK</td>
 </tr>
 <tr>
-<td>宓屽叆寮忕郴缁?</td>
-<td>璺敱鍣ㄥ浐浠躲€佺墿鑱旂綉璁惧鑴氭湰</td>
+<td>嵌入式系统</td>
+<td>路由器固件、物联网设备脚本</td>
 </tr>
 <tr>
-<td>Web 鏈嶅姟</td>
-<td>OpenResty锛圢ginx + Lua锛夈€丷edis 鑴氭湰锛圗VAL锛?</td>
+<td>Web 服务</td>
+<td>OpenResty（Nginx + Lua）、Redis 脚本（EVAL）</td>
 </tr>
 <tr>
-<td>閰嶇疆鏂囦欢</td>
-<td>Nginx銆乄ireshark銆乂LC銆両3 绐楀彛绠＄悊鍣?</td>
+<td>配置文件</td>
+<td>Nginx、Wireshark、VLC、I3 窗口管理器</td>
 </tr>
 <tr>
-<td>宸ュ叿閾?</td>
-<td>Neovim 鎻掍欢锛圴imScript 鏇夸唬鑰咃級銆丄wesome WM</td>
+<td>工具链</td>
+<td>Neovim 插件（VimScript 替代者）、Awesome WM</td>
 </tr>
 </tbody></table>
 <hr>
-<h2 id="1-2-Lua-涓庡叾浠栬瑷€鐨勭畝鍗曞姣"><a href="#1-2-Lua-涓庡叾浠栬瑷€鐨勭畝鍗曞姣" class="headerlink" title="1.2 Lua 涓庡叾浠栬瑷€鐨勭畝鍗曞姣?"></a>1.2 Lua 涓庡叾浠栬瑷€鐨勭畝鍗曞姣?</h2><table>
+<h2 id="1-2-Lua-与其他语言的简单对比"><a href="#1-2-Lua-与其他语言的简单对比" class="headerlink" title="1.2 Lua 与其他语言的简单对比"></a>1.2 Lua 与其他语言的简单对比</h2><table>
 <thead>
 <tr>
-<th>缁村害</th>
+<th>维度</th>
 <th>Lua</th>
 <th>Python</th>
 <th>JavaScript</th>
@@ -363,105 +365,117 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>浣撶Н</td>
+<td>体积</td>
 <td>~200KB</td>
 <td>~30MB</td>
 <td>~5MB</td>
 <td>~100MB+</td>
 </tr>
 <tr>
-<td>鍏抽敭瀛楁暟閲?</td>
+<td>关键字数量</td>
 <td>21</td>
 <td>35</td>
 <td>63+</td>
 <td>80+</td>
 </tr>
 <tr>
-<td>涓昏鐢ㄩ€?</td>
-<td>宓屽叆寮忚剼鏈?</td>
-<td>閫氱敤缂栫▼</td>
-<td>Web 鍓嶇</td>
-<td>浼佷笟绾у簲鐢?</td>
+<td>主要用途</td>
+<td>嵌入式脚本</td>
+<td>通用编程</td>
+<td>Web 前端</td>
+<td>企业级应用</td>
 </tr>
 <tr>
-<td>杩愯鏂瑰紡</td>
-<td>瑙ｉ噴鎵ц</td>
-<td>瑙ｉ噴鎵ц</td>
-<td>瑙ｉ噴&#x2F;JIT</td>
-<td>缂栬瘧+JIT</td>
+<td>运行方式</td>
+<td>解释执行</td>
+<td>解释执行</td>
+<td>解释&#x2F;JIT</td>
+<td>编译+JIT</td>
 </tr>
 <tr>
-<td>璇硶澶嶆潅搴?</td>
-<td>鈽呪槅鈽嗏槅鈽?</td>
-<td>鈽呪槄鈽嗏槅鈽?</td>
-<td>鈽呪槄鈽呪槅鈽?</td>
-<td>鈽呪槄鈽呪槅鈽?</td>
+<td>语法复杂度</td>
+<td>★☆☆☆☆</td>
+<td>★★☆☆☆</td>
+<td>★★★☆☆</td>
+<td>★★★☆☆</td>
 </tr>
 </tbody></table>
-<h2 id="Lua-鐨勪紭鍔垮湪浜-鏋佽嚧鐨勫皬宸у拰宓屽叆鎬-锛屽鏋滀綘鐨勫簲鐢ㄩ渶瑕佷竴涓剼鏈紩鎿庢潵鎵╁睍鍔熻兘锛孡ua-鏄渶浣抽€夋嫨涔嬩竴銆"><a href="#Lua-鐨勪紭鍔垮湪浜-鏋佽嚧鐨勫皬宸у拰宓屽叆鎬-锛屽鏋滀綘鐨勫簲鐢ㄩ渶瑕佷竴涓剼鏈紩鎿庢潵鎵╁睍鍔熻兘锛孡ua-鏄渶浣抽€夋嫨涔嬩竴銆" class="headerlink" title="Lua 鐨勪紭鍔垮湪浜?*鏋佽嚧鐨勫皬宸у拰宓屽叆鎬?*锛屽鏋滀綘鐨勫簲鐢ㄩ渶瑕佷竴涓剼鏈紩鎿庢潵鎵╁睍鍔熻兘锛孡ua 鏄渶浣抽€夋嫨涔嬩竴銆?"></a>Lua 鐨勪紭鍔垮湪浜?*鏋佽嚧鐨勫皬宸у拰宓屽叆鎬?*锛屽鏋滀綘鐨勫簲鐢ㄩ渶瑕佷竴涓剼鏈紩鎿庢潵鎵╁睍鍔熻兘锛孡ua 鏄渶浣抽€夋嫨涔嬩竴銆?</h2><h2 id="1-3-鐜鎼缓"><a href="#1-3-鐜鎼缓" class="headerlink" title="1.3 鐜鎼缓"></a>1.3 鐜鎼缓</h2><h3 id="Windows-鐜"><a href="#Windows-鐜" class="headerlink" title="Windows 鐜"></a>Windows 鐜</h3><p><strong>鏂规硶涓€锛氫娇鐢?LuaDist锛堟帹鑽愶級</strong></p>
+<p>Lua 的优势在于<strong>极致的小巧和嵌入性</strong>，如果你的应用需要一个脚本引擎来扩展功能，Lua 是最佳选择之一。</p>
+<hr>
+<h2 id="1-3-环境搭建"><a href="#1-3-环境搭建" class="headerlink" title="1.3 环境搭建"></a>1.3 环境搭建</h2><h3 id="Windows-环境"><a href="#Windows-环境" class="headerlink" title="Windows 环境"></a>Windows 环境</h3><p><strong>方法一：使用 LuaDist（推荐）</strong></p>
 <ol>
-<li>璁块棶 <a target="_blank" rel="noopener" href="https://luadist.org/">LuaDist</a> 涓嬭浇棰勭紪璇戝寘</li>
-<li>瑙ｅ帇鍚庨厤缃幆澧冨彉閲忥紙灏?lua.exe 鎵€鍦ㄧ洰褰曟坊鍔犲埌 PATH锛?3. 鎵撳紑鍛戒护琛岃緭鍏?<code>lua -v</code> 楠岃瘉瀹夎</li>
+<li>访问 <a target="_blank" rel="noopener" href="https://luadist.org/">LuaDist</a> 下载预编译包</li>
+<li>解压后配置环境变量（将 lua.exe 所在目录添加到 PATH）</li>
+<li>打开命令行输入 <code>lua -v</code> 验证安装</li>
 </ol>
-<p><strong>鏂规硶浜岋細浣跨敤 Winget</strong></p>
+<p><strong>方法二：使用 Winget</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">winget install Lua.Lua</span><br></pre></td></tr></table></figure>
 
-<p><strong>鏂规硶涓夛細浣跨敤 Lua for Windows</strong><br>涓嬭浇 <a target="_blank" rel="noopener" href="https://github.com/rjpcomputing/luaforwindows">Lua for Windows</a> 瀹夎鍖咃紝涓€閿畨瑁呫€?</p>
-<h3 id="macOS-鐜"><a href="#macOS-鐜" class="headerlink" title="macOS 鐜"></a>macOS 鐜</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install lua</span><br></pre></td></tr></table></figure>
+<p><strong>方法三：使用 Lua for Windows</strong><br>下载 <a target="_blank" rel="noopener" href="https://github.com/rjpcomputing/luaforwindows">Lua for Windows</a> 安装包，一键安装。</p>
+<h3 id="macOS-环境"><a href="#macOS-环境" class="headerlink" title="macOS 环境"></a>macOS 环境</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install lua</span><br></pre></td></tr></table></figure>
 
-<h3 id="Linux-鐜"><a href="#Linux-鐜" class="headerlink" title="Linux 鐜"></a>Linux 鐜</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Ubuntu/Debian</span></span><br><span class="line">sudo apt install lua5.4</span><br><span class="line"></span><br><span class="line"><span class="comment"># CentOS/RHEL</span></span><br><span class="line">sudo yum install lua</span><br><span class="line"></span><br><span class="line"><span class="comment"># Arch Linux</span></span><br><span class="line">sudo pacman -S lua</span><br></pre></td></tr></table></figure>
+<h3 id="Linux-环境"><a href="#Linux-环境" class="headerlink" title="Linux 环境"></a>Linux 环境</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Ubuntu/Debian</span></span><br><span class="line">sudo apt install lua5.4</span><br><span class="line"></span><br><span class="line"><span class="comment"># CentOS/RHEL</span></span><br><span class="line">sudo yum install lua</span><br><span class="line"></span><br><span class="line"><span class="comment"># Arch Linux</span></span><br><span class="line">sudo pacman -S lua</span><br></pre></td></tr></table></figure>
 
-<h3 id="鍦ㄧ嚎杩愯鐜锛堟棤闇€瀹夎锛"><a href="#鍦ㄧ嚎杩愯鐜锛堟棤闇€瀹夎锛" class="headerlink" title="鍦ㄧ嚎杩愯鐜锛堟棤闇€瀹夎锛?"></a>鍦ㄧ嚎杩愯鐜锛堟棤闇€瀹夎锛?</h3><ul>
+<h3 id="在线运行环境（无需安装）"><a href="#在线运行环境（无需安装）" class="headerlink" title="在线运行环境（无需安装）"></a>在线运行环境（无需安装）</h3><ul>
 <li><a target="_blank" rel="noopener" href="https://replit.com/languages/lua">Replit - Lua</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.lua.org/demo.html">Lua Demo</a></li>
 <li><a target="_blank" rel="noopener" href="https://onecompiler.com/lua">OneCompiler - Lua</a></li>
 </ul>
 <blockquote>
-<p>寤鸿鍒濆鑰呭厛浣跨敤鍦ㄧ嚎鐜鐔熸倝璇硶锛屽啀瀹夎鏈湴鐜杩涜娣卞叆缁冧範銆?</p>
+<p>建议初学者先使用在线环境熟悉语法，再安装本地环境进行深入练习。</p>
 </blockquote>
 <hr>
-<h2 id="1-4-杩愯绗竴涓-Lua-绋嬪簭"><a href="#1-4-杩愯绗竴涓-Lua-绋嬪簭" class="headerlink" title="1.4 杩愯绗竴涓?Lua 绋嬪簭"></a>1.4 杩愯绗竴涓?Lua 绋嬪簭</h2><h3 id="浜や簰寮忔a寮忥紙REPL锛"><a href="#浜や簰寮忔a寮忥紙REPL锛" class="headerlink" title="浜や簰寮忔ā寮忥紙REPL锛?"></a>浜や簰寮忔ā寮忥紙REPL锛?</h3><p>鎵撳紑缁堢杈撳叆 <code>lua</code>锛岃繘鍏ヤ氦浜掑紡妯″紡锛?</p>
+<h2 id="1-4-运行第一个-Lua-程序"><a href="#1-4-运行第一个-Lua-程序" class="headerlink" title="1.4 运行第一个 Lua 程序"></a>1.4 运行第一个 Lua 程序</h2><h3 id="交互式模式（REPL）"><a href="#交互式模式（REPL）" class="headerlink" title="交互式模式（REPL）"></a>交互式模式（REPL）</h3><p>打开终端输入 <code>lua</code>，进入交互式模式：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Lua <span class="number">5.4</span><span class="number">.6</span>  Copyright (C) <span class="number">1994</span><span class="number">-2023</span> Lua.org, PUC-Rio</span><br><span class="line">&gt; <span class="built_in">print</span>(<span class="string">&quot;Hello, Lua!&quot;</span>)</span><br><span class="line">Hello, Lua!</span><br><span class="line">&gt; <span class="number">1</span> + <span class="number">2</span> * <span class="number">3</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line">&gt; <span class="built_in">os</span>.<span class="built_in">date</span>()</span><br><span class="line"><span class="string">&quot;Mon Jun  1 08:00:00 2026&quot;</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 
-<p>鎸?<code>Ctrl+D</code> 鎴?<code>Ctrl+C</code> 鎴栬緭鍏?<code>os.exit()</code> 閫€鍑轰氦浜掓ā寮忋€?</p>
-<h3 id="鑴氭湰妯″紡"><a href="#鑴氭湰妯″紡" class="headerlink" title="鑴氭湰妯″紡"></a>鑴氭湰妯″紡</h3><p>鍒涘缓涓€涓枃鏈枃浠?<code>hello.lua</code>锛?</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- hello.lua</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello, Lua!&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;浠婂ぉ鏄? &quot;</span> .. <span class="built_in">os</span>.<span class="built_in">date</span>())</span><br></pre></td></tr></table></figure>
+<p>按 <code>Ctrl+D</code> 或 <code>Ctrl+C</code> 或输入 <code>os.exit()</code> 退出交互模式。</p>
+<h3 id="脚本模式"><a href="#脚本模式" class="headerlink" title="脚本模式"></a>脚本模式</h3><p>创建一个文本文件 <code>hello.lua</code>：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- hello.lua</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello, Lua!&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;今天是: &quot;</span> .. <span class="built_in">os</span>.<span class="built_in">date</span>())</span><br></pre></td></tr></table></figure>
 
-<p>鍦ㄧ粓绔墽琛岋細</p>
+<p>在终端执行：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lua hello.lua</span><br></pre></td></tr></table></figure>
 
-<p>杈撳嚭锛?&#96;&#96;&#96;<br>Hello, Lua!<br>浠婂ぉ鏄? Mon Jun  1 08:00:00 2026</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 浼犻€掑懡浠よ鍙傛暟</span><br><span class="line"></span><br><span class="line">```lua</span><br><span class="line">-- args.lua</span><br><span class="line">print(&quot;鑴氭湰鍚嶇О:&quot;, arg[0])</span><br><span class="line">print(&quot;绗竴涓弬鏁?&quot;, arg[1])</span><br><span class="line">print(&quot;绗簩涓弬鏁?&quot;, arg[2])</span><br><span class="line">print(&quot;鍙傛暟涓暟:&quot;, #arg - 1)</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Hello, Lua!</span><br><span class="line">今天是: Mon Jun  1 08:00:00 2026</span><br></pre></td></tr></table></figure>
 
-<p>鎵ц锛?&#96;&#96;&#96;bash<br>lua args.lua hello world</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">杈撳嚭锛?```</span><br><span class="line">鑴氭湰鍚嶇О: args.lua</span><br><span class="line">绗竴涓弬鏁? hello</span><br><span class="line">绗簩涓弬鏁? world</span><br><span class="line">鍙傛暟涓暟: 2</span><br></pre></td></tr></table></figure>
+<h3 id="传递命令行参数"><a href="#传递命令行参数" class="headerlink" title="传递命令行参数"></a>传递命令行参数</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- args.lua</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;脚本名称:&quot;</span>, <span class="built_in">arg</span>[<span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;第一个参数:&quot;</span>, <span class="built_in">arg</span>[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;第二个参数:&quot;</span>, <span class="built_in">arg</span>[<span class="number">2</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;参数个数:&quot;</span>, #<span class="built_in">arg</span> - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lua args.lua hello world</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">脚本名称: args.lua</span><br><span class="line">第一个参数: hello</span><br><span class="line">第二个参数: world</span><br><span class="line">参数个数: 2</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h2 id="1-5-鎺ㄨ崘寮€鍙戝伐鍏"><a href="#1-5-鎺ㄨ崘寮€鍙戝伐鍏" class="headerlink" title="1.5 鎺ㄨ崘寮€鍙戝伐鍏?"></a>1.5 鎺ㄨ崘寮€鍙戝伐鍏?</h2><h3 id="VS-Code-Lua-鎻掍欢"><a href="#VS-Code-Lua-鎻掍欢" class="headerlink" title="VS Code + Lua 鎻掍欢"></a>VS Code + Lua 鎻掍欢</h3><ol>
-<li>瀹夎 VS Code</li>
-<li>瀹夎鎻掍欢锛?   - <strong>Lua</strong>锛坰umneko锛屽張鍚?EmmyLua锛夆€斺€斾唬鐮佽ˉ鍏ㄣ€佽娉曟鏌ャ€佺被鍨嬫彁绀?   - <strong>Lua Debug</strong>锛坅ctboy168锛夆€斺€旇皟璇曟敮鎸?3. 鍒涘缓涓€涓?<code>.lua</code> 鏂囦欢锛屽紑濮嬬紪鐮?<br>閰嶇疆 <code>settings.json</code>锛?&#96;&#96;&#96;json<br>{<br> “Lua.runtime.version”: “Lua 5.4”,<br> “Lua.workspace.checkThirdParty”: false,<br> “Lua.completion.showWord”: “Enable”<br>}</li>
+<h2 id="1-5-推荐开发工具"><a href="#1-5-推荐开发工具" class="headerlink" title="1.5 推荐开发工具"></a>1.5 推荐开发工具</h2><h3 id="VS-Code-Lua-插件"><a href="#VS-Code-Lua-插件" class="headerlink" title="VS Code + Lua 插件"></a>VS Code + Lua 插件</h3><ol>
+<li>安装 VS Code</li>
+<li>安装插件：<ul>
+<li><strong>Lua</strong>（sumneko，又名 EmmyLua）——代码补全、语法检查、类型提示</li>
+<li><strong>Lua Debug</strong>（actboy168）——调试支持</li>
+</ul>
+</li>
+<li>创建一个 <code>.lua</code> 文件，开始编码</li>
 </ol>
-<pre><code>
-### ZeroBrane Studio
+<p>配置 <code>settings.json</code>：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;Lua.runtime.version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Lua 5.4&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;Lua.workspace.checkThirdParty&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;Lua.completion.showWord&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Enable&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
-涓撻棬涓?Lua 寮€鍙戠殑杞婚噺绾?IDE锛屽唴缃皟璇曞櫒锛屾敮鎸?LuaJIT锛岄€傚悎娓告垙鑴氭湰璋冭瘯銆?
-### IntelliJ IDEA + EmmyLua
-
-濡傛灉浣犱娇鐢?JetBrains 绯荤殑 IDE锛屽畨瑁?EmmyLua 鎻掍欢鍙彁渚涘己澶х殑 Lua 鏀寔銆?
----
-
-## 1.6 鏈珷灏忕粨
-
-- Lua 鏄竴绉嶈交閲忋€侀珮鏁堛€佸彲宓屽叆鐨勮剼鏈瑷€
-- 鎿呴暱浣滀负鑳舵按璇█鎵╁睍瀹夸富绋嬪簭鍔熻兘
-- 瀹夎鏂瑰紡绠€鍗曪紝涓€琛屽懡浠ゅ嵆鍙?- 浜や簰寮忔ā寮忛€傚悎蹇€熼獙璇佽娉?- 鑴氭湰妯″紡鐢ㄤ簬缂栧啓瀹屾暣绋嬪簭
-
-### 缁冧範棰?
-1. 瀹夎 Lua 鐜锛屾墦鍗?`Hello, Lua!`
-2. 鍦ㄤ氦浜掓ā寮忎笅璁＄畻 `((1 + 2) * 3 - 4) / 5` 鐨勭粨鏋?3. 缂栧啓涓€涓剼鏈紝鎺ユ敹涓や釜鏁板瓧浣滀负鍛戒护琛屽弬鏁帮紝鎵撳嵃瀹冧滑鐨勫拰
-4. 浣跨敤 `os.date()` 鏍煎紡鍖栬緭鍑哄綋鍓嶆椂闂达紝鏍煎紡涓?`2026骞?6鏈?1鏃
-</code></pre>
-<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2025/06/14/Lua教程-14-标准库与文件IO/" class="related-post-item" title="鏍囧噯搴撲笌鏂囦欢 I/O"><span class="related-post-title">鏍囧噯搴撲笌鏂囦欢 I/O</span><span class="related-post-date">2025-06-14</span><span class="related-post-desc">14.1 math 搴? 甯哥敤甯搁噺 鍙栨暣鍑芥暟 缁濆鍊间笌绗﹀彿 涓夎鍑芥暟 闅忔満鏁? 14.2 os 搴? 鏃堕棿涓庢棩鏈? 鏍煎紡鍖栨棩鏈? 鏃</span></a><a href="/2025/06/13/Lua教程-13-模块与包管理/" class="related-post-item" title="妯″潡涓庡寘绠＄悊"><span class="related-post-title">妯″潡涓庡寘绠＄悊</span><span class="related-post-date">2025-06-13</span><span class="related-post-desc">13.1 涓轰粈涔堥渶瑕佹ā鍧? 褰撶▼搴忓彉澶ф椂锛屾妸浠ｇ爜鏀惧埌涓€涓枃浠堕噷浼氬鑷达細 鍛藉悕鍐茬獊 锛氫笉鍚屽紑鍙戣€呭畾涔夌殑鍏ㄥ眬鍙橀噺鍙兘</span></a><a href="/2025/06/12/Lua教程-12-面向对象编程/" class="related-post-item" title="闈㈠悜瀵硅薄缂栫▼"><span class="related-post-title">闈㈠悜瀵硅薄缂栫▼</span><span class="related-post-date">2025-06-12</span><span class="related-post-desc">12.1 Lua 鐨?OOP 鎬濊矾 Lua 鏈韩涓嶆槸闈㈠悜瀵硅薄璇█鈥斺€旀病鏈? class 鍏抽敭瀛楋紝娌℃湁 this 锛屾病鏈夌户鎵胯娉曘€備</span></a><a href="/2025/06/10/Lua教程-10-表的深入应用/" class="related-post-item" title="琛ㄧ殑娣卞叆搴旂敤"><span class="related-post-title">琛ㄧ殑娣卞叆搴旂敤</span><span class="related-post-date">2025-06-10</span><span class="related-post-desc">10.1 table 搴撹瑙? table.insert table.remove table.sort lua 瀛楃涓茶繛鎺?local parts = </span></a><a href="/2025/06/07/Lua教程-07-函数基础篇/" class="related-post-item" title="鍑芥暟锛堝熀纭€绡囷級"><span class="related-post-title">鍑芥暟锛堝熀纭€绡囷級</span><span class="related-post-date">2025-06-07</span><span class="related-post-desc">7.1 鍑芥暟瀹氫箟 鍩烘湰璇硶 璇硶绯? 褰撳嚱鏁板瓨鍌ㄥ湪琛ㄤ腑鏃讹紝鍙互浣跨敤鍐掑彿璇硶锛? 7.2 鍙傛暟浼犻€? 褰㈠弬涓庡疄鍙? 鍙傛暟榛樿</span></a><a href="/2025/06/06/Lua教程-06-控制结构/" class="related-post-item" title="鎺у埗缁撴瀯"><span class="related-post-title">鎺у埗缁撴瀯</span><span class="related-post-date">2025-06-06</span><span class="related-post-desc">6.1 鏉′欢鍒嗘敮 if...then if...then...else if...then...elseif...else 鐪熷亣鍒ゆ柇 Lua 涓彧鏈?</span></a></div></div><div class="series-nav"><div class="series-nav-title">Lua鍩虹鏁欑▼ 系列</div><div class="series-nav-progress">第 1/8 篇</div><div class="series-nav-links"><a href="/2025/06/03/Lua教程-03-变量与作用域/" class="series-nav-next">鍙橀噺涓庝綔鐢ㄥ煙</a></div></div>
+<h3 id="ZeroBrane-Studio"><a href="#ZeroBrane-Studio" class="headerlink" title="ZeroBrane Studio"></a>ZeroBrane Studio</h3><p>专门为 Lua 开发的轻量级 IDE，内置调试器，支持 LuaJIT，适合游戏脚本调试。</p>
+<h3 id="IntelliJ-IDEA-EmmyLua"><a href="#IntelliJ-IDEA-EmmyLua" class="headerlink" title="IntelliJ IDEA + EmmyLua"></a>IntelliJ IDEA + EmmyLua</h3><p>如果你使用 JetBrains 系的 IDE，安装 EmmyLua 插件可提供强大的 Lua 支持。</p>
+<hr>
+<h2 id="1-6-本章小结"><a href="#1-6-本章小结" class="headerlink" title="1.6 本章小结"></a>1.6 本章小结</h2><ul>
+<li>Lua 是一种轻量、高效、可嵌入的脚本语言</li>
+<li>擅长作为胶水语言扩展宿主程序功能</li>
+<li>安装方式简单，一行命令即可</li>
+<li>交互式模式适合快速验证语法</li>
+<li>脚本模式用于编写完整程序</li>
+</ul>
+<h3 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h3><ol>
+<li>安装 Lua 环境，打印 <code>Hello, Lua!</code></li>
+<li>在交互模式下计算 <code>((1 + 2) * 3 - 4) / 5</code> 的结果</li>
+<li>编写一个脚本，接收两个数字作为命令行参数，打印它们的和</li>
+<li>使用 <code>os.date()</code> 格式化输出当前时间，格式为 <code>2026年06月01日</code></li>
+</ol>
+<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2025/06/15/Lua教程-15-综合实战通讯录管理系统/" class="related-post-item" title="综合实战：命令行通讯录管理系统"><span class="related-post-title">综合实战：命令行通讯录管理系统</span><span class="related-post-date">2025-06-15</span><span class="related-post-desc">15.1 项目概述 本章将综合运用本系列所学的知识，从零实现一个完整的 命令行通讯录管理系统 。 功能需求 涉及的知识点 表操作 ：存储联系人数据 函数 ：模块</span></a><a href="/2025/06/14/Lua教程-14-标准库与文件IO/" class="related-post-item" title="标准库与文件 I/O"><span class="related-post-title">标准库与文件 I/O</span><span class="related-post-date">2025-06-14</span><span class="related-post-desc">14.1 math 库 常用常量 取整函数 绝对值与符号 三角函数 随机数 14.2 os 库 时间与日期 格式化日期 时间差 执行系统命令 14.3 io 库</span></a><a href="/2025/06/13/Lua教程-13-模块与包管理/" class="related-post-item" title="模块与包管理"><span class="related-post-title">模块与包管理</span><span class="related-post-date">2025-06-13</span><span class="related-post-desc">13.1 为什么需要模块 当程序变大时，把代码放到一个文件里会导致： 命名冲突 ：不同开发者定义的全局变量可能重名 难以维护 ：上千行的文件难以阅读和调试 复用</span></a><a href="/2025/06/12/Lua教程-12-面向对象编程/" class="related-post-item" title="面向对象编程"><span class="related-post-title">面向对象编程</span><span class="related-post-date">2025-06-12</span><span class="related-post-desc">12.1 Lua 的 OOP 思路 Lua 本身不是面向对象语言——没有 class 关键字，没有 this ，没有继承语法。但借助 table + 元表 ，我</span></a><a href="/2025/06/11/Lua教程-11-元表与元方法/" class="related-post-item" title="元表（Metatable）与元方法"><span class="related-post-title">元表（Metatable）与元方法</span><span class="related-post-date">2025-06-11</span><span class="related-post-desc">11.1 什么是元表 元表（metatable） 是一张特殊的表，它定义了另一个表的行为。通过元表，我们可以： 改变表的算术运算行为（加法、减法等） 控制表的索</span></a><a href="/2025/06/10/Lua教程-10-表的深入应用/" class="related-post-item" title="表的深入应用"><span class="related-post-title">表的深入应用</span><span class="related-post-date">2025-06-10</span><span class="related-post-desc">10.1 table 库详解 table.insert table.remove table.sort lua 字符串连接 local parts = {"a"</span></a></div></div><div class="series-nav"><div class="series-nav-title">Lua基础教程 系列</div><div class="series-nav-progress">第 1/15 篇</div><div class="series-nav-links"><a href="/2025/06/02/Lua教程-02-基本语法与数据类型/" class="series-nav-next">基本语法与数据类型</a></div></div>
     </div>
 
     
@@ -471,8 +485,8 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Lua/" rel="tag"># Lua</a>
-              <a href="/tags/%E9%8F%81%E6%AC%91%E2%96%BC/" rel="tag"># 鏁欑▼</a>
-              <a href="/tags/series-Lua%E9%8D%A9%E8%99%B9%EE%94%85%E9%8F%81%E6%AC%91%E2%96%BC/" rel="tag"># series:Lua鍩虹鏁欑▼</a>
+              <a href="/tags/%E6%95%99%E7%A8%8B/" rel="tag"># 教程</a>
+              <a href="/tags/series-Lua%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" rel="tag"># series:Lua基础教程</a>
           </div>
 
         
@@ -485,8 +499,8 @@
       <i class="fa fa-chevron-left"></i> C#学习笔记【行为树】
     </a></div>
       <div class="post-nav-item">
-    <a href="/2025/06/03/Lua%E6%95%99%E7%A8%8B-03-%E5%8F%98%E9%87%8F%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F/" rel="next" title="鍙橀噺涓庝綔鐢ㄥ煙">
-      鍙橀噺涓庝綔鐢ㄥ煙 <i class="fa fa-chevron-right"></i>
+    <a href="/2025/06/02/Lua%E6%95%99%E7%A8%8B-02-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="next" title="基本语法与数据类型">
+      基本语法与数据类型 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -499,7 +513,7 @@
 
   <div class="post-share">
     <span class="post-share-label">分享：</span>
-    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2025%2F06%2F01%2FLua%25E6%2595%2599%25E7%25A8%258B-01-Lua%25E7%25AE%2580%25E4%25BB%258B%25E4%25B8%258E%25E7%258E%25AF%25E5%25A2%2583%25E6%2590%25AD%25E5%25BB%25BA%2F&amp;title=Lua%20%E7%BB%A0%E2%82%AC%E6%B5%A0%E5%AC%A9%E7%AC%8C%E9%90%9C%EE%88%9A%EE%95%A8%E9%8E%BC%EE%85%9E%E7%BC%93" target="_blank" rel="noopener" title="分享到微博">
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2025%2F06%2F01%2FLua%25E6%2595%2599%25E7%25A8%258B-01-Lua%25E7%25AE%2580%25E4%25BB%258B%25E4%25B8%258E%25E7%258E%25AF%25E5%25A2%2583%25E6%2590%25AD%25E5%25BB%25BA%2F&amp;title=Lua%20%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA" target="_blank" rel="noopener" title="分享到微博">
       <i class="fab fa-weibo"></i>
     </a>
     <a href="#" onclick="navigator.clipboard.writeText(location.href);var t=this;t.innerHTML='<i class=fa fa-check></i>';setTimeout(function(){t.innerHTML='<i class=fa fa-link></i>'},1500);return false" title="复制链接">
@@ -574,7 +588,7 @@
 	  
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E6%B5%A0%E2%82%AC%E6%B6%94%E5%A0%9F%E6%A7%B8-Lua"><span class="nav-number">1.</span> <span class="nav-text">1.1 浠€涔堟槸 Lua</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lua-%E9%90%A8%E5%8B%AC%E7%89%B3%E8%B9%87%E5%86%AA%E5%A3%92%E9%8E%AC"><span class="nav-number">1.1.</span> <span class="nav-text">Lua 鐨勬牳蹇冪壒鎬?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lua-%E9%90%A8%E5%8B%AB%E7%B0%B2%E9%90%A2%E3%84%A5%E6%BA%80%E9%8F%85"><span class="nav-number">1.2.</span> <span class="nav-text">Lua 鐨勫簲鐢ㄥ満鏅?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Lua-%E6%B6%93%E5%BA%A1%E5%8F%BE%E6%B5%A0%E6%A0%AC%EE%87%A2%E7%91%B7%E2%82%AC%E9%90%A8%E5%8B%AD%E7%95%9D%E9%8D%97%E6%9B%9E%EE%87%AE%E5%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">1.2 Lua 涓庡叾浠栬瑷€鐨勭畝鍗曞姣?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lua-%E9%90%A8%E5%8B%AA%E7%B4%AD%E9%8D%94%E5%9E%AE%E6%B9%AA%E6%B5%9C-%E9%8F%8B%E4%BD%BD%E5%9A%A7%E9%90%A8%E5%8B%AB%E7%9A%AC%E5%AE%B8%D1%83%E6%8B%B0%E5%AE%93%E5%B1%BD%E5%8F%86%E9%8E%AC-%E9%94%9B%E5%B1%BD%EE%9B%A7%E9%8F%8B%E6%BB%80%E7%B6%98%E9%90%A8%E5%8B%AB%E7%B0%B2%E9%90%A2%E3%84%A9%E6%B8%B6%E7%91%95%E4%BD%B7%E7%AB%B4%E6%B6%93%EE%81%87%E5%89%BC%E9%8F%88%EE%84%80%E7%B4%A9%E9%8E%BF%E5%BA%A2%E6%BD%B5%E9%8E%B5%E2%95%81%E7%9D%8D%E9%8D%94%E7%86%BB%E5%85%98%E9%94%9B%E5%AD%A1ua-%E9%8F%84%EE%88%9B%E6%B8%B6%E6%B5%A3%E6%8A%BD%E2%82%AC%E5%A4%8B%E5%AB%A8%E6%B6%94%E5%AC%A9%E7%AB%B4%E9%8A%86"><span class="nav-number">3.</span> <span class="nav-text">Lua 鐨勪紭鍔垮湪浜?*鏋佽嚧鐨勫皬宸у拰宓屽叆鎬?*锛屽鏋滀綘鐨勫簲鐢ㄩ渶瑕佷竴涓剼鏈紩鎿庢潵鎵╁睍鍔熻兘锛孡ua 鏄渶浣抽€夋嫨涔嬩竴銆?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E9%90%9C%EE%88%9A%EE%95%A8%E9%8E%BC%EE%85%9E%E7%BC%93"><span class="nav-number">4.</span> <span class="nav-text">1.3 鐜鎼缓</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-%E9%90%9C%EE%88%9A%EE%95%A8"><span class="nav-number">4.1.</span> <span class="nav-text">Windows 鐜</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#macOS-%E9%90%9C%EE%88%9A%EE%95%A8"><span class="nav-number">4.2.</span> <span class="nav-text">macOS 鐜</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-%E9%90%9C%EE%88%9A%EE%95%A8"><span class="nav-number">4.3.</span> <span class="nav-text">Linux 鐜</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%8D%A6%E3%84%A7%E5%9A%8E%E6%9D%A9%E6%84%AF%EE%94%91%E9%90%9C%EE%88%9A%EE%95%A8%E9%94%9B%E5%A0%9F%E6%A3%A4%E9%97%87%E2%82%AC%E7%80%B9%E5%A4%8E%EE%97%8A%E9%94%9B"><span class="nav-number">4.4.</span> <span class="nav-text">鍦ㄧ嚎杩愯鐜锛堟棤闇€瀹夎锛?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E6%9D%A9%E6%84%AF%EE%94%91%E7%BB%97%EE%83%BF%E7%AB%B4%E6%B6%93-Lua-%E7%BB%8B%E5%AC%AA%E7%B0%AD"><span class="nav-number">5.</span> <span class="nav-text">1.4 杩愯绗竴涓?Lua 绋嬪簭</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%9C%E3%82%84%E7%B0%B0%E5%AF%AE%E5%BF%94a%E5%AF%AE%E5%BF%A5%E7%B4%99REPL%E9%94%9B"><span class="nav-number">5.1.</span> <span class="nav-text">浜や簰寮忔ā寮忥紙REPL锛?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%91%B4%E6%B0%AD%E6%B9%B0%E5%A6%AF%E2%80%B3%E7%B4%A1"><span class="nav-number">5.2.</span> <span class="nav-text">鑴氭湰妯″紡</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-%E9%8E%BA%E3%84%A8%E5%B4%98%E5%AF%AE%E2%82%AC%E9%8D%99%E6%88%9D%E4%BC%90%E9%8D%8F"><span class="nav-number">6.</span> <span class="nav-text">1.5 鎺ㄨ崘寮€鍙戝伐鍏?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VS-Code-Lua-%E9%8E%BB%E6%8E%8D%E6%AC%A2"><span class="nav-number">6.1.</span> <span class="nav-text">VS Code + Lua 鎻掍欢</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF-Lua"><span class="nav-number">1.</span> <span class="nav-text">1.1 什么是 Lua</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lua-%E7%9A%84%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">Lua 的核心特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lua-%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.2.</span> <span class="nav-text">Lua 的应用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Lua-%E4%B8%8E%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%9A%84%E7%AE%80%E5%8D%95%E5%AF%B9%E6%AF%94"><span class="nav-number">2.</span> <span class="nav-text">1.2 Lua 与其他语言的简单对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">3.</span> <span class="nav-text">1.3 环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-%E7%8E%AF%E5%A2%83"><span class="nav-number">3.1.</span> <span class="nav-text">Windows 环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#macOS-%E7%8E%AF%E5%A2%83"><span class="nav-number">3.2.</span> <span class="nav-text">macOS 环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-%E7%8E%AF%E5%A2%83"><span class="nav-number">3.3.</span> <span class="nav-text">Linux 环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E7%BA%BF%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%EF%BC%88%E6%97%A0%E9%9C%80%E5%AE%89%E8%A3%85%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">在线运行环境（无需安装）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E8%BF%90%E8%A1%8C%E7%AC%AC%E4%B8%80%E4%B8%AA-Lua-%E7%A8%8B%E5%BA%8F"><span class="nav-number">4.</span> <span class="nav-text">1.4 运行第一个 Lua 程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A4%E4%BA%92%E5%BC%8F%E6%A8%A1%E5%BC%8F%EF%BC%88REPL%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">交互式模式（REPL）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">脚本模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E9%80%92%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0"><span class="nav-number">4.3.</span> <span class="nav-text">传递命令行参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-%E6%8E%A8%E8%8D%90%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="nav-number">5.</span> <span class="nav-text">1.5 推荐开发工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VS-Code-Lua-%E6%8F%92%E4%BB%B6"><span class="nav-number">5.1.</span> <span class="nav-text">VS Code + Lua 插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZeroBrane-Studio"><span class="nav-number">5.2.</span> <span class="nav-text">ZeroBrane Studio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IntelliJ-IDEA-EmmyLua"><span class="nav-number">5.3.</span> <span class="nav-text">IntelliJ IDEA + EmmyLua</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">1.6 本章小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0%E9%A2%98"><span class="nav-number">6.1.</span> <span class="nav-text">练习题</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 	  
@@ -590,7 +604,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">110</span>
+          <span class="site-state-item-count">117</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
