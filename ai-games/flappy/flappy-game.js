@@ -18,6 +18,23 @@
     var PIPE_WIDTH = 52;
     var PIPE_SPACING = 200;
     var BIRD_X = 80;
+    var PX = 4;
+    var PX_BIRD = 2;
+
+    var PIXEL_DIGITS = [
+        '111101101101111',
+        '010010010010010',
+        '111001111100111',
+        '111001111001111',
+        '101101111001001',
+        '111100111001111',
+        '111100111101111',
+        '111001001001001',
+        '111101111101111',
+        '111101111001111',
+    ];
+    var DIGIT_W = 3;
+    var DIGIT_H = 5;
 
     function getDifficulty() {
         var gap = Math.max(150, 170 - Math.floor(score / 8) * 5);
@@ -29,8 +46,19 @@
     var bird, pipes, score, bestScore, gameState, animFrame;
     var particles = [];
     var particleTimer = 0;
+    var gameoverTimer = 0;
+    var countdownInterval = null;
+
+    function clearCountdown() {
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+        }
+        gameoverTimer = 0;
+    }
 
     function resetGame() {
+        clearCountdown();
         bird = {
             x: BIRD_X,
             y: 240,
@@ -50,7 +78,12 @@
         if (readyOverlay) {
             readyOverlay.style.display = 'flex';
             readyOverlay.className = 'ready';
-            readyOverlay.innerHTML = '<div class="go-hint" style="font-size:1.1rem">🐤 点击画面开始游戏</div>';
+            readyOverlay.innerHTML =
+                '<div class="overlay-panel">' +
+                '<div class="rd-title">FLAPPY BYTE</div>' +
+                '<div class="rd-sub">— 小鸟闯关 —</div>' +
+                '<div class="rd-start">▶ 点击画面开始游戏 ◀</div>' +
+                '</div>';
         }
         particles = [];
         console.log('游戏已重置');
@@ -152,12 +185,31 @@
             if (readyOverlay) {
                 readyOverlay.style.display = 'flex';
                 readyOverlay.className = 'gameover';
-                var newBest = score >= bestScore && score > 0 ? ' 🏆 新纪录!' : '';
+                var newBest = score >= bestScore && score > 0 ? '<div class="go-new">🏆 新纪录!</div>' : '';
                 readyOverlay.innerHTML = 
-                    '<div class="go-title">💀 Game Over</div>' +
-                    '<div class="go-score-row"><span class="go-label">得分</span><span class="go-num">' + score + '</span></div>' +
-                    '<div class="go-score-row"><span class="go-label">最佳</span><span class="go-num">' + bestScore + '</span><span class="go-new">' + newBest + '</span></div>' +
-                    '<div class="go-hint">点击重新开始</div>';
+                    '<div class="overlay-panel">' +
+                    '<div class="go-title">💀 GAME OVER</div>' +
+                    '<div class="go-score-row">' +
+                    '<div class="go-score-item"><div class="go-label">得分</div><div class="go-num">' + score + '</div></div>' +
+                    '<div class="go-score-item"><div class="go-label">最佳</div><div class="go-num">' + bestScore + '</div></div>' +
+                    '</div>' +
+                    newBest +
+                    '<div class="go-hint" id="go-hint">3 秒后可关闭</div>' +
+                    '</div>';
+                clearCountdown();
+                gameoverTimer = Date.now() + 3000;
+                countdownInterval = setInterval(function() {
+                    var remaining = Math.ceil((gameoverTimer - Date.now()) / 1000);
+                    var hintEl = document.getElementById('go-hint');
+                    if (!hintEl) { clearInterval(countdownInterval); return; }
+                    if (remaining > 0) {
+                        hintEl.textContent = remaining + ' 秒后可关闭';
+                    } else {
+                        hintEl.textContent = '点击关闭';
+                        clearInterval(countdownInterval);
+                        countdownInterval = null;
+                    }
+                }, 200);
             }
             console.log('游戏结束，得分:', score);
         }
@@ -165,82 +217,97 @@
 
     function drawBg() {
         var isDark = document.body.classList.contains('dark-mode');
-        var skyTop = isDark ? '#1a1a2e' : C_SKY_TOP;
-        var skyMid = isDark ? '#16213e' : '#5dd5c8';
-        var skyBot = isDark ? '#0f3460' : C_SKY_BOT;
-        var grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
-        grad.addColorStop(0, skyTop);
-        grad.addColorStop(0.5, skyMid);
-        grad.addColorStop(0.85, skyBot);
-        grad.addColorStop(1, isDark ? '#0a1628' : '#b8e6f0');
-        ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        var skyColors = isDark
+            ? ['#1a1a2e', '#16213e', '#0f3460', '#0a1628']
+            : ['#37c6c0', '#4dc9c3', '#6ed0c9', '#87CEEB', '#b8e6f0'];
+        var bandH = Math.ceil(canvas.height / skyColors.length / PX) * PX;
+        for (var i = 0; i < skyColors.length; i++) {
+            ctx.fillStyle = skyColors[i];
+            ctx.fillRect(0, i * bandH, canvas.width, bandH + PX);
+        }
 
-        var cloudY = isDark ? 40 : 45;
+        var cloudP = PX;
         for (var c = 0; c < 3; c++) {
             var cx = (Date.now() * 0.015 + c * 220) % (canvas.width + 120) - 60;
-            ctx.fillStyle = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.5)';
-            ctx.beginPath();
-            ctx.ellipse(cx, cloudY + c * 25, 45, 14, 0, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.fillStyle = isDark ? 'rgba(255,217,61,0.03)' : 'rgba(255,217,61,0.08)';
-            ctx.beginPath();
-            ctx.ellipse(cx + 15, cloudY + c * 25 - 3, 30, 10, 0, 0, Math.PI * 2);
-            ctx.fill();
+            var cy = Math.floor((40 + c * 25) / cloudP) * cloudP;
+            var cloudGrid = [
+                [0,0,1,1,1,1,1,1,0,0],
+                [0,1,1,1,1,1,1,1,1,0],
+                [1,1,1,1,1,1,1,1,1,1],
+                [0,1,1,1,1,1,1,1,0,0],
+            ];
+            ctx.fillStyle = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.45)';
+            for (var r = 0; r < cloudGrid.length; r++) {
+                for (var col = 0; col < cloudGrid[r].length; col++) {
+                    if (cloudGrid[r][col]) {
+                        ctx.fillRect(cx + col * cloudP, cy + r * cloudP, cloudP, cloudP);
+                    }
+                }
+            }
         }
     }
 
     function drawGround() {
         var gy = canvas.height - 60;
+        var p = PX;
 
-        var waterGrad = ctx.createLinearGradient(0, gy, 0, canvas.height);
-        waterGrad.addColorStop(0, '#7dd3c8');
-        waterGrad.addColorStop(0.15, C_SAND);
-        waterGrad.addColorStop(0.5, C_SAND);
-        waterGrad.addColorStop(1, C_SAND_DARK);
-        ctx.fillStyle = waterGrad;
+        ctx.fillStyle = C_SAND_DARK;
         ctx.fillRect(0, gy, canvas.width, 60);
 
+        var offset = -(Date.now() * 0.04) % (p * 2);
+        ctx.fillStyle = C_SAND;
+        for (var x = 0; x < canvas.width; x += p * 2) {
+            ctx.fillRect(x + offset, gy, p, 60);
+        }
+
+        ctx.fillStyle = C_TEAL_DEEP;
+        ctx.fillRect(0, gy, canvas.width, p);
+
         ctx.fillStyle = C_TEAL;
-        ctx.fillRect(0, gy, canvas.width, 3);
-
-        ctx.fillStyle = 'rgba(55,198,192,0.3)';
-        ctx.fillRect(0, gy + 3, canvas.width, 5);
-
-        var offset = -(Date.now() * 0.04) % 28;
-        ctx.fillStyle = 'rgba(255,255,255,0.3)';
-        for (var i = 0; i < 18; i++) {
-            var lx = i * 28 + offset;
-            ctx.fillRect(lx, gy + 10, 12, 2);
+        for (var i = 0; i < 12; i++) {
+            var bx = (i * p * 3 + offset * 2) % (canvas.width + p * 3) - p;
+            ctx.fillRect(bx, gy + p * 2, p, p);
+            ctx.fillRect(bx + p, gy + p * 4, p, p);
         }
     }
 
     function drawPipes() {
+        var p = PX;
         for (var i = 0; i < pipes.length; i++) {
-            var p = pipes[i];
-            var grad = ctx.createLinearGradient(p.x, 0, p.x + p.w, 0);
-            grad.addColorStop(0, C_TEAL_DEEP);
-            grad.addColorStop(0.3, C_TEAL);
-            grad.addColorStop(0.7, C_TEAL);
-            grad.addColorStop(1, C_TEAL_DARK);
-
-            ctx.fillStyle = grad;
-            ctx.fillRect(p.x, 0, p.w, p.gapY);
-            ctx.fillRect(p.x, p.gapY + p.gapH, p.w, canvas.height - p.gapY - p.gapH - 60);
+            var pp = pipes[i];
+            var x = Math.round(pp.x / p) * p;
+            var w = Math.round(pp.w / p) * p;
+            var gapY = Math.round(pp.gapY / p) * p;
+            var gapH = Math.round(pp.gapH / p) * p;
+            var capH = 20;
 
             ctx.fillStyle = C_TEAL_DEEP;
-            ctx.fillRect(p.x - 4, p.gapY - 22, p.w + 8, 22);
-            ctx.fillRect(p.x - 4, p.gapY + p.gapH, p.w + 8, 22);
+            ctx.fillRect(x, 0, w, gapY);
+            ctx.fillRect(x, gapY + gapH, w, canvas.height - gapY - gapH - 60);
+
+            ctx.fillStyle = C_TEAL;
+            ctx.fillRect(x + p, 0, p * 2, gapY);
+            ctx.fillRect(x + p, gapY + gapH, p * 2, canvas.height - gapY - gapH - 60);
+
+            ctx.fillStyle = '#1d746f';
+            ctx.fillRect(x + w - p, 0, p, gapY);
+            ctx.fillRect(x + w - p, gapY + gapH, p, canvas.height - gapY - gapH - 60);
+
+            var capW = Math.round((w + 8) / p) * p;
+            var capX = x - Math.round(4 / p) * p;
+            ctx.fillStyle = C_TEAL_DEEP;
+            ctx.fillRect(capX, gapY - capH, capW, capH);
+            ctx.fillRect(capX, gapY + gapH, capW, capH);
+
+            ctx.fillStyle = C_TEAL;
+            ctx.fillRect(capX + p, gapY - capH, capW - p * 2, p);
+            ctx.fillRect(capX + p, gapY + gapH + capH - p, capW - p * 2, p);
 
             ctx.fillStyle = C_GOLD;
-            ctx.fillRect(p.x - 4, p.gapY - 22, p.w + 8, 3);
-            ctx.fillRect(p.x - 4, p.gapY + p.gapH, p.w + 8, 3);
-            ctx.fillRect(p.x - 4, p.gapY - 3, p.w + 8, 3);
-            ctx.fillRect(p.x - 4, p.gapY + p.gapH + 19, p.w + 8, 3);
-
-            ctx.fillStyle = 'rgba(55,198,192,0.08)';
-            ctx.fillRect(p.x + 4, p.gapY - 18, 8, p.gapY);
-            ctx.fillRect(p.x + 4, p.gapY + p.gapH + 4, 8, canvas.height - p.gapY - p.gapH - 64);
+            ctx.fillRect(capX, gapY - capH, capW, p);
+            ctx.fillRect(capX, gapY + gapH, capW, p);
+            ctx.fillRect(capX, gapY - p, capW, p);
+            ctx.fillRect(capX, gapY + gapH + capH - p, capW, p);
         }
     }
 
@@ -249,88 +316,78 @@
         ctx.translate(bird.x + bird.w / 2, bird.y + bird.h / 2);
         ctx.rotate(bird.rotation);
 
-        var bodyGrad = ctx.createRadialGradient(-3, -3, 2, 0, 0, bird.w / 2 + 2);
-        bodyGrad.addColorStop(0, '#ffe566');
-        bodyGrad.addColorStop(0.6, C_GOLD);
-        bodyGrad.addColorStop(1, '#e6c300');
-        ctx.fillStyle = bodyGrad;
-        ctx.beginPath();
-        ctx.ellipse(0, 0, bird.w / 2, bird.h / 2, 0, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.fillStyle = C_GOLD;
-        ctx.shadowColor = 'rgba(255,217,61,0.3)';
-        ctx.shadowBlur = 6;
-        ctx.beginPath();
-        ctx.ellipse(0, 0, bird.w / 2, bird.h / 2, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 0;
-
-        ctx.fillStyle = C_TEAL;
-        var wingY = bird.wingUp ? -7 : 1;
-        ctx.beginPath();
-        ctx.ellipse(-8, wingY, 10, 6, -0.3, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.fillStyle = C_TEAL_DARK;
-        ctx.beginPath();
-        ctx.ellipse(-10, wingY + 2, 8, 4, -0.3, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.fillStyle = '#fff';
-        ctx.beginPath();
-        ctx.arc(7, -4, 5, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.fillStyle = '#222';
-        ctx.beginPath();
-        ctx.arc(9, -4, 2.5, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.fillStyle = '#fff';
-        ctx.beginPath();
-        ctx.arc(10, -5.5, 1, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.fillStyle = C_CORAL;
-        ctx.beginPath();
-        ctx.moveTo(14, 0);
-        ctx.lineTo(24, 2);
-        ctx.lineTo(14, 5);
-        ctx.closePath();
-        ctx.fill();
-
-        ctx.fillStyle = '#e05555';
-        ctx.beginPath();
-        ctx.moveTo(14, 1);
-        ctx.lineTo(22, 2);
-        ctx.lineTo(14, 4);
-        ctx.closePath();
-        ctx.fill();
+        var bp = PX_BIRD;
+        var palette = ['', '#1d746f', '#1d8a84', '#37c6c0', '#ffd93d', '#ffffff', '#222222', '#2aa39e'];
+        var grid = [
+            [0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0],
+            [0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0],
+            [0,0,0,0,0,7,1,1,1,1,1,1,0,0,0,0],
+            [0,0,0,0,7,7,1,1,1,1,1,1,0,0,0,0],
+            [0,0,0,0,0,1,1,1,3,3,3,0,0,0,0,0],
+            [0,0,0,0,0,1,1,1,1,3,3,0,0,5,5,4],
+            [0,0,0,0,0,1,1,1,1,1,3,0,5,6,5,4],
+            [0,0,0,0,0,1,1,1,1,1,1,0,5,5,5,4],
+            [0,0,0,0,0,0,1,1,1,1,0,0,0,0,4,0],
+            [0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        ];
+        var gw = grid[0].length;
+        var gh = grid.length;
+        for (var row = 0; row < gh; row++) {
+            for (var col = 0; col < gw; col++) {
+                var c = grid[row][col];
+                if (c === 0) continue;
+                var yOff = (c === 7 && bird.wingUp) ? -2 : 0;
+                ctx.fillStyle = palette[c];
+                ctx.fillRect(
+                    (col - gw / 2) * bp,
+                    (row - gh / 2 + yOff) * bp,
+                    bp, bp
+                );
+            }
+        }
 
         ctx.restore();
     }
 
     function drawParticles() {
+        var pp = PX;
         for (var i = 0; i < particles.length; i++) {
             var p = particles[i];
             ctx.fillStyle = 'rgba(55,198,192,' + p.alpha + ')';
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fill();
+            ctx.fillRect(
+                Math.floor(p.x / pp) * pp,
+                Math.floor(p.y / pp) * pp,
+                p.r, p.r
+            );
         }
     }
 
+    function drawPixelDigit(digit, x, y, dp) {
+        var data = PIXEL_DIGITS[digit];
+        for (var i = 0; i < DIGIT_H * DIGIT_W; i++) {
+            if (data[i] === '1') {
+                ctx.fillRect(
+                    x + (i % DIGIT_W) * dp,
+                    y + Math.floor(i / DIGIT_W) * dp,
+                    dp, dp
+                );
+            }
+        }
+    }
     function drawHUD() {
         if (gameState === 'playing' || gameState === 'ready') {
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'top';
-            ctx.shadowColor = 'rgba(0,0,0,0.3)';
-            ctx.shadowBlur = 4;
+            var dp = Math.round(8 / PX) * PX;
+            var str = score.toString();
+            var totalW = str.length * (DIGIT_W * dp) + (str.length - 1) * dp;
+            var startX = Math.floor((canvas.width - totalW) / (dp * 2)) * (dp * 2);
+            var y = Math.floor(18 / PX) * PX;
             ctx.fillStyle = C_GOLD;
-            ctx.font = 'bold 42px Arial';
-            ctx.fillText(score.toString(), canvas.width / 2, 18);
-            ctx.shadowBlur = 0;
+            for (var i = 0; i < str.length; i++) {
+                var d = parseInt(str[i], 10);
+                drawPixelDigit(d, startX + i * (DIGIT_W * dp + dp), y, dp);
+            }
         }
     }
 
@@ -366,6 +423,7 @@
             return;
         }
         if (gameState === 'gameover') {
+            if (Date.now() < gameoverTimer) return;
             resetGame();
             return;
         }
@@ -443,6 +501,7 @@
             canvas.removeEventListener('touchend', window._flappyTouchEnd);
         }
         window.removeEventListener('keydown', window._flappyKeyHandler);
+        clearCountdown();
         console.log('Flappy Byte 已清理');
     }
 
