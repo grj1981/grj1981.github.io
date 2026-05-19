@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <link rel="preconnect" href="https://iili.io">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#37c6c0">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#37c6c0">
+
+<meta http-equiv="Permissions-Policy" content="encrypted-media=*">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+  <meta name="description" content="14.1 math 搴?甯哥敤甯搁噺12345678910111213141516171819print(math.pi) &gt; 3.1415926535898print(math.huge) &gt; inf锛堟棤绌峰ぇ锛?print(math.maxinteger) &gt; 9223372036854775807锛?.3+锛?print(math.mininteger) &gt; 922">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鏍囧噯搴撲笌鏂囦欢 I&#x2F;O">
+<meta property="og:url" content="https://www.bytefisher.top/2025/06/14/Lua%E6%95%99%E7%A8%8B-14-%E6%A0%87%E5%87%86%E5%BA%93%E4%B8%8E%E6%96%87%E4%BB%B6IO/index.html">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="14.1 math 搴?甯哥敤甯搁噺12345678910111213141516171819print(math.pi) &gt; 3.1415926535898print(math.huge) &gt; inf锛堟棤绌峰ぇ锛?print(math.maxinteger) &gt; 9223372036854775807锛?.3+锛?print(math.mininteger) &gt; 922">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-06-14T00:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-19T10:57:27.520Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="Lua">
+<meta property="article:tag" content="series:Lua鍩虹鏁欑▼">
+<meta property="article:tag" content="鏁欑▼">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.bytefisher.top/2025/06/14/Lua%E6%95%99%E7%A8%8B-14-%E6%A0%87%E5%87%86%E5%BA%93%E4%B8%8E%E6%96%87%E4%BB%B6IO/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"鏍囧噯搴撲笌鏂囦欢 I/O","description":"14.1 math 搴?甯哥敤甯搁噺12345678910111213141516171819print(math.pi) &gt; 3.1415926535898print(math.huge) &gt; inf锛堟棤绌峰ぇ锛?print(math.maxinteger) &gt; 9223372036854775807锛?.3+锛?print(math.mininteger) &gt; 922...","url":"https://www.bytefisher.top/2025/06/14/Lua教程-14-标准库与文件IO/","datePublished":"2025-06-14T00:00:00.000Z","dateModified":"2026-05-19T10:57:27.520Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/06/14/Lua教程-14-标准库与文件IO/"},"keywords":"Lua, 鏁欑▼, series:Lua鍩虹鏁欑▼"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Lua","item":"https://www.bytefisher.top/categories/Lua/"},{"@type":"ListItem","position":3,"name":"鏍囧噯搴撲笌鏂囦欢 I/O"}]}</script>
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>鏍囧噯搴撲笌鏂囦欢 I/O | ByteFisher</title>
+  
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dc50e0997d43c3a8dbf2afdb3fdff233";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#37c6c0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-aigames">
+
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">48</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">110</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">51</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>rss</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/06/14/Lua%E6%95%99%E7%A8%8B-14-%E6%A0%87%E5%87%86%E5%BA%93%E4%B8%8E%E6%96%87%E4%BB%B6IO/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          鏍囧噯搴撲笌鏂囦欢 I/O
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-06-14 08:00:00" itemprop="dateCreated datePublished" datetime="2025-06-14T08:00:00+08:00">2025-06-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%8F%81%E6%AC%91%E2%96%BC/" itemprop="url" rel="index"><span itemprop="name">鏁欑▼</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2025/06/14/Lua%E6%95%99%E7%A8%8B-14-%E6%A0%87%E5%87%86%E5%BA%93%E4%B8%8E%E6%96%87%E4%BB%B6IO/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/06/14/Lua%E6%95%99%E7%A8%8B-14-%E6%A0%87%E5%87%86%E5%BA%93%E4%B8%8E%E6%96%87%E4%BB%B6IO/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">14.1 math 搴?甯哥敤甯搁噺12345678910111213141516171819print(math.pi) &gt; 3.1415926535898print(math.huge) &gt; inf锛堟棤绌峰ぇ锛?print(math.maxinteger) &gt; 9223372036854775807锛?.3+锛?print(math.mininteger) &gt; 922...</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="14-1-math-搴"><a href="#14-1-math-搴" class="headerlink" title="14.1 math 搴?"></a>14.1 math 搴?</h2><h3 id="甯哥敤甯搁噺"><a href="#甯哥敤甯搁噺" class="headerlink" title="甯哥敤甯搁噺"></a>甯哥敤甯搁噺</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">pi</span>)            <span class="comment">--&gt; 3.1415926535898</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">huge</span>)          <span class="comment">--&gt; inf锛堟棤绌峰ぇ锛?print(math.maxinteger)    --&gt; 9223372036854775807锛?.3+锛?print(math.mininteger)    --&gt; -9223372036854775808锛?.3+锛?```</span></span><br><span class="line"></span><br><span class="line">### 鍙栨暣鍑芥暟</span><br><span class="line"></span><br><span class="line">```lua</span><br><span class="line"><span class="comment">-- floor锛氬悜涓嬪彇鏁?print(math.floor(3.7))    --&gt; 3</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">floor</span>(<span class="number">-3.7</span>))   <span class="comment">--&gt; -4</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- ceil锛氬悜涓婂彇鏁?print(math.ceil(3.1))     --&gt; 4</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">ceil</span>(<span class="number">-3.1</span>))    <span class="comment">--&gt; -3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 鍥涜垗浜斿叆锛堣嚜宸卞疄鐜帮級</span></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">round</span><span class="params">(x)</span></span></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">math</span>.<span class="built_in">floor</span>(x + <span class="number">0.5</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(round(<span class="number">3.4</span>))         <span class="comment">--&gt; 3</span></span><br><span class="line"><span class="built_in">print</span>(round(<span class="number">3.5</span>))         <span class="comment">--&gt; 4</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="缁濆鍊间笌绗﹀彿"><a href="#缁濆鍊间笌绗﹀彿" class="headerlink" title="缁濆鍊间笌绗﹀彿"></a>缁濆鍊间笌绗﹀彿</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">abs</span>(<span class="number">-5</span>))       <span class="comment">--&gt; 5</span></span><br><span class="line"><span class="comment">-- Lua 娌℃湁 sign 鍑芥暟锛岃嚜宸卞疄鐜?local function sign(x)</span></span><br><span class="line">  <span class="keyword">if</span> x &gt; <span class="number">0</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">  <span class="keyword">elseif</span> x &lt; <span class="number">0</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span> <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="骞備笌鏍"><a href="#骞備笌鏍" class="headerlink" title="骞備笌鏍?"></a>骞備笌鏍?</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">sqrt</span>(<span class="number">16</span>))      <span class="comment">--&gt; 4</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">pow</span>(<span class="number">2</span>, <span class="number">10</span>))    <span class="comment">--&gt; 1024锛堢瓑浠蜂簬 2^10锛?print(math.exp(1))        --&gt; 2.718281828459锛坋^1锛?print(math.log(100))      --&gt; 4.6051701859881锛堣嚜鐒跺鏁帮級</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">log</span>(<span class="number">100</span>, <span class="number">10</span>))  <span class="comment">--&gt; 2.0锛堜互 10 涓哄簳鐨勫鏁帮級</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="涓夎鍑芥暟"><a href="#涓夎鍑芥暟" class="headerlink" title="涓夎鍑芥暟"></a>涓夎鍑芥暟</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> angle = <span class="built_in">math</span>.<span class="built_in">pi</span> / <span class="number">4</span>  <span class="comment">-- 45 搴?print(math.sin(angle))    --&gt; 0.7071</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">cos</span>(angle))    <span class="comment">--&gt; 0.7071</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">tan</span>(angle))    <span class="comment">--&gt; 1.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 鍙嶄笁瑙掑嚱鏁?print(math.asin(0.5))     --&gt; 0.5236锛堝姬搴?鈮?30掳锛?print(math.acos(0.5))     --&gt; 1.0472锛堝姬搴?鈮?60掳锛?</span></span><br><span class="line"><span class="comment">-- 寮у害 鈫?瑙掑害杞崲</span></span><br><span class="line"><span class="keyword">local</span> <span class="built_in">deg</span> = <span class="built_in">math</span>.<span class="built_in">deg</span>(<span class="built_in">math</span>.<span class="built_in">pi</span> / <span class="number">3</span>)  <span class="comment">--&gt; 60</span></span><br><span class="line"><span class="keyword">local</span> <span class="built_in">rad</span> = <span class="built_in">math</span>.<span class="built_in">rad</span>(<span class="number">60</span>)            <span class="comment">--&gt; 1.0472</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="闅忔満鏁"><a href="#闅忔満鏁" class="headerlink" title="闅忔満鏁?"></a>闅忔満鏁?</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 鍒濆鍖栫瀛?math.randomseed(os.time())</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 鐢熸垚闅忔満娴偣鏁?[0, 1)</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">random</span>())</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 鐢熸垚闅忔満鏁存暟 [1, n]</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">random</span>(<span class="number">100</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 鐢熸垚闅忔満鏁存暟 [m, n]</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">random</span>(<span class="number">10</span>, <span class="number">20</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 娉ㄦ剰锛歐indows 涓?os.time() 绮掑害涓嶅</span></span><br><span class="line"><span class="comment">-- 鏇村ソ鐨勭瀛愮瓥鐣?math.randomseed(os.time() + os.clock() * 1000)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 鎵撲贡鏁扮粍</span></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">shuffle</span><span class="params">(t)</span></span></span><br><span class="line">  <span class="keyword">for</span> i = #t, <span class="number">2</span>, <span class="number">-1</span> <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">local</span> j = <span class="built_in">math</span>.<span class="built_in">random</span>(i)</span><br><span class="line">    t[i], t[j] = t[j], t[i]</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">return</span> t</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> cards = &#123;<span class="string">&quot;A&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="string">&quot;3&quot;</span>, <span class="string">&quot;4&quot;</span>, <span class="string">&quot;5&quot;</span>&#125;</span><br><span class="line">shuffle(cards)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="14-2-os-搴"><a href="#14-2-os-搴" class="headerlink" title="14.2 os 搴?"></a>14.2 os 搴?</h2><h3 id="鏃堕棿涓庢棩鏈"><a href="#鏃堕棿涓庢棩鏈" class="headerlink" title="鏃堕棿涓庢棩鏈?"></a>鏃堕棿涓庢棩鏈?</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 褰撳墠鏃堕棿鎴筹紙绉掞級</span></span><br><span class="line"><span class="keyword">local</span> now = <span class="built_in">os</span>.<span class="built_in">time</span>()</span><br><span class="line"><span class="built_in">print</span>(now)                <span class="comment">--&gt; 渚嬪 1756627200</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 灏嗘椂闂磋〃杞负鏃堕棿鎴?local t = &#123;year = 2026, month = 6, day = 1, hour = 8, min = 0, sec = 0&#125;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">time</span>(t))         <span class="comment">--&gt; 瀵瑰簲鐨勬椂闂存埑</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 灏嗘椂闂存埑杞负鏃堕棿琛?local dt = os.date(&quot;*t&quot;, os.time())</span></span><br><span class="line"><span class="built_in">print</span>(dt.year)            <span class="comment">--&gt; 2026</span></span><br><span class="line"><span class="built_in">print</span>(dt.month)           <span class="comment">--&gt; 6</span></span><br><span class="line"><span class="built_in">print</span>(dt.day)             <span class="comment">--&gt; 1</span></span><br><span class="line"><span class="built_in">print</span>(dt.hour)            <span class="comment">--&gt; 8</span></span><br><span class="line"><span class="built_in">print</span>(dt.<span class="built_in">min</span>)             <span class="comment">--&gt; 0</span></span><br><span class="line"><span class="built_in">print</span>(dt.sec)             <span class="comment">--&gt; 0</span></span><br><span class="line"><span class="built_in">print</span>(dt.wday)            <span class="comment">--&gt; 1锛堟槦鏈熷嚑锛?=鏄熸湡鏃ワ級</span></span><br><span class="line"><span class="built_in">print</span>(dt.yday)            <span class="comment">--&gt; 152锛堜竴骞翠腑鐨勭鍑犲ぉ锛?```</span></span><br><span class="line"></span><br><span class="line">### 鏍煎紡鍖栨棩鏈?</span><br><span class="line">```lua</span><br><span class="line"><span class="comment">-- 鏍囧噯鏍煎紡鍖?print(os.date(&quot;%Y-%m-%d %H:%M:%S&quot;))      --&gt; 2026-06-01 08:00:00</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">date</span>(<span class="string">&quot;%Y骞?m鏈?d鏃?%H鏃?M鍒?))   --&gt; 2026骞?6鏈?1鏃?08鏃?0鍒?</span></span><br><span class="line"><span class="string">-- 鏍煎紡鍖栬鏄?-- %Y锛氬洓浣嶆暟骞翠唤</span></span><br><span class="line"><span class="string">-- %y锛氫袱浣嶆暟骞翠唤</span></span><br><span class="line"><span class="string">-- %m锛氭湀浠斤紙01-12锛?-- %d锛氭棩锛?1-31锛?-- %H锛氬皬鏃讹紙00-23锛?-- %M锛氬垎閽燂紙00-59锛?-- %S锛氱锛?0-59锛?-- %A锛氭槦鏈熷叏鍚嶏紙Saturday锛?-- %a锛氭槦鏈熺缉鍐欙紙Sat锛?-- %B锛氭湀浠藉叏鍚嶏紙June锛?-- %b锛氭湀浠界缉鍐欙紙Jun锛?-- %%锛氱櫨鍒嗗彿瀛楅潰閲?```</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">### 鏃堕棿宸?</span></span><br><span class="line"><span class="string">```lua</span></span><br><span class="line"><span class="string">local start = os.time()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">-- 妯℃嫙鑰楁椂鎿嶄綔</span></span><br><span class="line"><span class="string">for i = 1, 1000000 do</span></span><br><span class="line"><span class="string">  math.sqrt(i)</span></span><br><span class="line"><span class="string">end</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">local elapsed = os.difftime(os.time(), start)</span></span><br><span class="line"><span class="string">print(&quot;</span>鑰楁椂锛? .. elapsed .. <span class="string">&quot; 绉?)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">-- 鏇寸簿纭殑璁℃椂</span></span><br><span class="line"><span class="string">local start = os.clock()</span></span><br><span class="line"><span class="string">for i = 1, 1000000 do</span></span><br><span class="line"><span class="string">  math.sqrt(i)</span></span><br><span class="line"><span class="string">end</span></span><br><span class="line"><span class="string">local elapsed = os.clock() - start</span></span><br><span class="line"><span class="string">print(string.format(&quot;</span>鑰楁椂锛?<span class="number">.3</span>f 绉?, elapsed))</span><br></pre></td></tr></table></figure>
+
+<h3 id="鎵ц绯荤粺鍛戒护"><a href="#鎵ц绯荤粺鍛戒护" class="headerlink" title="鎵ц绯荤粺鍛戒护"></a>鎵ц绯荤粺鍛戒护</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 鎵ц鍛戒护锛堣繑鍥炵姸鎬佺爜锛?local exit_code = os.execute(&quot;echo Hello from Lua&quot;)</span></span><br><span class="line"><span class="comment">-- Windows 涓婄敤锛?-- os.execute(&quot;dir&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 鎹曡幏鍛戒护杈撳嚭锛堥渶瑕佽嚜宸卞皝瑁咃級</span></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">execute_command</span><span class="params">(cmd)</span></span></span><br><span class="line">  <span class="keyword">local</span> handle = <span class="built_in">io</span>.<span class="built_in">popen</span>(cmd, <span class="string">&quot;r&quot;</span>)</span><br><span class="line">  <span class="keyword">if</span> handle <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">local</span> result = handle:<span class="built_in">read</span>(<span class="string">&quot;*a&quot;</span>)</span><br><span class="line">    handle:<span class="built_in">close</span>()</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- Windows</span></span><br><span class="line"><span class="keyword">local</span> <span class="built_in">output</span> = execute_command(<span class="string">&quot;dir&quot;</span>)</span><br><span class="line"><span class="comment">-- Linux/macOS</span></span><br><span class="line"><span class="comment">-- local output = execute_command(&quot;ls -la&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="14-3-io-搴撯€斺€旀枃浠惰鍐"><a href="#14-3-io-搴撯€斺€旀枃浠惰鍐" class="headerlink" title="14.3 io 搴撯€斺€旀枃浠惰鍐?"></a>14.3 io 搴撯€斺€旀枃浠惰鍐?</h2><h3 id="鏂囦欢妯″紡"><a href="#鏂囦欢妯″紡" class="headerlink" title="鏂囦欢妯″紡"></a>鏂囦欢妯″紡</h3><table>
+<thead>
+<tr>
+<th>妯″紡</th>
+<th>鍚箟</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&quot;r&quot;</code></td>
+<td>鍙锛堟枃浠跺繀椤诲瓨鍦級</td>
+</tr>
+<tr>
+<td><code>&quot;w&quot;</code></td>
+<td>鍙啓锛堣鐩栧師鏈夊唴瀹癸級</td>
+</tr>
+<tr>
+<td><code>&quot;a&quot;</code></td>
+<td>杩藉姞锛堝啓鍏ユ湯灏撅級</td>
+</tr>
+<tr>
+<td><code>&quot;r+&quot;</code></td>
+<td>璇诲啓锛堟枃浠跺繀椤诲瓨鍦級</td>
+</tr>
+<tr>
+<td><code>&quot;w+&quot;</code></td>
+<td>璇诲啓锛堣鐩栧師鏈夛級</td>
+</tr>
+<tr>
+<td><code>&quot;a+&quot;</code></td>
+<td>璇诲拰杩藉姞</td>
+</tr>
+<tr>
+<td><code>&quot;b&quot;</code></td>
+<td>浜岃繘鍒舵ā寮忥紙杩藉姞鍒版ā寮忓悗锛屽 <code>&quot;rb&quot;</code>锛?</td>
+</tr>
+</tbody></table>
+<h3 id="绠€鍗-I-O-妯″紡"><a href="#绠€鍗-I-O-妯″紡" class="headerlink" title="绠€鍗?I&#x2F;O 妯″紡"></a>绠€鍗?I&#x2F;O 妯″紡</h3><p>绠€鍗曟ā寮忎娇鐢ㄩ瀹氫箟鐨勮緭鍏?杈撳嚭娴侊細</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 鍐欏叆鏂囦欢</span></span><br><span class="line"><span class="keyword">local</span> file = <span class="built_in">io</span>.<span class="built_in">open</span>(<span class="string">&quot;test.txt&quot;</span>, <span class="string">&quot;w&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> file <span class="keyword">then</span></span><br><span class="line">  file:<span class="built_in">write</span>(<span class="string">&quot;Hello Lua!\n&quot;</span>)</span><br><span class="line">  file:<span class="built_in">write</span>(<span class="string">&quot;杩欐槸绗簩琛孿n&quot;</span>)</span><br><span class="line">  file:<span class="built_in">close</span>()</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 璇诲彇鏁翠釜鏂囦欢</span></span><br><span class="line">file = <span class="built_in">io</span>.<span class="built_in">open</span>(<span class="string">&quot;test.txt&quot;</span>, <span class="string">&quot;r&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> file <span class="keyword">then</span></span><br><span class="line">  <span class="keyword">local</span> content = file:<span class="built_in">read</span>(<span class="string">&quot;*a&quot;</span>)    <span class="comment">-- 璇诲彇鍏ㄩ儴</span></span><br><span class="line">  <span class="built_in">print</span>(content)</span><br><span class="line">  file:<span class="built_in">close</span>()</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 鎸夎璇诲彇</span></span><br><span class="line">file = <span class="built_in">io</span>.<span class="built_in">open</span>(<span class="string">&quot;test.txt&quot;</span>, <span class="string">&quot;r&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> file <span class="keyword">then</span></span><br><span class="line">  <span class="keyword">for</span> line <span class="keyword">in</span> file:<span class="built_in">lines</span>() <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;琛?&quot;</span>, line)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  file:<span class="built_in">close</span>()</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 杩藉姞鍐呭</span></span><br><span class="line">file = <span class="built_in">io</span>.<span class="built_in">open</span>(<span class="string">&quot;test.txt&quot;</span>, <span class="string">&quot;a&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> file <span class="keyword">then</span></span><br><span class="line">  file:<span class="built_in">write</span>(<span class="string">&quot;杩藉姞鐨勪竴琛孿n&quot;</span>)</span><br><span class="line">  file:<span class="built_in">close</span>()</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="io-read-鐨勮鍙栨牸寮"><a href="#io-read-鐨勮鍙栨牸寮" class="headerlink" title="io.read 鐨勮鍙栨牸寮?"></a><code>io.read</code> 鐨勮鍙栨牸寮?</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- &quot;*a&quot;锛氳鍙栨暣涓枃浠讹紙浠庡綋鍓嶄綅缃埌鏈熬锛?-- &quot;*l&quot;锛氳鍙栦竴琛岋紙榛樿锛?-- &quot;*n&quot;锛氳鍙栦竴涓暟瀛?-- number锛氳鍙栨寚瀹氬瓧鑺傛暟</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> file = <span class="built_in">io</span>.<span class="built_in">open</span>(<span class="string">&quot;data.txt&quot;</span>, <span class="string">&quot;r&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> file <span class="keyword">then</span></span><br><span class="line">  <span class="comment">-- 璇诲彇涓€涓暟瀛?  local num = file:read(&quot;*n&quot;)</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;鏁板瓧:&quot;</span>, num)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">-- 璇诲彇涓€琛?  local line = file:read()</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;琛?&quot;</span>, line)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">-- 璇诲彇 10 涓瓧鑺?  local chunk = file:read(10)</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;10 瀛楄妭:&quot;</span>, chunk)</span><br><span class="line">  </span><br><span class="line">  file:<span class="built_in">close</span>()</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="瀹屽叏-I-O-妯″紡"><a href="#瀹屽叏-I-O-妯″紡" class="headerlink" title="瀹屽叏 I&#x2F;O 妯″紡"></a>瀹屽叏 I&#x2F;O 妯″紡</h3><p>瀹屽叏妯″紡浣跨敤鏂囦欢鍙ユ焺锛?</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 鎵撳紑鏂囦欢</span></span><br><span class="line"><span class="keyword">local</span> f = <span class="built_in">io</span>.<span class="built_in">open</span>(<span class="string">&quot;test.txt&quot;</span>, <span class="string">&quot;w+&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 鍐欏叆</span></span><br><span class="line">f:<span class="built_in">write</span>(<span class="string">&quot;Lua 鏂囦欢鎿嶄綔\n&quot;</span>)</span><br><span class="line">f:<span class="built_in">write</span>(<span class="string">&quot;绗簩琛屽唴瀹筡n&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 瀹氫綅鍒版枃浠跺紑澶?f:seek(&quot;set&quot;, 0)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 璇诲彇</span></span><br><span class="line"><span class="keyword">local</span> content = f:<span class="built_in">read</span>(<span class="string">&quot;*a&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(content)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 鏌ョ湅褰撳墠浣嶇疆</span></span><br><span class="line"><span class="keyword">local</span> pos = f:seek(<span class="string">&quot;cur&quot;</span>, <span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;褰撳墠浣嶇疆:&quot;</span>, pos)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 瀹氫綅鍒版湯灏?local size = f:seek(&quot;end&quot;, 0)</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;鏂囦欢澶у皬:&quot;</span>, size)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 鍏抽棴</span></span><br><span class="line">f:<span class="built_in">close</span>()</span><br></pre></td></tr></table></figure>
+
+<h3 id="file-seek-鍙傛暟"><a href="#file-seek-鍙傛暟" class="headerlink" title="file:seek 鍙傛暟"></a><code>file:seek</code> 鍙傛暟</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- seek(whence, offset)</span></span><br><span class="line"><span class="comment">-- &quot;set&quot;锛氱浉瀵逛簬鏂囦欢寮€澶?-- &quot;cur&quot;锛氱浉瀵逛簬褰撳墠浣嶇疆</span></span><br><span class="line"><span class="comment">-- &quot;end&quot;锛氱浉瀵逛簬鏂囦欢鏈熬</span></span><br><span class="line"></span><br><span class="line">f:seek(<span class="string">&quot;set&quot;</span>, <span class="number">0</span>)    <span class="comment">-- 鍥炲埌寮€澶?f:seek(&quot;end&quot;, -10)  -- 瀹氫綅鍒板€掓暟绗?10 涓瓧鑺?f:seek(&quot;end&quot;, 0)    -- 瀹氫綅鍒版湯灏撅紙鍙幏鍙栨枃浠跺ぇ灏忥級</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="14-4-瀹炵敤-I-O-绀轰緥"><a href="#14-4-瀹炵敤-I-O-绀轰緥" class="headerlink" title="14.4 瀹炵敤 I&#x2F;O 绀轰緥"></a>14.4 瀹炵敤 I&#x2F;O 绀轰緥</h2><h3 id="閫愯澶勭悊澶ф枃浠"><a href="#閫愯澶勭悊澶ф枃浠" class="headerlink" title="閫愯澶勭悊澶ф枃浠?"></a>閫愯澶勭悊澶ф枃浠?</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">process_large_file</span><span class="params">(filename)</span></span></span><br><span class="line">  <span class="keyword">local</span> f = <span class="built_in">io</span>.<span class="built_in">open</span>(filename, <span class="string">&quot;r&quot;</span>)</span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> f <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;鏃犳硶鎵撳紑鏂囦欢:&quot;</span>, filename)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">local</span> line_count = <span class="number">0</span></span><br><span class="line">  <span class="keyword">for</span> line <span class="keyword">in</span> f:<span class="built_in">lines</span>() <span class="keyword">do</span></span><br><span class="line">    line_count = line_count + <span class="number">1</span></span><br><span class="line">    <span class="comment">-- 澶勭悊姣忎竴琛?    -- 杩欓噷绠€鍗曟墦鍗拌鍙?    if line_count % 1000 == 0 then</span></span><br><span class="line">      <span class="built_in">print</span>(<span class="string">&quot;宸插鐞嗚鏁?&quot;</span>, line_count)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  </span><br><span class="line">  f:<span class="built_in">close</span>()</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;鎬昏鏁?&quot;</span>, line_count)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="璇诲彇-CSV-鏂囦欢"><a href="#璇诲彇-CSV-鏂囦欢" class="headerlink" title="璇诲彇 CSV 鏂囦欢"></a>璇诲彇 CSV 鏂囦欢</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">parse_csv_line</span><span class="params">(line)</span></span></span><br><span class="line">  <span class="keyword">local</span> fields = &#123;&#125;</span><br><span class="line">  <span class="keyword">local</span> current = <span class="string">&quot;&quot;</span></span><br><span class="line">  <span class="keyword">local</span> in_quotes = <span class="literal">false</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> i = <span class="number">1</span>, #line <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">local</span> c = line:<span class="built_in">sub</span>(i, i)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> c == <span class="string">&#x27;&quot;&#x27;</span> <span class="keyword">then</span></span><br><span class="line">      in_quotes = <span class="keyword">not</span> in_quotes</span><br><span class="line">    <span class="keyword">elseif</span> c == <span class="string">&#x27;,&#x27;</span> <span class="keyword">and</span> <span class="keyword">not</span> in_quotes <span class="keyword">then</span></span><br><span class="line">      <span class="built_in">table</span>.<span class="built_in">insert</span>(fields, current)</span><br><span class="line">      current = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      current = current .. c</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="built_in">table</span>.<span class="built_in">insert</span>(fields, current)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> fields</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">read_csv</span><span class="params">(filename)</span></span></span><br><span class="line">  <span class="keyword">local</span> f = <span class="built_in">io</span>.<span class="built_in">open</span>(filename, <span class="string">&quot;r&quot;</span>)</span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> f <span class="keyword">then</span> <span class="keyword">return</span> <span class="literal">nil</span> <span class="keyword">end</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">local</span> data = &#123;&#125;</span><br><span class="line">  <span class="keyword">local</span> headers = parse_csv_line(f:<span class="built_in">read</span>())</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> line <span class="keyword">in</span> f:<span class="built_in">lines</span>() <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">local</span> fields = parse_csv_line(line)</span><br><span class="line">    <span class="keyword">local</span> record = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i, header <span class="keyword">in</span> <span class="built_in">ipairs</span>(headers) <span class="keyword">do</span></span><br><span class="line">      record[header] = fields[i]</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="built_in">table</span>.<span class="built_in">insert</span>(data, record)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  </span><br><span class="line">  f:<span class="built_in">close</span>()</span><br><span class="line">  <span class="keyword">return</span> data</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="鍐欏叆-CSV-鏂囦欢"><a href="#鍐欏叆-CSV-鏂囦欢" class="headerlink" title="鍐欏叆 CSV 鏂囦欢"></a>鍐欏叆 CSV 鏂囦欢</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">write_csv</span><span class="params">(filename, data, headers)</span></span></span><br><span class="line">  <span class="keyword">local</span> f = <span class="built_in">io</span>.<span class="built_in">open</span>(filename, <span class="string">&quot;w&quot;</span>)</span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> f <span class="keyword">then</span> <span class="keyword">return</span> <span class="literal">false</span> <span class="keyword">end</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">-- 鍐欏叆琛ㄥご</span></span><br><span class="line">  <span class="keyword">if</span> headers <span class="keyword">then</span></span><br><span class="line">    f:<span class="built_in">write</span>(<span class="built_in">table</span>.<span class="built_in">concat</span>(headers, <span class="string">&quot;,&quot;</span>) .. <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">-- 鍐欏叆鏁版嵁</span></span><br><span class="line">  <span class="keyword">for</span> _, record <span class="keyword">in</span> <span class="built_in">ipairs</span>(data) <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">local</span> fields = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> _, header <span class="keyword">in</span> <span class="built_in">ipairs</span>(headers) <span class="keyword">do</span></span><br><span class="line">      <span class="keyword">local</span> value = <span class="built_in">tostring</span>(record[header] <span class="keyword">or</span> <span class="string">&quot;&quot;</span>)</span><br><span class="line">      <span class="comment">-- 濡傛灉鍖呭惈閫楀彿鎴栧紩鍙凤紝鐢ㄥ紩鍙峰寘瑁?      if value:find(&#x27;[,&quot;]&#x27;) then</span></span><br><span class="line">        value = <span class="string">&#x27;&quot;&#x27;</span> .. value:<span class="built_in">gsub</span>(<span class="string">&#x27;&quot;&#x27;</span>, <span class="string">&#x27;&quot;&quot;&#x27;</span>) .. <span class="string">&#x27;&quot;&#x27;</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">      <span class="built_in">table</span>.<span class="built_in">insert</span>(fields, value)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    f:<span class="built_in">write</span>(<span class="built_in">table</span>.<span class="built_in">concat</span>(fields, <span class="string">&quot;,&quot;</span>) .. <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  </span><br><span class="line">  f:<span class="built_in">close</span>()</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="14-5-浠g爜鍔犺浇锛歚dofile-loadfile-load"><a href="#14-5-浠g爜鍔犺浇锛歚dofile-loadfile-load" class="headerlink" title="14.5 浠ｇ爜鍔犺浇锛歚dofile/loadfile/load&#96;"></a>14.5 浠ｇ爜鍔犺浇锛歚dofile<code>/</code>loadfile<code>/</code>load&#96;</h2><h3 id="dofile"><a href="#dofile" class="headerlink" title="dofile"></a><code>dofile</code></h3><p>鐩存帴鎵ц鏂囦欢涓殑 Lua 浠ｇ爜锛?</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 鍒涘缓涓€涓剼鏈枃浠?local f = io.open(&quot;greeting.lua&quot;, &quot;w&quot;)</span></span><br><span class="line">f:<span class="built_in">write</span>(<span class="string">[[</span></span><br><span class="line"><span class="string">  local name = &quot;Lua&quot;</span></span><br><span class="line"><span class="string">  print(&quot;Hello, &quot; .. name .. &quot;!&quot;)</span></span><br><span class="line"><span class="string">  return 42</span></span><br><span class="line"><span class="string">]]</span>)</span><br><span class="line">f:<span class="built_in">close</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 鎵ц鏂囦欢</span></span><br><span class="line"><span class="keyword">local</span> result = <span class="built_in">dofile</span>(<span class="string">&quot;greeting.lua&quot;</span>)</span><br><span class="line"><span class="comment">--&gt; Hello, Lua!</span></span><br><span class="line"><span class="built_in">print</span>(result)             <span class="comment">--&gt; 42</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="loadfile"><a href="#loadfile" class="headerlink" title="loadfile"></a><code>loadfile</code></h3><p>灏嗘枃浠剁紪璇戜负鍑芥暟浣嗕笉鎵ц锛?</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 鍔犺浇浣嗕笉鎵ц</span></span><br><span class="line"><span class="keyword">local</span> func = <span class="built_in">loadfile</span>(<span class="string">&quot;greeting.lua&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> func <span class="keyword">then</span></span><br><span class="line">  <span class="comment">-- 鎵ц</span></span><br><span class="line">  <span class="keyword">local</span> result = func()</span><br><span class="line">  <span class="built_in">print</span>(result)           <span class="comment">--&gt; 42</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 鍙互澶氭鎵ц</span></span><br><span class="line">func()</span><br><span class="line">func()</span><br></pre></td></tr></table></figure>
+
+<h3 id="load"><a href="#load" class="headerlink" title="load"></a><code>load</code></h3><p>浠庡瓧绗︿覆鍔犺浇 Lua 浠ｇ爜锛?</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 缂栬瘧瀛楃涓插舰寮忕殑 Lua 浠ｇ爜</span></span><br><span class="line"><span class="keyword">local</span> func = <span class="built_in">load</span>(<span class="string">&quot;return 2 + 2&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> func <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">print</span>(func())           <span class="comment">--&gt; 4</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 鍔ㄦ€佷唬鐮佹墽琛?local expression = &quot;10 * (5 + 3)&quot;</span></span><br><span class="line"><span class="keyword">local</span> f = <span class="built_in">load</span>(<span class="string">&quot;return &quot;</span> .. expression)</span><br><span class="line"><span class="keyword">if</span> f <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">print</span>(f())              <span class="comment">--&gt; 80</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="14-6-閿欒澶勭悊"><a href="#14-6-閿欒澶勭悊" class="headerlink" title="14.6 閿欒澶勭悊"></a>14.6 閿欒澶勭悊</h2><h3 id="error-涓-assert"><a href="#error-涓-assert" class="headerlink" title="error() 涓?assert()"></a><code>error()</code> 涓?<code>assert()</code></h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 涓诲姩鎶涘嚭閿欒</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">divide</span><span class="params">(a, b)</span></span></span><br><span class="line">  <span class="keyword">if</span> b == <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">error</span>(<span class="string">&quot;闄ゆ暟涓嶈兘涓?0&quot;</span>)  <span class="comment">-- 鎶涘嚭閿欒瀛楃涓?  end</span></span><br><span class="line">  <span class="keyword">return</span> a / b</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- error 鐨勭浜屼釜鍙傛暟鎸囧畾閿欒绾у埆</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inner</span><span class="params">()</span></span></span><br><span class="line">  <span class="built_in">error</span>(<span class="string">&quot;鍑洪敊浜?, 2)       -- 閿欒鎶ュ憡缁欒皟鐢ㄨ€?end</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">function outer()</span></span><br><span class="line"><span class="string">  inner()</span></span><br><span class="line"><span class="string">end</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">-- assert 绠€鍖栨鏌?local function open_file(filename)</span></span><br><span class="line"><span class="string">  local f = assert(io.open(filename, &quot;</span>r<span class="string">&quot;), &quot;</span>鏃犳硶鎵撳紑鏂囦欢: <span class="string">&quot; .. filename)</span></span><br><span class="line"><span class="string">  return f</span></span><br><span class="line"><span class="string">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="pcall锛堜繚鎶よ皟鐢級"><a href="#pcall锛堜繚鎶よ皟鐢級" class="headerlink" title="pcall锛堜繚鎶よ皟鐢級"></a><code>pcall</code>锛堜繚鎶よ皟鐢級</h3><p><code>pcall</code> 浠ヤ繚鎶ゆā寮忚皟鐢ㄥ嚱鏁帮紝鎹曡幏閿欒锛?</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">risky_function</span><span class="params">(x)</span></span></span><br><span class="line">  <span class="keyword">if</span> x &lt; <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">error</span>(<span class="string">&quot;涓嶈兘涓鸿礋鏁?)</span></span><br><span class="line"><span class="string">  end</span></span><br><span class="line"><span class="string">  return math.sqrt(x)</span></span><br><span class="line"><span class="string">end</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">-- 姝ｅ父璋冪敤</span></span><br><span class="line"><span class="string">local ok, result = pcall(risky_function, 9)</span></span><br><span class="line"><span class="string">if ok then</span></span><br><span class="line"><span class="string">  print(&quot;</span>缁撴灉:<span class="string">&quot;, result)    --&gt; 缁撴灉: 3</span></span><br><span class="line"><span class="string">end</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">-- 閿欒璋冪敤</span></span><br><span class="line"><span class="string">local ok, err = pcall(risky_function, -1)</span></span><br><span class="line"><span class="string">if not ok then</span></span><br><span class="line"><span class="string">  print(&quot;</span>鍑洪敊:<span class="string">&quot;, err)       --&gt; 鍑洪敊: 涓嶈兘涓鸿礋鏁?end</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">-- pcall 鐨勮繑鍥炲€硷細</span></span><br><span class="line"><span class="string">-- 鎴愬姛锛歵rue, 鍑芥暟杩斿洖鍊?..</span></span><br><span class="line"><span class="string">-- 澶辫触锛歠alse, 閿欒淇℃伅</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="xpcall锛堝甫閿欒澶勭悊鍑芥暟锛"><a href="#xpcall锛堝甫閿欒澶勭悊鍑芥暟锛" class="headerlink" title="xpcall锛堝甫閿欒澶勭悊鍑芥暟锛?"></a><code>xpcall</code>锛堝甫閿欒澶勭悊鍑芥暟锛?</h3><p><code>xpcall</code> 鍦ㄥ嚭閿欐椂璋冪敤鑷畾涔夌殑閿欒澶勭悊鍑芥暟锛岄€氬父鐢ㄤ簬鑾峰彇鍫嗘爤淇℃伅锛?</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 閿欒澶勭悊鍑芥暟</span></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">error_handler</span><span class="params">(err)</span></span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;鍙戠敓浜嗛敊璇?&quot;</span>)</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;  娑堟伅:&quot;</span>, err)</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;  鍫嗘爤:&quot;</span>, <span class="built_in">debug</span>.<span class="built_in">traceback</span>())</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 寮曞彂閿欒鐨勫嚱鏁?local function level3()</span></span><br><span class="line">  <span class="built_in">error</span>(<span class="string">&quot;娣卞眰閿欒&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">level2</span><span class="params">()</span></span></span><br><span class="line">  level3()</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">level1</span><span class="params">()</span></span></span><br><span class="line">  level2()</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 浣跨敤 xpcall</span></span><br><span class="line"><span class="keyword">local</span> ok, err = <span class="built_in">xpcall</span>(level1, error_handler)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> ok <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;璋冪敤澶辫触锛屽凡鎹曡幏閿欒&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="閿欒澶勭悊鐨勬渶浣冲疄璺"><a href="#閿欒澶勭悊鐨勬渶浣冲疄璺" class="headerlink" title="閿欒澶勭悊鐨勬渶浣冲疄璺?"></a>閿欒澶勭悊鐨勬渶浣冲疄璺?</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 鏂瑰紡涓€锛氳繑鍥為敊璇紙绫讳技 Go 椋庢牸锛?local function read_file_safe(filename)</span></span><br><span class="line">  <span class="keyword">local</span> f = <span class="built_in">io</span>.<span class="built_in">open</span>(filename, <span class="string">&quot;r&quot;</span>)</span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> f <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span>, <span class="string">&quot;鏃犳硶鎵撳紑鏂囦欢&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">local</span> content = f:<span class="built_in">read</span>(<span class="string">&quot;*a&quot;</span>)</span><br><span class="line">  f:<span class="built_in">close</span>()</span><br><span class="line">  <span class="keyword">return</span> content, <span class="literal">nil</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> content, err = read_file_safe(<span class="string">&quot;nonexistent.txt&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> content <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;璇诲彇澶辫触:&quot;</span>, err)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 鏂瑰紡浜岋細浣跨敤 pcall</span></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">safe_call</span><span class="params">(func, ...)</span></span></span><br><span class="line">  <span class="keyword">local</span> results = &#123;<span class="built_in">pcall</span>(func, ...)&#125;</span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> results[<span class="number">1</span>] <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;璋冪敤澶辫触:&quot;</span>, results[<span class="number">2</span>])</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="built_in">table</span>.<span class="built_in">remove</span>(results, <span class="number">1</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">table</span>.<span class="built_in">unpack</span>(results)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> result = safe_call(<span class="built_in">math</span>.<span class="built_in">sqrt</span>, <span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="14-7-鏈珷灏忕粨"><a href="#14-7-鏈珷灏忕粨" class="headerlink" title="14.7 鏈珷灏忕粨"></a>14.7 鏈珷灏忕粨</h2><table>
+<thead>
+<tr>
+<th>搴?</th>
+<th>閲嶈鍑芥暟</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>math</code></td>
+<td><code>floor</code>銆乣ceil<code>銆乣random</code>銆乣sqrt<code>銆乣sin</code>銆乣pi&#96;</td>
+</tr>
+<tr>
+<td><code>os</code></td>
+<td><code>time</code>銆乣date<code>銆乣difftime</code>銆乣clock<code>銆乣execute</code></td>
+</tr>
+<tr>
+<td><code>io</code></td>
+<td><code>open</code>銆乣read<code>銆乣write</code>銆乣lines<code>銆乣seek</code>銆乣close&#96;</td>
+</tr>
+<tr>
+<td>鍔犺浇</td>
+<td><code>dofile</code>銆乣loadfile<code>銆乣load</code></td>
+</tr>
+<tr>
+<td>閿欒</td>
+<td><code>error</code>銆乣assert<code>銆乣pcall</code>銆乣xpcall&#96;</td>
+</tr>
+</tbody></table>
+<h3 id="缁冧範棰"><a href="#缁冧範棰" class="headerlink" title="缁冧範棰?"></a>缁冧範棰?</h3><ol>
+<li>鍐欎竴涓嚱鏁?<code>copy_file(src, dst)</code> 瀹炵幇鏂囦欢澶嶅埗</li>
+<li>璇诲彇鏂囦欢鍐呭锛岀粺璁″崟璇嶅嚭鐜伴鐜囷紝杈撳嚭 TOP 10</li>
+<li>瀹炵幇涓€涓畝鍗曠殑 INI 鏂囦欢瑙ｆ瀽鍣紙璇诲彇鍜屽啓鍏?.ini 鏍煎紡锛?4. 鐢?<code>math.random</code> 妯℃嫙鎺烽瀛愶紙1~6锛夛紝缁熻 10000 娆＄殑缁撴灉鍒嗗竷</li>
+<li>鍐欎竴涓畨鍏ㄧ殑 <code>eval(str)</code> 鍑芥暟锛屼娇鐢?<code>pcall</code> 鎹曡幏瑙ｆ瀽鍜岃繍琛屾椂鐨勯敊璇?</li>
+</ol>
+<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2025/06/13/Lua教程-13-模块与包管理/" class="related-post-item" title="妯″潡涓庡寘绠＄悊"><span class="related-post-title">妯″潡涓庡寘绠＄悊</span><span class="related-post-date">2025-06-13</span><span class="related-post-desc">13.1 涓轰粈涔堥渶瑕佹ā鍧? 褰撶▼搴忓彉澶ф椂锛屾妸浠ｇ爜鏀惧埌涓€涓枃浠堕噷浼氬鑷达細 鍛藉悕鍐茬獊 锛氫笉鍚屽紑鍙戣€呭畾涔夌殑鍏ㄥ眬鍙橀噺鍙兘</span></a><a href="/2025/06/12/Lua教程-12-面向对象编程/" class="related-post-item" title="闈㈠悜瀵硅薄缂栫▼"><span class="related-post-title">闈㈠悜瀵硅薄缂栫▼</span><span class="related-post-date">2025-06-12</span><span class="related-post-desc">12.1 Lua 鐨?OOP 鎬濊矾 Lua 鏈韩涓嶆槸闈㈠悜瀵硅薄璇█鈥斺€旀病鏈? class 鍏抽敭瀛楋紝娌℃湁 this 锛屾病鏈夌户鎵胯娉曘€備</span></a><a href="/2025/06/10/Lua教程-10-表的深入应用/" class="related-post-item" title="琛ㄧ殑娣卞叆搴旂敤"><span class="related-post-title">琛ㄧ殑娣卞叆搴旂敤</span><span class="related-post-date">2025-06-10</span><span class="related-post-desc">10.1 table 搴撹瑙? table.insert table.remove table.sort lua 瀛楃涓茶繛鎺?local parts = </span></a><a href="/2025/06/07/Lua教程-07-函数基础篇/" class="related-post-item" title="鍑芥暟锛堝熀纭€绡囷級"><span class="related-post-title">鍑芥暟锛堝熀纭€绡囷級</span><span class="related-post-date">2025-06-07</span><span class="related-post-desc">7.1 鍑芥暟瀹氫箟 鍩烘湰璇硶 璇硶绯? 褰撳嚱鏁板瓨鍌ㄥ湪琛ㄤ腑鏃讹紝鍙互浣跨敤鍐掑彿璇硶锛? 7.2 鍙傛暟浼犻€? 褰㈠弬涓庡疄鍙? 鍙傛暟榛樿</span></a><a href="/2025/06/06/Lua教程-06-控制结构/" class="related-post-item" title="鎺у埗缁撴瀯"><span class="related-post-title">鎺у埗缁撴瀯</span><span class="related-post-date">2025-06-06</span><span class="related-post-desc">6.1 鏉′欢鍒嗘敮 if...then if...then...else if...then...elseif...else 鐪熷亣鍒ゆ柇 Lua 涓彧鏈?</span></a><a href="/2025/06/03/Lua教程-03-变量与作用域/" class="related-post-item" title="鍙橀噺涓庝綔鐢ㄥ煙"><span class="related-post-title">鍙橀噺涓庝綔鐢ㄥ煙</span><span class="related-post-date">2025-06-03</span><span class="related-post-desc">3.1 鍙橀噺澹版槑 鍏ㄥ眬鍙橀噺 鍦?Lua 涓紝 涓嶅姞 local 鍏抽敭瀛楀０鏄庣殑鍙橀噺榛樿鏄叏灞€鍙橀噺 锛? 鍗充娇鏄湪寰幆鎴栨潯浠跺垎</span></a></div></div><div class="series-nav"><div class="series-nav-title">Lua鍩虹鏁欑▼ 系列</div><div class="series-nav-progress">第 8/8 篇</div><div class="series-nav-links"><a href="/2025/06/13/Lua教程-13-模块与包管理/" class="series-nav-prev">妯″潡涓庡寘绠＄悊</a></div></div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Lua/" rel="tag"># Lua</a>
+              <a href="/tags/%E9%8F%81%E6%AC%91%E2%96%BC/" rel="tag"># 鏁欑▼</a>
+              <a href="/tags/series-Lua%E9%8D%A9%E8%99%B9%EE%94%85%E9%8F%81%E6%AC%91%E2%96%BC/" rel="tag"># series:Lua鍩虹鏁欑▼</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/06/13/Lua%E6%95%99%E7%A8%8B-13-%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%8C%85%E7%AE%A1%E7%90%86/" rel="prev" title="妯″潡涓庡寘绠＄悊">
+      <i class="fa fa-chevron-left"></i> 妯″潡涓庡寘绠＄悊
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-%E6%8F%92%E4%BB%B6-%E6%89%93%E9%80%A0%E9%AB%98%E6%95%88%E7%8E%87%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0-AI-%E7%A8%8B%E5%BA%8F%E5%91%98%E2%80%9D/" rel="next" title="Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员”">
+      Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员” <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+  <div class="post-share">
+    <span class="post-share-label">分享：</span>
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2025%2F06%2F14%2FLua%25E6%2595%2599%25E7%25A8%258B-14-%25E6%25A0%2587%25E5%2587%2586%25E5%25BA%2593%25E4%25B8%258E%25E6%2596%2587%25E4%25BB%25B6IO%2F&amp;title=%E9%8F%8D%E5%9B%A7%E5%99%AF%E6%90%B4%E6%92%B2%E7%AC%8C%E9%8F%82%E5%9B%A6%E6%AC%A2%20I%2FO" target="_blank" rel="noopener" title="分享到微博">
+      <i class="fab fa-weibo"></i>
+    </a>
+    <a href="#" onclick="navigator.clipboard.writeText(location.href);var t=this;t.innerHTML='<i class=fa fa-check></i>';setTimeout(function(){t.innerHTML='<i class=fa fa-link></i>'},1500);return false" title="复制链接">
+      <i class="fa fa-link"></i>
+    </a>
+  </div>
+
+  
+  <div class="post-author-bio">
+    <div class="post-author-avatar">
+      <img src="/images/avatar2.gif" alt="淡水鱼">
+    </div>
+    <div class="post-author-info">
+      <div class="post-author-name">淡水鱼</div>
+      <div class="post-author-desc">钓鱼爱好者 &amp; Unity 游戏开发者，分享编程技术与钓鱼经验。</div>
+      <div class="post-author-links">
+        <a href="https://github.com/grj1981" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="/atom.xml" title="RSS 订阅"><i class="fa fa-rss"></i></a>
+        <a href="mailto:271623821@qq.com" title="联系我"><i class="fa fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  
+
+
+          </div>
+          
+    <div class="comments" id="waline-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#14-1-math-%E6%90%B4"><span class="nav-number">1.</span> <span class="nav-text">14.1 math 搴?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%AF%E5%93%A5%E6%95%A4%E7%94%AF%E6%90%81%E5%99%BA"><span class="nav-number">1.1.</span> <span class="nav-text">甯哥敤甯搁噺</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%81%E6%BF%86%EE%87%AE%E9%8D%8A%E9%97%B4%E7%AC%8C%E7%BB%97%EF%B9%80%E5%BD%BF"><span class="nav-number">1.2.</span> <span class="nav-text">缁濆鍊间笌绗﹀彿</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%9E%E5%82%99%E7%AC%8C%E9%8F%8D"><span class="nav-number">1.3.</span> <span class="nav-text">骞備笌鏍?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%93%E5%A4%8E%EE%9D%97%E9%8D%91%E8%8A%A5%E6%9A%9F"><span class="nav-number">1.4.</span> <span class="nav-text">涓夎鍑芥暟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%85%E5%BF%94%E6%BA%80%E9%8F%81"><span class="nav-number">1.5.</span> <span class="nav-text">闅忔満鏁?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-2-os-%E6%90%B4"><span class="nav-number">2.</span> <span class="nav-text">14.2 os 搴?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%8F%83%E5%A0%95%E6%A3%BF%E6%B6%93%E5%BA%A2%E6%A3%A9%E9%8F%88"><span class="nav-number">2.1.</span> <span class="nav-text">鏃堕棿涓庢棩鏈?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%8E%B5%D1%86%EE%94%91%E7%BB%AF%E8%8D%A4%E7%B2%BA%E9%8D%9B%E6%88%92%E6%8A%A4"><span class="nav-number">2.2.</span> <span class="nav-text">鎵ц绯荤粺鍛戒护</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-3-io-%E6%90%B4%E6%92%AF%E2%82%AC%E6%96%BA%E2%82%AC%E6%97%80%E6%9E%83%E6%B5%A0%E6%83%B0%EE%87%B0%E9%8D%90"><span class="nav-number">3.</span> <span class="nav-text">14.3 io 搴撯€斺€旀枃浠惰鍐?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%8F%82%E5%9B%A6%E6%AC%A2%E5%A6%AF%E2%80%B3%E7%B4%A1"><span class="nav-number">3.1.</span> <span class="nav-text">鏂囦欢妯″紡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A0%E2%82%AC%E9%8D%97-I-O-%E5%A6%AF%E2%80%B3%E7%B4%A1"><span class="nav-number">3.2.</span> <span class="nav-text">绠€鍗?I&#x2F;O 妯″紡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#io-read-%E9%90%A8%E5%8B%AE%EE%87%B0%E9%8D%99%E6%A0%A8%E7%89%B8%E5%AF%AE"><span class="nav-number">3.3.</span> <span class="nav-text">io.read 鐨勮鍙栨牸寮?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%80%B9%E5%B1%BD%E5%8F%8F-I-O-%E5%A6%AF%E2%80%B3%E7%B4%A1"><span class="nav-number">3.4.</span> <span class="nav-text">瀹屽叏 I&#x2F;O 妯″紡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#file-seek-%E9%8D%99%E5%82%9B%E6%9A%9F"><span class="nav-number">3.5.</span> <span class="nav-text">file:seek 鍙傛暟</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-4-%E7%80%B9%E7%82%B5%E6%95%A4-I-O-%E7%BB%80%E8%BD%B0%E7%B7%A5"><span class="nav-number">4.</span> <span class="nav-text">14.4 瀹炵敤 I&#x2F;O 绀轰緥</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%96%AB%E6%84%AF%EE%94%91%E6%BE%B6%E5%8B%AD%E6%82%8A%E6%BE%B6%D1%84%E6%9E%83%E6%B5%A0"><span class="nav-number">4.1.</span> <span class="nav-text">閫愯澶勭悊澶ф枃浠?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%92%87%E8%AF%B2%E5%BD%87-CSV-%E9%8F%82%E5%9B%A6%E6%AC%A2"><span class="nav-number">4.2.</span> <span class="nav-text">璇诲彇 CSV 鏂囦欢</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%8D%90%E6%AC%8F%E5%8F%86-CSV-%E9%8F%82%E5%9B%A6%E6%AC%A2"><span class="nav-number">4.3.</span> <span class="nav-text">鍐欏叆 CSV 鏂囦欢</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-5-%E6%B5%A0g%E7%88%9C%E9%8D%94%E7%8A%BA%E6%B5%87%E9%94%9B%E6%AD%9Adofile-loadfile-load"><span class="nav-number">5.</span> <span class="nav-text">14.5 浠ｇ爜鍔犺浇锛歚dofile&#x2F;loadfile&#x2F;load&#96;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dofile"><span class="nav-number">5.1.</span> <span class="nav-text">dofile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#loadfile"><span class="nav-number">5.2.</span> <span class="nav-text">loadfile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#load"><span class="nav-number">5.3.</span> <span class="nav-text">load</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-6-%E9%96%BF%E6%AC%92%EE%87%A4%E6%BE%B6%E5%8B%AD%E6%82%8A"><span class="nav-number">6.</span> <span class="nav-text">14.6 閿欒澶勭悊</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#error-%E6%B6%93-assert"><span class="nav-number">6.1.</span> <span class="nav-text">error() 涓?assert()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pcall%E9%94%9B%E5%A0%9C%E7%B9%9A%E9%8E%B6%E3%82%88%E7%9A%9F%E9%90%A2%EE%9F%92%E7%B4%9A"><span class="nav-number">6.2.</span> <span class="nav-text">pcall锛堜繚鎶よ皟鐢級</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xpcall%E9%94%9B%E5%A0%9D%E7%94%AB%E9%96%BF%E6%AC%92%EE%87%A4%E6%BE%B6%E5%8B%AD%E6%82%8A%E9%8D%91%E8%8A%A5%E6%9A%9F%E9%94%9B"><span class="nav-number">6.3.</span> <span class="nav-text">xpcall锛堝甫閿欒澶勭悊鍑芥暟锛?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%96%BF%E6%AC%92%EE%87%A4%E6%BE%B6%E5%8B%AD%E6%82%8A%E9%90%A8%E5%8B%AC%E6%B8%B6%E6%B5%A3%E5%86%B2%E7%96%84%E7%92%BA"><span class="nav-number">6.4.</span> <span class="nav-text">閿欒澶勭悊鐨勬渶浣冲疄璺?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-7-%E9%8F%88%EE%84%82%E7%8F%B7%E7%81%8F%E5%BF%95%E7%B2%A8"><span class="nav-number">7.</span> <span class="nav-text">14.7 鏈珷灏忕粨</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%81%E5%86%A7%E7%AF%84%E6%A3%B0"><span class="nav-number">7.1.</span> <span class="nav-text">缁冧範棰?</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">110</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe id="music-player" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2023 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
+<script>
+(function() {
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+
+  function updateCounts() {
+    var countEls = document.querySelectorAll('.waline-visitor-count');
+    if (!countEls.length) return;
+    countEls.forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var url = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(json) {
+          if (json && json.data && json.data[0] && json.data[0].time != null) {
+            el.innerText = json.data[0].time;
+          }
+        }).catch(function(){});
+    });
+  }
+
+  var el = document.querySelector('#waline-comments');
+  if (el) {
+    updateCounts();
+    NexT.utils.loadComments(el, function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
+        Waline.init({
+          el: '#waline-comments',
+          serverURL: 'https://waline.bytefisher.top/',
+          path: location.pathname,
+          lang: 'zh-CN' || 'zh-CN',
+          meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
+          requiredMeta: ["nick"] || ['nick'],
+          placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
+          avatar: 'retro' || 'retro',
+          pageSize: 10 || 10,
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
+        });
+        var pathEl = document.querySelector('.waline-visitor-count');
+        var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
+        fetch(baseURL + '/api/article', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: postPath })
+        }).finally(function() {
+          setTimeout(updateCounts, 300);
+        });
+      }, window.Waline);
+    });
+  } else {
+    updateCounts();
+  }
+})();
+</script>
+
+<script>
+(function() {
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+  function fetchAll() {
+    document.querySelectorAll('.waline-visitor-count').forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var d = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(d) + '&type=time')
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          var t = d && d.data && d.data[0] && d.data[0].time;
+          if (t > 0) el.textContent = t;
+        });
+    });
+  }
+  // Run immediately, after 2s, and after 4s (handles PJAX + Waline load)
+  if (document.readyState === 'complete') { fetchAll(); }
+  else { window.addEventListener('load', fetchAll); }
+  setTimeout(fetchAll, 2000);
+  setTimeout(fetchAll, 4000);
+  // MutationObserver: if anything changes the span text, fix it
+  document.querySelectorAll('.waline-visitor-count').forEach(function(el) {
+    var obs = new MutationObserver(function() { fetchAll(); });
+    obs.observe(el, { characterData: true, childList: true, subtree: true });
+  });
+})();
+</script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
+
+<style>
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  scrollbar-gutter: stable;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.modal::-webkit-scrollbar {
+  display: none !important;
+}
+
+.modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.modal-content {
+  position: relative;
+  width: min(71%, 340px);
+  max-width: calc((100vh - 100px) * 9 / 17.5);
+  height: auto;
+  aspect-ratio: 9 / 17.5;
+  max-height: calc(100vh - 100px);
+  margin: 0 auto;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: min(81%, 320px);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: min(94%, 300px);
+    max-width: calc((100vh - 80px) * 9 / 17.5);
+    height: auto;
+    aspect-ratio: 9 / 17.5;
+    max-height: calc(100vh - 80px);
+  }
+}
+
+.modal-content iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  border: none;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  left: auto;
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 10000;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+}
+
+.close-btn:hover {
+  color: #e74c3c;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  background: rgba(0,0,0,0.1);
+  border-radius: 50%;
+  line-height: 50px;
+  user-select: none;
+}
+
+.nav-btn:hover {
+  background: rgba(0,0,0,0.2);
+}
+
+.prev-btn {
+  left: 0;
+}
+
+.next-btn {
+  right: 15px;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: calc(100% - 60px);
+    max-width: calc((100vh - 100px) * 9 / 17.5);
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    line-height: 40px;
+  }
+  .prev-btn {
+    left: 0;
+  }
+  .next-btn {
+    right: 5px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var musicIframe = null;
+  var musicDisplayStyle = '';
+  var isMusicPaused = false;
+  var videoIds = [];
+  var currentIndex = 0;
+  
+  function findMusicIframe() {
+    var iframes = document.getElementsByTagName('iframe');
+    for (var i = 0; i < iframes.length; i++) {
+      var src = iframes[i].src || '';
+      if (src.indexOf('music.163.com') > -1 || src.indexOf('outchain/player') > -1) {
+        return iframes[i];
+      }
+    }
+    console.log('[Douyin] Music iframe not found in', iframes.length, 'iframes');
+    return null;
+  }
+  
+  function pauseMusic() {
+    console.log('[Douyin] Trying to pause music...');
+    musicIframe = findMusicIframe();
+    
+    if (musicIframe) {
+      console.log('[Douyin] Music iframe found');
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=1') > -1) {
+        musicIframe.src = src.replace('auto=1', 'auto=0');
+        console.log('[Douyin] Changed auto=1 to auto=0');
+      }
+      isMusicPaused = true;
+    } else {
+      console.log('[Douyin] Music iframe NOT found!');
+    }
+  }
+  
+  function resumeMusic() {
+    console.log('[Douyin] Trying to resume music...');
+    
+    if (musicIframe && isMusicPaused) {
+      var src = musicIframe.src || '';
+      
+      if (src.indexOf('auto=0') > -1) {
+        musicIframe.src = src.replace('auto=0', 'auto=1');
+        console.log('[Douyin] Changed auto=0 to auto=1');
+      }
+      isMusicPaused = false;
+    }
+  }
+  
+  function init() {
+    console.log('[Douyin] Initializing...');
+    var cards = document.querySelectorAll('.video-card');
+    console.log('[Douyin] Found', cards.length, 'video cards');
+    
+    videoIds = [];
+    for (var j = 0; j < cards.length; j++) {
+      var videoId = cards[j].getAttribute('data-id');
+      if (videoId) {
+        videoIds.push(videoId);
+      }
+      cards[j].addEventListener('click', openModal);
+    }
+    
+    var closeBtn = document.querySelector('.close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+    
+    var prevBtn = document.querySelector('.prev-btn');
+    var nextBtn = document.querySelector('.next-btn');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(-1);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigateVideo(1);
+      });
+    }
+    
+    var modal = document.getElementById('douyin-modal');
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+    }
+  }
+  
+  function navigateVideo(direction) {
+    if (videoIds.length === 0) return;
+    
+    currentIndex += direction;
+    if (currentIndex < 0) {
+      currentIndex = videoIds.length - 1;
+    } else if (currentIndex >= videoIds.length) {
+      currentIndex = 0;
+    }
+    
+    var videoId = videoIds[currentIndex];
+    var player = document.getElementById('douyin-player');
+    if (player && videoId) {
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+    }
+  }
+  
+  function openModal(e) {
+    console.log('[Douyin] Opening modal...');
+    var card = e.currentTarget;
+    var videoId = card.getAttribute('data-id');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    currentIndex = videoIds.indexOf(videoId);
+    
+    if (player && modal && videoId) {
+      pauseMusic();
+      
+      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.marginRight = '0px';
+    }
+  }
+  
+  function closeModal() {
+    console.log('[Douyin] Closing modal...');
+    var player = document.getElementById('douyin-player');
+    var modal = document.getElementById('douyin-modal');
+    
+    if (player) {
+      player.src = '';
+    }
+    
+    if (modal) {
+      modal.classList.remove('active');
+    }
+    
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    
+    resumeMusic();
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+<!-- Hero 打字机效果 -->
+<script>
+(function() {
+  function initHeroTyping() {
+    var el = document.getElementById('hero-typing');
+    if (!el) return;
+    var texts = ['编程世界', '数字乐园', '钓鱼天地', '技术博客'];
+    var textIndex = 0;
+    var charIndex = 0;
+    var isDeleting = false;
+
+    function type() {
+      var current = texts[textIndex];
+      if (isDeleting) {
+        el.textContent = current.substring(0, charIndex--);
+      } else {
+        el.textContent = current.substring(0, charIndex++);
+      }
+
+      if (!isDeleting && charIndex === current.length) {
+        setTimeout(function() { isDeleting = true; }, 2000);
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+      }
+
+      setTimeout(type, isDeleting ? 50 : 100);
+    }
+    type();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroTyping);
+  } else {
+    initHeroTyping();
+  }
+})();
+</script>
+
+
+
+<!-- 深色模式切换 -->
+<button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
+  <i class="fa fa-moon-o"></i>
+  <i class="fa fa-sun-o"></i>
+</button>
+<script data-pjax>
+(function() {
+  var btn = document.getElementById('darkmode-toggle');
+  if (!btn) return;
+  if (document.body.classList.contains('dark-mode')) btn.classList.add('on');
+  btn.addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+    btn.classList.toggle('on');
+    localStorage.setItem('blog-darkmode', document.body.classList.contains('dark-mode') ? '1' : '0');
+  });
+  if (localStorage.getItem('blog-darkmode') === '1') {
+    document.body.classList.add('dark-mode');
+    btn.classList.add('on');
+  }
+})();
+</script>
+
+<!-- AI 博客助手 -->
+<script src="/js/ai-assistant.js" data-pjax></script>
+
+<script data-pjax>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<!-- 热门文章侧边栏 -->
+<script data-pjax>
+(function() {
+  var container = document.querySelector('.sidebar-inner');
+  if (!container) return;
+
+  var existEl = document.getElementById('hot-posts-widget');
+  if (existEl) return;
+
+  var widget = document.createElement('div');
+  widget.id = 'hot-posts-widget';
+  widget.className = 'sidebar-widget hot-posts-widget';
+  widget.innerHTML = '<div class="sidebar-widget-title"><i class="fa fa-fire"></i> 热门文章</div>' +
+    '<div class="sidebar-widget-body" id="hot-posts-list">' +
+    '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">加载中...</p></div>';
+  container.appendChild(widget);
+
+  fetch('/api/hot-articles.json')
+    .then(function(r) { return r.json(); })
+    .then(function(res) {
+      var el = document.getElementById('hot-posts-list');
+      if (!el) return;
+      if (res.errno !== 0 || !res.data || !res.data.length) {
+        el.innerHTML = '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">暂无数据</p>';
+        return;
+      }
+      var html = '<ul style="list-style:none;padding:0;margin:0;">';
+      res.data.forEach(function(item, i) {
+        html += '<li style="padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' +
+          '<span style="color:#37c6c0;font-weight:700;margin-right:4px;">' + (i+1) + '.</span>' +
+          '<a href="' + item.url + '" style="color:#555;text-decoration:none;border:none;" title="' + (item.title || '') + '">' +
+          (item.title || item.url) + '</a>' +
+          '<span style="color:#ccc;margin-left:4px;font-size:10px;">' + item.count + '℃</span>' +
+        '</li>';
+      });
+      html += '</ul>';
+      el.innerHTML = html;
+      if (window.pjax && window.pjax.refresh) {
+        window.pjax.refresh(document.getElementById('hot-posts-widget'));
+      }
+    })
+    .catch(function() {
+      var el = document.getElementById('hot-posts-list');
+      if (el) el.innerHTML = '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">加载失败</p>';
+    });
+})();
+</script>
+    </div>
+</body>
+</html>
