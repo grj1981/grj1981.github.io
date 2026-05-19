@@ -341,7 +341,7 @@
     <published>2026-05-14T12:00:00.000Z</published>
     <summary>前言ByteFisher 博客从建站第一天起，所有图片就托管在 iili.io（FreeImage.Host）——一个免费的第三方图床。免费的东西往往最贵——你不知道它什么时候会关停、限速、删图、或者域名变更。 之前也一直想着要迁移，但 546 张相册图片 + 257 张文章配图 + 46 张抖音封面，总数近 850 张，想想就头大。直到有一天用 DevTools 看了一眼图片加载时间： 1iil...</summary>
     <title>Hexo 博客图床迁移实战：从 iili.io 到 Cloudflare Workers + 相册维护工具链改造全记录</title>
-    <updated>2026-05-19T10:46:31.415Z</updated>
+    <updated>2026-05-19T10:52:21.351Z</updated>
   </entry>
   <entry>
     <author>
