@@ -1313,7 +1313,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #0393ff;
+  background: #e7acff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2681,9 +2681,6 @@ body {
   background-attachment: fixed;
   background-size: 100% 100%;
 }
-.sidebar {
-  overflow-y: auto;
-}
 .content-wrap {
   opacity: 0.8;
 }
@@ -3699,6 +3696,7 @@ figure.highlight table {
   font-size: 13px;
   line-height: 1.6;
   color: #555;
+  max-height: 45vh;
   overflow-y: auto;
 }
 .hot-posts-widget .sidebar-widget-body ul li a:hover {
