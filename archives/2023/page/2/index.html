@@ -474,14 +474,6 @@
   </nav>
 
 
-  <div class="post-meta" style="text-align:center;margin-top:20px;color:#999;font-size:13px;">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon"><i class="fa fa-eye"></i></span>
-      <span class="post-meta-item-text">阅读量</span>
-      <span class="waline-visitor-count" data-path="/archives/2023/page/2/index.html"></span>
-    </span>
-  </div>
-
 
           </div>
           
@@ -833,15 +825,6 @@ window.addEventListener('pjax:success', () => {
     });
   } else {
     updateCounts();
-    var pathEl = document.querySelector('.waline-visitor-count');
-    var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
-    fetch(baseURL + '/api/article', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ path: postPath })
-    }).finally(function() {
-      setTimeout(updateCounts, 300);
-    });
   }
 })();
 </script>
