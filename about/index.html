@@ -356,7 +356,7 @@
 </tr>
 <tr>
 <td>电子邮箱</td>
-<td><a href="mailto:&#x32;&#x37;&#x31;&#54;&#50;&#51;&#56;&#x32;&#49;&#64;&#113;&#113;&#46;&#99;&#111;&#x6d;">271623821@qq.com</a></td>
+<td><a href="mailto:&#x32;&#55;&#49;&#x36;&#x32;&#x33;&#x38;&#x32;&#x31;&#64;&#113;&#113;&#x2e;&#x63;&#111;&#x6d;">271623821@qq.com</a></td>
 </tr>
 </tbody></table>
 <hr>
@@ -383,6 +383,13 @@
     </div>
     
 
+    <div class="post-meta" style="text-align:center;margin-top:20px;color:#999;font-size:13px;">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="fa fa-eye"></i></span>
+        <span class="post-meta-item-text">阅读量</span>
+        <span class="waline-visitor-count" data-path="about/index.html"></span>
+      </span>
+    </div>
     
     
     
@@ -740,6 +747,15 @@ window.addEventListener('pjax:success', () => {
     });
   } else {
     updateCounts();
+    var pathEl = document.querySelector('.waline-visitor-count');
+    var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
+    fetch(baseURL + '/api/article', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ path: postPath })
+    }).finally(function() {
+      setTimeout(updateCounts, 300);
+    });
   }
 })();
 </script>
