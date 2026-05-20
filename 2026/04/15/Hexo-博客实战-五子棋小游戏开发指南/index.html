@@ -19,7 +19,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
@@ -28,7 +28,7 @@
   <meta name="description" content="前言继扫雷、俄罗斯方块之后，本文介绍五子棋 AI 对战游戏的开发。相比其他游戏，五子棋的核心难点在于AI 算法的实现：如何在有限时间内找到最优落子位置，同时平衡进攻与防守。 五子棋是一个信息完全公开的零和博弈游戏，理论上可以通过搜索算法找到最优解。但实际应用中，我们需要考虑： 搜索空间巨大：15×15 棋盘有 225 个位置，搜索深度每增加一层，复杂度指数级增长 时间限制：玩家期望 AI 在几秒内">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo 博客实战：五子棋小游戏开发指南">
-<meta property="og:url" content="https://www.bytefisher.top/2026/04/15/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BA%94%E5%AD%90%E6%A3%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:url" content="https://www.bytefisher.top/2026/04/15/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BA%94%E5%AD%90%E6%A3%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
 <meta property="og:site_name" content="ByteFisher">
 <meta property="og:description" content="前言继扫雷、俄罗斯方块之后，本文介绍五子棋 AI 对战游戏的开发。相比其他游戏，五子棋的核心难点在于AI 算法的实现：如何在有限时间内找到最优落子位置，同时平衡进攻与防守。 五子棋是一个信息完全公开的零和博弈游戏，理论上可以通过搜索算法找到最优解。但实际应用中，我们需要考虑： 搜索空间巨大：15×15 棋盘有 225 个位置，搜索深度每增加一层，复杂度指数级增长 时间限制：玩家期望 AI 在几秒内">
 <meta property="og:locale" content="zh_CN">
@@ -172,12 +172,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">117</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">137</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">51</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">52</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -249,7 +249,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -819,14 +819,14 @@
     <img class="site-author-image" itemprop="image" alt="淡水鱼"
       src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">淡水鱼</p>
-  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">137</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -839,7 +839,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-count">52</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -19,7 +19,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
@@ -28,12 +28,12 @@
   <meta name="description" content="12.1 Lua 的 OOP 思路Lua 本身不是面向对象语言——没有 class 关键字，没有 this，没有继承语法。但借助 table + 元表，我们可以实现一套优雅的面向对象系统。 核心思想： 对象 → table 类 → 原型 table 方法 → table 中的函数 继承 → index 元方法链 12.2 self 与冒号语法不使用冒号123456789101112local Pe">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面向对象编程">
-<meta property="og:url" content="https://www.bytefisher.top/2025/06/12/Lua%E6%95%99%E7%A8%8B-12-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:url" content="https://www.bytefisher.top/2025/06/12/Lua%E6%95%99%E7%A8%8B-12-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/">
 <meta property="og:site_name" content="ByteFisher">
 <meta property="og:description" content="12.1 Lua 的 OOP 思路Lua 本身不是面向对象语言——没有 class 关键字，没有 this，没有继承语法。但借助 table + 元表，我们可以实现一套优雅的面向对象系统。 核心思想： 对象 → table 类 → 原型 table 方法 → table 中的函数 继承 → index 元方法链 12.2 self 与冒号语法不使用冒号123456789101112local Pe">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-06-12T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-19T11:03:06.474Z">
+<meta property="article:modified_time" content="2026-05-20T06:05:02.892Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="Lua">
 <meta property="article:tag" content="series:Lua基础教程">
@@ -42,7 +42,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/06/12/Lua%E6%95%99%E7%A8%8B-12-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"面向对象编程","description":"12.1 Lua 的 OOP 思路Lua 本身不是面向对象语言——没有 class 关键字，没有 this，没有继承语法。但借助 table + 元表，我们可以实现一套优雅的面向对象系统。 核心思想： 对象 → table 类 → 原型 table 方法 → table 中的函数 继承 → index 元方法链 12.2 self 与冒号语法不使用冒号123456789101112local Pe...","url":"https://www.bytefisher.top/2025/06/12/Lua教程-12-面向对象编程/","datePublished":"2025-06-12T00:00:00.000Z","dateModified":"2026-05-19T11:03:06.474Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/06/12/Lua教程-12-面向对象编程/"},"keywords":"Lua, 教程, series:Lua基础教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"面向对象编程","description":"12.1 Lua 的 OOP 思路Lua 本身不是面向对象语言——没有 class 关键字，没有 this，没有继承语法。但借助 table + 元表，我们可以实现一套优雅的面向对象系统。 核心思想： 对象 → table 类 → 原型 table 方法 → table 中的函数 继承 → index 元方法链 12.2 self 与冒号语法不使用冒号123456789101112local Pe...","url":"https://www.bytefisher.top/2025/06/12/Lua教程-12-面向对象编程/","datePublished":"2025-06-12T00:00:00.000Z","dateModified":"2026-05-20T06:05:02.892Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/06/12/Lua教程-12-面向对象编程/"},"keywords":"Lua, 教程, series:Lua基础教程"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Lua","item":"https://www.bytefisher.top/categories/Lua/"},{"@type":"ListItem","position":3,"name":"面向对象编程"}]}</script>
 
 
@@ -170,12 +170,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">117</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">137</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">51</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">52</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -247,7 +247,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -322,6 +322,8 @@
 <li><strong>方法</strong> → table 中的函数</li>
 <li><strong>继承</strong> → <code>__index</code> 元方法链</li>
 </ul>
+<span id="more"></span>
+
 <hr>
 <h2 id="12-2-self-与冒号语法"><a href="#12-2-self-与冒号语法" class="headerlink" title="12.2 self 与冒号语法"></a>12.2 <code>self</code> 与冒号语法</h2><h3 id="不使用冒号"><a href="#不使用冒号" class="headerlink" title="不使用冒号"></a>不使用冒号</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> Person = &#123;</span><br><span class="line">  name = <span class="string">&quot;匿名&quot;</span>,</span><br><span class="line">  age = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 方法需要显式接受 self</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person.greet</span><span class="params">(self)</span></span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;你好，我是&quot;</span> .. <span class="built_in">self</span>.name)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 调用时需传递对象自身</span></span><br><span class="line">Person.greet(Person)      <span class="comment">--&gt; 你好，我是匿名</span></span><br></pre></td></tr></table></figure>
 
@@ -529,14 +531,14 @@
     <img class="site-author-image" itemprop="image" alt="淡水鱼"
       src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">淡水鱼</p>
-  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">137</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -549,7 +551,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-count">52</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

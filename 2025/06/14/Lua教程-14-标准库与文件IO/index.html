@@ -19,7 +19,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
@@ -28,12 +28,12 @@
   <meta name="description" content="14.1 math 库常用常量1234print(math.pi) &gt; 3.1415926535898print(math.huge) &gt; inf（无穷大）print(math.maxinteger) &gt; 9223372036854775807（5.3+）print(math.mininteger) &gt; 9223372036854775808（5.3+） 取整函数12345">
 <meta property="og:type" content="article">
 <meta property="og:title" content="标准库与文件 I&#x2F;O">
-<meta property="og:url" content="https://www.bytefisher.top/2025/06/14/Lua%E6%95%99%E7%A8%8B-14-%E6%A0%87%E5%87%86%E5%BA%93%E4%B8%8E%E6%96%87%E4%BB%B6IO/index.html">
+<meta property="og:url" content="https://www.bytefisher.top/2025/06/14/Lua%E6%95%99%E7%A8%8B-14-%E6%A0%87%E5%87%86%E5%BA%93%E4%B8%8E%E6%96%87%E4%BB%B6IO/">
 <meta property="og:site_name" content="ByteFisher">
 <meta property="og:description" content="14.1 math 库常用常量1234print(math.pi) &gt; 3.1415926535898print(math.huge) &gt; inf（无穷大）print(math.maxinteger) &gt; 9223372036854775807（5.3+）print(math.mininteger) &gt; 9223372036854775808（5.3+） 取整函数12345">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-06-14T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-19T11:03:06.515Z">
+<meta property="article:modified_time" content="2026-05-20T06:05:02.949Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="Lua">
 <meta property="article:tag" content="series:Lua基础教程">
@@ -42,7 +42,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/06/14/Lua%E6%95%99%E7%A8%8B-14-%E6%A0%87%E5%87%86%E5%BA%93%E4%B8%8E%E6%96%87%E4%BB%B6IO/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"标准库与文件 I/O","description":"14.1 math 库常用常量1234print(math.pi) &gt; 3.1415926535898print(math.huge) &gt; inf（无穷大）print(math.maxinteger) &gt; 9223372036854775807（5.3+）print(math.mininteger) &gt; 9223372036854775808（5.3+） 取整函数12345...","url":"https://www.bytefisher.top/2025/06/14/Lua教程-14-标准库与文件IO/","datePublished":"2025-06-14T00:00:00.000Z","dateModified":"2026-05-19T11:03:06.515Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/06/14/Lua教程-14-标准库与文件IO/"},"keywords":"Lua, 教程, series:Lua基础教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"标准库与文件 I/O","description":"14.1 math 库常用常量1234print(math.pi) &gt; 3.1415926535898print(math.huge) &gt; inf（无穷大）print(math.maxinteger) &gt; 9223372036854775807（5.3+）print(math.mininteger) &gt; 9223372036854775808（5.3+） 取整函数12345...","url":"https://www.bytefisher.top/2025/06/14/Lua教程-14-标准库与文件IO/","datePublished":"2025-06-14T00:00:00.000Z","dateModified":"2026-05-20T06:05:02.949Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/06/14/Lua教程-14-标准库与文件IO/"},"keywords":"Lua, 教程, series:Lua基础教程"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Lua","item":"https://www.bytefisher.top/categories/Lua/"},{"@type":"ListItem","position":3,"name":"标准库与文件 I/O"}]}</script>
 
 
@@ -170,12 +170,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">117</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">137</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">51</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">52</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -247,7 +247,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -325,6 +325,9 @@
 <h3 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> angle = <span class="built_in">math</span>.<span class="built_in">pi</span> / <span class="number">4</span>  <span class="comment">-- 45 度</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">sin</span>(angle))    <span class="comment">--&gt; 0.7071</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">cos</span>(angle))    <span class="comment">--&gt; 0.7071</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">tan</span>(angle))    <span class="comment">--&gt; 1.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 反三角函数</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">asin</span>(<span class="number">0.5</span>))     <span class="comment">--&gt; 0.5236（弧度 ≈ 30°）</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">acos</span>(<span class="number">0.5</span>))     <span class="comment">--&gt; 1.0472（弧度 ≈ 60°）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 弧度 ↔ 角度转换</span></span><br><span class="line"><span class="keyword">local</span> <span class="built_in">deg</span> = <span class="built_in">math</span>.<span class="built_in">deg</span>(<span class="built_in">math</span>.<span class="built_in">pi</span> / <span class="number">3</span>)  <span class="comment">--&gt; 60</span></span><br><span class="line"><span class="keyword">local</span> <span class="built_in">rad</span> = <span class="built_in">math</span>.<span class="built_in">rad</span>(<span class="number">60</span>)            <span class="comment">--&gt; 1.0472</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 初始化种子</span></span><br><span class="line"><span class="built_in">math</span>.<span class="built_in">randomseed</span>(<span class="built_in">os</span>.<span class="built_in">time</span>())</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 生成随机浮点数 [0, 1)</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">random</span>())</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 生成随机整数 [1, n]</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">random</span>(<span class="number">100</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 生成随机整数 [m, n]</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">random</span>(<span class="number">10</span>, <span class="number">20</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 注意：Windows 上 os.time() 粒度不够</span></span><br><span class="line"><span class="comment">-- 更好的种子策略</span></span><br><span class="line"><span class="built_in">math</span>.<span class="built_in">randomseed</span>(<span class="built_in">os</span>.<span class="built_in">time</span>() + <span class="built_in">os</span>.<span class="built_in">clock</span>() * <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 打乱数组</span></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">shuffle</span><span class="params">(t)</span></span></span><br><span class="line">  <span class="keyword">for</span> i = #t, <span class="number">2</span>, <span class="number">-1</span> <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">local</span> j = <span class="built_in">math</span>.<span class="built_in">random</span>(i)</span><br><span class="line">    t[i], t[j] = t[j], t[i]</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">return</span> t</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> cards = &#123;<span class="string">&quot;A&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="string">&quot;3&quot;</span>, <span class="string">&quot;4&quot;</span>, <span class="string">&quot;5&quot;</span>&#125;</span><br><span class="line">shuffle(cards)</span><br></pre></td></tr></table></figure>
+
+
+<span id="more"></span>
 
 <hr>
 <h2 id="14-2-os-库"><a href="#14-2-os-库" class="headerlink" title="14.2 os 库"></a>14.2 os 库</h2><h3 id="时间与日期"><a href="#时间与日期" class="headerlink" title="时间与日期"></a>时间与日期</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 当前时间戳（秒）</span></span><br><span class="line"><span class="keyword">local</span> now = <span class="built_in">os</span>.<span class="built_in">time</span>()</span><br><span class="line"><span class="built_in">print</span>(now)                <span class="comment">--&gt; 例如 1756627200</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 将时间表转为时间戳</span></span><br><span class="line"><span class="keyword">local</span> t = &#123;year = <span class="number">2026</span>, month = <span class="number">6</span>, day = <span class="number">1</span>, hour = <span class="number">8</span>, <span class="built_in">min</span> = <span class="number">0</span>, sec = <span class="number">0</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">time</span>(t))         <span class="comment">--&gt; 对应的时间戳</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 将时间戳转为时间表</span></span><br><span class="line"><span class="keyword">local</span> dt = <span class="built_in">os</span>.<span class="built_in">date</span>(<span class="string">&quot;*t&quot;</span>, <span class="built_in">os</span>.<span class="built_in">time</span>())</span><br><span class="line"><span class="built_in">print</span>(dt.year)            <span class="comment">--&gt; 2026</span></span><br><span class="line"><span class="built_in">print</span>(dt.month)           <span class="comment">--&gt; 6</span></span><br><span class="line"><span class="built_in">print</span>(dt.day)             <span class="comment">--&gt; 1</span></span><br><span class="line"><span class="built_in">print</span>(dt.hour)            <span class="comment">--&gt; 8</span></span><br><span class="line"><span class="built_in">print</span>(dt.<span class="built_in">min</span>)             <span class="comment">--&gt; 0</span></span><br><span class="line"><span class="built_in">print</span>(dt.sec)             <span class="comment">--&gt; 0</span></span><br><span class="line"><span class="built_in">print</span>(dt.wday)            <span class="comment">--&gt; 1（星期几，1=星期日）</span></span><br><span class="line"><span class="built_in">print</span>(dt.yday)            <span class="comment">--&gt; 152（一年中的第几天）</span></span><br></pre></td></tr></table></figure>
@@ -568,14 +571,14 @@
     <img class="site-author-image" itemprop="image" alt="淡水鱼"
       src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">淡水鱼</p>
-  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">137</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -588,7 +591,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-count">52</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

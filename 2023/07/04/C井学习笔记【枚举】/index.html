@@ -19,7 +19,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
@@ -28,12 +28,12 @@
   <meta name="description" content="C 枚举（Enum）枚举是一组命名整型常量。枚举类型是使用 enum 关键字声明的。 C 枚举是值类型。换句话说，枚举包含自己的值，且不能继承或传递继承。 枚举类名建议带上 Enum 后缀，枚举成员名称需要全大写，单词间用下划线隔开。 说明： 枚举其实就是特殊的常量类，且构造方法被默认强制是私有。 正例： 枚举名字： DealStatusEnum， 成员名称： SUCCESS &amp; x2F; UNK">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C#学习笔记【枚举】">
-<meta property="og:url" content="https://www.bytefisher.top/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%9E%9A%E4%B8%BE%E3%80%91/index.html">
+<meta property="og:url" content="https://www.bytefisher.top/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%9E%9A%E4%B8%BE%E3%80%91/">
 <meta property="og:site_name" content="ByteFisher">
 <meta property="og:description" content="C 枚举（Enum）枚举是一组命名整型常量。枚举类型是使用 enum 关键字声明的。 C 枚举是值类型。换句话说，枚举包含自己的值，且不能继承或传递继承。 枚举类名建议带上 Enum 后缀，枚举成员名称需要全大写，单词间用下划线隔开。 说明： 枚举其实就是特殊的常量类，且构造方法被默认强制是私有。 正例： 枚举名字： DealStatusEnum， 成员名称： SUCCESS &amp; x2F; UNK">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-04T08:43:12.000Z">
-<meta property="article:modified_time" content="2026-05-14T08:31:52.688Z">
+<meta property="article:modified_time" content="2026-05-20T06:07:08.324Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="C#">
 <meta property="article:tag" content="IT">
@@ -42,7 +42,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%9E%9A%E4%B8%BE%E3%80%91/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C#学习笔记【枚举】","description":"C 枚举（Enum）枚举是一组命名整型常量。枚举类型是使用 enum 关键字声明的。 C 枚举是值类型。换句话说，枚举包含自己的值，且不能继承或传递继承。 枚举类名建议带上 Enum 后缀，枚举成员名称需要全大写，单词间用下划线隔开。 说明： 枚举其实就是特殊的常量类，且构造方法被默认强制是私有。 正例： 枚举名字： DealStatusEnum， 成员名称： SUCCESS & x2F; UNK...","url":"https://www.bytefisher.top/2023/07/04/C井学习笔记【枚举】/","datePublished":"2023-07-04T08:43:12.000Z","dateModified":"2026-05-14T08:31:52.688Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/07/04/C井学习笔记【枚举】/"},"keywords":"IT, C#, series:C#学习笔记"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C#学习笔记【枚举】","description":"C 枚举（Enum）枚举是一组命名整型常量。枚举类型是使用 enum 关键字声明的。 C 枚举是值类型。换句话说，枚举包含自己的值，且不能继承或传递继承。 枚举类名建议带上 Enum 后缀，枚举成员名称需要全大写，单词间用下划线隔开。 说明： 枚举其实就是特殊的常量类，且构造方法被默认强制是私有。 正例： 枚举名字： DealStatusEnum， 成员名称： SUCCESS & x2F; UNK...","url":"https://www.bytefisher.top/2023/07/04/C井学习笔记【枚举】/","datePublished":"2023-07-04T08:43:12.000Z","dateModified":"2026-05-20T06:07:08.324Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/07/04/C井学习笔记【枚举】/"},"keywords":"IT, C#, series:C#学习笔记"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"C#","item":"https://www.bytefisher.top/categories/C/"},{"@type":"ListItem","position":3,"name":"C#学习笔记【枚举】"}]}</script>
 
 
@@ -170,12 +170,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">117</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">137</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">51</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">52</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -247,7 +247,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -319,18 +319,18 @@
 <p>枚举类名建议带上 Enum 后缀，枚举成员名称需要全大写，单词间用下划线隔开。</p>
 <p>说明： 枚举其实就是特殊的常量类，且构造方法被默认强制是私有。</p>
 <p>正例： 枚举名字： DealStatusEnum， 成员名称： SUCCESS &#x2F; UNKOWN_REASON</p>
-<h2 id="声明-enum-变量"><a href="#声明-enum-变量" class="headerlink" title="- 声明 enum 变量"></a>- 声明 enum 变量</h2><p>声明枚举的一般语法：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">enum &lt;enum_name&gt;</span><br><span class="line">&#123; </span><br><span class="line">    enumeration list </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><br>其中，</p>
+<h2 id="声明-enum-变量"><a href="#声明-enum-变量" class="headerlink" title="- 声明 enum 变量"></a>- 声明 enum 变量</h2><p>声明枚举的一般语法：<br>	<br>	<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">enum</span> &lt;enum_name&gt;</span><br><span class="line">&#123; </span><br><span class="line">    enumeration list </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><br>其中，</p>
 <pre><code>enum_name 指定枚举的类型名称。
 enumeration list 是一个用逗号分隔的标识符列表。
 </code></pre>
 <p>枚举列表中的每个符号代表一个整数值，一个比它前面的符号大的整数值。默认情况下，第一个枚举符号的值是 0.例如：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">enum Days &#123; Sun, Mon, tue, Wed, thu, Fri, Sat &#125;;</span><br></pre></td></tr></table></figure>
+<pre><code><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">enum</span> Days &#123; Sun, Mon, tue, Wed, thu, Fri, Sat &#125;;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>下面的实例演示了枚举变量的用法：</p>
 <blockquote>
 <p><strong>实例</strong></p>
 </blockquote>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">public class EnumTest</span><br><span class="line">&#123;</span><br><span class="line">    enum Day &#123; Sun, Mon, Tue, Wed, Thu, Fri, Sat &#125;;</span><br><span class="line"></span><br><span class="line">    static void Main()</span><br><span class="line">    &#123;</span><br><span class="line">        int x = (int)Day.Sun;</span><br><span class="line">        int y = (int)Day.Fri;</span><br><span class="line">        Console.WriteLine(&quot;Sun = &#123;0&#125;&quot;, x);</span><br><span class="line">        Console.WriteLine(&quot;Fri = &#123;0&#125;&quot;, y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">EnumTest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">enum</span> Day &#123; Sun, Mon, Tue, Wed, Thu, Fri, Sat &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">int</span> x = (<span class="built_in">int</span>)Day.Sun;</span><br><span class="line">        <span class="built_in">int</span> y = (<span class="built_in">int</span>)Day.Fri;</span><br><span class="line">        Console.WriteLine(<span class="string">&quot;Sun = &#123;0&#125;&quot;</span>, x);</span><br><span class="line">        Console.WriteLine(<span class="string">&quot;Fri = &#123;0&#125;&quot;</span>, y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <span id="more"></span>
 <p>当上面的代码被编译和执行时，它会产生下列结果：</p>
@@ -338,11 +338,11 @@ enumeration list 是一个用逗号分隔的标识符列表。
 Fri = 5
 </code></pre>
 <h2 id="位标志枚举（flags-enumeration）"><a href="#位标志枚举（flags-enumeration）" class="headerlink" title="- 位标志枚举（flags enumeration）"></a>- 位标志枚举（flags enumeration）</h2><p>现实中不总是用离散值枚举，以一周中的7天为例，假设要求应用程序用户指定一周中各天的任意组合，便可以使用”位标志枚举”。使用位标志枚举时，可以用或运算创建新的组合值。以星期为例，声明方法如下：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[Flags]</span><br><span class="line">public enum Days</span><br><span class="line">&#123;</span><br><span class="line">    None = 0,</span><br><span class="line">    Sunday = 0x01,          //0000 0001</span><br><span class="line">    Monday = 0x02,          //0000 0010</span><br><span class="line">    Tuesday = 0x04,         //0000 0100</span><br><span class="line">    Wednesday = 0x08,       //0000 1000</span><br><span class="line">    Thursday = 0x10,        //0001 0000</span><br><span class="line">    Friday = 0x20,          //0010 0000</span><br><span class="line">    Saturday = 0x40,        //0100 0000</span><br><span class="line">    Weekend = Sunday | Saturday,     //0100 0001</span><br><span class="line">    Workdays = Monday | Tuesday | Wednesday | Tuesday | Friday, //0011 1110</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Flags</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="built_in">enum</span> Days</span><br><span class="line">&#123;</span><br><span class="line">    None = <span class="number">0</span>,</span><br><span class="line">    Sunday = <span class="number">0x01</span>,          <span class="comment">//0000 0001</span></span><br><span class="line">    Monday = <span class="number">0x02</span>,          <span class="comment">//0000 0010</span></span><br><span class="line">    Tuesday = <span class="number">0x04</span>,         <span class="comment">//0000 0100</span></span><br><span class="line">    Wednesday = <span class="number">0x08</span>,       <span class="comment">//0000 1000</span></span><br><span class="line">    Thursday = <span class="number">0x10</span>,        <span class="comment">//0001 0000</span></span><br><span class="line">    Friday = <span class="number">0x20</span>,          <span class="comment">//0010 0000</span></span><br><span class="line">    Saturday = <span class="number">0x40</span>,        <span class="comment">//0100 0000</span></span><br><span class="line">    Weekend = Sunday | Saturday,     <span class="comment">//0100 0001</span></span><br><span class="line">    Workdays = Monday | Tuesday | Wednesday | Tuesday | Friday, <span class="comment">//0011 1110</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>为了让位标志枚举的值能够组合，所有值都必须是2的幂。因为组合多个值时，必须能确定结果为哪个离散值。</p>
 <p>在简单枚举中，可以让名称None或最常用默认名称对应于0，但标志枚举要求0对应于名称None,这个值意味着所有标志都未设置。</p>
-<p>执行：<br>	<br>	<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Days days = Days.Weekend;</span><br><span class="line">Console.WriteLine(&quot;&#123;0&#125; : &#123;1&#125;&quot;,days,(int)days);</span><br></pre></td></tr></table></figure><br>结果输出：</p>
+<p>执行：<br>	<br>	<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Days days = Days.Weekend;</span><br><span class="line">Console.WriteLine(<span class="string">&quot;&#123;0&#125; : &#123;1&#125;&quot;</span>,days,(<span class="built_in">int</span>)days);</span><br></pre></td></tr></table></figure><br>结果输出：</p>
 <pre><code>Weekend : 65
 </code></pre>
 <div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2025/05/19/C-学习笔记【行为树】/" class="related-post-item" title="C#学习笔记【行为树】"><span class="related-post-title">C#学习笔记【行为树】</span><span class="related-post-date">2025-05-19</span><span class="related-post-desc">行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策</span></a><a href="/2025/04/17/C-学习笔记【取消异步操作】/" class="related-post-item" title="C#学习笔记【取消异步操作】"><span class="related-post-title">C#学习笔记【取消异步操作】</span><span class="related-post-date">2025-04-17</span><span class="related-post-desc">基本概念 CancellationTokenSource 是一个类，用于创建一个取消令牌 (CancellationToken)，并通过该令牌来通知一个或多个异</span></a><a href="/2025/03/14/C-学习笔记【DOTween库】/" class="related-post-item" title="C#学习笔记【DOTween库】"><span class="related-post-title">C#学习笔记【DOTween库】</span><span class="related-post-date">2025-03-14</span><span class="related-post-desc">DOTween 库详细用法教程 DOTween 是一个用于 Unity 的强大且灵活的动画库，它使用链式语法来创建和控制动画，使得代码更加简洁和易读。下面详细介</span></a><a href="/2025/02/05/C-学习笔记【集合Collection】/" class="related-post-item" title="C#学习笔记【集合Collection】"><span class="related-post-title">C#学习笔记【集合Collection】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 集合（Collection） 集合（Collection）类是专门用于数据存储和检索的类。这些类提供了对栈（stack）、队列（queue）、列表（list</span></a><a href="/2025/02/05/C-学习笔记【事件Event】/" class="related-post-item" title="C#学习笔记【事件Event】"><span class="related-post-title">C#学习笔记【事件Event】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 事件（Event） C 事件（Event）是一种成员，用于将特定的事件通知发送给订阅者。事件通常用于实现观察者模式，它允许一个对象将状态的变化通知其他对象，</span></a><a href="/2025/02/05/C-学习笔记【委托Delegate】/" class="related-post-item" title="C#学习笔记【委托Delegate】"><span class="related-post-title">C#学习笔记【委托Delegate】</span><span class="related-post-date">2025-02-05</span><span class="related-post-desc">C 委托（Delegate） 在 C 中，委托（Delegate） 是一种类型安全的函数指针，它允许将方法作为参数传递给其他方法。 C 中的委托（Delegat</span></a></div></div><div class="series-nav"><div class="series-nav-title">C#学习笔记 系列</div><div class="series-nav-progress">第 8/22 篇</div><div class="series-nav-links"><a href="/2023/07/04/C井学习笔记【结构体Struct】/" class="series-nav-prev">C#学习笔记【结构体Struct】</a><a href="/2023/07/06/C井学习笔记【类】/" class="series-nav-next">C#学习笔记【类】</a></div></div>
@@ -467,14 +467,14 @@ Fri = 5
     <img class="site-author-image" itemprop="image" alt="淡水鱼"
       src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">淡水鱼</p>
-  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">137</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -487,7 +487,7 @@ Fri = 5
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-count">52</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

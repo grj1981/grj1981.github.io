@@ -19,7 +19,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
@@ -28,12 +28,12 @@
   <meta name="description" content="C 接口(Interface)接口定义了所有类继承接口时应遵循的语法合同。接口定义了语法合同 “是什么” 部分，派生类定义了语法合同 “怎么做” 部分。 接口定义了属性、方法和事件，这些都是接口的成员。接口只包含了成员的声明。成员的定义是派生类的责任。接口提供了派生类应遵循的标准结构。 接口使得实现接口的类或结构在形式上保持一致。 抽象类在某种程度上与接口类似，但是，它们大多只是用在当只有少数方法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C#学习笔记【接口Interface】">
-<meta property="og:url" content="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/index.html">
+<meta property="og:url" content="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/">
 <meta property="og:site_name" content="ByteFisher">
 <meta property="og:description" content="C 接口(Interface)接口定义了所有类继承接口时应遵循的语法合同。接口定义了语法合同 “是什么” 部分，派生类定义了语法合同 “怎么做” 部分。 接口定义了属性、方法和事件，这些都是接口的成员。接口只包含了成员的声明。成员的定义是派生类的责任。接口提供了派生类应遵循的标准结构。 接口使得实现接口的类或结构在形式上保持一致。 抽象类在某种程度上与接口类似，但是，它们大多只是用在当只有少数方法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-02-05T03:11:49.000Z">
-<meta property="article:modified_time" content="2026-05-14T08:31:52.685Z">
+<meta property="article:modified_time" content="2026-05-20T06:07:08.105Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="C#">
 <meta property="article:tag" content="IT">
@@ -42,7 +42,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C#学习笔记【接口Interface】","description":"C 接口(Interface)接口定义了所有类继承接口时应遵循的语法合同。接口定义了语法合同 “是什么” 部分，派生类定义了语法合同 “怎么做” 部分。 接口定义了属性、方法和事件，这些都是接口的成员。接口只包含了成员的声明。成员的定义是派生类的责任。接口提供了派生类应遵循的标准结构。 接口使得实现接口的类或结构在形式上保持一致。 抽象类在某种程度上与接口类似，但是，它们大多只是用在当只有少数方法...","url":"https://www.bytefisher.top/2025/02/05/C-学习笔记【接口Interface】/","datePublished":"2025-02-05T03:11:49.000Z","dateModified":"2026-05-14T08:31:52.685Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/02/05/C-学习笔记【接口Interface】/"},"keywords":"IT, C#, series:C#学习笔记"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C#学习笔记【接口Interface】","description":"C 接口(Interface)接口定义了所有类继承接口时应遵循的语法合同。接口定义了语法合同 “是什么” 部分，派生类定义了语法合同 “怎么做” 部分。 接口定义了属性、方法和事件，这些都是接口的成员。接口只包含了成员的声明。成员的定义是派生类的责任。接口提供了派生类应遵循的标准结构。 接口使得实现接口的类或结构在形式上保持一致。 抽象类在某种程度上与接口类似，但是，它们大多只是用在当只有少数方法...","url":"https://www.bytefisher.top/2025/02/05/C-学习笔记【接口Interface】/","datePublished":"2025-02-05T03:11:49.000Z","dateModified":"2026-05-20T06:07:08.105Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/02/05/C-学习笔记【接口Interface】/"},"keywords":"IT, C#, series:C#学习笔记"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"C#","item":"https://www.bytefisher.top/categories/C/"},{"@type":"ListItem","position":3,"name":"C#学习笔记【接口Interface】"}]}</script>
 
 
@@ -170,12 +170,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">117</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">137</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">51</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">52</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -247,7 +247,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -321,15 +321,15 @@
 <p>接口本身并不实现任何功能，它只是和声明实现该接口的对象订立一个必须实现哪些行为的契约。</p>
 <p>抽象类不能直接实例化，但允许派生出具体的，具有实际功能的类。</p>
 <h1 id="定义接口-MyInterface-cs"><a href="#定义接口-MyInterface-cs" class="headerlink" title="定义接口: MyInterface.cs"></a><strong>定义接口: MyInterface.cs</strong></h1><p>接口使用 interface 关键字声明，它与类的声明类似。接口声明默认是 public 的。下面是一个接口声明的实例：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface IMyInterface</span><br><span class="line">&#123;</span><br><span class="line">    void MethodToImplement();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title">IMyInterface</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">MethodToImplement</span>()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>以上代码定义了接口 IMyInterface。通常接口命名以 I 字母开头，这个接口只有一个方法 MethodToImplement()，没有参数和返回值，当然我们可以按照需求设置参数和返回值。</p>
 <p>值得注意的是，该方法并没有具体的实现。</p>
 <h1 id="实现以上接口：InterfaceImplementer-cs"><a href="#实现以上接口：InterfaceImplementer-cs" class="headerlink" title="实现以上接口：InterfaceImplementer.cs"></a><strong>实现以上接口：InterfaceImplementer.cs</strong></h1><p><strong>&gt; 实例：</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">interface IMyInterface</span><br><span class="line">&#123;</span><br><span class="line">        // 接口成员</span><br><span class="line">    void MethodToImplement();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class InterfaceImplementer : IMyInterface</span><br><span class="line">&#123;</span><br><span class="line">    static void Main()</span><br><span class="line">    &#123;</span><br><span class="line">        InterfaceImplementer iImp = new InterfaceImplementer();</span><br><span class="line">        iImp.MethodToImplement();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void MethodToImplement()</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(&quot;MethodToImplement() called.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title">IMyInterface</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="comment">// 接口成员</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">MethodToImplement</span>()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">InterfaceImplementer</span> : <span class="title">IMyInterface</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        InterfaceImplementer iImp = <span class="keyword">new</span> InterfaceImplementer();</span><br><span class="line">        iImp.MethodToImplement();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MethodToImplement</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(<span class="string">&quot;MethodToImplement() called.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>InterfaceImplementer 类实现了 IMyInterface 接口，接口的实现与类的继承语法格式类似：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class InterfaceImplementer : IMyInterface</span><br></pre></td></tr></table></figure>
+<pre><code><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">InterfaceImplementer</span> : <span class="title">IMyInterface</span></span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>继承接口后，我们需要实现接口的方法 MethodToImplement() , 方法名必须与接口定义的方法名一致。</p>
 <span id="more"></span>
@@ -337,10 +337,10 @@
 <p>如果一个接口继承其他接口，那么实现类或结构就需要实现所有接口的成员。</p>
 <p>以下实例 IMyInterface 继承了 IParentInterface 接口，因此接口实现类必须实现 MethodToImplement() 和 ParentInterfaceMethod() 方法：</p>
 <p><strong>&gt; 实例:</strong></p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">interface IParentInterface</span><br><span class="line">&#123;</span><br><span class="line">    void ParentInterfaceMethod();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface IMyInterface : IParentInterface</span><br><span class="line">&#123;</span><br><span class="line">    void MethodToImplement();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class InterfaceImplementer : IMyInterface</span><br><span class="line">&#123;</span><br><span class="line">    static void Main()</span><br><span class="line">    &#123;</span><br><span class="line">        InterfaceImplementer iImp = new InterfaceImplementer();</span><br><span class="line">        iImp.MethodToImplement();</span><br><span class="line">        iImp.ParentInterfaceMethod();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void MethodToImplement()</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(&quot;MethodToImplement() called.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void ParentInterfaceMethod()</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(&quot;ParentInterfaceMethod() called.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title">IParentInterface</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">ParentInterfaceMethod</span>()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title">IMyInterface</span> : <span class="title">IParentInterface</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">MethodToImplement</span>()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">InterfaceImplementer</span> : <span class="title">IMyInterface</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        InterfaceImplementer iImp = <span class="keyword">new</span> InterfaceImplementer();</span><br><span class="line">        iImp.MethodToImplement();</span><br><span class="line">        iImp.ParentInterfaceMethod();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MethodToImplement</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(<span class="string">&quot;MethodToImplement() called.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ParentInterfaceMethod</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(<span class="string">&quot;ParentInterfaceMethod() called.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>实例输出结果为：</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MethodToImplement() called.</span><br><span class="line">ParentInterfaceMethod() called.</span><br></pre></td></tr></table></figure>
+<pre><code><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MethodToImplement() called.</span><br><span class="line">ParentInterfaceMethod() called.</span><br></pre></td></tr></table></figure>
 </code></pre>
 <h1 id="接口的特点"><a href="#接口的特点" class="headerlink" title="接口的特点"></a><strong>接口的特点</strong></h1><p>接口的定义是指定一组函数成员而不实现成员的引用类型，其它类型和接口可以继承接口。定义还是很好理解的，但是没有反映特点，接口主要有以下特点：</p>
 <ul>
@@ -482,14 +482,14 @@
     <img class="site-author-image" itemprop="image" alt="淡水鱼"
       src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">淡水鱼</p>
-  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">137</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -502,7 +502,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-count">52</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -19,7 +19,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
@@ -28,12 +28,12 @@
   <meta name="description" content="8.1 词法作用域Lua 采用词法作用域（Lexical Scoping），也称为静态作用域。函数的上下文在定义时确定，而非调用时： 1234567891011121314local x &#x3D; 10function outer() local x &#x3D; 20 function inner() return x 引用的是定义时的 x，值为 20 end return innerendlocal fn &#x3D;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="函数（进阶篇）">
-<meta property="og:url" content="https://www.bytefisher.top/2025/06/08/Lua%E6%95%99%E7%A8%8B-08-%E5%87%BD%E6%95%B0%E8%BF%9B%E9%98%B6%E7%AF%87/index.html">
+<meta property="og:url" content="https://www.bytefisher.top/2025/06/08/Lua%E6%95%99%E7%A8%8B-08-%E5%87%BD%E6%95%B0%E8%BF%9B%E9%98%B6%E7%AF%87/">
 <meta property="og:site_name" content="ByteFisher">
 <meta property="og:description" content="8.1 词法作用域Lua 采用词法作用域（Lexical Scoping），也称为静态作用域。函数的上下文在定义时确定，而非调用时： 1234567891011121314local x &#x3D; 10function outer() local x &#x3D; 20 function inner() return x 引用的是定义时的 x，值为 20 end return innerendlocal fn &#x3D;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-06-08T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-19T11:03:06.406Z">
+<meta property="article:modified_time" content="2026-05-20T06:05:02.794Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="Lua">
 <meta property="article:tag" content="series:Lua基础教程">
@@ -42,7 +42,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/06/08/Lua%E6%95%99%E7%A8%8B-08-%E5%87%BD%E6%95%B0%E8%BF%9B%E9%98%B6%E7%AF%87/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"函数（进阶篇）","description":"8.1 词法作用域Lua 采用词法作用域（Lexical Scoping），也称为静态作用域。函数的上下文在定义时确定，而非调用时： 1234567891011121314local x = 10function outer() local x = 20 function inner() return x 引用的是定义时的 x，值为 20 end return innerendlocal fn =...","url":"https://www.bytefisher.top/2025/06/08/Lua教程-08-函数进阶篇/","datePublished":"2025-06-08T00:00:00.000Z","dateModified":"2026-05-19T11:03:06.406Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/06/08/Lua教程-08-函数进阶篇/"},"keywords":"Lua, 教程, series:Lua基础教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"函数（进阶篇）","description":"8.1 词法作用域Lua 采用词法作用域（Lexical Scoping），也称为静态作用域。函数的上下文在定义时确定，而非调用时： 1234567891011121314local x = 10function outer() local x = 20 function inner() return x 引用的是定义时的 x，值为 20 end return innerendlocal fn =...","url":"https://www.bytefisher.top/2025/06/08/Lua教程-08-函数进阶篇/","datePublished":"2025-06-08T00:00:00.000Z","dateModified":"2026-05-20T06:05:02.794Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/06/08/Lua教程-08-函数进阶篇/"},"keywords":"Lua, 教程, series:Lua基础教程"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Lua","item":"https://www.bytefisher.top/categories/Lua/"},{"@type":"ListItem","position":3,"name":"函数（进阶篇）"}]}</script>
 
 
@@ -170,12 +170,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">117</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">137</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">51</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">52</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -247,7 +247,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -316,6 +316,9 @@
       
         <h2 id="8-1-词法作用域"><a href="#8-1-词法作用域" class="headerlink" title="8.1 词法作用域"></a>8.1 词法作用域</h2><p>Lua 采用<strong>词法作用域</strong>（Lexical Scoping），也称为静态作用域。函数的上下文在<strong>定义时</strong>确定，而非调用时：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> x = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outer</span><span class="params">()</span></span></span><br><span class="line">  <span class="keyword">local</span> x = <span class="number">20</span></span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">inner</span><span class="params">()</span></span></span><br><span class="line">    <span class="keyword">return</span> x            <span class="comment">-- 引用的是定义时的 x，值为 20</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> inner</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> fn = outer()</span><br><span class="line"><span class="built_in">print</span>(fn())             <span class="comment">--&gt; 20（而不是 10）</span></span><br></pre></td></tr></table></figure>
+
+
+<span id="more"></span>
 
 <hr>
 <h2 id="8-2-闭包（Closure）"><a href="#8-2-闭包（Closure）" class="headerlink" title="8.2 闭包（Closure）"></a>8.2 闭包（Closure）</h2><p><strong>闭包 &#x3D; 函数 + 它引用的外部局部变量（upvalue）</strong></p>
@@ -488,14 +491,14 @@
     <img class="site-author-image" itemprop="image" alt="淡水鱼"
       src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">淡水鱼</p>
-  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">137</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -508,7 +511,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-count">52</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
