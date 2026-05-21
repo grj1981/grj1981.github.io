@@ -1313,7 +1313,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #4d50a4;
+  background: #88d003;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3259,6 +3259,131 @@ body {
 #ai-assistant-panel .ai-input-area #ai-send:hover {
   background: #33b6b1;
 }
+/* ---- Toast ---- */
+.ai-toast {
+  position: absolute;
+  top: 56px;
+  left: 12px;
+  right: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.4;
+  z-index: 10000;
+  animation: ai-toast-in 0.25s ease-out;
+  pointer-events: none;
+  text-align: center;
+}
+.ai-toast.ai-toast-error {
+  background: #fdecea;
+  color: #c0392b;
+  border: 1px solid #f5c6cb;
+}
+.ai-toast.ai-toast-warning {
+  background: #fff8e6;
+  color: #8a6d3b;
+  border: 1px solid #faebcc;
+}
+.ai-toast.ai-toast-info {
+  background: #e8f4fd;
+  color: #31708f;
+  border: 1px solid #bce8f1;
+}
+/* ---- Char count ---- */
+.ai-input-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.ai-input-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 2px 4px 0;
+}
+.ai-char-count {
+  font-size: 11px;
+  color: #999;
+  transition: color 0.2s;
+}
+/* ---- Stop button ---- */
+.ai-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: stretch;
+}
+.ai-stop-btn {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.ai-stop-btn:hover {
+  background: #e43927;
+}
+/* ---- Dark mode ---- */
+@media (prefers-color-scheme: dark) {
+  #ai-assistant-panel {
+    background: #2d2d2d;
+    border-color: #444;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  #ai-assistant-panel .ai-messages .ai-message.ai-message-bot {
+    background: #3d3d3d;
+    color: #e0e0e0;
+  }
+  #ai-assistant-panel .ai-messages .ai-message.ai-message-bot code {
+    background: rgba(255,255,255,0.1);
+  }
+  #ai-assistant-panel .ai-messages .ai-message.ai-message-bot pre {
+    background: #1a1a1a;
+    color: #d4d4d4;
+  }
+  #ai-assistant-panel .ai-messages .ai-message.ai-message-typing {
+    background: #3d3d3d;
+  }
+  #ai-assistant-panel .ai-messages .ai-message.ai-message-typing span {
+    background: #666;
+  }
+  #ai-assistant-panel .ai-input-area {
+    background: #333;
+    border-top-color: #444;
+  }
+  #ai-assistant-panel .ai-input-area textarea {
+    background: #3d3d3d;
+    color: #e0e0e0;
+    border-color: #555;
+  }
+  #ai-assistant-panel .ai-input-area #ai-send {
+    background: #32b2ad;
+  }
+  #ai-assistant-panel .ai-header {
+    background: linear-gradient(135deg, #2fa8a3, #299490);
+  }
+  .ai-char-count {
+    color: #888;
+  }
+  .ai-toast.ai-toast-error {
+    background: #4a1c1c;
+    color: #f5c6cb;
+    border-color: #6b2a2a;
+  }
+  .ai-toast.ai-toast-warning {
+    background: #4a3c1c;
+    color: #faebcc;
+    border-color: #6b5a2a;
+  }
+  .ai-toast.ai-toast-info {
+    background: #1c334a;
+    color: #bce8f1;
+    border-color: #2a4a6b;
+  }
+}
+/* ---- Mobile ---- */
 @media (max-width: 480px) {
   #ai-assistant-panel {
     width: calc(100% - 24px);
@@ -3266,6 +3391,9 @@ body {
     bottom: 70px;
     right: 12px;
     max-height: none;
+  }
+  #ai-assistant-panel .ai-input-area {
+    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
   }
 }
 .fish-quick-nav {
@@ -3930,6 +4058,78 @@ figure.highlight table {
   }
   30% {
     transform: translateY(-6px);
+  }
+}
+@-moz-keyframes ai-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@-webkit-keyframes ai-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@-o-keyframes ai-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes ai-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@-moz-keyframes ai-toast-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes ai-toast-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-o-keyframes ai-toast-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes ai-toast-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 @-moz-keyframes cardFadeIn {

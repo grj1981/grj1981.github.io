@@ -2,17 +2,74 @@
 
 (function() {
   var CONFIG = {
-    // Vercel Serverless API（自定义域名，国内可访问）
     apiEndpoint: 'https://api.bytefisher.top/api/chat',
     botName: 'ByteBot',
     welcomeMessage: '🎣 欢迎来到 ByteFisher 博客！\n\n我是 ByteBot，可以帮你：\n📖 推荐文章\n💡 解答技术问题\n🎯 了解博客内容\n\n有什么想了解的？',
-    placeholder: '输入你的问题...'
+    placeholder: '输入你的问题...',
+    maxInputLength: 2000,
+    maxHistoryTurns: 6,
+    debounceInterval: 1000
   };
 
   var isOpen = false;
   var isLoading = false;
   var postsIndexCache = null;
+  var messages = [];
+  var lastSentTime = 0;
+  var abortController = null;
 
+  /* ---------- Toast ---------- */
+  function showToast(text, type) {
+    var panel = document.getElementById('ai-assistant-panel');
+    if (!panel) return;
+    var old = document.querySelector('.ai-toast');
+    if (old) old.remove();
+    var t = document.createElement('div');
+    t.className = 'ai-toast ai-toast-' + (type || 'error');
+    t.textContent = text;
+    panel.appendChild(t);
+    setTimeout(function() { t.remove(); }, 3000);
+  }
+
+  /* ---------- Error classification ---------- */
+  function classifyError(err, response) {
+    if (err && err.name === 'AbortError') return null;
+    if (!response) return '网络连接失败，请检查网络后重试';
+    var s = response.status;
+    if (s === 429) return '服务忙，请稍后再试 🐟';
+    if (s === 504) return '回答超时了，请简化问题后重试';
+    if (s === 401 || s === 403) return '服务配置异常，请联系站长';
+    if (s >= 500) return '服务暂时不可用，请稍后重试';
+    return '抱歉没理解，换个问法试试？';
+  }
+
+  function getToastType(err, response) {
+    if (!response) return 'error';
+    var s = response.status;
+    if (s === 429 || s === 504) return 'warning';
+    return 'error';
+  }
+
+  /* ---------- Token estimation ---------- */
+  function estimateTokens(text) {
+    var chinese = (text.match(/[\u4e00-\u9fff]/g) || []).length;
+    var other = text.length - chinese;
+    return Math.ceil(chinese / 1.5 + other / 4);
+  }
+
+  function truncateMessages(msgs) {
+    var maxTokens = 3000;
+    for (var i = msgs.length - 1; i >= 0; i--) {
+      var total = 0;
+      for (var j = i; j < msgs.length; j++) {
+        total += estimateTokens(msgs[j].content);
+      }
+      if (total <= maxTokens) return msgs.slice(i);
+    }
+    return msgs.slice(-2);
+  }
+
+  /* ---------- Create UI ---------- */
   function createBtn() {
     var btn = document.createElement('div');
     btn.id = 'ai-assistant-btn';
@@ -32,13 +89,22 @@
       '</div>' +
       '<div class="ai-messages" id="ai-msgs"></div>' +
       '<div class="ai-input-area">' +
-        '<textarea id="ai-input" rows="1" placeholder="' + CONFIG.placeholder + '"></textarea>' +
-        '<button id="ai-send">发送</button>' +
+        '<div class="ai-input-wrap">' +
+          '<textarea id="ai-input" rows="1" placeholder="' + CONFIG.placeholder + '" maxlength="' + CONFIG.maxInputLength + '"></textarea>' +
+          '<div class="ai-input-footer">' +
+            '<span class="ai-char-count" id="ai-charcount">0/' + CONFIG.maxInputLength + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="ai-actions">' +
+          '<button id="ai-stop" class="ai-stop-btn" style="display:none">停止</button>' +
+          '<button id="ai-send">发送</button>' +
+        '</div>' +
       '</div>';
     document.body.appendChild(panel);
 
     panel.querySelector('.ai-close').addEventListener('click', toggle);
     document.getElementById('ai-send').addEventListener('click', send);
+    document.getElementById('ai-stop').addEventListener('click', stopGeneration);
     document.getElementById('ai-input').addEventListener('keydown', function(e) {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
@@ -50,6 +116,7 @@
     });
   }
 
+  /* ---------- Toggle ---------- */
   function toggle() {
     isOpen = !isOpen;
     var panel = document.getElementById('ai-assistant-panel');
@@ -62,26 +129,22 @@
     }
   }
 
+  /* ---------- Posts index ---------- */
   function ensurePostsIndex() {
     if (postsIndexCache) return Promise.resolve(postsIndexCache);
     return fetch('/api/posts-index.json')
       .then(function(r) { return r.json(); })
-      .then(function(data) {
-        postsIndexCache = data;
-        return data;
-      })
-      .catch(function() {
-        return null;
-      });
+      .then(function(d) { postsIndexCache = d; return d; })
+      .catch(function() { return null; });
   }
 
+  /* ---------- System prompt ---------- */
   function buildSystemPrompt(index) {
     var lines = [
       '你是 ByteFisher 博客的 AI 助手 ByteBot。',
       '作者是淡水鱼，Unity 游戏开发者 + 钓鱼爱好者。',
       '博客地址：https://www.bytefisher.top'
     ];
-
     if (index && index.posts && index.posts.length) {
       lines.push('博客共有 ' + index.total + ' 篇文章。');
       lines.push('');
@@ -95,57 +158,164 @@
     } else {
       lines.push('博客内容涵盖：Unity3D、C#、Lua、Python、钓鱼技巧、游戏开发教程。');
     }
-
     lines.push('');
     lines.push('回答规则：');
     lines.push('- 简洁中文，可适当使用 emoji');
     lines.push('- 推荐相关文章时给出文章标题');
     lines.push('- 不确定的不编造');
-
     return lines.join('\n');
   }
 
+  /* ---------- Send ---------- */
   function send() {
     var input = document.getElementById('ai-input');
     var text = input.value.trim();
     if (!text || isLoading) return;
+
+    var now = Date.now();
+    if (now - lastSentTime < CONFIG.debounceInterval) return;
+    lastSentTime = now;
+
     input.value = '';
     input.style.height = 'auto';
+    updateCharCount();
     addMsg('user', text);
+
+    messages.push({ role: 'user', content: text });
+    messages = truncateMessages(messages);
+
     isLoading = true;
+    document.getElementById('ai-send').style.display = 'none';
+    document.getElementById('ai-stop').style.display = '';
     showTyping();
+
+    abortController = new AbortController();
 
     ensurePostsIndex()
       .then(function(index) {
+        var msgs = [{ role: 'system', content: buildSystemPrompt(index) }];
+        for (var i = 0; i < messages.length; i++) msgs.push(messages[i]);
+
         return fetch(CONFIG.apiEndpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            messages: [
-              { role: 'system', content: buildSystemPrompt(index) },
-              { role: 'user', content: text }
-            ]
-          })
+          signal: abortController.signal,
+          body: JSON.stringify({ messages: msgs, stream: true })
         });
       })
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        hideTyping();
-        isLoading = false;
-        var reply = data.choices && data.choices[0] && data.choices[0].message;
-        if (reply) {
-          addMsg('bot', reply.content);
-        } else {
-          addMsg('bot', '抱歉没理解，换个问法试试？');
+      .then(function(response) {
+        if (!response.ok) {
+          var errMsg = classifyError(null, response);
+          hideTyping();
+          isLoading = false;
+          showStopBtn(false);
+          if (errMsg) showToast(errMsg, getToastType(null, response));
+          return null;
         }
+        if (!response.body) {
+          return response.json().then(function(data) {
+            hideTyping();
+            isLoading = false;
+            showStopBtn(false);
+            var reply = data.choices && data.choices[0] && data.choices[0].message;
+            if (reply) {
+              addMsg('bot', reply.content);
+              messages.push({ role: 'assistant', content: reply.content });
+            }
+          });
+        }
+        return handleStream(response);
       })
-      .catch(function() {
+      .catch(function(err) {
         hideTyping();
         isLoading = false;
-        addMsg('bot', '网络开小差了，请稍后重试 🐟');
+        showStopBtn(false);
+        if (err.name === 'AbortError') return;
+        showToast(classifyError(err, null), 'error');
       });
   }
 
+  /* ---------- Streaming ---------- */
+  function handleStream(response) {
+    var reader = response.body.getReader();
+    var decoder = new TextDecoder();
+    var buffer = '';
+    var fullReply = '';
+    var botDiv = null;
+
+    function appendToken(text) {
+      if (!botDiv) {
+        botDiv = createBotMessageDiv();
+        hideTyping();
+      }
+      fullReply += text;
+      botDiv.innerHTML = render(fullReply);
+      var container = document.getElementById('ai-msgs');
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function readChunk() {
+      return reader.read().then(function(result) {
+        if (result.done) {
+          if (fullReply) messages.push({ role: 'assistant', content: fullReply });
+          isLoading = false;
+          showStopBtn(false);
+          return;
+        }
+        buffer += decoder.decode(result.value, { stream: true });
+        var lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+
+        for (var i = 0; i < lines.length; i++) {
+          var line = lines[i].trim();
+          if (!line || !line.startsWith('data: ')) continue;
+          var data = line.substring(6);
+          if (data === '[DONE]') {
+            if (fullReply) messages.push({ role: 'assistant', content: fullReply });
+            isLoading = false;
+            showStopBtn(false);
+            return;
+          }
+          try {
+            var parsed = JSON.parse(data);
+            var delta = parsed.choices && parsed.choices[0] && parsed.choices[0].delta;
+            if (delta && delta.content) {
+              appendToken(delta.content);
+            }
+          } catch(e) { /* skip malformed chunk */ }
+        }
+        return readChunk();
+      });
+    }
+
+    return readChunk();
+  }
+
+  function createBotMessageDiv() {
+    var container = document.getElementById('ai-msgs');
+    var div = document.createElement('div');
+    div.className = 'ai-message ai-message-bot';
+    container.appendChild(div);
+    return div;
+  }
+
+  /* ---------- Stop generation ---------- */
+  function stopGeneration() {
+    if (abortController) {
+      abortController.abort();
+      abortController = null;
+    }
+    isLoading = false;
+    hideTyping();
+    showStopBtn(false);
+  }
+
+  function showStopBtn(show) {
+    document.getElementById('ai-send').style.display = show ? 'none' : '';
+    document.getElementById('ai-stop').style.display = show ? '' : 'none';
+  }
+
+  /* ---------- Message ---------- */
   function addMsg(role, text) {
     var container = document.getElementById('ai-msgs');
     var div = document.createElement('div');
@@ -155,6 +325,7 @@
     container.scrollTop = container.scrollHeight;
   }
 
+  /* ---------- Typing ---------- */
   function showTyping() {
     var container = document.getElementById('ai-msgs');
     var div = document.createElement('div');
@@ -170,31 +341,106 @@
     if (el) el.remove();
   }
 
+  /* ---------- Markdown render (enhanced) ---------- */
   function render(text) {
-    return text
+    var escaped = text
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
+      .replace(/>/g, '&gt;');
+
+    var blocks = {};
+    var idx = 0;
+
+    escaped = escaped.replace(/```([\s\S]*?)```/g, function(m, code) {
+      var key = '%%BLOCK' + (idx++) + '%%';
+      blocks[key] = '<pre><code>' + code.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>') + '</code></pre>';
+      return key;
+    });
+
+    escaped = escaped
       .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(m, txt, url) {
+        if (/^javascript:/i.test(url)) return m;
+        return '<a href="' + url.replace(/&amp;/g, '&') + '" target="_blank" rel="noopener noreferrer">' + txt + '</a>';
+      })
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\n/g, '<br>');
+      .replace(/^### (.+)$/gm, '<h4>$1</h4>')
+      .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
+      .replace(/^- (.+)$/gm, '<li class="ai-li-u">$1</li>')
+      .replace(/^\d+\. (.+)$/gm, '<li class="ai-li-o">$1</li>');
+
+    escaped = escaped.replace(/(<li class="ai-li-u">.*?<\/li>(\s|(<br>))*)+/g, function(m) {
+      return '<ul>' + m.replace(/<br>/g, '').replace(/ class="ai-li-u"/g, '') + '</ul>';
+    });
+    escaped = escaped.replace(/(<li class="ai-li-o">.*?<\/li>(\s|(<br>))*)+/g, function(m) {
+      return '<ol>' + m.replace(/<br>/g, '').replace(/ class="ai-li-o"/g, '') + '</ol>';
+    });
+
+    // Table: simple pipe-to-table conversion
+    escaped = escaped.replace(/^\|(.+?)\|$/gm, function(m, content) {
+      if (/^[-:\s]+\|/.test(content)) return m; // skip separator row
+      var cells = content.split('|');
+      var html = '<tr>';
+      for (var i = 0; i < cells.length; i++) html += '<td>' + cells[i].trim() + '</td>';
+      html += '</tr>';
+      return html;
+    });
+    escaped = escaped.replace(/(<tr>.*?<\/tr>(\s|(<br>))*)+/g, function(m) {
+      return '<table>' + m.replace(/<br>/g, '') + '</table>';
+    });
+
+    for (var key in blocks) {
+      escaped = escaped.replace(key, blocks[key]);
+    }
+
+    escaped = escaped.replace(/\n/g, '<br>');
+    return escaped;
   }
 
+  /* ---------- Input ---------- */
   function autoResizeInput() {
     var input = document.getElementById('ai-input');
     input.addEventListener('input', function() {
       this.style.height = 'auto';
       this.style.height = Math.min(this.scrollHeight, 80) + 'px';
+      updateCharCount();
     });
   }
 
+  function updateCharCount() {
+    var input = document.getElementById('ai-input');
+    var count = document.getElementById('ai-charcount');
+    var len = input.value.length;
+    count.textContent = len + '/' + CONFIG.maxInputLength;
+    count.style.color = len > CONFIG.maxInputLength * 0.9 ? '#e74c3c' : (len > CONFIG.maxInputLength ? '#e74c3c' : '#999');
+  }
+
+  /* ---------- Mobile keyboard ---------- */
+  function handleMobileKeyboard() {
+    if ('visualViewport' in window) {
+      var panel = document.getElementById('ai-assistant-panel');
+      window.visualViewport.addEventListener('resize', function() {
+        var diff = window.innerHeight - window.visualViewport.height;
+        if (diff > 100) {
+          panel.style.bottom = (diff + 10) + 'px';
+          panel.style.maxHeight = 'calc(100vh - ' + (diff + 60) + 'px)';
+        } else {
+          panel.style.bottom = '';
+          panel.style.maxHeight = '';
+        }
+      });
+    }
+  }
+
+  /* ---------- Init ---------- */
   function init() {
     if (document.getElementById('ai-assistant-btn')) return;
     createBtn();
     createPanel();
     addMsg('bot', CONFIG.welcomeMessage);
     autoResizeInput();
+    updateCharCount();
+    handleMobileKeyboard();
   }
 
   if (document.readyState === 'loading') {
