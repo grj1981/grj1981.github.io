@@ -170,16 +170,13 @@
         }
       }
       lines.push('');
-      lines.push('推荐文章格式（严格遵循）：');
-      lines.push('[文章标题](链接地址)');
-      lines.push('链接地址必须从下方列表中直接复制，禁止修改。');
+      lines.push('推荐文章时直接复制下方整行 Markdown 链接：');
       lines.push('');
-      lines.push('可推荐的文章（含真实链接）：');
-      var recent = index.posts.slice(0, 15);
+      lines.push('可推荐的文章：');
+      var recent = index.posts.slice(0, 10);
       for (var i = 0; i < recent.length; i++) {
         var p = recent[i];
-        var tagStr = p.tags && p.tags.length ? ' [' + p.tags.join('、') + ']' : '';
-        lines.push('- ' + p.date + ' ' + p.title + tagStr + ' → ' + p.url);
+        lines.push('- [' + p.title + '](' + p.url + ')');
       }
     } else {
       lines.push('博客共有 ' + (index ? index.total : 0) + ' 篇文章。');
@@ -387,6 +384,7 @@
       .replace(/<\/a>/gi, '')
       .replace(/\s*target="[^"]*"/gi, '')
       .replace(/\s*rel="[^"]*"/gi, '')
+      .replace(/打开链接\s*/g, '')
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
@@ -439,7 +437,7 @@
     // Bare URL to clickable link (not inside existing <a> tag)
     escaped = escaped.replace(/(?<!<a [^>]*>)(https?:\/\/[^\s<]+)/g, function(m, url) {
       var isInternal = url.indexOf('bytefisher.top') !== -1 || url.indexOf('localhost') !== -1;
-      if (isInternal) return '<a href="' + url + '" target="_self">打开链接</a>';
+      if (isInternal) return '<a href="' + url + '" target="_self">' + url.replace(/^https?:\/\//, '') + '</a>';
       return '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + url + '</a>';
     });
 
