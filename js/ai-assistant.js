@@ -18,6 +18,18 @@
   var lastSentTime = 0;
   var abortController = null;
 
+  /* ---------- Analytics ---------- */
+  function trackEvent(type) {
+    try {
+      var key = 'ai_stats';
+      var stats = JSON.parse(localStorage.getItem(key)) || { opens: 0, sends: 0, errors: 0 };
+      if (type === 'open') stats.opens++;
+      else if (type === 'send') stats.sends++;
+      else if (type === 'error') stats.errors++;
+      localStorage.setItem(key, JSON.stringify(stats));
+    } catch(e) { /* ignore */ }
+  }
+
   /* ---------- Toast ---------- */
   function showToast(text, type) {
     var panel = document.getElementById('ai-assistant-panel');
@@ -71,6 +83,30 @@
   }
 
   /* ---------- Create UI ---------- */
+  function adjustBtnPosition() {
+    var btn = document.getElementById('ai-assistant-btn');
+    if (!btn) return;
+    var btnRect = btn.getBoundingClientRect();
+    var fixedEls = document.querySelectorAll('*');
+    var maxOverlap = 0;
+    for (var i = 0; i < fixedEls.length; i++) {
+      var el = fixedEls[i];
+      if (el === btn || el.id === 'ai-assistant-panel') continue;
+      var style = window.getComputedStyle(el);
+      if (style.position !== 'fixed') continue;
+      var rect = el.getBoundingClientRect();
+      if (rect.bottom > btnRect.top && rect.top < btnRect.bottom &&
+          rect.right > btnRect.left && rect.left < btnRect.right) {
+        var overlap = Math.min(rect.bottom, btnRect.bottom) - Math.max(rect.top, btnRect.top);
+        if (overlap > maxOverlap) maxOverlap = overlap;
+      }
+    }
+    if (maxOverlap > 10) {
+      var currentBottom = parseInt(btn.style.bottom) || 80;
+      btn.style.bottom = (currentBottom + maxOverlap + 10) + 'px';
+    }
+  }
+
   function createBtn() {
     var btn = document.createElement('div');
     btn.id = 'ai-assistant-btn';
@@ -78,6 +114,8 @@
     btn.innerHTML = '<span class="ai-btn-icon">🎣</span><span class="ai-btn-text">AI 助手</span>';
     btn.addEventListener('click', toggle);
     document.body.appendChild(btn);
+    setTimeout(adjustBtnPosition, 100);
+    window.addEventListener('resize', adjustBtnPosition);
   }
 
   function createPanel() {
@@ -115,6 +153,22 @@
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && isOpen) toggle();
     });
+
+    // Swipe to close (mobile)
+    var touchStartY = 0;
+    panel.addEventListener('touchstart', function(e) {
+      if (e.target.closest('.ai-input-area') || e.target.closest('.ai-header')) {
+        touchStartY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+    panel.addEventListener('touchmove', function(e) {
+      if (!touchStartY) return;
+      var dy = e.touches[0].clientY - touchStartY;
+      if (dy > 80) {
+        touchStartY = 0;
+        toggle();
+      }
+    }, { passive: true });
   }
 
   /* ---------- Toggle ---------- */
@@ -127,6 +181,7 @@
     if (isOpen) {
       document.getElementById('ai-input').focus();
       ensurePostsIndex();
+      trackEvent('open');
     }
   }
 
@@ -139,8 +194,47 @@
       .catch(function() { return null; });
   }
 
+  /* ---------- RAG: Keyword extraction ---------- */
+  function extractKeywords(text) {
+    if (!text) return [];
+    var cleaned = text.replace(/[的了吗是和我有在就了也吗啊呢吧呗给被把让向从对于关于]|[，。！？、；：""''（）【】《》\s,.!?;:'"()\[\]{}<>]/g, ' ');
+    var words = cleaned.split(/\s+/).filter(function(w) { return w.length > 1; });
+    var unique = {};
+    for (var i = 0; i < words.length; i++) unique[words[i].toLowerCase()] = true;
+    var tech = ['unity', 'c#', 'lua', 'python', 'csharp', 'c井', 'javascript', 'hexo', '博客', '游戏', '钓鱼', '教程', '学习', '笔记', '委托', '事件', '接口', '类', '对象', '继承', '多态', '数组', '字符串', '异步', '协程', '线程', '性能', '优化', '动画', '物理', '碰撞', '相机', '场景', 'ui', '导航', '寻路', '粒子', '序列化', '网络', '加密', 'linq', '泛型', '反射', '特性', '依赖', '注入', '设计模式', '函数式', '编译器', 'roslyn', 'sourcegen', '互操作', '延迟', 'ai', 'deepseek', 'opencode', 'qwen', 'ollama', 'rag', 'docker', 'vercel', 'cloudflare', 'turso', 'waline', 'tidb', 'leancloud', 'seo', 'pwa', 'webp', 'cdn', 'pjax', 'rss', 'sitemap', '图床', '评论', '抖音', '微信', 'github', '域名', '重定向', '多项目'];
+    for (var t = 0; t < tech.length; t++) {
+      if (text.toLowerCase().indexOf(tech[t]) !== -1) unique[tech[t]] = true;
+    }
+    return Object.keys(unique);
+  }
+
+  function rankArticles(question, posts) {
+    if (!question || !posts || !posts.length) return [];
+    var keywords = extractKeywords(question);
+    if (keywords.length === 0) return posts.slice(0, 5);
+    var scored = posts.map(function(post) {
+      var score = 0;
+      var title = (post.title || '').toLowerCase();
+      var excerpt = (post.excerpt || '').toLowerCase();
+      var tags = (post.tags || []).join(' ').toLowerCase();
+      var cats = (post.categories || []).join(' ').toLowerCase();
+      var text = title + ' ' + excerpt + ' ' + tags + ' ' + cats;
+      for (var i = 0; i < keywords.length; i++) {
+        var kw = keywords[i].toLowerCase();
+        if (title.indexOf(kw) !== -1) score += 3;
+        else if (tags.indexOf(kw) !== -1) score += 2;
+        else if (excerpt.indexOf(kw) !== -1) score += 1;
+        else if (cats.indexOf(kw) !== -1) score += 1;
+      }
+      return { post: post, score: score };
+    });
+    scored.sort(function(a, b) { return b.score - a.score; });
+    var matched = scored.filter(function(s) { return s.score > 0; }).slice(0, 5).map(function(s) { return s.post; });
+    return matched.length > 0 ? matched : posts.slice(0, 5);
+  }
+
   /* ---------- System prompt ---------- */
-  function buildSystemPrompt(index) {
+  function buildSystemPrompt(index, topArticles) {
     var lines = [
       '你是 ByteFisher 博客的 AI 助手 ByteBot。',
       '作者是淡水鱼，Unity 游戏开发者 + 钓鱼爱好者。',
@@ -182,10 +276,10 @@
       lines.push('');
       lines.push('推荐文章时直接复制下方整行 Markdown 链接：');
       lines.push('');
-      lines.push('可推荐的文章：');
-      var recent = index.posts.slice(0, 10);
-      for (var i = 0; i < recent.length; i++) {
-        var p = recent[i];
+      lines.push('可推荐的文章（与用户问题相关）：');
+      var articles = topArticles && topArticles.length ? topArticles : index.posts.slice(0, 5);
+      for (var i = 0; i < articles.length; i++) {
+        var p = articles[i];
         lines.push('- [' + p.title + '](' + p.url + ')');
       }
     } else {
@@ -218,6 +312,7 @@
     messages.push({ role: 'user', content: text });
     messages = truncateMessages(messages);
     saveSession();
+    trackEvent('send');
 
     isLoading = true;
     document.getElementById('ai-send').style.display = 'none';
@@ -228,7 +323,8 @@
 
     ensurePostsIndex()
       .then(function(index) {
-        var msgs = [{ role: 'system', content: buildSystemPrompt(index) }];
+        var topArticles = rankArticles(text, index.posts);
+        var msgs = [{ role: 'system', content: buildSystemPrompt(index, topArticles) }];
         for (var i = 0; i < messages.length; i++) msgs.push(messages[i]);
 
         return fetch(CONFIG.apiEndpoint, {
@@ -268,6 +364,7 @@
         isLoading = false;
         showStopBtn(false);
         if (err.name === 'AbortError') return;
+        trackEvent('error');
         showToast(classifyError(err, null), 'error');
       });
   }
