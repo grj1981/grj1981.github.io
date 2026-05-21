@@ -170,10 +170,9 @@
         }
       }
       lines.push('');
-      lines.push('推荐文章时必须严格遵守以下规则：');
-      lines.push('1. 使用 Markdown 链接格式：[文章标题](真实链接)');
-      lines.push('2. 链接地址必须从下方"→ "后面直接复制，禁止自己修改或构造');
-      lines.push('3. 不要添加任何 HTML 标签或 target 属性');
+      lines.push('推荐文章格式（严格遵循）：');
+      lines.push('[文章标题](链接地址)');
+      lines.push('链接地址必须从下方列表中直接复制，禁止修改。');
       lines.push('');
       lines.push('可推荐的文章（含真实链接）：');
       var recent = index.posts.slice(0, 15);
@@ -382,7 +381,12 @@
 
   /* ---------- Markdown render (enhanced) ---------- */
   function render(text) {
+    // Strip AI-generated HTML artifacts before Markdown processing
     var escaped = text
+      .replace(/<a\s[^>]*>/gi, '')
+      .replace(/<\/a>/gi, '')
+      .replace(/\s*target="[^"]*"/gi, '')
+      .replace(/\s*rel="[^"]*"/gi, '')
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
