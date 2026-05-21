@@ -59,14 +59,15 @@
 
   function truncateMessages(msgs) {
     var maxTokens = 3000;
+    var result = [];
+    var total = 0;
     for (var i = msgs.length - 1; i >= 0; i--) {
-      var total = 0;
-      for (var j = i; j < msgs.length; j++) {
-        total += estimateTokens(msgs[j].content);
-      }
-      if (total <= maxTokens) return msgs.slice(i);
+      var tokens = estimateTokens(msgs[i].content);
+      if (total + tokens > maxTokens) break;
+      total += tokens;
+      result.unshift(msgs[i]);
     }
-    return msgs.slice(-2);
+    return result;
   }
 
   /* ---------- Create UI ---------- */
@@ -212,7 +213,8 @@
           if (errMsg) showToast(errMsg, getToastType(null, response));
           return null;
         }
-        if (!response.body) {
+        var contentType = response.headers.get('Content-Type') || '';
+        if (contentType.indexOf('text/event-stream') === -1) {
           return response.json().then(function(data) {
             hideTyping();
             isLoading = false;
@@ -278,7 +280,15 @@
           }
           try {
             var parsed = JSON.parse(data);
-            var delta = parsed.choices && parsed.choices[0] && parsed.choices[0].delta;
+            var choice = parsed.choices && parsed.choices[0];
+            if (!choice) continue;
+            if (choice.finish_reason === 'stop') {
+              if (fullReply) messages.push({ role: 'assistant', content: fullReply });
+              isLoading = false;
+              showStopBtn(false);
+              return;
+            }
+            var delta = choice.delta;
             if (delta && delta.content) {
               appendToken(delta.content);
             }
