@@ -170,7 +170,12 @@
         }
       }
       lines.push('');
-      lines.push('推荐文章时使用以下真实链接（站内链接在当前窗口打开，外部链接在新窗口打开）：');
+      lines.push('推荐文章时必须严格遵守以下规则：');
+      lines.push('1. 使用 Markdown 链接格式：[文章标题](真实链接)');
+      lines.push('2. 链接地址必须从下方"→ "后面直接复制，禁止自己修改或构造');
+      lines.push('3. 不要添加任何 HTML 标签或 target 属性');
+      lines.push('');
+      lines.push('可推荐的文章（含真实链接）：');
       var recent = index.posts.slice(0, 15);
       for (var i = 0; i < recent.length; i++) {
         var p = recent[i];
@@ -475,11 +480,38 @@
   }
 
   /* ---------- Init ---------- */
+  function restoreSession() {
+    try {
+      var saved = sessionStorage.getItem('ai_messages');
+      if (saved) messages = JSON.parse(saved);
+    } catch(e) { /* ignore */ }
+    if (sessionStorage.getItem('ai_open') === '1') {
+      isOpen = true;
+    }
+  }
+
+  function saveSession() {
+    try {
+      sessionStorage.setItem('ai_messages', JSON.stringify(messages));
+      sessionStorage.setItem('ai_open', isOpen ? '1' : '0');
+    } catch(e) { /* ignore */ }
+  }
+
+  window.addEventListener('beforeunload', saveSession);
+
   function init() {
     if (document.getElementById('ai-assistant-btn')) return;
+    restoreSession();
     createBtn();
     createPanel();
-    addMsg('bot', CONFIG.welcomeMessage);
+    if (!isOpen) addMsg('bot', CONFIG.welcomeMessage);
+    if (isOpen) {
+      var btn = document.getElementById('ai-assistant-btn');
+      var panel = document.getElementById('ai-assistant-panel');
+      btn.classList.add('hidden');
+      panel.classList.add('active');
+      ensurePostsIndex();
+    }
     autoResizeInput();
     updateCharCount();
     handleMobileKeyboard();
