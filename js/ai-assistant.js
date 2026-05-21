@@ -382,7 +382,12 @@
 
   /* ---------- Markdown render (enhanced) ---------- */
   function render(text) {
+    // Strip AI-generated HTML artifacts — render() handles links, AI should not generate HTML
     var escaped = text
+      .replace(/<a\s[^>]*>/gi, '')
+      .replace(/<\/a>/gi, '')
+      .replace(/\s*target="[^"]*"/gi, '')
+      .replace(/\s*rel="[^"]*"/gi, '')
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
