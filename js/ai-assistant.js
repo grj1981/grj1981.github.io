@@ -424,6 +424,13 @@
       return '<table>' + m.replace(/<br>/g, '') + '</table>';
     });
 
+    // Bare URL to clickable link (not inside existing <a> tag)
+    escaped = escaped.replace(/(?<!<a [^>]*>)(https?:\/\/[^\s<]+)/g, function(m, url) {
+      var isInternal = url.indexOf('bytefisher.top') !== -1 || url.indexOf('localhost') !== -1;
+      if (isInternal) return '<a href="' + url + '" target="_self">' + url + '</a>';
+      return '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + url + '</a>';
+    });
+
     for (var key in blocks) {
       escaped = escaped.replace(key, blocks[key]);
     }
