@@ -382,12 +382,7 @@
 
   /* ---------- Markdown render (enhanced) ---------- */
   function render(text) {
-    // Strip AI-generated HTML artifacts — render() handles links, AI should not generate HTML
     var escaped = text
-      .replace(/<a\s[^>]*>/gi, '')
-      .replace(/<\/a>/gi, '')
-      .replace(/\s*target="[^"]*"/gi, '')
-      .replace(/\s*rel="[^"]*"/gi, '')
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
@@ -405,7 +400,8 @@
       .replace(/`([^`]+)`/g, '<code>$1</code>')
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(m, txt, url) {
         if (/^javascript:/i.test(url)) return m;
-        var href = url.replace(/&amp;/g, '&');
+        // AI may append HTML attributes after URL (e.g. target="_self">text), strip them
+        var href = url.replace(/&amp;/g, '&').replace(/[\s>&].*$/, '');
         var isInternal = href.indexOf('bytefisher.top') !== -1 || href.indexOf('/') === 0;
         if (isInternal) return '<a href="' + href + '" target="_self">' + txt + '</a>';
         return '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + txt + '</a>';
