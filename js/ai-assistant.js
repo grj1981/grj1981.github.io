@@ -149,16 +149,17 @@
     if (index && index.meta) {
       var m = index.meta;
       lines.push('');
-      lines.push('博客概况（可信数据，回答基于此）：');
+      lines.push('博客概况（可信数据，回答基于此，推荐页面时复制 Markdown 链接）：');
       lines.push('- 文章：共 ' + m.totalPosts + ' 篇');
       if (m.games) lines.push('- 小游戏：' + m.games.count + ' 款（' + m.games.names.join('、') + '）');
-      if (m.videos && m.videos.count) lines.push('- 钓鱼视频：' + m.videos.count + ' 个（收录在抖音专栏）');
+      if (m.videos && m.videos.count) lines.push('- 钓鱼视频：' + m.videos.count + ' 个（收录在[抖音专栏](/douyin/)）');
       if (m.albums && m.albums.count) {
-        var albumYears = m.albums.dirs.map(function(d) {
+        var albumLinks = m.albums.dirs.map(function(d) {
           var y = d.match(/\d{4}/);
-          return y ? y[0] + '年鱼获' : (d === 'img2' ? '钓场风景' : (d === 'img3' ? '个人随拍' : d));
+          var label = y ? y[0] + '年鱼获' : (d === 'img2' ? '钓场风景' : (d === 'img3' ? '个人随拍' : d));
+          return '[' + label + '](/fish/' + d + '/)';
         });
-        lines.push('- 钓鱼相册：' + m.albums.count + ' 个（' + albumYears.join('、') + '）');
+        lines.push('- 钓鱼相册：' + m.albums.count + ' 个（' + albumLinks.join('、') + '）');
       }
       if (m.fishing) {
         var f = m.fishing;
@@ -169,6 +170,15 @@
           if (sp.length) lines.push('- 主要鱼种：' + sp.join('、') + ' 等');
         }
       }
+      lines.push('');
+      lines.push('博客功能页面（复制这些 Markdown 链接推荐给用户）：');
+      lines.push('- [游戏合集](/ai-games/)：' + m.games.count + ' 款小游戏');
+      lines.push('- [抖音专栏](/douyin/)：' + m.videos.count + ' 个钓鱼视频');
+      lines.push('- [钓鱼相册](/fish/)：' + m.albums.count + ' 个相册');
+      lines.push('- [钓鱼地图](/fish/map/)：' + m.fishing.spotsCount + ' 个钓点');
+      lines.push('- [教程系列](/tutorials/)');
+      lines.push('- [关于博主](/about/)');
+      lines.push('- [留言互动](/guestbook/)');
       lines.push('');
       lines.push('推荐文章时直接复制下方整行 Markdown 链接：');
       lines.push('');
@@ -401,11 +411,8 @@
     escaped = escaped
       .replace(/`([^`]+)`/g, '<code>$1</code>')
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(m, txt, url) {
-        if (/^javascript:/i.test(url)) return m;
-        // AI may append HTML attributes after URL (e.g. target="_self">text), strip them
-        var href = url.replace(/&amp;/g, '&').replace(/[\s>&].*$/, '');
-        var isInternal = href.indexOf('bytefisher.top') !== -1 || href.indexOf('/') === 0;
-        if (isInternal) return '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + txt + '</a>';
+        if (/^(?:javascript|data|vbscript|file):/i.test(url)) return txt;
+        var href = url.replace(/&amp;/g, '&').replace(/['">\s].*$/, '');
         return '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + txt + '</a>';
       })
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
@@ -434,10 +441,10 @@
       return '<table>' + m.replace(/<br>/g, '') + '</table>';
     });
 
-    // Bare URL to clickable link (not inside existing <a> tag)
-    escaped = escaped.replace(/(?<!<a [^>]*>)(https?:\/\/[^\s"'<>]+|www\.[^\s"'<>]+)/g, function(m) {
-      var href = m.indexOf('http') === 0 ? m : 'https://' + m;
-      return '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + href.replace(/^https?:\/\//, '') + '</a>';
+    // Bare URL to clickable link (matched before <a> tags with same pattern)
+    escaped = escaped.replace(/(^|[\s>])(https?:\/\/[^\s"'<>]+|www\.[^\s"'<>]+)/g, function(m, prefix, url) {
+      var href = url.indexOf('http') === 0 ? url : 'https://' + url;
+      return prefix + '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + href.replace(/^https?:\/\//, '') + '</a>';
     });
 
     for (var key in blocks) {

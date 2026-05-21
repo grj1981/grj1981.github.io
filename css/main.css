@@ -1313,7 +1313,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #c3a860;
+  background: #f621ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3190,6 +3190,17 @@ body {
   margin-right: auto;
   border-bottom-left-radius: 4px;
 }
+#ai-assistant-panel .ai-messages .ai-message.ai-message-bot a {
+  color: #37c6c0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  border-bottom: none;
+  word-break: break-all;
+}
+#ai-assistant-panel .ai-messages .ai-message.ai-message-bot a:hover {
+  color: #32b2ad;
+  text-decoration: none;
+}
 #ai-assistant-panel .ai-messages .ai-message.ai-message-bot code {
   background: rgba(0,0,0,0.06);
   padding: 2px 6px;
@@ -3335,6 +3346,17 @@ body {
   #ai-assistant-panel .ai-messages .ai-message.ai-message-bot {
     background: #3d3d3d;
     color: #e0e0e0;
+  }
+  #ai-assistant-panel .ai-messages .ai-message.ai-message-bot a {
+    color: #5ed2cd;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    border-bottom: none;
+    word-break: break-all;
+  }
+  #ai-assistant-panel .ai-messages .ai-message.ai-message-bot a:hover {
+    color: #7cdbd7;
+    text-decoration: none;
   }
   #ai-assistant-panel .ai-messages .ai-message.ai-message-bot code {
     background: rgba(255,255,255,0.1);
