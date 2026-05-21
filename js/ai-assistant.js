@@ -86,6 +86,9 @@
   function adjustBtnPosition() {
     var btn = document.getElementById('ai-assistant-btn');
     if (!btn) return;
+    // Reset to CSS default before each calculation to prevent PJAX cumulative offset
+    btn.style.bottom = '';
+    btn.style.removeProperty('bottom');
     var btnRect = btn.getBoundingClientRect();
     var fixedEls = document.querySelectorAll('*');
     var maxOverlap = 0;
@@ -102,8 +105,7 @@
       }
     }
     if (maxOverlap > 10) {
-      var currentBottom = parseInt(btn.style.bottom) || 80;
-      btn.style.bottom = (currentBottom + maxOverlap + 10) + 'px';
+      btn.style.bottom = (80 + maxOverlap + 10) + 'px';
     }
   }
 
@@ -115,7 +117,12 @@
     btn.addEventListener('click', toggle);
     document.body.appendChild(btn);
     setTimeout(adjustBtnPosition, 100);
+    // Remove old listener before adding (prevents PJAX duplicate bindings)
+    window.removeEventListener('resize', adjustBtnPosition);
     window.addEventListener('resize', adjustBtnPosition);
+    // Reposition after PJAX page navigation
+    document.removeEventListener('pjax:complete', adjustBtnPosition);
+    document.addEventListener('pjax:complete', adjustBtnPosition);
   }
 
   function createPanel() {
