@@ -33,15 +33,16 @@
 <meta property="og:description" content="泛型是 C 中最强大的语言特性之一，基础教程中我们已经掌握了泛型的基本用法——泛型类、泛型方法、以及简单的约束。本文将深入探讨高级泛型技术，包括类型参数的协变与逆变、自定义约束的组合、静态成员与泛型、以及运行时泛型的内省机制。 协变与逆变 (out &amp; x2F; in)协变和逆变解决的是泛型接口&amp; x2F;委托的类型兼容性问题。 1234567891011121314151617181920&#x2F;&#x2F;.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-04-19T12:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-21T06:17:44.482Z">
+<meta property="article:modified_time" content="2026-05-21T06:33:39.885Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="C#">
+<meta property="article:tag" content="series:C#高级教程">
 <meta property="article:tag" content="高级">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/04/19/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-01-%E9%AB%98%E7%BA%A7%E6%B3%9B%E5%9E%8B/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C# 高级教程 - 01 高级泛型","description":"泛型是 C 中最强大的语言特性之一，基础教程中我们已经掌握了泛型的基本用法——泛型类、泛型方法、以及简单的约束。本文将深入探讨高级泛型技术，包括类型参数的协变与逆变、自定义约束的组合、静态成员与泛型、以及运行时泛型的内省机制。 协变与逆变 (out & x2F; in)协变和逆变解决的是泛型接口& x2F;委托的类型兼容性问题。 1234567891011121314151617181920//...","url":"https://www.bytefisher.top/2025/04/19/CSharp高级教程-01-高级泛型/","datePublished":"2025-04-19T12:00:00.000Z","dateModified":"2026-05-21T06:17:44.482Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/04/19/CSharp高级教程-01-高级泛型/"},"keywords":"C#, 高级"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C# 高级教程 - 01 高级泛型","description":"泛型是 C 中最强大的语言特性之一，基础教程中我们已经掌握了泛型的基本用法——泛型类、泛型方法、以及简单的约束。本文将深入探讨高级泛型技术，包括类型参数的协变与逆变、自定义约束的组合、静态成员与泛型、以及运行时泛型的内省机制。 协变与逆变 (out & x2F; in)协变和逆变解决的是泛型接口& x2F;委托的类型兼容性问题。 1234567891011121314151617181920//...","url":"https://www.bytefisher.top/2025/04/19/CSharp高级教程-01-高级泛型/","datePublished":"2025-04-19T12:00:00.000Z","dateModified":"2026-05-21T06:33:39.885Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/04/19/CSharp高级教程-01-高级泛型/"},"keywords":"C#, 高级, series:C#高级教程"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"C#","item":"https://www.bytefisher.top/categories/C/"},{"@type":"ListItem","position":3,"name":"C# 高级教程 - 01 高级泛型"}]}</script>
 
 
@@ -179,7 +180,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">55</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">56</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -345,7 +346,7 @@
 <p>本模式广泛应用于 ORM 框架（如 EF Core、Dapper）以及序列化库中，避免重复反射带来的性能开销。</p>
 <hr>
 <p><strong>总结</strong>：C# 的高级泛型为类型安全带来了极大的灵活性。理解协变&#x2F;逆变能让你的 API 更符合直觉，善用泛型约束可以编写更健壮的代码，而泛型缓存模式则是高性能框架设计中的经典技巧。熟练掌握这些技术，是进阶 C# 开发者的必修课。</p>
-<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2025/05/27/CSharp高级教程-20-性能优化与诊断/" class="related-post-item" title="C# 高级教程 - 20 性能优化与诊断"><span class="related-post-title">C# 高级教程 - 20 性能优化与诊断</span><span class="related-post-date">2025-05-27</span><span class="related-post-desc">性能优化不是"过早优化"，而是基于数据的科学工程实践。.NET 生态提供了世界一流的诊断工具链——从 BenchmarkDotNet 到 OpenTelemet</span></a><a href="/2025/05/25/CSharp高级教程-19-互操作与源码生成器/" class="related-post-item" title="C# 高级教程 - 19 互操作与源代码生成器"><span class="related-post-title">C# 高级教程 - 19 互操作与源代码生成器</span><span class="related-post-date">2025-05-25</span><span class="related-post-desc">互操作（Interop）让 .NET 代码可以调用原生 C/C++ 库和 COM 组件，这在图像处理、硬件驱动、游戏引擎集成等场景中不可或缺。源代码生成器（So</span></a><a href="/2025/05/23/CSharp高级教程-18-函数式编程/" class="related-post-item" title="C# 高级教程 - 18 函数式编程"><span class="related-post-title">C# 高级教程 - 18 函数式编程</span><span class="related-post-date">2025-05-23</span><span class="related-post-desc">C 是一门多范式语言，在面向对象基础上不断吸收函数式编程（FP）的特性。从 LINQ 到模式匹配，从 record 到不可变数据，C 的函数式表达能力持续增强。</span></a><a href="/2025/05/21/CSharp高级教程-17-高级设计模式/" class="related-post-item" title="C# 高级教程 - 17 高级设计模式"><span class="related-post-title">C# 高级教程 - 17 高级设计模式</span><span class="related-post-date">2025-05-21</span><span class="related-post-desc">基础教程中我们了解过单例、工厂、观察者等经典设计模式。在实际的 C 项目中，这些模式有更地道的 .NET 实现方式，同时也需要理解模式之间的组合与演进。本文将探</span></a><a href="/2025/05/19/CSharp高级教程-16-依赖注入/" class="related-post-item" title="C# 高级教程 - 16 依赖注入"><span class="related-post-title">C# 高级教程 - 16 依赖注入</span><span class="related-post-date">2025-05-19</span><span class="related-post-desc">依赖注入（DI）是现代 .NET 应用架构的核心模式。ASP.NET Core 内置了完整的 DI 容器，了解其工作原理、生命周期管理、高级注册方式和常见陷阱，</span></a><a href="/2025/05/17/CSharp高级教程-15-高级异步模式/" class="related-post-item" title="C# 高级教程 - 15 高级异步模式"><span class="related-post-title">C# 高级教程 - 15 高级异步模式</span><span class="related-post-date">2025-05-17</span><span class="related-post-desc">基础教程中我们学会了 async/await 的基本用法。但在高性能场景下，不当的异步编程会导致性能反而比同步更差。本文将深入探讨 ValueTask、IAsy</span></a></div></div>
+<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2025/05/27/CSharp高级教程-20-性能优化与诊断/" class="related-post-item" title="C# 高级教程 - 20 性能优化与诊断"><span class="related-post-title">C# 高级教程 - 20 性能优化与诊断</span><span class="related-post-date">2025-05-27</span><span class="related-post-desc">性能优化不是"过早优化"，而是基于数据的科学工程实践。.NET 生态提供了世界一流的诊断工具链——从 BenchmarkDotNet 到 OpenTelemet</span></a><a href="/2025/05/25/CSharp高级教程-19-互操作与源码生成器/" class="related-post-item" title="C# 高级教程 - 19 互操作与源代码生成器"><span class="related-post-title">C# 高级教程 - 19 互操作与源代码生成器</span><span class="related-post-date">2025-05-25</span><span class="related-post-desc">互操作（Interop）让 .NET 代码可以调用原生 C/C++ 库和 COM 组件，这在图像处理、硬件驱动、游戏引擎集成等场景中不可或缺。源代码生成器（So</span></a><a href="/2025/05/23/CSharp高级教程-18-函数式编程/" class="related-post-item" title="C# 高级教程 - 18 函数式编程"><span class="related-post-title">C# 高级教程 - 18 函数式编程</span><span class="related-post-date">2025-05-23</span><span class="related-post-desc">C 是一门多范式语言，在面向对象基础上不断吸收函数式编程（FP）的特性。从 LINQ 到模式匹配，从 record 到不可变数据，C 的函数式表达能力持续增强。</span></a><a href="/2025/05/21/CSharp高级教程-17-高级设计模式/" class="related-post-item" title="C# 高级教程 - 17 高级设计模式"><span class="related-post-title">C# 高级教程 - 17 高级设计模式</span><span class="related-post-date">2025-05-21</span><span class="related-post-desc">基础教程中我们了解过单例、工厂、观察者等经典设计模式。在实际的 C 项目中，这些模式有更地道的 .NET 实现方式，同时也需要理解模式之间的组合与演进。本文将探</span></a><a href="/2025/05/19/CSharp高级教程-16-依赖注入/" class="related-post-item" title="C# 高级教程 - 16 依赖注入"><span class="related-post-title">C# 高级教程 - 16 依赖注入</span><span class="related-post-date">2025-05-19</span><span class="related-post-desc">依赖注入（DI）是现代 .NET 应用架构的核心模式。ASP.NET Core 内置了完整的 DI 容器，了解其工作原理、生命周期管理、高级注册方式和常见陷阱，</span></a><a href="/2025/05/17/CSharp高级教程-15-高级异步模式/" class="related-post-item" title="C# 高级教程 - 15 高级异步模式"><span class="related-post-title">C# 高级教程 - 15 高级异步模式</span><span class="related-post-date">2025-05-17</span><span class="related-post-desc">基础教程中我们学会了 async/await 的基本用法。但在高性能场景下，不当的异步编程会导致性能反而比同步更差。本文将深入探讨 ValueTask、IAsy</span></a></div></div><div class="series-nav"><div class="series-nav-title">C#高级教程 系列</div><div class="series-nav-progress">第 1/20 篇</div><div class="series-nav-links"><a href="/2025/04/21/CSharp高级教程-02-反射与特性/" class="series-nav-next">C# 高级教程 - 02 反射与特性</a></div></div>
     </div>
 
     
@@ -356,6 +357,7 @@
           <div class="post-tags">
               <a href="/tags/C/" rel="tag"># C#</a>
               <a href="/tags/%E9%AB%98%E7%BA%A7/" rel="tag"># 高级</a>
+              <a href="/tags/series-C-%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B/" rel="tag"># series:C#高级教程</a>
           </div>
 
         
@@ -486,7 +488,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-count">56</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -33,15 +33,16 @@
 <meta property="og:description" content="多线程环境下，普通的 List&lt;T&gt;、Dictionary&lt;TKey, TValue&gt; 不是线程安全的，在并发读写时会导致数据损坏或异常。.NET 提供了 System.Collections.Concurrent 命名空间，包含一系列专为高并发场景设计的集合类型。本文将深入比较各类并发集合的内部实现、适用场景以及备选的无锁方案。 并发集合概览 类型 非并发等价 特点 Co">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-05-03T12:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-21T06:19:37.046Z">
+<meta property="article:modified_time" content="2026-05-21T06:33:45.193Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="C#">
+<meta property="article:tag" content="series:C#高级教程">
 <meta property="article:tag" content="高级">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/05/03/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-08-%E5%B9%B6%E5%8F%91%E9%9B%86%E5%90%88%E4%B8%8E%E5%90%8C%E6%AD%A5/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C# 高级教程 - 08 并发集合与同步","description":"多线程环境下，普通的 List&lt;T&gt;、Dictionary&lt;TKey, TValue&gt; 不是线程安全的，在并发读写时会导致数据损坏或异常。.NET 提供了 System.Collections.Concurrent 命名空间，包含一系列专为高并发场景设计的集合类型。本文将深入比较各类并发集合的内部实现、适用场景以及备选的无锁方案。 并发集合概览 类型 非并发等价 特点 Co...","url":"https://www.bytefisher.top/2025/05/03/CSharp高级教程-08-并发集合与同步/","datePublished":"2025-05-03T12:00:00.000Z","dateModified":"2026-05-21T06:19:37.046Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/05/03/CSharp高级教程-08-并发集合与同步/"},"keywords":"C#, 高级"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C# 高级教程 - 08 并发集合与同步","description":"多线程环境下，普通的 List&lt;T&gt;、Dictionary&lt;TKey, TValue&gt; 不是线程安全的，在并发读写时会导致数据损坏或异常。.NET 提供了 System.Collections.Concurrent 命名空间，包含一系列专为高并发场景设计的集合类型。本文将深入比较各类并发集合的内部实现、适用场景以及备选的无锁方案。 并发集合概览 类型 非并发等价 特点 Co...","url":"https://www.bytefisher.top/2025/05/03/CSharp高级教程-08-并发集合与同步/","datePublished":"2025-05-03T12:00:00.000Z","dateModified":"2026-05-21T06:33:45.193Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/05/03/CSharp高级教程-08-并发集合与同步/"},"keywords":"C#, 高级, series:C#高级教程"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"C#","item":"https://www.bytefisher.top/categories/C/"},{"@type":"ListItem","position":3,"name":"C# 高级教程 - 08 并发集合与同步"}]}</script>
 
 
@@ -179,7 +180,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">55</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">56</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -467,7 +468,7 @@
 
 <hr>
 <p><strong>总结</strong>：并发集合让多线程数据共享变得安全且高效。选择正确的并发集合可以大幅减少锁竞争、避免死锁，并提升应用吞吐量。理解每种集合的内部布局和无锁算法原理，是做出正确选型的关键。在 .NET Core 的新项目中，<code>Channel&lt;T&gt;</code> 正逐渐成为生产者-消费者场景的首选方案。</p>
-<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2025/05/27/CSharp高级教程-20-性能优化与诊断/" class="related-post-item" title="C# 高级教程 - 20 性能优化与诊断"><span class="related-post-title">C# 高级教程 - 20 性能优化与诊断</span><span class="related-post-date">2025-05-27</span><span class="related-post-desc">性能优化不是"过早优化"，而是基于数据的科学工程实践。.NET 生态提供了世界一流的诊断工具链——从 BenchmarkDotNet 到 OpenTelemet</span></a><a href="/2025/05/25/CSharp高级教程-19-互操作与源码生成器/" class="related-post-item" title="C# 高级教程 - 19 互操作与源代码生成器"><span class="related-post-title">C# 高级教程 - 19 互操作与源代码生成器</span><span class="related-post-date">2025-05-25</span><span class="related-post-desc">互操作（Interop）让 .NET 代码可以调用原生 C/C++ 库和 COM 组件，这在图像处理、硬件驱动、游戏引擎集成等场景中不可或缺。源代码生成器（So</span></a><a href="/2025/05/23/CSharp高级教程-18-函数式编程/" class="related-post-item" title="C# 高级教程 - 18 函数式编程"><span class="related-post-title">C# 高级教程 - 18 函数式编程</span><span class="related-post-date">2025-05-23</span><span class="related-post-desc">C 是一门多范式语言，在面向对象基础上不断吸收函数式编程（FP）的特性。从 LINQ 到模式匹配，从 record 到不可变数据，C 的函数式表达能力持续增强。</span></a><a href="/2025/05/21/CSharp高级教程-17-高级设计模式/" class="related-post-item" title="C# 高级教程 - 17 高级设计模式"><span class="related-post-title">C# 高级教程 - 17 高级设计模式</span><span class="related-post-date">2025-05-21</span><span class="related-post-desc">基础教程中我们了解过单例、工厂、观察者等经典设计模式。在实际的 C 项目中，这些模式有更地道的 .NET 实现方式，同时也需要理解模式之间的组合与演进。本文将探</span></a><a href="/2025/05/19/CSharp高级教程-16-依赖注入/" class="related-post-item" title="C# 高级教程 - 16 依赖注入"><span class="related-post-title">C# 高级教程 - 16 依赖注入</span><span class="related-post-date">2025-05-19</span><span class="related-post-desc">依赖注入（DI）是现代 .NET 应用架构的核心模式。ASP.NET Core 内置了完整的 DI 容器，了解其工作原理、生命周期管理、高级注册方式和常见陷阱，</span></a><a href="/2025/05/17/CSharp高级教程-15-高级异步模式/" class="related-post-item" title="C# 高级教程 - 15 高级异步模式"><span class="related-post-title">C# 高级教程 - 15 高级异步模式</span><span class="related-post-date">2025-05-17</span><span class="related-post-desc">基础教程中我们学会了 async/await 的基本用法。但在高性能场景下，不当的异步编程会导致性能反而比同步更差。本文将深入探讨 ValueTask、IAsy</span></a></div></div>
+<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2025/05/27/CSharp高级教程-20-性能优化与诊断/" class="related-post-item" title="C# 高级教程 - 20 性能优化与诊断"><span class="related-post-title">C# 高级教程 - 20 性能优化与诊断</span><span class="related-post-date">2025-05-27</span><span class="related-post-desc">性能优化不是"过早优化"，而是基于数据的科学工程实践。.NET 生态提供了世界一流的诊断工具链——从 BenchmarkDotNet 到 OpenTelemet</span></a><a href="/2025/05/25/CSharp高级教程-19-互操作与源码生成器/" class="related-post-item" title="C# 高级教程 - 19 互操作与源代码生成器"><span class="related-post-title">C# 高级教程 - 19 互操作与源代码生成器</span><span class="related-post-date">2025-05-25</span><span class="related-post-desc">互操作（Interop）让 .NET 代码可以调用原生 C/C++ 库和 COM 组件，这在图像处理、硬件驱动、游戏引擎集成等场景中不可或缺。源代码生成器（So</span></a><a href="/2025/05/23/CSharp高级教程-18-函数式编程/" class="related-post-item" title="C# 高级教程 - 18 函数式编程"><span class="related-post-title">C# 高级教程 - 18 函数式编程</span><span class="related-post-date">2025-05-23</span><span class="related-post-desc">C 是一门多范式语言，在面向对象基础上不断吸收函数式编程（FP）的特性。从 LINQ 到模式匹配，从 record 到不可变数据，C 的函数式表达能力持续增强。</span></a><a href="/2025/05/21/CSharp高级教程-17-高级设计模式/" class="related-post-item" title="C# 高级教程 - 17 高级设计模式"><span class="related-post-title">C# 高级教程 - 17 高级设计模式</span><span class="related-post-date">2025-05-21</span><span class="related-post-desc">基础教程中我们了解过单例、工厂、观察者等经典设计模式。在实际的 C 项目中，这些模式有更地道的 .NET 实现方式，同时也需要理解模式之间的组合与演进。本文将探</span></a><a href="/2025/05/19/CSharp高级教程-16-依赖注入/" class="related-post-item" title="C# 高级教程 - 16 依赖注入"><span class="related-post-title">C# 高级教程 - 16 依赖注入</span><span class="related-post-date">2025-05-19</span><span class="related-post-desc">依赖注入（DI）是现代 .NET 应用架构的核心模式。ASP.NET Core 内置了完整的 DI 容器，了解其工作原理、生命周期管理、高级注册方式和常见陷阱，</span></a><a href="/2025/05/17/CSharp高级教程-15-高级异步模式/" class="related-post-item" title="C# 高级教程 - 15 高级异步模式"><span class="related-post-title">C# 高级教程 - 15 高级异步模式</span><span class="related-post-date">2025-05-17</span><span class="related-post-desc">基础教程中我们学会了 async/await 的基本用法。但在高性能场景下，不当的异步编程会导致性能反而比同步更差。本文将深入探讨 ValueTask、IAsy</span></a></div></div><div class="series-nav"><div class="series-nav-title">C#高级教程 系列</div><div class="series-nav-progress">第 8/20 篇</div><div class="series-nav-links"><a href="/2025/05/01/CSharp高级教程-07-TPL与并行编程/" class="series-nav-prev">C# 高级教程 - 07 TPL 与并行编程</a><a href="/2025/05/05/CSharp高级教程-09-Span与高效内存/" class="series-nav-next">C# 高级教程 - 09 Span<T> 与高效内存编程</a></div></div>
     </div>
 
     
@@ -478,6 +479,7 @@
           <div class="post-tags">
               <a href="/tags/C/" rel="tag"># C#</a>
               <a href="/tags/%E9%AB%98%E7%BA%A7/" rel="tag"># 高级</a>
+              <a href="/tags/series-C-%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B/" rel="tag"># series:C#高级教程</a>
           </div>
 
         
@@ -608,7 +610,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-count">56</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
