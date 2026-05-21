@@ -171,12 +171,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">157</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">197</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">53</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">55</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -253,7 +253,7 @@
     <p class="hero-desc">分享游戏开发技术与钓鱼乐趣</p>
     <div class="hero-stats">
       <div class="hero-stat">
-        <span class="hero-stat-value">157</span>
+        <span class="hero-stat-value">197</span>
         <span class="hero-stat-label">文章</span>
       </div>
       <div class="hero-stat">
@@ -634,6 +634,86 @@
 
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
 
@@ -641,7 +721,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/05/05/Unity3D%E6%95%99%E7%A8%8B-05-%E5%9C%BA%E6%99%AF%E7%AE%A1%E7%90%86%E4%B8%8E%E5%9D%90%E6%A0%87%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -655,7 +735,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【反射Reflection】</a>
+            <a href="/2025/05/05/Unity3D%E6%95%99%E7%A8%8B-05-%E5%9C%BA%E6%99%AF%E7%AE%A1%E7%90%86%E4%B8%8E%E5%9D%90%E6%A0%87%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">场景管理与坐标系统</a>
         </h2>
 
         <div class="post-meta">
@@ -665,283 +745,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-02-05 14:27:15" itemprop="dateCreated datePublished" datetime="2025-02-05T14:27:15+08:00">2025-02-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>C 反射（Reflection）反射指程序可以访问、检测和修改它本身状态或行为的一种能力。 程序集包含模块，而模块包含类型，类型又包含成员。反射则提供了封装程序集、模块和类型的对象。 您可以使用反射动态地创建类型的实例，将类型绑定到现有对象，或从现有对象中获取类型。然后，可以调用类型的方法或访问其字段和属性。 优缺点优点： 1、反射提高了程序的灵活性和扩展性。 2、降低耦合性，提高自适应能力。 3...</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【特性Attribute】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-02-05 11:57:31" itemprop="dateCreated datePublished" datetime="2025-02-05T11:57:31+08:00">2025-02-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>C 特性（Attribute）特性（Attribute）是用于在运行时传递程序中各种元素（比如类、方法、结构、枚举、组件等）的行为信息的声明性标签。您可以通过使用特性向程序添加声明性信息。一个声明性标签是通过放置在它所应用的元素前面的方括号（ ）来描述的。 特性（Attribute）用于添加元数据，如编译器指令和注释、描述、方法、类等其他信息。.Net 框架提供了两种类型的特性：预定义特性和自定义...</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【接口Interface】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-02-05 11:11:49" itemprop="dateCreated datePublished" datetime="2025-02-05T11:11:49+08:00">2025-02-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>C 接口(Interface)接口定义了所有类继承接口时应遵循的语法合同。接口定义了语法合同 “是什么” 部分，派生类定义了语法合同 “怎么做” 部分。 接口定义了属性、方法和事件，这些都是接口的成员。接口只包含了成员的声明。成员的定义是派生类的责任。接口提供了派生类应遵循的标准结构。 接口使得实现接口的类或结构在形式上保持一致。 抽象类在某种程度上与接口类似，但是，它们大多只是用在当只有少数方法...</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/" class="post-title-link" itemprop="url">Unity3D游戏开发异步编程UniTask和Task</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-01-22 11:11:59" itemprop="dateCreated datePublished" datetime="2025-01-22T11:11:59+08:00">2025-01-22</time>
+              <time title="创建时间：2025-05-05 08:00:00" itemprop="dateCreated datePublished" datetime="2025-05-05T08:00:00+08:00">2025-05-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -953,11 +757,191 @@
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2025/05/05/Unity3D%E6%95%99%E7%A8%8B-05-%E5%9C%BA%E6%99%AF%E7%AE%A1%E7%90%86%E4%B8%8E%E5%9D%90%E6%A0%87%E7%B3%BB%E7%BB%9F/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/05/05/Unity3D%E6%95%99%E7%A8%8B-05-%E5%9C%BA%E6%99%AF%E7%AE%A1%E7%90%86%E4%B8%8E%E5%9D%90%E6%A0%87%E7%B3%BB%E7%BB%9F/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>5.1 场景（Scene）的概念场景是 Unity 中组织和编辑游戏内容的基本单位。一个场景可以包含： 游戏物体（GameObject） 灯光和摄像机 UI 元素 音频源 导航网格 游戏由多个场景组成，常用于： 不同关卡 主菜单和游戏画面 加载界面 5.2 场景管理场景操作 API12345678using UnityEngine.SceneManagement;// 获取当前活动场景Scene...</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/05/05/Unity3D%E6%95%99%E7%A8%8B-05-%E5%9C%BA%E6%99%AF%E7%AE%A1%E7%90%86%E4%B8%8E%E5%9D%90%E6%A0%87%E7%B3%BB%E7%BB%9F/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/05/04/Unity3D%E6%95%99%E7%A8%8B-04-%E8%84%9A%E6%9C%AC%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/05/04/Unity3D%E6%95%99%E7%A8%8B-04-%E8%84%9A%E6%9C%AC%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="post-title-link" itemprop="url">脚本基础与生命周期</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-05-04 08:00:00" itemprop="dateCreated datePublished" datetime="2025-05-04T08:00:00+08:00">2025-05-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2025/05/04/Unity3D%E6%95%99%E7%A8%8B-04-%E8%84%9A%E6%9C%AC%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/05/04/Unity3D%E6%95%99%E7%A8%8B-04-%E8%84%9A%E6%9C%AC%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>前置知识：本教程假设你已了解 C 基本语法（变量、方法、类）。如需回顾，可参考系列中的 C 学习笔记文章。 4.1 创建第一个脚本在 Project 面板中：右键 → Create → C Script，命名为 PlayerMovement。 双击打开脚本，默认内容如下： 12345678910111213141516using System.Collections;using System.Co...</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/05/04/Unity3D%E6%95%99%E7%A8%8B-04-%E8%84%9A%E6%9C%AC%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/05/03/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-08-%E5%B9%B6%E5%8F%91%E9%9B%86%E5%90%88%E4%B8%8E%E5%90%8C%E6%AD%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/05/03/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-08-%E5%B9%B6%E5%8F%91%E9%9B%86%E5%90%88%E4%B8%8E%E5%90%8C%E6%AD%A5/" class="post-title-link" itemprop="url">C# 高级教程 - 08 并发集合与同步</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-05-03 20:00:00" itemprop="dateCreated datePublished" datetime="2025-05-03T20:00:00+08:00">2025-05-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
                 </span>
             </span>
 
@@ -970,8 +954,8 @@
       </span>
       <span class="post-meta-item-text">Waline：</span>
     
-    <a title="waline" href="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/" itemprop="commentCount"></span>
+    <a title="waline" href="/2025/05/03/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-08-%E5%B9%B6%E5%8F%91%E9%9B%86%E5%90%88%E4%B8%8E%E5%90%8C%E6%AD%A5/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/05/03/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-08-%E5%B9%B6%E5%8F%91%E9%9B%86%E5%90%88%E4%B8%8E%E5%90%8C%E6%AD%A5/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -986,10 +970,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>await 关键字在C 编程中，await 关键字用于异步编程，它通常与 async 关键字一起使用。await 用于暂停当前方法的执行，直到等待的异步任务完成。这样可以在不阻塞主线程的情况下执行耗时操作，如I& x2F;O操作或网络请求。 例如，假设有一个异步方法 GetDataAsync()，你可以这样使用 await： 123456public async Task&lt;string&gt...</p>
+          <p>多线程环境下，普通的 List&lt;T&gt;、Dictionary&lt;TKey, TValue&gt; 不是线程安全的，在并发读写时会导致数据损坏或异常。.NET 提供了 System.Collections.Concurrent 命名空间，包含一系列专为高并发场景设计的集合类型。本文将深入比较各类并发集合的内部实现、适用场景以及备选的无锁方案。 并发集合概览 类型 非并发等价 特点 Co...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/01/22/Unity3D%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8BUniTask%E5%92%8CTask/">
+              <a class="btn" href="/2025/05/03/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-08-%E5%B9%B6%E5%8F%91%E9%9B%86%E5%90%88%E4%B8%8E%E5%90%8C%E6%AD%A5/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1013,7 +997,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/12/10/Python%E6%95%99%E7%A8%8B-20-%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/05/03/Unity3D%E6%95%99%E7%A8%8B-03-GameObject%E4%B8%8E%E7%BB%84%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1027,7 +1011,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/12/10/Python%E6%95%99%E7%A8%8B-20-%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE/" class="post-title-link" itemprop="url">Python 综合实战项目</a>
+            <a href="/2025/05/03/Unity3D%E6%95%99%E7%A8%8B-03-GameObject%E4%B8%8E%E7%BB%84%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">GameObject 与组件系统</a>
         </h2>
 
         <div class="post-meta">
@@ -1037,7 +1021,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-12-10 08:00:00" itemprop="dateCreated datePublished" datetime="2024-12-10T08:00:00+08:00">2024-12-10</time>
+              <time title="创建时间：2025-05-03 08:00:00" itemprop="dateCreated datePublished" datetime="2025-05-03T08:00:00+08:00">2025-05-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1045,7 +1029,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1062,8 +1046,8 @@
       </span>
       <span class="post-meta-item-text">Waline：</span>
     
-    <a title="waline" href="/2024/12/10/Python%E6%95%99%E7%A8%8B-20-%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2024/12/10/Python%E6%95%99%E7%A8%8B-20-%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE/" itemprop="commentCount"></span>
+    <a title="waline" href="/2025/05/03/Unity3D%E6%95%99%E7%A8%8B-03-GameObject%E4%B8%8E%E7%BB%84%E4%BB%B6%E7%B3%BB%E7%BB%9F/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/05/03/Unity3D%E6%95%99%E7%A8%8B-03-GameObject%E4%B8%8E%E7%BB%84%E4%BB%B6%E7%B3%BB%E7%BB%9F/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1078,10 +1062,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>20.1 项目一：通讯录管理系统功能需求 添加联系人 删除联系人 查询联系人 显示所有联系人 保存到文件 实现代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556import jsonimport osclass ContactManager...</p>
+          <p>3.1 GameObject 的概念GameObject（游戏对象）是 Unity 中一切物体的基类。任何存在于场景中的东西都是 GameObject。 空对象右键 → Create Empty 创建一个空 GameObject，它只有一个 Transform 组件： Position：位置 (x, y, z) Rotation：旋转 (x, y, z) Scale：缩放 (x, y, z) 空对...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/12/10/Python%E6%95%99%E7%A8%8B-20-%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE/">
+              <a class="btn" href="/2025/05/03/Unity3D%E6%95%99%E7%A8%8B-03-GameObject%E4%B8%8E%E7%BB%84%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1105,7 +1089,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/12/08/Python%E6%95%99%E7%A8%8B-19-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/05/02/Unity3D%E6%95%99%E7%A8%8B-02-%E7%BC%96%E8%BE%91%E5%99%A8%E7%95%8C%E9%9D%A2%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1119,7 +1103,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/12/08/Python%E6%95%99%E7%A8%8B-19-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="post-title-link" itemprop="url">Python 正则表达式</a>
+            <a href="/2025/05/02/Unity3D%E6%95%99%E7%A8%8B-02-%E7%BC%96%E8%BE%91%E5%99%A8%E7%95%8C%E9%9D%A2%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">编辑器界面详解</a>
         </h2>
 
         <div class="post-meta">
@@ -1129,7 +1113,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-12-08 08:00:00" itemprop="dateCreated datePublished" datetime="2024-12-08T08:00:00+08:00">2024-12-08</time>
+              <time title="创建时间：2025-05-02 08:00:00" itemprop="dateCreated datePublished" datetime="2025-05-02T08:00:00+08:00">2025-05-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1137,7 +1121,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1154,8 +1138,8 @@
       </span>
       <span class="post-meta-item-text">Waline：</span>
     
-    <a title="waline" href="/2024/12/08/Python%E6%95%99%E7%A8%8B-19-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2024/12/08/Python%E6%95%99%E7%A8%8B-19-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" itemprop="commentCount"></span>
+    <a title="waline" href="/2025/05/02/Unity3D%E6%95%99%E7%A8%8B-02-%E7%BC%96%E8%BE%91%E5%99%A8%E7%95%8C%E9%9D%A2%E8%AF%A6%E8%A7%A3/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/05/02/Unity3D%E6%95%99%E7%A8%8B-02-%E7%BC%96%E8%BE%91%E5%99%A8%E7%95%8C%E9%9D%A2%E8%AF%A6%E8%A7%A3/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1170,10 +1154,102 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>19.1 正则表达式概念正则表达式（Regular Expression）是用于匹配字符串模式的强大工具。 应用场景 数据验证（邮箱、电话、密码强度） 文本提取 搜索与替换 日志分析 19.2 基本语法字符匹配 模式 说明 示例 . 任意字符（除换行） a.c 匹配 “abc” \d 数字 \d\d 匹配 “12” \w 字母数字下划线 \w+ 匹配 “hello” \s 空白字符 a\s b 匹...</p>
+          <p>2.1 Scene 视图Scene 视图是编辑游戏世界的核心工作区。 视图控制 右键拖拽：旋转视角 滚轮：缩放 中键拖拽：平移视角 右键 + WASD：飞行模式浏览 工具栏 工具 快捷键 功能 手形工具 Q 平移场景视图 移动工具 W 移动选中的对象 旋转工具 E 旋转选中的对象 缩放工具 R 缩放选中的对象 矩形工具 T 2D& x2F;UI 对象调整 变换工具 Y 移动& x2F;旋转& x2...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/12/08/Python%E6%95%99%E7%A8%8B-19-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+              <a class="btn" href="/2025/05/02/Unity3D%E6%95%99%E7%A8%8B-02-%E7%BC%96%E8%BE%91%E5%99%A8%E7%95%8C%E9%9D%A2%E8%AF%A6%E8%A7%A3/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/05/01/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-07-TPL%E4%B8%8E%E5%B9%B6%E8%A1%8C%E7%BC%96%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/05/01/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-07-TPL%E4%B8%8E%E5%B9%B6%E8%A1%8C%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">C# 高级教程 - 07 TPL 与并行编程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-05-01 20:00:00" itemprop="dateCreated datePublished" datetime="2025-05-01T20:00:00+08:00">2025-05-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2025/05/01/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-07-TPL%E4%B8%8E%E5%B9%B6%E8%A1%8C%E7%BC%96%E7%A8%8B/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/05/01/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-07-TPL%E4%B8%8E%E5%B9%B6%E8%A1%8C%E7%BC%96%E7%A8%8B/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Task Parallel Library（TPL）是 .NET 中构建并行和异步应用的核心框架。基础教程中我们接触了 Task 的基本用法和 async& x2F;await，但 TPL 的能力远不止于此。本文将深入探讨 Task 的底层机制、Parallel 类、PLINQ、Dataflow 库、以及如何正确控制并行度与取消。 Task 底层细节Task 状态机123456789// Task...</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/05/01/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-07-TPL%E4%B8%8E%E5%B9%B6%E8%A1%8C%E7%BC%96%E7%A8%8B/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1196,7 +1272,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1264,7 +1340,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">157</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1277,7 +1353,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">55</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

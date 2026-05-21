@@ -171,12 +171,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">157</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">197</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">53</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">55</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -253,7 +253,7 @@
     <p class="hero-desc">分享游戏开发技术与钓鱼乐趣</p>
     <div class="hero-stats">
       <div class="hero-stat">
-        <span class="hero-stat-value">157</span>
+        <span class="hero-stat-value">197</span>
         <span class="hero-stat-label">文章</span>
       </div>
       <div class="hero-stat">
@@ -634,6 +634,86 @@
 
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
 
@@ -641,7 +721,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/05/11/Unity3D%E6%95%99%E7%A8%8B-11-UI%E7%B3%BB%E7%BB%9F%E5%85%A5%E9%97%A8/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/05/17/Unity3D%E6%95%99%E7%A8%8B-17-%E5%AF%BC%E8%88%AA%E5%AF%BB%E8%B7%AF%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -655,7 +735,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/05/11/Unity3D%E6%95%99%E7%A8%8B-11-UI%E7%B3%BB%E7%BB%9F%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">UI 系统入门</a>
+            <a href="/2025/05/17/Unity3D%E6%95%99%E7%A8%8B-17-%E5%AF%BC%E8%88%AA%E5%AF%BB%E8%B7%AF%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">导航寻路系统</a>
         </h2>
 
         <div class="post-meta">
@@ -665,7 +745,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-05-11 08:00:00" itemprop="dateCreated datePublished" datetime="2025-05-11T08:00:00+08:00">2025-05-11</time>
+              <time title="创建时间：2025-05-17 08:00:00" itemprop="dateCreated datePublished" datetime="2025-05-17T08:00:00+08:00">2025-05-17</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -690,8 +770,8 @@
       </span>
       <span class="post-meta-item-text">Waline：</span>
     
-    <a title="waline" href="/2025/05/11/Unity3D%E6%95%99%E7%A8%8B-11-UI%E7%B3%BB%E7%BB%9F%E5%85%A5%E9%97%A8/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2025/05/11/Unity3D%E6%95%99%E7%A8%8B-11-UI%E7%B3%BB%E7%BB%9F%E5%85%A5%E9%97%A8/" itemprop="commentCount"></span>
+    <a title="waline" href="/2025/05/17/Unity3D%E6%95%99%E7%A8%8B-17-%E5%AF%BC%E8%88%AA%E5%AF%BB%E8%B7%AF%E7%B3%BB%E7%BB%9F/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/05/17/Unity3D%E6%95%99%E7%A8%8B-17-%E5%AF%BC%E8%88%AA%E5%AF%BB%E8%B7%AF%E7%B3%BB%E7%BB%9F/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -706,10 +786,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>11.1 Canvas 与 EventSystemCanvasCanvas 是所有 UI 元素的容器。创建 UI 元素时自动生成。 渲染模式： 模式 说明 适用场景 Screen Space Overlay UI 覆盖在游戏画面之上（默认） 主菜单、HUD Screen Space Camera UI 由指定摄像机渲染 需要与 3D 场景交互的 UI World Space UI 位于 3D 世界...</p>
+          <p>17.1 NavMesh 概述NavMesh（导航网格）是 Unity 内置的寻路系统，将场景烘焙为网格数据，AI 角色可以自动计算路径并移动到目标。 核心组件 组件 作用 NavMesh 场景的导航网格数据 NavMesh Agent 角色的寻路代理 NavMesh Obstacle 动态障碍物 Off Mesh Link 跳跃& x2F;跨越的链接（沟壑、围栏） 17.2 烘焙 NavMesh...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/05/11/Unity3D%E6%95%99%E7%A8%8B-11-UI%E7%B3%BB%E7%BB%9F%E5%85%A5%E9%97%A8/">
+              <a class="btn" href="/2025/05/17/Unity3D%E6%95%99%E7%A8%8B-17-%E5%AF%BC%E8%88%AA%E5%AF%BB%E8%B7%AF%E7%B3%BB%E7%BB%9F/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -733,7 +813,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/05/10/Unity3D%E6%95%99%E7%A8%8B-10-%E6%91%84%E5%83%8F%E6%9C%BA%E6%8E%A7%E5%88%B6%E4%B8%8E%E8%A7%86%E9%87%8E/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/05/16/Unity3D%E6%95%99%E7%A8%8B-16-%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%8A%80%E6%9C%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -747,7 +827,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/05/10/Unity3D%E6%95%99%E7%A8%8B-10-%E6%91%84%E5%83%8F%E6%9C%BA%E6%8E%A7%E5%88%B6%E4%B8%8E%E8%A7%86%E9%87%8E/" class="post-title-link" itemprop="url">摄像机控制与视野</a>
+            <a href="/2025/05/16/Unity3D%E6%95%99%E7%A8%8B-16-%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%8A%80%E6%9C%AF/" class="post-title-link" itemprop="url">对象池技术</a>
         </h2>
 
         <div class="post-meta">
@@ -757,7 +837,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-05-10 08:00:00" itemprop="dateCreated datePublished" datetime="2025-05-10T08:00:00+08:00">2025-05-10</time>
+              <time title="创建时间：2025-05-16 08:00:00" itemprop="dateCreated datePublished" datetime="2025-05-16T08:00:00+08:00">2025-05-16</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -782,8 +862,8 @@
       </span>
       <span class="post-meta-item-text">Waline：</span>
     
-    <a title="waline" href="/2025/05/10/Unity3D%E6%95%99%E7%A8%8B-10-%E6%91%84%E5%83%8F%E6%9C%BA%E6%8E%A7%E5%88%B6%E4%B8%8E%E8%A7%86%E9%87%8E/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2025/05/10/Unity3D%E6%95%99%E7%A8%8B-10-%E6%91%84%E5%83%8F%E6%9C%BA%E6%8E%A7%E5%88%B6%E4%B8%8E%E8%A7%86%E9%87%8E/" itemprop="commentCount"></span>
+    <a title="waline" href="/2025/05/16/Unity3D%E6%95%99%E7%A8%8B-16-%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%8A%80%E6%9C%AF/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/05/16/Unity3D%E6%95%99%E7%A8%8B-16-%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%8A%80%E6%9C%AF/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -798,10 +878,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>10.1 Camera 组件Camera 是玩家观察游戏世界的窗口，每个场景至少需要一个 Camera。 核心属性 属性 说明 Clear Flags 背景填充方式（Skybox& x2F;Solid Color& x2F;Depth Only） Background 纯色背景颜色 Projection Perspective（透视）& x2F; Orthographic（正交） Field of...</p>
+          <p>16.1 为什么需要对象池在游戏开发中，频繁创建和销毁对象会导致： GC 压力：大量内存分配触发垃圾回收，造成卡顿 性能开销：Instantiate & x2F; Destroy 是开销较大的操作 对象池通过预先创建一批对象实例，复用而不是销毁，显著提升性能。 适合对象池的场景 子弹、弹幕 粒子特效 敌人波次 掉落物 临时 UI 提示 16.2 基础对象池实现1234567891011121314...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/05/10/Unity3D%E6%95%99%E7%A8%8B-10-%E6%91%84%E5%83%8F%E6%9C%BA%E6%8E%A7%E5%88%B6%E4%B8%8E%E8%A7%86%E9%87%8E/">
+              <a class="btn" href="/2025/05/16/Unity3D%E6%95%99%E7%A8%8B-16-%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%8A%80%E6%9C%AF/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -825,7 +905,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/05/09/Unity3D%E6%95%99%E7%A8%8B-09-%E9%A2%84%E5%88%B6%E4%BD%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%AE%9E%E4%BE%8B%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/05/15/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-14-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -839,7 +919,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/05/09/Unity3D%E6%95%99%E7%A8%8B-09-%E9%A2%84%E5%88%B6%E4%BD%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%AE%9E%E4%BE%8B%E5%8C%96/" class="post-title-link" itemprop="url">预制体与动态实例化</a>
+            <a href="/2025/05/15/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-14-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">C# 高级教程 - 14 网络编程</a>
         </h2>
 
         <div class="post-meta">
@@ -849,7 +929,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-05-09 08:00:00" itemprop="dateCreated datePublished" datetime="2025-05-09T08:00:00+08:00">2025-05-09</time>
+              <time title="创建时间：2025-05-15 20:00:00" itemprop="dateCreated datePublished" datetime="2025-05-15T20:00:00+08:00">2025-05-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -857,7 +937,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -874,8 +954,8 @@
       </span>
       <span class="post-meta-item-text">Waline：</span>
     
-    <a title="waline" href="/2025/05/09/Unity3D%E6%95%99%E7%A8%8B-09-%E9%A2%84%E5%88%B6%E4%BD%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%AE%9E%E4%BE%8B%E5%8C%96/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2025/05/09/Unity3D%E6%95%99%E7%A8%8B-09-%E9%A2%84%E5%88%B6%E4%BD%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%AE%9E%E4%BE%8B%E5%8C%96/" itemprop="commentCount"></span>
+    <a title="waline" href="/2025/05/15/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-14-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/05/15/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-14-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -890,10 +970,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>9.1 预制体（Prefab）的概念预制体是一种可复用的 GameObject 模板。它将一个游戏对象及其所有组件、子对象、属性保存为资源文件（.prefab）。 创建预制体 在场景中搭建好一个 GameObject（例如：附带脚本、碰撞体、材质的敌人） 从 Hierarchy 拖拽到 Project 面板 → 自动生成 .prefab 文件 场景中的物体变为预制体实例（Inspector 顶部显...</p>
+          <p>网络编程是后端开发的核心能力。C 提供了从高层级的 HttpClient 到低层级的 Socket 的完整网络编程栈。本文将深入探讨 HTTP 请求调优、gRPC 通信、Socket 编程、以及 ASP.NET Core 中的网络性能优化。 HttpClient 深入调优正确使用 HttpClient1234567891011121314151617181920212223242526272829...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/05/09/Unity3D%E6%95%99%E7%A8%8B-09-%E9%A2%84%E5%88%B6%E4%BD%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%AE%9E%E4%BE%8B%E5%8C%96/">
+              <a class="btn" href="/2025/05/15/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-14-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -917,7 +997,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/05/08/Unity3D%E6%95%99%E7%A8%8B-08-%E7%A2%B0%E6%92%9E%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%A7%A6%E5%8F%91%E4%BA%8B%E4%BB%B6/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/05/15/Unity3D%E6%95%99%E7%A8%8B-15-%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -931,7 +1011,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/05/08/Unity3D%E6%95%99%E7%A8%8B-08-%E7%A2%B0%E6%92%9E%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%A7%A6%E5%8F%91%E4%BA%8B%E4%BB%B6/" class="post-title-link" itemprop="url">碰撞检测与触发事件</a>
+            <a href="/2025/05/15/Unity3D%E6%95%99%E7%A8%8B-15-%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96/" class="post-title-link" itemprop="url">数据持久化</a>
         </h2>
 
         <div class="post-meta">
@@ -941,7 +1021,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-05-08 08:00:00" itemprop="dateCreated datePublished" datetime="2025-05-08T08:00:00+08:00">2025-05-08</time>
+              <time title="创建时间：2025-05-15 08:00:00" itemprop="dateCreated datePublished" datetime="2025-05-15T08:00:00+08:00">2025-05-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -966,8 +1046,8 @@
       </span>
       <span class="post-meta-item-text">Waline：</span>
     
-    <a title="waline" href="/2025/05/08/Unity3D%E6%95%99%E7%A8%8B-08-%E7%A2%B0%E6%92%9E%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%A7%A6%E5%8F%91%E4%BA%8B%E4%BB%B6/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2025/05/08/Unity3D%E6%95%99%E7%A8%8B-08-%E7%A2%B0%E6%92%9E%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%A7%A6%E5%8F%91%E4%BA%8B%E4%BB%B6/" itemprop="commentCount"></span>
+    <a title="waline" href="/2025/05/15/Unity3D%E6%95%99%E7%A8%8B-15-%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/05/15/Unity3D%E6%95%99%E7%A8%8B-15-%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -982,10 +1062,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>8.1 Collider 组件Collider 定义物体的物理形状，用于碰撞检测。 3D Collider 类型 类型 用途 BoxCollider 盒型碰撞体（箱子、墙壁） SphereCollider 球型碰撞体（球、检测范围） CapsuleCollider 胶囊碰撞体（角色） MeshCollider 网格碰撞体（复杂形状，性能消耗大） TerrainCollider 地形碰撞体 2D C...</p>
+          <p>15.1 为什么需要数据持久化游戏数据持久化是指将运行时数据保存到磁盘，在下次运行时恢复。常见场景： 存档& x2F;读档 玩家设置（音量、画质） 排行榜分数 解锁进度 15.2 PlayerPrefsPlayerPrefs 是最简单的持久化方式，以键值对形式存储。 存储数据1234567891011121314151617181920// 保存数据PlayerPrefs.SetInt(&quot...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/05/08/Unity3D%E6%95%99%E7%A8%8B-08-%E7%A2%B0%E6%92%9E%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%A7%A6%E5%8F%91%E4%BA%8B%E4%BB%B6/">
+              <a class="btn" href="/2025/05/15/Unity3D%E6%95%99%E7%A8%8B-15-%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1009,7 +1089,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/05/07/Unity3D%E6%95%99%E7%A8%8B-07-%E7%89%A9%E7%90%86%E5%BC%95%E6%93%8E%E4%B8%8E%E5%88%9A%E4%BD%93%E7%BB%84%E4%BB%B6/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/05/14/Unity3D%E6%95%99%E7%A8%8B-14-%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1023,7 +1103,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/05/07/Unity3D%E6%95%99%E7%A8%8B-07-%E7%89%A9%E7%90%86%E5%BC%95%E6%93%8E%E4%B8%8E%E5%88%9A%E4%BD%93%E7%BB%84%E4%BB%B6/" class="post-title-link" itemprop="url">物理引擎与刚体组件</a>
+            <a href="/2025/05/14/Unity3D%E6%95%99%E7%A8%8B-14-%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">音频系统</a>
         </h2>
 
         <div class="post-meta">
@@ -1033,7 +1113,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-05-07 08:00:00" itemprop="dateCreated datePublished" datetime="2025-05-07T08:00:00+08:00">2025-05-07</time>
+              <time title="创建时间：2025-05-14 08:00:00" itemprop="dateCreated datePublished" datetime="2025-05-14T08:00:00+08:00">2025-05-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1058,8 +1138,8 @@
       </span>
       <span class="post-meta-item-text">Waline：</span>
     
-    <a title="waline" href="/2025/05/07/Unity3D%E6%95%99%E7%A8%8B-07-%E7%89%A9%E7%90%86%E5%BC%95%E6%93%8E%E4%B8%8E%E5%88%9A%E4%BD%93%E7%BB%84%E4%BB%B6/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2025/05/07/Unity3D%E6%95%99%E7%A8%8B-07-%E7%89%A9%E7%90%86%E5%BC%95%E6%93%8E%E4%B8%8E%E5%88%9A%E4%BD%93%E7%BB%84%E4%BB%B6/" itemprop="commentCount"></span>
+    <a title="waline" href="/2025/05/14/Unity3D%E6%95%99%E7%A8%8B-14-%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/05/14/Unity3D%E6%95%99%E7%A8%8B-14-%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1074,10 +1154,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>7.1 物理引擎概述Unity 内置 PhysX（3D）和 Box2D（2D）物理引擎，提供： 刚体动力学（力、质量、速度） 碰撞检测 关节和约束 射线检测 7.2 Rigidbody 组件基本属性 属性 说明 Mass 质量（默认 1kg） Drag 线性阻力（空气阻力） Angular Drag 角阻力 Use Gravity 是否受重力影响 Is Kinematic 启用后不受物理力驱动，可...</p>
+          <p>14.1 Audio Source 组件AudioSource 是音频播放的核心组件。 核心属性 属性 说明 AudioClip 音频文件（WAV & x2F; MP3 & x2F; OGG & x2F; AAC） Output 输出到的 Audio Mixer Group Mute 静音 Play On Awake 启动时自动播放 Loop 循环播放 Volume 音量（0 1） Pitch 音...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/05/07/Unity3D%E6%95%99%E7%A8%8B-07-%E7%89%A9%E7%90%86%E5%BC%95%E6%93%8E%E4%B8%8E%E5%88%9A%E4%BD%93%E7%BB%84%E4%BB%B6/">
+              <a class="btn" href="/2025/05/14/Unity3D%E6%95%99%E7%A8%8B-14-%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1101,7 +1181,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/05/06/Unity3D%E6%95%99%E7%A8%8B-06-%E8%BE%93%E5%85%A5%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%8E%A9%E5%AE%B6%E4%BA%A4%E4%BA%92/">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/05/13/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-13-%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AE%89%E5%85%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1115,7 +1195,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/05/06/Unity3D%E6%95%99%E7%A8%8B-06-%E8%BE%93%E5%85%A5%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%8E%A9%E5%AE%B6%E4%BA%A4%E4%BA%92/" class="post-title-link" itemprop="url">输入控制与玩家交互</a>
+            <a href="/2025/05/13/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-13-%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AE%89%E5%85%A8/" class="post-title-link" itemprop="url">C# 高级教程 - 13 加密与安全</a>
         </h2>
 
         <div class="post-meta">
@@ -1125,7 +1205,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-05-06 08:00:00" itemprop="dateCreated datePublished" datetime="2025-05-06T08:00:00+08:00">2025-05-06</time>
+              <time title="创建时间：2025-05-13 20:00:00" itemprop="dateCreated datePublished" datetime="2025-05-13T20:00:00+08:00">2025-05-13</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1133,7 +1213,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1150,8 +1230,8 @@
       </span>
       <span class="post-meta-item-text">Waline：</span>
     
-    <a title="waline" href="/2025/05/06/Unity3D%E6%95%99%E7%A8%8B-06-%E8%BE%93%E5%85%A5%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%8E%A9%E5%AE%B6%E4%BA%A4%E4%BA%92/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2025/05/06/Unity3D%E6%95%99%E7%A8%8B-06-%E8%BE%93%E5%85%A5%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%8E%A9%E5%AE%B6%E4%BA%A4%E4%BA%92/" itemprop="commentCount"></span>
+    <a title="waline" href="/2025/05/13/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-13-%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AE%89%E5%85%A8/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/05/13/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-13-%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AE%89%E5%85%A8/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1166,10 +1246,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>6.1 输入检测基础Unity 提供 Input 类处理键盘、鼠标、触控等输入。 键盘输入1234567891011121314151617181920void Update()& 123; // 按下瞬间（GetKeyDown） if (Input.GetKeyDown(KeyCode.Space)) & 123; Jump(); & 125; // 按住期间（GetKey） if (Input...</p>
+          <p>安全是现代软件开发的基石。.NET 提供了完整的安全编程基础设施，包括加密算法、哈希函数、数字签名以及安全编码实践。本文将从实际应用角度出发，讲解 .NET 中加密与安全的核心概念和最佳实践。 哈希与校验密码哈希123456789101112131415161718192021222324252627282930313233using System.Security.Cryptography;//...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/05/06/Unity3D%E6%95%99%E7%A8%8B-06-%E8%BE%93%E5%85%A5%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%8E%A9%E5%AE%B6%E4%BA%A4%E4%BA%92/">
+              <a class="btn" href="/2025/05/13/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-13-%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AE%89%E5%85%A8/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1192,7 +1272,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1260,7 +1340,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">157</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1273,7 +1353,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">55</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
