@@ -435,10 +435,11 @@
     });
 
     // Bare URL to clickable link (not inside existing <a> tag)
-    escaped = escaped.replace(/(?<!<a [^>]*>)(https?:\/\/[^\s<]+)/g, function(m, url) {
-      var isInternal = url.indexOf('bytefisher.top') !== -1 || url.indexOf('localhost') !== -1;
-      if (isInternal) return '<a href="' + url + '" target="_self">' + url.replace(/^https?:\/\//, '') + '</a>';
-      return '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + url + '</a>';
+    escaped = escaped.replace(/(?<!<a [^>]*>)(https?:\/\/[^\s<]+|www\.[^\s<]+)/g, function(m) {
+      var isInternal = m.indexOf('bytefisher.top') !== -1 || m.indexOf('localhost') !== -1;
+      var href = m.indexOf('http') === 0 ? m : 'https://' + m;
+      if (isInternal) return '<a href="' + href + '" target="_self">' + href.replace(/^https?:\/\//, '') + '</a>';
+      return '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + href + '</a>';
     });
 
     for (var key in blocks) {
