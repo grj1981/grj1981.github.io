@@ -405,7 +405,7 @@
         // AI may append HTML attributes after URL (e.g. target="_self">text), strip them
         var href = url.replace(/&amp;/g, '&').replace(/[\s>&].*$/, '');
         var isInternal = href.indexOf('bytefisher.top') !== -1 || href.indexOf('/') === 0;
-        if (isInternal) return '<a href="' + href + '" target="_self">' + txt + '</a>';
+        if (isInternal) return '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + txt + '</a>';
         return '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + txt + '</a>';
       })
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
@@ -436,10 +436,8 @@
 
     // Bare URL to clickable link (not inside existing <a> tag)
     escaped = escaped.replace(/(?<!<a [^>]*>)(https?:\/\/[^\s<]+|www\.[^\s<]+)/g, function(m) {
-      var isInternal = m.indexOf('bytefisher.top') !== -1 || m.indexOf('localhost') !== -1;
       var href = m.indexOf('http') === 0 ? m : 'https://' + m;
-      if (isInternal) return '<a href="' + href + '" target="_self">' + href.replace(/^https?:\/\//, '') + '</a>';
-      return '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + href + '</a>';
+      return '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + href.replace(/^https?:\/\//, '') + '</a>';
     });
 
     for (var key in blocks) {
