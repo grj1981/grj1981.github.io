@@ -211,6 +211,7 @@
 
     messages.push({ role: 'user', content: text });
     messages = truncateMessages(messages);
+    saveSession();
 
     isLoading = true;
     document.getElementById('ai-send').style.display = 'none';
@@ -250,6 +251,7 @@
             if (reply) {
               addMsg('bot', reply.content);
               messages.push({ role: 'assistant', content: reply.content });
+              saveSession();
             }
           });
         }
@@ -286,7 +288,7 @@
     function readChunk() {
       return reader.read().then(function(result) {
         if (result.done) {
-          if (fullReply) messages.push({ role: 'assistant', content: fullReply });
+          if (fullReply) { messages.push({ role: 'assistant', content: fullReply }); saveSession(); }
           isLoading = false;
           showStopBtn(false);
           return;
@@ -300,7 +302,7 @@
           if (!line || !line.startsWith('data: ')) continue;
           var data = line.substring(6);
           if (data === '[DONE]') {
-            if (fullReply) messages.push({ role: 'assistant', content: fullReply });
+            if (fullReply) { messages.push({ role: 'assistant', content: fullReply }); saveSession(); }
             isLoading = false;
             showStopBtn(false);
             return;
@@ -310,7 +312,7 @@
             var choice = parsed.choices && parsed.choices[0];
             if (!choice) continue;
             if (choice.finish_reason === 'stop') {
-              if (fullReply) messages.push({ role: 'assistant', content: fullReply });
+              if (fullReply) { messages.push({ role: 'assistant', content: fullReply }); saveSession(); }
               isLoading = false;
               showStopBtn(false);
               return;
@@ -432,7 +434,7 @@
     // Bare URL to clickable link (not inside existing <a> tag)
     escaped = escaped.replace(/(?<!<a [^>]*>)(https?:\/\/[^\s<]+)/g, function(m, url) {
       var isInternal = url.indexOf('bytefisher.top') !== -1 || url.indexOf('localhost') !== -1;
-      if (isInternal) return '<a href="' + url + '" target="_self">' + url + '</a>';
+      if (isInternal) return '<a href="' + url + '" target="_self">打开链接</a>';
       return '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + url + '</a>';
     });
 
@@ -497,11 +499,9 @@
     } catch(e) { /* ignore */ }
   }
 
-  window.addEventListener('beforeunload', saveSession);
-
   function init() {
-    if (document.getElementById('ai-assistant-btn')) return;
     restoreSession();
+    if (document.getElementById('ai-assistant-btn')) return;
     createBtn();
     createPanel();
     if (!isOpen) addMsg('bot', CONFIG.welcomeMessage);
