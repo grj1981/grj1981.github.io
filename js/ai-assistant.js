@@ -149,12 +149,12 @@
     if (index && index.posts && index.posts.length) {
       lines.push('博客共有 ' + index.total + ' 篇文章。');
       lines.push('');
-      lines.push('近期文章列表：');
+      lines.push('近期文章列表（包含可访问链接）：');
       var recent = index.posts.slice(0, 15);
       for (var i = 0; i < recent.length; i++) {
         var p = recent[i];
         var tagStr = p.tags && p.tags.length ? ' [' + p.tags.join('、') + ']' : '';
-        lines.push('- ' + p.date + ' ' + p.title + tagStr);
+        lines.push('- ' + p.date + ' ' + p.title + tagStr + ' → ' + p.url);
       }
     } else {
       lines.push('博客内容涵盖：Unity3D、C#、Lua、Python、钓鱼技巧、游戏开发教程。');
