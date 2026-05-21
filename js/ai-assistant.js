@@ -435,7 +435,7 @@
     });
 
     // Bare URL to clickable link (not inside existing <a> tag)
-    escaped = escaped.replace(/(?<!<a [^>]*>)(https?:\/\/[^\s<]+|www\.[^\s<]+)/g, function(m) {
+    escaped = escaped.replace(/(?<!<a [^>]*>)(https?:\/\/[^\s"'<>]+|www\.[^\s"'<>]+)/g, function(m) {
       var href = m.indexOf('http') === 0 ? m : 'https://' + m;
       return '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + href.replace(/^https?:\/\//, '') + '</a>';
     });
