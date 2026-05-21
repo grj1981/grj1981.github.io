@@ -146,10 +146,31 @@
       '作者是淡水鱼，Unity 游戏开发者 + 钓鱼爱好者。',
       '博客地址：https://www.bytefisher.top'
     ];
-    if (index && index.posts && index.posts.length) {
-      lines.push('博客共有 ' + index.total + ' 篇文章。');
+    if (index && index.meta) {
+      var m = index.meta;
       lines.push('');
-      lines.push('近期文章列表（包含可访问链接）：');
+      lines.push('博客概况（可信数据，回答基于此）：');
+      lines.push('- 文章：共 ' + m.totalPosts + ' 篇');
+      if (m.games) lines.push('- 小游戏：' + m.games.count + ' 款（' + m.games.names.join('、') + '）');
+      if (m.videos && m.videos.count) lines.push('- 钓鱼视频：' + m.videos.count + ' 个（收录在抖音专栏）');
+      if (m.albums && m.albums.count) {
+        var albumYears = m.albums.dirs.map(function(d) {
+          var y = d.match(/\d{4}/);
+          return y ? y[0] + '年鱼获' : (d === 'img2' ? '钓场风景' : (d === 'img3' ? '个人随拍' : d));
+        });
+        lines.push('- 钓鱼相册：' + m.albums.count + ' 个（' + albumYears.join('、') + '）');
+      }
+      if (m.fishing) {
+        var f = m.fishing;
+        lines.push('- 钓鱼钓点：' + f.spotsCount + ' 个（含' + (f.spotTypes ? Object.keys(f.spotTypes).join('、') : '多种') + '类型）');
+        if (f.bestSpots && f.bestSpots.length) lines.push('  热门钓点：' + f.bestSpots.join('、'));
+        if (f.species) {
+          var sp = Object.keys(f.species).filter(function(k) { return f.species[k] > 0; }).slice(0, 6);
+          if (sp.length) lines.push('- 主要鱼种：' + sp.join('、') + ' 等');
+        }
+      }
+      lines.push('');
+      lines.push('推荐文章时使用以下真实链接（站内链接在当前窗口打开，外部链接在新窗口打开）：');
       var recent = index.posts.slice(0, 15);
       for (var i = 0; i < recent.length; i++) {
         var p = recent[i];
@@ -157,12 +178,13 @@
         lines.push('- ' + p.date + ' ' + p.title + tagStr + ' → ' + p.url);
       }
     } else {
+      lines.push('博客共有 ' + (index ? index.total : 0) + ' 篇文章。');
       lines.push('博客内容涵盖：Unity3D、C#、Lua、Python、钓鱼技巧、游戏开发教程。');
     }
     lines.push('');
     lines.push('回答规则：');
     lines.push('- 简洁中文，可适当使用 emoji');
-    lines.push('- 推荐相关文章时给出文章标题');
+    lines.push('- 推荐文章时给出标题和链接');
     lines.push('- 不确定的不编造');
     return lines.join('\n');
   }
@@ -371,7 +393,10 @@
       .replace(/`([^`]+)`/g, '<code>$1</code>')
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(m, txt, url) {
         if (/^javascript:/i.test(url)) return m;
-        return '<a href="' + url.replace(/&amp;/g, '&') + '" target="_blank" rel="noopener noreferrer">' + txt + '</a>';
+        var href = url.replace(/&amp;/g, '&');
+        var isInternal = href.indexOf('bytefisher.top') !== -1 || href.indexOf('/') === 0;
+        if (isInternal) return '<a href="' + href + '" target="_self">' + txt + '</a>';
+        return '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + txt + '</a>';
       })
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/^### (.+)$/gm, '<h4>$1</h4>')
