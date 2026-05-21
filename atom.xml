@@ -11,7 +11,25 @@
   <rights>All rights reserved 2026, 淡水鱼</rights>
   <subtitle>钓鱼爱好者的编程世界</subtitle>
   <title>ByteFisher</title>
-  <updated>2026-05-19T09:08:00.745Z</updated>
+  <updated>2026-05-21T10:11:22.593Z</updated>
+  <entry>
+    <author>
+      <name>淡水鱼</name>
+    </author>
+    <category term="Hexo博客搭建" scheme="https://www.bytefisher.top/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    <category term="AI" scheme="https://www.bytefisher.top/categories/AI/"/>
+    <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
+    <category term="AI" scheme="https://www.bytefisher.top/tags/AI/"/>
+    <category term="DeepSeek" scheme="https://www.bytefisher.top/tags/DeepSeek/"/>
+    <category term="Vercel" scheme="https://www.bytefisher.top/tags/Vercel/"/>
+    <category term="博客开发" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E5%BC%80%E5%8F%91/"/>
+    <id>https://www.bytefisher.top/2026/05/21/Hexo-%E5%8D%9A%E5%AE%A2AI%E9%97%AE%E7%AD%94%E5%8A%A9%E6%89%8BByteBot%E5%85%A8%E6%A0%88%E5%AE%9E%E8%B7%B5/</id>
+    <link href="https://www.bytefisher.top/2026/05/21/Hexo-%E5%8D%9A%E5%AE%A2AI%E9%97%AE%E7%AD%94%E5%8A%A9%E6%89%8BByteBot%E5%85%A8%E6%A0%88%E5%AE%9E%E8%B7%B5/"/>
+    <published>2026-05-21T12:00:00.000Z</published>
+    <summary>ByteBot 是 ByteFisher 博客的 AI 问答助手，基于 DeepSeek API + Vercel Serverless 构建，为博客访问者提供智能问答服务。本文详细记录从最初的基础问答到全功能生产级助手的完整技术实现过程。 一、为什么需要 AI 助手ByteFisher 博客运行在 Hexo + Next 主题之上，经过多年积累已有 95+ 篇文章，涵盖 Unity3D、C 、L...</summary>
+    <title>Hexo 博客 AI 问答助手 ByteBot 全栈实践：从流式响应到 RAG 增强</title>
+    <updated>2026-05-21T10:11:22.593Z</updated>
+  </entry>
   <entry>
     <author>
       <name>淡水鱼</name>
@@ -208,9 +226,9 @@
     <category term="Hexo博客搭建" scheme="https://www.bytefisher.top/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
     <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
     <category term="Next主题" scheme="https://www.bytefisher.top/tags/Next%E4%B8%BB%E9%A2%98/"/>
+    <category term="博客开发" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E5%BC%80%E5%8F%91/"/>
     <category term="series:抖音视频集成" scheme="https://www.bytefisher.top/tags/series-%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E9%9B%86%E6%88%90/"/>
     <category term="抖音视频集成" scheme="https://www.bytefisher.top/tags/%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E9%9B%86%E6%88%90/"/>
-    <category term="博客开发" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E5%BC%80%E5%8F%91/"/>
     <id>https://www.bytefisher.top/2026/04/29/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%EF%BC%88%E7%BB%AD%EF%BC%89-%E5%BC%B9%E7%AA%97%E6%92%AD%E6%94%BE%E4%BD%93%E9%AA%8C%E4%BC%98%E5%8C%96/</id>
     <link href="https://www.bytefisher.top/2026/04/29/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%EF%BC%88%E7%BB%AD%EF%BC%89-%E5%BC%B9%E7%AA%97%E6%92%AD%E6%94%BE%E4%BD%93%E9%AA%8C%E4%BC%98%E5%8C%96/"/>
     <published>2026-04-29T12:00:00.000Z</published>
@@ -316,9 +334,9 @@
     <category term="Hexo博客搭建" scheme="https://www.bytefisher.top/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
     <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
     <category term="Next主题" scheme="https://www.bytefisher.top/tags/Next%E4%B8%BB%E9%A2%98/"/>
+    <category term="博客开发" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E5%BC%80%E5%8F%91/"/>
     <category term="series:抖音视频集成" scheme="https://www.bytefisher.top/tags/series-%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E9%9B%86%E6%88%90/"/>
     <category term="抖音视频集成" scheme="https://www.bytefisher.top/tags/%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E9%9B%86%E6%88%90/"/>
-    <category term="博客开发" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E5%BC%80%E5%8F%91/"/>
     <id>https://www.bytefisher.top/2026/04/03/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/</id>
     <link href="https://www.bytefisher.top/2026/04/03/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/"/>
     <published>2026-04-03T05:00:00.000Z</published>
@@ -342,22 +360,5 @@
     <summary>前言继俄罗斯方块之后，本文讲解扫雷游戏的开发。扫雷是 Windows 系统经典的益智小游戏，核心玩法是揭开格子找出所有安全区域，同时避免触雷。 相比俄罗斯方块，扫雷更侧重于逻辑推理和策略标记，需要实现数字计算、递归扩散、旗标标记等功能。 项目结构游戏放置在 source/ai games/minesweeper/ 目录下，文件结构如下： 123source/ai games/minesweeper...</summary>
     <title>Hexo 博客实战：扫雷小游戏开发指南</title>
     <updated>2026-05-14T08:31:52.692Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>淡水鱼</name>
-    </author>
-    <category term="编程" scheme="https://www.bytefisher.top/categories/%E7%BC%96%E7%A8%8B/"/>
-    <category term="游戏开发" scheme="https://www.bytefisher.top/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
-    <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
-    <category term="JavaScript" scheme="https://www.bytefisher.top/tags/JavaScript/"/>
-    <category term="游戏开发" scheme="https://www.bytefisher.top/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
-    <category term="series:博客实战-小游戏" scheme="https://www.bytefisher.top/tags/series-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E6%B8%B8%E6%88%8F/"/>
-    <id>https://www.bytefisher.top/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BF%84%E7%BD%97%E6%96%AF%E6%96%B9%E5%9D%97%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</id>
-    <link href="https://www.bytefisher.top/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BF%84%E7%BD%97%E6%96%AF%E6%96%B9%E5%9D%97%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/"/>
-    <published>2026-03-27T13:00:00.000Z</published>
-    <summary>前言继上一篇文章介绍贪吃蛇小游戏的实现方案后，本文继续讲解俄罗斯方块游戏的开发。相比贪吃蛇，俄罗斯方块的实现更加复杂，涉及方块旋转、多行消除、速度递增等机制。 通过这个案例，可以学习到如何用原生 JavaScript 实现经典的方块下落消除游戏。 项目结构游戏放置在 source/ai games/tetris/ 目录下，文件结构如下： 123source/ai games/tetris/├──...</summary>
-    <title>Hexo 博客实战：俄罗斯方块小游戏开发指南</title>
-    <updated>2026-05-14T08:31:52.691Z</updated>
   </entry>
 </feed>
