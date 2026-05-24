@@ -19,7 +19,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
@@ -28,12 +28,12 @@
   <meta name="description" content="行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策逻辑，每个节点代表一个行为或条件。下面是对Unity行为树的概要及用法的解释： 行为树概要节点类型 选择器（Selector）：会从上到下依次尝试子节点，直到有一个子节点成功执行。 序列器（Sequence）：会从上到下依次执行子节点，直到">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C#学习笔记【行为树】">
-<meta property="og:url" content="https://www.bytefisher.top/2025/05/19/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%A1%8C%E4%B8%BA%E6%A0%91%E3%80%91/index.html">
+<meta property="og:url" content="https://www.bytefisher.top/2025/05/19/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%A1%8C%E4%B8%BA%E6%A0%91%E3%80%91/">
 <meta property="og:site_name" content="ByteFisher">
 <meta property="og:description" content="行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策逻辑，每个节点代表一个行为或条件。下面是对Unity行为树的概要及用法的解释： 行为树概要节点类型 选择器（Selector）：会从上到下依次尝试子节点，直到有一个子节点成功执行。 序列器（Sequence）：会从上到下依次执行子节点，直到">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-05-19T08:18:34.000Z">
-<meta property="article:modified_time" content="2026-05-12T13:42:10.091Z">
+<meta property="article:modified_time" content="2026-05-24T12:19:52.970Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="C#">
 <meta property="article:tag" content="IT">
@@ -43,8 +43,8 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/05/19/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%A1%8C%E4%B8%BA%E6%A0%91%E3%80%91/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C#学习笔记【行为树】","description":"行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策逻辑，每个节点代表一个行为或条件。下面是对Unity行为树的概要及用法的解释： 行为树概要节点类型 选择器（Selector）：会从上到下依次尝试子节点，直到有一个子节点成功执行。 序列器（Sequence）：会从上到下依次执行子节点，直到...","url":"https://www.bytefisher.top/2025/05/19/C-学习笔记【行为树】/","datePublished":"2025-05-19T08:18:34.000Z","dateModified":"2026-05-12T13:42:10.091Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/05/19/C-学习笔记【行为树】/"},"keywords":"Unity3D, IT, C#, series:C#学习笔记"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Unity3D","item":"https://www.bytefisher.top/categories/Unity3D/"},{"@type":"ListItem","position":3,"name":"C#学习笔记【行为树】"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C#学习笔记【行为树】","description":"行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策逻辑，每个节点代表一个行为或条件。下面是对Unity行为树的概要及用法的解释： 行为树概要节点类型 选择器（Selector）：会从上到下依次尝试子节点，直到有一个子节点成功执行。 序列器（Sequence）：会从上到下依次执行子节点，直到...","url":"https://www.bytefisher.top/2025/05/19/C-学习笔记【行为树】/","datePublished":"2025-05-19T08:18:34.000Z","dateModified":"2026-05-24T12:19:52.970Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/05/19/C-学习笔记【行为树】/"},"keywords":"C#, IT, series:C#学习笔记, Unity3D"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"C#","item":"https://www.bytefisher.top/categories/C/"},{"@type":"ListItem","position":3,"name":"C#学习笔记【行为树】"}]}</script>
 
 
 <script id="page-configurations">
@@ -99,6 +99,7 @@
 
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#37c6c0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
 </head>
 
@@ -148,6 +149,11 @@
     <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
 
   </li>
+        <li class="menu-item menu-item-tutorials">
+
+    <a href="/tutorials/" rel="section"><i class="fa fa-book fa-fw"></i>教程</a>
+
+  </li>
         <li class="menu-item menu-item-fish">
 
     <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
@@ -155,7 +161,7 @@
   </li>
         <li class="menu-item menu-item-aigames">
 
-    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">5</span></a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">6</span></a>
 
   </li>
         <li class="menu-item menu-item-douyin">
@@ -165,17 +171,17 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">12</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">13</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">100</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">198</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">49</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">57</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -247,7 +253,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -273,15 +279,15 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
                 </span>
             </span>
 
@@ -393,19 +399,19 @@
 <li>检测玩家脚本：</li>
 </ul>
 <p>创建一个C#脚本，命名为CheckPlayerNearby，用于检测玩家是否在附近。	</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">using UnityEngine;</span><br><span class="line">using UnityEngine.AI;</span><br><span class="line">using UnityEngine.BehaviorTree;</span><br><span class="line"></span><br><span class="line">public class CheckPlayerNearby : BehaviorTreeNode</span><br><span class="line">&#123;</span><br><span class="line">    public float detectionDistance = 5f;</span><br><span class="line">    private Transform player;</span><br><span class="line">    private NavMeshAgent navMeshAgent;</span><br><span class="line"></span><br><span class="line">    protected override void OnStart()</span><br><span class="line">    &#123;</span><br><span class="line">        player = GameObject.FindGameObjectWithTag(&quot;Player&quot;).transform;</span><br><span class="line">        navMeshAgent = GetComponent&lt;NavMeshAgent&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected override NodeState OnRun()</span><br><span class="line">    &#123;</span><br><span class="line">        if (player != null &amp;&amp; Vector3.Distance(transform.position, player.position) &lt;= detectionDistance)</span><br><span class="line">        &#123;</span><br><span class="line">            return NodeState.Success;</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            return NodeState.Failure;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.AI;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.BehaviorTree;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CheckPlayerNearby</span> : <span class="title">BehaviorTreeNode</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">float</span> detectionDistance = <span class="number">5f</span>;</span><br><span class="line">    <span class="keyword">private</span> Transform player;</span><br><span class="line">    <span class="keyword">private</span> NavMeshAgent navMeshAgent;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnStart</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        player = GameObject.FindGameObjectWithTag(<span class="string">&quot;Player&quot;</span>).transform;</span><br><span class="line">        navMeshAgent = GetComponent&lt;NavMeshAgent&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> NodeState <span class="title">OnRun</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (player != <span class="literal">null</span> &amp;&amp; Vector3.Distance(transform.position, player.position) &lt;= detectionDistance)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> NodeState.Success;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> NodeState.Failure;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <ul>
 <li>巡逻脚本：</li>
 </ul>
 <p>创建一个C#脚本，命名为Patrol，用于控制敌人巡逻。</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">using UnityEngine;</span><br><span class="line">using UnityEngine.BehaviorTree;</span><br><span class="line">using UnityEngine.AI;</span><br><span class="line"></span><br><span class="line">public class Patrol : BehaviorTreeNode</span><br><span class="line">&#123;</span><br><span class="line">    public Transform[] patrolPoints;</span><br><span class="line">    private int currentPointIndex = 0;</span><br><span class="line">    private NavMeshAgent navMeshAgent;</span><br><span class="line"></span><br><span class="line">    protected override void OnStart()</span><br><span class="line">    &#123;</span><br><span class="line">        navMeshAgent = GetComponent&lt;NavMeshAgent&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected override NodeState OnRun()</span><br><span class="line">    &#123;</span><br><span class="line">        navMeshAgent.SetDestination(patrolPoints[currentPointIndex].position);</span><br><span class="line"></span><br><span class="line">        if (navMeshAgent.remainingDistance &lt;= navMeshAgent.stoppingDistance)</span><br><span class="line">        &#123;</span><br><span class="line">            currentPointIndex = (currentPointIndex + 1) % patrolPoints.Length;</span><br><span class="line">            return NodeState.Success;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return NodeState.Running;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.BehaviorTree;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.AI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Patrol</span> : <span class="title">BehaviorTreeNode</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> Transform[] patrolPoints;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">int</span> currentPointIndex = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> NavMeshAgent navMeshAgent;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnStart</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        navMeshAgent = GetComponent&lt;NavMeshAgent&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> NodeState <span class="title">OnRun</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        navMeshAgent.SetDestination(patrolPoints[currentPointIndex].position);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (navMeshAgent.remainingDistance &lt;= navMeshAgent.stoppingDistance)</span><br><span class="line">        &#123;</span><br><span class="line">            currentPointIndex = (currentPointIndex + <span class="number">1</span>) % patrolPoints.Length;</span><br><span class="line">            <span class="keyword">return</span> NodeState.Success;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> NodeState.Running;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <ul>
 <li>攻击玩家脚本：</li>
 </ul>
 <p>创建一个C#脚本，命名为AttackPlayer，用于控制敌人攻击玩家。</p>
-<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">using UnityEngine;</span><br><span class="line">using UnityEngine.BehaviorTree;</span><br><span class="line">using UnityEngine.AI;</span><br><span class="line"></span><br><span class="line">public class AttackPlayer : BehaviorTreeNode</span><br><span class="line">&#123;</span><br><span class="line">    public float attackDistance = 2f;</span><br><span class="line">    private Transform player;</span><br><span class="line">    private NavMeshAgent navMeshAgent;</span><br><span class="line"></span><br><span class="line">    protected override void OnStart()</span><br><span class="line">    &#123;</span><br><span class="line">        player = GameObject.FindGameObjectWithTag(&quot;Player&quot;).transform;</span><br><span class="line">        navMeshAgent = GetComponent&lt;NavMeshAgent&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected override NodeState OnRun()</span><br><span class="line">    &#123;</span><br><span class="line">        if (player != null &amp;&amp; Vector3.Distance(transform.position, player.position) &lt;= attackDistance)</span><br><span class="line">        &#123;</span><br><span class="line">            navMeshAgent.SetDestination(transform.position); // Stop moving</span><br><span class="line">            Debug.Log(&quot;Attacking Player&quot;);</span><br><span class="line">            return NodeState.Success;</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            navMeshAgent.SetDestination(player.position); // Move towards player</span><br><span class="line">            return NodeState.Running;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.BehaviorTree;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.AI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttackPlayer</span> : <span class="title">BehaviorTreeNode</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">float</span> attackDistance = <span class="number">2f</span>;</span><br><span class="line">    <span class="keyword">private</span> Transform player;</span><br><span class="line">    <span class="keyword">private</span> NavMeshAgent navMeshAgent;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnStart</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        player = GameObject.FindGameObjectWithTag(<span class="string">&quot;Player&quot;</span>).transform;</span><br><span class="line">        navMeshAgent = GetComponent&lt;NavMeshAgent&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> NodeState <span class="title">OnRun</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (player != <span class="literal">null</span> &amp;&amp; Vector3.Distance(transform.position, player.position) &lt;= attackDistance)</span><br><span class="line">        &#123;</span><br><span class="line">            navMeshAgent.SetDestination(transform.position); <span class="comment">// Stop moving</span></span><br><span class="line">            Debug.Log(<span class="string">&quot;Attacking Player&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> NodeState.Success;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            navMeshAgent.SetDestination(player.position); <span class="comment">// Move towards player</span></span><br><span class="line">            <span class="keyword">return</span> NodeState.Running;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <h2 id="配置行为树"><a href="#配置行为树" class="headerlink" title="配置行为树"></a>配置行为树</h2><ul>
 <li><p>配置行为树节点：<br>在行为树编辑器中，选择条件节点Check if Player is Detected，将其Type设置为Custom，并将Custom Type设置为CheckPlayerNearby。<br>选择动作节点Patrol，将其Type设置为Custom，并将Custom Type设置为Patrol。<br>选择动作节点Attack Player，将其Type设置为Custom，并将Custom Type设置为AttackPlayer。</p>
@@ -423,10 +429,10 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
-              <a href="/tags/IT/" rel="tag"># IT</a>
               <a href="/tags/C/" rel="tag"># C#</a>
+              <a href="/tags/IT/" rel="tag"># IT</a>
               <a href="/tags/series-C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># series:C#学习笔记</a>
+              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
           </div>
 
         
@@ -435,12 +441,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/04/17/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%96%E6%B6%88%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E3%80%91/" rel="prev" title="C#学习笔记【取消异步操作】">
-      <i class="fa fa-chevron-left"></i> C#学习笔记【取消异步操作】
+    <a href="/2025/05/19/Unity3D%E6%95%99%E7%A8%8B-19-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%85%A5%E9%97%A8/" rel="prev" title="性能优化入门">
+      <i class="fa fa-chevron-left"></i> 性能优化入门
     </a></div>
       <div class="post-nav-item">
-    <a href="/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-%E6%8F%92%E4%BB%B6-%E6%89%93%E9%80%A0%E9%AB%98%E6%95%88%E7%8E%87%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0-AI-%E7%A8%8B%E5%BA%8F%E5%91%98%E2%80%9D/" rel="next" title="Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员”">
-      Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员” <i class="fa fa-chevron-right"></i>
+    <a href="/2025/05/19/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-16-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" rel="next" title="C# 高级教程 - 16 依赖注入">
+      C# 高级教程 - 16 依赖注入 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -537,27 +543,27 @@
     <img class="site-author-image" itemprop="image" alt="淡水鱼"
       src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">淡水鱼</p>
-  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">198</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -580,7 +586,7 @@
 
 
       </div>
-	  <iframe id="music-player" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <iframe id="music-player" allow="encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
 	  <div class="wechat_OA">
 		<span>欢迎关注我的公众号</span>
 		<!-- 这里添加你的二维码图片 -->
@@ -772,15 +778,16 @@ window.addEventListener('pjax:success', () => {
 
 
     <div id="pjax">
-  
+    
 
   
 
-  
+    
 
+    </div>
 
 <link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
-<script>
+<script data-pjax>
 (function() {
   var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
 
@@ -835,7 +842,7 @@ window.addEventListener('pjax:success', () => {
 })();
 </script>
 
-<script>
+<script data-pjax>
 (function() {
   var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
   function fetchAll() {
@@ -1307,6 +1314,5 @@ if ('serviceWorker' in navigator) {
     });
 })();
 </script>
-    </div>
 </body>
 </html>

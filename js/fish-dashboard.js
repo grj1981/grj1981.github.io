@@ -18,14 +18,18 @@
   }
 
   function renderStats(data) {
-    document.getElementById('total-photos').textContent = data.totalPhotos;
+    document.getElementById('total-photos').textContent = data.totalFishPhotos;
     document.getElementById('total-years').textContent = data.totalYears;
     document.getElementById('avg-yearly').textContent =
-      (data.totalPhotos / data.totalYears).toFixed(1);
+      (data.totalFishPhotos / data.totalYears).toFixed(1);
     var best = data.yearlyData.reduce(function(a, b) {
       return a.count > b.count ? a : b;
     });
     document.getElementById('best-year').textContent = best.year;
+    var sceneryEl = document.getElementById('total-scenery');
+    if (sceneryEl) sceneryEl.textContent = data.totalScenery;
+    var snapshotsEl = document.getElementById('total-snapshots');
+    if (snapshotsEl) snapshotsEl.textContent = data.totalSnapshots;
   }
 
   function renderYearlyChart(data) {
@@ -68,7 +72,7 @@
         values.push(data.speciesStats[key]);
       }
     });
-    var colors = ['#37c6c0', '#ff6b6b', '#ffd93d', '#6bcb77', '#4d96ff', '#c9c9c9', '#f0a050', '#a855f7', '#66d9e8', '#e879f9'];
+    var colors = ['#37c6c0', '#ff6b6b', '#ffd93d', '#6bcb77', '#4d96ff', '#c9c9c9', '#f0a050', '#a855f7', '#66d9e8', '#e879f9', '#2ec4b6', '#e71d36', '#ff9f1c', '#011627', '#fcca46', '#a01a7d', '#7cb518', '#5c4d7d', '#d81159', '#218380'];
     new Chart(ctx, {
       type: 'doughnut',
       data: {

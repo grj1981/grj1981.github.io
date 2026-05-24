@@ -19,21 +19,21 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
-  <meta name="description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+  <meta name="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ByteFisher">
-<meta property="og:url" content="https://www.bytefisher.top/archives/page/3/index.html">
+<meta property="og:url" content="https://www.bytefisher.top/archives/page/3/">
 <meta property="og:site_name" content="ByteFisher">
-<meta property="og:description" content="结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。">
+<meta property="og:description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="淡水鱼">
-<meta property="article:tag" content="unity,手游开发,编程,flash开发,钓鱼">
+<meta property="article:tag" content="unity,游戏开发,C#,Lua,Python,Hexo,博客,钓鱼,教程,编程">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://www.bytefisher.top/archives/page/3/">
@@ -93,6 +93,7 @@
 
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#37c6c0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
 </head>
 
@@ -142,6 +143,11 @@
     <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
 
   </li>
+        <li class="menu-item menu-item-tutorials">
+
+    <a href="/tutorials/" rel="section"><i class="fa fa-book fa-fw"></i>教程</a>
+
+  </li>
         <li class="menu-item menu-item-fish">
 
     <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
@@ -149,7 +155,7 @@
   </li>
         <li class="menu-item menu-item-aigames">
 
-    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">5</span></a>
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">6</span></a>
 
   </li>
         <li class="menu-item menu-item-douyin">
@@ -159,17 +165,17 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">12</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">13</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">100</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">198</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">49</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">57</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -239,21 +245,81 @@
     <div class="posts-collapse">
       <div class="collection-title">
         
-        <span class="collection-header">很好! 目前共计 100 篇日志。 继续努力。</span>
+        <span class="collection-header">非常好! 目前共计 198 篇日志。 继续努力。</span>
       </div>
 
       <div class="archive-summary">
-        <span>共 100 篇文章</span>
+        <span>共 198 篇文章</span>
         <span>｜</span>
-        <span>最新更新：2026-04-26</span>
+        <span>最新更新：2026-05-01</span>
         <span>｜</span>
-        <span>最早文章：2023-12-16</span>
+        <span>最早文章：2023-11-26</span>
       </div>
 
       
     <div class="collection-year">
       <span class="collection-header">2026</span>
     </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2026-03-27T21:00:00+08:00"
+              content="2026-03-27">
+          03-27
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BF%84%E7%BD%97%E6%96%AF%E6%96%B9%E5%9D%97%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" itemprop="url">
+            <span itemprop="name">Hexo 博客实战：俄罗斯方块小游戏开发指南</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2026-03-27T20:00:00+08:00"
+              content="2026-03-27">
+          03-27
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2026/03/27/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" itemprop="url">
+            <span itemprop="name">Hexo 博客实战：贪吃蛇小游戏开发指南</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2026-03-24T20:00:00+08:00"
+              content="2026-03-24">
+          03-24
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" itemprop="url">
+            <span itemprop="name">VSCode 中搭建 OpenCode AI 编程助手完整指南</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
 
   <article itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -283,15 +349,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2025-05-19T16:18:34+08:00"
-              content="2025-05-19">
-          05-19
+              datetime="2025-06-15T08:00:00+08:00"
+              content="2025-06-15">
+          06-15
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2025/05/19/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%A1%8C%E4%B8%BA%E6%A0%91%E3%80%91/" itemprop="url">
-            <span itemprop="name">C#学习笔记【行为树】</span>
+          <a class="post-title-link" href="/2025/06/15/Lua%E6%95%99%E7%A8%8B-15-%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" itemprop="url">
+            <span itemprop="name">综合实战：命令行通讯录管理系统</span>
           </a>
       </div>
 
@@ -303,15 +369,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2025-04-17T14:17:54+08:00"
-              content="2025-04-17">
-          04-17
+              datetime="2025-06-14T08:00:00+08:00"
+              content="2025-06-14">
+          06-14
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2025/04/17/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%96%E6%B6%88%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E3%80%91/" itemprop="url">
-            <span itemprop="name">C#学习笔记【取消异步操作】</span>
+          <a class="post-title-link" href="/2025/06/14/Lua%E6%95%99%E7%A8%8B-14-%E6%A0%87%E5%87%86%E5%BA%93%E4%B8%8E%E6%96%87%E4%BB%B6IO/" itemprop="url">
+            <span itemprop="name">标准库与文件 I/O</span>
           </a>
       </div>
 
@@ -323,15 +389,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2025-03-14T16:52:24+08:00"
-              content="2025-03-14">
-          03-14
+              datetime="2025-06-13T08:00:00+08:00"
+              content="2025-06-13">
+          06-13
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2025/03/14/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90DOTween%E5%BA%93%E3%80%91/" itemprop="url">
-            <span itemprop="name">C#学习笔记【DOTween库】</span>
+          <a class="post-title-link" href="/2025/06/13/Lua%E6%95%99%E7%A8%8B-13-%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%8C%85%E7%AE%A1%E7%90%86/" itemprop="url">
+            <span itemprop="name">模块与包管理</span>
           </a>
       </div>
 
@@ -343,15 +409,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2025-02-05T17:46:14+08:00"
-              content="2025-02-05">
-          02-05
+              datetime="2025-06-12T08:00:00+08:00"
+              content="2025-06-12">
+          06-12
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/" itemprop="url">
-            <span itemprop="name">C#学习笔记【集合Collection】</span>
+          <a class="post-title-link" href="/2025/06/12/Lua%E6%95%99%E7%A8%8B-12-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" itemprop="url">
+            <span itemprop="name">面向对象编程</span>
           </a>
       </div>
 
@@ -363,15 +429,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2025-02-05T16:43:10+08:00"
-              content="2025-02-05">
-          02-05
+              datetime="2025-06-11T08:00:00+08:00"
+              content="2025-06-11">
+          06-11
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%BA%8B%E4%BB%B6Event%E3%80%91/" itemprop="url">
-            <span itemprop="name">C#学习笔记【事件Event】</span>
+          <a class="post-title-link" href="/2025/06/11/Lua%E6%95%99%E7%A8%8B-11-%E5%85%83%E8%A1%A8%E4%B8%8E%E5%85%83%E6%96%B9%E6%B3%95/" itemprop="url">
+            <span itemprop="name">元表（Metatable）与元方法</span>
           </a>
       </div>
 
@@ -383,75 +449,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2025-02-05T15:39:03+08:00"
-              content="2025-02-05">
-          02-05
+              datetime="2025-06-10T08:00:00+08:00"
+              content="2025-06-10">
+          06-10
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/" itemprop="url">
-            <span itemprop="name">C#学习笔记【委托Delegate】</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2025-02-05T15:23:12+08:00"
-              content="2025-02-05">
-          02-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/" itemprop="url">
-            <span itemprop="name">C#学习笔记【索引器Indexer】</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2025-02-05T14:59:27+08:00"
-              content="2025-02-05">
-          02-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/" itemprop="url">
-            <span itemprop="name">C#学习笔记【属性Property】</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2025-02-05T14:27:15+08:00"
-              content="2025-02-05">
-          02-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/" itemprop="url">
-            <span itemprop="name">C#学习笔记【反射Reflection】</span>
+          <a class="post-title-link" href="/2025/06/10/Lua%E6%95%99%E7%A8%8B-10-%E8%A1%A8%E7%9A%84%E6%B7%B1%E5%85%A5%E5%BA%94%E7%94%A8/" itemprop="url">
+            <span itemprop="name">表的深入应用</span>
           </a>
       </div>
 
@@ -467,13 +473,14 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/10/">10</a><a class="extend next" rel="next" href="/archives/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/archives/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/20/">20</a><a class="extend next" rel="next" href="/archives/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
 
           </div>
           
+    <div class="comments" id="waline-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -528,27 +535,27 @@
     <img class="site-author-image" itemprop="image" alt="淡水鱼"
       src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">淡水鱼</p>
-  <div class="site-description" itemprop="description">结合编程和钓鱼，我们创造了一个独特的空间，给予爱好者们一个交流、学习和分享的平台。无论你是在代码中垂钓大鱼，还是钓鱼间歇性的编码，这里都能满足你的需求。</div>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">198</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -571,7 +578,7 @@
 
 
       </div>
-	  <iframe id="music-player" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <iframe id="music-player" allow="encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
 	  <div class="wechat_OA">
 		<span>欢迎关注我的公众号</span>
 		<!-- 这里添加你的二维码图片 -->
@@ -763,15 +770,16 @@ window.addEventListener('pjax:success', () => {
 
 
     <div id="pjax">
-  
+    
 
   
 
-  
+    
 
+    </div>
 
 <link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
-<script>
+<script data-pjax>
 (function() {
   var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
 
@@ -826,7 +834,7 @@ window.addEventListener('pjax:success', () => {
 })();
 </script>
 
-<script>
+<script data-pjax>
 (function() {
   var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
   function fetchAll() {
@@ -1298,6 +1306,5 @@ if ('serviceWorker' in navigator) {
     });
 })();
 </script>
-    </div>
 </body>
 </html>
