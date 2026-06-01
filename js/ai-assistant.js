@@ -236,7 +236,7 @@
   function rankArticles(question, posts) {
     if (!question || !posts || !posts.length) return [];
     var keywords = extractKeywords(question);
-    if (keywords.length === 0) return posts.slice(0, 5);
+    if (keywords.length === 0) return posts.slice(0, 10);
     var scored = posts.map(function(post) {
       var score = 0;
       var title = (post.title || '').toLowerCase();
@@ -257,8 +257,8 @@
       return { post: post, score: score };
     });
     scored.sort(function(a, b) { return b.score - a.score; });
-    var matched = scored.filter(function(s) { return s.score > 0; }).slice(0, 5).map(function(s) { return s.post; });
-    return matched.length > 0 ? matched : posts.slice(0, 5);
+    var matched = scored.filter(function(s) { return s.score > 0; }).slice(0, 10).map(function(s) { return s.post; });
+    return matched.length > 0 ? matched : posts.slice(0, 10);
   }
 
   /* ---------- System prompt ---------- */
@@ -313,8 +313,8 @@
       lines.push('');
       lines.push('推荐文章时直接复制下方整行 Markdown 链接：');
       lines.push('');
-      lines.push('可推荐的文章（与用户问题相关）：');
-      var articles = topArticles && topArticles.length ? topArticles : index.posts.slice(0, 5);
+      lines.push('可推荐的文章（与用户问题相关，仅限以下列表，严禁编造）：');
+      var articles = topArticles && topArticles.length ? topArticles : index.posts.slice(0, 10);
       for (var i = 0; i < articles.length; i++) {
         var p = articles[i];
         lines.push('- [' + p.title.replace(/\]/g, '\\]') + '](' + p.url + ')');
@@ -342,7 +342,17 @@
     lines.push('- **严禁**只写纯文本标题而不带链接，用户必须能点击访问');
     lines.push('- 如果用户问某个系列的某个知识点，优先推荐该系列文章，并说明是第几篇');
     lines.push('- 如果文章有章节信息，可以告诉用户相关内容在哪个章节');
-    lines.push('- 不确定的不编造');
+    lines.push('');
+    lines.push('⚠️ **系列文章推荐格式**：');
+    lines.push('- 链接文本 `[ ]` 中**必须**使用原文标题，不能自行概括或用章节名代替');
+    lines.push('  ✅ 正确：`- [基本语法与数据类型](URL) —— 第 2 篇（注释、标识符、关键字）`');
+    lines.push('  ❌ 错误：`- [注释、标识符与关键字](URL) —— 第 2 篇`');
+    lines.push('  ❌ 错误：`- 注释、标识符与关键字 —— 第 2 篇`');
+    lines.push('- 章节名、摘要等补充说明放在 `](URL)` 之后，不要写入链接文本');
+    lines.push('');
+    lines.push('⚠️ **重要规则**：');
+    lines.push('- **严禁编造不存在的文章标题或 URL**');
+    lines.push('- 如果实在找不到相关内容，如实说"博客目前还没有这方面的文章"');
     return lines.join('\n');
   }
 
@@ -565,15 +575,61 @@
 
   function preLinkArticles(text) {
     if (!postsIndexCache || !postsIndexCache.posts) return text;
+
+    function norm(s) {
+      return s.replace(/\s/g, '')
+              .replace(/[－—–―]/g, '-')
+              .replace(/[：:]/g, ':')
+              .replace(/[；;]/g, ';')
+              .replace(/[，,]/g, ',')
+              .replace(/[。.]/g, '.')
+              .replace(/[（(]/g, '(')
+              .replace(/[）)]/g, ')')
+              .replace(/[／/]/g, '/')
+              .replace(/[’']/g, "'")
+              .replace(/[“”]/g, '"')
+              .replace(/[Ａ-Ｚ]/g, function(c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
+              .replace(/[ａ-ｚ]/g, function(c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
+              .replace(/[０-９]/g, function(c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
+              .replace(/[＃]/g, '#');
+    }
+
+    function looksLikeTitle(line) {
+      var plain = line.replace(/\s/g, '');
+      if (plain.length < 8 || plain.length > 60) return false;
+      if (line.indexOf('：') !== -1) return true;
+      if (/第\s*\d+\s*篇/.test(line)) return true;
+      if (/^(Hexo|Unity|C#|C＃|Python|Lua|CSharp|VSCode|OpenCode|Next|Ollama)/.test(line)) return true;
+      return false;
+    }
+
+    function findBestArticle(line, articles) {
+      var keywords = extractKeywords(line);
+      if (!keywords || keywords.length < 2) return null;
+      var best = null, bestScore = 0;
+      for (var i = 0; i < articles.length; i++) {
+        var score = 0;
+        var title = (articles[i].title || '').toLowerCase();
+        var tags = (articles[i].tags || []).join(' ').toLowerCase();
+        for (var k = 0; k < keywords.length; k++) {
+          var kw = keywords[k].toLowerCase();
+          if (title.indexOf(kw) !== -1) score += 3;
+          else if (tags.indexOf(kw) !== -1) score += 2;
+        }
+        if (score > bestScore) { bestScore = score; best = articles[i]; }
+      }
+      return bestScore >= 6 ? best : null;
+    }
+
     var sorted = postsIndexCache.posts.slice().sort(function(a, b) { return b.title.length - a.title.length; });
     var lines = text.split('\n');
     for (var li = 0; li < lines.length; li++) {
       var line = lines[li].trim();
       if (!line || line.indexOf('[') === 0) continue;
-      var normLine = line.replace(/\s/g, '');
+      var normLine = norm(line);
       for (var pi = 0; pi < sorted.length; pi++) {
         var title = sorted[pi].title;
-        var normTitle = title.replace(/\s/g, '');
+        var normTitle = norm(title);
         if (normLine === normTitle || normLine.indexOf(normTitle) === 0) {
           var rest = line.substring(title.length);
           var url = sorted[pi].url.replace(/^https?:\/\/[^\/]+/, '');
@@ -582,11 +638,81 @@
         }
       }
     }
+
+    // Fallback: fuzzy match remaining title-like lines
+    for (var li = 0; li < lines.length; li++) {
+      var line = lines[li].trim();
+      if (!line || line.indexOf('[') === 0) continue;
+      if (!looksLikeTitle(line)) continue;
+      var best = findBestArticle(line, sorted);
+      if (best) {
+        var url = best.url.replace(/^https?:\/\/[^\/]+/, '');
+        lines[li] = '[' + best.title + '](' + url + ')';
+      } else {
+        lines[li] = '';
+      }
+    }
+
     return lines.join('\n');
+  }
+
+  /* ---------- URL validation ---------- */
+  function validateLinks(text, index) {
+    if (!index || !index.posts || !index.posts.length) return text;
+
+    var articleUrls = {};
+    for (var i = 0; i < index.posts.length; i++) {
+      var relUrl = index.posts[i].url.replace(/^https?:\/\/[^\/]+/, '');
+      articleUrls[relUrl] = index.posts[i].title;
+    }
+
+    var pathPrefixes = [
+      '/fish/', '/ai-games/', '/douyin/',
+      '/about/', '/guestbook/', '/tutorials/', '/program/',
+      '/tags/', '/categories/', '/archives/',
+      '/page/', '/images/', '/css/', '/js/', '/lib/',
+      '/search.xml', '/atom.xml', '/sitemap.xml',
+      '/sitemap_images.xml', '/api/'
+    ];
+
+    return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) {
+      var relUrl = url.replace(/^https?:\/\/[^\/]+/, '');
+
+      // External URL → pass through
+      if (url.indexOf('://') !== -1 && url.indexOf('bytefisher.top') === -1) return match;
+
+      // Known article URL → pass
+      if (articleUrls[relUrl]) return match;
+
+      // Matches a known path prefix → pass (tags, categories, albums, etc.)
+      for (var p = 0; p < pathPrefixes.length; p++) {
+        if (relUrl.indexOf(pathPrefixes[p]) === 0) return match;
+      }
+
+      // Root path
+      if (relUrl === '/' || relUrl === '') return match;
+
+      // Try to match link text to article title → auto-correct URL
+      for (var i = 0; i < index.posts.length; i++) {
+        if (index.posts[i].title === linkText) {
+          return '[' + linkText + '](' + index.posts[i].url.replace(/^https?:\/\/[^\/]+/, '') + ')';
+        }
+      }
+      // Partial title match → auto-correct
+      for (var i = 0; i < index.posts.length; i++) {
+        if (index.posts[i].title.indexOf(linkText) !== -1 || linkText.indexOf(index.posts[i].title) !== -1) {
+          return '[' + linkText + '](' + index.posts[i].url.replace(/^https?:\/\/[^\/]+/, '') + ')';
+        }
+      }
+
+      // Cannot fix — strip link, keep plain text
+      return linkText;
+    });
   }
 
   function render(text) {
     text = preLinkArticles(text);
+    text = validateLinks(text, postsIndexCache);
     if (typeof marked === 'undefined') {
       return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
