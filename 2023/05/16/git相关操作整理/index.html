@@ -179,12 +179,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">220</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">221</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">58</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">59</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -391,7 +391,7 @@ git如何避免”warning: LF will be replaced by CRLF“提示？ ##
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>打开github，在头像下面点击settings，再点击SSH and GPG keys，新建一个SSH，名字随便。将输出的内容复制到框中，点击确定保存。</p>
-<p>输入ssh -T <a href="mailto:&#103;&#x69;&#x74;&#x40;&#103;&#x69;&#x74;&#x68;&#x75;&#x62;&#x2e;&#99;&#x6f;&#109;">git@github.com</a>，如果出现你的用户名，验证成功。</p>
+<p>输入ssh -T <a href="mailto:&#103;&#x69;&#116;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#111;&#x6d;">git@github.com</a>，如果出现你的用户名，验证成功。</p>
 <p>打开博客根目录下的_config.yml文件，这是博客的配置文件，在这里你可以修改与博客相关的各种信息。</p>
 <p>修改最后一行的配置：</p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">	type: git</span><br><span class="line">	repository: https://github.com/godweiyang/godweiyang.github.io</span><br><span class="line">	branch: master</span><br></pre></td></tr></table></figure>
@@ -411,12 +411,22 @@ git如何避免”warning: LF will be replaced by CRLF“提示？ ##
 <h2 id="强制拉取并覆盖本地（更彻底的放弃，不推荐）"><a href="#强制拉取并覆盖本地（更彻底的放弃，不推荐）" class="headerlink" title="- 强制拉取并覆盖本地（更彻底的放弃，不推荐）"></a>- 强制拉取并覆盖本地（更彻底的放弃，不推荐）</h2><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/master   # 本地所有未提交的修改都会丢失！</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>注意：reset –hard 会丢弃所有未提交的修改，包括已暂存但未提交的内容，务必确认不再需要这些改动再执行。</p>
-<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2026/04/21/OpenCode中接入Qwen模型配置指南/" class="related-post-item" title="OpenCode 中接入 Qwen 模型完整指南"><span class="related-post-title">OpenCode 中接入 Qwen 模型完整指南</span><span class="related-post-date">2026-04-21</span><span class="related-post-desc">详细介绍如何在 OpenCode 中接入阿里云通义千问 Qwen 模型，包括注册阿里云账号、获取 API Key、配置 providers 文件、模型参数调优，以及与其他模型的成本对比。</span></a><a href="/2026/03/24/VSCode中搭建OpenCode-AI编程助手完整指南/" class="related-post-item" title="VSCode 中搭建 OpenCode AI 编程助手完整指南"><span class="related-post-title">VSCode 中搭建 OpenCode AI 编程助手完整指南</span><span class="related-post-date">2026-03-24</span><span class="related-post-desc">详细教程教你如何在 VSCode 中搭建 OpenCode AI 编程助手，涵盖环境准备、安装配置、LSP 自动启用、多会话并行处理、75+ LLM 提供商支持。开源免费，隐私优先，提升编程效率的完整指南。</span></a><a href="/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-插件-打造高效率的“本地-AI-程序员”/" class="related-post-item" title="Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员”"><span class="related-post-title">Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员”</span><span class="related-post-date">2026-03-10</span><span class="related-post-desc">使用 Ollama 部署 DeepSeek-Coder-V2 本地模型，配合 Visual Studio 2022 的 Copilot 插件打造本地 AI 程序员。无需联网、代码隐私安全、零成本，适合 Unity3D 和 C# 开发者的本地 AI 编程方案。</span></a><a href="/2025/05/19/C-学习笔记【行为树】/" class="related-post-item" title="C#学习笔记【行为树】"><span class="related-post-title">C#学习笔记【行为树】</span><span class="related-post-date">2025-05-19</span><span class="related-post-desc">行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策</span></a><a href="/2025/04/17/C-学习笔记【取消异步操作】/" class="related-post-item" title="C#学习笔记【取消异步操作】"><span class="related-post-title">C#学习笔记【取消异步操作】</span><span class="related-post-date">2025-04-17</span><span class="related-post-desc">基本概念 CancellationTokenSource 是一个类，用于创建一个取消令牌 (CancellationToken)，并通过该令牌来通知一个或多个异</span></a><a href="/2025/03/14/C-学习笔记【DOTween库】/" class="related-post-item" title="C#学习笔记【DOTween库】"><span class="related-post-title">C#学习笔记【DOTween库】</span><span class="related-post-date">2025-03-14</span><span class="related-post-desc">DOTween 库详细用法教程 DOTween 是一个用于 Unity 的强大且灵活的动画库，它使用链式语法来创建和控制动画，使得代码更加简洁和易读。下面详细介</span></a></div></div>
+
     </div>
 
     
     
     
+    <div class="post-blog-card" style="margin:1.5em auto 0;padding:.5em .8em;border:1px solid #e8e8e8;border-radius:6px;background:var(--card-bg-color,#fff);display:flex;align-items:center;max-width:400px">
+  <div style="flex:1;min-width:0;text-align:left">
+    <div style="font-size:.8em;font-weight:700;color:#555">ByteFisher</div>
+    <div style="font-size:.68em;color:#999;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">分享编程技术 · 记录钓鱼乐趣</div>
+  </div>
+  <img src="/images/wechat-qcode.jpg" alt="扫码关注" style="width:44px;height:44px;border-radius:3px;margin:0 10px;flex-shrink:0">
+  <div style="padding:3px 10px;border:1px solid #fc6423;border-radius:3px;color:#fc6423;font-size:.7em;white-space:nowrap;flex-shrink:0">▸ 扫码关注 ◂</div>
+</div>
+
+    <div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2026/04/21/OpenCode中接入Qwen模型配置指南/" class="related-post-item" title="OpenCode 中接入 Qwen 模型完整指南"><span class="related-post-title">OpenCode 中接入 Qwen 模型完整指南</span><span class="related-post-date">2026-04-21</span><span class="related-post-desc">详细介绍如何在 OpenCode 中接入阿里云通义千问 Qwen 模型，包括注册阿里云账号、获取 API Key、配置 providers 文件、模型参数调优，以及与其他模型的成本对比。</span></a><a href="/2026/03/24/VSCode中搭建OpenCode-AI编程助手完整指南/" class="related-post-item" title="VSCode 中搭建 OpenCode AI 编程助手完整指南"><span class="related-post-title">VSCode 中搭建 OpenCode AI 编程助手完整指南</span><span class="related-post-date">2026-03-24</span><span class="related-post-desc">详细教程教你如何在 VSCode 中搭建 OpenCode AI 编程助手，涵盖环境准备、安装配置、LSP 自动启用、多会话并行处理、75+ LLM 提供商支持。开源免费，隐私优先，提升编程效率的完整指南。</span></a><a href="/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-插件-打造高效率的“本地-AI-程序员”/" class="related-post-item" title="Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员”"><span class="related-post-title">Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员”</span><span class="related-post-date">2026-03-10</span><span class="related-post-desc">使用 Ollama 部署 DeepSeek-Coder-V2 本地模型，配合 Visual Studio 2022 的 Copilot 插件打造本地 AI 程序员。无需联网、代码隐私安全、零成本，适合 Unity3D 和 C# 开发者的本地 AI 编程方案。</span></a><a href="/2025/05/19/C-学习笔记【行为树】/" class="related-post-item" title="C#学习笔记【行为树】"><span class="related-post-title">C#学习笔记【行为树】</span><span class="related-post-date">2025-05-19</span><span class="related-post-desc">行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策</span></a><a href="/2025/04/17/C-学习笔记【取消异步操作】/" class="related-post-item" title="C#学习笔记【取消异步操作】"><span class="related-post-title">C#学习笔记【取消异步操作】</span><span class="related-post-date">2025-04-17</span><span class="related-post-desc">基本概念 CancellationTokenSource 是一个类，用于创建一个取消令牌 (CancellationToken)，并通过该令牌来通知一个或多个异</span></a><a href="/2025/03/14/C-学习笔记【DOTween库】/" class="related-post-item" title="C#学习笔记【DOTween库】"><span class="related-post-title">C#学习笔记【DOTween库】</span><span class="related-post-date">2025-03-14</span><span class="related-post-desc">DOTween 库详细用法教程 DOTween 是一个用于 Unity 的强大且灵活的动画库，它使用链式语法来创建和控制动画，使得代码更加简洁和易读。下面详细介</span></a></div></div>
 
       <footer class="post-footer">
           <div class="post-tags">
@@ -471,6 +481,7 @@ git如何避免”warning: LF will be replaced by CRLF“提示？ ##
       </div>
     </div>
   </div>
+
   
 
 
@@ -539,7 +550,7 @@ git如何避免”warning: LF will be replaced by CRLF“提示？ ##
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">220</span>
+          <span class="site-state-item-count">221</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -552,7 +563,7 @@ git如何避免”warning: LF will be replaced by CRLF“提示？ ##
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

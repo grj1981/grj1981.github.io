@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <link rel="preconnect" href="https://iili.io">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#37c6c0">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#37c6c0">
+
+<meta http-equiv="Permissions-Policy" content="encrypted-media=*">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="codeva-7SG6ROHyTg">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com busuanzi.ibruce.info static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
+  <meta name="description" content="本文详细介绍如何使用 VSCode + OpenCode + DeepSeek 构建博客文章全自动开发流水线，涵盖 AI 辅助写作、GitHub Actions 自动部署、微信公众号自动同步等完整工作流。从提示词配置到 Tools 调用，从 CI&#x2F;CD 到内容分发，一次编写，多平台发布。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VSCode + OpenCode + DeepSeek：博客文章全自动开发流水线实战">
+<meta property="og:url" content="https://www.bytefisher.top/2026/05/31/VSCode-OpenCode-DeepSeek-%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E5%85%A8%E8%87%AA%E5%8A%A8%E5%BC%80%E5%8F%91%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%AE%9E%E6%88%98/">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="本文详细介绍如何使用 VSCode + OpenCode + DeepSeek 构建博客文章全自动开发流水线，涵盖 AI 辅助写作、GitHub Actions 自动部署、微信公众号自动同步等完整工作流。从提示词配置到 Tools 调用，从 CI&#x2F;CD 到内容分发，一次编写，多平台发布。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-05-31T12:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-01T03:22:32.033Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="DeepSeek">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="OpenCode">
+<meta property="article:tag" content="VSCode">
+<meta property="article:tag" content="series:AI编程助手">
+<meta property="article:tag" content="series:Hexo博客搭建">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.bytefisher.top/2026/05/31/VSCode-OpenCode-DeepSeek-%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E5%85%A8%E8%87%AA%E5%8A%A8%E5%BC%80%E5%8F%91%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%AE%9E%E6%88%98/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"VSCode + OpenCode + DeepSeek：博客文章全自动开发流水线实战","description":"本文详细介绍如何使用 VSCode + OpenCode + DeepSeek 构建博客文章全自动开发流水线，涵盖 AI 辅助写作、GitHub Actions 自动部署、微信公众号自动同步等完整工作流。从提示词配置到 Tools 调用，从 CI/CD 到内容分发，一次编写，多平台发布。","url":"https://www.bytefisher.top/2026/05/31/VSCode-OpenCode-DeepSeek-博客文章全自动开发流水线实战/","datePublished":"2026-05-31T12:00:00.000Z","dateModified":"2026-06-01T03:22:32.033Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/05/31/VSCode-OpenCode-DeepSeek-博客文章全自动开发流水线实战/"},"keywords":"series:Hexo博客搭建, Hexo, AI, DeepSeek, series:AI编程助手, OpenCode, VSCode"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Hexo博客搭建","item":"https://www.bytefisher.top/categories/Hexo博客搭建/"},{"@type":"ListItem","position":3,"name":"VSCode + OpenCode + DeepSeek：博客文章全自动开发流水线实战"}]}</script>
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>VSCode + OpenCode + DeepSeek：博客文章全自动开发流水线实战 | ByteFisher</title>
+  
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dc50e0997d43c3a8dbf2afdb3fdff233";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#37c6c0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-tutorials">
+
+    <a href="/tutorials/" rel="section"><i class="fa fa-book fa-fw"></i>教程</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-aigames">
+
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">52</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">221</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">59</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>rss</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/05/31/VSCode-OpenCode-DeepSeek-%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E5%85%A8%E8%87%AA%E5%8A%A8%E5%BC%80%E5%8F%91%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%AE%9E%E6%88%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VSCode + OpenCode + DeepSeek：博客文章全自动开发流水线实战
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-05-31 20:00:00" itemprop="dateCreated datePublished" datetime="2026-05-31T20:00:00+08:00">2026-05-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">Hexo博客搭建</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2026/05/31/VSCode-OpenCode-DeepSeek-%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E5%85%A8%E8%87%AA%E5%8A%A8%E5%BC%80%E5%8F%91%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%AE%9E%E6%88%98/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2026/05/31/VSCode-OpenCode-DeepSeek-%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E5%85%A8%E8%87%AA%E5%8A%A8%E5%BC%80%E5%8F%91%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%AE%9E%E6%88%98/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">本文详细介绍如何使用 VSCode + OpenCode + DeepSeek 构建博客文章全自动开发流水线，涵盖 AI 辅助写作、GitHub Actions 自动部署、微信公众号自动同步等完整工作流。从提示词配置到 Tools 调用，从 CI/CD 到内容分发，一次编写，多平台发布。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>三个月前我写了一篇《VSCode 中搭建 OpenCode AI 编程助手完整指南》，那篇文章主要讲怎么装、怎么配。装好之后呢？它到底能帮我们省多少事？</p>
+<p>这几个月下来，我摸索出一整套从写文章到自动发布的工作流。今天把我博客的完整流水线拆开给大家看——从在 VSCode 里写 Markdown，到 GitHub Actions 自动构建部署，再到自动同步到微信公众号，全链路自动化，一次编写，多平台分发。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="一、OpenCode-项目配置：从通用助手到专属博客架构师"><a href="#一、OpenCode-项目配置：从通用助手到专属博客架构师" class="headerlink" title="一、OpenCode 项目配置：从通用助手到专属博客架构师"></a>一、OpenCode 项目配置：从通用助手到专属博客架构师</h2><p>OpenCode 默认是通用的编程助手，但真正好用的是它的<strong>项目级自定义配置</strong>。通过 <code>.opencode.yaml</code> 和 <code>AGENTS.md</code> 两个文件，我们可以让 AI 完全理解项目上下文，变成专属于这个博客的助手。</p>
+<h3 id="1-1-模型配置"><a href="#1-1-模型配置" class="headerlink" title="1.1 模型配置"></a>1.1 模型配置</h3><p>我的博客用的是 DeepSeek V4 Flash，配置在 <code>.opencode.yaml</code> 中：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">model:</span> <span class="string">deepseek/deepseek-v4-flash</span></span><br><span class="line"><span class="attr">apiBaseUrl:</span> <span class="string">https://api.deepseek.com</span></span><br><span class="line"><span class="attr">role:</span> <span class="string">Unity导师,</span> <span class="string">博客架构师,</span> <span class="string">代码审查员,</span> <span class="string">资深游戏设计师,</span> <span class="string">资深策划,</span></span><br><span class="line">      <span class="string">高级软件工程师,</span> <span class="string">高级美工设计师,</span> <span class="string">UI设计师</span></span><br></pre></td></tr></table></figure>
+
+<p>选 DeepSeek V4 Flash 的原因很直接：<strong>速度快、中文理解好、成本趋近于零</strong>。写博客场景不像写生产代码，不需要反复推理，更需要的是快速理解和风格一致的自然语言输出。V4 Flash 在中文技术写作上的表现，明显优于同价位的其他模型。</p>
+<p><code>role</code> 字段定义了助手在项目中的多个角色视角，这直接影响了 OpenCode 的回答风格——当你在 <code>/chat</code> 中问博客相关问题时，它会自动切换到”博客架构师”视角；当问代码逻辑时，切换到”高级软件工程师”视角。</p>
+<h3 id="1-2-AGENTS-md：项目知识库"><a href="#1-2-AGENTS-md：项目知识库" class="headerlink" title="1.2 AGENTS.md：项目知识库"></a>1.2 AGENTS.md：项目知识库</h3><p>真正让 OpenCode 理解这个博客的，是根目录下的 <code>AGENTS.md</code> 文件。它定义了项目的完整 DNA：</p>
+<ul>
+<li><strong>项目概览</strong>：博客基于 Hexo + Next 主题，目录结构说明</li>
+<li><strong>构建命令</strong>：<code>hexo clean &amp;&amp; hexo g</code>、<code>hexo s</code>、<code>hexo d</code></li>
+<li><strong>代码风格</strong>：JavaScript 用 <code>&#39;use strict&#39;</code>，Python 用 f-string，Markdown 用 bracket-wrapped tags</li>
+<li><strong>文件规范</strong>：文章命名 kebab-case，相册目录结构，工具脚本目录</li>
+<li><strong>禁止操作</strong>：不修改 <code>node_modules/</code>，不提交 <code>public/</code> 和 <code>db.json</code></li>
+<li><strong>发布前检查</strong>：本地构建测试 → 用户确认 → 提交部署</li>
+</ul>
+<p>有了这份配置，OpenCode 在生成代码或文章时就会自动遵循项目规范，不需要每次重复交代上下文。比如我写 <code>hexo new post &quot;xxx&quot;</code> 后让 OpenCode 帮我补全 front-matter，它自动就知道 tags 要用 bracket-wrapped 格式、categories 要写什么、date 用什么格式。</p>
+<hr>
+<h2 id="二、文章开发工作流：从想法到成文"><a href="#二、文章开发工作流：从想法到成文" class="headerlink" title="二、文章开发工作流：从想法到成文"></a>二、文章开发工作流：从想法到成文</h2><p>有了配置好的助手，实际的写作流程变成这样：</p>
+<h3 id="2-1-创建文章骨架"><a href="#2-1-创建文章骨架" class="headerlink" title="2.1 创建文章骨架"></a>2.1 创建文章骨架</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new post <span class="string">&quot;VSCode-OpenCode-DeepSeek-博客文章全自动开发流水线实战&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>OpenCode 会自动补全 front-matter，然后我通过 <code>/read</code> 查看当前文章模板，通过 <code>/edit</code> 调整结构大纲。</p>
+<h3 id="2-2-AI-辅助写作"><a href="#2-2-AI-辅助写作" class="headerlink" title="2.2 AI 辅助写作"></a>2.2 AI 辅助写作</h3><p>写作过程中，我经常用到这几个 OpenCode 的 Tools：</p>
+<ul>
+<li><strong><code>/read</code></strong> — 查阅已有的文章，确保风格一致。比如写这篇之前，我 <code>/read</code> 了之前那篇 OpenCode 安装指南，避免内容重复</li>
+<li><strong><code>/edit</code></strong> — 精确替换文章内容，不用自己拉滚动条找位置</li>
+<li><strong><code>/bash</code></strong> — 直接在 VSCode 里跑 <code>hexo s</code> 预览效果</li>
+<li><strong><code>/grep</code></strong> 和 <strong><code>/glob</code></strong> — 快速查找项目中已有的配置文件和代码片段</li>
+</ul>
+<p>比如我需要确认某个 GitHub Actions 配置的语法，直接 <code>/read .github/workflows/deploy.yml</code> 就能看到完整配置，不用切到文件管理器去找。</p>
+<h3 id="2-3-图片处理"><a href="#2-3-图片处理" class="headerlink" title="2.3 图片处理"></a>2.3 图片处理</h3><p>博客的图片主要来自钓鱼相册。每次拍完照片，先用 <code>tools/图片重命名.py</code> 批量处理：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/图片重命名工具/图片重命名.py --album img2026 --keywords <span class="string">&quot;花碑水库&quot;</span> --species <span class="string">&quot;鲤鱼&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个脚本会做三件事：</p>
+<ol>
+<li>图片转 WebP 并压缩</li>
+<li>调用 DeepSeek API 自动生成 alt 文本（根据图片内容描述场景）</li>
+<li>生成相册 HTML 代码片段</li>
+</ol>
+<p>生成的 HTML 直接贴进 <code>source/fish/img2026/index.md</code>，然后把新图片推送到 <code>fish-images</code> 仓库。</p>
+<h3 id="2-4-多仓库管理"><a href="#2-4-多仓库管理" class="headerlink" title="2.4 多仓库管理"></a>2.4 多仓库管理</h3><p>我的博客涉及两个 Git 仓库：</p>
+<table>
+<thead>
+<tr>
+<th>仓库</th>
+<th>用途</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>grj1981/BlogCode</code></td>
+<td>博客源码（文章、主题、配置）</td>
+<td><code>git push origin master</code></td>
+</tr>
+<tr>
+<td><code>grj1981/fish-images</code></td>
+<td>图片 CDN 源</td>
+<td><code>git push origin main</code></td>
+</tr>
+</tbody></table>
+<p>OpenCode 的 AGENTS.md 里定义了禁止自动提交的规则，所以每次都是我先手动 review 变更，确认无误后再让它执行提交操作。</p>
+<hr>
+<h2 id="三、自动部署：GitHub-Actions-接管构建与发布"><a href="#三、自动部署：GitHub-Actions-接管构建与发布" class="headerlink" title="三、自动部署：GitHub Actions 接管构建与发布"></a>三、自动部署：GitHub Actions 接管构建与发布</h2><p>以前我的部署流程是：本地 <code>hexo clean &amp;&amp; hexo g</code>，确认没问题，然后 <code>hexo d</code>。虽然不太麻烦，但人总有忘记的时候。而且如果在外地没有本地环境，就完全没法更新博客。</p>
+<p>自从配了 GitHub Actions，部署这件事基本就从我的待办列表里消失了。</p>
+<h3 id="3-1-工作流配置"><a href="#3-1-工作流配置" class="headerlink" title="3.1 工作流配置"></a>3.1 工作流配置</h3><p>完整的部署流程写在 <code>.github/workflows/deploy.yml</code> 中：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Deploy</span> <span class="string">Blog</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">workflow_dispatch:</span>                        <span class="comment"># 手动触发</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span> [<span class="string">master</span>]</span><br><span class="line">    <span class="attr">paths:</span>                                  <span class="comment"># 只监听源码变更</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;source/_posts/**&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;scripts/**&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;themes/next/**&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;_config.yml&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;package.json&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build-and-deploy:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v4</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">submodules:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/setup-node@v4</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="number">20</span></span><br><span class="line">          <span class="attr">cache:</span> <span class="string">npm</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">dependencies</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">npm</span> <span class="string">ci</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Build</span> <span class="string">site</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="attr">TIDB_HOST:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.TIDB_HOST</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">TIDB_PORT:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.TIDB_PORT</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">TIDB_USER:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.TIDB_USER</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">TIDB_PASSWORD:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.TIDB_PASSWORD</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">TIDB_DB:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.TIDB_DB</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">npx</span> <span class="string">hexo</span> <span class="string">clean</span> <span class="string">&amp;&amp;</span> <span class="string">npx</span> <span class="string">hexo</span> <span class="string">generate</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deploy</span> <span class="string">to</span> <span class="string">grj1981.github.io</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          echo &quot;$&#123;&#123; secrets.DEPLOY_KEY_B64 &#125;&#125;&quot; | base64 -d &gt; /tmp/deploy_key</span></span><br><span class="line"><span class="string">          chmod 600 /tmp/deploy_key</span></span><br><span class="line"><span class="string">          git config --global user.name &#x27;github-actions[bot]&#x27;</span></span><br><span class="line"><span class="string">          git config --global user.email &#x27;github-actions[bot]@users.noreply.github.com&#x27;</span></span><br><span class="line"><span class="string">          export GIT_SSH_COMMAND=&quot;ssh -i /tmp/deploy_key -o StrictHostKeyChecking=accept-new&quot;</span></span><br><span class="line"><span class="string">          git clone git@github.com:grj1981/grj1981.github.io.git /tmp/gh-pages</span></span><br><span class="line"><span class="string">          rsync -av --delete ./public/ /tmp/gh-pages/ --exclude .git</span></span><br><span class="line"><span class="string">          cd /tmp/gh-pages</span></span><br><span class="line"><span class="string">          git add -A</span></span><br><span class="line"><span class="string">          git diff --cached --quiet --exit-code &amp;&amp; echo &quot;No changes to deploy&quot; || (</span></span><br><span class="line"><span class="string">            git commit -m &quot;Site updated: $(date -u &#x27;+%Y-%m-%d %H:%M:%S&#x27;)&quot;</span></span><br><span class="line"><span class="string">            GIT_SSH_COMMAND=&quot;ssh -i /tmp/deploy_key -o StrictHostKeyChecking=accept-new&quot; git push origin master</span></span><br><span class="line"><span class="string">          )</span></span><br></pre></td></tr></table></figure>
+
+<p>几个值得一提的设计：</p>
+<p><strong>路径过滤</strong>：只监听 <code>source/_posts/</code>、<code>scripts/</code>、<code>themes/next/</code> 等目录的变更。如果只是改了 README 或者 tools 目录下的脚本，不会触发部署，省 Action 分钟数。</p>
+<p><strong>TiDB 凭据注入</strong>：博客的评论区热榜数据在构建时从 TiDB Cloud 读取，通过 GitHub Secrets 注入环境变量，不会暴露在源码中。</p>
+<p><strong>SSH Deploy Key</strong>：部署到 <code>grj1981.github.io</code> 仓库用的是 base64 编码的 SSH 私钥，存放在 <code>DEPLOY_KEY_B64</code> Secret 中。构建时解码写入临时文件，用完即弃。</p>
+<h3 id="3-2-构建流程时序"><a href="#3-2-构建流程时序" class="headerlink" title="3.2 构建流程时序"></a>3.2 构建流程时序</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">用户 push → GitHub 检测到变更 →</span><br><span class="line">  → checkout 源码</span><br><span class="line">  → npm ci 安装依赖</span><br><span class="line">  → hexo clean &amp;&amp; hexo generate (注入 TiDB 凭据)</span><br><span class="line">  → rsync public/ 到 gh-pages 仓库</span><br><span class="line">  → git commit &amp;&amp; git push</span><br><span class="line">  → GitHub Pages 自动更新</span><br></pre></td></tr></table></figure>
+
+<p>整个过程大约 40-60 秒。文章推送到 master 后，不到一分钟就能在 <code>www.bytefisher.top</code> 上看到更新。</p>
+<h3 id="3-3-踩坑：路径过滤不生效"><a href="#3-3-踩坑：路径过滤不生效" class="headerlink" title="3.3 踩坑：路径过滤不生效"></a>3.3 踩坑：路径过滤不生效</h3><p>🔴 <strong>问题</strong>：配置了 <code>paths</code> 过滤后，有几次改了 <code>source/_posts/</code> 下的文章却没触发部署。</p>
+<p>排查发现是 GitHub Actions 的 <code>paths</code> 过滤规则的问题——如果 push 包含多个 commit，其中只有部分 commit 命中 paths，整个 workflow 也可能被跳过。最终在配置里加了 <code>workflow_dispatch</code> 手动触发作为兜底，需要时去 GitHub 仓库页面点一下 “Run workflow” 就行。</p>
+<hr>
+<h2 id="四、公众号同步：博客到微信的自动化桥梁"><a href="#四、公众号同步：博客到微信的自动化桥梁" class="headerlink" title="四、公众号同步：博客到微信的自动化桥梁"></a>四、公众号同步：博客到微信的自动化桥梁</h2><p>部署到博客只是第一步。我的内容还需要同步到微信公众号，而这一步的自动化程度最高，也最复杂。</p>
+<h3 id="4-1-同步方案设计"><a href="#4-1-同步方案设计" class="headerlink" title="4.1 同步方案设计"></a>4.1 同步方案设计</h3><p>微信公众号文章的格式要求和博客完全不同：</p>
+<ul>
+<li>不支持标准 Markdown，需要转成内联 HTML</li>
+<li>图片不能引用外链，必须上传到微信素材库</li>
+<li>封面图有严格的尺寸要求（900×500）</li>
+<li>已经发布的草稿不支持修改（只能重新创建）</li>
+</ul>
+<p>面对这些限制，我决定写一个专门的工具，目录在 <code>tools/wechat-sync/</code>。整体架构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">source/_posts/*.md</span><br><span class="line">      │</span><br><span class="line">      ▼</span><br><span class="line">  post-parser.js     ─── 解析 Front Matter + 正文</span><br><span class="line">      │</span><br><span class="line">      ▼</span><br><span class="line">  markdown-to-html.js ─── 转换为微信公众号兼容的 HTML</span><br><span class="line">      │</span><br><span class="line">      ▼</span><br><span class="line">  image-processor.js  ─── 下载图片 → 压缩 → 上传微信素材库</span><br><span class="line">      │</span><br><span class="line">      ▼</span><br><span class="line">  wechat-api.js       ─── 调用微信公众号 API 创建/更新草稿</span><br><span class="line">      │</span><br><span class="line">      ▼</span><br><span class="line">  tracker.js          ─── 记录同步状态（增量同步）</span><br><span class="line">      │</span><br><span class="line">      ▼</span><br><span class="line">  sync-state.json     ─── 持久化状态文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-自动同步工作流"><a href="#4-2-自动同步工作流" class="headerlink" title="4.2 自动同步工作流"></a>4.2 自动同步工作流</h3><p>同步也是通过 GitHub Actions 触发，配置在 <code>.github/workflows/wechat-sync.yml</code> 中：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">WeChat</span> <span class="string">Sync</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span> [<span class="string">master</span>]</span><br><span class="line">    <span class="attr">paths:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;source/_posts/**&#x27;</span></span><br><span class="line">  <span class="attr">workflow_dispatch:</span></span><br><span class="line">    <span class="attr">inputs:</span></span><br><span class="line">      <span class="attr">mode:</span></span><br><span class="line">        <span class="attr">description:</span> <span class="string">&#x27;同步模式&#x27;</span></span><br><span class="line">        <span class="attr">default:</span> <span class="string">&#x27;auto&#x27;</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">choice</span></span><br><span class="line">        <span class="attr">options:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">auto</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">all</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">year-2026</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">dry-run</span></span><br><span class="line">      <span class="attr">specific_file:</span></span><br><span class="line">        <span class="attr">description:</span> <span class="string">&#x27;指定单个文件&#x27;</span></span><br><span class="line">        <span class="attr">required:</span> <span class="literal">false</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">string</span></span><br><span class="line">      <span class="attr">force:</span></span><br><span class="line">        <span class="attr">description:</span> <span class="string">&#x27;强制重新同步&#x27;</span></span><br><span class="line">        <span class="attr">required:</span> <span class="literal">false</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">boolean</span></span><br><span class="line">        <span class="attr">default:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="attr">concurrency:</span></span><br><span class="line">  <span class="attr">group:</span> <span class="string">wechat-sync</span></span><br><span class="line">  <span class="attr">cancel-in-progress:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>工作流的触发方式有两种：</p>
+<p><strong>自动触发</strong>：当有新的文章 push 到 <code>source/_posts/</code> 时，自动检测变更的文章，只同步新增或内容有修改的文章。</p>
+<p><strong>手动触发</strong>：通过 GitHub Actions 的 <code>workflow_dispatch</code>，支持多种模式：</p>
+<ul>
+<li><code>auto</code> — 自动检测增量变更（默认）</li>
+<li><code>all</code> — 强制同步全部文章</li>
+<li><code>year-2026</code> — 只同步指定年份</li>
+<li><code>dry-run</code> — 试运行，不调用微信 API，只输出将要执行的操作</li>
+<li><code>specific_file</code> — 指定单个文件同步</li>
+</ul>
+<h3 id="4-3-核心模块拆解"><a href="#4-3-核心模块拆解" class="headerlink" title="4.3 核心模块拆解"></a>4.3 核心模块拆解</h3><h4 id="4-3-1-文章解析（post-parser-js）"><a href="#4-3-1-文章解析（post-parser-js）" class="headerlink" title="4.3.1 文章解析（post-parser.js）"></a>4.3.1 文章解析（post-parser.js）</h4><p>这个模块负责把 Hexo 的 Markdown 文章解析成结构化数据：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">parsePost</span>(<span class="params">filePath</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> rawContent = fs.<span class="title function_">readFileSync</span>(filePath, <span class="string">&#x27;utf-8&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 解析 Front Matter</span></span><br><span class="line">  <span class="keyword">const</span> endOfFrontMatter = rawContent.<span class="title function_">indexOf</span>(<span class="string">&#x27;---&#x27;</span>, <span class="number">3</span>);</span><br><span class="line">  <span class="keyword">let</span> frontMatter = yaml.<span class="title function_">load</span>(rawContent.<span class="title function_">slice</span>(<span class="number">3</span>, endOfFrontMatter));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 提取正文</span></span><br><span class="line">  <span class="keyword">const</span> body = rawContent.<span class="title function_">slice</span>(endOfFrontMatter + <span class="number">3</span>).<span class="title function_">trim</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 解析图片链接（支持 ![]() 和 &lt;img&gt; 两种格式）</span></span><br><span class="line">  <span class="keyword">const</span> imageRegex = <span class="regexp">/!\[.*?\]\((.*?)\)|&lt;img[^&gt;]+src=[&quot;&#x27;](.*?)[&quot;&#x27;]/g</span>;</span><br><span class="line">  <span class="keyword">const</span> images = [];</span><br><span class="line">  <span class="keyword">let</span> match;</span><br><span class="line">  <span class="keyword">while</span> ((match = imageRegex.<span class="title function_">exec</span>(body)) !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> url = match[<span class="number">1</span>] || match[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">if</span> (url &amp;&amp; !url.<span class="title function_">startsWith</span>(<span class="string">&#x27;data:&#x27;</span>)) images.<span class="title function_">push</span>(url);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    title, date, tags, categories,</span><br><span class="line">    body, images, permalink, rawContent, ...</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关键点：摘要生成逻辑——优先使用 <code>description</code> 字段，其次是 <code>&lt;!--more--&gt;</code> 之前的内容，最后是正文前 200 字符。</p>
+<h4 id="4-3-2-Markdown-转微信-HTML（markdown-to-html-js）"><a href="#4-3-2-Markdown-转微信-HTML（markdown-to-html-js）" class="headerlink" title="4.3.2 Markdown 转微信 HTML（markdown-to-html.js）"></a>4.3.2 Markdown 转微信 HTML（markdown-to-html.js）</h4><p>微信公众号的编辑器不支持标准 Markdown，必须使用内联样式的 HTML。我用 <code>marked</code> 库自定义了一个 Renderer：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> renderer = <span class="keyword">new</span> marked.<span class="title class_">Renderer</span>();</span><br><span class="line"></span><br><span class="line">renderer.<span class="property">heading</span> = <span class="keyword">function</span> (<span class="params">&#123; text, depth &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> tag = <span class="string">`h<span class="subst">$&#123;<span class="built_in">Math</span>.min(depth, <span class="number">4</span>)&#125;</span>`</span>;</span><br><span class="line">  <span class="keyword">const</span> style = <span class="variable constant_">STYLES</span>[tag];</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`&lt;<span class="subst">$&#123;tag&#125;</span> style=&quot;<span class="subst">$&#123;style&#125;</span>&quot;&gt;<span class="subst">$&#123;text&#125;</span>&lt;/<span class="subst">$&#123;tag&#125;</span>&gt;`</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">renderer.<span class="property">image</span> = <span class="keyword">function</span> (<span class="params">&#123; href, text &#125;</span>) &#123;</span><br><span class="line">  <span class="comment">// 微信不支持外链图片，用占位符标记，后面替换</span></span><br><span class="line">  <span class="keyword">return</span> <span class="string">`&lt;!-- IMG:<span class="subst">$&#123;href&#125;</span> --&gt;`</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">renderer.<span class="property">code</span> = <span class="keyword">function</span> (<span class="params">&#123; text, lang &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> escaped = escapeHtml(text);</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`&lt;pre style=&quot;<span class="subst">$&#123;STYLES.pre&#125;</span>&quot;&gt;&lt;code style=&quot;<span class="subst">$&#123;STYLES.code&#125;</span>&quot;&gt;<span class="subst">$&#123;escaped&#125;</span>&lt;/code&gt;&lt;/pre&gt;`</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>图片处理是最特别的——它不是直接输出 <code>&lt;img&gt;</code> 标签，而是生成 <code>&lt;!-- IMG:url --&gt;</code> 占位符，等图片上传到微信素材库后，再统一替换成真正的微信图片地址。</p>
+<p>安全性方面，内置了 <code>sanitizeHtml</code> 函数过滤 XSS：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sanitizeHtml</span>(<span class="params">html</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> html</span><br><span class="line">    .<span class="title function_">replace</span>(<span class="regexp">/&lt;script[\s\S]*?&lt;\/script&gt;/gi</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    .<span class="title function_">replace</span>(<span class="regexp">/&lt;iframe[\s\S]*?&lt;\/iframe&gt;/gi</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    .<span class="title function_">replace</span>(<span class="regexp">/\son\w+=&quot;[^&quot;]*&quot;/gi</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    .<span class="title function_">replace</span>(<span class="regexp">/href=[&quot;&#x27;]javascript:[&quot;&#x27;]/gi</span>, <span class="string">&#x27;href=&quot;#&quot;&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-3-3-图片处理流水线（image-processor-js）"><a href="#4-3-3-图片处理流水线（image-processor-js）" class="headerlink" title="4.3.3 图片处理流水线（image-processor.js）"></a>4.3.3 图片处理流水线（image-processor.js）</h4><p>图片处理是整个同步过程中最耗时、也最容易出问题的环节。流程如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">processImages</span>(<span class="params">imageUrls, client, options = &#123;&#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> [index, url] <span class="keyword">of</span> imageUrls.<span class="title function_">entries</span>()) &#123;</span><br><span class="line">    <span class="comment">// 1. 下载图片（带 15s 超时）</span></span><br><span class="line">    <span class="keyword">const</span> &#123; buffer &#125; = <span class="keyword">await</span> <span class="title function_">downloadImage</span>(url, <span class="number">15000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 统一格式（png 太大 → 转 jpg，gif 动图保持）</span></span><br><span class="line">    <span class="keyword">const</span> &#123; <span class="attr">buffer</span>: normalized &#125; = <span class="keyword">await</span> <span class="title function_">normalizeImageFormat</span>(buffer);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 超过 2MB 则压缩（quality 从 85 递减到 40）</span></span><br><span class="line">    <span class="keyword">if</span> (normalized.<span class="property">length</span> &gt; <span class="number">2</span> * <span class="number">1024</span> * <span class="number">1024</span>) &#123;</span><br><span class="line">      processedBuffer = <span class="keyword">await</span> <span class="title function_">compressImage</span>(normalized, <span class="string">&#x27;jpeg&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4. 上传到微信素材库</span></span><br><span class="line">    <span class="keyword">const</span> &#123; <span class="attr">url</span>: wechatUrl &#125; = <span class="keyword">await</span> client.<span class="title function_">uploadImage</span>(processedBuffer, fileName);</span><br><span class="line">    urlMapping.<span class="title function_">set</span>(url, wechatUrl);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>压缩策略非常保守——先从 quality 85 开始，如果超过 2MB 就降 10，循环到 40 为止。实测绝大多数图片在 quality 75 左右就能压到 2MB 以内。</p>
+<h4 id="4-3-4-微信-API-封装（wechat-api-js）"><a href="#4-3-4-微信-API-封装（wechat-api-js）" class="headerlink" title="4.3.4 微信 API 封装（wechat-api.js）"></a>4.3.4 微信 API 封装（wechat-api.js）</h4><p>微信公众号 API 有两个关键接口需要调用：</p>
+<p><strong>获取 Access Token</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">getAccessToken</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">_token</span> &amp;&amp; <span class="title class_">Date</span>.<span class="title function_">now</span>() &lt; <span class="variable language_">this</span>.<span class="property">_tokenExpireAt</span> - <span class="number">5</span> * <span class="number">60</span> * <span class="number">1000</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_token</span>;  <span class="comment">// 缓存复用</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> url = <span class="string">`https://api.weixin.qq.com/cgi-bin/token`</span></span><br><span class="line">    + <span class="string">`?grant_type=client_credential`</span></span><br><span class="line">    + <span class="string">`&amp;appid=<span class="subst">$&#123;<span class="variable language_">this</span>.appId&#125;</span>&amp;secret=<span class="subst">$&#123;<span class="variable language_">this</span>.appSecret&#125;</span>`</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> data = <span class="keyword">await</span> (<span class="keyword">await</span> <span class="title function_">fetch</span>(url)).<span class="title function_">json</span>();</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">_token</span> = data.<span class="property">access_token</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">_tokenExpireAt</span> = <span class="title class_">Date</span>.<span class="title function_">now</span>() + data.<span class="property">expires_in</span> * <span class="number">1000</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_token</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建&#x2F;更新草稿</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">createDraft</span>(<span class="params">article</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> result = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="title function_">_request</span>(<span class="string">&#x27;POST&#x27;</span>, <span class="string">&#x27;/cgi-bin/draft/add&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">articles</span>: [article]</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">mediaId</span>: result.<span class="property">media_id</span> &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">updateDraft</span>(<span class="params">mediaId, article</span>) &#123;</span><br><span class="line">  <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="title function_">_request</span>(<span class="string">&#x27;POST&#x27;</span>, <span class="string">&#x27;/cgi-bin/draft/update&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">media_id</span>: mediaId,</span><br><span class="line">    <span class="attr">articles</span>: article,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建草稿时传入的参数包括：标题、作者、摘要、正文 HTML、原文链接、是否开启评论等。其中 <code>content_source_url</code> 字段指向博客原文，读者可以点击”阅读原文”跳转到博客。</p>
+<h4 id="4-3-5-增量同步状态追踪（tracker-js）"><a href="#4-3-5-增量同步状态追踪（tracker-js）" class="headerlink" title="4.3.5 增量同步状态追踪（tracker.js）"></a>4.3.5 增量同步状态追踪（tracker.js）</h4><p>这是保证同步效率和避免重复创建草稿的关键模块：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">SyncTracker</span> &#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">computeHash</span>(<span class="params">content</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> crypto.<span class="title function_">createHash</span>(<span class="string">&#x27;sha256&#x27;</span>).<span class="title function_">update</span>(content, <span class="string">&#x27;utf-8&#x27;</span>).<span class="title function_">digest</span>(<span class="string">&#x27;hex&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">checkStatus</span>(<span class="params">fileName, contentHash</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> record = <span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">posts</span>[fileName];</span><br><span class="line">    <span class="keyword">if</span> (!record) <span class="keyword">return</span> &#123; <span class="attr">state</span>: <span class="string">&#x27;unsynced&#x27;</span> &#125;;</span><br><span class="line">    <span class="keyword">if</span> (record.<span class="property">status</span> === <span class="string">&#x27;failed&#x27;</span>) <span class="keyword">return</span> &#123; <span class="attr">state</span>: <span class="string">&#x27;failed&#x27;</span> &#125;;</span><br><span class="line">    <span class="keyword">if</span> (record.<span class="property">contentHash</span> !== contentHash) <span class="keyword">return</span> &#123; <span class="attr">state</span>: <span class="string">&#x27;changed&#x27;</span>, <span class="attr">draftMediaId</span>: record.<span class="property">draftMediaId</span> &#125;;</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">state</span>: <span class="string">&#x27;synced&#x27;</span>, <span class="attr">draftMediaId</span>: record.<span class="property">draftMediaId</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同步状态文件 <code>sync-state.json</code> 记录了每篇文章的同步状态：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="number">1</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;updatedAt&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2026-05-31T10:30:00.000Z&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;posts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;VSCode-OpenCode-DeepSeek-博客文章全自动开发流水线实战.md&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;contentHash&quot;</span><span class="punctuation">:</span> <span class="string">&quot;a3f8b2c1...&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;draftMediaId&quot;</span><span class="punctuation">:</span> <span class="string">&quot;abc123def456&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;VSCode + OpenCode + DeepSeek：博客文章全自动开发流水线实战&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;syncedAt&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2026-05-31T10:30:00.000Z&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;status&quot;</span><span class="punctuation">:</span> <span class="string">&quot;created&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>增量同步的逻辑：</p>
+<ol>
+<li>对所有文章计算 contentHash</li>
+<li>和状态文件中的记录对比</li>
+<li>新增 → 创建草稿</li>
+<li>内容变更 → 更新草稿</li>
+<li>未变更 → 跳过</li>
+</ol>
+<p>这样即使博客有上百篇文章，每次触发时也只需要处理最近变更的那一两篇，整个同步过程能在 10-20 秒内完成。</p>
+<h3 id="4-4-踩坑集锦"><a href="#4-4-踩坑集锦" class="headerlink" title="4.4 踩坑集锦"></a>4.4 踩坑集锦</h3><p>公众号同步过程中踩过的坑不少，列几个比较典型的：</p>
+<h4 id="🔴-踩坑-1：图片尺寸超限"><a href="#🔴-踩坑-1：图片尺寸超限" class="headerlink" title="🔴 踩坑 1：图片尺寸超限"></a>🔴 踩坑 1：图片尺寸超限</h4><p>微信素材库对图片的限制是 2MB（普通图片）和 10MB（高清图片），但博客的图片经过 WebP 压缩后很多只有 200-300KB，按理不会超限。问题出在<strong>格式转换</strong>上——有些 png 图片在转成 jpg 时，由于色彩复杂，文件体积反而膨胀了。</p>
+<p>解决方案：<code>compressImage</code> 函数在转格式后主动检测文件大小，超标就循环降 quality，直到达标为止。</p>
+<h4 id="🔴-踩坑-2：Markdown-差异导致排版错乱"><a href="#🔴-踩坑-2：Markdown-差异导致排版错乱" class="headerlink" title="🔴 踩坑 2：Markdown 差异导致排版错乱"></a>🔴 踩坑 2：Markdown 差异导致排版错乱</h4><p>标准 Markdown 的很多特性在微信公众号里是不支持的：</p>
+<ul>
+<li>表格没有带边框 → 需要手动加 <code>border:1px solid #ddd</code></li>
+<li><code>- [ ]</code> 复选框 → 完全不兼容</li>
+<li>行内 HTML 标签 → 微信编辑器会过滤掉一部分</li>
+</ul>
+<p>解决方案：自建 Renderer，每个元素都指定完整的内联样式，从 <code>h1</code> 到 <code>blockquote</code> 到 <code>table</code>，全部显式设置 <code>font-size</code>、<code>color</code>、<code>margin</code>。</p>
+<h4 id="🔴-踩坑-3：公众号-API-的-media-id-过期"><a href="#🔴-踩坑-3：公众号-API-的-media-id-过期" class="headerlink" title="🔴 踩坑 3：公众号 API 的 media_id 过期"></a>🔴 踩坑 3：公众号 API 的 media_id 过期</h4><p>微信的草稿 <code>media_id</code> 在<strong>草稿已发布</strong>后会失效，此时再调用 <code>updateDraft</code> 会返回错误码 <code>40007</code>。而且已发布的文章不能修改，必须重新创建。</p>
+<p>解决方案：在 <code>syncPost</code> 函数中捕获 <code>40007</code> 错误，自动转为 <code>createDraft</code> 重新创建：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (err.<span class="property">errcode</span> === <span class="number">40007</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`⚠️ media_id 无效，尝试重新创建...`</span>);</span><br><span class="line">  <span class="keyword">const</span> result = <span class="keyword">await</span> client.<span class="title function_">createDraft</span>(article);</span><br><span class="line">  tracker.<span class="title function_">markSynced</span>(fileName, result.<span class="property">mediaId</span>, ...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="🔴-踩坑-4：GitHub-Actions-并发冲突"><a href="#🔴-踩坑-4：GitHub-Actions-并发冲突" class="headerlink" title="🔴 踩坑 4：GitHub Actions 并发冲突"></a>🔴 踩坑 4：GitHub Actions 并发冲突</h4><p>有一次连续 push 了两篇文章，触发了两次 wechat-sync 工作流。两个并行的同步实例同时对 <code>sync-state.json</code> 进行读写，导致状态文件损坏，部分文章重复同步。</p>
+<p>解决方案：在 workflow 中设置 <code>concurrency</code> 组：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">concurrency:</span></span><br><span class="line">  <span class="attr">group:</span> <span class="string">wechat-sync</span></span><br><span class="line">  <span class="attr">cancel-in-progress:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>这样同一个 group 内的 workflow 会排队执行，不会并发。<code>cancel-in-progress: false</code> 保证不会取消已经在执行的同步任务。</p>
+<hr>
+<h2 id="五、一条指令完成全流程"><a href="#五、一条指令完成全流程" class="headerlink" title="五、一条指令完成全流程"></a>五、一条指令完成全流程</h2><p>现在，整个文章开发流程变成了这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">写文章</span><br><span class="line">  │</span><br><span class="line">  ├── hexo new post &quot;标题&quot;           ← OpenCode 自动补全 front-matter</span><br><span class="line">  ├── 在 VSCode 中写作               ← OpenCode /edit /grep /read</span><br><span class="line">  ├── 图片处理                        ← tools/图片重命名.py</span><br><span class="line">  │</span><br><span class="line">  ▼</span><br><span class="line">git push origin master</span><br><span class="line">  │</span><br><span class="line">  ├── GitHub Actions Deploy           ← hexo g → rsync → 上线</span><br><span class="line">  │     └── www.bytefisher.top 已更新</span><br><span class="line">  │</span><br><span class="line">  └── GitHub Actions WeChat Sync     ← 解析 → 转 HTML → 传图片 → 创建草稿</span><br><span class="line">        └── 公众号草稿箱已就绪，登录手动发布</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">                  ┌─────────────────────┐</span><br><span class="line">                  │   VSCode + OpenCode  │</span><br><span class="line">                  │  写文章 / 处理图片    │</span><br><span class="line">                  └─────────┬───────────┘</span><br><span class="line">                            │ git push</span><br><span class="line">                            ▼</span><br><span class="line">                  ┌─────────────────────┐</span><br><span class="line">                  │   GitHub Actions     │</span><br><span class="line">                  │   (自动触发)          │</span><br><span class="line">                  └─────┬───────┬───────┘</span><br><span class="line">                        │       │</span><br><span class="line">           ┌────────────┘       └────────────┐</span><br><span class="line">           ▼                                  ▼</span><br><span class="line">┌─────────────────────┐          ┌──────────────────────┐</span><br><span class="line">│  Deploy Workflow     │          │  WeChat Sync Workflow │</span><br><span class="line">│  hexo clean &amp;&amp; g     │          │  解析 → 转 HTML       │</span><br><span class="line">│  rsync → gh-pages    │          │  压缩图片 → 上传素材   │</span><br><span class="line">│  GitHub Pages 更新    │          │  创建/更新草稿         │</span><br><span class="line">└─────────────────────┘          └──────────────────────┘</span><br><span class="line">           │                                  │</span><br><span class="line">           ▼                                  ▼</span><br><span class="line">┌─────────────────────┐          ┌──────────────────────┐</span><br><span class="line">│  www.bytefisher.top  │          │  公众号草稿箱          │</span><br><span class="line">│  已上线               │          │  手动发布              │</span><br><span class="line">└─────────────────────┘          └──────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<p>这张图就是我现在发布一篇文章的完整路径。从在 VSCode 里敲下最后一个字，到博客上线 + 公众号草稿就绪，只需要 <strong>git push</strong> 这一条指令。</p>
+<hr>
+<h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><h3 id="6-1-自动化的价值"><a href="#6-1-自动化的价值" class="headerlink" title="6.1 自动化的价值"></a>6.1 自动化的价值</h3><p>这套流水线跑下来，最大的感受是：<strong>精力从”发布操作”转移到了”内容创作”</strong>。</p>
+<p>以前每次发文章：</p>
+<ol>
+<li>本地构建 → 检查报错（3 分钟）</li>
+<li>截图 → 上传图床 → 替换链接（5 分钟）</li>
+<li>部署到 GitHub Pages（2 分钟）</li>
+<li>登录公众号后台 → 复制粘贴 → 重新排版（15 分钟）</li>
+<li>上传图片 → 调整格式 → 保存草稿（10 分钟）</li>
+</ol>
+<p>现在：</p>
+<ol>
+<li>写完 → <code>git push</code>（10 秒）</li>
+<li>等 40 秒博客自动更新</li>
+<li>等 15 秒公众号草稿自动创建</li>
+<li>登录公众号 → 预览 → 发布（2 分钟）</li>
+</ol>
+<h3 id="6-2-成本分析"><a href="#6-2-成本分析" class="headerlink" title="6.2 成本分析"></a>6.2 成本分析</h3><table>
+<thead>
+<tr>
+<th>服务</th>
+<th>月费用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DeepSeek V4 Flash API</td>
+<td>≈ ¥0</td>
+<td>写博客用量极少，免费额度足够</td>
+</tr>
+<tr>
+<td>GitHub Actions</td>
+<td>免费</td>
+<td>每月 2000 分钟免费额度，博客部署只用了不到 50 分钟</td>
+</tr>
+<tr>
+<td>GitHub Pages</td>
+<td>免费</td>
+<td>静态托管免费</td>
+</tr>
+<tr>
+<td>Cloudflare Workers</td>
+<td>免费</td>
+<td>图片代理，免费计划每天 10 万请求</td>
+</tr>
+<tr>
+<td>Vercel (Waline)</td>
+<td>免费</td>
+<td>Serverless 函数运行评论系统</td>
+</tr>
+<tr>
+<td>TiDB Cloud Serverless</td>
+<td>≈ ¥0</td>
+<td>评论区数据存储，25GB 免费容量</td>
+</tr>
+<tr>
+<td><strong>总计</strong></td>
+<td><strong>≈ ¥0&#x2F;月</strong></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="6-3-未来展望"><a href="#6-3-未来展望" class="headerlink" title="6.3 未来展望"></a>6.3 未来展望</h3><p>目前自动化的最后一公里——<strong>微信公众号的手动发布</strong>——还没有打通。虽然草稿是自动创建好的，但还是需要登录公众号后台点一下发布按钮。</p>
+<p>考虑过接入微信发布的 API，但微信公众号的<strong>群发接口</strong>有严格的调用限制（订阅号每天只能群发 1 次），而且发布后的文章不能修改。自动发布的风险太高，手动预览一次再发布更稳妥。</p>
+<p>下一个想接入的是 <strong>RSS 自动同步到其他平台</strong>（掘金、CSDN 等），通过标准的 RSS feed 让第三方平台自动抓取新文章。<code>atom.xml</code> 已经有了，缺的是各平台的接入适配。</p>
+<hr>
+<p><strong>相关链接：</strong></p>
+<ul>
+<li><a href="/2026/03/24/VSCode%E4%B8%AD%E6%90%AD%E5%BB%BAOpenCode-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/">VSCode 中搭建 OpenCode AI 编程助手完整指南</a></li>
+<li><a href="/2026/05/12/Hexo-%E5%8D%9A%E5%AE%A2%E4%BA%8C%E6%AC%A1%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E4%BB%8E%E6%80%A7%E8%83%BD%E5%8E%8B%E7%BC%A9%E5%88%B0%E5%93%81%E7%89%8C%E6%89%93%E7%A3%A8%E5%85%A8%E8%AE%B0%E5%BD%95/">Hexo 博客二次优化实战：从性能压缩到品牌打磨全记录</a></li>
+<li><a href="/2026/05/14/Hexo-%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%E8%BF%81%E7%A7%BB%E5%AE%9E%E6%88%98-%E4%BB%8Eiili.io%E5%88%B0Cloudflare-Workers+%E5%B7%A5%E5%85%B7%E9%93%BE%E6%94%B9%E9%80%A0%E5%85%A8%E8%AE%B0%E5%BD%95/">Hexo 博客图床迁移实战：从 iili.io 到 Cloudflare Workers + 工具链改造全记录</a></li>
+<li><a target="_blank" rel="noopener" href="https://opencode.ai/">OpenCode 官网</a></li>
+<li><a target="_blank" rel="noopener" href="https://deepseek.com/">DeepSeek 官网</a></li>
+</ul>
+<hr>
+<p><em>本文对应的完整配置和工具代码可在 <a target="_blank" rel="noopener" href="https://github.com/grj1981/BlogCode">GitHub BlogCode 仓库</a> 中找到。</em></p>
+
+    </div>
+
+    
+    
+    
+    <div class="post-blog-card" style="margin:1.5em auto 0;padding:.5em .8em;border:1px solid #e8e8e8;border-radius:6px;background:var(--card-bg-color,#fff);display:flex;align-items:center;max-width:400px">
+  <div style="flex:1;min-width:0;text-align:left">
+    <div style="font-size:.8em;font-weight:700;color:#555">ByteFisher</div>
+    <div style="font-size:.68em;color:#999;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">分享编程技术 · 记录钓鱼乐趣</div>
+  </div>
+  <img src="/images/wechat-qcode.jpg" alt="扫码关注" style="width:44px;height:44px;border-radius:3px;margin:0 10px;flex-shrink:0">
+  <div style="padding:3px 10px;border:1px solid #fc6423;border-radius:3px;color:#fc6423;font-size:.7em;white-space:nowrap;flex-shrink:0">▸ 扫码关注 ◂</div>
+</div>
+
+    <div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2026/05/28/Hexo-博客AI问答助手ByteBot优化实录-Markdown渲染迁移与踩坑记/" class="related-post-item" title="Hexo 博客 AI 问答助手 ByteBot 优化实录：Markdown 渲染迁移与踩坑记"><span class="related-post-title">Hexo 博客 AI 问答助手 ByteBot 优化实录：Markdown 渲染迁移与踩坑记</span><span class="related-post-date">2026-05-28</span><span class="related-post-desc">ByteBot 从第一版上线至今已经过 30+ 次提交迭代，从最初的自研 70 行 Markdown 渲染器到如今的 marked@4 + DOMPurify </span></a><a href="/2026/05/21/Hexo-博客AI问答助手ByteBot全栈实践/" class="related-post-item" title="Hexo 博客 AI 问答助手 ByteBot 全栈实践：从流式响应到 RAG 增强"><span class="related-post-title">Hexo 博客 AI 问答助手 ByteBot 全栈实践：从流式响应到 RAG 增强</span><span class="related-post-date">2026-05-21</span><span class="related-post-desc">ByteBot 是 ByteFisher 博客的 AI 问答助手，基于 DeepSeek API + Vercel Serverless 构建，为博客访问者提供</span></a><a href="/2026/05/09/Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板/" class="related-post-item" title="Hexo 博客集成 AI 问答助手：DeepSeek + Vercel + 悬浮球聊天面板"><span class="related-post-title">Hexo 博客集成 AI 问答助手：DeepSeek + Vercel + 悬浮球聊天面板</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">前言 ByteFisher 博客已发布 95+ 篇文章，一个痛点越来越明显： 静态博客缺少即时互动能力 。 读者经常遇到的问题场景： "有没有 Unity 相关</span></a><a href="/2026/04/21/OpenCode中接入Qwen模型配置指南/" class="related-post-item" title="OpenCode 中接入 Qwen 模型完整指南"><span class="related-post-title">OpenCode 中接入 Qwen 模型完整指南</span><span class="related-post-date">2026-04-21</span><span class="related-post-desc">详细介绍如何在 OpenCode 中接入阿里云通义千问 Qwen 模型，包括注册阿里云账号、获取 API Key、配置 providers 文件、模型参数调优，以及与其他模型的成本对比。</span></a><a href="/2026/03/24/VSCode中搭建OpenCode-AI编程助手完整指南/" class="related-post-item" title="VSCode 中搭建 OpenCode AI 编程助手完整指南"><span class="related-post-title">VSCode 中搭建 OpenCode AI 编程助手完整指南</span><span class="related-post-date">2026-03-24</span><span class="related-post-desc">详细教程教你如何在 VSCode 中搭建 OpenCode AI 编程助手，涵盖环境准备、安装配置、LSP 自动启用、多会话并行处理、75+ LLM 提供商支持。开源免费，隐私优先，提升编程效率的完整指南。</span></a><a href="/2026/05/15/Hexo-博客评论系统深度迁移-从LeanCloud到TiDB Cloud全记录/" class="related-post-item" title="Hexo 博客评论系统深度迁移：从 LeanCloud 到 TiDB Cloud"><span class="related-post-title">Hexo 博客评论系统深度迁移：从 LeanCloud 到 TiDB Cloud</span><span class="related-post-date">2026-05-15</span><span class="related-post-desc">前言 ByteFisher 博客的评论系统使用 Waline（部署于 Vercel） + LeanCloud（国内版）的组合已运行一年多，积累了 19 条评论和</span></a></div></div>
+    <div class="series-nav"><div class="series-nav-title">Hexo博客搭建 系列</div><div class="series-nav-progress">第 13/13 篇</div><div class="series-nav-links"><a href="/2026/05/28/Hexo-博客AI问答助手ByteBot优化实录-Markdown渲染迁移与踩坑记/" class="series-nav-prev">Hexo 博客 AI 问答助手 ByteBot 优化实录：Markdown 渲染迁移与踩坑记</a></div></div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag"># series:Hexo博客搭建</a>
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/DeepSeek/" rel="tag"># DeepSeek</a>
+              <a href="/tags/series-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/" rel="tag"># series:AI编程助手</a>
+              <a href="/tags/OpenCode/" rel="tag"># OpenCode</a>
+              <a href="/tags/VSCode/" rel="tag"># VSCode</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/05/28/Hexo-%E5%8D%9A%E5%AE%A2AI%E9%97%AE%E7%AD%94%E5%8A%A9%E6%89%8BByteBot%E4%BC%98%E5%8C%96%E5%AE%9E%E5%BD%95-Markdown%E6%B8%B2%E6%9F%93%E8%BF%81%E7%A7%BB%E4%B8%8E%E8%B8%A9%E5%9D%91%E8%AE%B0/" rel="prev" title="Hexo 博客 AI 问答助手 ByteBot 优化实录：Markdown 渲染迁移与踩坑记">
+      <i class="fa fa-chevron-left"></i> Hexo 博客 AI 问答助手 ByteBot 优化实录：Markdown 渲染迁移与踩坑记
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+  <div class="post-share">
+    <span class="post-share-label">分享：</span>
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2026%2F05%2F31%2FVSCode-OpenCode-DeepSeek-%25E5%258D%259A%25E5%25AE%25A2%25E6%2596%2587%25E7%25AB%25A0%25E5%2585%25A8%25E8%2587%25AA%25E5%258A%25A8%25E5%25BC%2580%25E5%258F%2591%25E6%25B5%2581%25E6%25B0%25B4%25E7%25BA%25BF%25E5%25AE%259E%25E6%2588%2598%2F&amp;title=VSCode%20%2B%20OpenCode%20%2B%20DeepSeek%EF%BC%9A%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E5%85%A8%E8%87%AA%E5%8A%A8%E5%BC%80%E5%8F%91%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%AE%9E%E6%88%98" target="_blank" rel="noopener" title="分享到微博">
+      <i class="fab fa-weibo"></i>
+    </a>
+    <a href="#" onclick="navigator.clipboard.writeText(location.href);var t=this;t.innerHTML='<i class=fa fa-check></i>';setTimeout(function(){t.innerHTML='<i class=fa fa-link></i>'},1500);return false" title="复制链接">
+      <i class="fa fa-link"></i>
+    </a>
+  </div>
+
+  
+  <div class="post-author-bio">
+    <div class="post-author-avatar">
+      <img src="/images/avatar2.gif" alt="淡水鱼">
+    </div>
+    <div class="post-author-info">
+      <div class="post-author-name">淡水鱼</div>
+      <div class="post-author-desc">钓鱼爱好者 &amp; Unity 游戏开发者，分享编程技术与钓鱼经验。</div>
+      <div class="post-author-links">
+        <a href="https://github.com/grj1981" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="/atom.xml" title="RSS 订阅"><i class="fa fa-rss"></i></a>
+        <a href="mailto:271623821@qq.com" title="联系我"><i class="fa fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+          </div>
+          
+    <div class="comments" id="waline-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81OpenCode-%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%EF%BC%9A%E4%BB%8E%E9%80%9A%E7%94%A8%E5%8A%A9%E6%89%8B%E5%88%B0%E4%B8%93%E5%B1%9E%E5%8D%9A%E5%AE%A2%E6%9E%B6%E6%9E%84%E5%B8%88"><span class="nav-number">1.</span> <span class="nav-text">一、OpenCode 项目配置：从通用助手到专属博客架构师</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 模型配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-AGENTS-md%EF%BC%9A%E9%A1%B9%E7%9B%AE%E7%9F%A5%E8%AF%86%E5%BA%93"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 AGENTS.md：项目知识库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%96%87%E7%AB%A0%E5%BC%80%E5%8F%91%E5%B7%A5%E4%BD%9C%E6%B5%81%EF%BC%9A%E4%BB%8E%E6%83%B3%E6%B3%95%E5%88%B0%E6%88%90%E6%96%87"><span class="nav-number">2.</span> <span class="nav-text">二、文章开发工作流：从想法到成文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%88%9B%E5%BB%BA%E6%96%87%E7%AB%A0%E9%AA%A8%E6%9E%B6"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 创建文章骨架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-AI-%E8%BE%85%E5%8A%A9%E5%86%99%E4%BD%9C"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 AI 辅助写作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 图片处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E5%A4%9A%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 多仓库管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%EF%BC%9AGitHub-Actions-%E6%8E%A5%E7%AE%A1%E6%9E%84%E5%BB%BA%E4%B8%8E%E5%8F%91%E5%B8%83"><span class="nav-number">3.</span> <span class="nav-text">三、自动部署：GitHub Actions 接管构建与发布</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%B7%A5%E4%BD%9C%E6%B5%81%E9%85%8D%E7%BD%AE"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 工作流配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B%E6%97%B6%E5%BA%8F"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 构建流程时序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E8%B8%A9%E5%9D%91%EF%BC%9A%E8%B7%AF%E5%BE%84%E8%BF%87%E6%BB%A4%E4%B8%8D%E7%94%9F%E6%95%88"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 踩坑：路径过滤不生效</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%85%AC%E4%BC%97%E5%8F%B7%E5%90%8C%E6%AD%A5%EF%BC%9A%E5%8D%9A%E5%AE%A2%E5%88%B0%E5%BE%AE%E4%BF%A1%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%A5%E6%A2%81"><span class="nav-number">4.</span> <span class="nav-text">四、公众号同步：博客到微信的自动化桥梁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%90%8C%E6%AD%A5%E6%96%B9%E6%A1%88%E8%AE%BE%E8%AE%A1"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 同步方案设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 自动同步工作流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97%E6%8B%86%E8%A7%A3"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 核心模块拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-1-%E6%96%87%E7%AB%A0%E8%A7%A3%E6%9E%90%EF%BC%88post-parser-js%EF%BC%89"><span class="nav-number">4.3.1.</span> <span class="nav-text">4.3.1 文章解析（post-parser.js）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-2-Markdown-%E8%BD%AC%E5%BE%AE%E4%BF%A1-HTML%EF%BC%88markdown-to-html-js%EF%BC%89"><span class="nav-number">4.3.2.</span> <span class="nav-text">4.3.2 Markdown 转微信 HTML（markdown-to-html.js）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-3-%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86%E6%B5%81%E6%B0%B4%E7%BA%BF%EF%BC%88image-processor-js%EF%BC%89"><span class="nav-number">4.3.3.</span> <span class="nav-text">4.3.3 图片处理流水线（image-processor.js）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-4-%E5%BE%AE%E4%BF%A1-API-%E5%B0%81%E8%A3%85%EF%BC%88wechat-api-js%EF%BC%89"><span class="nav-number">4.3.4.</span> <span class="nav-text">4.3.4 微信 API 封装（wechat-api.js）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-5-%E5%A2%9E%E9%87%8F%E5%90%8C%E6%AD%A5%E7%8A%B6%E6%80%81%E8%BF%BD%E8%B8%AA%EF%BC%88tracker-js%EF%BC%89"><span class="nav-number">4.3.5.</span> <span class="nav-text">4.3.5 增量同步状态追踪（tracker.js）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E8%B8%A9%E5%9D%91%E9%9B%86%E9%94%A6"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 踩坑集锦</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%F0%9F%94%B4-%E8%B8%A9%E5%9D%91-1%EF%BC%9A%E5%9B%BE%E7%89%87%E5%B0%BA%E5%AF%B8%E8%B6%85%E9%99%90"><span class="nav-number">4.4.1.</span> <span class="nav-text">🔴 踩坑 1：图片尺寸超限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%F0%9F%94%B4-%E8%B8%A9%E5%9D%91-2%EF%BC%9AMarkdown-%E5%B7%AE%E5%BC%82%E5%AF%BC%E8%87%B4%E6%8E%92%E7%89%88%E9%94%99%E4%B9%B1"><span class="nav-number">4.4.2.</span> <span class="nav-text">🔴 踩坑 2：Markdown 差异导致排版错乱</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%F0%9F%94%B4-%E8%B8%A9%E5%9D%91-3%EF%BC%9A%E5%85%AC%E4%BC%97%E5%8F%B7-API-%E7%9A%84-media-id-%E8%BF%87%E6%9C%9F"><span class="nav-number">4.4.3.</span> <span class="nav-text">🔴 踩坑 3：公众号 API 的 media_id 过期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%F0%9F%94%B4-%E8%B8%A9%E5%9D%91-4%EF%BC%9AGitHub-Actions-%E5%B9%B6%E5%8F%91%E5%86%B2%E7%AA%81"><span class="nav-number">4.4.4.</span> <span class="nav-text">🔴 踩坑 4：GitHub Actions 并发冲突</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E4%B8%80%E6%9D%A1%E6%8C%87%E4%BB%A4%E5%AE%8C%E6%88%90%E5%85%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">5.</span> <span class="nav-text">五、一条指令完成全流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">六、总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9A%84%E4%BB%B7%E5%80%BC"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 自动化的价值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E6%88%90%E6%9C%AC%E5%88%86%E6%9E%90"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 成本分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-%E6%9C%AA%E6%9D%A5%E5%B1%95%E6%9C%9B"><span class="nav-number">6.3.</span> <span class="nav-text">6.3 未来展望</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">221</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe id="music-player" allow="encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2023 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition(true);
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+    
+
+  
+
+    
+
+    </div>
+
+<link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
+<script data-pjax>
+(function() {
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+
+  function updateCounts() {
+    var countEls = document.querySelectorAll('.waline-visitor-count');
+    if (!countEls.length) return;
+    countEls.forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var url = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(json) {
+          if (json && json.data && json.data[0] && json.data[0].time != null) {
+            el.innerText = json.data[0].time;
+          }
+        }).catch(function(){});
+    });
+  }
+
+  var el = document.querySelector('#waline-comments');
+  if (el) {
+    updateCounts();
+    NexT.utils.loadComments(el, function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
+        Waline.init({
+          el: '#waline-comments',
+          serverURL: 'https://waline.bytefisher.top/',
+          path: location.pathname,
+          lang: 'zh-CN' || 'zh-CN',
+          meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
+          requiredMeta: ["nick"] || ['nick'],
+          placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
+          avatar: 'retro' || 'retro',
+          pageSize: 10 || 10,
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
+        });
+        var pathEl = document.querySelector('.waline-visitor-count');
+        var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
+        fetch(baseURL + '/api/article', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: postPath })
+        }).finally(function() {
+          setTimeout(updateCounts, 300);
+        });
+      }, window.Waline);
+    });
+  } else {
+    updateCounts();
+  }
+
+  // Fallback for delayed Waline rendering
+  setTimeout(updateCounts, 2000);
+})();
+</script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="/css/douyin-modal.css">
+<script src="/js/douyin-modal.js"></script>
+<script src="/js/hero-typing.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
+<script data-pjax>
+(function() {
+  if (document.querySelector('a[data-lightbox]')) {
+    if (!window._lightboxLoaded) {
+      window._lightboxLoaded = true;
+      var s = document.createElement('script');
+      s.src = '/js/lightbox-plus-jquery.min.js';
+      document.body.appendChild(s);
+    }
+  }
+})();
+</script>
+
+<button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
+  <i class="fa fa-moon-o"></i>
+  <i class="fa fa-sun-o"></i>
+</button>
+<script src="/js/darkmode-toggle.js"></script>
+
+<script src="/js/lib/marked.min.js" data-pjax></script>
+<script src="/js/lib/purify.min.js" data-pjax></script>
+<script src="/js/ai-assistant.js" data-pjax></script>
+
+<script data-pjax>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script src="/js/hot-posts-widget.js" data-pjax></script>
+
+</body>
+</html>

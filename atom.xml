@@ -11,7 +11,27 @@
   <rights>All rights reserved 2026, 淡水鱼</rights>
   <subtitle>钓鱼爱好者的编程世界</subtitle>
   <title>ByteFisher</title>
-  <updated>2026-05-28T10:38:43.441Z</updated>
+  <updated>2026-06-01T03:22:32.033Z</updated>
+  <entry>
+    <author>
+      <name>淡水鱼</name>
+    </author>
+    <category term="Hexo博客搭建" scheme="https://www.bytefisher.top/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    <category term="AI" scheme="https://www.bytefisher.top/categories/AI/"/>
+    <category term="series:Hexo博客搭建" scheme="https://www.bytefisher.top/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
+    <category term="AI" scheme="https://www.bytefisher.top/tags/AI/"/>
+    <category term="DeepSeek" scheme="https://www.bytefisher.top/tags/DeepSeek/"/>
+    <category term="series:AI编程助手" scheme="https://www.bytefisher.top/tags/series-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/"/>
+    <category term="OpenCode" scheme="https://www.bytefisher.top/tags/OpenCode/"/>
+    <category term="VSCode" scheme="https://www.bytefisher.top/tags/VSCode/"/>
+    <id>https://www.bytefisher.top/2026/05/31/VSCode-OpenCode-DeepSeek-%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E5%85%A8%E8%87%AA%E5%8A%A8%E5%BC%80%E5%8F%91%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%AE%9E%E6%88%98/</id>
+    <link href="https://www.bytefisher.top/2026/05/31/VSCode-OpenCode-DeepSeek-%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E5%85%A8%E8%87%AA%E5%8A%A8%E5%BC%80%E5%8F%91%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%AE%9E%E6%88%98/"/>
+    <published>2026-05-31T12:00:00.000Z</published>
+    <summary>本文详细介绍如何使用 VSCode + OpenCode + DeepSeek 构建博客文章全自动开发流水线，涵盖 AI 辅助写作、GitHub Actions 自动部署、微信公众号自动同步等完整工作流。从提示词配置到 Tools 调用，从 CI/CD 到内容分发，一次编写，多平台发布。</summary>
+    <title>VSCode + OpenCode + DeepSeek：博客文章全自动开发流水线实战</title>
+    <updated>2026-06-01T03:22:32.033Z</updated>
+  </entry>
   <entry>
     <author>
       <name>淡水鱼</name>
@@ -344,23 +364,5 @@
     <summary>Hexo、JavaScript、游戏开发、Canvas、响应式设计：前言 继五子棋之后，本文介绍光影拼图游戏的开发。相比其他游戏，拼图的核心难点在于图片处理与碎片管理：如何将一张图片切割成碎片，实现拖拽吸附，并保证在移动端和桌面端都有良好的交互体验。</summary>
     <title>Hexo 博客实战：光影拼图游戏开发指南</title>
     <updated>2026-05-14T08:31:52.692Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>淡水鱼</name>
-    </author>
-    <category term="编程" scheme="https://www.bytefisher.top/categories/%E7%BC%96%E7%A8%8B/"/>
-    <category term="游戏开发" scheme="https://www.bytefisher.top/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
-    <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
-    <category term="AI" scheme="https://www.bytefisher.top/tags/AI/"/>
-    <category term="JavaScript" scheme="https://www.bytefisher.top/tags/JavaScript/"/>
-    <category term="游戏开发" scheme="https://www.bytefisher.top/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
-    <category term="series:博客实战-小游戏" scheme="https://www.bytefisher.top/tags/series-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E6%B8%B8%E6%88%8F/"/>
-    <id>https://www.bytefisher.top/2026/04/15/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BA%94%E5%AD%90%E6%A3%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</id>
-    <link href="https://www.bytefisher.top/2026/04/15/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E4%BA%94%E5%AD%90%E6%A3%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/"/>
-    <published>2026-04-15T12:00:00.000Z</published>
-    <summary>Hexo、AI、JavaScript、游戏开发：前言 继扫雷、俄罗斯方块之后，本文介绍五子棋 AI 对战游戏的开发。相比其他游戏，五子棋的核心难点在于AI 算法的实现：如何在有限时间内找到最优落子位置，同时平衡进攻与防守。 五子棋是一个信息完全公开的零和博弈游戏，理论上可以通过搜索算法找到最优解。</summary>
-    <title>Hexo 博客实战：五子棋小游戏开发指南</title>
-    <updated>2026-05-14T08:31:52.691Z</updated>
   </entry>
 </feed>
