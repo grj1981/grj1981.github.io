@@ -1313,7 +1313,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #58ffff;
+  background: #7078ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2676,7 +2676,7 @@ ul.breadcrumb li + li:last-child {
   margin-top: 16px;
 }
 body {
-  background-image: url("/images/bg.jpg");
+  background-image: url("/images/bg.webp");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100% 100%;

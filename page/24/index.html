@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.loli.net">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://img.bytefisher.top">
   <link rel="preconnect" href="https://waline.bytefisher.top">
-  <link rel="preconnect" href="https://iili.io">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#37c6c0">
@@ -1705,8 +1706,8 @@ window.addEventListener('pjax:success', () => {
 </div>
 
 <link rel="stylesheet" type="text/css" href="/css/douyin-modal.css">
-<script src="/js/douyin-modal.js"></script>
-<script src="/js/hero-typing.js"></script>
+<script src="/js/douyin-modal.js" async></script>
+<script src="/js/hero-typing.js" async></script>
 
 <link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
 <script data-pjax>
@@ -1726,11 +1727,30 @@ window.addEventListener('pjax:success', () => {
   <i class="fa fa-moon-o"></i>
   <i class="fa fa-sun-o"></i>
 </button>
-<script src="/js/darkmode-toggle.js"></script>
+<script src="/js/darkmode-toggle.js" async></script>
 
-<script src="/js/lib/marked.min.js" data-pjax></script>
-<script src="/js/lib/purify.min.js" data-pjax></script>
-<script src="/js/ai-assistant.js" data-pjax></script>
+<script data-pjax>
+(function() {
+  function loadAI() {
+    if (window._aiLoaded) return;
+    window._aiLoaded = true;
+    var scripts = ['/js/lib/marked.min.js', '/js/lib/purify.min.js', '/js/ai-assistant.js'];
+    function loadNext() {
+      if (!scripts.length) return;
+      var s = document.createElement('script');
+      s.src = scripts.shift();
+      s.onload = s.onerror = loadNext;
+      document.body.appendChild(s);
+    }
+    loadNext();
+  }
+  if (document.readyState === 'complete') {
+    setTimeout(loadAI, 500);
+  } else {
+    window.addEventListener('load', function() { setTimeout(loadAI, 500); });
+  }
+})();
+</script>
 
 <script data-pjax>
 if ('serviceWorker' in navigator) {
@@ -1738,7 +1758,7 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 
-<script src="/js/hot-posts-widget.js" data-pjax></script>
+<script src="/js/hot-posts-widget.js" async></script>
 
 </body>
 </html>
