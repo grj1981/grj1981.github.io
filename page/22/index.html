@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <link rel="preconnect" href="https://iili.io">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#37c6c0">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#37c6c0">
+
+<meta http-equiv="Permissions-Policy" content="encrypted-media=*">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="codeva-7SG6ROHyTg">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com busuanzi.ibruce.info static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
+  <meta name="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ByteFisher">
+<meta property="og:url" content="https://www.bytefisher.top/page/22/">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="unity,游戏开发,C#,Lua,Python,Hexo,博客,钓鱼,教程,编程">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.bytefisher.top/page/22/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"ByteFisher","url":"https://www.bytefisher.top","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.bytefisher.top/search.json?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"ByteFisher","description":"ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。","url":"https://www.bytefisher.top"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"}]}</script>
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ByteFisher - 钓鱼爱好者的编程世界</title>
+  
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dc50e0997d43c3a8dbf2afdb3fdff233";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#37c6c0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-tutorials">
+
+    <a href="/tutorials/" rel="section"><i class="fa fa-book fa-fw"></i>教程</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-aigames">
+
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">52</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">220</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">58</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>rss</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+
+  <div class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">
+      <span class="hero-emoji">🎣</span>
+      ByteFisher
+    </h1>
+    <div class="hero-subtitle">
+      <span class="hero-prefix">钓鱼爱好者的</span>
+      <span class="hero-typing" id="hero-typing"></span>
+      <span class="hero-cursor">|</span>
+    </div>
+    <p class="hero-desc">分享游戏开发技术与钓鱼乐趣</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-value">220</span>
+        <span class="hero-stat-label">文章</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">7</span>
+        <span class="hero-stat-label">钓鱼相册</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">6</span>
+        <span class="hero-stat-label">小游戏</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">52</span>
+        <span class="hero-stat-label">抖音作品</span>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="/archives/" class="hero-btn hero-btn-secondary">📚 浏览文章</a>
+      <a href="/fish/" class="hero-btn hero-btn-secondary">🎣 钓鱼相册</a>
+      <a href="/ai-games/" class="hero-btn hero-btn-secondary">🎮 玩小游戏</a>
+      <a href="/douyin/" class="hero-btn hero-btn-secondary">🎬 抖音作品</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+<div class="featured-section">
+  <div class="featured-title">📖 推荐阅读</div>
+  <div class="featured-grid">
+    
+    <a href="/2026/05/12/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E9%92%93%E9%B1%BC%E7%9B%B8%E5%86%8C%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E5%85%A8%E8%AE%B0%E5%BD%95/" class="featured-card">
+      <div class="featured-card-title">Hexo 博客实战：钓鱼相册数据统计与地图</div>
+      <div class="featured-card-date">2026-05-12</div>
+    </a>
+    
+    
+  
+
+  
+    
+    <a href="/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%20AI%20%E9%97%AE%E7%AD%94%E5%8A%A9%E6%89%8B%EF%BC%9ADeepSeek%20API%20+%20Vercel%20Serverless%20+%20%E6%82%AC%E6%B5%AE%E7%90%83%E8%81%8A%E5%A4%A9%E9%9D%A2%E6%9D%BF/" class="featured-card">
+      <div class="featured-card-title">Hexo 博客集成 AI 问答助手：DeepSeek + Vercel + 悬浮球聊天面板</div>
+      <div class="featured-card-date">2026-05-09</div>
+    </a>
+    
+    
+  
+
+  
+    
+    <a href="/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%BD%93%E9%AA%8C%E5%8D%87%E7%BA%A7%EF%BC%9ASEO%20%E4%BC%98%E5%8C%96%20+%20%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E5%A2%9E%E5%BC%BA%20+%20%E5%93%81%E7%89%8C%E8%A7%86%E8%A7%89%E9%87%8D%E6%9E%84/" class="featured-card">
+      <div class="featured-card-title">Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构</div>
+      <div class="featured-card-date">2026-05-09</div>
+    </a>
+    
+    
+  
+
+  
+
+  
+    
+    <a href="/2026/05/04/2026-05-04-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E4%BA%94%E4%B8%80%E8%BF%9E%E6%88%98%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93/" class="featured-card">
+      <div class="featured-card-title">五一连战花碑水库，爆护50斤——老表两小时空军，我连竿到手酸</div>
+      <div class="featured-card-date">2026-05-04</div>
+    </a>
+    
+    
+  </div>
+</div>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【委托Delegate】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-02-05 15:39:03" itemprop="dateCreated datePublished" datetime="2025-02-05T15:39:03+08:00">2025-02-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>IT、C#：C# 委托（Delegate） #
+在 C# 中，委托（Delegate） 是一种类型安全的函数指针，它允许将方法作为参数传递给其他方法。 C# 中的委托（Delegate）类似于 C 或 C++ 中函数的指针。委托（Delegate） 是存有对某个方法的引用的一种引用类型变量，引用可在运行时被改变。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【索引器Indexer】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-02-05 15:23:12" itemprop="dateCreated datePublished" datetime="2025-02-05T15:23:12+08:00">2025-02-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>IT、C#：C# 索引器（Indexer） #
+索引器（Indexer） 允许一个对象可以像数组一样使用下标的方式来访问。 当您为类定义一个索引器时，该类的行为就会像一个 虚拟数组（virtual array） 一样。您可以使用数组访问运算符 [ ] 来访问该类的的成员。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B4%A2%E5%BC%95%E5%99%A8Indexer%E3%80%91/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【属性Property】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-02-05 14:59:27" itemprop="dateCreated datePublished" datetime="2025-02-05T14:59:27+08:00">2025-02-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>IT、C#：C# 属性（Property） #
+C# 中的属性（Property）是类和结构体中用于封装数据的成员。它们提供了一种方式来定义类成员的访问和设置规则，通常用于隐藏字段（Fields）的内部实现细节，同时提供控制数据访问的机制。 属性可以看作是对字段的包装器，通常由 get 和 set 访问器组成。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【反射Reflection】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-02-05 14:27:15" itemprop="dateCreated datePublished" datetime="2025-02-05T14:27:15+08:00">2025-02-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>IT、C#：C# 反射（Reflection） # 反射指程序可以访问、检测和修改它本身状态或行为的一种能力。 程序集包含模块，而模块包含类型，类型又包含成员。反射则提供了封装程序集、模块和类型的对象。 您可以使用反射动态地创建类型的实例，将类型绑定到现有对象，或从现有对象中获取类型。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%8D%E5%B0%84Reflection%E3%80%91/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【特性Attribute】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-02-05 11:57:31" itemprop="dateCreated datePublished" datetime="2025-02-05T11:57:31+08:00">2025-02-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>IT、C#：C# 特性（Attribute） # 特性（Attribute）是用于在运行时传递程序中各种元素（比如类、方法、结构、枚举、组件等）的行为信息的声明性标签。您可以通过使用特性向程序添加声明性信息。一个声明性标签是通过放置在它所应用的元素前面的方括号（[ ]）来描述的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%89%B9%E6%80%A7Attribute%E3%80%91/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/" class="post-title-link" itemprop="url">C#学习笔记【接口Interface】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-02-05 11:11:49" itemprop="dateCreated datePublished" datetime="2025-02-05T11:11:49+08:00">2025-02-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>IT、C#：C#接口(Interface) # 接口定义了所有类继承接口时应遵循的语法合同。接口定义了语法合同 "是什么" 部分，派生类定义了语法合同 "怎么做" 部分。 接口定义了属性、方法和事件，这些都是接口的成员。接口只包含了成员的声明。成员的定义是派生类的责任。接口提供了派生类应遵循的标准结构。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%8E%A5%E5%8F%A3Interface%E3%80%91/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/21/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/37/">37</a><a class="extend next" rel="next" href="/page/23/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">220</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe id="music-player" allow="encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2023 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition(true);
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+    
+
+  
+
+    
+
+    </div>
+
+<link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
+<script data-pjax>
+(function() {
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+
+  function updateCounts() {
+    var countEls = document.querySelectorAll('.waline-visitor-count');
+    if (!countEls.length) return;
+    countEls.forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var url = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(json) {
+          if (json && json.data && json.data[0] && json.data[0].time != null) {
+            el.innerText = json.data[0].time;
+          }
+        }).catch(function(){});
+    });
+  }
+
+  var el = document.querySelector('#waline-comments');
+  if (el) {
+    updateCounts();
+    NexT.utils.loadComments(el, function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
+        Waline.init({
+          el: '#waline-comments',
+          serverURL: 'https://waline.bytefisher.top/',
+          path: location.pathname,
+          lang: 'zh-CN' || 'zh-CN',
+          meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
+          requiredMeta: ["nick"] || ['nick'],
+          placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
+          avatar: 'retro' || 'retro',
+          pageSize: 10 || 10,
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
+        });
+        var pathEl = document.querySelector('.waline-visitor-count');
+        var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
+        fetch(baseURL + '/api/article', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: postPath })
+        }).finally(function() {
+          setTimeout(updateCounts, 300);
+        });
+      }, window.Waline);
+    });
+  } else {
+    updateCounts();
+  }
+
+  // Fallback for delayed Waline rendering
+  setTimeout(updateCounts, 2000);
+})();
+</script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="/css/douyin-modal.css">
+<script src="/js/douyin-modal.js"></script>
+<script src="/js/hero-typing.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
+<script data-pjax>
+(function() {
+  if (document.querySelector('a[data-lightbox]')) {
+    if (!window._lightboxLoaded) {
+      window._lightboxLoaded = true;
+      var s = document.createElement('script');
+      s.src = '/js/lightbox-plus-jquery.min.js';
+      document.body.appendChild(s);
+    }
+  }
+})();
+</script>
+
+<button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
+  <i class="fa fa-moon-o"></i>
+  <i class="fa fa-sun-o"></i>
+</button>
+<script src="/js/darkmode-toggle.js"></script>
+
+<script src="/js/lib/marked.min.js" data-pjax></script>
+<script src="/js/lib/purify.min.js" data-pjax></script>
+<script src="/js/ai-assistant.js" data-pjax></script>
+
+<script data-pjax>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script src="/js/hot-posts-widget.js" data-pjax></script>
+
+</body>
+</html>

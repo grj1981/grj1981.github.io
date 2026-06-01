@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /lib/
+Disallow: /js/
+
+Sitemap: https://www.bytefisher.top/sitemap.xml
+Sitemap: https://www.bytefisher.top/sitemap_images.xml

@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <link rel="preconnect" href="https://iili.io">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#37c6c0">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#37c6c0">
+
+<meta http-equiv="Permissions-Policy" content="encrypted-media=*">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="codeva-7SG6ROHyTg">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com busuanzi.ibruce.info static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
+  <meta name="description" content="Unity3D、高级：概述 入门系列使用 Input.GetAxis &#x2F; Input.GetButtonDown（旧版 Input Manager）。新版 Input System 是 Unity 推荐的输入处理方案，从 Unity 2019 开始引入，Unity 2023 以后旧版已标记为过时。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity3D 进阶教程 - 18 新版 Input System 深入">
+<meta property="og:url" content="https://www.bytefisher.top/2025/09/06/Unity3D%E8%BF%9B%E9%98%B6%E6%95%99%E7%A8%8B-18-%E6%96%B0%E7%89%88InputSystem%E6%B7%B1%E5%85%A5/">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="Unity3D、高级：概述 入门系列使用 Input.GetAxis &#x2F; Input.GetButtonDown（旧版 Input Manager）。新版 Input System 是 Unity 推荐的输入处理方案，从 Unity 2019 开始引入，Unity 2023 以后旧版已标记为过时。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-06T12:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-26T07:49:27.979Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="Unity3D">
+<meta property="article:tag" content="series:Unity3D进阶教程">
+<meta property="article:tag" content="高级">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.bytefisher.top/2025/09/06/Unity3D%E8%BF%9B%E9%98%B6%E6%95%99%E7%A8%8B-18-%E6%96%B0%E7%89%88InputSystem%E6%B7%B1%E5%85%A5/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Unity3D 进阶教程 - 18 新版 Input System 深入","description":"Unity3D、高级：概述 入门系列使用 Input.GetAxis / Input.GetButtonDown（旧版 Input Manager）。新版 Input System 是 Unity 推荐的输入处理方案，从 Unity 2019 开始引入，Unity 2023 以后旧版已标记为过时。","url":"https://www.bytefisher.top/2025/09/06/Unity3D进阶教程-18-新版InputSystem深入/","datePublished":"2025-09-06T12:00:00.000Z","dateModified":"2026-05-26T07:49:27.979Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/09/06/Unity3D进阶教程-18-新版InputSystem深入/"},"keywords":"Unity3D, 高级, series:Unity3D进阶教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Unity3D","item":"https://www.bytefisher.top/categories/Unity3D/"},{"@type":"ListItem","position":3,"name":"Unity3D 进阶教程 - 18 新版 Input System 深入"}]}</script>
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Unity3D 进阶教程 - 18 新版 Input System 深入 | ByteFisher</title>
+  
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dc50e0997d43c3a8dbf2afdb3fdff233";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#37c6c0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-tutorials">
+
+    <a href="/tutorials/" rel="section"><i class="fa fa-book fa-fw"></i>教程</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-aigames">
+
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">52</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">220</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">58</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>rss</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2025/09/06/Unity3D%E8%BF%9B%E9%98%B6%E6%95%99%E7%A8%8B-18-%E6%96%B0%E7%89%88InputSystem%E6%B7%B1%E5%85%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Unity3D 进阶教程 - 18 新版 Input System 深入
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-09-06 20:00:00" itemprop="dateCreated datePublished" datetime="2025-09-06T20:00:00+08:00">2025-09-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2025/09/06/Unity3D%E8%BF%9B%E9%98%B6%E6%95%99%E7%A8%8B-18-%E6%96%B0%E7%89%88InputSystem%E6%B7%B1%E5%85%A5/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2025/09/06/Unity3D%E8%BF%9B%E9%98%B6%E6%95%99%E7%A8%8B-18-%E6%96%B0%E7%89%88InputSystem%E6%B7%B1%E5%85%A5/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">Unity3D、高级：概述 入门系列使用 Input.GetAxis / Input.GetButtonDown（旧版 Input Manager）。新版 Input System 是 Unity 推荐的输入处理方案，从 Unity 2019 开始引入，Unity 2023 以后旧版已标记为过时。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>入门系列使用 Input.GetAxis &#x2F; Input.GetButtonDown（旧版 Input Manager）。新版 <strong>Input System</strong> 是 Unity 推荐的输入处理方案，从 Unity 2019 开始引入，Unity 2023 以后旧版已标记为过时。</p>
+<p>新 Input System 的核心优势：<strong>多设备统一处理</strong>、<strong>可重绑定按键</strong>、<strong>事件驱动</strong>、<strong>输入调试工具</strong>。</p>
+<span id="more"></span>
+
+<h2 id="1-启用-Input-System"><a href="#1-启用-Input-System" class="headerlink" title="1. 启用 Input System"></a>1. 启用 Input System</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Package Manager -&gt; Unity Registry -&gt; Input System -&gt; Install</span><br></pre></td></tr></table></figure>
+
+<p>安装后建议在 Project Settings &gt; Player &gt; Active Input Handling 中选择 Both。</p>
+<hr>
+<h2 id="2-核心概念"><a href="#2-核心概念" class="headerlink" title="2. 核心概念"></a>2. 核心概念</h2><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Input Action Asset</td>
+<td>输入映射配置文件</td>
+</tr>
+<tr>
+<td>Action Map</td>
+<td>一组相关 Action，如 Gameplay、UI、Menu</td>
+</tr>
+<tr>
+<td>Action</td>
+<td>一个具体的操作，如 Move、Jump、Fire</td>
+</tr>
+<tr>
+<td>Binding</td>
+<td>Action 到具体输入设备的映射</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="3-代码集成"><a href="#3-代码集成" class="headerlink" title="3. 代码集成"></a>3. 代码集成</h2><h3 id="3-1-自动生成-C-类"><a href="#3-1-自动生成-C-类" class="headerlink" title="3.1 自动生成 C# 类"></a>3.1 自动生成 C# 类</h3><p>在 Input Action Asset 的 Inspector 中勾选 Generate C# Class，生成后的代码提供强类型 API：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">PlayerInputController</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> InputActions _input;</span><br><span class="line">    <span class="keyword">private</span> Vector2 _moveInput;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        _input = <span class="keyword">new</span> InputActions();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnEnable</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        _input.Gameplay.Enable();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnDisable</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        _input.Gameplay.Disable();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        _moveInput = _input.Gameplay.Move.ReadValue&lt;Vector2&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnDestroy</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        _input?.Dispose();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-事件驱动模式"><a href="#3-2-事件驱动模式" class="headerlink" title="3.2 事件驱动模式"></a>3.2 事件驱动模式</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">EventDrivenPlayer</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> InputActions _input;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnEnable</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        _input = <span class="keyword">new</span> InputActions();</span><br><span class="line">        _input.Gameplay.Enable();</span><br><span class="line"></span><br><span class="line">        _input.Gameplay.Jump.performed += OnJump;</span><br><span class="line">        _input.Gameplay.Fire.performed += OnFire;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnDisable</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        _input.Gameplay.Jump.performed -= OnJump;</span><br><span class="line">        _input.Gameplay.Fire.performed -= OnFire;</span><br><span class="line">        _input.Gameplay.Disable();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnJump</span>(<span class="params">InputAction.CallbackContext context</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (IsGrounded())</span><br><span class="line">            _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnFire</span>(<span class="params">InputAction.CallbackContext context</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (context.performed)</span><br><span class="line">            Shoot();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="4-按键重绑定"><a href="#4-按键重绑定" class="headerlink" title="4. 按键重绑定"></a>4. 按键重绑定</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">RebindingUI</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> InputActionReference _jumpAction;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">StartRebinding</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">var</span> action = _jumpAction.action;</span><br><span class="line">        <span class="keyword">var</span> bindingIndex = action.GetBindingIndexForControl(action.controls[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">        action.Disable();</span><br><span class="line"></span><br><span class="line">        action.PerformInteractiveRebinding(bindingIndex)</span><br><span class="line">            .WithControlsExcluding(<span class="string">&quot;Mouse&quot;</span>)</span><br><span class="line">            .WithTimeout(<span class="number">5f</span>)</span><br><span class="line">            .OnComplete(result =&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                Debug.Log(<span class="string">&quot;重绑定完成: &quot;</span> + result.selectedControl.path);</span><br><span class="line">                action.Enable();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">var</span> json = action.SaveBindingOverridesAsJson();</span><br><span class="line">                PlayerPrefs.SetString(<span class="string">&quot;Rebindings&quot;</span>, json);</span><br><span class="line">            &#125;)</span><br><span class="line">            .OnCancel(result =&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                Debug.Log(<span class="string">&quot;重绑定取消&quot;</span>);</span><br><span class="line">                action.Enable();</span><br><span class="line">            &#125;)</span><br><span class="line">            .Start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">LoadSavedBindings</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (PlayerPrefs.HasKey(<span class="string">&quot;Rebindings&quot;</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> json = PlayerPrefs.GetString(<span class="string">&quot;Rebindings&quot;</span>);</span><br><span class="line">            _jumpAction.action.LoadBindingOverridesFromJson(json);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="5-多设备支持"><a href="#5-多设备支持" class="headerlink" title="5. 多设备支持"></a>5. 多设备支持</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">DeviceManager</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> GameObject _playerPrefab;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        InputSystem.onDeviceChange += OnDeviceChange;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">var</span> device <span class="keyword">in</span> InputSystem.devices)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (device <span class="keyword">is</span> Gamepad || device <span class="keyword">is</span> Keyboard)</span><br><span class="line">                AssignPlayerToDevice(device);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnDeviceChange</span>(<span class="params">InputDevice device, InputDeviceChange change</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">switch</span> (change)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">case</span> InputDeviceChange.Added:</span><br><span class="line">                AssignPlayerToDevice(device);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> InputDeviceChange.Removed:</span><br><span class="line">                UnassignPlayerFromDevice(device);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">AssignPlayerToDevice</span>(<span class="params">InputDevice device</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">var</span> player = Instantiate(_playerPrefab);</span><br><span class="line">        <span class="keyword">var</span> input = player.GetComponent&lt;PlayerInput&gt;();</span><br><span class="line">        input.SwitchCurrentControlScheme(device);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="6-输入调试"><a href="#6-输入调试" class="headerlink" title="6. 输入调试"></a>6. 输入调试</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Window -&gt; Analysis -&gt; Input Debugger</span><br></pre></td></tr></table></figure>
+
+<p>功能：查看所有已连接的设备、实时输入值、检查绑定是否生效。</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><strong>Input Action Asset</strong> 是输入配置的中央仓库</li>
+<li><strong>三种读取方式</strong>：直接轮询（ReadValue）、事件驱动（performed）、自动生成 C# 类</li>
+<li><strong>按键重绑定</strong> 是 Input System 的原生功能</li>
+<li><strong>Input Debugger</strong> 是排查输入问题的首选工具</li>
+</ul>
+<p>下一篇将讲解 <strong>高级物理与自定义碰撞</strong>，超越 Unity 内置物理引擎的限制。</p>
+<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2025/09/08/Unity3D进阶教程-20-完整项目框架搭建/" class="related-post-item" title="Unity3D 进阶教程 - 20 完整项目框架搭建"><span class="related-post-title">Unity3D 进阶教程 - 20 完整项目框架搭建</span><span class="related-post-date">2025-09-08</span><span class="related-post-desc">概述 入门系列第 20 篇做了一个 2D 平台游戏的综合实战。这一篇的实战是 搭建可扩展的游戏项目框架 ——这不是一个具体的游戏，而是一个 架构模板 ，当你开始</span></a><a href="/2025/09/07/Unity3D进阶教程-19-高级物理与自定义碰撞/" class="related-post-item" title="Unity3D 进阶教程 - 19 高级物理与自定义碰撞"><span class="related-post-title">Unity3D 进阶教程 - 19 高级物理与自定义碰撞</span><span class="related-post-date">2025-09-07</span><span class="related-post-desc">概述 入门系列第 07 08 篇介绍了 PhysX 引擎的基础——Rigidbody、Collider、碰撞事件。当游戏需要 非标准碰撞形状 、 自定义物理材质</span></a><a href="/2025/09/05/Unity3D进阶教程-17-多人游戏架构实战/" class="related-post-item" title="Unity3D 进阶教程 - 17 多人游戏架构实战"><span class="related-post-title">Unity3D 进阶教程 - 17 多人游戏架构实战</span><span class="related-post-date">2025-09-05</span><span class="related-post-desc">概述 上一篇掌握了 Netcode for GameObjects 的核心 API。这一篇从 系统架构 的角度出发，讨论一个完整的多人游戏项目应该怎么组织——房</span></a><a href="/2025/09/04/Unity3D进阶教程-16-NetcodeForGameObjects/" class="related-post-item" title="Unity3D 进阶教程 - 16 Netcode for GameObjects"><span class="related-post-title">Unity3D 进阶教程 - 16 Netcode for GameObjects</span><span class="related-post-date">2025-09-04</span><span class="related-post-desc">概述 Netcode for GameObjects 是 Unity 官方推出的多人游戏网络库，取代了旧版的 UNET（已废弃）。它基于 客户端 服务器 （Cl</span></a><a href="/2025/09/03/Unity3D进阶教程-15-JobSystem与BurstCompiler/" class="related-post-item" title="Unity3D 进阶教程 - 15 Job System 与 Burst Compiler"><span class="related-post-title">Unity3D 进阶教程 - 15 Job System 与 Burst Compiler</span><span class="related-post-date">2025-09-03</span><span class="related-post-desc">概述 现代 CPU 拥有 4 16 个核心，但 Unity 传统的 MonoBehaviour.Update 只在单线程上执行，其他核心大部分时间空闲。 Job</span></a><a href="/2025/09/02/Unity3D进阶教程-14-ECS实体组件系统/" class="related-post-item" title="Unity3D 进阶教程 - 14 ECS 实体组件系统"><span class="related-post-title">Unity3D 进阶教程 - 14 ECS 实体组件系统</span><span class="related-post-date">2025-09-02</span><span class="related-post-desc">概述 传统 Unity 开发基于 GameObject Component 模型。当对象数量达到数万级别时，GameObject 的管理开销和单体脚本的性能瓶颈</span></a></div></div><div class="series-nav"><div class="series-nav-title">Unity3D进阶教程 系列</div><div class="series-nav-progress">第 18/20 篇</div><div class="series-nav-links"><a href="/2025/09/05/Unity3D进阶教程-17-多人游戏架构实战/" class="series-nav-prev">Unity3D 进阶教程 - 17 多人游戏架构实战</a><a href="/2025/09/07/Unity3D进阶教程-19-高级物理与自定义碰撞/" class="series-nav-next">Unity3D 进阶教程 - 19 高级物理与自定义碰撞</a></div></div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Unity3D/" rel="tag"># Unity3D</a>
+              <a href="/tags/%E9%AB%98%E7%BA%A7/" rel="tag"># 高级</a>
+              <a href="/tags/series-Unity3D%E8%BF%9B%E9%98%B6%E6%95%99%E7%A8%8B/" rel="tag"># series:Unity3D进阶教程</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/09/05/Unity3D%E8%BF%9B%E9%98%B6%E6%95%99%E7%A8%8B-17-%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E5%AE%9E%E6%88%98/" rel="prev" title="Unity3D 进阶教程 - 17 多人游戏架构实战">
+      <i class="fa fa-chevron-left"></i> Unity3D 进阶教程 - 17 多人游戏架构实战
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/09/07/Unity3D%E8%BF%9B%E9%98%B6%E6%95%99%E7%A8%8B-19-%E9%AB%98%E7%BA%A7%E7%89%A9%E7%90%86%E4%B8%8E%E8%87%AA%E5%AE%9A%E4%B9%89%E7%A2%B0%E6%92%9E/" rel="next" title="Unity3D 进阶教程 - 19 高级物理与自定义碰撞">
+      Unity3D 进阶教程 - 19 高级物理与自定义碰撞 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+  <div class="post-share">
+    <span class="post-share-label">分享：</span>
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2025%2F09%2F06%2FUnity3D%25E8%25BF%259B%25E9%2598%25B6%25E6%2595%2599%25E7%25A8%258B-18-%25E6%2596%25B0%25E7%2589%2588InputSystem%25E6%25B7%25B1%25E5%2585%25A5%2F&amp;title=Unity3D%20%E8%BF%9B%E9%98%B6%E6%95%99%E7%A8%8B%20-%2018%20%E6%96%B0%E7%89%88%20Input%20System%20%E6%B7%B1%E5%85%A5" target="_blank" rel="noopener" title="分享到微博">
+      <i class="fab fa-weibo"></i>
+    </a>
+    <a href="#" onclick="navigator.clipboard.writeText(location.href);var t=this;t.innerHTML='<i class=fa fa-check></i>';setTimeout(function(){t.innerHTML='<i class=fa fa-link></i>'},1500);return false" title="复制链接">
+      <i class="fa fa-link"></i>
+    </a>
+  </div>
+
+  
+  <div class="post-author-bio">
+    <div class="post-author-avatar">
+      <img src="/images/avatar2.gif" alt="淡水鱼">
+    </div>
+    <div class="post-author-info">
+      <div class="post-author-name">淡水鱼</div>
+      <div class="post-author-desc">钓鱼爱好者 &amp; Unity 游戏开发者，分享编程技术与钓鱼经验。</div>
+      <div class="post-author-links">
+        <a href="https://github.com/grj1981" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="/atom.xml" title="RSS 订阅"><i class="fa fa-rss"></i></a>
+        <a href="mailto:271623821@qq.com" title="联系我"><i class="fa fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  
+
+
+          </div>
+          
+    <div class="comments" id="waline-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%90%AF%E7%94%A8-Input-System"><span class="nav-number">2.</span> <span class="nav-text">1. 启用 Input System</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">2. 核心概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BB%A3%E7%A0%81%E9%9B%86%E6%88%90"><span class="nav-number">4.</span> <span class="nav-text">3. 代码集成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90-C-%E7%B1%BB"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 自动生成 C# 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 事件驱动模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%8C%89%E9%94%AE%E9%87%8D%E7%BB%91%E5%AE%9A"><span class="nav-number">5.</span> <span class="nav-text">4. 按键重绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%A4%9A%E8%AE%BE%E5%A4%87%E6%94%AF%E6%8C%81"><span class="nav-number">6.</span> <span class="nav-text">5. 多设备支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E8%BE%93%E5%85%A5%E8%B0%83%E8%AF%95"><span class="nav-number">7.</span> <span class="nav-text">6. 输入调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">220</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe id="music-player" allow="encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2023 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition(true);
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+    
+
+  
+
+    
+
+    </div>
+
+<link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
+<script data-pjax>
+(function() {
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+
+  function updateCounts() {
+    var countEls = document.querySelectorAll('.waline-visitor-count');
+    if (!countEls.length) return;
+    countEls.forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var url = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(json) {
+          if (json && json.data && json.data[0] && json.data[0].time != null) {
+            el.innerText = json.data[0].time;
+          }
+        }).catch(function(){});
+    });
+  }
+
+  var el = document.querySelector('#waline-comments');
+  if (el) {
+    updateCounts();
+    NexT.utils.loadComments(el, function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
+        Waline.init({
+          el: '#waline-comments',
+          serverURL: 'https://waline.bytefisher.top/',
+          path: location.pathname,
+          lang: 'zh-CN' || 'zh-CN',
+          meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
+          requiredMeta: ["nick"] || ['nick'],
+          placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
+          avatar: 'retro' || 'retro',
+          pageSize: 10 || 10,
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
+        });
+        var pathEl = document.querySelector('.waline-visitor-count');
+        var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
+        fetch(baseURL + '/api/article', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: postPath })
+        }).finally(function() {
+          setTimeout(updateCounts, 300);
+        });
+      }, window.Waline);
+    });
+  } else {
+    updateCounts();
+  }
+
+  // Fallback for delayed Waline rendering
+  setTimeout(updateCounts, 2000);
+})();
+</script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="/css/douyin-modal.css">
+<script src="/js/douyin-modal.js"></script>
+<script src="/js/hero-typing.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
+<script data-pjax>
+(function() {
+  if (document.querySelector('a[data-lightbox]')) {
+    if (!window._lightboxLoaded) {
+      window._lightboxLoaded = true;
+      var s = document.createElement('script');
+      s.src = '/js/lightbox-plus-jquery.min.js';
+      document.body.appendChild(s);
+    }
+  }
+})();
+</script>
+
+<button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
+  <i class="fa fa-moon-o"></i>
+  <i class="fa fa-sun-o"></i>
+</button>
+<script src="/js/darkmode-toggle.js"></script>
+
+<script src="/js/lib/marked.min.js" data-pjax></script>
+<script src="/js/lib/purify.min.js" data-pjax></script>
+<script src="/js/ai-assistant.js" data-pjax></script>
+
+<script data-pjax>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script src="/js/hot-posts-widget.js" data-pjax></script>
+
+</body>
+</html>

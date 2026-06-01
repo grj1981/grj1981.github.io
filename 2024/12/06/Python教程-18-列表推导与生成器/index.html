@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <link rel="preconnect" href="https://iili.io">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#37c6c0">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#37c6c0">
+
+<meta http-equiv="Permissions-Policy" content="encrypted-media=*">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="codeva-7SG6ROHyTg">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com busuanzi.ibruce.info static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
+  <meta name="description" content="教程、Python：18.1 列表推导式进阶 嵌套推导式 复杂条件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 列表推导与生成器">
+<meta property="og:url" content="https://www.bytefisher.top/2024/12/06/Python%E6%95%99%E7%A8%8B-18-%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="教程、Python：18.1 列表推导式进阶 嵌套推导式 复杂条件">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-12-06T00:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-21T03:25:57.683Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="series:Python基础教程">
+<meta property="article:tag" content="教程">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.bytefisher.top/2024/12/06/Python%E6%95%99%E7%A8%8B-18-%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Python 列表推导与生成器","description":"教程、Python：18.1 列表推导式进阶 嵌套推导式 复杂条件","url":"https://www.bytefisher.top/2024/12/06/Python教程-18-列表推导与生成器/","datePublished":"2024-12-06T00:00:00.000Z","dateModified":"2026-05-21T03:25:57.683Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2024/12/06/Python教程-18-列表推导与生成器/"},"keywords":"教程, Python, series:Python基础教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"教程","item":"https://www.bytefisher.top/categories/教程/"},{"@type":"ListItem","position":3,"name":"Python 列表推导与生成器"}]}</script>
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Python 列表推导与生成器 | ByteFisher</title>
+  
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dc50e0997d43c3a8dbf2afdb3fdff233";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#37c6c0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-tutorials">
+
+    <a href="/tutorials/" rel="section"><i class="fa fa-book fa-fw"></i>教程</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-aigames">
+
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">52</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">220</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">58</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>rss</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/12/06/Python%E6%95%99%E7%A8%8B-18-%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python 列表推导与生成器
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-12-06 08:00:00" itemprop="dateCreated datePublished" datetime="2024-12-06T08:00:00+08:00">2024-12-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2024/12/06/Python%E6%95%99%E7%A8%8B-18-%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2024/12/06/Python%E6%95%99%E7%A8%8B-18-%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">教程、Python：18.1 列表推导式进阶 嵌套推导式 复杂条件</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="18-1-列表推导式进阶"><a href="#18-1-列表推导式进阶" class="headerlink" title="18.1 列表推导式进阶"></a>18.1 列表推导式进阶</h2><h3 id="嵌套推导式"><a href="#嵌套推导式" class="headerlink" title="嵌套推导式"></a>嵌套推导式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 二维列表展平</span></span><br><span class="line">matrix = [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]]</span><br><span class="line">flat = [num <span class="keyword">for</span> row <span class="keyword">in</span> matrix <span class="keyword">for</span> num <span class="keyword">in</span> row]</span><br><span class="line"><span class="built_in">print</span>(flat)  <span class="comment"># [1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 矩阵转置</span></span><br><span class="line">transposed = [[row[i] <span class="keyword">for</span> row <span class="keyword">in</span> matrix] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>)]</span><br><span class="line"><span class="built_in">print</span>(transposed)</span><br><span class="line"><span class="comment"># [[1, 4, 7], [2, 5, 8], [3, 6, 9]]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 过滤嵌套</span></span><br><span class="line">numbers = [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]]</span><br><span class="line">evens = [num <span class="keyword">for</span> row <span class="keyword">in</span> numbers <span class="keyword">for</span> num <span class="keyword">in</span> row <span class="keyword">if</span> num % <span class="number">2</span> == <span class="number">0</span>]</span><br><span class="line"><span class="built_in">print</span>(evens)  <span class="comment"># [2, 4, 6, 8]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="复杂条件"><a href="#复杂条件" class="headerlink" title="复杂条件"></a>复杂条件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 多条件过滤</span></span><br><span class="line">numbers = <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">50</span>)</span><br><span class="line">result = [x <span class="keyword">for</span> x <span class="keyword">in</span> numbers <span class="keyword">if</span> x % <span class="number">3</span> == <span class="number">0</span> <span class="keyword">or</span> x % <span class="number">5</span> == <span class="number">0</span>]</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 条件表达式</span></span><br><span class="line">scores = [<span class="number">85</span>, <span class="number">42</span>, <span class="number">90</span>, <span class="number">38</span>, <span class="number">76</span>, <span class="number">55</span>]</span><br><span class="line">grades = [<span class="string">&quot;及格&quot;</span> <span class="keyword">if</span> s &gt;= <span class="number">60</span> <span class="keyword">else</span> <span class="string">&quot;不及格&quot;</span> <span class="keyword">for</span> s <span class="keyword">in</span> scores]</span><br><span class="line"><span class="built_in">print</span>(grades)</span><br><span class="line"><span class="comment"># [&#x27;及格&#x27;, &#x27;不及格&#x27;, &#x27;及格&#x27;, &#x27;不及格&#x27;, &#x27;及格&#x27;, &#x27;不及格&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<hr>
+<h2 id="18-2-字典与集合推导式"><a href="#18-2-字典与集合推导式" class="headerlink" title="18.2 字典与集合推导式"></a>18.2 字典与集合推导式</h2><h3 id="字典推导式"><a href="#字典推导式" class="headerlink" title="字典推导式"></a>字典推导式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本用法</span></span><br><span class="line">squares = &#123;x: x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">6</span>)&#125;</span><br><span class="line"><span class="built_in">print</span>(squares)  <span class="comment"># &#123;1: 1, 2: 4, 3: 9, 4: 16, 5: 25&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 键值交换</span></span><br><span class="line">original = &#123;<span class="string">&quot;a&quot;</span>: <span class="number">1</span>, <span class="string">&quot;b&quot;</span>: <span class="number">2</span>, <span class="string">&quot;c&quot;</span>: <span class="number">3</span>&#125;</span><br><span class="line">swapped = &#123;v: k <span class="keyword">for</span> k, v <span class="keyword">in</span> original.items()&#125;</span><br><span class="line"><span class="built_in">print</span>(swapped)  <span class="comment"># &#123;1: &#x27;a&#x27;, 2: &#x27;b&#x27;, 3: &#x27;c&#x27;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 过滤</span></span><br><span class="line">scores = &#123;<span class="string">&quot;Alice&quot;</span>: <span class="number">85</span>, <span class="string">&quot;Bob&quot;</span>: <span class="number">42</span>, <span class="string">&quot;Charlie&quot;</span>: <span class="number">90</span>, <span class="string">&quot;David&quot;</span>: <span class="number">38</span>&#125;</span><br><span class="line">passed = &#123;k: v <span class="keyword">for</span> k, v <span class="keyword">in</span> scores.items() <span class="keyword">if</span> v &gt;= <span class="number">60</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(passed)  <span class="comment"># &#123;&#x27;Alice&#x27;: 85, &#x27;Charlie&#x27;: 90&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计</span></span><br><span class="line">text = <span class="string">&quot;hello world&quot;</span></span><br><span class="line">char_count = &#123;char: text.count(char) <span class="keyword">for</span> char <span class="keyword">in</span> <span class="built_in">set</span>(text)&#125;</span><br><span class="line"><span class="built_in">print</span>(char_count)</span><br></pre></td></tr></table></figure>
+
+<h3 id="集合推导式"><a href="#集合推导式" class="headerlink" title="集合推导式"></a>集合推导式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本用法</span></span><br><span class="line">squares = &#123;x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">6</span>)&#125;</span><br><span class="line"><span class="built_in">print</span>(squares)  <span class="comment"># &#123;1, 4, 9, 16, 25&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 过滤</span></span><br><span class="line">evens = &#123;x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">20</span>) <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(evens)  <span class="comment"># &#123;0, 2, 4, 6, 8, 10, 12, 14, 16, 18&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 去重处理</span></span><br><span class="line">words = [<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;world&quot;</span>, <span class="string">&quot;python&quot;</span>, <span class="string">&quot;hello&quot;</span>]</span><br><span class="line">lengths = &#123;<span class="built_in">len</span>(w) <span class="keyword">for</span> w <span class="keyword">in</span> words&#125;</span><br><span class="line"><span class="built_in">print</span>(lengths)  <span class="comment"># &#123;5, 6&#125;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="18-3-生成器表达式"><a href="#18-3-生成器表达式" class="headerlink" title="18.3 生成器表达式"></a>18.3 生成器表达式</h2><p>生成器表达式语法类似列表推导式，但使用圆括号。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列表推导式 vs 生成器表达式</span></span><br><span class="line">list_comp = [x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>)]</span><br><span class="line">gen_expr = (x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(list_comp)     <span class="comment"># [0, 1, 4, 9, 16]</span></span><br><span class="line"><span class="built_in">print</span>(gen_expr)      <span class="comment"># &lt;generator object&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历生成器</span></span><br><span class="line"><span class="keyword">for</span> val <span class="keyword">in</span> gen_expr:</span><br><span class="line">    <span class="built_in">print</span>(val, end=<span class="string">&quot; &quot;</span>)  <span class="comment"># 0 1 4 9 16</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 转换为列表</span></span><br><span class="line">gen = (x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>))</span><br><span class="line">squares = <span class="built_in">list</span>(gen)</span><br><span class="line"><span class="built_in">print</span>(squares)  <span class="comment"># [0, 1, 4, 9, 16]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="内存对比"><a href="#内存对比" class="headerlink" title="内存对比"></a>内存对比</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">list_comp = [x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10000</span>)]</span><br><span class="line">gen_expr = (x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10000</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(sys.getsizeof(list_comp))  <span class="comment"># ~87616 字节</span></span><br><span class="line"><span class="built_in">print</span>(sys.getsizeof(gen_expr))   <span class="comment"># ~112 字节</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="18-4-yield-与生成器函数"><a href="#18-4-yield-与生成器函数" class="headerlink" title="18.4 yield 与生成器函数"></a>18.4 yield 与生成器函数</h2><h3 id="基本生成器"><a href="#基本生成器" class="headerlink" title="基本生成器"></a>基本生成器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">count_up_to</span>(<span class="params"><span class="built_in">max</span></span>):</span><br><span class="line">    count = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> count &lt;= <span class="built_in">max</span>:</span><br><span class="line">        <span class="keyword">yield</span> count</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">counter = count_up_to(<span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(counter))  <span class="comment"># 1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(counter))  <span class="comment"># 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历</span></span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> count_up_to(<span class="number">3</span>):</span><br><span class="line">    <span class="built_in">print</span>(num)  <span class="comment"># 1, 2, 3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="无限生成器"><a href="#无限生成器" class="headerlink" title="无限生成器"></a>无限生成器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">infinite_counter</span>():</span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">yield</span> count</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">counter = infinite_counter()</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">next</span>(counter))  <span class="comment"># 0, 1, 2, 3, 4</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="斐波那契生成器"><a href="#斐波那契生成器" class="headerlink" title="斐波那契生成器"></a>斐波那契生成器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">fibonacci</span>():</span><br><span class="line">    a, b = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">yield</span> a</span><br><span class="line">        a, b = b, a + b</span><br><span class="line"></span><br><span class="line">fib = fibonacci()</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">next</span>(fib), end=<span class="string">&quot; &quot;</span>)</span><br><span class="line"><span class="comment"># 0 1 1 2 3 5 8 13 21 34</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="18-5-生成器管道"><a href="#18-5-生成器管道" class="headerlink" title="18.5 生成器管道"></a>18.5 生成器管道</h2><p>生成器可以链式组合，形成数据处理管道。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">read_data</span>(<span class="params">filename</span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(filename) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">            <span class="keyword">yield</span> line.strip()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">filter_lines</span>(<span class="params">lines, keyword</span>):</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">        <span class="keyword">if</span> keyword <span class="keyword">in</span> line:</span><br><span class="line">            <span class="keyword">yield</span> line</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">transform</span>(<span class="params">lines</span>):</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">        <span class="keyword">yield</span> line.upper()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用管道</span></span><br><span class="line">lines = read_data(<span class="string">&quot;log.txt&quot;</span>)</span><br><span class="line">filtered = filter_lines(lines, <span class="string">&quot;ERROR&quot;</span>)</span><br><span class="line">result = transform(filtered)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> result:</span><br><span class="line">    <span class="built_in">print</span>(line)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="18-6-生成器方法"><a href="#18-6-生成器方法" class="headerlink" title="18.6 生成器方法"></a>18.6 生成器方法</h2><h3 id="send-发送值"><a href="#send-发送值" class="headerlink" title="send() - 发送值"></a>send() - 发送值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">accumulator</span>():</span><br><span class="line">    total = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        value = <span class="keyword">yield</span> total</span><br><span class="line">        <span class="keyword">if</span> value <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            total += value</span><br><span class="line"></span><br><span class="line">acc = accumulator()</span><br><span class="line"><span class="built_in">next</span>(acc)           <span class="comment"># 启动生成器</span></span><br><span class="line"><span class="built_in">print</span>(acc.send(<span class="number">10</span>)) <span class="comment"># 10</span></span><br><span class="line"><span class="built_in">print</span>(acc.send(<span class="number">20</span>)) <span class="comment"># 30</span></span><br><span class="line"><span class="built_in">print</span>(acc.send(<span class="number">30</span>)) <span class="comment"># 60</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="throw-抛出异常"><a href="#throw-抛出异常" class="headerlink" title="throw() - 抛出异常"></a>throw() - 抛出异常</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">generator</span>():</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">yield</span> <span class="number">2</span></span><br><span class="line">        <span class="keyword">yield</span> <span class="number">3</span></span><br><span class="line">    <span class="keyword">except</span> ValueError:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;捕获到 ValueError&quot;</span>)</span><br><span class="line">        <span class="keyword">yield</span> -<span class="number">1</span></span><br><span class="line"></span><br><span class="line">gen = generator()</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(gen))  <span class="comment"># 1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(gen))  <span class="comment"># 2</span></span><br><span class="line">gen.throw(ValueError)  <span class="comment"># 触发异常</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(gen))  <span class="comment"># -1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="close-关闭生成器"><a href="#close-关闭生成器" class="headerlink" title="close() - 关闭生成器"></a>close() - 关闭生成器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">generator</span>():</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">yield</span> <span class="number">2</span></span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;生成器已关闭&quot;</span>)</span><br><span class="line"></span><br><span class="line">gen = generator()</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(gen))</span><br><span class="line">gen.close()</span><br><span class="line"><span class="comment"># 输出: 生成器已关闭</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="18-7-迭代器协议"><a href="#18-7-迭代器协议" class="headerlink" title="18.7 迭代器协议"></a>18.7 迭代器协议</h2><p>实现 <code>__iter__</code> 和 <code>__next__</code> 方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Counter</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, <span class="built_in">max</span></span>):</span><br><span class="line">        self.<span class="built_in">max</span> = <span class="built_in">max</span></span><br><span class="line">        self.current = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__iter__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__next__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">if</span> self.current &gt;= self.<span class="built_in">max</span>:</span><br><span class="line">            <span class="keyword">raise</span> StopIteration</span><br><span class="line">        value = self.current</span><br><span class="line">        self.current += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> value</span><br><span class="line"></span><br><span class="line">counter = Counter(<span class="number">5</span>)</span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> counter:</span><br><span class="line">    <span class="built_in">print</span>(num)  <span class="comment"># 0, 1, 2, 3, 4</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="18-8-本章小结"><a href="#18-8-本章小结" class="headerlink" title="18.8 本章小结"></a>18.8 本章小结</h2><ul>
+<li>列表推导式：<code>[表达式 for 变量 in 可迭代对象 if 条件]</code></li>
+<li>字典&#x2F;集合推导式语法类似</li>
+<li>生成器表达式使用 <code>()</code>，惰性求值节省内存</li>
+<li><code>yield</code> 创建生成器函数</li>
+<li>生成器支持 <code>send()</code>、<code>throw()</code>、<code>close()</code></li>
+<li>迭代器协议：<code>__iter__</code> 和 <code>__next__</code></li>
+</ul>
+<h3 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h3><ol>
+<li>使用列表推导式生成 100 以内所有素数</li>
+<li>使用生成器实现无限自然数序列</li>
+<li>使用字典推导式统计字符串中每个字符出现次数</li>
+<li>以下代码输出什么？<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gen = (x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(gen))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(gen))</span><br></pre></td></tr></table></figure></li>
+</ol>
+<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2024/12/10/Python教程-20-综合实战项目/" class="related-post-item" title="Python 综合实战项目"><span class="related-post-title">Python 综合实战项目</span><span class="related-post-date">2024-12-10</span><span class="related-post-desc">20.1 项目一：通讯录管理系统 功能需求 添加联系人 删除联系人 查询联系人 显示所有联系人 保存到文件 实现代码 20.2 项目二：简易网页爬虫 功能需求 </span></a><a href="/2024/12/08/Python教程-19-正则表达式/" class="related-post-item" title="Python 正则表达式"><span class="related-post-title">Python 正则表达式</span><span class="related-post-date">2024-12-08</span><span class="related-post-desc">19.1 正则表达式概念 正则表达式（Regular Expression）是用于匹配字符串模式的强大工具。 应用场景 数据验证（邮箱、电话、密码强度） 文本提</span></a><a href="/2024/12/04/Python教程-17-常用标准库/" class="related-post-item" title="Python 常用标准库"><span class="related-post-title">Python 常用标准库</span><span class="related-post-date">2024-12-04</span><span class="related-post-desc">17.1 collections 模块 提供额外的数据结构。 Counter 计数器 defaultdict 默认字典 deque 双端队列 17.2 iter</span></a><a href="/2024/12/02/Python教程-16-面向对象高级/" class="related-post-item" title="Python 面向对象高级"><span class="related-post-title">Python 面向对象高级</span><span class="related-post-date">2024-12-02</span><span class="related-post-desc">16.1 魔术方法 魔术方法是以双下划线开头和结尾的特殊方法，用于定义类的行为。 常用魔术方法 16.2 运算符重载 通过魔术方法实现自定义运算符。 比较运算符</span></a><a href="/2024/11/30/Python教程-15-面向对象进阶/" class="related-post-item" title="Python 面向对象进阶"><span class="related-post-title">Python 面向对象进阶</span><span class="related-post-date">2024-11-30</span><span class="related-post-desc">15.1 继承 继承允许一个类获取另一个类的属性和方法。 基本语法 示例 15.2 方法重写 子类可以重写父类的方法。 15.3 super() 函数 supe</span></a><a href="/2024/11/28/Python教程-14-面向对象基础/" class="related-post-item" title="Python 面向对象基础"><span class="related-post-title">Python 面向对象基础</span><span class="related-post-date">2024-11-28</span><span class="related-post-desc">14.1 面向对象概念 面向对象编程（OOP）是一种编程范式，将数据和操作封装在对象中。 核心概念 类（Class） ：对象的蓝图/模板 对象（Object） </span></a></div></div><div class="series-nav"><div class="series-nav-title">Python基础教程 系列</div><div class="series-nav-progress">第 18/20 篇</div><div class="series-nav-links"><a href="/2024/12/04/Python教程-17-常用标准库/" class="series-nav-prev">Python 常用标准库</a><a href="/2024/12/08/Python教程-19-正则表达式/" class="series-nav-next">Python 正则表达式</a></div></div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%99%E7%A8%8B/" rel="tag"># 教程</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/series-Python%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" rel="tag"># series:Python基础教程</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/12/04/Python%E6%95%99%E7%A8%8B-17-%E5%B8%B8%E7%94%A8%E6%A0%87%E5%87%86%E5%BA%93/" rel="prev" title="Python 常用标准库">
+      <i class="fa fa-chevron-left"></i> Python 常用标准库
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/12/06/Unity3DRigidbody2D%E4%BD%BF%E7%94%A8%E4%B8%8E%E4%BC%98%E5%8C%96/" rel="next" title="Unity3DRigidbody2D使用与优化">
+      Unity3DRigidbody2D使用与优化 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+  <div class="post-share">
+    <span class="post-share-label">分享：</span>
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2024%2F12%2F06%2FPython%25E6%2595%2599%25E7%25A8%258B-18-%25E5%2588%2597%25E8%25A1%25A8%25E6%258E%25A8%25E5%25AF%25BC%25E4%25B8%258E%25E7%2594%259F%25E6%2588%2590%25E5%2599%25A8%2F&amp;title=Python%20%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8" target="_blank" rel="noopener" title="分享到微博">
+      <i class="fab fa-weibo"></i>
+    </a>
+    <a href="#" onclick="navigator.clipboard.writeText(location.href);var t=this;t.innerHTML='<i class=fa fa-check></i>';setTimeout(function(){t.innerHTML='<i class=fa fa-link></i>'},1500);return false" title="复制链接">
+      <i class="fa fa-link"></i>
+    </a>
+  </div>
+
+  
+  <div class="post-author-bio">
+    <div class="post-author-avatar">
+      <img src="/images/avatar2.gif" alt="淡水鱼">
+    </div>
+    <div class="post-author-info">
+      <div class="post-author-name">淡水鱼</div>
+      <div class="post-author-desc">钓鱼爱好者 &amp; Unity 游戏开发者，分享编程技术与钓鱼经验。</div>
+      <div class="post-author-links">
+        <a href="https://github.com/grj1981" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="/atom.xml" title="RSS 订阅"><i class="fa fa-rss"></i></a>
+        <a href="mailto:271623821@qq.com" title="联系我"><i class="fa fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  
+
+
+          </div>
+          
+    <div class="comments" id="waline-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#18-1-%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F%E8%BF%9B%E9%98%B6"><span class="nav-number">1.</span> <span class="nav-text">18.1 列表推导式进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">嵌套推导式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">复杂条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-2-%E5%AD%97%E5%85%B8%E4%B8%8E%E9%9B%86%E5%90%88%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">18.2 字典与集合推导式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E5%85%B8%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">字典推导式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">集合推导式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-3-%E7%94%9F%E6%88%90%E5%99%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">18.3 生成器表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%AF%B9%E6%AF%94"><span class="nav-number">3.1.</span> <span class="nav-text">内存对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-4-yield-%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8%E5%87%BD%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">18.4 yield 与生成器函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">4.1.</span> <span class="nav-text">基本生成器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E9%99%90%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">4.2.</span> <span class="nav-text">无限生成器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">4.3.</span> <span class="nav-text">斐波那契生成器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-5-%E7%94%9F%E6%88%90%E5%99%A8%E7%AE%A1%E9%81%93"><span class="nav-number">5.</span> <span class="nav-text">18.5 生成器管道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-6-%E7%94%9F%E6%88%90%E5%99%A8%E6%96%B9%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">18.6 生成器方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#send-%E5%8F%91%E9%80%81%E5%80%BC"><span class="nav-number">6.1.</span> <span class="nav-text">send() - 发送值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#throw-%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8"><span class="nav-number">6.2.</span> <span class="nav-text">throw() - 抛出异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#close-%E5%85%B3%E9%97%AD%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">6.3.</span> <span class="nav-text">close() - 关闭生成器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-7-%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%8D%8F%E8%AE%AE"><span class="nav-number">7.</span> <span class="nav-text">18.7 迭代器协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-8-%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93"><span class="nav-number">8.</span> <span class="nav-text">18.8 本章小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0%E9%A2%98"><span class="nav-number">8.1.</span> <span class="nav-text">练习题</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">220</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe id="music-player" allow="encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2023 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition(true);
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+    
+
+  
+
+    
+
+    </div>
+
+<link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
+<script data-pjax>
+(function() {
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+
+  function updateCounts() {
+    var countEls = document.querySelectorAll('.waline-visitor-count');
+    if (!countEls.length) return;
+    countEls.forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var url = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(json) {
+          if (json && json.data && json.data[0] && json.data[0].time != null) {
+            el.innerText = json.data[0].time;
+          }
+        }).catch(function(){});
+    });
+  }
+
+  var el = document.querySelector('#waline-comments');
+  if (el) {
+    updateCounts();
+    NexT.utils.loadComments(el, function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
+        Waline.init({
+          el: '#waline-comments',
+          serverURL: 'https://waline.bytefisher.top/',
+          path: location.pathname,
+          lang: 'zh-CN' || 'zh-CN',
+          meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
+          requiredMeta: ["nick"] || ['nick'],
+          placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
+          avatar: 'retro' || 'retro',
+          pageSize: 10 || 10,
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
+        });
+        var pathEl = document.querySelector('.waline-visitor-count');
+        var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
+        fetch(baseURL + '/api/article', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: postPath })
+        }).finally(function() {
+          setTimeout(updateCounts, 300);
+        });
+      }, window.Waline);
+    });
+  } else {
+    updateCounts();
+  }
+
+  // Fallback for delayed Waline rendering
+  setTimeout(updateCounts, 2000);
+})();
+</script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="/css/douyin-modal.css">
+<script src="/js/douyin-modal.js"></script>
+<script src="/js/hero-typing.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
+<script data-pjax>
+(function() {
+  if (document.querySelector('a[data-lightbox]')) {
+    if (!window._lightboxLoaded) {
+      window._lightboxLoaded = true;
+      var s = document.createElement('script');
+      s.src = '/js/lightbox-plus-jquery.min.js';
+      document.body.appendChild(s);
+    }
+  }
+})();
+</script>
+
+<button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
+  <i class="fa fa-moon-o"></i>
+  <i class="fa fa-sun-o"></i>
+</button>
+<script src="/js/darkmode-toggle.js"></script>
+
+<script src="/js/lib/marked.min.js" data-pjax></script>
+<script src="/js/lib/purify.min.js" data-pjax></script>
+<script src="/js/ai-assistant.js" data-pjax></script>
+
+<script data-pjax>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script src="/js/hot-posts-widget.js" data-pjax></script>
+
+</body>
+</html>

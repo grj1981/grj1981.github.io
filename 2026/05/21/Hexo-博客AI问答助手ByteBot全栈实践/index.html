@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <link rel="preconnect" href="https://iili.io">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#37c6c0">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#37c6c0">
+
+<meta http-equiv="Permissions-Policy" content="encrypted-media=*">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="codeva-7SG6ROHyTg">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com busuanzi.ibruce.info static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
+  <meta name="description" content="Hexo、AI、DeepSeek、博客开发、Vercel：ByteBot 是 ByteFisher 博客的 AI 问答助手，基于 DeepSeek API + Vercel Serverless 构建，为博客访问者提供智能问答服务。本文详细记录从最初的基础问答到全功能生产级助手的完整技术实现过程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 博客 AI 问答助手 ByteBot 全栈实践：从流式响应到 RAG 增强">
+<meta property="og:url" content="https://www.bytefisher.top/2026/05/21/Hexo-%E5%8D%9A%E5%AE%A2AI%E9%97%AE%E7%AD%94%E5%8A%A9%E6%89%8BByteBot%E5%85%A8%E6%A0%88%E5%AE%9E%E8%B7%B5/">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="Hexo、AI、DeepSeek、博客开发、Vercel：ByteBot 是 ByteFisher 博客的 AI 问答助手，基于 DeepSeek API + Vercel Serverless 构建，为博客访问者提供智能问答服务。本文详细记录从最初的基础问答到全功能生产级助手的完整技术实现过程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-05-21T12:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-21T10:21:41.498Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="DeepSeek">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Vercel">
+<meta property="article:tag" content="series:Hexo博客搭建">
+<meta property="article:tag" content="博客开发">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.bytefisher.top/2026/05/21/Hexo-%E5%8D%9A%E5%AE%A2AI%E9%97%AE%E7%AD%94%E5%8A%A9%E6%89%8BByteBot%E5%85%A8%E6%A0%88%E5%AE%9E%E8%B7%B5/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo 博客 AI 问答助手 ByteBot 全栈实践：从流式响应到 RAG 增强","description":"Hexo、AI、DeepSeek、博客开发、Vercel：ByteBot 是 ByteFisher 博客的 AI 问答助手，基于 DeepSeek API + Vercel Serverless 构建，为博客访问者提供智能问答服务。本文详细记录从最初的基础问答到全功能生产级助手的完整技术实现过程。","url":"https://www.bytefisher.top/2026/05/21/Hexo-博客AI问答助手ByteBot全栈实践/","datePublished":"2026-05-21T12:00:00.000Z","dateModified":"2026-05-21T10:21:41.498Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/05/21/Hexo-博客AI问答助手ByteBot全栈实践/"},"keywords":"series:Hexo博客搭建, Hexo, AI, DeepSeek, 博客开发, Vercel"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Hexo博客搭建","item":"https://www.bytefisher.top/categories/Hexo博客搭建/"},{"@type":"ListItem","position":3,"name":"Hexo 博客 AI 问答助手 ByteBot 全栈实践：从流式响应到 RAG 增强"}]}</script>
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Hexo 博客 AI 问答助手 ByteBot 全栈实践：从流式响应到 RAG 增强 | ByteFisher</title>
+  
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dc50e0997d43c3a8dbf2afdb3fdff233";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#37c6c0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-tutorials">
+
+    <a href="/tutorials/" rel="section"><i class="fa fa-book fa-fw"></i>教程</a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-aigames">
+
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">52</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">220</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">58</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>rss</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/05/21/Hexo-%E5%8D%9A%E5%AE%A2AI%E9%97%AE%E7%AD%94%E5%8A%A9%E6%89%8BByteBot%E5%85%A8%E6%A0%88%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo 博客 AI 问答助手 ByteBot 全栈实践：从流式响应到 RAG 增强
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-05-21 20:00:00" itemprop="dateCreated datePublished" datetime="2026-05-21T20:00:00+08:00">2026-05-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">Hexo博客搭建</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2026/05/21/Hexo-%E5%8D%9A%E5%AE%A2AI%E9%97%AE%E7%AD%94%E5%8A%A9%E6%89%8BByteBot%E5%85%A8%E6%A0%88%E5%AE%9E%E8%B7%B5/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2026/05/21/Hexo-%E5%8D%9A%E5%AE%A2AI%E9%97%AE%E7%AD%94%E5%8A%A9%E6%89%8BByteBot%E5%85%A8%E6%A0%88%E5%AE%9E%E8%B7%B5/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">Hexo、AI、DeepSeek、博客开发、Vercel：ByteBot 是 ByteFisher 博客的 AI 问答助手，基于 DeepSeek API + Vercel Serverless 构建，为博客访问者提供智能问答服务。本文详细记录从最初的基础问答到全功能生产级助手的完整技术实现过程。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>ByteBot 是 ByteFisher 博客的 AI 问答助手，基于 DeepSeek API + Vercel Serverless 构建，为博客访问者提供智能问答服务。本文详细记录从最初的基础问答到全功能生产级助手的完整技术实现过程。</p>
+<span id="more"></span>
+
+<h2 id="一、为什么需要-AI-助手"><a href="#一、为什么需要-AI-助手" class="headerlink" title="一、为什么需要 AI 助手"></a>一、为什么需要 AI 助手</h2><p>ByteFisher 博客运行在 Hexo + Next 主题之上，经过多年积累已有 95+ 篇文章，涵盖 Unity3D、C#、Lua、Python、钓鱼技巧等多个领域。信息量大了之后，访客很难快速找到想要的内容：</p>
+<ul>
+<li>想了解 C# 委托机制 → 需要先知道有一篇《C# 学习笔记【委托Delegate】》</li>
+<li>想看 2023 年钓鱼照片 → 需要知道相册路径是 <code>/fish/img2023/</code> 而不是 <code>/fish/2023/</code></li>
+<li>想玩五子棋小游戏 → 需要知道游戏合集在 <code>/ai-games/</code></li>
+</ul>
+<p>传统搜索（站内关键词搜索、标签浏览）能满足基本需求，但对自然语言提问的支持不够友好。ByteBot 的定位就是：<strong>用自然语言对话的方式，帮助访客快速找到博客中的内容</strong>。</p>
+<p>经过多轮迭代，ByteBot 目前已完成 10 项优化需求：</p>
+<table>
+<thead>
+<tr>
+<th>优先级</th>
+<th>功能</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>P0</td>
+<td>流式响应、对话历史、暗色模式、精确错误提示</td>
+<td>核心体验闭环</td>
+</tr>
+<tr>
+<td>P1</td>
+<td>Markdown 渲染增强、输入保护、移动端全适配</td>
+<td>功能完整度提升</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>Vercel 超时优化、RAG 上下文增强、使用统计</td>
+<td>锦上添花</td>
+</tr>
+</tbody></table>
+<h2 id="二、系统架构"><a href="#二、系统架构" class="headerlink" title="二、系统架构"></a>二、系统架构</h2><p>ByteBot 的整体架构是一个典型的三层结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────┐     SSE Stream      ┌──────────────────┐     POST SSE     ┌──────────────┐</span><br><span class="line">│   Browser       │ ◄────────────────── │  Vercel Proxy    │ ──────────────►│  DeepSeek    │</span><br><span class="line">│  ai-assistant.js│                    │  api/chat.js     │ ◄──────────────│  API         │</span><br><span class="line">│                 │     messages[]      │                  │     SSE chunks  │              │</span><br><span class="line">│  posts-index    │ ──────────────────► │  timeout: 30s    │                │              │</span><br><span class="line">│  (local cache)  │                    └──────────────────┘                └──────────────┘</span><br><span class="line">└─────────────────┘</span><br></pre></td></tr></table></figure>
+
+<p><strong>数据流</strong>：用户在浏览器输入问题 → <code>ai-assistant.js</code> 将 <code>messages[]</code> 历史 + 系统提示词发给 <code>api/chat.js</code> → Vercel Serverless 函数转发到 DeepSeek API → SSE 流式返回 → 前端逐 token 渲染。</p>
+<p>关键技术选型：</p>
+<table>
+<thead>
+<tr>
+<th>决策项</th>
+<th>选型</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>流式方案</td>
+<td>fetch + ReadableStream</td>
+<td>兼容性优于 EventSource，支持 POST 方法</td>
+</tr>
+<tr>
+<td>Markdown 渲染</td>
+<td>自研增强版（~70 行）</td>
+<td>避免额外依赖，精确控制 XSS 安全</td>
+</tr>
+<tr>
+<td>对话存储</td>
+<td>session 级内存数组 + sessionStorage</td>
+<td>页面刷新不持久化，符合预期</td>
+</tr>
+<tr>
+<td>暗色模式</td>
+<td><code>@media (prefers-color-scheme: dark)</code></td>
+<td>纯 CSS，零运行时开销</td>
+</tr>
+<tr>
+<td>Vercel 超时</td>
+<td><code>maxDuration: 30</code></td>
+<td>超过 Hobby 默认 10s，无需 Pro 计划</td>
+</tr>
+</tbody></table>
+<h2 id="三、核心交互体验"><a href="#三、核心交互体验" class="headerlink" title="三、核心交互体验"></a>三、核心交互体验</h2><h3 id="3-1-流式响应（SSE）"><a href="#3-1-流式响应（SSE）" class="headerlink" title="3.1 流式响应（SSE）"></a>3.1 流式响应（SSE）</h3><p><strong>问题</strong>：最初 ByteBot 等待 DeepSeek 返回完整的 <code>max_tokens: 2000</code> 响应后才一次性渲染，用户平均等待 3-8 秒无任何反馈，体验极差。</p>
+<p><strong>方案</strong>：前后端全链路流式转发。</p>
+<p><strong>服务端</strong>（<code>api/chat.js</code>）使用 <code>response.body.getReader()</code> 边读边写 SSE：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> reader = response.<span class="property">body</span>.<span class="title function_">getReader</span>();</span><br><span class="line"><span class="keyword">const</span> decoder = <span class="keyword">new</span> <span class="title class_">TextDecoder</span>();</span><br><span class="line"><span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; done, value &#125; = <span class="keyword">await</span> reader.<span class="title function_">read</span>();</span><br><span class="line">  <span class="keyword">if</span> (done) &#123; res.<span class="title function_">end</span>(); <span class="keyword">break</span>; &#125;</span><br><span class="line">  res.<span class="title function_">write</span>(decoder.<span class="title function_">decode</span>(value, &#123; <span class="attr">stream</span>: !done &#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>前端</strong>（<code>ai-assistant.js</code>）的 <code>handleStream()</code> 函数逐行解析 <code>data:</code> 前缀的 SSE 消息：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">handleStream</span>(<span class="params">response</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> reader = response.<span class="property">body</span>.<span class="title function_">getReader</span>();</span><br><span class="line">  <span class="keyword">var</span> buffer = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="keyword">var</span> fullReply = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="keyword">var</span> botDiv = <span class="literal">null</span>;</span><br><span class="line">  <span class="comment">// appendToken() 实时调用 render() 更新 DOM</span></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">appendToken</span>(<span class="params">text</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!botDiv) &#123; botDiv = <span class="title function_">createBotMessageDiv</span>(); <span class="title function_">hideTyping</span>(); &#125;</span><br><span class="line">    fullReply += text;</span><br><span class="line">    botDiv.<span class="property">innerHTML</span> = <span class="title function_">render</span>(fullReply);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// readChunk() 递归读取，逐 chunk 解析 delta.content</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>停止生成</strong>：<code>AbortController</code> 实现。用户点击「停止」按钮 → <code>abortController.abort()</code> → fetch 连接断开 → 前端丢弃后续 chunk。注意：Vercel 函数仍会跑完，DeepSeek API 仍会计费。</p>
+<h3 id="3-2-对话历史支持"><a href="#3-2-对话历史支持" class="headerlink" title="3.2 对话历史支持"></a>3.2 对话历史支持</h3><p><strong>问题</strong>：每次请求只发送 <code>system + 当前问题</code>，AI 无法记忆前文。</p>
+<p><strong>方案</strong>：前端维护 <code>messages[]</code> 数组，每次请求一并发送历史消息。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> messages = [];</span><br><span class="line"><span class="keyword">var</span> maxHistoryTurns = <span class="number">6</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">send</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  messages.<span class="title function_">push</span>(&#123; <span class="attr">role</span>: <span class="string">&#x27;user&#x27;</span>, <span class="attr">content</span>: text &#125;);</span><br><span class="line">  messages = <span class="title function_">truncateMessages</span>(messages);</span><br><span class="line">  <span class="comment">// 构建请求消息列表</span></span><br><span class="line">  <span class="keyword">var</span> msgs = [&#123; <span class="attr">role</span>: <span class="string">&#x27;system&#x27;</span>, <span class="attr">content</span>: <span class="title function_">buildSystemPrompt</span>(index, topArticles) &#125;];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; messages.<span class="property">length</span>; i++) msgs.<span class="title function_">push</span>(messages[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于前端没有精确 tokenizer，采用近似策略估算 token 数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">estimateTokens</span>(<span class="params">text</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> chinese = (text.<span class="title function_">match</span>(<span class="regexp">/[\u4e00-\u9fff]/g</span>) || []).<span class="property">length</span>;</span><br><span class="line">  <span class="keyword">var</span> other = text.<span class="property">length</span> - chinese;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Math</span>.<span class="title function_">ceil</span>(chinese / <span class="number">1.5</span> + other / <span class="number">4</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>truncateMessages()</code> 从后往前扫描，累积 token 超过 3000 上限时丢弃最早的消息。</p>
+<h3 id="3-3-暗色模式适配"><a href="#3-3-暗色模式适配" class="headerlink" title="3.3 暗色模式适配"></a>3.3 暗色模式适配</h3><p><strong>问题</strong>：聊天面板硬编码白色背景（<code>#fff</code>），在博客暗色模式下刺眼不协调。</p>
+<p><strong>方案</strong>：<code>@media (prefers-color-scheme: dark)</code> 纯 CSS 媒体查询适配，无需 JavaScript 干预。</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// styles.styl — 亮色模式</span></span><br><span class="line"><span class="selector-id">#ai-assistant-panel</span> <span class="selector-class">.ai-messages</span> <span class="selector-class">.ai-message</span></span><br><span class="line">  &amp;<span class="selector-class">.ai-message-bot</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#f0f4f8</span></span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#333</span></span><br><span class="line">    <span class="selector-tag">a</span></span><br><span class="line">      <span class="attribute">color</span>: <span class="variable">$ai</span>-primary  // <span class="number">#37c6c0</span></span><br><span class="line">      <span class="selector-pseudo">&amp;:hover</span></span><br><span class="line">        <span class="attribute">color</span>: <span class="built_in">darken</span>(<span class="variable">$ai</span>-primary, <span class="number">10%</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">@media</span> (<span class="attribute">prefers-color-scheme</span>: dark)</span><br><span class="line">  #ai-assistant-panel</span><br><span class="line">    background: #<span class="number">2</span>d2d2d</span><br><span class="line">    border-color: #<span class="number">444</span></span><br><span class="line">  #ai-assistant-panel .ai-messages .ai-message</span><br><span class="line">    &amp;.ai-message-bot</span><br><span class="line">      background: #<span class="number">3</span>d3d3d</span><br><span class="line">      <span class="attribute">color</span>: #e0e0e0</span><br><span class="line">      a</span><br><span class="line">        <span class="attribute">color</span>: lighten($ai-primary, <span class="number">20%</span>)</span><br></pre></td></tr></table></figure>
+
+<p>覆盖范围包括面板背景、气泡、文字、输入框、按钮、阴影、Toast、链接颜色。切换系统主题时即时响应，无需刷新。</p>
+<h3 id="3-4-精确错误提示"><a href="#3-4-精确错误提示" class="headerlink" title="3.4 精确错误提示"></a>3.4 精确错误提示</h3><p><strong>问题</strong>：所有异常统一显示”抱歉没理解”，用户无法判断是网络问题还是服务端问题。</p>
+<p><strong>方案</strong>：<code>classifyError()</code> 函数按优先级顺序判定错误类型：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">classifyError</span>(<span class="params">err, response</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (err &amp;&amp; err.<span class="property">name</span> === <span class="string">&#x27;AbortError&#x27;</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">if</span> (!response) <span class="keyword">return</span> <span class="string">&#x27;网络连接失败，请检查网络后重试&#x27;</span>;</span><br><span class="line">  <span class="keyword">var</span> s = response.<span class="property">status</span>;</span><br><span class="line">  <span class="keyword">if</span> (s === <span class="number">429</span>) <span class="keyword">return</span> <span class="string">&#x27;服务忙，请稍后再试 🐟&#x27;</span>;</span><br><span class="line">  <span class="keyword">if</span> (s === <span class="number">504</span>) <span class="keyword">return</span> <span class="string">&#x27;回答超时了，请简化问题后重试&#x27;</span>;</span><br><span class="line">  <span class="keyword">if</span> (s === <span class="number">401</span> || s === <span class="number">403</span>) <span class="keyword">return</span> <span class="string">&#x27;服务配置异常，请联系站长&#x27;</span>;</span><br><span class="line">  <span class="keyword">if</span> (s &gt;= <span class="number">500</span>) <span class="keyword">return</span> <span class="string">&#x27;服务暂时不可用，请稍后重试&#x27;</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&#x27;抱歉没理解，换个问法试试？&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>错误提示以 Toast 浮层展示，3 秒后自动消失，不阻塞用户操作。</p>
+<h3 id="3-5-输入保护"><a href="#3-5-输入保护" class="headerlink" title="3.5 输入保护"></a>3.5 输入保护</h3><ul>
+<li>输入框 <code>maxlength=&quot;2000&quot;</code>，超出时字符计数器变红</li>
+<li>防抖：调用 <code>send()</code> 时检查 <code>Date.now()</code> 差值，间隔不足 1 秒则丢弃</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> now = <span class="title class_">Date</span>.<span class="title function_">now</span>();</span><br><span class="line"><span class="keyword">if</span> (now - lastSentTime &lt; <span class="variable constant_">CONFIG</span>.<span class="property">debounceInterval</span>) <span class="keyword">return</span>;</span><br><span class="line">lastSentTime = now;</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、自研-Markdown-渲染引擎"><a href="#四、自研-Markdown-渲染引擎" class="headerlink" title="四、自研 Markdown 渲染引擎"></a>四、自研 Markdown 渲染引擎</h2><h3 id="为什么不自研"><a href="#为什么不自研" class="headerlink" title="为什么不自研"></a>为什么不自研</h3><p>ByteBot 的 AI 回复需要在前端实时渲染为 HTML。常见的方案有：</p>
+<ol>
+<li><strong>marked.js</strong>（约 10KB gzip）— 功能完整，但无法精确控制 AI 可能输出的危险 HTML</li>
+<li><strong>DOMPurify</strong> + 任意 Markdown 库 — 需要额外 6KB 依赖</li>
+<li><strong>自研</strong> — 针对 AI 回复场景定制，精确控制安全边界</li>
+</ol>
+<p>选择了方案 3：ByteBot 的 AI 回复格式相对有限（代码块、列表、链接、偶尔表格），不需要完整 CommonMark 支持。自研渲染器约 70 行代码，零外部依赖，且可以内置 AI 输出碎片的预清理逻辑。</p>
+<h3 id="支持的语法"><a href="#支持的语法" class="headerlink" title="支持的语法"></a>支持的语法</h3><p>render() 函数的处理流程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">原始文本 → HTML 碎片预清理 → 保护代码块 → inline code</span><br><span class="line">→ Markdown 链接 → 粗体 → 标题 → 引用 → 列表</span><br><span class="line">→ 列表归组 → 表格 → 裸 URL → 恢复代码块 → \n 换行</span><br></pre></td></tr></table></figure>
+
+<p>支持 8 种语法：</p>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+<th>输入</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>代码块</td>
+<td><code>```code```</code></td>
+<td><code>&lt;pre&gt;&lt;code&gt;</code></td>
+</tr>
+<tr>
+<td>内联代码</td>
+<td><code>`code`</code></td>
+<td><code>&lt;code&gt;</code></td>
+</tr>
+<tr>
+<td>粗体</td>
+<td><code>**text**</code></td>
+<td><code>&lt;strong&gt;</code></td>
+</tr>
+<tr>
+<td>链接</td>
+<td><code>[text](url)</code></td>
+<td><code>&lt;a href=&quot;url&quot;&gt;</code></td>
+</tr>
+<tr>
+<td>无序列表</td>
+<td><code>- item</code></td>
+<td><code>&lt;ul&gt;&lt;li&gt;</code></td>
+</tr>
+<tr>
+<td>有序列表</td>
+<td><code>1. item</code></td>
+<td><code>&lt;ol&gt;&lt;li&gt;</code></td>
+</tr>
+<tr>
+<td>标题</td>
+<td><code>### title</code></td>
+<td><code>&lt;h4&gt;</code></td>
+</tr>
+<tr>
+<td>引用</td>
+<td><code>&gt; quote</code></td>
+<td><code>&lt;blockquote&gt;</code></td>
+</tr>
+<tr>
+<td>表格</td>
+<td><code>|a|b|</code></td>
+<td><code>&lt;table&gt;&lt;tr&gt;&lt;td&gt;</code></td>
+</tr>
+<tr>
+<td>裸 URL</td>
+<td><code>https://...</code></td>
+<td><code>&lt;a href=&quot;...&quot;&gt;</code></td>
+</tr>
+</tbody></table>
+<h3 id="安全措施"><a href="#安全措施" class="headerlink" title="安全措施"></a>安全措施</h3><p><strong>危险协议过滤</strong>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="regexp">/^(?:javascript|data|vbscript|file):/i</span>.<span class="title function_">test</span>(url)) <span class="keyword">return</span> txt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>HTML 碎片预清理</strong>：AI 有时会输出不完整的 HTML 标签（如 <code>&lt;a href=&quot;...&quot;&gt;</code> 末尾缺少 <code>&lt;/a&gt;</code>），在 Markdown 处理前先剥离：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.<span class="title function_">replace</span>(<span class="regexp">/&lt;a\s[^&gt;]*&gt;/gi</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">.<span class="title function_">replace</span>(<span class="regexp">/&lt;\/a&gt;/gi</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">.<span class="title function_">replace</span>(<span class="regexp">/\s*target=&quot;[^&quot;]*&quot;/gi</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">.<span class="title function_">replace</span>(<span class="regexp">/\s*rel=&quot;[^&quot;]*&quot;/gi</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">.<span class="title function_">replace</span>(<span class="regexp">/打开链接\s*/g</span>, <span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>链接安全</strong>：所有 <code>&lt;a&gt;</code> 统一加 <code>target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;</code>，不渲染 <code>&lt;img&gt;</code> 标签。</p>
+<p><strong>URL 清理</strong>：AI 有时会在 URL 后追加 HTML 属性（如 <code>https://...&quot;&gt;text</code>），需精确保留 URL 中的 <code>&amp;</code> 查询参数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 正确：保留 &amp; 参数，只移除尾部 HTML 属性</span></span><br><span class="line"><span class="keyword">var</span> href = url.<span class="title function_">replace</span>(<span class="regexp">/&amp;amp;/g</span>, <span class="string">&#x27;&amp;&#x27;</span>).<span class="title function_">replace</span>(<span class="regexp">/[&#x27;&quot;&gt;\s].*$/</span>, <span class="string">&#x27;&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>裸 URL 正则兼容性</strong>：将 lookbehind <code>(?&lt;!&lt;a [^&gt;]*&gt;)</code> 改为 <code>(^|[\s&gt;])</code> 前缀捕获，兼容旧版 Safari。</p>
+<p><strong>链接样式</strong>：亮色模式使用主题色 <code>#37c6c0</code>，暗色模式使用 <code>lighten($ai-primary, 20%)</code>，hover 时去掉下划线。</p>
+<h2 id="五、System-Prompt-工程与-RAG-增强"><a href="#五、System-Prompt-工程与-RAG-增强" class="headerlink" title="五、System Prompt 工程与 RAG 增强"></a>五、System Prompt 工程与 RAG 增强</h2><h3 id="5-1-博客知识注入"><a href="#5-1-博客知识注入" class="headerlink" title="5.1 博客知识注入"></a>5.1 博客知识注入</h3><p>ByteBot 的知识来源是 <code>scripts/generators/ai-index.js</code> 生成的 <code>/api/posts-index.json</code>。构建时自动采集：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// posts-index.json 的数据结构</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">posts</span>: [</span><br><span class="line">    &#123; title, url, date, tags, categories, excerpt &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">meta</span>: &#123;</span><br><span class="line">    totalPosts, categories, tags,</span><br><span class="line">    <span class="attr">albums</span>: &#123; count, <span class="attr">dirs</span>: [<span class="string">&#x27;img2022&#x27;</span>,<span class="string">&#x27;img2023&#x27;</span>,...] &#125;,</span><br><span class="line">    <span class="attr">games</span>: &#123; count, <span class="attr">names</span>: [<span class="string">&#x27;贪吃蛇&#x27;</span>,<span class="string">&#x27;俄罗斯方块&#x27;</span>,...] &#125;,</span><br><span class="line">    <span class="attr">videos</span>: &#123; count, years &#125;,</span><br><span class="line">    <span class="attr">fishing</span>: &#123; spotsCount, spotTypes, species, bestSpots &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>buildSystemPrompt()</code> 将这些元数据转化为自然语言描述注入到 system prompt 中，让 AI 了解博客的全貌。</p>
+<h3 id="5-2-真实路径修复"><a href="#5-2-真实路径修复" class="headerlink" title="5.2 真实路径修复"></a>5.2 真实路径修复</h3><p>最初，system prompt 只告诉 AI “收录在抖音专栏” 或 “2023年鱼获”，没有给出实际 URL。AI 自行猜测路径，导致错误的链接：</p>
+<table>
+<thead>
+<tr>
+<th>用户举报的问题</th>
+<th>AI 猜测的路径</th>
+<th>正确路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>视频链接错误</td>
+<td><code>/video/</code></td>
+<td><code>/douyin/</code></td>
+</tr>
+<tr>
+<td>2023 相册链接错误</td>
+<td><code>/fish/2023/</code></td>
+<td><code>/fish/img2023/</code></td>
+</tr>
+</tbody></table>
+<p>修复方案：在 system prompt 中使用 Markdown 链接模板，AI 直接复制即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- 钓鱼视频：45 个（收录在[抖音专栏](/douyin/)）</span><br><span class="line">- 钓鱼相册：5 个（[2023年鱼获](/fish/img2023/)、[2024年鱼获](/fish/img2024/)...）</span><br></pre></td></tr></table></figure>
+
+<p>同时新增「博客功能页面」专区，列出所有关键页面的 Markdown 链接：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">博客功能页面（复制这些 Markdown 链接推荐给用户）：</span><br><span class="line">- [游戏合集](/ai-games/)：6 款小游戏</span><br><span class="line">- [抖音专栏](/douyin/)：45 个钓鱼视频</span><br><span class="line">- [钓鱼相册](/fish/)：5 个相册</span><br><span class="line">- [钓鱼地图](/fish/map/)：N 个钓点</span><br><span class="line">- [教程系列](/tutorials/)</span><br><span class="line">- [关于博主](/about/)</span><br><span class="line">- [留言互动](/guestbook/)</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-RAG-关键词匹配"><a href="#5-3-RAG-关键词匹配" class="headerlink" title="5.3 RAG 关键词匹配"></a>5.3 RAG 关键词匹配</h3><p><strong>问题</strong>：博客有 95+ 篇文章，但 system prompt 只包含最近 10 篇。用户问旧文章内容时 AI 无从知晓。</p>
+<p><strong>方案</strong>：关键词提取 + 相关性排序的轻量 RAG。</p>
+<p><strong>关键词提取</strong>（<code>extractKeywords</code>）：</p>
+<ul>
+<li>去停用词（”的、了、吗、是、我、有” 等中文虚词）</li>
+<li>分词后去重</li>
+<li>60+ 技术关键词辅助匹配（unity、lua、委托、异步、tidb、vercel 等）</li>
+</ul>
+<p><strong>相关性排序</strong>（<code>rankArticles</code>）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">rankArticles</span>(<span class="params">question, posts</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> keywords = <span class="title function_">extractKeywords</span>(question);</span><br><span class="line">  <span class="comment">// 对每篇文章打分</span></span><br><span class="line">  <span class="keyword">var</span> scored = posts.<span class="title function_">map</span>(<span class="keyword">function</span>(<span class="params">post</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> score = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> text = post.<span class="property">title</span> + <span class="string">&#x27; &#x27;</span> + post.<span class="property">excerpt</span> + <span class="string">&#x27; &#x27;</span> + post.<span class="property">tags</span>.<span class="title function_">join</span>(<span class="string">&#x27; &#x27;</span>) + <span class="string">&#x27; &#x27;</span> + post.<span class="property">categories</span>.<span class="title function_">join</span>(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; keywords.<span class="property">length</span>; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (title.<span class="title function_">match</span>(keyword)) score += <span class="number">3</span>;    <span class="comment">// 标题命中权重最高</span></span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (tags.<span class="title function_">match</span>(keyword)) score += <span class="number">2</span>; <span class="comment">// 标签次之</span></span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (excerpt.<span class="title function_">match</span>(keyword)) score += <span class="number">1</span>; <span class="comment">// 摘要/分类最低</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123; post, score &#125;;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">// 取 Top-5</span></span><br><span class="line">  <span class="keyword">return</span> scored.<span class="title function_">filter</span>(<span class="function"><span class="params">s</span> =&gt;</span> s.<span class="property">score</span> &gt; <span class="number">0</span>).<span class="title function_">sort</span>(<span class="function">(<span class="params">a,b</span>) =&gt;</span> b.<span class="property">score</span> - a.<span class="property">score</span>).<span class="title function_">slice</span>(<span class="number">0</span>, <span class="number">5</span>).<span class="title function_">map</span>(<span class="function"><span class="params">s</span> =&gt;</span> s.<span class="property">post</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>没有关键词匹配时，回退最近 5 篇文章作为兜底。</p>
+<p><strong>数据流</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用户输入问题 → extractKeywords → rankArticles(question, 95+ posts)</span><br><span class="line">→ Top-5 相关文章 → buildSystemPrompt(index, topArticles) → 注入 prompt</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、移动端全适配"><a href="#六、移动端全适配" class="headerlink" title="六、移动端全适配"></a>六、移动端全适配</h2><p>移动端交互是 ByteBot 的薄弱环节，共做了 4 项优化：</p>
+<h3 id="6-1-软键盘处理"><a href="#6-1-软键盘处理" class="headerlink" title="6.1 软键盘处理"></a>6.1 软键盘处理</h3><p>利用 <code>visualViewport</code> API 检测键盘弹出：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">handleMobileKeyboard</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="string">&#x27;visualViewport&#x27;</span> <span class="keyword">in</span> <span class="variable language_">window</span>) &#123;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">visualViewport</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;resize&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">var</span> diff = <span class="variable language_">window</span>.<span class="property">innerHeight</span> - <span class="variable language_">window</span>.<span class="property">visualViewport</span>.<span class="property">height</span>;</span><br><span class="line">      <span class="keyword">if</span> (diff &gt; <span class="number">100</span>) &#123; <span class="comment">// 键盘弹出了</span></span><br><span class="line">        panel.<span class="property">style</span>.<span class="property">bottom</span> = (diff + <span class="number">10</span>) + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-按钮重叠检测"><a href="#6-2-按钮重叠检测" class="headerlink" title="6.2 按钮重叠检测"></a>6.2 按钮重叠检测</h3><p>浮动按钮 <code>bottom: 80px</code> 可能与「回到顶部」「暗色切换」等固定元素重叠。<code>adjustBtnPosition()</code> 遍历所有 <code>position: fixed</code> 元素，检测矩形重叠后自动垫高按钮：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">adjustBtnPosition</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> fixedEls = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;*&#x27;</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; fixedEls.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (el === btn) <span class="keyword">continue</span>;</span><br><span class="line">    <span class="keyword">var</span> style = <span class="variable language_">window</span>.<span class="title function_">getComputedStyle</span>(el);</span><br><span class="line">    <span class="keyword">if</span> (style.<span class="property">position</span> !== <span class="string">&#x27;fixed&#x27;</span>) <span class="keyword">continue</span>;</span><br><span class="line">    <span class="comment">// 检测矩形重叠</span></span><br><span class="line">    <span class="keyword">if</span> (rect.<span class="property">bottom</span> &gt; btnRect.<span class="property">top</span> &amp;&amp; rect.<span class="property">top</span> &lt; btnRect.<span class="property">bottom</span> &amp;&amp;</span><br><span class="line">        rect.<span class="property">right</span> &gt; btnRect.<span class="property">left</span> &amp;&amp; rect.<span class="property">left</span> &lt; btnRect.<span class="property">right</span>) &#123;</span><br><span class="line">      <span class="comment">// 有重叠，向上移动</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建按钮后延迟 100ms 调用一次，同时监听 <code>window.resize</code> 实时更新。</p>
+<h3 id="6-3-滑动关闭手势"><a href="#6-3-滑动关闭手势" class="headerlink" title="6.3 滑动关闭手势"></a>6.3 滑动关闭手势</h3><p>在面板 header 和输入区监听触摸事件，下滑超过 80px 自动关闭：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">panel.<span class="title function_">addEventListener</span>(<span class="string">&#x27;touchstart&#x27;</span>, <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">  touchStartY = e.<span class="property">touches</span>[<span class="number">0</span>].<span class="property">clientY</span>;</span><br><span class="line">&#125;, &#123; <span class="attr">passive</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">panel.<span class="title function_">addEventListener</span>(<span class="string">&#x27;touchmove&#x27;</span>, <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> dy = e.<span class="property">touches</span>[<span class="number">0</span>].<span class="property">clientY</span> - touchStartY;</span><br><span class="line">  <span class="keyword">if</span> (dy &gt; <span class="number">80</span>) <span class="title function_">toggle</span>(); <span class="comment">// 下滑关闭</span></span><br><span class="line">&#125;, &#123; <span class="attr">passive</span>: <span class="literal">true</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-4-响应式布局"><a href="#6-4-响应式布局" class="headerlink" title="6.4 响应式布局"></a>6.4 响应式布局</h3><p>480px 以下全屏展示：</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> (<span class="attribute">max-width</span>: <span class="number">480px</span>)</span><br><span class="line">  #ai-assistant-panel</span><br><span class="line">    <span class="attribute">width</span>: calc(<span class="number">100%</span> - <span class="number">24px</span>)</span><br><span class="line">    <span class="attribute">height</span>: calc(<span class="number">100vh</span> - <span class="number">100px</span>)</span><br><span class="line">    bottom: <span class="number">70px</span></span><br><span class="line">    right: <span class="number">12px</span></span><br><span class="line">    .ai-input-area</span><br><span class="line">      padding-bottom: calc(<span class="number">10px</span> + env(safe-area-inset-bottom, <span class="number">0px</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="七、部署运维与使用统计"><a href="#七、部署运维与使用统计" class="headerlink" title="七、部署运维与使用统计"></a>七、部署运维与使用统计</h2><h3 id="7-1-Vercel-配置"><a href="#7-1-Vercel-配置" class="headerlink" title="7.1 Vercel 配置"></a>7.1 Vercel 配置</h3><p><code>vercel.json</code> 设置 Serverless 函数超时：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;functions&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;api/*.js&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;maxDuration&quot;</span><span class="punctuation">:</span> <span class="number">30</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>CORS 白名单（<code>api/chat.js</code>）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getCorsOrigin</span>(<span class="params">origin</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (origin === <span class="string">&#x27;https://www.bytefisher.top&#x27;</span> ||</span><br><span class="line">      origin.<span class="title function_">indexOf</span>(<span class="string">&#x27;localhost&#x27;</span>) !== -<span class="number">1</span>) <span class="keyword">return</span> origin;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&#x27;https://www.bytefisher.top&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-2-使用统计埋点"><a href="#7-2-使用统计埋点" class="headerlink" title="7.2 使用统计埋点"></a>7.2 使用统计埋点</h3><p>localStorage 存储三个计数器：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">trackEvent</span>(<span class="params">type</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> stats = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;ai_stats&#x27;</span>)) || &#123; <span class="attr">opens</span>: <span class="number">0</span>, <span class="attr">sends</span>: <span class="number">0</span>, <span class="attr">errors</span>: <span class="number">0</span> &#125;;</span><br><span class="line">  <span class="keyword">if</span> (type === <span class="string">&#x27;open&#x27;</span>) stats.<span class="property">opens</span>++;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (type === <span class="string">&#x27;send&#x27;</span>) stats.<span class="property">sends</span>++;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (type === <span class="string">&#x27;error&#x27;</span>) stats.<span class="property">errors</span>++;</span><br><span class="line">  <span class="variable language_">localStorage</span>.<span class="title function_">setItem</span>(<span class="string">&#x27;ai_stats&#x27;</span>, <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(stats));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>触发点：打开面板 → <code>&#39;open&#39;</code>，发送消息 → <code>&#39;send&#39;</code>，捕获异常 → <code>&#39;error&#39;</code>。</p>
+<p>数据可在浏览器 DevTools → Application → Local Storage 中查看。</p>
+<h3 id="7-3-已知问题"><a href="#7-3-已知问题" class="headerlink" title="7.3 已知问题"></a>7.3 已知问题</h3><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>影响</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PJAX 切换页面后面板状态重置</td>
+<td>低，用户可重新点击打开</td>
+</tr>
+<tr>
+<td><code>posts-index.json</code> 体积随文章增长</td>
+<td>中，可考虑按需加载</td>
+</tr>
+<tr>
+<td>使用统计仅前端 localStorage</td>
+<td>低，清除浏览器数据会丢失</td>
+</tr>
+</tbody></table>
+<h2 id="八、总结"><a href="#八、总结" class="headerlink" title="八、总结"></a>八、总结</h2><p>ByteBot 从最初只有基础问答功能的原型，经过三个轮次的迭代优化，完成了全部 10 项需求：</p>
+<ul>
+<li><strong>P0 核心体验</strong>（流式响应、对话历史、暗色模式、错误提示）— 让助手”好用”</li>
+<li><strong>P1 功能增强</strong>（Markdown 渲染、输入保护、移动端适配）— 让助手”完整”</li>
+<li><strong>P2 锦上添花</strong>（超时优化、RAG 增强、使用统计）— 让助手”聪明”</li>
+</ul>
+<h3 id="后续优化方向"><a href="#后续优化方向" class="headerlink" title="后续优化方向"></a>后续优化方向</h3><ol>
+<li><strong>语义向量检索</strong> — 当前 RAG 基于关键词匹配，语义理解有限。可引入 <code>pgvector</code> 或 <code>Cloudflare Vectorize</code> 实现向量搜索</li>
+<li><strong>后端分析面板</strong> — 当前埋点仅前端 localStorage，后续可上报到后端，可视化分析助手活跃度</li>
+<li><strong>PJAX 状态恢复</strong> — 修复 Next 主题 PJAX 切换页面后助手状态重置问题</li>
+</ol>
+<hr>
+<p><em>本文所有代码基于 ByteFisher 博客（<a href="https://www.bytefisher.top/">www.bytefisher.top</a>）的实际生产环境实现，持续迭代中。</em></p>
+<div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2026/05/28/Hexo-博客AI问答助手ByteBot优化实录-Markdown渲染迁移与踩坑记/" class="related-post-item" title="Hexo 博客 AI 问答助手 ByteBot 优化实录：Markdown 渲染迁移与踩坑记"><span class="related-post-title">Hexo 博客 AI 问答助手 ByteBot 优化实录：Markdown 渲染迁移与踩坑记</span><span class="related-post-date">2026-05-28</span><span class="related-post-desc">ByteBot 从第一版上线至今已经过 30+ 次提交迭代，从最初的自研 70 行 Markdown 渲染器到如今的 marked@4 + DOMPurify </span></a><a href="/2026/05/09/Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板/" class="related-post-item" title="Hexo 博客集成 AI 问答助手：DeepSeek + Vercel + 悬浮球聊天面板"><span class="related-post-title">Hexo 博客集成 AI 问答助手：DeepSeek + Vercel + 悬浮球聊天面板</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">前言 ByteFisher 博客已发布 95+ 篇文章，一个痛点越来越明显： 静态博客缺少即时互动能力 。 读者经常遇到的问题场景： "有没有 Unity 相关</span></a><a href="/2026/05/15/Hexo-博客评论系统深度迁移-从LeanCloud到TiDB Cloud全记录/" class="related-post-item" title="Hexo 博客评论系统深度迁移：从 LeanCloud 到 TiDB Cloud"><span class="related-post-title">Hexo 博客评论系统深度迁移：从 LeanCloud 到 TiDB Cloud</span><span class="related-post-date">2026-05-15</span><span class="related-post-desc">前言 ByteFisher 博客的评论系统使用 Waline（部署于 Vercel） + LeanCloud（国内版）的组合已运行一年多，积累了 19 条评论和</span></a><a href="/2026/05/14/Hexo-博客图床迁移实战-从iili.io到Cloudflare Workers+工具链改造全记录/" class="related-post-item" title="Hexo 博客图床迁移实战：从 iili.io 到 Cloudflare Workers"><span class="related-post-title">Hexo 博客图床迁移实战：从 iili.io 到 Cloudflare Workers</span><span class="related-post-date">2026-05-14</span><span class="related-post-desc">前言 ByteFisher 博客从建站第一天起，所有图片就托管在 iili.io（FreeImage.Host）——一个免费的第三方图床。免费的东西往往最贵——</span></a><a href="/2026/05/12/Hexo-博客二次优化实战-从性能压缩到品牌打磨全记录/" class="related-post-item" title="Hexo 博客二次优化实战：从性能压缩到品牌打磨全记录"><span class="related-post-title">Hexo 博客二次优化实战：从性能压缩到品牌打磨全记录</span><span class="related-post-date">2026-05-12</span><span class="related-post-desc">前言 ByteFisher 博客第一期优化（RSS 修复、AI 助手、评论迁移等）完成后，博客能正常跑了，但离"好用"还有距离。 梳理了一下发现几类问题： 配置</span></a><a href="/2026/05/12/Hexo-博客实战-钓鱼相册数据统计与地图实现全记录/" class="related-post-item" title="Hexo 博客实战：钓鱼相册数据统计与地图"><span class="related-post-title">Hexo 博客实战：钓鱼相册数据统计与地图</span><span class="related-post-date">2026-05-12</span><span class="related-post-desc">前言 ByteFisher 博客上线了两年，积累了 7 个钓鱼相册、500+ 张照片。但一直有个遗憾： 相册只是按年份一字排开，缺少两个关键视角 。 一是 数据</span></a></div></div><div class="series-nav"><div class="series-nav-title">Hexo博客搭建 系列</div><div class="series-nav-progress">第 11/12 篇</div><div class="series-nav-links"><a href="/2026/05/15/Hexo-博客评论系统深度迁移-从LeanCloud到TiDB Cloud全记录/" class="series-nav-prev">Hexo 博客评论系统深度迁移：从 LeanCloud 到 TiDB Cloud</a><a href="/2026/05/28/Hexo-博客AI问答助手ByteBot优化实录-Markdown渲染迁移与踩坑记/" class="series-nav-next">Hexo 博客 AI 问答助手 ByteBot 优化实录：Markdown 渲染迁移与踩坑记</a></div></div>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag"># series:Hexo博客搭建</a>
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/DeepSeek/" rel="tag"># DeepSeek</a>
+              <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%BC%80%E5%8F%91/" rel="tag"># 博客开发</a>
+              <a href="/tags/Vercel/" rel="tag"># Vercel</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/05/19/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E9%B8%9F%E9%97%AF%E5%85%B3%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" rel="prev" title="Hexo 博客实战：小鸟闯关游戏开发指南">
+      <i class="fa fa-chevron-left"></i> Hexo 博客实战：小鸟闯关游戏开发指南
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/05/23/2026-05-23-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93%E4%BA%94%E6%88%98%E8%AE%B0/" rel="next" title="花碑水库五战记——第三支达摩沉底，银鳕鱼倒是连竿了">
+      花碑水库五战记——第三支达摩沉底，银鳕鱼倒是连竿了 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+  <div class="post-share">
+    <span class="post-share-label">分享：</span>
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2026%2F05%2F21%2FHexo-%25E5%258D%259A%25E5%25AE%25A2AI%25E9%2597%25AE%25E7%25AD%2594%25E5%258A%25A9%25E6%2589%258BByteBot%25E5%2585%25A8%25E6%25A0%2588%25E5%25AE%259E%25E8%25B7%25B5%2F&amp;title=Hexo%20%E5%8D%9A%E5%AE%A2%20AI%20%E9%97%AE%E7%AD%94%E5%8A%A9%E6%89%8B%20ByteBot%20%E5%85%A8%E6%A0%88%E5%AE%9E%E8%B7%B5%EF%BC%9A%E4%BB%8E%E6%B5%81%E5%BC%8F%E5%93%8D%E5%BA%94%E5%88%B0%20RAG%20%E5%A2%9E%E5%BC%BA" target="_blank" rel="noopener" title="分享到微博">
+      <i class="fab fa-weibo"></i>
+    </a>
+    <a href="#" onclick="navigator.clipboard.writeText(location.href);var t=this;t.innerHTML='<i class=fa fa-check></i>';setTimeout(function(){t.innerHTML='<i class=fa fa-link></i>'},1500);return false" title="复制链接">
+      <i class="fa fa-link"></i>
+    </a>
+  </div>
+
+  
+  <div class="post-author-bio">
+    <div class="post-author-avatar">
+      <img src="/images/avatar2.gif" alt="淡水鱼">
+    </div>
+    <div class="post-author-info">
+      <div class="post-author-name">淡水鱼</div>
+      <div class="post-author-desc">钓鱼爱好者 &amp; Unity 游戏开发者，分享编程技术与钓鱼经验。</div>
+      <div class="post-author-links">
+        <a href="https://github.com/grj1981" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="/atom.xml" title="RSS 订阅"><i class="fa fa-rss"></i></a>
+        <a href="mailto:271623821@qq.com" title="联系我"><i class="fa fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  
+
+
+          </div>
+          
+    <div class="comments" id="waline-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-AI-%E5%8A%A9%E6%89%8B"><span class="nav-number">1.</span> <span class="nav-text">一、为什么需要 AI 助手</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">二、系统架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%A0%B8%E5%BF%83%E4%BA%A4%E4%BA%92%E4%BD%93%E9%AA%8C"><span class="nav-number">3.</span> <span class="nav-text">三、核心交互体验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%B5%81%E5%BC%8F%E5%93%8D%E5%BA%94%EF%BC%88SSE%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 流式响应（SSE）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%AF%B9%E8%AF%9D%E5%8E%86%E5%8F%B2%E6%94%AF%E6%8C%81"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 对话历史支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E6%9A%97%E8%89%B2%E6%A8%A1%E5%BC%8F%E9%80%82%E9%85%8D"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 暗色模式适配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E7%B2%BE%E7%A1%AE%E9%94%99%E8%AF%AF%E6%8F%90%E7%A4%BA"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 精确错误提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E8%BE%93%E5%85%A5%E4%BF%9D%E6%8A%A4"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 输入保护</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E8%87%AA%E7%A0%94-Markdown-%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E"><span class="nav-number">4.</span> <span class="nav-text">四、自研 Markdown 渲染引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%87%AA%E7%A0%94"><span class="nav-number">4.1.</span> <span class="nav-text">为什么不自研</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E7%9A%84%E8%AF%AD%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">支持的语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%8E%AA%E6%96%BD"><span class="nav-number">4.3.</span> <span class="nav-text">安全措施</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81System-Prompt-%E5%B7%A5%E7%A8%8B%E4%B8%8E-RAG-%E5%A2%9E%E5%BC%BA"><span class="nav-number">5.</span> <span class="nav-text">五、System Prompt 工程与 RAG 增强</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E5%8D%9A%E5%AE%A2%E7%9F%A5%E8%AF%86%E6%B3%A8%E5%85%A5"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 博客知识注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E7%9C%9F%E5%AE%9E%E8%B7%AF%E5%BE%84%E4%BF%AE%E5%A4%8D"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 真实路径修复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-RAG-%E5%85%B3%E9%94%AE%E8%AF%8D%E5%8C%B9%E9%85%8D"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 RAG 关键词匹配</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%85%A8%E9%80%82%E9%85%8D"><span class="nav-number">6.</span> <span class="nav-text">六、移动端全适配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E8%BD%AF%E9%94%AE%E7%9B%98%E5%A4%84%E7%90%86"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 软键盘处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E6%8C%89%E9%92%AE%E9%87%8D%E5%8F%A0%E6%A3%80%E6%B5%8B"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 按钮重叠检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-%E6%BB%91%E5%8A%A8%E5%85%B3%E9%97%AD%E6%89%8B%E5%8A%BF"><span class="nav-number">6.3.</span> <span class="nav-text">6.3 滑动关闭手势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80"><span class="nav-number">6.4.</span> <span class="nav-text">6.4 响应式布局</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E9%83%A8%E7%BD%B2%E8%BF%90%E7%BB%B4%E4%B8%8E%E4%BD%BF%E7%94%A8%E7%BB%9F%E8%AE%A1"><span class="nav-number">7.</span> <span class="nav-text">七、部署运维与使用统计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-Vercel-%E9%85%8D%E7%BD%AE"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 Vercel 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-%E4%BD%BF%E7%94%A8%E7%BB%9F%E8%AE%A1%E5%9F%8B%E7%82%B9"><span class="nav-number">7.2.</span> <span class="nav-text">7.2 使用统计埋点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-%E5%B7%B2%E7%9F%A5%E9%97%AE%E9%A2%98"><span class="nav-number">7.3.</span> <span class="nav-text">7.3 已知问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-number">8.</span> <span class="nav-text">八、总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD%E4%BC%98%E5%8C%96%E6%96%B9%E5%90%91"><span class="nav-number">8.1.</span> <span class="nav-text">后续优化方向</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">220</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe id="music-player" allow="encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.jpg">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2023 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition(true);
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+    
+
+  
+
+    
+
+    </div>
+
+<link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
+<script data-pjax>
+(function() {
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+
+  function updateCounts() {
+    var countEls = document.querySelectorAll('.waline-visitor-count');
+    if (!countEls.length) return;
+    countEls.forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var url = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(json) {
+          if (json && json.data && json.data[0] && json.data[0].time != null) {
+            el.innerText = json.data[0].time;
+          }
+        }).catch(function(){});
+    });
+  }
+
+  var el = document.querySelector('#waline-comments');
+  if (el) {
+    updateCounts();
+    NexT.utils.loadComments(el, function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
+        Waline.init({
+          el: '#waline-comments',
+          serverURL: 'https://waline.bytefisher.top/',
+          path: location.pathname,
+          lang: 'zh-CN' || 'zh-CN',
+          meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
+          requiredMeta: ["nick"] || ['nick'],
+          placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
+          avatar: 'retro' || 'retro',
+          pageSize: 10 || 10,
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
+        });
+        var pathEl = document.querySelector('.waline-visitor-count');
+        var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
+        fetch(baseURL + '/api/article', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: postPath })
+        }).finally(function() {
+          setTimeout(updateCounts, 300);
+        });
+      }, window.Waline);
+    });
+  } else {
+    updateCounts();
+  }
+
+  // Fallback for delayed Waline rendering
+  setTimeout(updateCounts, 2000);
+})();
+</script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="/css/douyin-modal.css">
+<script src="/js/douyin-modal.js"></script>
+<script src="/js/hero-typing.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
+<script data-pjax>
+(function() {
+  if (document.querySelector('a[data-lightbox]')) {
+    if (!window._lightboxLoaded) {
+      window._lightboxLoaded = true;
+      var s = document.createElement('script');
+      s.src = '/js/lightbox-plus-jquery.min.js';
+      document.body.appendChild(s);
+    }
+  }
+})();
+</script>
+
+<button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
+  <i class="fa fa-moon-o"></i>
+  <i class="fa fa-sun-o"></i>
+</button>
+<script src="/js/darkmode-toggle.js"></script>
+
+<script src="/js/lib/marked.min.js" data-pjax></script>
+<script src="/js/lib/purify.min.js" data-pjax></script>
+<script src="/js/ai-assistant.js" data-pjax></script>
+
+<script data-pjax>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script src="/js/hot-posts-widget.js" data-pjax></script>
+
+</body>
+</html>
