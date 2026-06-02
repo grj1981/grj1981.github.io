@@ -11,7 +11,22 @@
   <rights>All rights reserved 2026, 淡水鱼</rights>
   <subtitle>钓鱼爱好者的编程世界</subtitle>
   <title>ByteFisher</title>
-  <updated>2026-06-01T03:22:32.033Z</updated>
+  <updated>2026-06-02T04:42:47.577Z</updated>
+  <entry>
+    <author>
+      <name>淡水鱼</name>
+    </author>
+    <category term="钓鱼日记" scheme="https://www.bytefisher.top/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/"/>
+    <category term="钓鱼" scheme="https://www.bytefisher.top/tags/%E9%92%93%E9%B1%BC/"/>
+    <category term="钓鱼日记" scheme="https://www.bytefisher.top/tags/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/"/>
+    <category term="series:钓鱼日记" scheme="https://www.bytefisher.top/tags/series-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/"/>
+    <id>https://www.bytefisher.top/2026/05/31/2026-05-30-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93%E5%85%AD%E6%88%98%E8%AE%B0/</id>
+    <link href="https://www.bytefisher.top/2026/05/31/2026-05-30-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93%E5%85%AD%E6%88%98%E8%AE%B0/"/>
+    <published>2026-05-31T13:00:00.000Z</published>
+    <summary>钓鱼、钓鱼日记：上周末在花碑水库四连空切主线丢漂，水底下又躺了一支新达摩。回家之后我翻来覆去睡不着，坐在电脑前把录像回放看了两遍，越看越憋屈。当晚就在购物车下单了一支新浮漂。不就是大物吗？不就是切主线吗？我上周在文章结尾放了狠话——下周7.2米鱼竿加3.0主线和有倒刺钩，我倒要看看你们还能整出什么幺蛾子。</summary>
+    <title>花碑水库六战记——女钓友连竿我当观众，运动相机拍到没电也没拍到</title>
+    <updated>2026-06-02T04:42:47.577Z</updated>
+  </entry>
   <entry>
     <author>
       <name>淡水鱼</name>
@@ -225,9 +240,9 @@
     <id>https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%BD%93%E9%AA%8C%E5%8D%87%E7%BA%A7%EF%BC%9ASEO%20%E4%BC%98%E5%8C%96%20+%20%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E5%A2%9E%E5%BC%BA%20+%20%E5%93%81%E7%89%8C%E8%A7%86%E8%A7%89%E9%87%8D%E6%9E%84/</id>
     <link href="https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%BD%93%E9%AA%8C%E5%8D%87%E7%BA%A7%EF%BC%9ASEO%20%E4%BC%98%E5%8C%96%20+%20%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E5%A2%9E%E5%BC%BA%20+%20%E5%93%81%E7%89%8C%E8%A7%86%E8%A7%89%E9%87%8D%E6%9E%84/"/>
     <published>2026-05-09T13:00:00.000Z</published>
-    <summary>Hexo、Next主题、博客优化、SEO：前言 上一篇《Hexo 博客三项基础修复》解决了 RSS、Sitemap、评论系统的高优先级硬性问题，博客具备了稳固的基础设施。</summary>
+    <summary>SEO、用户体验与品牌视觉重构，共13项优化全记录</summary>
     <title>Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构</title>
-    <updated>2026-05-19T10:41:44.433Z</updated>
+    <updated>2026-06-02T02:59:31.765Z</updated>
   </entry>
   <entry>
     <author>
@@ -345,24 +360,5 @@
     <summary>详细介绍如何在 OpenCode 中接入阿里云通义千问 Qwen 模型，包括注册阿里云账号、获取 API Key、配置 providers 文件、模型参数调优，以及与其他模型的成本对比。</summary>
     <title>OpenCode 中接入 Qwen 模型完整指南</title>
     <updated>2026-05-28T03:56:51.714Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>淡水鱼</name>
-    </author>
-    <category term="编程" scheme="https://www.bytefisher.top/categories/%E7%BC%96%E7%A8%8B/"/>
-    <category term="游戏开发" scheme="https://www.bytefisher.top/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
-    <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
-    <category term="JavaScript" scheme="https://www.bytefisher.top/tags/JavaScript/"/>
-    <category term="游戏开发" scheme="https://www.bytefisher.top/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
-    <category term="series:博客实战-小游戏" scheme="https://www.bytefisher.top/tags/series-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E6%B8%B8%E6%88%8F/"/>
-    <category term="Canvas" scheme="https://www.bytefisher.top/tags/Canvas/"/>
-    <category term="响应式设计" scheme="https://www.bytefisher.top/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1/"/>
-    <id>https://www.bytefisher.top/2026/04/20/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</id>
-    <link href="https://www.bytefisher.top/2026/04/20/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/"/>
-    <published>2026-04-20T12:00:00.000Z</published>
-    <summary>Hexo、JavaScript、游戏开发、Canvas、响应式设计：前言 继五子棋之后，本文介绍光影拼图游戏的开发。相比其他游戏，拼图的核心难点在于图片处理与碎片管理：如何将一张图片切割成碎片，实现拖拽吸附，并保证在移动端和桌面端都有良好的交互体验。</summary>
-    <title>Hexo 博客实战：光影拼图游戏开发指南</title>
-    <updated>2026-05-14T08:31:52.692Z</updated>
   </entry>
 </feed>
