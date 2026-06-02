@@ -31,24 +31,25 @@
     var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com busuanzi.ibruce.info static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
-  <meta name="description" content="教程、Python：16.1 魔术方法 魔术方法是以双下划线开头和结尾的特殊方法，用于定义类的行为。 常用魔术方法">
+  <meta name="description" content="本文详细讲解Python 面向对象高级，涵盖Python、教程等核心知识点。「Python基础教程」系列第16篇，共20篇。适合相关开发者。附完整代码示例与实战技巧。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python 面向对象高级">
 <meta property="og:url" content="https://www.bytefisher.top/2024/12/02/Python%E6%95%99%E7%A8%8B-16-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7/">
 <meta property="og:site_name" content="ByteFisher">
-<meta property="og:description" content="教程、Python：16.1 魔术方法 魔术方法是以双下划线开头和结尾的特殊方法，用于定义类的行为。 常用魔术方法">
+<meta property="og:description" content="本文详细讲解Python 面向对象高级，涵盖Python、教程等核心知识点。「Python基础教程」系列第16篇，共20篇。适合相关开发者。附完整代码示例与实战技巧。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-02T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-21T03:24:28.359Z">
+<meta property="article:modified_time" content="2026-06-02T08:41:49.742Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="series:Python基础教程">
 <meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary">
+  <meta name="keywords" content="Python基础教程, Python, 面向对象高级, 抽象基类, 魔术方法, 抽象基, 术方法, 运算符, 魔术方, 教程">
 
 <link rel="canonical" href="https://www.bytefisher.top/2024/12/02/Python%E6%95%99%E7%A8%8B-16-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Python 面向对象高级","description":"教程、Python：16.1 魔术方法 魔术方法是以双下划线开头和结尾的特殊方法，用于定义类的行为。 常用魔术方法","url":"https://www.bytefisher.top/2024/12/02/Python教程-16-面向对象高级/","datePublished":"2024-12-02T00:00:00.000Z","dateModified":"2026-05-21T03:24:28.359Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2024/12/02/Python教程-16-面向对象高级/"},"keywords":"教程, Python, series:Python基础教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Python 面向对象高级","description":"本文详细讲解Python 面向对象高级，涵盖Python、教程等核心知识点。「Python基础教程」系列第16篇，共20篇。适合相关开发者。附完整代码示例与实战技巧。","url":"https://www.bytefisher.top/2024/12/02/Python教程-16-面向对象高级/","datePublished":"2024-12-02T00:00:00.000Z","dateModified":"2026-06-02T08:41:49.742Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2024/12/02/Python教程-16-面向对象高级/"},"keywords":"教程, Python, series:Python基础教程"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"教程","item":"https://www.bytefisher.top/categories/教程/"},{"@type":"ListItem","position":3,"name":"Python 面向对象高级"}]}</script>
 
 
@@ -181,12 +182,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">222</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">220</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">59</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">58</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -307,7 +308,7 @@
   </span>
   
   
-            <div class="post-description">教程、Python：16.1 魔术方法 魔术方法是以双下划线开头和结尾的特殊方法，用于定义类的行为。 常用魔术方法</div>
+            <div class="post-description">本文详细讲解Python 面向对象高级，涵盖Python、教程等核心知识点。「Python基础教程」系列第16篇，共20篇。适合相关开发者。附完整代码示例与实战技巧。</div>
 
         </div>
       </header>
@@ -387,7 +388,7 @@
   <div style="padding:3px 10px;border:1px solid #fc6423;border-radius:3px;color:#fc6423;font-size:.7em;white-space:nowrap;flex-shrink:0">▸ 扫码关注 ◂</div>
 </div>
 
-    <div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2024/12/10/Python教程-20-综合实战项目/" class="related-post-item" title="Python 综合实战项目"><span class="related-post-title">Python 综合实战项目</span><span class="related-post-date">2024-12-10</span><span class="related-post-desc">20.1 项目一：通讯录管理系统 功能需求 添加联系人 删除联系人 查询联系人 显示所有联系人 保存到文件 实现代码 20.2 项目二：简易网页爬虫 功能需求 </span></a><a href="/2024/12/08/Python教程-19-正则表达式/" class="related-post-item" title="Python 正则表达式"><span class="related-post-title">Python 正则表达式</span><span class="related-post-date">2024-12-08</span><span class="related-post-desc">19.1 正则表达式概念 正则表达式（Regular Expression）是用于匹配字符串模式的强大工具。 应用场景 数据验证（邮箱、电话、密码强度） 文本提</span></a><a href="/2024/12/06/Python教程-18-列表推导与生成器/" class="related-post-item" title="Python 列表推导与生成器"><span class="related-post-title">Python 列表推导与生成器</span><span class="related-post-date">2024-12-06</span><span class="related-post-desc">18.1 列表推导式进阶 嵌套推导式 复杂条件 18.2 字典与集合推导式 字典推导式 集合推导式 18.3 生成器表达式 生成器表达式语法类似列表推导式，但使</span></a><a href="/2024/12/04/Python教程-17-常用标准库/" class="related-post-item" title="Python 常用标准库"><span class="related-post-title">Python 常用标准库</span><span class="related-post-date">2024-12-04</span><span class="related-post-desc">17.1 collections 模块 提供额外的数据结构。 Counter 计数器 defaultdict 默认字典 deque 双端队列 17.2 iter</span></a><a href="/2024/11/30/Python教程-15-面向对象进阶/" class="related-post-item" title="Python 面向对象进阶"><span class="related-post-title">Python 面向对象进阶</span><span class="related-post-date">2024-11-30</span><span class="related-post-desc">15.1 继承 继承允许一个类获取另一个类的属性和方法。 基本语法 示例 15.2 方法重写 子类可以重写父类的方法。 15.3 super() 函数 supe</span></a><a href="/2024/11/28/Python教程-14-面向对象基础/" class="related-post-item" title="Python 面向对象基础"><span class="related-post-title">Python 面向对象基础</span><span class="related-post-date">2024-11-28</span><span class="related-post-desc">14.1 面向对象概念 面向对象编程（OOP）是一种编程范式，将数据和操作封装在对象中。 核心概念 类（Class） ：对象的蓝图/模板 对象（Object） </span></a></div></div>
+    <div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2024/12/10/Python教程-20-综合实战项目/" class="related-post-item" title="Python 综合实战项目"><span class="related-post-title">Python 综合实战项目</span><span class="related-post-date">2024-12-10</span><span class="related-post-desc">本文详细讲解Python 综合实战项目，涵盖Python、教程等核心知识点。「Python基础教程」系列第20篇，共20篇。适合相关开发者。附完整代码示例与实战技巧。</span></a><a href="/2024/12/08/Python教程-19-正则表达式/" class="related-post-item" title="Python 正则表达式"><span class="related-post-title">Python 正则表达式</span><span class="related-post-date">2024-12-08</span><span class="related-post-desc">本文详细讲解Python 正则表达式，涵盖Python、教程等核心知识点。「Python基础教程」系列第19篇，共20篇。适合相关开发者。附完整代码示例与实战技巧。</span></a><a href="/2024/12/06/Python教程-18-列表推导与生成器/" class="related-post-item" title="Python 列表推导与生成器"><span class="related-post-title">Python 列表推导与生成器</span><span class="related-post-date">2024-12-06</span><span class="related-post-desc">本文详细讲解Python 列表推导与生成器，涵盖Python、教程等核心知识点。「Python基础教程」系列第18篇，共20篇。适合相关开发者。附完整代码示例与实战技巧。</span></a><a href="/2024/12/04/Python教程-17-常用标准库/" class="related-post-item" title="Python 常用标准库"><span class="related-post-title">Python 常用标准库</span><span class="related-post-date">2024-12-04</span><span class="related-post-desc">本文详细讲解Python 常用标准库，涵盖Python、教程等核心知识点。「Python基础教程」系列第17篇，共20篇。适合相关开发者。附完整代码示例与实战技巧。</span></a><a href="/2024/11/30/Python教程-15-面向对象进阶/" class="related-post-item" title="Python 面向对象进阶"><span class="related-post-title">Python 面向对象进阶</span><span class="related-post-date">2024-11-30</span><span class="related-post-desc">本文详细讲解Python 面向对象进阶，涵盖Python、教程等核心知识点。「Python基础教程」系列第15篇，共20篇。适合相关开发者。附完整代码示例与实战技巧。</span></a><a href="/2024/11/28/Python教程-14-面向对象基础/" class="related-post-item" title="Python 面向对象基础"><span class="related-post-title">Python 面向对象基础</span><span class="related-post-date">2024-11-28</span><span class="related-post-desc">本文详细讲解Python 面向对象基础，涵盖Python、教程等核心知识点。「Python基础教程」系列第14篇，共20篇。适合相关开发者。附完整代码示例与实战技巧。</span></a></div></div>
     <div class="series-nav"><div class="series-nav-title">Python基础教程 系列</div><div class="series-nav-progress">第 16/20 篇</div><div class="series-nav-links"><a href="/2024/11/30/Python教程-15-面向对象进阶/" class="series-nav-prev">Python 面向对象进阶</a><a href="/2024/12/04/Python教程-17-常用标准库/" class="series-nav-next">Python 常用标准库</a></div></div>
 
       <footer class="post-footer">
@@ -513,7 +514,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">222</span>
+          <span class="site-state-item-count">220</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -526,7 +527,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">58</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -749,9 +750,18 @@ window.addEventListener('pjax:success', () => {
 
     </div>
 
-<link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
+<link rel="stylesheet" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css">
 <script data-pjax>
 (function() {
+  // 抑制第三方扩展的 notice.avoidance 报错
+  window.addEventListener('error', function(e) {
+    if (e.message && e.message.indexOf('notice.avoidance') !== -1) {
+      e.preventDefault();
+      e.stopPropagation();
+      return true;
+    }
+  });
+
   var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
 
   function updateCounts() {
@@ -775,7 +785,7 @@ window.addEventListener('pjax:success', () => {
   if (el) {
     updateCounts();
     NexT.utils.loadComments(el, function() {
-      NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2.15.8/dist/waline.js', function() {
         Waline.init({
           el: '#waline-comments',
           serverURL: 'https://waline.bytefisher.top/',

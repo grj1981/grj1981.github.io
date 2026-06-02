@@ -43,6 +43,7 @@
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="unity,游戏开发,C#,Lua,Python,Hexo,博客,钓鱼,教程,编程">
 <meta name="twitter:card" content="summary">
+  <meta name="keywords" content="教程系列">
 
 <link rel="canonical" href="https://www.bytefisher.top/tutorials/">
 
@@ -179,12 +180,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">222</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">220</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">59</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">58</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -332,8 +333,7 @@
         <div class="tutorial-card-body">
           <h3 class="tutorial-card-title">Unity3D进阶教程</h3>
           
-          <p class="tutorial-card-desc">概述
-入门系列中，我们把脚本挂到 GameObject 上，用 GetComponent...</p>
+          <p class="tutorial-card-desc">Unity3D、高级: 入门系列中，我们把脚本挂到 GameObject 上，用 GetComponent...</p>
           
           <div class="tutorial-card-meta">
             <span class="tutorial-card-count">20 篇</span>
@@ -409,10 +409,7 @@
         <div class="tutorial-card-body">
           <h3 class="tutorial-card-title">C#学习笔记</h3>
           
-          <p class="tutorial-card-desc">C 程序结构 
-在我们学习 C 编程语言的基础构件块之前，让我们先看一下 C 的最小的程序结构。
-C Hello World 实例 
-一个 C...</p>
+          <p class="tutorial-card-desc">C、IT: - 命名空间声明（Namespace declaration） - 语句（Statements）& 表达式（Expressions）</p>
           
           <div class="tutorial-card-meta">
             <span class="tutorial-card-count">22 篇</span>
@@ -526,8 +523,7 @@ C Hello World 实例
         <div class="tutorial-card-body">
           <h3 class="tutorial-card-title">Python学习笔记</h3>
           
-          <p class="tutorial-card-desc">Python3 字符串 
-字符串是 Python 中最常用的数据类型。我们可以使用引号( ' 或 " )来创建字符串。...</p>
+          <p class="tutorial-card-desc">Python、IT: 索引值以 0 为开始值，-1 为从末尾的开始位置。 var1[0]: H var2[1:5]: unoo  - Python 字符串更新...</p>
           
           <div class="tutorial-card-meta">
             <span class="tutorial-card-count">14 篇</span>
@@ -651,7 +647,7 @@ C Hello World 实例
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">222</span>
+          <span class="site-state-item-count">220</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -664,7 +660,7 @@ C Hello World 实例
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">58</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -887,9 +883,18 @@ window.addEventListener('pjax:success', () => {
 
     </div>
 
-<link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
+<link rel="stylesheet" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css">
 <script data-pjax>
 (function() {
+  // 抑制第三方扩展的 notice.avoidance 报错
+  window.addEventListener('error', function(e) {
+    if (e.message && e.message.indexOf('notice.avoidance') !== -1) {
+      e.preventDefault();
+      e.stopPropagation();
+      return true;
+    }
+  });
+
   var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
 
   function updateCounts() {
@@ -913,7 +918,7 @@ window.addEventListener('pjax:success', () => {
   if (el) {
     updateCounts();
     NexT.utils.loadComments(el, function() {
-      NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2.15.8/dist/waline.js', function() {
         Waline.init({
           el: '#waline-comments',
           serverURL: 'https://waline.bytefisher.top/',

@@ -41,6 +41,7 @@
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="unity,游戏开发,C#,Lua,Python,Hexo,博客,钓鱼,教程,编程">
 <meta name="twitter:card" content="summary">
+  <meta name="keywords" content="unity,游戏开发,C#,Lua,Python,Hexo,博客,钓鱼,教程,编程">
 
 <link rel="canonical" href="https://www.bytefisher.top/page/16/">
 
@@ -178,12 +179,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">222</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">220</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">59</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">58</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -260,7 +261,7 @@
     <p class="hero-desc">分享游戏开发技术与钓鱼乐趣</p>
     <div class="hero-stats">
       <div class="hero-stat">
-        <span class="hero-stat-value">222</span>
+        <span class="hero-stat-value">220</span>
         <span class="hero-stat-label">文章</span>
       </div>
       <div class="hero-stat">
@@ -767,10 +768,6 @@
 
   
 
-  
-
-  
-
 
 
 
@@ -843,7 +840,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>C#、高级：Span 是 .NET Core 2.1 引入的里程碑式类型，它提供了一种类型安全、无需额外分配的内存视图抽象，能够在不复制数据的前提下操作连续内存块。配合 Memory、ReadOnlySpan 和 stackalloc，开发者可以编写出接近 C/C++ 级别性能的托管代码。</p>
+          <p>C#、高级: Span 是 .NET Core 2.1 引入的里程碑式类型，它提供了一种类型安全、无需额外分配的内存视图抽象，能够在不复制数据的前提下操作连续内存块。配合 Memory、ReadOnlySpan 和 stackalloc，开发者可以编写出接近 C/C++ 级别性能的托管代码。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/05/05/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-09-Span%E4%B8%8E%E9%AB%98%E6%95%88%E5%86%85%E5%AD%98/">
@@ -935,15 +932,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Unity3D、教程：5.1 场景（Scene）的概念 场景是 Unity 中组织和编辑游戏内容的基本单位。一个场景可以包含：
-游戏物体（GameObject）
-灯光和摄像机
-UI 元素
-音频源
-导航网格 游戏由多个场景组成，常用于：
-不同关卡
-主菜单和游戏画面
-加载界面</p>
+          <p>本文详细讲解场景管理与坐标系统，涵盖Unity3D、教程等核心知识点。「Unity3D开发基础教程」系列第5篇，共20篇。适合Unity初学者。附完整代码示例与实战技巧。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/05/05/Unity3D%E6%95%99%E7%A8%8B-05-%E5%9C%BA%E6%99%AF%E7%AE%A1%E7%90%86%E4%B8%8E%E5%9D%90%E6%A0%87%E7%B3%BB%E7%BB%9F/">
@@ -1035,7 +1024,7 @@ UI 元素
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Unity3D、教程：> 前置知识：本教程假设你已了解 C# 基本语法（变量、方法、类）。如需回顾，可参考系列中的 C# 学习笔记文章。 4.1 创建第一个脚本 在 Project 面板中：右键 → Create → C# Script，命名为 。 双击打开脚本，默认内容如下： 所有 Unity 脚本都继承自 。</p>
+          <p>Unity3D、教程: > 前置知识：本教程假设你已了解 C# 基本语法（变量、方法、类）。如需回顾，可参考系列中的 C# 学习笔记文章。 在 Project 面板中：右键 → Create → C# Script，命名为 PlayerMovement。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/05/04/Unity3D%E6%95%99%E7%A8%8B-04-%E8%84%9A%E6%9C%AC%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
@@ -1127,7 +1116,7 @@ UI 元素
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>C#、高级：多线程环境下，普通的 、 不是线程安全的，在并发读写时会导致数据损坏或异常。.NET 提供了 命名空间，包含一系列专为高并发场景设计的集合类型。本文将深入比较各类并发集合的内部实现、适用场景以及备选的无锁方案。</p>
+          <p>C#、高级: 多线程环境下，普通的 List、Dictionary 不是线程安全的，在并发读写时会导致数据损坏或异常。.NET 提供了 System.Collections.Concurrent 命名空间，包含一系列专为高并发场景设计的集合类型。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/05/03/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-08-%E5%B9%B6%E5%8F%91%E9%9B%86%E5%90%88%E4%B8%8E%E5%90%8C%E6%AD%A5/">
@@ -1219,7 +1208,7 @@ UI 元素
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Unity3D、教程：3.1 GameObject 的概念 GameObject（游戏对象）是 Unity 中一切物体的基类。任何存在于场景中的东西都是 GameObject。</p>
+          <p>本文详细讲解GameObject 与组件系统，涵盖Unity3D、教程等核心知识点。「Unity3D开发基础教程」系列第3篇，共20篇。适合Unity初学者。附完整代码示例与实战技巧。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/05/03/Unity3D%E6%95%99%E7%A8%8B-03-GameObject%E4%B8%8E%E7%BB%84%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
@@ -1311,11 +1300,7 @@ UI 元素
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Unity3D、教程：2.1 Scene 视图 Scene 视图是编辑游戏世界的核心工作区。 视图控制
-右键拖拽：旋转视角
-滚轮：缩放
-中键拖拽：平移视角
-右键 + WASD：飞行模式浏览 工具栏 工具 快捷键 功能 ------ -------- ------ 手形工具 Q 平移场景视图 移动工具 W 移动选中的对象...</p>
+          <p>本文详细讲解编辑器界面详解，涵盖Unity3D、教程等核心知识点。「Unity3D开发基础教程」系列第2篇，共20篇。适合Unity初学者。附完整代码示例与实战技巧。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/05/02/Unity3D%E6%95%99%E7%A8%8B-02-%E7%BC%96%E8%BE%91%E5%99%A8%E7%95%8C%E9%9D%A2%E8%AF%A6%E8%A7%A3/">
@@ -1409,7 +1394,7 @@ UI 元素
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">222</span>
+          <span class="site-state-item-count">220</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1422,7 +1407,7 @@ UI 元素
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">58</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1645,9 +1630,18 @@ window.addEventListener('pjax:success', () => {
 
     </div>
 
-<link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
+<link rel="stylesheet" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css">
 <script data-pjax>
 (function() {
+  // 抑制第三方扩展的 notice.avoidance 报错
+  window.addEventListener('error', function(e) {
+    if (e.message && e.message.indexOf('notice.avoidance') !== -1) {
+      e.preventDefault();
+      e.stopPropagation();
+      return true;
+    }
+  });
+
   var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
 
   function updateCounts() {
@@ -1671,7 +1665,7 @@ window.addEventListener('pjax:success', () => {
   if (el) {
     updateCounts();
     NexT.utils.loadComments(el, function() {
-      NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2.15.8/dist/waline.js', function() {
         Waline.init({
           el: '#waline-comments',
           serverURL: 'https://waline.bytefisher.top/',

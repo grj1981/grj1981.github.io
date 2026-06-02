@@ -31,25 +31,26 @@
     var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com busuanzi.ibruce.info static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
-  <meta name="description" content="使用 Ollama 部署 DeepSeek-Coder-V2 本地模型，配合 Visual Studio 2022 的 Copilot 插件打造本地 AI 程序员。无需联网、代码隐私安全、零成本，适合 Unity3D 和 C# 开发者的本地 AI 编程方案。">
+  <meta name="description" content="针对 Visual Studio 2022 用户，要打造一个高效率的“本地 AI 程序员”，关键在于选择一款能与 VS 2022 深度集成、且支持连接本地模型（如 Ollama）的插件。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员”">
 <meta property="og:url" content="https://www.bytefisher.top/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-%E6%8F%92%E4%BB%B6-%E6%89%93%E9%80%A0%E9%AB%98%E6%95%88%E7%8E%87%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0-AI-%E7%A8%8B%E5%BA%8F%E5%91%98%E2%80%9D/">
 <meta property="og:site_name" content="ByteFisher">
-<meta property="og:description" content="使用 Ollama 部署 DeepSeek-Coder-V2 本地模型，配合 Visual Studio 2022 的 Copilot 插件打造本地 AI 程序员。无需联网、代码隐私安全、零成本，适合 Unity3D 和 C# 开发者的本地 AI 编程方案。">
+<meta property="og:description" content="针对 Visual Studio 2022 用户，要打造一个高效率的“本地 AI 程序员”，关键在于选择一款能与 VS 2022 深度集成、且支持连接本地模型（如 Ollama）的插件。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-10T15:31:44.000Z">
-<meta property="article:modified_time" content="2026-05-28T03:56:51.713Z">
+<meta property="article:modified_time" content="2026-06-02T09:36:36.857Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="C#">
 <meta property="article:tag" content="IT">
 <meta property="article:tag" content="Unity3D">
 <meta property="article:tag" content="series:AI编程助手">
 <meta name="twitter:card" content="summary">
+  <meta name="keywords" content="本地部署, AI,程序员, DeepSeek, Ollama, Visual Studio, 大模型">
 
 <link rel="canonical" href="https://www.bytefisher.top/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-%E6%8F%92%E4%BB%B6-%E6%89%93%E9%80%A0%E9%AB%98%E6%95%88%E7%8E%87%E7%9A%84%E2%80%9C%E6%9C%AC%E5%9C%B0-AI-%E7%A8%8B%E5%BA%8F%E5%91%98%E2%80%9D/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员”","description":"使用 Ollama 部署 DeepSeek-Coder-V2 本地模型，配合 Visual Studio 2022 的 Copilot 插件打造本地 AI 程序员。无需联网、代码隐私安全、零成本，适合 Unity3D 和 C# 开发者的本地 AI 编程方案。","url":"https://www.bytefisher.top/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-插件-打造高效率的“本地-AI-程序员”/","datePublished":"2026-03-10T15:31:44.000Z","dateModified":"2026-05-28T03:56:51.713Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-插件-打造高效率的“本地-AI-程序员”/"},"keywords":"Unity3D, IT, C#, series:AI编程助手"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员”","description":"针对 Visual Studio 2022 用户，要打造一个高效率的“本地 AI 程序员”，关键在于选择一款能与 VS 2022 深度集成、且支持连接本地模型（如 Ollama）的插件。","url":"https://www.bytefisher.top/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-插件-打造高效率的“本地-AI-程序员”/","datePublished":"2026-03-10T15:31:44.000Z","dateModified":"2026-06-02T09:36:36.857Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/03/10/Ollama-DeepSeek-Coder-V2-Visual-Studio-Copilot-插件-打造高效率的“本地-AI-程序员”/"},"keywords":"Unity3D, IT, C#, series:AI编程助手"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Unity3D","item":"https://www.bytefisher.top/categories/Unity3D/"},{"@type":"ListItem","position":3,"name":"Ollama + DeepSeek-Coder-V2 + Visual Studio + Copilot(插件)打造高效率的“本地 AI 程序员”"}]}</script>
 
 
@@ -182,12 +183,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">222</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">220</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">59</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">58</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -312,7 +313,7 @@
   </span>
   
   
-            <div class="post-description">使用 Ollama 部署 DeepSeek-Coder-V2 本地模型，配合 Visual Studio 2022 的 Copilot 插件打造本地 AI 程序员。无需联网、代码隐私安全、零成本，适合 Unity3D 和 C# 开发者的本地 AI 编程方案。</div>
+            <div class="post-description">针对 Visual Studio 2022 用户，要打造一个高效率的“本地 AI 程序员”，关键在于选择一款能与 VS 2022 深度集成、且支持连接本地模型（如 Ollama）的插件。</div>
 
         </div>
       </header>
@@ -408,7 +409,7 @@
   <div style="padding:3px 10px;border:1px solid #fc6423;border-radius:3px;color:#fc6423;font-size:.7em;white-space:nowrap;flex-shrink:0">▸ 扫码关注 ◂</div>
 </div>
 
-    <div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2025/05/19/C-学习笔记【行为树】/" class="related-post-item" title="C#学习笔记【行为树】"><span class="related-post-title">C#学习笔记【行为树】</span><span class="related-post-date">2025-05-19</span><span class="related-post-desc">行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策</span></a><a href="/2025/04/17/C-学习笔记【取消异步操作】/" class="related-post-item" title="C#学习笔记【取消异步操作】"><span class="related-post-title">C#学习笔记【取消异步操作】</span><span class="related-post-date">2025-04-17</span><span class="related-post-desc">基本概念 CancellationTokenSource 是一个类，用于创建一个取消令牌 (CancellationToken)，并通过该令牌来通知一个或多个异</span></a><a href="/2025/01/22/Unity3D游戏开发异步编程UniTask和Task/" class="related-post-item" title="Unity3D游戏开发异步编程UniTask和Task"><span class="related-post-title">Unity3D游戏开发异步编程UniTask和Task</span><span class="related-post-date">2025-01-22</span><span class="related-post-desc">await 关键字 在C 编程中，await 关键字用于异步编程，它通常与 async 关键字一起使用。await 用于暂停当前方法的执行，直到等待的异步任务完</span></a><a href="/2026/04/21/OpenCode中接入Qwen模型配置指南/" class="related-post-item" title="OpenCode 中接入 Qwen 模型完整指南"><span class="related-post-title">OpenCode 中接入 Qwen 模型完整指南</span><span class="related-post-date">2026-04-21</span><span class="related-post-desc">详细介绍如何在 OpenCode 中接入阿里云通义千问 Qwen 模型，包括注册阿里云账号、获取 API Key、配置 providers 文件、模型参数调优，以及与其他模型的成本对比。</span></a><a href="/2026/03/24/VSCode中搭建OpenCode-AI编程助手完整指南/" class="related-post-item" title="VSCode 中搭建 OpenCode AI 编程助手完整指南"><span class="related-post-title">VSCode 中搭建 OpenCode AI 编程助手完整指南</span><span class="related-post-date">2026-03-24</span><span class="related-post-desc">详细教程教你如何在 VSCode 中搭建 OpenCode AI 编程助手，涵盖环境准备、安装配置、LSP 自动启用、多会话并行处理、75+ LLM 提供商支持。开源免费，隐私优先，提升编程效率的完整指南。</span></a><a href="/2025/03/14/C-学习笔记【DOTween库】/" class="related-post-item" title="C#学习笔记【DOTween库】"><span class="related-post-title">C#学习笔记【DOTween库】</span><span class="related-post-date">2025-03-14</span><span class="related-post-desc">DOTween 库详细用法教程 DOTween 是一个用于 Unity 的强大且灵活的动画库，它使用链式语法来创建和控制动画，使得代码更加简洁和易读。下面详细介</span></a></div></div>
+    <div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2025/05/19/C-学习笔记【行为树】/" class="related-post-item" title="C#学习笔记【行为树】"><span class="related-post-title">C#学习笔记【行为树】</span><span class="related-post-date">2025-05-19</span><span class="related-post-desc">C#、IT、Unity3D: 行为树（Behavior Tree, BT）是一种用于AI行为设计的数据结构，广泛应用于游戏开发，包括Unity游戏引擎中。行为树通过节点的组合来表示复杂的决策逻辑，每个节点代表一个行为或条件。</span></a><a href="/2025/04/17/C-学习笔记【取消异步操作】/" class="related-post-item" title="C#学习笔记【取消异步操作】"><span class="related-post-title">C#学习笔记【取消异步操作】</span><span class="related-post-date">2025-04-17</span><span class="related-post-desc">C#、IT、Unity3D: 声明一个 CancellationTokenSource 对象。 在某个方法中（例如 Start 方法）初始化 CancellationTokenSource。</span></a><a href="/2025/01/22/Unity3D游戏开发异步编程UniTask和Task/" class="related-post-item" title="Unity3D游戏开发异步编程UniTask和Task"><span class="related-post-title">Unity3D游戏开发异步编程UniTask和Task</span><span class="related-post-date">2025-01-22</span><span class="related-post-desc">在C#编程中，await 关键字用于异步编程，它通常与 async 关键字一起使用。await 用于暂停当前方法的执行，直到等待的异步任务完成。这样可以在不阻塞主线程的情况下执行耗时操作，如I/O操作或网络请求。 例如，假设有一个异步方法 GetDataAsync()，你可以这样使用 await：</span></a><a href="/2026/04/21/OpenCode中接入Qwen模型配置指南/" class="related-post-item" title="OpenCode 中接入 Qwen 模型完整指南"><span class="related-post-title">OpenCode 中接入 Qwen 模型完整指南</span><span class="related-post-date">2026-04-21</span><span class="related-post-desc">详细介绍如何在 OpenCode 中接入阿里云通义千问 Qwen 模型，包括注册阿里云账号、获取 API Key、配置 providers 文件、模型参数调优，以及与其他模型的成本对比。</span></a><a href="/2026/03/24/VSCode中搭建OpenCode-AI编程助手完整指南/" class="related-post-item" title="VSCode 中搭建 OpenCode AI 编程助手完整指南"><span class="related-post-title">VSCode 中搭建 OpenCode AI 编程助手完整指南</span><span class="related-post-date">2026-03-24</span><span class="related-post-desc">详细教程教你如何在 VSCode 中搭建 OpenCode AI 编程助手，涵盖环境准备、安装配置、LSP 自动启用、多会话并行处理、75+ LLM 提供商支持。开源免费，隐私优先，提升编程效率的完整指南。</span></a><a href="/2025/03/14/C-学习笔记【DOTween库】/" class="related-post-item" title="C#学习笔记【DOTween库】"><span class="related-post-title">C#学习笔记【DOTween库】</span><span class="related-post-date">2025-03-14</span><span class="related-post-desc">C#、IT: DOTween 是一个用于 Unity 的强大且灵活的动画库，它使用链式语法来创建和控制动画，使得代码更加简洁和易读。下面详细介绍 DOTween 的用法。 打开 Unity 的 Package Manager（可以通过 Window -> Package Manager 打开）。</span></a></div></div>
     <div class="series-nav"><div class="series-nav-title">AI编程助手 系列</div><div class="series-nav-progress">第 1/4 篇</div><div class="series-nav-links"><a href="/2026/03/24/VSCode中搭建OpenCode-AI编程助手完整指南/" class="series-nav-next">VSCode 中搭建 OpenCode AI 编程助手完整指南</a></div></div>
 
       <footer class="post-footer">
@@ -535,7 +536,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">222</span>
+          <span class="site-state-item-count">220</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -548,7 +549,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">58</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -771,9 +772,18 @@ window.addEventListener('pjax:success', () => {
 
     </div>
 
-<link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
+<link rel="stylesheet" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css">
 <script data-pjax>
 (function() {
+  // 抑制第三方扩展的 notice.avoidance 报错
+  window.addEventListener('error', function(e) {
+    if (e.message && e.message.indexOf('notice.avoidance') !== -1) {
+      e.preventDefault();
+      e.stopPropagation();
+      return true;
+    }
+  });
+
   var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
 
   function updateCounts() {
@@ -797,7 +807,7 @@ window.addEventListener('pjax:success', () => {
   if (el) {
     updateCounts();
     NexT.utils.loadComments(el, function() {
-      NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2.15.8/dist/waline.js', function() {
         Waline.init({
           el: '#waline-comments',
           serverURL: 'https://waline.bytefisher.top/',

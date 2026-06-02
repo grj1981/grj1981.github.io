@@ -31,24 +31,26 @@
     var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com busuanzi.ibruce.info static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
-  <meta name="description" content="Unity3D、教程：19.1 性能优化的核心指标 指标 目标 说明 ------ ------ ------ FPS ≥ 30（移动端），≥ 60（PC） 帧率 Draw Calls &lt; 200（移动端），&lt; 1000（PC） CPU 向 GPU 发送的渲染命令数 Tris&#x2F;Verts 视平台而定 每帧渲染的三角形&#x2F;...">
+  <meta name="description" content="本文详细讲解性能优化入门，涵盖Unity3D、教程等核心知识点。「Unity3D开发基础教程」系列第19篇，共20篇。适合Unity初学者。附完整代码示例与实战技巧。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="性能优化入门">
 <meta property="og:url" content="https://www.bytefisher.top/2025/05/19/Unity3D%E6%95%99%E7%A8%8B-19-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%85%A5%E9%97%A8/">
 <meta property="og:site_name" content="ByteFisher">
-<meta property="og:description" content="Unity3D、教程：19.1 性能优化的核心指标 指标 目标 说明 ------ ------ ------ FPS ≥ 30（移动端），≥ 60（PC） 帧率 Draw Calls &lt; 200（移动端），&lt; 1000（PC） CPU 向 GPU 发送的渲染命令数 Tris&#x2F;Verts 视平台而定 每帧渲染的三角形&#x2F;...">
+<meta property="og:description" content="本文详细讲解性能优化入门，涵盖Unity3D、教程等核心知识点。「Unity3D开发基础教程」系列第19篇，共20篇。适合Unity初学者。附完整代码示例与实战技巧。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-05-19T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-20T06:05:03.272Z">
+<meta property="article:modified_time" content="2026-06-02T08:42:54.105Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="Unity3D">
 <meta property="article:tag" content="series:Unity3D开发基础教程">
 <meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary">
+  <meta name="keywords" content="Unity3D开发基础教程, Unity3D, 性能优化入门, 分配
+, 教程">
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/05/19/Unity3D%E6%95%99%E7%A8%8B-19-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%85%A5%E9%97%A8/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"性能优化入门","description":"Unity3D、教程：19.1 性能优化的核心指标 指标 目标 说明 ------ ------ ------ FPS ≥ 30（移动端），≥ 60（PC） 帧率 Draw Calls < 200（移动端），< 1000（PC） CPU 向 GPU 发送的渲染命令数 Tris/Verts 视平台而定 每帧渲染的三角形/...","url":"https://www.bytefisher.top/2025/05/19/Unity3D教程-19-性能优化入门/","datePublished":"2025-05-19T00:00:00.000Z","dateModified":"2026-05-20T06:05:03.272Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/05/19/Unity3D教程-19-性能优化入门/"},"keywords":"Unity3D, 教程, series:Unity3D开发基础教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"性能优化入门","description":"本文详细讲解性能优化入门，涵盖Unity3D、教程等核心知识点。「Unity3D开发基础教程」系列第19篇，共20篇。适合Unity初学者。附完整代码示例与实战技巧。","url":"https://www.bytefisher.top/2025/05/19/Unity3D教程-19-性能优化入门/","datePublished":"2025-05-19T00:00:00.000Z","dateModified":"2026-06-02T08:42:54.105Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/05/19/Unity3D教程-19-性能优化入门/"},"keywords":"Unity3D, 教程, series:Unity3D开发基础教程"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Unity3D","item":"https://www.bytefisher.top/categories/Unity3D/"},{"@type":"ListItem","position":3,"name":"性能优化入门"}]}</script>
 
 
@@ -181,12 +183,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">222</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">220</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">59</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">58</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -307,7 +309,7 @@
   </span>
   
   
-            <div class="post-description">Unity3D、教程：19.1 性能优化的核心指标 指标 目标 说明 ------ ------ ------ FPS ≥ 30（移动端），≥ 60（PC） 帧率 Draw Calls < 200（移动端），< 1000（PC） CPU 向 GPU 发送的渲染命令数 Tris/Verts 视平台而定 每帧渲染的三角形/...</div>
+            <div class="post-description">本文详细讲解性能优化入门，涵盖Unity3D、教程等核心知识点。「Unity3D开发基础教程」系列第19篇，共20篇。适合Unity初学者。附完整代码示例与实战技巧。</div>
 
         </div>
       </header>
@@ -504,7 +506,7 @@
   <div style="padding:3px 10px;border:1px solid #fc6423;border-radius:3px;color:#fc6423;font-size:.7em;white-space:nowrap;flex-shrink:0">▸ 扫码关注 ◂</div>
 </div>
 
-    <div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2025/05/20/Unity3D教程-20-构建发布与综合实战/" class="related-post-item" title="构建发布与综合实战"><span class="related-post-title">构建发布与综合实战</span><span class="related-post-date">2025-05-20</span><span class="related-post-desc">20.1 构建发布基础 Build Settings File → Build Settings（Ctrl+Shift+B） 设置项 说明 Scenes in </span></a><a href="/2025/05/18/Unity3D教程-18-粒子特效系统/" class="related-post-item" title="粒子特效系统"><span class="related-post-title">粒子特效系统</span><span class="related-post-date">2025-05-18</span><span class="related-post-desc">18.1 Particle System 概述 Unity 的粒子系统是一个可组合的模块化特效工具，用于创建火焰、烟雾、魔法、爆炸、雨雪等各种视觉效果。 核心模</span></a><a href="/2025/05/17/Unity3D教程-17-导航寻路系统/" class="related-post-item" title="导航寻路系统"><span class="related-post-title">导航寻路系统</span><span class="related-post-date">2025-05-17</span><span class="related-post-desc">17.1 NavMesh 概述 NavMesh（导航网格）是 Unity 内置的寻路系统，将场景烘焙为网格数据，AI 角色可以自动计算路径并移动到目标。 核心组</span></a><a href="/2025/05/16/Unity3D教程-16-对象池技术/" class="related-post-item" title="对象池技术"><span class="related-post-title">对象池技术</span><span class="related-post-date">2025-05-16</span><span class="related-post-desc">16.1 为什么需要对象池 在游戏开发中，频繁创建和销毁对象会导致： GC 压力 ：大量内存分配触发垃圾回收，造成卡顿 性能开销 ：Instantiate / </span></a><a href="/2025/05/15/Unity3D教程-15-数据持久化/" class="related-post-item" title="数据持久化"><span class="related-post-title">数据持久化</span><span class="related-post-date">2025-05-15</span><span class="related-post-desc">15.1 为什么需要数据持久化 游戏数据持久化是指将运行时数据保存到磁盘，在下次运行时恢复。常见场景： 存档/读档 玩家设置（音量、画质） 排行榜分数 解锁进度</span></a><a href="/2025/05/14/Unity3D教程-14-音频系统/" class="related-post-item" title="音频系统"><span class="related-post-title">音频系统</span><span class="related-post-date">2025-05-14</span><span class="related-post-desc">14.1 Audio Source 组件 AudioSource 是音频播放的核心组件。 核心属性 属性 说明 AudioClip 音频文件（WAV / MP3</span></a></div></div>
+    <div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2025/05/20/Unity3D教程-20-构建发布与综合实战/" class="related-post-item" title="构建发布与综合实战"><span class="related-post-title">构建发布与综合实战</span><span class="related-post-date">2025-05-20</span><span class="related-post-desc">本文详细讲解构建发布与综合实战，涵盖Unity3D、教程等核心知识点。「Unity3D开发基础教程」系列第20篇，共20篇。适合Unity初学者。附完整代码示例与实战技巧。</span></a><a href="/2025/05/18/Unity3D教程-18-粒子特效系统/" class="related-post-item" title="粒子特效系统"><span class="related-post-title">粒子特效系统</span><span class="related-post-date">2025-05-18</span><span class="related-post-desc">本文详细讲解粒子特效系统，涵盖Unity3D、教程等核心知识点。「Unity3D开发基础教程」系列第18篇，共20篇。适合Unity初学者。附完整代码示例与实战技巧。</span></a><a href="/2025/05/17/Unity3D教程-17-导航寻路系统/" class="related-post-item" title="导航寻路系统"><span class="related-post-title">导航寻路系统</span><span class="related-post-date">2025-05-17</span><span class="related-post-desc">本文详细讲解导航寻路系统，涵盖Unity3D、教程等核心知识点。「Unity3D开发基础教程」系列第17篇，共20篇。适合Unity初学者。附完整代码示例与实战技巧。</span></a><a href="/2025/05/16/Unity3D教程-16-对象池技术/" class="related-post-item" title="对象池技术"><span class="related-post-title">对象池技术</span><span class="related-post-date">2025-05-16</span><span class="related-post-desc">本文详细讲解对象池技术，涵盖Unity3D、教程等核心知识点。「Unity3D开发基础教程」系列第16篇，共20篇。适合Unity初学者。附完整代码示例与实战技巧。</span></a><a href="/2025/05/15/Unity3D教程-15-数据持久化/" class="related-post-item" title="数据持久化"><span class="related-post-title">数据持久化</span><span class="related-post-date">2025-05-15</span><span class="related-post-desc">本文详细讲解数据持久化，涵盖Unity3D、教程等核心知识点。「Unity3D开发基础教程」系列第15篇，共20篇。适合Unity初学者。附完整代码示例与实战技巧。</span></a><a href="/2025/05/14/Unity3D教程-14-音频系统/" class="related-post-item" title="音频系统"><span class="related-post-title">音频系统</span><span class="related-post-date">2025-05-14</span><span class="related-post-desc">本文详细讲解音频系统，涵盖Unity3D、教程等核心知识点。「Unity3D开发基础教程」系列第14篇，共20篇。适合Unity初学者。附完整代码示例与实战技巧。</span></a></div></div>
     <div class="series-nav"><div class="series-nav-title">Unity3D开发基础教程 系列</div><div class="series-nav-progress">第 19/20 篇</div><div class="series-nav-links"><a href="/2025/05/18/Unity3D教程-18-粒子特效系统/" class="series-nav-prev">粒子特效系统</a><a href="/2025/05/20/Unity3D教程-20-构建发布与综合实战/" class="series-nav-next">构建发布与综合实战</a></div></div>
 
       <footer class="post-footer">
@@ -630,7 +632,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">222</span>
+          <span class="site-state-item-count">220</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -643,7 +645,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">58</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -866,9 +868,18 @@ window.addEventListener('pjax:success', () => {
 
     </div>
 
-<link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
+<link rel="stylesheet" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css">
 <script data-pjax>
 (function() {
+  // 抑制第三方扩展的 notice.avoidance 报错
+  window.addEventListener('error', function(e) {
+    if (e.message && e.message.indexOf('notice.avoidance') !== -1) {
+      e.preventDefault();
+      e.stopPropagation();
+      return true;
+    }
+  });
+
   var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
 
   function updateCounts() {
@@ -892,7 +903,7 @@ window.addEventListener('pjax:success', () => {
   if (el) {
     updateCounts();
     NexT.utils.loadComments(el, function() {
-      NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2.15.8/dist/waline.js', function() {
         Waline.init({
           el: '#waline-comments',
           serverURL: 'https://waline.bytefisher.top/',

@@ -31,24 +31,25 @@
     var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com busuanzi.ibruce.info static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
-  <meta name="description" content="IT、Python：Python3 字典 ## 字典是另一种可变容器模型，且可存储任意类型对象。 字典的每个键值 key&#x3D;&gt;value 对用冒号 : 分割，每个对之间用逗号(,)分割，整个字典包括在花括号 {} 中 ,格式如下所示： d &#x3D; {key1 : value1, key2 : value2, key3 : v...">
+  <meta name="description" content="字典的每个键值 key&#x3D;&gt;value 对用冒号 : 分割，每个对之间用逗号(,)分割，整个字典包括在花括号 {} 中 ,格式如下所示： d &#x3D; {key1 : value1, key2 : value2, key3 : value3 } 注意：dict 作为 Python 的关键字和内置函数，...">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python学习笔记【字典】">
 <meta property="og:url" content="https://www.bytefisher.top/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E5%85%B8%E3%80%91/">
 <meta property="og:site_name" content="ByteFisher">
-<meta property="og:description" content="IT、Python：Python3 字典 ## 字典是另一种可变容器模型，且可存储任意类型对象。 字典的每个键值 key&#x3D;&gt;value 对用冒号 : 分割，每个对之间用逗号(,)分割，整个字典包括在花括号 {} 中 ,格式如下所示： d &#x3D; {key1 : value1, key2 : value2, key3 : v...">
+<meta property="og:description" content="字典的每个键值 key&#x3D;&gt;value 对用冒号 : 分割，每个对之间用逗号(,)分割，整个字典包括在花括号 {} 中 ,格式如下所示： d &#x3D; {key1 : value1, key2 : value2, key3 : value3 } 注意：dict 作为 Python 的关键字和内置函数，...">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-29T06:25:04.000Z">
-<meta property="article:modified_time" content="2026-05-20T06:07:08.497Z">
+<meta property="article:modified_time" content="2026-06-02T08:42:45.389Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="IT">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="series:Python学习笔记">
 <meta name="twitter:card" content="summary">
+  <meta name="keywords" content="Python学习笔记【字典】, Python学习笔记, Python, 上实例输, 以上实例, 实例输出, 上实例, 以上实, 实例输, IT">
 
 <link rel="canonical" href="https://www.bytefisher.top/2023/05/29/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%97%E5%85%B8%E3%80%91/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Python学习笔记【字典】","description":"IT、Python：Python3 字典 ##\n字典是另一种可变容器模型，且可存储任意类型对象。 字典的每个键值 key=>value 对用冒号 : 分割，每个对之间用逗号(,)分割，整个字典包括在花括号 {} 中 ,格式如下所示： d = {key1 : value1, key2 : value2, key3 : v...","url":"https://www.bytefisher.top/2023/05/29/Python学习笔记【字典】/","datePublished":"2023-05-29T06:25:04.000Z","dateModified":"2026-05-20T06:07:08.497Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/05/29/Python学习笔记【字典】/"},"keywords":"IT, Python, series:Python学习笔记"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Python学习笔记【字典】","description":"字典的每个键值 key=>value 对用冒号 : 分割，每个对之间用逗号(,)分割，整个字典包括在花括号 {} 中 ,格式如下所示： d = {key1 : value1, key2 : value2, key3 : value3 } 注意：dict 作为 Python 的关键字和内置函数，...","url":"https://www.bytefisher.top/2023/05/29/Python学习笔记【字典】/","datePublished":"2023-05-29T06:25:04.000Z","dateModified":"2026-06-02T08:42:45.389Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.gif"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/05/29/Python学习笔记【字典】/"},"keywords":"IT, Python, series:Python学习笔记"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"IT","item":"https://www.bytefisher.top/categories/IT/"},{"@type":"ListItem","position":3,"name":"Python学习笔记【字典】"}]}</script>
 
 
@@ -181,12 +182,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">222</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">220</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">59</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">58</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -307,8 +308,7 @@
   </span>
   
   
-            <div class="post-description">IT、Python：Python3 字典 ##
-字典是另一种可变容器模型，且可存储任意类型对象。 字典的每个键值 key=>value 对用冒号 : 分割，每个对之间用逗号(,)分割，整个字典包括在花括号 {} 中 ,格式如下所示： d = {key1 : value1, key2 : value2, key3 : v...</div>
+            <div class="post-description">字典的每个键值 key=>value 对用冒号 : 分割，每个对之间用逗号(,)分割，整个字典包括在花括号 {} 中 ,格式如下所示： d = {key1 : value1, key2 : value2, key3 : value3 } 注意：dict 作为 Python 的关键字和内置函数，...</div>
 
         </div>
       </header>
@@ -483,7 +483,7 @@ TypeError: unhashable type: &#39;list&#39;
   <div style="padding:3px 10px;border:1px solid #fc6423;border-radius:3px;color:#fc6423;font-size:.7em;white-space:nowrap;flex-shrink:0">▸ 扫码关注 ◂</div>
 </div>
 
-    <div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2023/06/25/Python学习笔记【JSON】/" class="related-post-item" title="Python学习笔记【JSON】"><span class="related-post-title">Python学习笔记【JSON】</span><span class="related-post-date">2023-06-25</span><span class="related-post-desc">Python3 JSON 数据解析 JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。 Python3 中可以使用</span></a><a href="/2023/06/25/Python学习笔记【XML解析】/" class="related-post-item" title="Python学习笔记【XML解析】"><span class="related-post-title">Python学习笔记【XML解析】</span><span class="related-post-date">2023-06-25</span><span class="related-post-desc">Python3 XML 解析 什么是 XML？ XML 指可扩展标记语言（eXtensible Markup Language），标准通用标记语言的子集，是一种</span></a><a href="/2023/06/25/Python学习笔记【多线程】/" class="related-post-item" title="Python学习笔记【多线程】"><span class="related-post-title">Python学习笔记【多线程】</span><span class="related-post-date">2023-06-25</span><span class="related-post-desc">Python3 多线程 多线程类似于同时执行多个不同程序，多线程运行有如下优点： 使用线程可以把占据长时间的程序中的任务放到后台去处理。 用户界面可以更加吸引人</span></a><a href="/2023/06/21/Python学习笔记【正则表达式】/" class="related-post-item" title="Python学习笔记【正则表达式】"><span class="related-post-title">Python学习笔记【正则表达式】</span><span class="related-post-date">2023-06-21</span><span class="related-post-desc">Python3 正则表达式 正则表达式是一个特殊的字符序列，它能帮助你方便的检查一个字符串是否与某种模式匹配。 Python 自1.5版本起增加了re 模块，它</span></a><a href="/2023/06/08/Python学习笔记【标准库概览】/" class="related-post-item" title="Python学习笔记【标准库概览】"><span class="related-post-title">Python学习笔记【标准库概览】</span><span class="related-post-date">2023-06-08</span><span class="related-post-desc">Python3 标准库概览 Python 标准库非常庞大，所提供的组件涉及范围十分广泛，使用标准库我们可以让您轻松地完成各种任务。 以下是一些 Python3 </span></a><a href="/2023/06/06/Python学习笔记【面向对向】/" class="related-post-item" title="Python学习笔记【面向对象】"><span class="related-post-title">Python学习笔记【面向对象】</span><span class="related-post-date">2023-06-06</span><span class="related-post-desc">Python3 面向对象 Python从设计之初就已经是一门面向对象的语言，正因为如此，在Python中创建一个类和对象是很容易的。本章节我们将详细介绍Pyth</span></a></div></div>
+    <div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2023/06/25/Python学习笔记【JSON】/" class="related-post-item" title="Python学习笔记【JSON】"><span class="related-post-title">Python学习笔记【JSON】</span><span class="related-post-date">2023-06-25</span><span class="related-post-desc">Python3 中可以使用 json 模块来对 JSON 数据进行编解码，它包含了两个函数： json.dumps(): 对数据进行编码。 json.loads(): 对数据进行解码。</span></a><a href="/2023/06/25/Python学习笔记【XML解析】/" class="related-post-item" title="Python学习笔记【XML解析】"><span class="related-post-title">Python学习笔记【XML解析】</span><span class="related-post-date">2023-06-25</span><span class="related-post-desc">Python、IT: XML 被设计用来传输和存储数据。 XML 是一套定义语义标记的规则，这些标记将文档分成许多部件并对这些部件加以标识。</span></a><a href="/2023/06/25/Python学习笔记【多线程】/" class="related-post-item" title="Python学习笔记【多线程】"><span class="related-post-title">Python学习笔记【多线程】</span><span class="related-post-date">2023-06-25</span><span class="related-post-desc">Python、IT: - 使用线程可以把占据长时间的程序中的任务放到后台去处理。 - 用户界面可以更加吸引人，比如用户点击了一个按钮去触发某些事件的处理，可以弹出一个进度条来显示处理的进度。</span></a><a href="/2023/06/21/Python学习笔记【正则表达式】/" class="related-post-item" title="Python学习笔记【正则表达式】"><span class="related-post-title">Python学习笔记【正则表达式】</span><span class="related-post-date">2023-06-21</span><span class="related-post-desc">Python 自1.5版本起增加了re 模块，它提供 Perl 风格的正则表达式模式。 re 模块使 Python 语言拥有全部的正则表达式功能。</span></a><a href="/2023/06/08/Python学习笔记【标准库概览】/" class="related-post-item" title="Python学习笔记【标准库概览】"><span class="related-post-title">Python学习笔记【标准库概览】</span><span class="related-post-date">2023-06-08</span><span class="related-post-desc">Python、IT: 以下是一些 Python3 标准库中的模块： - os 模块：os 模块提供了许多与操作系统交互的函数，例如创建、移动和删除文件和目录，以及访问环境变量等。</span></a><a href="/2023/06/06/Python学习笔记【面向对向】/" class="related-post-item" title="Python学习笔记【面向对象】"><span class="related-post-title">Python学习笔记【面向对象】</span><span class="related-post-date">2023-06-06</span><span class="related-post-desc">Python、IT: 如果你以前没有接触过面向对象的编程语言，那你可能需要先了解一些面向对象语言的一些基本特征，在头脑里头形成一个基本的面向对象的概念，这样有助于你更容易的学习Python的面向对象编程。 接下来我们先来简单的了解下面向对象的一些基本特征。</span></a></div></div>
     <div class="series-nav"><div class="series-nav-title">Python学习笔记 系列</div><div class="series-nav-progress">第 4/14 篇</div><div class="series-nav-links"><a href="/2023/05/29/Python学习笔记【元组】/" class="series-nav-prev">Python学习笔记【元组】</a><a href="/2023/05/29/Python学习笔记【集合】/" class="series-nav-next">Python学习笔记【集合】</a></div></div>
 
       <footer class="post-footer">
@@ -609,7 +609,7 @@ TypeError: unhashable type: &#39;list&#39;
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">222</span>
+          <span class="site-state-item-count">220</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -622,7 +622,7 @@ TypeError: unhashable type: &#39;list&#39;
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">58</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -845,9 +845,18 @@ window.addEventListener('pjax:success', () => {
 
     </div>
 
-<link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
+<link rel="stylesheet" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css">
 <script data-pjax>
 (function() {
+  // 抑制第三方扩展的 notice.avoidance 报错
+  window.addEventListener('error', function(e) {
+    if (e.message && e.message.indexOf('notice.avoidance') !== -1) {
+      e.preventDefault();
+      e.stopPropagation();
+      return true;
+    }
+  });
+
   var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
 
   function updateCounts() {
@@ -871,7 +880,7 @@ window.addEventListener('pjax:success', () => {
   if (el) {
     updateCounts();
     NexT.utils.loadComments(el, function() {
-      NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2.15.8/dist/waline.js', function() {
         Waline.init({
           el: '#waline-comments',
           serverURL: 'https://waline.bytefisher.top/',

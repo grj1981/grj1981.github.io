@@ -41,6 +41,7 @@
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="unity,游戏开发,C#,Lua,Python,Hexo,博客,钓鱼,教程,编程">
 <meta name="twitter:card" content="summary">
+  <meta name="keywords" content="unity,游戏开发,C#,Lua,Python,Hexo,博客,钓鱼,教程,编程">
 
 <link rel="canonical" href="https://www.bytefisher.top/page/8/">
 
@@ -178,12 +179,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">222</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">220</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">59</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">58</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -260,7 +261,7 @@
     <p class="hero-desc">分享游戏开发技术与钓鱼乐趣</p>
     <div class="hero-stats">
       <div class="hero-stat">
-        <span class="hero-stat-value">222</span>
+        <span class="hero-stat-value">220</span>
         <span class="hero-stat-label">文章</span>
       </div>
       <div class="hero-stat">
@@ -767,10 +768,6 @@
 
   
 
-  
-
-  
-
 
 
 
@@ -843,7 +840,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Unity3D、高级：概述 入门系列中我们实现了基础对象池——一个队列管理子弹的复用。但在真实项目中，对象池需要处理多种类型、预热策略、异步加载、跨场景生命周期等问题。 Addressables 是 Unity 的现代资源管理系统，取代了传统的 Resources.Load 和 Asset Bundle 手动管理。</p>
+          <p>Unity3D、高级: 入门系列中我们实现了基础对象池——一个队列管理子弹的复用。但在真实项目中，对象池需要处理多种类型、预热策略、异步加载、跨场景生命周期等问题。 Addressables 是 Unity 的现代资源管理系统，取代了传统的 Resources.Load 和 Asset Bundle 手动管理。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/08/25/Unity3D%E8%BF%9B%E9%98%B6%E6%95%99%E7%A8%8B-06-%E8%BF%9B%E9%98%B6%E5%AF%B9%E8%B1%A1%E6%B1%A0%E4%B8%8EAddressables%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86/">
@@ -1027,7 +1024,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Unity3D、高级：概述 入门系列中我们用协程（Coroutine）处理延时和异步操作。协程的局限性很明显：不能返回值、无法处理异常、不能在协程外等待它完成、每帧有 MoveNext 的装箱开销。</p>
+          <p>Unity3D、高级: 入门系列中我们用协程（Coroutine）处理延时和异步操作。协程的局限性很明显：不能返回值、无法处理异常、不能在协程外等待它完成、每帧有 MoveNext 的装箱开销。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/08/23/Unity3D%E8%BF%9B%E9%98%B6%E6%95%99%E7%A8%8B-04-UniTask%E4%B8%8E%E9%AB%98%E7%BA%A7%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">
@@ -1119,7 +1116,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Unity3D、高级：概述 第 01 篇我们实现了基础状态机，用于管理玩家行为。但对于复杂的游戏 AI——比如敌人有巡逻、追踪、攻击、撤退等多种状态，且每种状态下又有子状态——单一层的状态机会导致状态膨胀。 分层状态机 将状态组织成层级结构，父状态控制子状态的切换规则。</p>
+          <p>Unity3D、高级: 第 01 篇我们实现了基础状态机，用于管理玩家行为。但对于复杂的游戏 AI——比如敌人有巡逻、追踪、攻击、撤退等多种状态，且每种状态下又有子状态——单一层的状态机会导致状态膨胀。 分层状态机 将状态组织成层级结构，父状态控制子状态的切换规则。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/08/22/Unity3D%E8%BF%9B%E9%98%B6%E6%95%99%E7%A8%8B-03-%E5%88%86%E5%B1%82%E7%8A%B6%E6%80%81%E6%9C%BA%E4%B8%8E%E8%A1%8C%E4%B8%BA%E6%A0%91/">
@@ -1211,7 +1208,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Unity3D、高级：概述 入门系列中，我们习惯了直接在脚本中用 或 获取依赖。这种方式的问题在于 硬编码的依赖查找——被依赖对象的位置、创建方式发生变化时，所有引用处都要改。 依赖注入（Dependency Injection, DI） 将依赖的创建和查找从使用者中剥离，由外部统一注入。</p>
+          <p>Unity3D、高级: 入门系列中，我们习惯了直接在脚本中用 GetComponent() 或 FindObjectOfType() 获取依赖。这种方式的问题在于 硬编码的依赖查找——被依赖对象的位置、创建方式发生变化时，所有引用处都要改。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/08/21/Unity3D%E8%BF%9B%E9%98%B6%E6%95%99%E7%A8%8B-02-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E4%B8%8E%E5%8F%AF%E7%BC%96%E5%86%99%E8%84%9A%E6%9C%AC%E5%AF%B9%E8%B1%A1/">
@@ -1303,7 +1300,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Unity3D、高级：概述 入门系列中，我们把脚本挂到 GameObject 上，用 互相调用，这种模式在小项目中够用。但当项目膨胀到几十上百个脚本时，缺乏组织会导致耦合严重、难以维护。 架构模式 就是解决这个问题的——它们提供了一套可复用的代码组织范式，让系统间解耦、职责清晰、易于扩展。</p>
+          <p>Unity3D、高级: 入门系列中，我们把脚本挂到 GameObject 上，用 GetComponent 互相调用，这种模式在小项目中够用。但当项目膨胀到几十上百个脚本时，缺乏组织会导致耦合严重、难以维护。 架构模式 就是解决这个问题的——它们提供了一套可复用的代码组织范式，让系统间解耦、职责清晰、易于扩展。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/08/20/Unity3D%E8%BF%9B%E9%98%B6%E6%95%99%E7%A8%8B-01-%E9%AB%98%E7%BA%A7%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/">
@@ -1397,7 +1394,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">222</span>
+          <span class="site-state-item-count">220</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1410,7 +1407,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">58</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1633,9 +1630,18 @@ window.addEventListener('pjax:success', () => {
 
     </div>
 
-<link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
+<link rel="stylesheet" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css">
 <script data-pjax>
 (function() {
+  // 抑制第三方扩展的 notice.avoidance 报错
+  window.addEventListener('error', function(e) {
+    if (e.message && e.message.indexOf('notice.avoidance') !== -1) {
+      e.preventDefault();
+      e.stopPropagation();
+      return true;
+    }
+  });
+
   var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
 
   function updateCounts() {
@@ -1659,7 +1665,7 @@ window.addEventListener('pjax:success', () => {
   if (el) {
     updateCounts();
     NexT.utils.loadComments(el, function() {
-      NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2.15.8/dist/waline.js', function() {
         Waline.init({
           el: '#waline-comments',
           serverURL: 'https://waline.bytefisher.top/',
