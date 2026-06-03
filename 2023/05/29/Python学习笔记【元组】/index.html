@@ -669,6 +669,20 @@ tup[1:4]	(&#39;Runoob&#39;, &#39;Taobao&#39;, &#39;Wiki&#39;)	截取元素，从
         <span id="busuanzi_value_site_pv"></span>
       </span>
     </span>
+  <script>
+    setTimeout(function(){
+      var containers = [
+        'busuanzi_container_site_uv',
+        'busuanzi_container_site_pv'
+      ];
+      for (var i = 0; i < containers.length; i++) {
+        var el = document.getElementById(containers[i]);
+        if (el && el.style.display === 'none') {
+          el.style.display = 'inline';
+        }
+      }
+    }, 3000);
+  </script>
 </div>
 
 

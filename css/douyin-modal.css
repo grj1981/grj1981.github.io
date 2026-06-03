@@ -57,6 +57,11 @@ body {
     height: auto;
     aspect-ratio: 9 / 17.5;
     max-height: calc(100vh - 80px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .close-btn {
+    top: env(safe-area-inset-top, 0px);
+    right: 5px;
   }
 }
 
