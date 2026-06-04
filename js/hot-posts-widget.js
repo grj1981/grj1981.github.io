@@ -33,6 +33,7 @@
     });
     html += '</ul>';
     el.innerHTML = html;
+    if (window._pjax) window._pjax.refresh();
   }
 
   fetch('/api/hot-articles.json')

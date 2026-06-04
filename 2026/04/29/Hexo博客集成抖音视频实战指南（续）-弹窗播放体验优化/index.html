@@ -781,6 +781,7 @@ var pjax = new Pjax({
   cacheBust: false,
   scrollTo : !CONFIG.bookmark.enable
 });
+window._pjax = pjax;
 
 window.addEventListener('pjax:success', () => {
   document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {

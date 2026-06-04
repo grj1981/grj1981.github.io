@@ -51,7 +51,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2023/08/02/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A4%9A%E6%80%81%E6%80%A7%E3%80%91/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C#学习笔记【多态性】","description":"C#、IT: 多态性意味着有多重形式。在面向对象编程范式中，多态性往往表现为\\\"一个接口，多个功能\\\"。 多态性可以是静态的或动态的。在静态多态性中，函数的响应是在编译时发生的。在动态多态性中，函数的响应是在运行时发生的。","url":"https://www.bytefisher.top/2023/08/02/C井学习笔记【多态性】/","datePublished":"2023-08-02T06:52:07.000Z","dateModified":"2026-06-02T08:42:35.608Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/08/02/C井学习笔记【多态性】/"},"keywords":"IT, C#, series:C#学习笔记"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C#学习笔记【多态性】","description":"C#、IT: 多态性意味着有多重形式。在面向对象编程范式中，多态性往往表现为\\\"一个接口，多个功能\\\"。 多态性可以是静态的或动态的。在静态多态性中，函数的响应是在编译时发生的。在动态多态性中，函数的响应是在运行时发生的。","url":"https://www.bytefisher.top/2023/08/02/C井学习笔记【多态性】/","datePublished":"2023-08-02T06:52:07.000Z","dateModified":"2026-06-02T08:42:35.608Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/08/02/C井学习笔记【多态性】/"},"keywords":"C#, IT, series:C#学习笔记"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"C#","item":"https://www.bytefisher.top/categories/C/"},{"@type":"ListItem","position":3,"name":"C#学习笔记【多态性】"}]}</script>
 
 
@@ -467,8 +467,8 @@ Triangle 类的面积：
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/IT/" rel="tag"># IT</a>
               <a href="/tags/C/" rel="tag"># C#</a>
+              <a href="/tags/IT/" rel="tag"># IT</a>
               <a href="/tags/series-C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># series:C#学习笔记</a>
           </div>
 
@@ -739,6 +739,7 @@ var pjax = new Pjax({
   cacheBust: false,
   scrollTo : !CONFIG.bookmark.enable
 });
+window._pjax = pjax;
 
 window.addEventListener('pjax:success', () => {
   document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {

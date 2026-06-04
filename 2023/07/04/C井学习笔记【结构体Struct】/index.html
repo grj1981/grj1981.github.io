@@ -49,7 +49,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2023/07/04/C%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%BB%93%E6%9E%84%E4%BD%93Struct%E3%80%91/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C#学习笔记【结构体Struct】","description":"C#、IT: 结构体是用来代表一个记录。假设您想跟踪图书馆中书的动态。您可能想跟踪每本书的以下属性： 例如，您可以按照如下的方式声明 Book 结构：","url":"https://www.bytefisher.top/2023/07/04/C井学习笔记【结构体Struct】/","datePublished":"2023-07-04T07:36:43.000Z","dateModified":"2026-06-02T08:42:37.837Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/07/04/C井学习笔记【结构体Struct】/"},"keywords":"IT, C#, series:C#学习笔记"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C#学习笔记【结构体Struct】","description":"C#、IT: 结构体是用来代表一个记录。假设您想跟踪图书馆中书的动态。您可能想跟踪每本书的以下属性： 例如，您可以按照如下的方式声明 Book 结构：","url":"https://www.bytefisher.top/2023/07/04/C井学习笔记【结构体Struct】/","datePublished":"2023-07-04T07:36:43.000Z","dateModified":"2026-06-02T08:42:37.837Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/07/04/C井学习笔记【结构体Struct】/"},"keywords":"C#, IT, series:C#学习笔记"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"C#","item":"https://www.bytefisher.top/categories/C/"},{"@type":"ListItem","position":3,"name":"C#学习笔记【结构体Struct】"}]}</script>
 
 
@@ -432,8 +432,8 @@ Book_id : 6495700
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/IT/" rel="tag"># IT</a>
               <a href="/tags/C/" rel="tag"># C#</a>
+              <a href="/tags/IT/" rel="tag"># IT</a>
               <a href="/tags/series-C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># series:C#学习笔记</a>
           </div>
 
@@ -704,6 +704,7 @@ var pjax = new Pjax({
   cacheBust: false,
   scrollTo : !CONFIG.bookmark.enable
 });
+window._pjax = pjax;
 
 window.addEventListener('pjax:success', () => {
   document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
