@@ -1313,7 +1313,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #fff;
+  background: #ff17f6;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -4429,15 +4429,13 @@ figure.highlight table {
   margin-top: -50px;
 }
 .photos-list {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
 }
 .photos-column {
-  margin: 12px;
-  margin-bottom: 10px;
+  margin: 0;
+  text-align: left;
 }
 .photos-item {
   margin-bottom: 8px;
@@ -4484,9 +4482,6 @@ figure.highlight table {
   }
   .photos-item p {
     font-size: 12px;
-  }
-  .photos-column {
-    margin: 8px;
   }
 }
 .img-list {

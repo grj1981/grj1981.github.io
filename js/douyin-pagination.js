@@ -1,9 +1,20 @@
 (function() {
   'use strict';
 
-  var PAGE_SIZE = 12;
+  var ROWS_PER_PAGE = 4;
   var videos = [];
   var currentPage = 1;
+
+  function getColumnCount() {
+    var container = document.getElementById('douyin-videos-container');
+    if (!container) return 4;
+    var cols = getComputedStyle(container).gridTemplateColumns;
+    return cols ? cols.split(' ').length : 4;
+  }
+
+  function getItemsPerPage() {
+    return Math.max(1, getColumnCount() * ROWS_PER_PAGE);
+  }
 
   function renderCard(video) {
     var cover = video.cover
@@ -29,15 +40,16 @@
   }
 
   function getTotalPages() {
-    return Math.max(1, Math.ceil(videos.length / PAGE_SIZE));
+    return Math.max(1, Math.ceil(videos.length / getItemsPerPage()));
   }
 
   function renderGrid() {
     var container = document.getElementById('douyin-videos-container');
     if (!container || !videos.length) return;
 
-    var start = (currentPage - 1) * PAGE_SIZE;
-    var end = Math.min(start + PAGE_SIZE, videos.length);
+    var pageSize = getItemsPerPage();
+    var start = (currentPage - 1) * pageSize;
+    var end = Math.min(start + pageSize, videos.length);
     var pageVideos = videos.slice(start, end);
 
     var html = '';
@@ -162,5 +174,16 @@
       renderGrid();
       renderPagination();
     }
+  });
+
+  var resizeTimer = null;
+  window.addEventListener('resize', function() {
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      var total = getTotalPages();
+      if (currentPage > total) currentPage = total;
+      renderGrid();
+      renderPagination();
+    }, 300);
   });
 })();
