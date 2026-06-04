@@ -128,6 +128,8 @@
     });
   }
 
+  window._douyinModalInit = init;
+
   setupEvents();
 
   if (document.readyState === 'loading') {
