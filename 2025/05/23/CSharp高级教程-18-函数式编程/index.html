@@ -39,18 +39,18 @@
 <meta property="og:description" content="C# 是一门多范式语言，在面向对象基础上不断吸收函数式编程（FP）的特性。从 LINQ 到模式匹配，从 record 到不可变数据，C# 的函数式表达能力持续增强。本文将深入探讨不可变性、纯函数、高阶函数、Either&#x2F;Option 模式、以及如何在 C# 中实践函数式设计。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-05-23T12:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-02T08:41:42.423Z">
+<meta property="article:modified_time" content="2026-06-04T10:25:30.568Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="C#">
 <meta property="article:tag" content="series:C#高级教程">
 <meta property="article:tag" content="高级">
 <meta name="twitter:card" content="summary">
-  <meta name="keywords" content="C#高级教程, 函数式编程, 不可变数, 模式匹配, 高级教程, 不可变, 式匹配, 模式匹, 纯函数, 18, C#, 教程, 高级">
+  <meta name="keywords" content="C#高级教程, 函数式编程, 不可变数, 模式匹配, 高级教程, 不可变, 匹配, 模式匹配, 函数, C#, 教程, 高级, 淡水鱼,ByteFisher">
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/05/23/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-18-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C# 高级教程 - 18 函数式编程","description":"C# 是一门多范式语言，在面向对象基础上不断吸收函数式编程（FP）的特性。从 LINQ 到模式匹配，从 record 到不可变数据，C# 的函数式表达能力持续增强。本文将深入探讨不可变性、纯函数、高阶函数、Either/Option 模式、以及如何在 C# 中实践函数式设计。","url":"https://www.bytefisher.top/2025/05/23/CSharp高级教程-18-函数式编程/","datePublished":"2025-05-23T12:00:00.000Z","dateModified":"2026-06-02T08:41:42.423Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/05/23/CSharp高级教程-18-函数式编程/"},"keywords":"C#, 高级, series:C#高级教程"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"C#","item":"https://www.bytefisher.top/categories/C/"},{"@type":"ListItem","position":3,"name":"C# 高级教程 - 18 函数式编程"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C# 高级教程 - 18 函数式编程","description":"C# 是一门多范式语言，在面向对象基础上不断吸收函数式编程（FP）的特性。从 LINQ 到模式匹配，从 record 到不可变数据，C# 的函数式表达能力持续增强。本文将深入探讨不可变性、纯函数、高阶函数、Either/Option 模式、以及如何在 C# 中实践函数式设计。","url":"https://www.bytefisher.top/2025/05/23/CSharp高级教程-18-函数式编程/","datePublished":"2025-05-23T12:00:00.000Z","dateModified":"2026-06-04T10:25:30.568Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/05/23/CSharp高级教程-18-函数式编程/"},"keywords":"C#, 高级, series:C#高级教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"教程","item":"https://www.bytefisher.top/categories/教程/"},{"@type":"ListItem","position":3,"name":"C# 高级教程 - 18 函数式编程"}]}</script>
 
 
 <script id="page-configurations">
@@ -182,12 +182,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">222</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">223</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">59</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -285,11 +285,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
             </span>
 
@@ -507,7 +507,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">222</span>
+          <span class="site-state-item-count">223</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -520,7 +520,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

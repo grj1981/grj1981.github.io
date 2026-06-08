@@ -39,18 +39,18 @@
 <meta property="og:description" content="本文详细讲解C# 面向对象 - 继承与多态，涵盖C#、教程等核心知识点。「C#基础教程」系列第11篇，共20篇。适合C#初学者。附完整代码示例与实战技巧。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-30T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-02T08:41:37.288Z">
+<meta property="article:modified_time" content="2026-06-04T10:06:14.194Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="C#">
 <meta property="article:tag" content="series:C#基础教程">
 <meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary">
-  <meta name="keywords" content="C#基础教程, 继承与多态, 用基类构, 调用基类, 面向对象, 基类构, 用基类, 类方法, 调用基, C#, 教程">
+  <meta name="keywords" content="C#基础教程, 继承与多态, 调用基类, 面向对象, 基类,虚方法与重写,多态, 强制转换,C#, 教程,淡水鱼,ByteFisher">
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/03/30/CSharp%E6%95%99%E7%A8%8B-11-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1-%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C# 面向对象 - 继承与多态","description":"本文详细讲解C# 面向对象 - 继承与多态，涵盖C#、教程等核心知识点。「C#基础教程」系列第11篇，共20篇。适合C#初学者。附完整代码示例与实战技巧。","url":"https://www.bytefisher.top/2025/03/30/CSharp教程-11-面向对象-继承与多态/","datePublished":"2025-03-30T00:00:00.000Z","dateModified":"2026-06-02T08:41:37.288Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/03/30/CSharp教程-11-面向对象-继承与多态/"},"keywords":"C#, 教程, series:C#基础教程"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"C#","item":"https://www.bytefisher.top/categories/C/"},{"@type":"ListItem","position":3,"name":"C# 面向对象 - 继承与多态"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C# 面向对象 - 继承与多态","description":"本文详细讲解C# 面向对象 - 继承与多态，涵盖C#、教程等核心知识点。「C#基础教程」系列第11篇，共20篇。适合C#初学者。附完整代码示例与实战技巧。","url":"https://www.bytefisher.top/2025/03/30/CSharp教程-11-面向对象-继承与多态/","datePublished":"2025-03-30T00:00:00.000Z","dateModified":"2026-06-04T10:06:14.194Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/03/30/CSharp教程-11-面向对象-继承与多态/"},"keywords":"教程, C#, series:C#基础教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"教程","item":"https://www.bytefisher.top/categories/教程/"},{"@type":"ListItem","position":3,"name":"C# 面向对象 - 继承与多态"}]}</script>
 
 
 <script id="page-configurations">
@@ -182,12 +182,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">222</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">223</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">59</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -285,11 +285,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C#</span></a>
                 </span>
             </span>
 
@@ -395,8 +395,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/C/" rel="tag"># C#</a>
               <a href="/tags/%E6%95%99%E7%A8%8B/" rel="tag"># 教程</a>
+              <a href="/tags/C/" rel="tag"># C#</a>
               <a href="/tags/series-C-%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" rel="tag"># series:C#基础教程</a>
           </div>
 
@@ -516,7 +516,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">222</span>
+          <span class="site-state-item-count">223</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -529,7 +529,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -39,7 +39,7 @@
 <meta property="og:description" content="Hexo、Next主题、抖音视频集成: 作为一名钓鱼爱好者，我在抖音分享了许多钓鱼视频。为了让博客访问者能够直观地浏览我的抖音作品，决定在Hexo博客中集成抖音视频相册功能。 本文将详细介绍整个实现过程，从数据配置到页面展示，再到进阶优化，帮助你快速在博客中实现类似功能。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-04-03T05:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-02T08:41:46.234Z">
+<meta property="article:modified_time" content="2026-06-04T10:42:14.139Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Next主题">
@@ -47,11 +47,11 @@
 <meta property="article:tag" content="博客开发">
 <meta property="article:tag" content="抖音视频集成">
 <meta name="twitter:card" content="summary">
-  <meta name="keywords" content="Hexo博客集成抖音视频实战指南, Hexo博客搭建, Next主题, 抖音视频集成, Hexo, 博客开发, 抖音分享, 视频数据, 取视频, 抖音分, 视频数, 频数据">
+  <meta name="keywords" content="Hexo博客集成抖音视频实战指南, Hexo博客搭建, Next主题, 抖音视频集成, Hexo, 博客开发, 抖音分享, 视频数据, 视频, 抖音,抖音视频, 淡水鱼,ByteFisher">
 
 <link rel="canonical" href="https://www.bytefisher.top/2026/04/03/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo博客集成抖音视频实战指南","description":"Hexo、Next主题、抖音视频集成: 作为一名钓鱼爱好者，我在抖音分享了许多钓鱼视频。为了让博客访问者能够直观地浏览我的抖音作品，决定在Hexo博客中集成抖音视频相册功能。 本文将详细介绍整个实现过程，从数据配置到页面展示，再到进阶优化，帮助你快速在博客中实现类似功能。","url":"https://www.bytefisher.top/2026/04/03/Hexo博客集成抖音视频实战指南/","datePublished":"2026-04-03T05:00:00.000Z","dateModified":"2026-06-02T08:41:46.234Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/04/03/Hexo博客集成抖音视频实战指南/"},"keywords":"Hexo, Next主题, 博客开发, series:抖音视频集成, 抖音视频集成"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo博客集成抖音视频实战指南","description":"Hexo、Next主题、抖音视频集成: 作为一名钓鱼爱好者，我在抖音分享了许多钓鱼视频。为了让博客访问者能够直观地浏览我的抖音作品，决定在Hexo博客中集成抖音视频相册功能。 本文将详细介绍整个实现过程，从数据配置到页面展示，再到进阶优化，帮助你快速在博客中实现类似功能。","url":"https://www.bytefisher.top/2026/04/03/Hexo博客集成抖音视频实战指南/","datePublished":"2026-04-03T05:00:00.000Z","dateModified":"2026-06-04T10:42:14.139Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/04/03/Hexo博客集成抖音视频实战指南/"},"keywords":"Hexo, Next主题, 博客开发, series:抖音视频集成, 抖音视频集成"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Hexo博客搭建","item":"https://www.bytefisher.top/categories/Hexo博客搭建/"},{"@type":"ListItem","position":3,"name":"Hexo博客集成抖音视频实战指南"}]}</script>
 
 
@@ -184,12 +184,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">222</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">223</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">59</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -836,7 +836,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">222</span>
+          <span class="site-state-item-count">223</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -849,7 +849,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
