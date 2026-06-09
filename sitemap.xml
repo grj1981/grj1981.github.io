@@ -2207,15 +2207,6 @@
   </url>
   
   <url>
-    <loc>https://www.bytefisher.top/archives/</loc>
-    
-    <lastmod>2026-05-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.bytefisher.top/categories/</loc>
     
     <lastmod>2026-05-14</lastmod>
@@ -2225,7 +2216,7 @@
   </url>
   
   <url>
-    <loc>https://www.bytefisher.top/ai-games/snake/</loc>
+    <loc>https://www.bytefisher.top/archives/</loc>
     
     <lastmod>2026-05-14</lastmod>
     
@@ -2235,6 +2226,15 @@
   
   <url>
     <loc>https://www.bytefisher.top/ai-games/tetris/</loc>
+    
+    <lastmod>2026-05-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bytefisher.top/ai-games/snake/</loc>
     
     <lastmod>2026-05-14</lastmod>
     
@@ -2309,6 +2309,20 @@
   </url>
   
   <url>
+    <loc>https://www.bytefisher.top/tags/Unity3D/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bytefisher.top/tags/IT/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://www.bytefisher.top/tags/AI/</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
@@ -2324,20 +2338,6 @@
   
   <url>
     <loc>https://www.bytefisher.top/tags/series-ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.bytefisher.top/tags/Unity3D/</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.bytefisher.top/tags/IT/</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2456,27 +2456,6 @@
   </url>
   
   <url>
-    <loc>https://www.bytefisher.top/tags/JavaScript/</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.bytefisher.top/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.bytefisher.top/tags/series-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E6%B8%B8%E6%88%8F/</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.bytefisher.top/tags/WebP/</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
@@ -2498,14 +2477,28 @@
   </url>
   
   <url>
-    <loc>https://www.bytefisher.top/tags/Canvas/</loc>
+    <loc>https://www.bytefisher.top/tags/JavaScript/</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.bytefisher.top/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1/</loc>
+    <loc>https://www.bytefisher.top/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bytefisher.top/tags/series-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E6%B8%B8%E6%88%8F/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bytefisher.top/tags/Canvas/</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2519,14 +2512,7 @@
   </url>
   
   <url>
-    <loc>https://www.bytefisher.top/tags/TiDB/</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.bytefisher.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <loc>https://www.bytefisher.top/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1/</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2541,6 +2527,20 @@
   
   <url>
     <loc>https://www.bytefisher.top/tags/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bytefisher.top/tags/TiDB/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bytefisher.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2582,13 +2582,6 @@
   </url>
   
   <url>
-    <loc>https://www.bytefisher.top/tags/Next%E8%AE%A2%E9%98%85%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.bytefisher.top/tags/Next%E4%B8%BB%E9%A2%98%E8%83%8C%E6%99%AF%E9%9F%B3%E4%B9%90/</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
@@ -2596,7 +2589,21 @@
   </url>
   
   <url>
-    <loc>https://www.bytefisher.top/tags/series-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/</loc>
+    <loc>https://www.bytefisher.top/tags/Next%E8%AE%A2%E9%98%85%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bytefisher.top/tags/Python/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bytefisher.top/tags/series-Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2617,14 +2624,7 @@
   </url>
   
   <url>
-    <loc>https://www.bytefisher.top/tags/Python/</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.bytefisher.top/tags/series-Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://www.bytefisher.top/tags/series-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2717,13 +2717,6 @@
   </url>
   
   <url>
-    <loc>https://www.bytefisher.top/categories/AI/</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.bytefisher.top/categories/Unity3D/</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
@@ -2731,7 +2724,7 @@
   </url>
   
   <url>
-    <loc>https://www.bytefisher.top/categories/%E6%95%99%E7%A8%8B/</loc>
+    <loc>https://www.bytefisher.top/categories/AI/</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2739,6 +2732,13 @@
   
   <url>
     <loc>https://www.bytefisher.top/categories/IT/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.bytefisher.top/categories/%E6%95%99%E7%A8%8B/</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
