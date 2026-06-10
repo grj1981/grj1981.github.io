@@ -1313,7 +1313,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #8fffff;
+  background: #fbffff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -4248,6 +4248,12 @@ figure.highlight table {
     height: auto;
     max-width: 300px;
   }
+}
+.site-state {
+  flex-wrap: wrap;
+}
+.site-state-item {
+  padding: 0 8px;
 }
 @-moz-keyframes blink {
   0%, 50% {
