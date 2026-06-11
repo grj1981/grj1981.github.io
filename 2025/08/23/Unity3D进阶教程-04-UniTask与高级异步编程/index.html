@@ -39,7 +39,7 @@
 <meta property="og:description" content="Unity3D、高级: 入门系列中我们用协程（Coroutine）处理延时和异步操作。协程的局限性很明显：不能返回值、无法处理异常、不能在协程外等待它完成、每帧有 MoveNext 的装箱开销。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-08-23T12:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-11T06:31:54.540Z">
+<meta property="article:modified_time" content="2026-06-11T08:39:47.381Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="Unity3D">
 <meta property="article:tag" content="series:Unity3D进阶教程">
@@ -49,7 +49,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/08/23/Unity3D%E8%BF%9B%E9%98%B6%E6%95%99%E7%A8%8B-04-UniTask%E4%B8%8E%E9%AB%98%E7%BA%A7%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Unity3D 进阶教程 - 04 UniTask 与高级异步编程","description":"Unity3D、高级: 入门系列中我们用协程（Coroutine）处理延时和异步操作。协程的局限性很明显：不能返回值、无法处理异常、不能在协程外等待它完成、每帧有 MoveNext 的装箱开销。","url":"https://www.bytefisher.top/2025/08/23/Unity3D进阶教程-04-UniTask与高级异步编程/","datePublished":"2025-08-23T12:00:00.000Z","dateModified":"2026-06-11T06:31:54.540Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/08/23/Unity3D进阶教程-04-UniTask与高级异步编程/"},"keywords":"Unity3D, 高级, series:Unity3D进阶教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Unity3D 进阶教程 - 04 UniTask 与高级异步编程","description":"Unity3D、高级: 入门系列中我们用协程（Coroutine）处理延时和异步操作。协程的局限性很明显：不能返回值、无法处理异常、不能在协程外等待它完成、每帧有 MoveNext 的装箱开销。","url":"https://www.bytefisher.top/2025/08/23/Unity3D进阶教程-04-UniTask与高级异步编程/","datePublished":"2025-08-23T12:00:00.000Z","dateModified":"2026-06-11T08:39:47.381Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/08/23/Unity3D进阶教程-04-UniTask与高级异步编程/"},"keywords":"Unity3D, 高级, series:Unity3D进阶教程"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Unity3D","item":"https://www.bytefisher.top/categories/Unity3D/"},{"@type":"ListItem","position":3,"name":"Unity3D 进阶教程 - 04 UniTask 与高级异步编程"}]}</script>
 
 
@@ -753,7 +753,7 @@ var pjax = new Pjax({
     '.post-toc-wrap': Pjax.switches.innerHTML
   },
   analytics: false,
-  cacheBust: false,
+  cacheBust: true,
   scrollTo : !CONFIG.bookmark.enable
 });
 window._pjax = pjax;
@@ -796,6 +796,12 @@ window.addEventListener('pjax:success', () => {
       .bootstrap();
   }
   NexT.utils.updateSidebarPosition(true);
+
+  document.querySelectorAll('.post-block, .pagination, .comments').forEach(function(el) {
+    if (parseFloat(el.style.opacity) === 0) {
+      el.style.opacity = 1;
+    }
+  });
 });
 </script>
 

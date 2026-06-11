@@ -258,7 +258,7 @@
       <div class="archive-summary">
         <span>共 225 篇文章</span>
         <span>｜</span>
-        <span>最新更新：2026-05-01</span>
+        <span>最新更新：2026-04-26</span>
         <span>｜</span>
         <span>最早文章：2024-02-25</span>
       </div>
@@ -677,7 +677,7 @@ var pjax = new Pjax({
     '.post-toc-wrap': Pjax.switches.innerHTML
   },
   analytics: false,
-  cacheBust: false,
+  cacheBust: true,
   scrollTo : !CONFIG.bookmark.enable
 });
 window._pjax = pjax;
@@ -720,6 +720,12 @@ window.addEventListener('pjax:success', () => {
       .bootstrap();
   }
   NexT.utils.updateSidebarPosition(true);
+
+  document.querySelectorAll('.post-block, .pagination, .comments').forEach(function(el) {
+    if (parseFloat(el.style.opacity) === 0) {
+      el.style.opacity = 1;
+    }
+  });
 });
 </script>
 
