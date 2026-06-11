@@ -17,6 +17,8 @@
   var messages = [];
   var lastSentTime = 0;
   var abortController = null;
+  var conversationTopic = null;
+  var currentArticles = [];
 
   /* ---------- Analytics ---------- */
   function trackEvent(type) {
@@ -62,6 +64,29 @@
     return 'error';
   }
 
+  /* ---------- Retry ---------- */
+  function showRetry(text) {
+    var container = document.getElementById('ai-msgs');
+    if (!container) return;
+    var div = document.createElement('div');
+    div.className = 'ai-message ai-message-error';
+    div.innerHTML = '<p>' + text + '</p><button class="ai-retry-btn" style="margin-top:6px;padding:4px 12px;border:1px solid #e74c3c;border-radius:4px;background:transparent;color:#e74c3c;cursor:pointer">重试</button>';
+    div.querySelector('.ai-retry-btn').addEventListener('click', function() {
+      div.remove();
+      var msgs = messages;
+      var lastUserMsg = '';
+      for (var i = msgs.length - 1; i >= 0; i--) {
+        if (msgs[i].role === 'user') { lastUserMsg = msgs[i].content; break; }
+      }
+      if (lastUserMsg) {
+        document.getElementById('ai-input').value = lastUserMsg;
+        send();
+      }
+    });
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+  }
+
   /* ---------- Token estimation ---------- */
   function estimateTokens(text) {
     var chinese = (text.match(/[\u4e00-\u9fff]/g) || []).length;
@@ -71,15 +96,21 @@
 
   function truncateMessages(msgs) {
     var maxTokens = 3000;
+    if (msgs.length <= 4) return msgs;
+
+    // Always keep first user + assistant pair
+    var head = msgs.slice(0, 2);
+    var tail = msgs.slice(2);
+
     var result = [];
-    var total = 0;
-    for (var i = msgs.length - 1; i >= 0; i--) {
-      var tokens = estimateTokens(msgs[i].content);
-      if (total + tokens > maxTokens) break;
-      total += tokens;
-      result.unshift(msgs[i]);
+    var total = head.reduce(function(s, m) { return s + estimateTokens(m.content); }, 0);
+    for (var i = tail.length - 1; i >= 0; i--) {
+      var t = estimateTokens(tail[i].content);
+      if (total + t > maxTokens) break;
+      total += t;
+      result.unshift(tail[i]);
     }
-    return result;
+    return head.concat(result);
   }
 
   /* ---------- Create UI ---------- */
@@ -218,51 +249,79 @@
       .catch(function() { return null; });
   }
 
-  /* ---------- RAG: Keyword extraction ---------- */
-  var TECH_KEYWORDS = ['unity', 'c#', 'lua', 'python', 'csharp', 'c井', 'javascript', 'hexo', '博客', '游戏', '钓鱼', '教程', '学习', '笔记', '委托', 'delegate', '事件', 'event', '接口', '类', '对象', '继承', '多态', '数组', '字符串', '异步', 'async', 'await', '协程', '线程', '性能', '优化', '动画', '物理', '碰撞', '相机', '场景', 'ui', '导航', '寻路', '粒子', '序列化', '网络', '加密', 'linq', '泛型', '反射', '特性', '依赖', '注入', '设计模式', '函数式', '编译器', 'roslyn', 'sourcegen', '互操作', '延迟', 'ai', 'deepseek', 'opencode', 'qwen', 'ollama', 'rag', 'docker', 'vercel', 'cloudflare', 'turso', 'waline', 'tidb', 'leancloud', 'seo', 'pwa', 'webp', 'cdn', 'pjax', 'rss', 'sitemap', '图床', '评论', '抖音', '微信', 'github', '域名', '重定向', '多项目', '场景', '管理器', '组件', '预制体', '协程', '动画', '音频', '持久化', '对象池', '导航网格', '粒子特效', '构建发布', 'ecs', 'job', 'burst', 'shader', 'urp', '渲染', '后处理', 'bloom', '体积光', '状态机', '行为树', 'netcode', '多人', '输入', '重绑定', '键盘', '手柄', 'profiler', 'gc', '内存', 'addressables', '资源管理', 'lod', '遮挡剔除', '单例', '单例模式', '事件总线', '命令模式', '依赖注入', 'scriptableobject', 'unirx', 'unitask', 'vcontainer', 'zenject', '编辑器', 'inspector', 'propertydrawer', '工具', '编程', '代码', '范式', '提示词', '人机协作', '效率', '模型', '生成', '审查', '调试', '重构', '配置', '入门', '实战', '测试', '部署'];
-
-  function extractKeywords(text) {
-    if (!text) return [];
-    var cleaned = text.replace(/[的了吗是和我有在就了也吗啊呢吧呗给被把让向从对于关于]|[，。！？、；：""''（）【】《》\s,.!?;:'"()\[\]{}<>]/g, ' ');
-    var words = cleaned.split(/\s+/).filter(function(w) { return w.length > 1; });
-    var unique = {};
-    for (var i = 0; i < words.length; i++) unique[words[i].toLowerCase()] = true;
-    for (var t = 0; t < TECH_KEYWORDS.length; t++) {
-      if (text.toLowerCase().indexOf(TECH_KEYWORDS[t]) !== -1) unique[TECH_KEYWORDS[t]] = true;
-    }
-    return Object.keys(unique);
-  }
-
+  /* ---------- RAG: Article ranking (BM25) ---------- */
   function rankArticles(question, posts) {
     if (!question || !posts || !posts.length) return [];
-    var keywords = extractKeywords(question);
-    if (keywords.length === 0) return posts.slice(0, 10);
-    var scored = posts.map(function(post) {
-      var score = 0;
-      var title = (post.title || '').toLowerCase();
-      var excerpt = (post.excerpt || '').toLowerCase();
-      var tags = (post.tags || []).join(' ').toLowerCase();
-      var cats = (post.categories || []).join(' ').toLowerCase();
-      var headings = (post.headings || []).join(' ').toLowerCase();
-      var postKeywords = (post.keywords || []).join(' ').toLowerCase();
-      for (var i = 0; i < keywords.length; i++) {
-        var kw = keywords[i].toLowerCase();
-        if (title.indexOf(kw) !== -1) score += 3;
-        else if (headings.indexOf(kw) !== -1) score += 2;
-        else if (tags.indexOf(kw) !== -1) score += 2;
-        else if (postKeywords.indexOf(kw) !== -1) score += 1;
-        else if (excerpt.indexOf(kw) !== -1) score += 1;
-        else if (cats.indexOf(kw) !== -1) score += 1;
+    var qTokens = question.toLowerCase().split(/[\s,，。.、！？;；：:()（）\[\]【】]+/).filter(function(w) { return w.length > 1; });
+    if (qTokens.length === 0) return posts.slice(0, 10);
+
+    var N = posts.length;
+    var k1 = 1.5, b = 0.75;
+    var totalLen = 0;
+    for (var i = 0; i < posts.length; i++) totalLen += (posts[i].textForSearch || posts[i].title).length;
+    var avgDocLen = totalLen / N || 1;
+
+    // Document frequency
+    var df = {};
+    for (var ti = 0; ti < qTokens.length; ti++) {
+      var w = qTokens[ti];
+      if (df[w] !== undefined) continue;
+      var count = 0;
+      for (var pi = 0; pi < posts.length; pi++) {
+        if ((posts[pi].textForSearch || posts[pi].title).toLowerCase().indexOf(w) !== -1) count++;
       }
-      return { post: post, score: score };
-    });
+      df[w] = count;
+    }
+
+    // IDF
+    var idf = {};
+    for (var w in df) {
+      idf[w] = Math.log((N - df[w] + 0.5) / (df[w] + 0.5) + 1);
+    }
+
+    var now = Date.now();
+    var scored = [];
+    for (var pi = 0; pi < posts.length; pi++) {
+      var text = (posts[pi].textForSearch || posts[pi].title).toLowerCase();
+      var docLen = text.length || 1;
+      var score = 0;
+      for (var ti = 0; ti < qTokens.length; ti++) {
+        var w = qTokens[ti];
+        if (!idf[w]) continue;
+        // Term frequency in this doc
+        var tf = 0, idx = 0;
+        while ((idx = text.indexOf(w, idx)) !== -1) { tf++; idx += w.length; }
+        score += idf[w] * (tf * (k1 + 1)) / (tf + k1 * (1 - b + b * docLen / avgDocLen));
+      }
+      // Recency boost
+      if (posts[pi].date) {
+        var days = (now - new Date(posts[pi].date).getTime()) / 86400000;
+        if (days < 30) score *= 1.3;
+        else if (days < 60) score *= 1.15;
+      }
+      scored.push({ post: posts[pi], score: score });
+    }
+
     scored.sort(function(a, b) { return b.score - a.score; });
-    var matched = scored.filter(function(s) { return s.score > 0; }).slice(0, 10).map(function(s) { return s.post; });
-    return matched.length > 0 ? matched : posts.slice(0, 10);
+
+    // Series dedup: max 2 per series
+    var seriesCount = {}, result = [];
+    for (var i = 0; i < scored.length && result.length < 10; i++) {
+      var s = scored[i].post.series;
+      if (s) {
+        seriesCount[s] = (seriesCount[s] || 0) + 1;
+        if (seriesCount[s] > 2) continue;
+      }
+      result.push(scored[i].post);
+    }
+    return result.length > 0 ? result : posts.slice(0, 10);
   }
 
   /* ---------- System prompt ---------- */
-  function buildSystemPrompt(index, topArticles) {
+  function buildSystemPrompt(index, topArticles, isNewTopic) {
+    if (!isNewTopic && conversationTopic) {
+      return '你是 ByteBot。继续当前话题回答，推荐文章时使用 Markdown 链接格式 `- [标题](URL)`。';
+    }
     var lines = [
       '你是 ByteFisher 博客的 AI 助手 ByteBot。',
       '作者是淡水鱼，Unity 游戏开发者 + 钓鱼爱好者。',
@@ -318,37 +377,18 @@
       for (var i = 0; i < articles.length; i++) {
         var p = articles[i];
         lines.push('- [' + p.title.replace(/\]/g, '\\]') + '](' + p.url + ')');
-        if (p.series) {
-          lines.push('  所属系列：' + p.series);
-        }
-        if (p.headings && p.headings.length) {
-          lines.push('  包含章节：' + p.headings.join('、'));
-        }
+        if (p.series) lines.push('  系列：' + p.series);
+        if (i < 3 && p.summary) lines.push('  摘要：' + p.summary.substring(0, 150));
       }
     } else {
       lines.push('博客共有 ' + (index ? index.total : 0) + ' 篇文章。');
       lines.push('博客内容涵盖：Unity3D、C#、Lua、Python、钓鱼技巧、游戏开发教程。');
     }
     lines.push('');
-    lines.push('回答格式要求（重要）：');
-    lines.push('- 用 `## 小标题` 分隔不同板块，让回答有层次感');
-    lines.push('- 用 `---` 分隔不同的功能或分类模块');
-    lines.push('- 用 `- ` 无序列表罗列条目，不要挤成段落');
-    lines.push('- 突出内容用 `**加粗**`');
-    lines.push('');
-    lines.push('内容规则：');
-    lines.push('- 简洁中文，可适当使用 emoji');
-    lines.push('- 推荐文章/页面/相册时，**必须**使用 Markdown 链接格式 `- [标题](URL)`，将此行原样复制到回复中');
-    lines.push('- **严禁**只写纯文本标题而不带链接，用户必须能点击访问');
-    lines.push('- 如果用户问某个系列的某个知识点，优先推荐该系列文章，并说明是第几篇');
-    lines.push('- 如果文章有章节信息，可以告诉用户相关内容在哪个章节');
-    lines.push('');
-    lines.push('⚠️ **系列文章推荐格式**：');
-    lines.push('- 链接文本 `[ ]` 中**必须**使用原文标题，不能自行概括或用章节名代替');
-    lines.push('  ✅ 正确：`- [基本语法与数据类型](URL) —— 第 2 篇（注释、标识符、关键字）`');
-    lines.push('  ❌ 错误：`- [注释、标识符与关键字](URL) —— 第 2 篇`');
-    lines.push('  ❌ 错误：`- 注释、标识符与关键字 —— 第 2 篇`');
-    lines.push('- 章节名、摘要等补充说明放在 `](URL)` 之后，不要写入链接文本');
+    lines.push('回答规则：');
+    lines.push('- 用 `##` 小标题 + `---` 分隔线 + `-` 无序列表 + `**加粗**` 组织回答');
+    lines.push('- 推荐链接格式 `- [原文标题](URL)`，严禁只写标题不加链接');
+    lines.push('- 优先推荐系列对应文章，说明是第几篇；章节名放在 `](URL)` 后说明');
     lines.push('');
     lines.push('⚠️ **重要规则**：');
     lines.push('- **严禁编造不存在的文章标题或 URL**');
@@ -385,8 +425,12 @@
 
     ensurePostsIndex()
       .then(function(index) {
-        var topArticles = rankArticles(text, index.posts);
-        var msgs = [{ role: 'system', content: buildSystemPrompt(index, topArticles) }];
+        var isNewTopic = !conversationTopic || messages.length <= 2;
+        if (isNewTopic) {
+          conversationTopic = text;
+          currentArticles = rankArticles(text, index.posts);
+        }
+        var msgs = [{ role: 'system', content: buildSystemPrompt(index, currentArticles, isNewTopic) }];
         for (var i = 0; i < messages.length; i++) msgs.push(messages[i]);
 
         return fetch(CONFIG.apiEndpoint, {
@@ -427,7 +471,7 @@
         showStopBtn(false);
         if (err.name === 'AbortError') return;
         trackEvent('error');
-        showToast(classifyError(err, null), 'error');
+        showRetry(classifyError(err, null));
       });
   }
 
@@ -594,33 +638,6 @@
               .replace(/[＃]/g, '#');
     }
 
-    function looksLikeTitle(line) {
-      var plain = line.replace(/\s/g, '');
-      if (plain.length < 8 || plain.length > 60) return false;
-      if (line.indexOf('：') !== -1) return true;
-      if (/第\s*\d+\s*篇/.test(line)) return true;
-      if (/^(Hexo|Unity|C#|C＃|Python|Lua|CSharp|VSCode|OpenCode|Next|Ollama)/.test(line)) return true;
-      return false;
-    }
-
-    function findBestArticle(line, articles) {
-      var keywords = extractKeywords(line);
-      if (!keywords || keywords.length < 2) return null;
-      var best = null, bestScore = 0;
-      for (var i = 0; i < articles.length; i++) {
-        var score = 0;
-        var title = (articles[i].title || '').toLowerCase();
-        var tags = (articles[i].tags || []).join(' ').toLowerCase();
-        for (var k = 0; k < keywords.length; k++) {
-          var kw = keywords[k].toLowerCase();
-          if (title.indexOf(kw) !== -1) score += 3;
-          else if (tags.indexOf(kw) !== -1) score += 2;
-        }
-        if (score > bestScore) { bestScore = score; best = articles[i]; }
-      }
-      return bestScore >= 6 ? best : null;
-    }
-
     var sorted = postsIndexCache.posts.slice().sort(function(a, b) { return b.title.length - a.title.length; });
     var lines = text.split('\n');
     for (var li = 0; li < lines.length; li++) {
@@ -636,20 +653,6 @@
           lines[li] = '[' + title + '](' + url + ')' + rest;
           break;
         }
-      }
-    }
-
-    // Fallback: fuzzy match remaining title-like lines
-    for (var li = 0; li < lines.length; li++) {
-      var line = lines[li].trim();
-      if (!line || line.indexOf('[') === 0) continue;
-      if (!looksLikeTitle(line)) continue;
-      var best = findBestArticle(line, sorted);
-      if (best) {
-        var url = best.url.replace(/^https?:\/\/[^\/]+/, '');
-        lines[li] = '[' + best.title + '](' + url + ')';
-      } else {
-        lines[li] = '';
       }
     }
 
@@ -698,9 +701,10 @@
           return '[' + linkText + '](' + index.posts[i].url.replace(/^https?:\/\/[^\/]+/, '') + ')';
         }
       }
-      // Partial title match → auto-correct
+      // Partial title match → auto-correct (only if lengths are close)
       for (var i = 0; i < index.posts.length; i++) {
-        if (index.posts[i].title.indexOf(linkText) !== -1 || linkText.indexOf(index.posts[i].title) !== -1) {
+        var title = index.posts[i].title;
+        if (Math.abs(title.length - linkText.length) <= 4 && (title.indexOf(linkText) !== -1 || linkText.indexOf(title) !== -1)) {
           return '[' + linkText + '](' + index.posts[i].url.replace(/^https?:\/\/[^\/]+/, '') + ')';
         }
       }
