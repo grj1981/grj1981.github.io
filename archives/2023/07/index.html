@@ -177,7 +177,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">224</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">225</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -252,15 +252,15 @@
     <div class="posts-collapse">
       <div class="collection-title">
         
-        <span class="collection-header">太棒了! 目前共计 224 篇日志。 继续努力。</span>
+        <span class="collection-header">太棒了! 目前共计 225 篇日志。 继续努力。</span>
       </div>
 
       <div class="archive-summary">
-        <span>共 224 篇文章</span>
+        <span>共 225 篇文章</span>
         <span>｜</span>
         <span>最新更新：2026-04-26</span>
         <span>｜</span>
-        <span>最早文章：2023-12-16</span>
+        <span>最早文章：2024-02-25</span>
       </div>
 
       
@@ -543,7 +543,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">224</span>
+          <span class="site-state-item-count">225</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -697,7 +697,7 @@ var pjax = new Pjax({
     '.post-toc-wrap': Pjax.switches.innerHTML
   },
   analytics: false,
-  cacheBust: false,
+  cacheBust: true,
   scrollTo : !CONFIG.bookmark.enable
 });
 window._pjax = pjax;
@@ -740,6 +740,12 @@ window.addEventListener('pjax:success', () => {
       .bootstrap();
   }
   NexT.utils.updateSidebarPosition(true);
+
+  document.querySelectorAll('.post-block, .pagination, .comments').forEach(function(el) {
+    if (parseFloat(el.style.opacity) === 0) {
+      el.style.opacity = 1;
+    }
+  });
 });
 </script>
 

@@ -247,7 +247,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">224</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">225</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -560,7 +560,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">224</span>
+          <span class="site-state-item-count">225</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -714,7 +714,7 @@ var pjax = new Pjax({
     '.post-toc-wrap': Pjax.switches.innerHTML
   },
   analytics: false,
-  cacheBust: false,
+  cacheBust: true,
   scrollTo : !CONFIG.bookmark.enable
 });
 window._pjax = pjax;
@@ -757,6 +757,12 @@ window.addEventListener('pjax:success', () => {
       .bootstrap();
   }
   NexT.utils.updateSidebarPosition(true);
+
+  document.querySelectorAll('.post-block, .pagination, .comments').forEach(function(el) {
+    if (parseFloat(el.style.opacity) === 0) {
+      el.style.opacity = 1;
+    }
+  });
 });
 </script>
 

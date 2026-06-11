@@ -177,7 +177,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">224</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">225</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -260,6 +260,26 @@
     <div class="collection-year">
       <span class="collection-header">2026</span>
     </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2026-06-11T00:00:00+08:00"
+              content="2026-06-11">
+          06-11
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2026/06/11/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-02-%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8E%9F%E7%90%86%E9%80%9A%E4%BF%97%E8%A7%A3%E8%AF%BB/" itemprop="url">
+            <span itemprop="name">ByteFisher AI 编程实战（二）：大语言模型原理通俗解读</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
 
   <article itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -355,7 +375,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">224</span>
+          <span class="site-state-item-count">225</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -509,7 +529,7 @@ var pjax = new Pjax({
     '.post-toc-wrap': Pjax.switches.innerHTML
   },
   analytics: false,
-  cacheBust: false,
+  cacheBust: true,
   scrollTo : !CONFIG.bookmark.enable
 });
 window._pjax = pjax;
@@ -552,6 +572,12 @@ window.addEventListener('pjax:success', () => {
       .bootstrap();
   }
   NexT.utils.updateSidebarPosition(true);
+
+  document.querySelectorAll('.post-block, .pagination, .comments').forEach(function(el) {
+    if (parseFloat(el.style.opacity) === 0) {
+      el.style.opacity = 1;
+    }
+  });
 });
 </script>
 

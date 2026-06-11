@@ -177,7 +177,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">224</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">225</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -260,6 +260,26 @@
     <div class="collection-year">
       <span class="collection-header">2025</span>
     </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2025-05-14T08:00:00+08:00"
+              content="2025-05-14">
+          05-14
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2025/05/14/Unity3D%E6%95%99%E7%A8%8B-14-%E9%9F%B3%E9%A2%91%E7%B3%BB%E7%BB%9F/" itemprop="url">
+            <span itemprop="name">音频系统</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
 
   <article itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -441,26 +461,6 @@
     </header>
   </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2025-05-07T20:00:00+08:00"
-              content="2025-05-07">
-          05-07
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/05/07/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-10-%E9%AB%98%E7%BA%A7LINQ/" itemprop="url">
-            <span itemprop="name">C# 高级教程 - 10 高级 LINQ</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
     </div>
   </div>
   
@@ -538,7 +538,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">224</span>
+          <span class="site-state-item-count">225</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -692,7 +692,7 @@ var pjax = new Pjax({
     '.post-toc-wrap': Pjax.switches.innerHTML
   },
   analytics: false,
-  cacheBust: false,
+  cacheBust: true,
   scrollTo : !CONFIG.bookmark.enable
 });
 window._pjax = pjax;
@@ -735,6 +735,12 @@ window.addEventListener('pjax:success', () => {
       .bootstrap();
   }
   NexT.utils.updateSidebarPosition(true);
+
+  document.querySelectorAll('.post-block, .pagination, .comments').forEach(function(el) {
+    if (parseFloat(el.style.opacity) === 0) {
+      el.style.opacity = 1;
+    }
+  });
 });
 </script>
 

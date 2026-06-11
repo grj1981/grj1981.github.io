@@ -11,7 +11,23 @@
   <rights>All rights reserved 2026, 淡水鱼</rights>
   <subtitle>钓鱼爱好者的编程世界</subtitle>
   <title>ByteFisher</title>
-  <updated>2026-06-09T08:56:04.692Z</updated>
+  <updated>2026-06-08T06:59:08.608Z</updated>
+  <entry>
+    <author>
+      <name>淡水鱼</name>
+    </author>
+    <category term="AI" scheme="https://www.bytefisher.top/categories/AI/"/>
+    <category term="教程" scheme="https://www.bytefisher.top/categories/%E6%95%99%E7%A8%8B/"/>
+    <category term="AI" scheme="https://www.bytefisher.top/tags/AI/"/>
+    <category term="教程" scheme="https://www.bytefisher.top/tags/%E6%95%99%E7%A8%8B/"/>
+    <category term="series:ByteFisher AI编程实战教程" scheme="https://www.bytefisher.top/tags/series-ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B/"/>
+    <id>https://www.bytefisher.top/2026/06/11/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-02-%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8E%9F%E7%90%86%E9%80%9A%E4%BF%97%E8%A7%A3%E8%AF%BB/</id>
+    <link href="https://www.bytefisher.top/2026/06/11/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-02-%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8E%9F%E7%90%86%E9%80%9A%E4%BF%97%E8%A7%A3%E8%AF%BB/"/>
+    <published>2026-06-10T16:00:00.000Z</published>
+    <summary>本系列第2篇，共21篇。用通俗易懂的方式解读大语言模型的核心原理——Token、注意力机制、Transformer架构，以及GPT到DeepSeek的演进之路，帮你理解AI为什么能写代码。</summary>
+    <title>ByteFisher AI 编程实战（二）：大语言模型原理通俗解读</title>
+    <updated>2026-06-08T06:59:08.608Z</updated>
+  </entry>
   <entry>
     <author>
       <name>淡水鱼</name>
@@ -335,24 +351,5 @@
     <summary>在上一篇文章《Hexo博客集成抖音视频实战指南》中，我们详细介绍了如何在Hexo博客中集成抖音视频相册功能，包括数据层设计、页面模板、弹窗播放等核心实现。 然而，在实际使用过程中，我发现弹窗播放存在几个体验问题：视频内容没有垂直居中、弹窗内部出现滚动条、底部进度条和&quot;看更多&quot;区域被遮挡。</summary>
     <title>Hexo博客集成抖音视频实战指南（续）- 弹窗播放体验优化</title>
     <updated>2026-06-04T10:42:36.904Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>淡水鱼</name>
-    </author>
-    <category term="编程" scheme="https://www.bytefisher.top/categories/%E7%BC%96%E7%A8%8B/"/>
-    <category term="游戏开发" scheme="https://www.bytefisher.top/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
-    <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
-    <category term="JavaScript" scheme="https://www.bytefisher.top/tags/JavaScript/"/>
-    <category term="游戏开发" scheme="https://www.bytefisher.top/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
-    <category term="series:博客实战-小游戏" scheme="https://www.bytefisher.top/tags/series-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E6%B8%B8%E6%88%8F/"/>
-    <category term="Canvas" scheme="https://www.bytefisher.top/tags/Canvas/"/>
-    <category term="性能优化" scheme="https://www.bytefisher.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
-    <id>https://www.bytefisher.top/2026/04/28/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97%EF%BC%88%E4%BC%98%E5%8C%96%E7%AF%87%EF%BC%89/</id>
-    <link href="https://www.bytefisher.top/2026/04/28/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97%EF%BC%88%E4%BC%98%E5%8C%96%E7%AF%87%EF%BC%89/"/>
-    <published>2026-04-28T13:00:00.000Z</published>
-    <summary>继光影拼图游戏开发指南（功能篇）介绍功能实现后，本篇聚焦优化过程中解决的 7 个 P0 级集成问题 与运行 Bug。问题的根源在于：Phase 1/Phase 2 的优化模块代码已完成，但未正确集成到游戏主流程中。 本文重点讲解： 1. 模块集成问题：优化代码为何闲置，如何激活 2.</summary>
-    <title>Hexo 博客实战：光影拼图游戏开发指南（优化篇）</title>
-    <updated>2026-06-04T10:38:39.423Z</updated>
   </entry>
 </feed>
