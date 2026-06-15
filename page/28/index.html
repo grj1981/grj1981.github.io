@@ -179,7 +179,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">225</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">227</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -261,7 +261,7 @@
     <p class="hero-desc">分享游戏开发技术与钓鱼乐趣</p>
     <div class="hero-stats">
       <div class="hero-stat">
-        <span class="hero-stat-value">225</span>
+        <span class="hero-stat-value">227</span>
         <span class="hero-stat-label">文章</span>
       </div>
       <div class="hero-stat">
@@ -353,6 +353,10 @@
 
 
 
+
+  
+
+  
 
   
 
@@ -855,6 +859,198 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.webp">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity娃娃机小游戏摘要</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-08-15 17:22:54" itemprop="dateCreated datePublished" datetime="2024-08-15T17:22:54+08:00">2024-08-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>游戏开始，下方随机生成不同品质小人，在场景中来回走动，不同品质的小人，移动速度不一样，被抓到后获得的积分也不一样。按住移动按钮，上方机械手臂会左右来回移动，当松开按钮，机械手臂会掉下来，当手臂下落碰到场景中小人时，检测当前手臂抓取范围内的小人，在抓取范围内的小人会被抓走。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/08/15/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A8%83%E5%A8%83%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.webp">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">Lua实现Unity象素鸟小游戏摘要</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-08-14 19:38:16" itemprop="dateCreated datePublished" datetime="2024-08-14T19:38:16+08:00">2024-08-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Lua实现Unity象素鸟小游戏要点记录： 不用物理引擎实现像素鸟在障碍物之间飞行，通过配表配置小鸟向下的加速度和点击一次屏幕给小鸟赋值一次初始速度和向上加速度来模拟小鸟飞行。障碍物根据配置难度在固定距离随机生成。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E8%B1%A1%E7%B4%A0%E9%B8%9F%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/08/14/Lua%E5%AE%9E%E7%8E%B0Unity%E4%B8%80%E7%AC%94%E7%94%BB%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1227,190 +1423,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/06/19/Unity3D%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.webp">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/06/19/Unity3D%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF/" class="post-title-link" itemprop="url">Unity3D游戏场景</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-06-19 15:05:23" itemprop="dateCreated datePublished" datetime="2024-06-19T15:05:23+08:00">2024-06-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/2024/06/19/Unity3D%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2024/06/19/Unity3D%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Unity3D、IT: Scene scene = SceneManager.GetActiveScene(); Debug.Log(scene.name);</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/06/19/Unity3D%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.webp">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/" class="post-title-link" itemprop="url">Unity3D路径权限</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-06-19 14:25:43" itemprop="dateCreated datePublished" datetime="2024-06-19T14:25:43+08:00">2024-06-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity3D/" itemprop="url" rel="index"><span itemprop="name">Unity3D</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Unity3D、IT: Debug.Log(Application.dataPath); D:/UnityTest/TestUnity2021Project/New Unity Project/Assets Debug.Log(Application.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1482,7 +1494,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">225</span>
+          <span class="site-state-item-count">227</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

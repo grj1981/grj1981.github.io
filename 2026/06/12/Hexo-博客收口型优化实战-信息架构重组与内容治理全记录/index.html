@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="preconnect" href="https://fonts.loli.net">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://img.bytefisher.top">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#37c6c0">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#37c6c0">
+
+<meta http-equiv="Permissions-Policy" content="encrypted-media=*">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="codeva-7SG6ROHyTg">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"></noscript>
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com busuanzi.ibruce.info static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
+  <meta name="description" content="ByteFisher 博客上线2年后迎来&quot;收口型&quot;优化——不追求新功能，而是对信息架构、SEO 质量、废弃资产和基础设施做系统性清理。记录首页改为内容入口矩阵、14+ 篇文章 description 批量重写、旧图床链接清零、tools 目录瘦身等全部过程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 博客收口型优化实战：信息架构重组与内容治理全记录">
+<meta property="og:url" content="https://www.bytefisher.top/2026/06/12/Hexo-%E5%8D%9A%E5%AE%A2%E6%94%B6%E5%8F%A3%E5%9E%8B%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E4%BF%A1%E6%81%AF%E6%9E%B6%E6%9E%84%E9%87%8D%E7%BB%84%E4%B8%8E%E5%86%85%E5%AE%B9%E6%B2%BB%E7%90%86%E5%85%A8%E8%AE%B0%E5%BD%95/">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="ByteFisher 博客上线2年后迎来&quot;收口型&quot;优化——不追求新功能，而是对信息架构、SEO 质量、废弃资产和基础设施做系统性清理。记录首页改为内容入口矩阵、14+ 篇文章 description 批量重写、旧图床链接清零、tools 目录瘦身等全部过程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-06-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-11T08:39:29.064Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Next主题">
+<meta property="article:tag" content="SEO">
+<meta property="article:tag" content="series:Hexo博客搭建">
+<meta property="article:tag" content="博客优化">
+<meta name="twitter:card" content="summary">
+  <meta name="keywords" content="Hexo博客搭建, 收口型优化, Next主题, 博客优化, 信息架构, 内容治理, SEO, 首页重构, 废弃页面清理, 淡水鱼, ByteFisher">
+
+<link rel="canonical" href="https://www.bytefisher.top/2026/06/12/Hexo-%E5%8D%9A%E5%AE%A2%E6%94%B6%E5%8F%A3%E5%9E%8B%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E4%BF%A1%E6%81%AF%E6%9E%B6%E6%9E%84%E9%87%8D%E7%BB%84%E4%B8%8E%E5%86%85%E5%AE%B9%E6%B2%BB%E7%90%86%E5%85%A8%E8%AE%B0%E5%BD%95/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo 博客收口型优化实战：信息架构重组与内容治理全记录","description":"ByteFisher 博客上线2年后迎来\\\"收口型\\\"优化——不追求新功能，而是对信息架构、SEO 质量、废弃资产和基础设施做系统性清理。记录首页改为内容入口矩阵、14+ 篇文章 description 批量重写、旧图床链接清零、tools 目录瘦身等全部过程。","url":"https://www.bytefisher.top/2026/06/12/Hexo-博客收口型优化实战-信息架构重组与内容治理全记录/","datePublished":"2026-06-11T16:00:00.000Z","dateModified":"2026-06-11T08:39:29.064Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/06/12/Hexo-博客收口型优化实战-信息架构重组与内容治理全记录/"},"keywords":"series:Hexo博客搭建, Hexo, Next主题, 博客优化, SEO"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Hexo博客搭建","item":"https://www.bytefisher.top/categories/Hexo博客搭建/"},{"@type":"ListItem","position":3,"name":"Hexo 博客收口型优化实战：信息架构重组与内容治理全记录"}]}</script>
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Hexo 博客收口型优化实战：信息架构重组与内容治理全记录 | ByteFisher</title>
+  
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dc50e0997d43c3a8dbf2afdb3fdff233";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#37c6c0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-tutorials">
+
+    <a href="/tutorials/" rel="section"><i class="fa fa-book fa-fw"></i>教程<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-aigames">
+
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">53</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">227</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>rss</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/06/12/Hexo-%E5%8D%9A%E5%AE%A2%E6%94%B6%E5%8F%A3%E5%9E%8B%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E4%BF%A1%E6%81%AF%E6%9E%B6%E6%9E%84%E9%87%8D%E7%BB%84%E4%B8%8E%E5%86%85%E5%AE%B9%E6%B2%BB%E7%90%86%E5%85%A8%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.webp">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo 博客收口型优化实战：信息架构重组与内容治理全记录
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-06-12 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-12T00:00:00+08:00">2026-06-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">Hexo博客搭建</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2026/06/12/Hexo-%E5%8D%9A%E5%AE%A2%E6%94%B6%E5%8F%A3%E5%9E%8B%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E4%BF%A1%E6%81%AF%E6%9E%B6%E6%9E%84%E9%87%8D%E7%BB%84%E4%B8%8E%E5%86%85%E5%AE%B9%E6%B2%BB%E7%90%86%E5%85%A8%E8%AE%B0%E5%BD%95/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2026/06/12/Hexo-%E5%8D%9A%E5%AE%A2%E6%94%B6%E5%8F%A3%E5%9E%8B%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E4%BF%A1%E6%81%AF%E6%9E%B6%E6%9E%84%E9%87%8D%E7%BB%84%E4%B8%8E%E5%86%85%E5%AE%B9%E6%B2%BB%E7%90%86%E5%85%A8%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">ByteFisher 博客上线2年后迎来"收口型"优化——不追求新功能，而是对信息架构、SEO 质量、废弃资产和基础设施做系统性清理。记录首页改为内容入口矩阵、14+ 篇文章 description 批量重写、旧图床链接清零、tools 目录瘦身等全部过程。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>ByteFisher 博客从最初的 Hexo 基础静态站一路迭代，到现在已经覆盖了技术教程、钓鱼日记、钓鱼相册、鱼获 Dashboard、钓点地图、抖音视频、AI 小游戏、AI 问答助手、热门文章、PWA 等多个功能模块。文章总量突破 150+，线下工具脚本接近 20 个，第三方服务依赖 6 个以上。</p>
+<p>功能越来越多，但问题也随之暴露：</p>
+<ul>
+<li><strong>首页还是时间流</strong>——150 篇文章按时间排列，新访客不知道从哪开始看。</li>
+<li><strong>文章摘要参差不齐</strong>——有的空着，有的截断，有的塞了正文片段。</li>
+<li><strong>旧图床链接零星残留</strong>——以前用 iili.io，切到 img.bytefisher.top 后还有漏网之鱼。</li>
+<li><strong>tools 目录积灰</strong>——脚本越来越多，三分之一已经不再使用。</li>
+<li><strong>基础设施欠账</strong>——PJAX cacheBust 没开、PWA 缓存策略过时、CI&#x2F;CD timezone 没设。</li>
+</ul>
+<p>本轮优化的核心理念是”收口”：不追加新功能，对已上线的内容、配置、代码做系统性清理。本文记录这次优化的完整过程。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="一、信息架构重组：从时间流到入口矩阵"><a href="#一、信息架构重组：从时间流到入口矩阵" class="headerlink" title="一、信息架构重组：从时间流到入口矩阵"></a>一、信息架构重组：从时间流到入口矩阵</h2><h3 id="1-1-背景：一个首页只有时间线的博客"><a href="#1-1-背景：一个首页只有时间线的博客" class="headerlink" title="1.1 背景：一个首页只有时间线的博客"></a>1.1 背景：一个首页只有时间线的博客</h3><p>优化前的 <code>index.swig</code> 结构很简单：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;% block content %&#125;</span><br><span class="line">  &#123;% include &#x27;_partials/hero.swig&#x27; %&#125;</span><br><span class="line">  &#123;%- for post in page.posts.toArray() %&#125;</span><br><span class="line">    &#123;&#123; partial(&#x27;_macro/post.swig&#x27;, &#123;post: post, is_index: true&#125;) &#125;&#125;</span><br><span class="line">  &#123;%- endfor %&#125;</span><br><span class="line">  &#123;% include &#x27;_partials/pagination.swig&#x27; %&#125;</span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Hero 区域放了几个跳转按钮和技术统计，下面就是按日期排列的文章列表。对于知道自己在找什么的老读者没问题，但新访客面对 150 篇文章的时间流，往往不知所措。</p>
+<h3 id="1-2-设计思路：按入口引导-专题推荐"><a href="#1-2-设计思路：按入口引导-专题推荐" class="headerlink" title="1.2 设计思路：按入口引导 + 专题推荐"></a>1.2 设计思路：按入口引导 + 专题推荐</h3><p>参考一些内容型网站的布局方式，把首页从上到下拆成四个区域：</p>
+<ol>
+<li><strong>Hero 品牌区</strong>——保留头像、打字动画和全站数据统计</li>
+<li><strong>内容入口 Grid</strong>——教程、钓鱼、游戏、视频四张卡片，按主题分流</li>
+<li><strong>精选专题</strong>——游戏开发、C# 基础、Hexo 实战、AI 编程四个系列推荐</li>
+<li><strong>最新文章 + Featured 推荐</strong></li>
+</ol>
+<p>关键是第二和第三区——它们让新访客在 1 秒内理解”这个博客有什么”，并且两次点击就能进入任意核心系列。</p>
+<h3 id="1-3-实现：home-sections-swig"><a href="#1-3-实现：home-sections-swig" class="headerlink" title="1.3 实现：home-sections.swig"></a>1.3 实现：home-sections.swig</h3><p>新增 <code>themes/next/layout/_partials/home-sections.swig</code>，内容区按模块切分：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&#123;# 内容入口 — 四张卡片按主题分流 #&#125;</span><br><span class="line">&lt;section class=&quot;home-section home-entry-section&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;home-section-head&quot;&gt;</span><br><span class="line">    &lt;h2 class=&quot;home-section-title&quot;&gt;内容入口&lt;/h2&gt;</span><br><span class="line">    &lt;p class=&quot;home-section-desc&quot;&gt;按主题进入，少翻时间线。&lt;/p&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;home-entry-grid&quot;&gt;</span><br><span class="line">    &lt;a class=&quot;home-entry-card home-entry-tech&quot; href=&quot;/tutorials/&quot;&gt;</span><br><span class="line">      &lt;span class=&quot;home-entry-icon&quot;&gt;&lt;i class=&quot;fa fa-book&quot;&gt;&lt;/i&gt;&lt;/span&gt;</span><br><span class="line">      &lt;span class=&quot;home-entry-body&quot;&gt;</span><br><span class="line">        &lt;strong&gt;教程系列&lt;/strong&gt;</span><br><span class="line">        &lt;span&gt;Unity3D、C#、Lua、Python、AI 编程&lt;/span&gt;</span><br><span class="line">      &lt;/span&gt;</span><br><span class="line">    &lt;/a&gt;</span><br><span class="line">    &lt;a class=&quot;home-entry-card home-entry-fish&quot; href=&quot;/fish/&quot;&gt;</span><br><span class="line">      ...</span><br><span class="line">    &lt;/a&gt;</span><br><span class="line">    &lt;a class=&quot;home-entry-card home-entry-game&quot; href=&quot;/ai-games/&quot;&gt;</span><br><span class="line">      ...</span><br><span class="line">    &lt;/a&gt;</span><br><span class="line">    &lt;a class=&quot;home-entry-card home-entry-video&quot; href=&quot;/douyin/&quot;&gt;</span><br><span class="line">      ...</span><br><span class="line">    &lt;/a&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/section&gt;</span><br><span class="line"></span><br><span class="line">&#123;# 精选专题 — 四个系列直接推荐 #&#125;</span><br><span class="line">&lt;section class=&quot;home-section home-topic-section&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;home-section-head&quot;&gt;</span><br><span class="line">    &lt;h2 class=&quot;home-section-title&quot;&gt;精选专题&lt;/h2&gt;</span><br><span class="line">    &lt;p class=&quot;home-section-desc&quot;&gt;从代表性系列开始阅读。&lt;/p&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;home-topic-grid&quot;&gt;</span><br><span class="line">    &lt;a class=&quot;home-topic-card&quot; href=&quot;/tags/series-Unity3D开发基础教程/&quot;&gt;</span><br><span class="line">      &lt;span class=&quot;home-topic-label&quot;&gt;游戏开发&lt;/span&gt;</span><br><span class="line">      &lt;strong&gt;Unity3D 开发基础教程&lt;/strong&gt;</span><br><span class="line">      &lt;span&gt;从场景、脚本、物理到构建发布。&lt;/span&gt;</span><br><span class="line">    &lt;/a&gt;</span><br><span class="line">    &#123;# ... 其余三个卡片类似 #&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/section&gt;</span><br></pre></td></tr></table></figure>
+
+<p>对应的 CSS 全部写在 <code>source/_data/styles.styl</code> 中，采用 Grid 布局实现响应式卡片：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.home-entry-grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="built_in">repeat</span>(auto-fit, <span class="built_in">minmax</span>(<span class="number">220px</span>, <span class="number">1</span>fr));</span><br><span class="line">  <span class="attribute">gap</span>: <span class="number">16px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.home-entry-card</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">  <span class="attribute">gap</span>: <span class="number">12px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">16px</span> <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">var</span>(--card-bg);</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="built_in">var</span>(--border-color);</span><br><span class="line">  <span class="attribute">transition</span>: transform <span class="number">0.2s</span>, box-shadow <span class="number">0.2s</span>;</span><br><span class="line"></span><br><span class="line">  <span class="selector-pseudo">&amp;:hover</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(-<span class="number">2px</span>);</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">4px</span> <span class="number">12px</span> <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.08</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-Featured-Posts：让精选文章浮出水面"><a href="#1-4-Featured-Posts：让精选文章浮出水面" class="headerlink" title="1.4 Featured Posts：让精选文章浮出水面"></a>1.4 Featured Posts：让精选文章浮出水面</h3><p>新增 <code>featured-posts.swig</code>，逻辑分两层：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;% for post in site.posts.sort(&#x27;date&#x27;, -1).toArray() %&#125;</span><br><span class="line">  &#123;% if post.featured and featured_count &lt; 4 %&#125;</span><br><span class="line">    &#123;# 渲染 featured 卡片 #&#125;</span><br><span class="line">  &#123;% endif %&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br><span class="line"></span><br><span class="line">&#123;# 如果没有 featured 文章，退回显示最新 4 篇 #&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也就是说，只要在文章的 front-matter 中设置 <code>featured: true</code>，它就会自动出现在首页的”推荐阅读”区域。没有手动设置的文章，则自动拿最新 4 篇填充——完全不增加维护成本。</p>
+<h3 id="1-5-全站数据联动：教程计数打通-Hero、Sidebar、菜单"><a href="#1-5-全站数据联动：教程计数打通-Hero、Sidebar、菜单" class="headerlink" title="1.5 全站数据联动：教程计数打通 Hero、Sidebar、菜单"></a>1.5 全站数据联动：教程计数打通 Hero、Sidebar、菜单</h3><p>为了让 Hero 区域的统计数据真实反映博客内容，需要把教程系列数量透传到前端。原来这些数字是手写在配置里的。</p>
+<p>在 <code>themes/next/scripts/</code> 中新增教程计数逻辑，通过 Hexo 的 <code>filter</code> 在生成阶段自动计算：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// themes/next/scripts/filters/tutorials-data.js</span></span><br><span class="line">hexo.<span class="property">extend</span>.<span class="property">filter</span>.<span class="title function_">register</span>(<span class="string">&#x27;after_init&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> series = hexo.<span class="property">locals</span>.<span class="title function_">get</span>(<span class="string">&#x27;posts&#x27;</span>).<span class="title function_">find</span>(&#123;</span><br><span class="line">    <span class="string">&#x27;tags&#x27;</span>: &#123; <span class="attr">$regex</span>: <span class="string">&#x27;^series-&#x27;</span> &#125;</span><br><span class="line">  &#125;).<span class="title function_">map</span>(<span class="keyword">function</span>(<span class="params">post</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> post.<span class="property">tags</span>.<span class="title function_">filter</span>(<span class="keyword">function</span>(<span class="params">t</span>) &#123; <span class="keyword">return</span> t.<span class="property">name</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;series-&#x27;</span>); &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">// 去重计数</span></span><br><span class="line">  <span class="keyword">var</span> uniqueSeries = [...<span class="keyword">new</span> <span class="title class_">Set</span>(series)];</span><br><span class="line">  hexo.<span class="property">theme</span>.<span class="property">config</span>.<span class="property">tutorialCount</span> = uniqueSeries.<span class="property">length</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这样 Hero stat、侧边栏 site-overview、菜单 badge 都能用 <code>&#123;&#123; theme.tutorialCount or 0 &#125;&#125;</code> 获取真实数据，不再需要手动维护。</p>
+<p><strong>效果</strong>：首页从纯时间流变成有层次的信息入口，新访客可以在两次点击内进入任意核心系列。后续统计显示，教程页的访问占比提升了约 30%。</p>
+<hr>
+<h2 id="二、SEO-与内容治理：14-篇文章摘要重写"><a href="#二、SEO-与内容治理：14-篇文章摘要重写" class="headerlink" title="二、SEO 与内容治理：14+ 篇文章摘要重写"></a>二、SEO 与内容治理：14+ 篇文章摘要重写</h2><h3 id="2-1-问题：description-质量参差不齐"><a href="#2-1-问题：description-质量参差不齐" class="headerlink" title="2.1 问题：description 质量参差不齐"></a>2.1 问题：description 质量参差不齐</h3><p>经过前几轮优化，文章 description 的覆盖率已经很高（95% 以上），但质量不行。</p>
+<p>用 <code>rg -n &quot;^description:&quot; source/_posts -g &quot;*.md&quot;</code> 逐一检查，发现几类典型问题：</p>
+<table>
+<thead>
+<tr>
+<th>问题类型</th>
+<th>示例</th>
+<th>影响</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>空描述</strong></td>
+<td><code>description:</code>（仅字段名，无内容）</td>
+<td>搜索引擎用正文前 160 字，可能截断不完整</td>
+</tr>
+<tr>
+<td><strong>截断残片</strong></td>
+<td>以半句话结尾，有明显断句痕迹</td>
+<td>搜索结果摘要读不通</td>
+</tr>
+<tr>
+<td><strong>正文污染</strong></td>
+<td>混入图片描述、代码片段、链接 URL</td>
+<td>降低搜索引擎对页面主题的判断</td>
+</tr>
+<tr>
+<td><strong>过长</strong></td>
+<td>超过 160 字，搜索引擎也会截断</td>
+<td>关键信息可能被截掉</td>
+</tr>
+</tbody></table>
+<h3 id="2-2-工具：frontmatter-audit-py"><a href="#2-2-工具：frontmatter-audit-py" class="headerlink" title="2.2 工具：frontmatter-audit.py"></a>2.2 工具：frontmatter-audit.py</h3><p>写了一个审计脚本 <code>tools/seo/frontmatter-audit.py</code>，自动扫描所有文章的 front-matter：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">POSTS_DIR = Path(__file__).resolve().parents[<span class="number">2</span>] / <span class="string">&quot;source&quot;</span> / <span class="string">&quot;_posts&quot;</span></span><br><span class="line">MIN_DESCRIPTION_LEN = <span class="number">40</span></span><br><span class="line">MAX_DESCRIPTION_LEN = <span class="number">160</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">find_issues</span>(<span class="params">path, fm</span>):</span><br><span class="line">    issues = []</span><br><span class="line">    desc = normalize_description(fm.get(<span class="string">&quot;description&quot;</span>, <span class="string">&quot;&quot;</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> desc:</span><br><span class="line">        issues.append(<span class="string">&quot;description 为空&quot;</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">len</span>(desc) &lt; MIN_DESCRIPTION_LEN:</span><br><span class="line">        issues.append(<span class="string">f&quot;description 过短（<span class="subst">&#123;<span class="built_in">len</span>(desc)&#125;</span> 字）&quot;</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">len</span>(desc) &gt; MAX_DESCRIPTION_LEN:</span><br><span class="line">        issues.append(<span class="string">f&quot;description 过长（<span class="subst">&#123;<span class="built_in">len</span>(desc)&#125;</span> 字）&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 检查是否包含 Markdown 标记、``` 代码块、图片描述等污染</span></span><br><span class="line">    pollution_patterns = [</span><br><span class="line">        (<span class="string">r&#x27;!\[.*?\]\(.*?\)&#x27;</span>, <span class="string">&#x27;图片 Markdown&#x27;</span>),</span><br><span class="line">        (<span class="string">r&#x27;```&#x27;</span>, <span class="string">&#x27;代码块&#x27;</span>),</span><br><span class="line">        (<span class="string">r&#x27;http[s]?://&#x27;</span>, <span class="string">&#x27;URL&#x27;</span>),</span><br><span class="line">    ]</span><br><span class="line">    <span class="keyword">for</span> pattern, label <span class="keyword">in</span> pollution_patterns:</span><br><span class="line">        <span class="keyword">if</span> re.search(pattern, desc):</span><br><span class="line">            issues.append(<span class="string">f&quot;含有 <span class="subst">&#123;label&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> issues</span><br></pre></td></tr></table></figure>
+
+<p>运行一次就会列出所有有问题的文章，逐一修复。这个脚本只读不改，可以放心集成到发布检查流程中。</p>
+<h3 id="2-3-重写策略：按文章类型定模板"><a href="#2-3-重写策略：按文章类型定模板" class="headerlink" title="2.3 重写策略：按文章类型定模板"></a>2.3 重写策略：按文章类型定模板</h3><p>针对不同类型的文章，制定了对应摘要模板：</p>
+<ul>
+<li><strong>技术教程</strong>：<code>[系列名] + [这篇文章教什么] + [读者收益]</code></li>
+<li><strong>钓鱼日记</strong>：<code>[时间] + [地点] + [鱼获亮点] + [经验总结]</code></li>
+<li><strong>Hexo 实战</strong>：<code>[解决的问题] + [方案简介] + [涉及技术/工具]</code></li>
+<li><strong>游戏开发</strong>：<code>[游戏类型] + [开发技术] + [核心功能点]</code></li>
+</ul>
+<p>示例——之前 <code>C#学习笔记【结构体Struct】</code> 的描述是空字段，重写后：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">description:</span> <span class="string">&#x27;C# 学习笔记系列第 5 篇。讲解结构体（struct）的值类型特性、与类的区别、适用场景和最佳实践，包含栈上分配和装箱拆箱的性能要点。&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>14+ 篇文章的描述逐一按这个标准重写，同时文中关键词也同步做了归并统一。</p>
+<hr>
+<h2 id="三、废弃资产清理"><a href="#三、废弃资产清理" class="headerlink" title="三、废弃资产清理"></a>三、废弃资产清理</h2><h3 id="3-1-Program-页面：停用废弃布局"><a href="#3-1-Program-页面：停用废弃布局" class="headerlink" title="3.1 Program 页面：停用废弃布局"></a>3.1 Program 页面：停用废弃布局</h3><p><code>source/program/index.md</code> 使用了 <code>layout: &quot;program&quot;</code>，这是一个历史遗留的自定义布局，已经被新搭建的 <code>/tutorials/</code> 教程总入口页面取代了。但旧 URL <code>/program/</code> 可能还在搜索引擎索引中，访问后返回一个不再维护的页面。</p>
+<p>处理方式不是直接删除，而是改为静态跳转页：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">&quot;program&quot;</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">教程索引</span></span><br><span class="line"><span class="attr">noindex:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">sitemap:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">canonical:</span> <span class="string">/tutorials/</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="string">&lt;!--</span> <span class="string">跳转提示</span> <span class="string">--&gt;</span></span><br><span class="line"><span class="string">&lt;link</span> <span class="string">rel=&quot;canonical&quot;</span> <span class="string">href=&quot;/tutorials/&quot;&gt;</span></span><br><span class="line"><span class="string">&lt;noscript&gt;</span></span><br><span class="line">  <span class="string">&lt;meta</span> <span class="string">http-equiv=&quot;refresh&quot;</span> <span class="string">content=&quot;0;</span> <span class="string">url=/tutorials/&quot;&gt;</span></span><br><span class="line"><span class="string">&lt;/noscript&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="string">&lt;script&gt;</span></span><br><span class="line">  <span class="string">window.location.href</span> <span class="string">=</span> <span class="string">&#x27;/tutorials/&#x27;</span><span class="string">;</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="string">&lt;div</span> <span class="string">style=&quot;text-align:center;padding:100px</span> <span class="string">20px;&quot;&gt;</span></span><br><span class="line">  <span class="string">&lt;p&gt;教程页面已迁移，正在跳转到</span> <span class="string">&lt;a</span> <span class="string">href=&quot;/tutorials/&quot;&gt;新教程页&lt;/a&gt;...&lt;/p&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>加上 <code>canonical</code> 和 <code>noindex</code>，搜索引擎知道该页面已不再独立索引。</p>
+<h3 id="3-2-旧图床链接清零"><a href="#3-2-旧图床链接清零" class="headerlink" title="3.2 旧图床链接清零"></a>3.2 旧图床链接清零</h3><p>两个月前把钓鱼相册和文章配图从 iili.io 迁移到了自建的 <code>img.bytefisher.top</code> CDN，但 <code>source/douyin/videos.json</code> 中还残留着 22 条旧链接。</p>
+<p>用 <code>rg &quot;iili\.io&quot; source</code> 快速定位所有残留，逐条迁移：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检查旧图床残留</span></span><br><span class="line">rg <span class="string">&quot;iili\.io|freeimage&quot;</span> <span class="built_in">source</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 结果：只有 douyin/videos.json 有残留</span></span><br><span class="line"><span class="built_in">source</span>/douyin/videos.json</span><br><span class="line">  12:  <span class="string">&quot;cover&quot;</span>: <span class="string">&quot;https://iili.io/xxx.jpg&quot;</span></span><br><span class="line">  18:  <span class="string">&quot;cover&quot;</span>: <span class="string">&quot;https://iili.io/yyy.jpg&quot;</span></span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
+
+<p>将 22 条封面链接全部替换为 <code>https://img.bytefisher.top/douyin/xxx.webp</code>，再次运行 <code>rg</code> 零结果。</p>
+<h3 id="3-3-Tools-目录瘦身：一次性删除-16-个历史文件"><a href="#3-3-Tools-目录瘦身：一次性删除-16-个历史文件" class="headerlink" title="3.3 Tools 目录瘦身：一次性删除 16 个历史文件"></a>3.3 Tools 目录瘦身：一次性删除 16 个历史文件</h3><p>这是最”爽”的一步。<code>tools/</code> 目录经过多轮迭代，积累了大量不再使用的脚本：</p>
+<ul>
+<li><code>archive/js/</code> 下的 <code>download_images.js</code>、<code>download_compress_images.js</code>、<code>download_missing.js</code>、<code>fix_webp_urls.js</code>、<code>replace_image_urls.js</code>——这些是图床迁移时的临时工具，迁移完成后再无用途</li>
+<li><code>archive/python/</code> 下的 <code>fix_series_brackets.py</code>、<code>fix_series_format.py</code>、<code>fix_series_indent.py</code>——历史格式修复脚本，修复过一次后不再需要</li>
+<li>整个 <code>wechat-path/</code> 目录——公众号图片路径处理工具，对应的逻辑已经在主同步工具 <code>wechat-sync/index.js</code> 内实现了</li>
+</ul>
+<p>清理了 16 个文件、约 800 行代码，<code>tools/</code> 目录从杂乱状态变得清爽：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tools/</span><br><span class="line">  README.md</span><br><span class="line">  requirements.txt</span><br><span class="line">  seo/              # SEO 审计工具（新）</span><br><span class="line">  douyin-convert/   # 抖音视频转换</span><br><span class="line">  wechat-sync/      # 公众号同步</span><br><span class="line">  图片重命名工具/</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="四、基础设施加固"><a href="#四、基础设施加固" class="headerlink" title="四、基础设施加固"></a>四、基础设施加固</h2><h3 id="4-1-PJAX-CacheBust：修复文章消失-Bug"><a href="#4-1-PJAX-CacheBust：修复文章消失-Bug" class="headerlink" title="4.1 PJAX CacheBust：修复文章消失 Bug"></a>4.1 PJAX CacheBust：修复文章消失 Bug</h3><p>线上发现一个诡异问题：新发布的文章”ByteFisher AI 编程实战（二）”首次加载正常显示，切换到其他页面再回主页就消失了，刷新后又出现。</p>
+<p>追到 <code>themes/next/layout/_scripts/pjax.swig</code> 发现 <code>cacheBust: false</code>。PJAX 的 XHR 请求不会加时间戳参数，浏览器直接返回了 HTTP 缓存中的旧首页 HTML——那里面没有新文章。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改前</span></span><br><span class="line"><span class="keyword">var</span> pjax = <span class="keyword">new</span> <span class="title class_">Pjax</span>(&#123;</span><br><span class="line">  <span class="attr">selectors</span>: [...],</span><br><span class="line">  <span class="attr">cacheBust</span>: <span class="literal">false</span>,  <span class="comment">// ← 这就是问题</span></span><br><span class="line">  ...</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改后</span></span><br><span class="line"><span class="keyword">var</span> pjax = <span class="keyword">new</span> <span class="title class_">Pjax</span>(&#123;</span><br><span class="line">  <span class="attr">selectors</span>: [...],</span><br><span class="line">  <span class="attr">cacheBust</span>: <span class="literal">true</span>,   <span class="comment">// 每次 XHR 带 ?t=Date.now() 时间戳</span></span><br><span class="line">  ...</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>同时加了一道 opacity 安全兜底，防止 motion 动画未完成时 post-block 卡在不可见状态：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 pjax:success 处理器末尾</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;.post-block, .pagination, .comments&#x27;</span>).<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">el</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">parseFloat</span>(el.<span class="property">style</span>.<span class="property">opacity</span>) === <span class="number">0</span>) &#123;</span><br><span class="line">    el.<span class="property">style</span>.<span class="property">opacity</span> = <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-PWA-Service-Worker-缓存策略升级"><a href="#4-2-PWA-Service-Worker-缓存策略升级" class="headerlink" title="4.2 PWA Service Worker 缓存策略升级"></a>4.2 PWA Service Worker 缓存策略升级</h3><p>Service Worker 之前用的 <code>CACHE_NAME = &#39;bytefisher-v4&#39;</code> 硬编码版本号，每次更新都需要手动改。改为自动生成：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// source/sw.js</span></span><br><span class="line"><span class="keyword">var</span> <span class="variable constant_">CACHE_NAME</span> = <span class="string">&#x27;bytefisher-&#x27;</span> + <span class="title class_">Date</span>.<span class="title function_">now</span>();</span><br></pre></td></tr></table></figure>
+
+<p>缓存策略也从单一的 cache-first 改为分级策略：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">self.<span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> req = event.<span class="property">request</span>;</span><br><span class="line">  <span class="keyword">var</span> isHTML = req.<span class="property">headers</span>.<span class="title function_">get</span>(<span class="string">&#x27;Accept&#x27;</span>).<span class="title function_">indexOf</span>(<span class="string">&#x27;text/html&#x27;</span>) !== -<span class="number">1</span>;</span><br><span class="line">  <span class="keyword">var</span> isCSS = <span class="regexp">/\.css(\?|$)/</span>.<span class="title function_">test</span>(req.<span class="property">url</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (isHTML || isCSS) &#123;</span><br><span class="line">    <span class="comment">// HTML 和 CSS：网络优先，保证最新</span></span><br><span class="line">    event.<span class="title function_">respondWith</span>(<span class="title function_">networkFirst</span>(req));</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// JS、图片、字体：stale-while-revalidate</span></span><br><span class="line">    event.<span class="title function_">respondWith</span>(<span class="title function_">staleWhileRevalidate</span>(req));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>HTML 和 CSS 采用网络优先策略保证内容时效性；JS、图片、字体采用 stale-while-revalidate（同时用缓存响应和发起网络更新），兼顾速度与更新。</p>
+<h3 id="4-3-CI-CD-定时构建与时区"><a href="#4-3-CI-CD-定时构建与时区" class="headerlink" title="4.3 CI&#x2F;CD 定时构建与时区"></a>4.3 CI&#x2F;CD 定时构建与时区</h3><p>GitHub Actions 的定时任务之前没有设置时区，凌晨触发的时间点不符合预期。在 workflow 文件中加入环境变量：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">env:</span></span><br><span class="line">  <span class="attr">TZ:</span> <span class="string">Asia/Shanghai</span></span><br><span class="line"></span><br><span class="line"><span class="attr">schedule:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">cron:</span> <span class="string">&#x27;5 16 * * *&#x27;</span>   <span class="comment"># 每天北京时间 00:05 触发</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">cron:</span> <span class="string">&#x27;0 2 * * *&#x27;</span>    <span class="comment"># 每天北京时间 10:00 二次构建（兜底）</span></span><br></pre></td></tr></table></figure>
+
+<p>第一个 cron 在午夜过 5 分钟触发，目的是让未来日期文章（比如当天 0 点定时发布的文章）被自动构建上线。第二个作为白天的容错构建。</p>
+<h3 id="4-4-明确未来文章发布策略"><a href="#4-4-明确未来文章发布策略" class="headerlink" title="4.4 明确未来文章发布策略"></a>4.4 明确未来文章发布策略</h3><p>博客有一个系列 ByteFisher AI 编程实战教程，从第 1 篇到第 21 篇预写了全部文章，日期跨度从 2026-06-08 到 2026-08-17。主配置 <code>_config.yml</code> 保持 <code>future: false</code>，所以普通 <code>npm run build</code> 不会生成这些未来文章。</p>
+<p>但项目中又存在 <code>build:all</code> 和 <code>server:all</code> 脚本用于开发预览。如果不明确说明，容易导致两个问题：</p>
+<ul>
+<li>开发时看不到未来文章，以为构建出错</li>
+<li>生产构建意外包含了不应该发布的内容</li>
+</ul>
+<p>在 AGENTS.md 中补充说明：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">### 未来文章发布策略</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="code">`_config.yml`</span> 中保持 <span class="code">`future: false`</span>，正式发布不生成未来日期文章。</span><br><span class="line"><span class="bullet">-</span> 不要为了预览未来文章而修改 <span class="code">`_config.yml`</span> 的 <span class="code">`future`</span> 配置。</span><br><span class="line"><span class="bullet">-</span> 需要提前发布某篇未来文章时，优先修改该文章 <span class="code">`date`</span> 为实际发布日期，再运行常规构建。</span><br><span class="line"><span class="bullet">-</span> 定时发布的未来文章由 CI/CD 在每天 00:05（北京时间）自动构建上线。</span><br></pre></td></tr></table></figure>
+
+<p>这样每个环节都有明确的行为预期。</p>
+<hr>
+<h2 id="五、工具链优化"><a href="#五、工具链优化" class="headerlink" title="五、工具链优化"></a>五、工具链优化</h2><h3 id="5-1-WeChat-Sync：40007-错误与章节截断"><a href="#5-1-WeChat-Sync：40007-错误与章节截断" class="headerlink" title="5.1 WeChat Sync：40007 错误与章节截断"></a>5.1 WeChat Sync：40007 错误与章节截断</h3><p>公众号同步工具 <code>tools/wechat-sync/index.js</code> 在同步长文时遇到了两个问题：</p>
+<p><strong>问题一：40007 错误</strong></p>
+<p>调用微信 API <code>updateDraft</code> 时传参格式错误：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误写法——返回 40007 invalid args</span></span><br><span class="line">client.<span class="title function_">updateDraft</span>(existingMediaId, article);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确写法——需要用数组包裹</span></span><br><span class="line">client.<span class="title function_">updateDraft</span>(existingMediaId, [article]);</span><br></pre></td></tr></table></figure>
+
+<p>一行括号的差别，排查了半天。</p>
+<p><strong>问题二：长文章截断后标签不闭合</strong></p>
+<p>微信图文消息有正文长度限制，超长文章需要截断。但原来的 <code>truncateHtml()</code> 函数只按字符数切，切完后的 HTML 片段可能不闭合标签，导致微信渲染出错。</p>
+<p>改为语义截断——按 <code>&lt;h2&gt;</code> 章节边界截断：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">truncateAtSection</span>(<span class="params">html, maxLen</span>) &#123;</span><br><span class="line">  <span class="comment">// 按 h2 分节，保留完整章节</span></span><br><span class="line">  <span class="keyword">var</span> sections = html.<span class="title function_">split</span>(<span class="regexp">/(?=&lt;h2\b)/i</span>);</span><br><span class="line">  <span class="keyword">var</span> result = [];</span><br><span class="line">  <span class="keyword">var</span> total = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; sections.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (total + sections[i].<span class="property">length</span> &gt; maxLen) <span class="keyword">break</span>;</span><br><span class="line">    result.<span class="title function_">push</span>(sections[i]);</span><br><span class="line">    total += sections[i].<span class="property">length</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 自动闭合所有未闭合的标签</span></span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">closeAllTags</span>(result.<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>)) +</span><br><span class="line">    <span class="string">&#x27;\n\n&lt;p style=&quot;color:#999;font-size:14px;&quot;&gt;📖 阅读完整内容请访问原文...&lt;/p&gt;&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样即使截断，每段导出的内容也是语法完整的 HTML。</p>
+<hr>
+<h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><p>这次收口型优化前后涉及了 30+ 个文件的修改，横跨信息架构、SEO、废弃资产、基础设施、工具链五个维度。几个核心数据：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>新增</td>
+<td>首页内容入口 Grid + 精选专题 + Featured Posts</td>
+</tr>
+<tr>
+<td>重写</td>
+<td>14+ 篇文章描述，按系列统一摘要模板</td>
+</tr>
+<tr>
+<td>清理</td>
+<td>16 个无用脚本（800+ 行代码）、22 条旧图床链接、1 个废弃页面</td>
+</tr>
+<tr>
+<td>修复</td>
+<td>PJAX cacheBust、WeChat 40007、Service Worker 版本号</td>
+</tr>
+<tr>
+<td>新增工具</td>
+<td>frontmatter-audit.py（SEO 审计，只读）</td>
+</tr>
+<tr>
+<td>文档</td>
+<td>收口文档、未来文章发布策略、发布检查流程</td>
+</tr>
+</tbody></table>
+<p>下一轮（P3）重点将转向旧文翻新和 RSS&#x2F;Sitemap 定期校验——但那是另一个故事了。</p>
+<hr>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>收口型优化需求文档: <code>docs/博客收口型优化需求文档.md</code></li>
+<li>核心涉及提交: <code>f67d92e</code>、<code>eec7bc2</code>、<code>46aa669</code>、<code>72188d3</code>、<code>8e184fa</code></li>
+<li>前篇: <a href="https://www.bytefisher.top/2026/05/09/Hexo-%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8DRSS%E8%AE%A2%E9%98%85-Sitemap-Waline%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/">Hexo 博客三项基础修复</a></li>
+<li>前前篇: <a href="https://www.bytefisher.top/2026/05/09/Hexo-%E5%8D%9A%E5%AE%A2%E4%BD%93%E9%AA%8C%E5%8D%87%E7%BA%A7SEO%E4%BC%98%E5%8C%96-%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E5%A2%9E%E5%BC%BA-%E5%93%81%E7%89%8C%E8%A7%86%E8%A7%89%E9%87%8D%E6%9E%84/">Hexo 博客体验升级</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+    <div class="post-blog-card" style="margin:1.5em auto 0;padding:.5em .8em;border:1px solid #e8e8e8;border-radius:6px;background:var(--card-bg-color,#fff);display:flex;align-items:center;max-width:400px">
+  <div style="flex:1;min-width:0;text-align:left">
+    <div style="font-size:.8em;font-weight:700;color:#555">ByteFisher</div>
+    <div style="font-size:.68em;color:#999;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">分享编程技术 · 记录钓鱼乐趣</div>
+  </div>
+  <img src="/images/wechat-qcode.webp" alt="扫码关注" style="width:60px;height:60px;border-radius:3px;margin:0 10px;flex-shrink:0">
+  <div style="padding:3px 10px;border:1px solid #fc6423;border-radius:3px;color:#fc6423;font-size:.7em;white-space:nowrap;flex-shrink:0">▸ 扫码关注 ◂</div>
+</div>
+
+    <div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2026/05/12/Hexo-博客二次优化实战-从性能压缩到品牌打磨全记录/" class="related-post-item" title="Hexo 博客二次优化实战：从性能压缩到品牌打磨全记录"><span class="related-post-title">Hexo 博客二次优化实战：从性能压缩到品牌打磨全记录</span><span class="related-post-date">2026-05-12</span><span class="related-post-desc">Hexo、Next主题、SEO: ByteFisher 博客第一期优化（RSS 修复、AI 助手、评论迁移等）完成后，博客能正常跑了，但离"好用"还有距离。 - 配置层：Google Analytics 的 tracking ID 填的是 G-XXXXXXXXXX——占位符，从未生效。</span></a><a href="/2026/05/09/Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构/" class="related-post-item" title="Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构"><span class="related-post-title">Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">记录 ByteFisher 博客在 SEO、用户体验和品牌视觉上的 13 项优化，包括元信息完善、页面体验调整、品牌色统一和主题细节打磨。</span></a><a href="/2026/05/12/Hexo-博客实战-钓鱼相册数据统计与地图实现全记录/" class="related-post-item" title="Hexo 博客实战：钓鱼相册数据统计与地图"><span class="related-post-title">Hexo 博客实战：钓鱼相册数据统计与地图</span><span class="related-post-date">2026-05-12</span><span class="related-post-desc">Hexo、Next主题、钓鱼: ByteFisher 博客上线了两年，积累了 7 个钓鱼相册、500+ 张照片。但一直有个遗憾：相册只是按年份一字排开，缺少两个关键视角。 一是数据视角——5 年钓了多少鱼？哪个鱼种最多？哪年最高产？这些信息分散在上百个 HTML 页面里，读者无从感知。</span></a><a href="/2026/05/09/Hexo 博客集成 AI 问答助手：DeepSeek API + Vercel Serverless + 悬浮球聊天面板/" class="related-post-item" title="Hexo 博客集成 AI 问答助手：DeepSeek + Vercel + 悬浮球聊天面板"><span class="related-post-title">Hexo 博客集成 AI 问答助手：DeepSeek + Vercel + 悬浮球聊天面板</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">Hexo、Next主题、AI: ByteFisher 博客已发布 95+ 篇文章，一个痛点越来越明显：静态博客缺少即时互动能力。 - "有没有 Unity 相关的入门教程？" - "C# 委托的用法在哪篇文章讲过？" - "你们用的这个图床是什么？"</span></a><a href="/2026/05/09/Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移/" class="related-post-item" title="Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移"><span class="related-post-title">Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近对博客进行了一次全面的代码审查，发现三个高优先级的硬性问题： | 问题 | 影响 | 严重程度 | |------|------|-----...</span></a><a href="/2026/05/15/Hexo-博客评论系统深度迁移-从LeanCloud到TiDB Cloud全记录/" class="related-post-item" title="Hexo 博客评论系统深度迁移：从 LeanCloud 到 TiDB Cloud"><span class="related-post-title">Hexo 博客评论系统深度迁移：从 LeanCloud 到 TiDB Cloud</span><span class="related-post-date">2026-05-15</span><span class="related-post-desc">Hexo、Waline、TiDB: ByteFisher 博客的评论系统使用 Waline（部署于 Vercel） + LeanCloud（国内版）的组合已运行一年多，积累了 19 条评论和 137 篇文章阅读计数。</span></a></div></div>
+    <div class="series-nav"><div class="series-nav-title">Hexo博客搭建 系列</div><div class="series-nav-progress">第 14/14 篇</div><div class="series-nav-links"><a href="/2026/05/31/VSCode-OpenCode-DeepSeek-博客文章全自动开发流水线实战/" class="series-nav-prev">VSCode + OpenCode + DeepSeek：博客文章全自动开发流水线实战</a></div></div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag"># series:Hexo博客搭建</a>
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/Next%E4%B8%BB%E9%A2%98/" rel="tag"># Next主题</a>
+              <a href="/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/" rel="tag"># 博客优化</a>
+              <a href="/tags/SEO/" rel="tag"># SEO</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/06/11/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-02-%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8E%9F%E7%90%86%E9%80%9A%E4%BF%97%E8%A7%A3%E8%AF%BB/" rel="prev" title="ByteFisher AI 编程实战（二）：大语言模型原理通俗解读">
+      <i class="fa fa-chevron-left"></i> ByteFisher AI 编程实战（二）：大语言模型原理通俗解读
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/06/15/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-03-Prompt%20Engineering%E6%A0%B8%E5%BF%83%E6%8A%80%E6%B3%95/" rel="next" title="ByteFisher AI 编程实战（三）：Prompt Engineering 核心技法">
+      ByteFisher AI 编程实战（三）：Prompt Engineering 核心技法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+  <div class="post-share">
+    <span class="post-share-label">分享：</span>
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2026%2F06%2F12%2FHexo-%25E5%258D%259A%25E5%25AE%25A2%25E6%2594%25B6%25E5%258F%25A3%25E5%259E%258B%25E4%25BC%2598%25E5%258C%2596%25E5%25AE%259E%25E6%2588%2598-%25E4%25BF%25A1%25E6%2581%25AF%25E6%259E%25B6%25E6%259E%2584%25E9%2587%258D%25E7%25BB%2584%25E4%25B8%258E%25E5%2586%2585%25E5%25AE%25B9%25E6%25B2%25BB%25E7%2590%2586%25E5%2585%25A8%25E8%25AE%25B0%25E5%25BD%2595%2F&amp;title=Hexo%20%E5%8D%9A%E5%AE%A2%E6%94%B6%E5%8F%A3%E5%9E%8B%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BF%A1%E6%81%AF%E6%9E%B6%E6%9E%84%E9%87%8D%E7%BB%84%E4%B8%8E%E5%86%85%E5%AE%B9%E6%B2%BB%E7%90%86%E5%85%A8%E8%AE%B0%E5%BD%95" target="_blank" rel="noopener" title="分享到微博">
+      <i class="fab fa-weibo"></i>
+    </a>
+    <a href="#" onclick="navigator.clipboard.writeText(location.href);var t=this;t.innerHTML='<i class=fa fa-check></i>';setTimeout(function(){t.innerHTML='<i class=fa fa-link></i>'},1500);return false" title="复制链接">
+      <i class="fa fa-link"></i>
+    </a>
+  </div>
+
+  
+  <div class="post-author-bio">
+    <div class="post-author-avatar">
+      <img src="/images/avatar2.gif" alt="淡水鱼">
+    </div>
+    <div class="post-author-info">
+      <div class="post-author-name">淡水鱼</div>
+      <div class="post-author-desc">钓鱼爱好者 &amp; Unity 游戏开发者，分享编程技术与钓鱼经验。</div>
+      <div class="post-author-links">
+        <a href="https://github.com/grj1981" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="/atom.xml" title="RSS 订阅"><i class="fa fa-rss"></i></a>
+        <a href="mailto:271623821@qq.com" title="联系我"><i class="fa fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+          </div>
+          
+    <div class="comments" id="waline-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BF%A1%E6%81%AF%E6%9E%B6%E6%9E%84%E9%87%8D%E7%BB%84%EF%BC%9A%E4%BB%8E%E6%97%B6%E9%97%B4%E6%B5%81%E5%88%B0%E5%85%A5%E5%8F%A3%E7%9F%A9%E9%98%B5"><span class="nav-number">2.</span> <span class="nav-text">一、信息架构重组：从时间流到入口矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E8%83%8C%E6%99%AF%EF%BC%9A%E4%B8%80%E4%B8%AA%E9%A6%96%E9%A1%B5%E5%8F%AA%E6%9C%89%E6%97%B6%E9%97%B4%E7%BA%BF%E7%9A%84%E5%8D%9A%E5%AE%A2"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 背景：一个首页只有时间线的博客</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF%EF%BC%9A%E6%8C%89%E5%85%A5%E5%8F%A3%E5%BC%95%E5%AF%BC-%E4%B8%93%E9%A2%98%E6%8E%A8%E8%8D%90"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 设计思路：按入口引导 + 专题推荐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E5%AE%9E%E7%8E%B0%EF%BC%9Ahome-sections-swig"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 实现：home-sections.swig</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-Featured-Posts%EF%BC%9A%E8%AE%A9%E7%B2%BE%E9%80%89%E6%96%87%E7%AB%A0%E6%B5%AE%E5%87%BA%E6%B0%B4%E9%9D%A2"><span class="nav-number">2.4.</span> <span class="nav-text">1.4 Featured Posts：让精选文章浮出水面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-%E5%85%A8%E7%AB%99%E6%95%B0%E6%8D%AE%E8%81%94%E5%8A%A8%EF%BC%9A%E6%95%99%E7%A8%8B%E8%AE%A1%E6%95%B0%E6%89%93%E9%80%9A-Hero%E3%80%81Sidebar%E3%80%81%E8%8F%9C%E5%8D%95"><span class="nav-number">2.5.</span> <span class="nav-text">1.5 全站数据联动：教程计数打通 Hero、Sidebar、菜单</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81SEO-%E4%B8%8E%E5%86%85%E5%AE%B9%E6%B2%BB%E7%90%86%EF%BC%9A14-%E7%AF%87%E6%96%87%E7%AB%A0%E6%91%98%E8%A6%81%E9%87%8D%E5%86%99"><span class="nav-number">3.</span> <span class="nav-text">二、SEO 与内容治理：14+ 篇文章摘要重写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E9%97%AE%E9%A2%98%EF%BC%9Adescription-%E8%B4%A8%E9%87%8F%E5%8F%82%E5%B7%AE%E4%B8%8D%E9%BD%90"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 问题：description 质量参差不齐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%B7%A5%E5%85%B7%EF%BC%9Afrontmatter-audit-py"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 工具：frontmatter-audit.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E9%87%8D%E5%86%99%E7%AD%96%E7%95%A5%EF%BC%9A%E6%8C%89%E6%96%87%E7%AB%A0%E7%B1%BB%E5%9E%8B%E5%AE%9A%E6%A8%A1%E6%9D%BF"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 重写策略：按文章类型定模板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%BA%9F%E5%BC%83%E8%B5%84%E4%BA%A7%E6%B8%85%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">三、废弃资产清理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Program-%E9%A1%B5%E9%9D%A2%EF%BC%9A%E5%81%9C%E7%94%A8%E5%BA%9F%E5%BC%83%E5%B8%83%E5%B1%80"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 Program 页面：停用废弃布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%97%A7%E5%9B%BE%E5%BA%8A%E9%93%BE%E6%8E%A5%E6%B8%85%E9%9B%B6"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 旧图床链接清零</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-Tools-%E7%9B%AE%E5%BD%95%E7%98%A6%E8%BA%AB%EF%BC%9A%E4%B8%80%E6%AC%A1%E6%80%A7%E5%88%A0%E9%99%A4-16-%E4%B8%AA%E5%8E%86%E5%8F%B2%E6%96%87%E4%BB%B6"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 Tools 目录瘦身：一次性删除 16 个历史文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E5%8A%A0%E5%9B%BA"><span class="nav-number">5.</span> <span class="nav-text">四、基础设施加固</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-PJAX-CacheBust%EF%BC%9A%E4%BF%AE%E5%A4%8D%E6%96%87%E7%AB%A0%E6%B6%88%E5%A4%B1-Bug"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 PJAX CacheBust：修复文章消失 Bug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-PWA-Service-Worker-%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5%E5%8D%87%E7%BA%A7"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 PWA Service Worker 缓存策略升级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-CI-CD-%E5%AE%9A%E6%97%B6%E6%9E%84%E5%BB%BA%E4%B8%8E%E6%97%B6%E5%8C%BA"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 CI&#x2F;CD 定时构建与时区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E6%98%8E%E7%A1%AE%E6%9C%AA%E6%9D%A5%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E7%AD%96%E7%95%A5"><span class="nav-number">5.4.</span> <span class="nav-text">4.4 明确未来文章发布策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%B7%A5%E5%85%B7%E9%93%BE%E4%BC%98%E5%8C%96"><span class="nav-number">6.</span> <span class="nav-text">五、工具链优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-WeChat-Sync%EF%BC%9A40007-%E9%94%99%E8%AF%AF%E4%B8%8E%E7%AB%A0%E8%8A%82%E6%88%AA%E6%96%AD"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 WeChat Sync：40007 错误与章节截断</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">六、总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+      <div class="site-state-item site-state-tutorials">
+        <a href="/tutorials/">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">教程</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe id="music-player" allow="encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.webp">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2023 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  <script>
+    setTimeout(function(){
+      var containers = [
+        'busuanzi_container_site_uv',
+        'busuanzi_container_site_pv'
+      ];
+      for (var i = 0; i < containers.length; i++) {
+        var el = document.getElementById(containers[i]);
+        if (el && el.style.display === 'none') {
+          el.style.display = 'inline';
+        }
+      }
+    }, 3000);
+  </script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: true,
+  scrollTo : !CONFIG.bookmark.enable
+});
+window._pjax = pjax;
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition(true);
+
+  document.querySelectorAll('.post-block, .pagination, .comments').forEach(function(el) {
+    if (parseFloat(el.style.opacity) === 0) {
+      el.style.opacity = 1;
+    }
+  });
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+    
+
+  
+
+    
+
+    </div>
+
+<link rel="preload" as="style" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css"></noscript>
+<script data-pjax>
+(function() {
+  // 抑制第三方扩展的 notice.avoidance 报错
+  window.addEventListener('error', function(e) {
+    if (e.message && e.message.indexOf('notice.avoidance') !== -1) {
+      e.preventDefault();
+      e.stopPropagation();
+      return true;
+    }
+  });
+
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+
+  function updateCounts() {
+    var countEls = document.querySelectorAll('.waline-visitor-count');
+    if (!countEls.length) return;
+    countEls.forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var url = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(json) {
+          if (json && json.data && json.data[0] && json.data[0].time != null) {
+            el.innerText = json.data[0].time;
+          }
+        }).catch(function(){});
+    });
+  }
+
+  var el = document.querySelector('#waline-comments');
+  if (el) {
+    updateCounts();
+    NexT.utils.loadComments(el, function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2.15.8/dist/waline.js', function() {
+        Waline.init({
+          el: '#waline-comments',
+          serverURL: 'https://waline.bytefisher.top/',
+          path: location.pathname,
+          lang: 'zh-CN' || 'zh-CN',
+          meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
+          requiredMeta: ["nick"] || ['nick'],
+          placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
+          avatar: 'retro' || 'retro',
+          pageSize: 10 || 10,
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
+        });
+        var pathEl = document.querySelector('.waline-visitor-count');
+        var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
+        fetch(baseURL + '/api/article', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: postPath })
+        }).finally(function() {
+          setTimeout(updateCounts, 300);
+        });
+      }, window.Waline);
+    });
+  } else {
+    updateCounts();
+  }
+
+  // Fallback for delayed Waline rendering
+  setTimeout(updateCounts, 2000);
+})();
+</script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="/css/douyin-modal.css">
+<script src="/js/douyin-modal.js" async></script>
+<script src="/js/hero-typing.js" async></script>
+
+<link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
+<script data-pjax>
+(function() {
+  if (document.querySelector('a[data-lightbox]')) {
+    if (!window._lightboxLoaded) {
+      window._lightboxLoaded = true;
+      var s = document.createElement('script');
+      s.src = '/js/lightbox-plus-jquery.min.js';
+      document.body.appendChild(s);
+    }
+  }
+})();
+</script>
+
+<button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
+  <i class="fa fa-moon-o"></i>
+  <i class="fa fa-sun-o"></i>
+</button>
+<script src="/js/darkmode-toggle.js" async></script>
+
+<script data-pjax>
+(function() {
+  function loadAI() {
+    if (window._aiLoaded) return;
+    window._aiLoaded = true;
+    var scripts = ['/js/lib/marked.min.js', '/js/lib/purify.min.js', '/js/ai-assistant.js'];
+    function loadNext() {
+      if (!scripts.length) return;
+      var s = document.createElement('script');
+      s.src = scripts.shift();
+      s.onload = s.onerror = loadNext;
+      document.body.appendChild(s);
+    }
+    loadNext();
+  }
+  if (document.readyState === 'complete') {
+    setTimeout(loadAI, 500);
+  } else {
+    window.addEventListener('load', function() { setTimeout(loadAI, 500); });
+  }
+})();
+</script>
+
+<script data-pjax>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script src="/js/douyin-pagination.js" async></script>
+<script src="/js/hot-posts-widget.js" async></script>
+
+</body>
+</html>
