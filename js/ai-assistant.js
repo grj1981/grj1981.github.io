@@ -330,7 +330,7 @@
     if (index && index.meta) {
       var m = index.meta;
       lines.push('');
-      lines.push('博客概况（可信数据，回答基于此，推荐页面时复制 Markdown 链接）：');
+      lines.push('博客概况（回答基于此数据，但构建时生成可能滞后，若与页面显示有出入，以归档页/侧边栏为准）：');
       lines.push('- 文章：共 ' + m.totalPosts + ' 篇');
       if (m.games) lines.push('- 小游戏：' + m.games.count + ' 款（' + m.games.names.join('、') + '）');
       if (m.videos && m.videos.count) lines.push('- 钓鱼视频：' + m.videos.count + ' 个（收录在[抖音专栏](/douyin/)）');
@@ -370,9 +370,9 @@
       lines.push('- [关于博主](/about/)');
       lines.push('- [留言互动](/guestbook/)');
       lines.push('');
-      lines.push('推荐文章时直接复制下方整行 Markdown 链接：');
+      lines.push('（仅当用户明确询问博客内容或寻找文章时，才从下方列表推荐文章，否则忽略此列表）');
       lines.push('');
-      lines.push('可推荐的文章（与用户问题相关，仅限以下列表，严禁编造）：');
+      lines.push('文章列表（仅限以下列表，严禁编造）：');
       var articles = topArticles && topArticles.length ? topArticles : index.posts.slice(0, 10);
       for (var i = 0; i < articles.length; i++) {
         var p = articles[i];
@@ -389,10 +389,12 @@
     lines.push('- 用 `##` 小标题 + `---` 分隔线 + `-` 无序列表 + `**加粗**` 组织回答');
     lines.push('- 推荐链接格式 `- [原文标题](URL)`，严禁只写标题不加链接');
     lines.push('- 优先推荐系列对应文章，说明是第几篇；章节名放在 `](URL)` 后说明');
+    lines.push('- **日常问候、闲聊无需推荐文章**，直接回答即可');
     lines.push('');
     lines.push('⚠️ **重要规则**：');
     lines.push('- **严禁编造不存在的文章标题或 URL**');
     lines.push('- 如果实在找不到相关内容，如实说"博客目前还没有这方面的文章"');
+    lines.push('- **不要为了推荐而推荐**，用户没问文章就不要提文章链接');
     return lines.join('\n');
   }
 
