@@ -11,7 +11,22 @@
   <rights>All rights reserved 2026, 淡水鱼</rights>
   <subtitle>钓鱼爱好者的编程世界</subtitle>
   <title>ByteFisher</title>
-  <updated>2026-06-08T06:01:18.340Z</updated>
+  <updated>2026-06-16T07:19:23.409Z</updated>
+  <entry>
+    <author>
+      <name>淡水鱼</name>
+    </author>
+    <category term="钓鱼日记" scheme="https://www.bytefisher.top/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/"/>
+    <category term="钓鱼" scheme="https://www.bytefisher.top/tags/%E9%92%93%E9%B1%BC/"/>
+    <category term="钓鱼日记" scheme="https://www.bytefisher.top/tags/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/"/>
+    <category term="series:钓鱼日记" scheme="https://www.bytefisher.top/tags/series-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/"/>
+    <id>https://www.bytefisher.top/2026/06/16/2026-06-16-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E5%B0%8F%E9%92%A9%E7%BB%86%E7%BA%BF%E6%90%8F%E5%A4%A7%E9%B1%BC%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BC%8F%E9%81%9B%E9%B1%BC%E5%85%A8%E8%AE%B0/</id>
+    <link href="https://www.bytefisher.top/2026/06/16/2026-06-16-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E5%B0%8F%E9%92%A9%E7%BB%86%E7%BA%BF%E6%90%8F%E5%A4%A7%E9%B1%BC%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BC%8F%E9%81%9B%E9%B1%BC%E5%85%A8%E8%AE%B0/"/>
+    <published>2026-06-16T04:00:00.000Z</published>
+    <summary>钓鱼、钓鱼日记: 周六改道三一水库，农家乐门口树下平台全天遮阴，一米五水深比往年涨了近一米。0.8主线0.4子线小钩细线抽白条，意外遭遇大鲤鱼，软竿卸力极限拉扯十多分钟。灌溉水库的水位变化如何改变了鱼情，程序员视角的遛鱼复盘。</summary>
+    <title>小钩细线搏大鱼，程序员式遛鱼全记录</title>
+    <updated>2026-06-16T07:19:23.409Z</updated>
+  </entry>
   <entry>
     <author>
       <name>淡水鱼</name>
@@ -117,8 +132,8 @@
     <category term="series:Hexo博客搭建" scheme="https://www.bytefisher.top/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
     <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
     <category term="DeepSeek" scheme="https://www.bytefisher.top/tags/DeepSeek/"/>
-    <category term="OpenCode" scheme="https://www.bytefisher.top/tags/OpenCode/"/>
     <category term="series:AI编程助手" scheme="https://www.bytefisher.top/tags/series-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/"/>
+    <category term="OpenCode" scheme="https://www.bytefisher.top/tags/OpenCode/"/>
     <category term="VSCode" scheme="https://www.bytefisher.top/tags/VSCode/"/>
     <id>https://www.bytefisher.top/2026/05/31/VSCode-OpenCode-DeepSeek-%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E5%85%A8%E8%87%AA%E5%8A%A8%E5%BC%80%E5%8F%91%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%AE%9E%E6%88%98/</id>
     <link href="https://www.bytefisher.top/2026/05/31/VSCode-OpenCode-DeepSeek-%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E5%85%A8%E8%87%AA%E5%8A%A8%E5%BC%80%E5%8F%91%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%AE%9E%E6%88%98/"/>
@@ -220,8 +235,8 @@
     <category term="Hexo博客搭建" scheme="https://www.bytefisher.top/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
     <category term="series:Hexo博客搭建" scheme="https://www.bytefisher.top/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
     <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
-    <category term="博客优化" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/"/>
     <category term="Waline" scheme="https://www.bytefisher.top/tags/Waline/"/>
+    <category term="博客优化" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/"/>
     <category term="评论系统" scheme="https://www.bytefisher.top/tags/%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/"/>
     <category term="TiDB" scheme="https://www.bytefisher.top/tags/TiDB/"/>
     <category term="数据库" scheme="https://www.bytefisher.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
@@ -328,8 +343,8 @@
     <category term="series:Hexo博客搭建" scheme="https://www.bytefisher.top/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
     <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
     <category term="Next主题" scheme="https://www.bytefisher.top/tags/Next%E4%B8%BB%E9%A2%98/"/>
-    <category term="博客优化" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/"/>
     <category term="Waline" scheme="https://www.bytefisher.top/tags/Waline/"/>
+    <category term="博客优化" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/"/>
     <category term="评论系统" scheme="https://www.bytefisher.top/tags/%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/"/>
     <id>https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/</id>
     <link href="https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%B8%89%E9%A1%B9%E5%9F%BA%E7%A1%80%E4%BF%AE%E5%A4%8D%EF%BC%9ARSS%20%E8%AE%A2%E9%98%85%20+%20Sitemap%20+%20Waline%20%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB/"/>
@@ -337,20 +352,5 @@
     <summary>ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近对博客进行了一次全面的代码审查，发现三个高优先级的硬性问题： | 问题 | 影响 | 严重程度 | |------|------|-----...</summary>
     <title>Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移</title>
     <updated>2026-06-04T10:33:56.082Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>淡水鱼</name>
-    </author>
-    <category term="钓鱼日记" scheme="https://www.bytefisher.top/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/"/>
-    <category term="钓鱼" scheme="https://www.bytefisher.top/tags/%E9%92%93%E9%B1%BC/"/>
-    <category term="钓鱼日记" scheme="https://www.bytefisher.top/tags/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/"/>
-    <category term="series:钓鱼日记" scheme="https://www.bytefisher.top/tags/series-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/"/>
-    <id>https://www.bytefisher.top/2026/05/04/2026-05-04-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E4%BA%94%E4%B8%80%E8%BF%9E%E6%88%98%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93/</id>
-    <link href="https://www.bytefisher.top/2026/05/04/2026-05-04-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E4%BA%94%E4%B8%80%E8%BF%9E%E6%88%98%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93/"/>
-    <published>2026-05-04T12:00:00.000Z</published>
-    <summary>钓鱼、钓鱼日记: 一号才刚去花碑水库算完账，五条大鲤鱼入户，三条鲢鳙放流，回来发了朋友圈，评论区炸了一整天。本来想着五一剩下的几天就在家歇歇，把手上的酸劲儿缓一缓——结果三号早上七点，手机就响了。 老表打来的：&quot;起来了没有？我已经到花碑了，今天口好得很，赶紧来！&quot;</summary>
-    <title>五一连战花碑水库，爆护50斤——老表两小时空军，我连竿到手酸</title>
-    <updated>2026-06-04T09:54:33.671Z</updated>
   </entry>
 </feed>
