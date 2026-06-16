@@ -1313,7 +1313,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #953eb8;
+  background: #5e4ede;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3587,7 +3587,7 @@ body {
 }
 .fish-topic-stats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
 }
 .fish-topic-stats div {
@@ -3612,7 +3612,7 @@ body {
 }
 .fish-topic-nav {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 10px;
   margin-bottom: 22px;
 }
@@ -3717,6 +3717,77 @@ body {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+.fish-video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.fish-video-card {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #edf0f2;
+  border-radius: 10px;
+  background: #fff;
+  border-bottom: none;
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.fish-video-card:hover {
+  border-color: #f97316;
+  box-shadow: 0 8px 20px rgba(33,47,54,0.08);
+  transform: translateY(-2px);
+}
+.fish-video-cover {
+  position: relative;
+  display: block;
+  aspect-ratio: 16/10;
+  background: linear-gradient(135deg, rgba(249,115,22,0.16), rgba(55,198,192,0.08));
+  background-position: center;
+  background-size: cover;
+}
+.fish-video-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  color: #f97316;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.16);
+}
+.fish-video-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 14px;
+}
+.fish-video-body strong {
+  margin: 7px 0;
+  color: #243238;
+  font-size: 15px;
+  line-height: 1.4;
+}
+.fish-video-date {
+  color: #999;
+  font-size: 12px;
+}
+.fish-video-desc {
+  color: #777;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
 .fish-album-section {
   margin: 6px 0 18px;
   padding: 20px 22px;
@@ -3782,6 +3853,9 @@ body {
     gap: 8px;
   }
   .fish-diary-grid {
+    grid-template-columns: 1fr;
+  }
+  .fish-video-grid {
     grid-template-columns: 1fr;
   }
   .fish-nav-btn {
