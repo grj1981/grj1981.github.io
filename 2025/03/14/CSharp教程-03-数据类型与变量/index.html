@@ -172,7 +172,7 @@
   </li>
         <li class="menu-item menu-item-douyin">
 
-    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">54</span></a>
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">55</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -990,7 +990,8 @@ window.addEventListener('pjax:success', () => {
   function loadAI() {
     if (window._aiLoaded) return;
     window._aiLoaded = true;
-    var scripts = ['/js/lib/marked.min.js', '/js/lib/purify.min.js', '/js/ai-assistant.js'];
+    var aiVersion = 'bytebot-20260617-clear';
+    var scripts = ['/js/lib/marked.min.js', '/js/lib/purify.min.js', '/js/ai-assistant.js?v=' + aiVersion];
     function loadNext() {
       if (!scripts.length) return;
       var s = document.createElement('script');

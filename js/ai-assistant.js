@@ -4,8 +4,8 @@
   var CONFIG = {
     apiEndpoint: 'https://api.bytefisher.top/api/chat',
     botName: 'ByteBot',
-    welcomeMessage: '🎣 欢迎来到 ByteFisher 博客！\n\n我是 ByteBot，可以帮你：\n📖 推荐文章\n💡 解答技术问题\n🎯 了解博客内容\n\n有什么想了解的？',
-    placeholder: '输入你的问题...',
+    welcomeMessage: '🎣 欢迎来到 ByteFisher 博客！\n\n我是 ByteBot，主要帮你查找和理解本站内容：\n📖 推荐 Unity / C# / AI 编程教程\n🎣 查找钓鱼日记、相册和地图\n🎮 介绍博客里的小游戏\n\n可以问我：博客里有哪些 Unity 入门文章？',
+    placeholder: '',
     maxInputLength: 2000,
     maxHistoryTurns: 6,
     debounceInterval: 1000
@@ -19,6 +19,7 @@
   var abortController = null;
   var conversationTopic = null;
   var currentArticles = [];
+  var lastUserQuestion = '';
 
   /* ---------- Analytics ---------- */
   function trackEvent(type) {
@@ -162,7 +163,10 @@
     panel.innerHTML =
       '<div class="ai-header">' +
         '<span>🎣 ' + CONFIG.botName + '</span>' +
-        '<button class="ai-close">&times;</button>' +
+        '<div class="ai-header-actions">' +
+          '<button class="ai-clear" title="清空对话">清空</button>' +
+          '<button class="ai-close" title="关闭">&times;</button>' +
+        '</div>' +
       '</div>' +
       '<div class="ai-messages" id="ai-msgs"></div>' +
       '<div class="ai-input-area">' +
@@ -180,6 +184,7 @@
     document.body.appendChild(panel);
 
     panel.querySelector('.ai-close').addEventListener('click', toggle);
+    panel.querySelector('.ai-clear').addEventListener('click', clearConversation);
     document.getElementById('ai-send').addEventListener('click', send);
     document.getElementById('ai-stop').addEventListener('click', stopGeneration);
     document.getElementById('ai-input').addEventListener('keydown', function(e) {
@@ -250,6 +255,15 @@
   }
 
   /* ---------- RAG: Article ranking (BM25) ---------- */
+  function getArticleSearchText(post) {
+    return [
+      post.title || '',
+      post.textForSearch || '',
+      post.summary || '',
+      post.excerpt || ''
+    ].join(' ').toLowerCase();
+  }
+
   function rankArticles(question, posts) {
     if (!question || !posts || !posts.length) return [];
     var qTokens = question.toLowerCase().split(/[\s,，。.、！？;；：:()（）\[\]【】]+/).filter(function(w) { return w.length > 1; });
@@ -258,7 +272,7 @@
     var N = posts.length;
     var k1 = 1.5, b = 0.75;
     var totalLen = 0;
-    for (var i = 0; i < posts.length; i++) totalLen += (posts[i].textForSearch || posts[i].title).length;
+    for (var i = 0; i < posts.length; i++) totalLen += getArticleSearchText(posts[i]).length;
     var avgDocLen = totalLen / N || 1;
 
     // Document frequency
@@ -268,7 +282,7 @@
       if (df[w] !== undefined) continue;
       var count = 0;
       for (var pi = 0; pi < posts.length; pi++) {
-        if ((posts[pi].textForSearch || posts[pi].title).toLowerCase().indexOf(w) !== -1) count++;
+        if (getArticleSearchText(posts[pi]).indexOf(w) !== -1) count++;
       }
       df[w] = count;
     }
@@ -282,7 +296,7 @@
     var now = Date.now();
     var scored = [];
     for (var pi = 0; pi < posts.length; pi++) {
-      var text = (posts[pi].textForSearch || posts[pi].title).toLowerCase();
+      var text = getArticleSearchText(posts[pi]);
       var docLen = text.length || 1;
       var score = 0;
       for (var ti = 0; ti < qTokens.length; ti++) {
@@ -315,6 +329,24 @@
       result.push(scored[i].post);
     }
     return result.length > 0 ? result : posts.slice(0, 10);
+  }
+
+  function showFallbackRecommendations(question) {
+    if (!postsIndexCache || !postsIndexCache.posts || !postsIndexCache.posts.length) return false;
+    var articles = rankArticles(question, postsIndexCache.posts).slice(0, 5);
+    if (!articles.length) return false;
+
+    var lines = [
+      'AI 服务暂时不可用，先为你匹配到这些站内内容：',
+      ''
+    ];
+    for (var i = 0; i < articles.length; i++) {
+      var p = articles[i];
+      var url = (p.url || '').replace(/^https?:\/\/[^\/]+/, '') || '/';
+      lines.push('- [' + p.title.replace(/\]/g, '\\]') + '](' + url + ')');
+    }
+    addMsg('bot', lines.join('\n'));
+    return true;
   }
 
   /* ---------- System prompt ---------- */
@@ -412,6 +444,7 @@
     input.style.height = 'auto';
     updateCharCount();
     addMsg('user', text);
+    lastUserQuestion = text;
 
     messages.push({ role: 'user', content: text });
     messages = truncateMessages(messages);
@@ -424,24 +457,14 @@
     showTyping();
 
     abortController = new AbortController();
+    ensurePostsIndex();
 
-    ensurePostsIndex()
-      .then(function(index) {
-        var isNewTopic = !conversationTopic || messages.length <= 2;
-        if (isNewTopic) {
-          conversationTopic = text;
-          currentArticles = rankArticles(text, index.posts);
-        }
-        var msgs = [{ role: 'system', content: buildSystemPrompt(index, currentArticles, isNewTopic) }];
-        for (var i = 0; i < messages.length; i++) msgs.push(messages[i]);
-
-        return fetch(CONFIG.apiEndpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          signal: abortController.signal,
-          body: JSON.stringify({ messages: msgs, stream: true })
-        });
-      })
+    fetch(CONFIG.apiEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      signal: abortController.signal,
+      body: JSON.stringify({ messages: messages, stream: true })
+    })
       .then(function(response) {
         if (!response.ok) {
           var errMsg = classifyError(null, response);
@@ -449,6 +472,7 @@
           isLoading = false;
           showStopBtn(false);
           if (errMsg) showToast(errMsg, getToastType(null, response));
+          showFallbackRecommendations(text);
           return null;
         }
         var contentType = response.headers.get('Content-Type') || '';
@@ -473,7 +497,9 @@
         showStopBtn(false);
         if (err.name === 'AbortError') return;
         trackEvent('error');
-        showRetry(classifyError(err, null));
+        if (!showFallbackRecommendations(text)) {
+          showRetry(classifyError(err, null));
+        }
       });
   }
 
@@ -512,10 +538,20 @@
         cancelAnimationFrame(rafId);
         rafId = null;
       }
-      flush();
+      if (pending || fullReply) flush();
       if (fullReply) { messages.push({ role: 'assistant', content: fullReply }); saveSession(); }
       isLoading = false;
       showStopBtn(false);
+    }
+
+    function failStream(message) {
+      hideTyping();
+      isLoading = false;
+      showStopBtn(false);
+      trackEvent('error');
+      if (!showFallbackRecommendations(lastUserQuestion)) {
+        showRetry(message || '服务暂时不可用，请稍后重试');
+      }
     }
 
     function readChunk() {
@@ -532,6 +568,10 @@
           if (data === '[DONE]') { endStream(); return; }
           try {
             var parsed = JSON.parse(data);
+            if (parsed.error) {
+              failStream(parsed.error.message);
+              return;
+            }
             var choice = parsed.choices && parsed.choices[0];
             if (!choice) continue;
             if (choice.finish_reason === 'stop') { endStream(); return; }
@@ -565,6 +605,27 @@
     isLoading = false;
     hideTyping();
     showStopBtn(false);
+  }
+
+  function clearConversation() {
+    if (abortController) {
+      abortController.abort();
+      abortController = null;
+    }
+    messages = [];
+    conversationTopic = null;
+    currentArticles = [];
+    lastUserQuestion = '';
+    isLoading = false;
+    hideTyping();
+    showStopBtn(false);
+    try {
+      sessionStorage.removeItem('ai_messages');
+      sessionStorage.setItem('ai_open', isOpen ? '1' : '0');
+    } catch(e) { /* ignore */ }
+    var container = document.getElementById('ai-msgs');
+    if (container) container.innerHTML = '';
+    addMsg('bot', CONFIG.welcomeMessage);
   }
 
   function showStopBtn(show) {

@@ -179,7 +179,7 @@
   </li>
         <li class="menu-item menu-item-douyin">
 
-    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">54</span></a>
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">55</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -287,7 +287,7 @@
             <span>日记</span>
           </div>
           <div>
-            <strong>54</strong>
+            <strong>55</strong>
             <span>短视频</span>
           </div>
           <div>
@@ -383,11 +383,24 @@
         <div class="fish-video-grid">
           
           <a class="fish-video-card" href="/douyin/">
+            <span class="fish-video-cover" style="background-image: url('https://img.bytefisher.top/album/img2026/2026.06.14_6.webp');">
+              <span class="fish-video-play"><i class="fa fa-play"></i></span>
+            </span>
+            <span class="fish-video-body">
+              <span class="fish-video-date">2026-06-16</span>
+              <strong>十分钟极限遛鱼！码农稳控野生大鲤🐟 每天对着代码逻辑敲敲打打</strong>
+              
+              <span class="fish-video-desc">十分钟极限遛鱼！码农稳控野生大鲤🐟 每天对着代码逻辑敲敲打打，钓鱼成了我调剂生活的小爱好～这次拍到了全程遛鱼的片段，原来遛鱼和写代码一样，得讲究节奏和耐心，还挺有意思的！# 钓鱼那些事儿 # 钓鱼真实分享 # 程序员钓鱼 # 业余钓鱼爱好者 # 垂钓那些事儿</span>
+              
+            </span>
+          </a>
+          
+          <a class="fish-video-card" href="/douyin/">
             <span class="fish-video-cover" style="background-image: url('https://img.bytefisher.top/album/img2026/2026.06.13_2.webp');">
               <span class="fish-video-play"><i class="fa fa-play"></i></span>
             </span>
             <span class="fish-video-body">
-              <span class="fish-video-date">2026-06-19</span>
+              <span class="fish-video-date">2026-06-15</span>
               <strong>玄武人Y小钩细线搏大鱼</strong>
               
               <span class="fish-video-desc">小钩细线搏大鱼，心跳飙升 玄武人Y12尺小钩细线抽白条，偶遇大鲤鱼！细线小钩不敢硬拔，全程弯腰弓背慢慢遛，敲代码练出来的耐心全用在遛鱼上了，极限拉扯太过瘾～# 钓鱼需要技术吗 # 程序员钓鱼# 玄武人Y # 户外钓鱼真实感受分享 # 钓鱼热爱者</span>
@@ -404,19 +417,6 @@
               <strong>钓鱼如同写代码</strong>
               
               <span class="fish-video-desc">钓鱼如同写代码，思路不对全白搭 用程序员思维复盘调整装备，再战花碑水库顺利中获大鲤鱼，谁知抄鱼频频失误。多亏旁边女钓友出手相助，十秒轻松搞定！原来钓鱼和写代码一样，找对方法才是关键～# 钓鱼人不一定要爆护 # 钓鱼没技巧全靠天天搞 # 苦练钓技 # 如何成为野钓高手 # 户外运动钓鱼</span>
-              
-            </span>
-          </a>
-          
-          <a class="fish-video-card" href="/douyin/">
-            <span class="fish-video-cover" style="background-image: url('https://img.bytefisher.top/album/img2026/2026.05.30_2.webp');">
-              <span class="fish-video-play"><i class="fa fa-play"></i></span>
-            </span>
-            <span class="fish-video-body">
-              <span class="fish-video-date">2026-05-31</span>
-              <strong>鱼星骗我千百遍</strong>
-              
-              <span class="fish-video-desc">鱼星骗我千百遍，我待钓点如初恋 前一秒看鱼星信心满满，后一秒清点鱼获直接破防。大鱼在哪？合着窝子里全是小家伙！# 渔获分享 # 渔获分享站🎣 # 渔获实拍 # 专业钓小鱼 # 晒晒我的渔获</span>
               
             </span>
           </a>
@@ -974,7 +974,8 @@ window.addEventListener('pjax:success', () => {
   function loadAI() {
     if (window._aiLoaded) return;
     window._aiLoaded = true;
-    var scripts = ['/js/lib/marked.min.js', '/js/lib/purify.min.js', '/js/ai-assistant.js'];
+    var aiVersion = 'bytebot-20260617-clear';
+    var scripts = ['/js/lib/marked.min.js', '/js/lib/purify.min.js', '/js/ai-assistant.js?v=' + aiVersion];
     function loadNext() {
       if (!scripts.length) return;
       var s = document.createElement('script');

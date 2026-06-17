@@ -41,9 +41,10 @@ self.addEventListener('fetch', function(event) {
   // Determine strategy by file type
   var isCSS = /\.css(\?|$)/.test(req.url);
   var isHTML = req.headers.get('Accept') && req.headers.get('Accept').indexOf('text/html') !== -1;
+  var isAIAssistant = /\/js\/ai-assistant\.js(\?|$)/.test(req.url);
 
-  // Network-first for HTML (fresh content) and CSS (critical for visual rendering)
-  if (isHTML || isCSS) {
+  // Network-first for HTML, CSS, and AI assistant script (fresh UI after deploy)
+  if (isHTML || isCSS || isAIAssistant) {
     event.respondWith(
       fetch(req).then(function(res) {
         var copy = res.clone();
