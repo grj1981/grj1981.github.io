@@ -310,21 +310,22 @@
       // Recency boost
       if (posts[pi].date) {
         var days = (now - new Date(posts[pi].date).getTime()) / 86400000;
-        if (days < 30) score *= 1.3;
-        else if (days < 60) score *= 1.15;
+        if (days < 30) score *= 1.8;
+        else if (days < 90) score *= 1.4;
+        else if (days < 365) score *= 1.1;
       }
       scored.push({ post: posts[pi], score: score });
     }
 
     scored.sort(function(a, b) { return b.score - a.score; });
 
-    // Series dedup: max 2 per series
+    // Series dedup: max 4 per series
     var seriesCount = {}, result = [];
     for (var i = 0; i < scored.length && result.length < 10; i++) {
       var s = scored[i].post.series;
       if (s) {
         seriesCount[s] = (seriesCount[s] || 0) + 1;
-        if (seriesCount[s] > 2) continue;
+        if (seriesCount[s] > 4) continue;
       }
       result.push(scored[i].post);
     }
