@@ -364,7 +364,7 @@
 </tr>
 <tr>
 <td>电子邮箱</td>
-<td><a href="mailto:&#50;&#55;&#49;&#x36;&#50;&#x33;&#x38;&#x32;&#x31;&#x40;&#113;&#113;&#46;&#99;&#111;&#109;">271623821@qq.com</a></td>
+<td><a href="mailto:&#x32;&#55;&#x31;&#54;&#x32;&#x33;&#x38;&#x32;&#x31;&#x40;&#x71;&#113;&#46;&#x63;&#111;&#109;">271623821@qq.com</a></td>
 </tr>
 </tbody></table>
 <hr>
@@ -852,7 +852,9 @@ window.addEventListener('pjax:success', () => {
 
 <script data-pjax>
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js');
+  navigator.serviceWorker.register('/sw.js').then(function(reg) {
+    reg.update(); // Force SW update check on each page load
+  });
 }
 </script>
 

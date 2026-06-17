@@ -1,3 +1,4 @@
+// v20260617 - force SW update, add clients.claim
 var CACHE_NAME = 'bytefisher-' + Date.now();
 var urlsToCache = [
   '/',
@@ -22,6 +23,8 @@ self.addEventListener('activate', function(event) {
       return Promise.all(
         keys.filter(function(k) { return k !== CACHE_NAME; }).map(function(k) { return caches.delete(k); })
       );
+    }).then(function() {
+      return self.clients.claim();
     })
   );
 });

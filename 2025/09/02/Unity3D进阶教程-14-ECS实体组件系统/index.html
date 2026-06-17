@@ -969,7 +969,9 @@ window.addEventListener('pjax:success', () => {
 
 <script data-pjax>
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js');
+  navigator.serviceWorker.register('/sw.js').then(function(reg) {
+    reg.update(); // Force SW update check on each page load
+  });
 }
 </script>
 
