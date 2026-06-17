@@ -928,7 +928,7 @@ window.addEventListener('pjax:success', () => {
   function loadAI() {
     if (window._aiLoaded) return;
     window._aiLoaded = true;
-    var aiVersion = 'bytebot-20260617-clear';
+    var aiVersion = 'bytebot-20260617-v2';
     var scripts = ['/js/lib/marked.min.js', '/js/lib/purify.min.js', '/js/ai-assistant.js?v=' + aiVersion];
     function loadNext() {
       if (!scripts.length) return;
