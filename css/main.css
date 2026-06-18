@@ -1313,7 +1313,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #8859aa;
+  background: #ff1882;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -4201,7 +4201,8 @@ figure.highlight table {
 }
 .ai-games-stats div {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
+  justify-content: center;
   gap: 6px;
   min-height: 32px;
   padding: 0 11px;
@@ -4213,7 +4214,7 @@ figure.highlight table {
   display: inline;
   color: #243238;
   font-size: 15px;
-  line-height: 1;
+  line-height: 1.2;
   font-weight: 700;
 }
 .ai-games-stats span {
@@ -4221,7 +4222,7 @@ figure.highlight table {
   margin-top: 0;
   color: #7a878c;
   font-size: 12px;
-  line-height: 1;
+  line-height: 1.2;
 }
 .ai-games-section,
 .ai-games-guide {
