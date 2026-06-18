@@ -11,7 +11,23 @@
   <rights>All rights reserved 2026, 淡水鱼</rights>
   <subtitle>钓鱼爱好者的编程世界</subtitle>
   <title>ByteFisher</title>
-  <updated>2026-06-17T07:50:22.180Z</updated>
+  <updated>2026-06-08T06:59:09.412Z</updated>
+  <entry>
+    <author>
+      <name>淡水鱼</name>
+    </author>
+    <category term="AI" scheme="https://www.bytefisher.top/categories/AI/"/>
+    <category term="教程" scheme="https://www.bytefisher.top/categories/%E6%95%99%E7%A8%8B/"/>
+    <category term="AI" scheme="https://www.bytefisher.top/tags/AI/"/>
+    <category term="教程" scheme="https://www.bytefisher.top/tags/%E6%95%99%E7%A8%8B/"/>
+    <category term="series:ByteFisher AI编程实战教程" scheme="https://www.bytefisher.top/tags/series-ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B/"/>
+    <id>https://www.bytefisher.top/2026/06/18/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-04-AI%E7%BC%96%E7%A8%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/</id>
+    <link href="https://www.bytefisher.top/2026/06/18/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-04-AI%E7%BC%96%E7%A8%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"/>
+    <published>2026-06-17T16:00:00.000Z</published>
+    <summary>本系列第4篇，共21篇。搭建 AI 编程所需的开发环境——Python、Node.js、Git、VS Code 的安装配置，以及必备插件推荐，为后续工具实战打下坚实基础。</summary>
+    <title>ByteFisher AI 编程实战（四）：AI编程的编程语言基础</title>
+    <updated>2026-06-08T06:59:09.412Z</updated>
+  </entry>
   <entry>
     <author>
       <name>淡水鱼</name>
@@ -147,8 +163,8 @@
     <category term="series:Hexo博客搭建" scheme="https://www.bytefisher.top/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
     <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
     <category term="DeepSeek" scheme="https://www.bytefisher.top/tags/DeepSeek/"/>
-    <category term="OpenCode" scheme="https://www.bytefisher.top/tags/OpenCode/"/>
     <category term="series:AI编程助手" scheme="https://www.bytefisher.top/tags/series-AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/"/>
+    <category term="OpenCode" scheme="https://www.bytefisher.top/tags/OpenCode/"/>
     <category term="VSCode" scheme="https://www.bytefisher.top/tags/VSCode/"/>
     <id>https://www.bytefisher.top/2026/05/31/VSCode-OpenCode-DeepSeek-%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E5%85%A8%E8%87%AA%E5%8A%A8%E5%BC%80%E5%8F%91%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%AE%9E%E6%88%98/</id>
     <link href="https://www.bytefisher.top/2026/05/31/VSCode-OpenCode-DeepSeek-%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E5%85%A8%E8%87%AA%E5%8A%A8%E5%BC%80%E5%8F%91%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%AE%9E%E6%88%98/"/>
@@ -250,8 +266,8 @@
     <category term="Hexo博客搭建" scheme="https://www.bytefisher.top/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
     <category term="series:Hexo博客搭建" scheme="https://www.bytefisher.top/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
     <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
-    <category term="Waline" scheme="https://www.bytefisher.top/tags/Waline/"/>
     <category term="博客优化" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/"/>
+    <category term="Waline" scheme="https://www.bytefisher.top/tags/Waline/"/>
     <category term="评论系统" scheme="https://www.bytefisher.top/tags/%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/"/>
     <category term="TiDB" scheme="https://www.bytefisher.top/tags/TiDB/"/>
     <category term="数据库" scheme="https://www.bytefisher.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
@@ -332,22 +348,5 @@
     <summary>Hexo、Next主题、AI: ByteFisher 博客已发布 95+ 篇文章，一个痛点越来越明显：静态博客缺少即时互动能力。 - &quot;有没有 Unity 相关的入门教程？&quot; - &quot;C# 委托的用法在哪篇文章讲过？&quot; - &quot;你们用的这个图床是什么？&quot;</summary>
     <title>Hexo 博客集成 AI 问答助手：DeepSeek + Vercel + 悬浮球聊天面板</title>
     <updated>2026-06-04T10:34:48.413Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>淡水鱼</name>
-    </author>
-    <category term="Hexo博客搭建" scheme="https://www.bytefisher.top/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
-    <category term="series:Hexo博客搭建" scheme="https://www.bytefisher.top/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
-    <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
-    <category term="Next主题" scheme="https://www.bytefisher.top/tags/Next%E4%B8%BB%E9%A2%98/"/>
-    <category term="博客优化" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/"/>
-    <category term="SEO" scheme="https://www.bytefisher.top/tags/SEO/"/>
-    <id>https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%BD%93%E9%AA%8C%E5%8D%87%E7%BA%A7%EF%BC%9ASEO%20%E4%BC%98%E5%8C%96%20+%20%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E5%A2%9E%E5%BC%BA%20+%20%E5%93%81%E7%89%8C%E8%A7%86%E8%A7%89%E9%87%8D%E6%9E%84/</id>
-    <link href="https://www.bytefisher.top/2026/05/09/Hexo%20%E5%8D%9A%E5%AE%A2%E4%BD%93%E9%AA%8C%E5%8D%87%E7%BA%A7%EF%BC%9ASEO%20%E4%BC%98%E5%8C%96%20+%20%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E5%A2%9E%E5%BC%BA%20+%20%E5%93%81%E7%89%8C%E8%A7%86%E8%A7%89%E9%87%8D%E6%9E%84/"/>
-    <published>2026-05-09T13:00:00.000Z</published>
-    <summary>记录 ByteFisher 博客在 SEO、用户体验和品牌视觉上的 13 项优化，包括元信息完善、页面体验调整、品牌色统一和主题细节打磨。</summary>
-    <title>Hexo 博客体验升级：SEO 优化 + 用户体验增强 + 品牌视觉重构</title>
-    <updated>2026-06-10T04:48:58.659Z</updated>
   </entry>
 </feed>

@@ -4,8 +4,8 @@
   var CONFIG = {
     apiEndpoint: 'https://api.bytefisher.top/api/chat',
     botName: 'ByteBot',
-    welcomeMessage: '🎣 欢迎来到 ByteFisher 博客！\n\n我是 ByteBot，主要帮你查找和理解本站内容：\n📖 推荐 Unity / C# / AI 编程教程\n🎣 查找钓鱼日记、相册和地图\n🎮 介绍博客里的小游戏\n\n可以问我：博客里有哪些 Unity 入门文章？',
-    placeholder: '',
+    welcomeMessage: '🎣 欢迎来到 ByteFisher 博客！\n\n我是 ByteBot，可以帮你优先查找和理解本站内容，也可以像日常助手一样陪你聊两句。\n\n📖 找 Unity / C# / AI 编程教程\n🎣 查钓鱼日记、相册和地图\n🎮 了解博客里的小游戏\n💬 闲聊、提问、整理思路\n\n可以问我：博客里有哪些 Unity 入门文章？或者：今天有点累，聊两句。',
+    placeholder: '问博客内容，或随便聊两句...',
     maxInputLength: 2000,
     maxHistoryTurns: 6,
     debounceInterval: 1000
@@ -332,7 +332,25 @@
     return result.length > 0 ? result : posts.slice(0, 10);
   }
 
+  function isBlogRelatedQuestion(question) {
+    var text = (question || '').toLowerCase().replace(/\s+/g, '');
+    var keywords = [
+      '博客', '文章', '教程', '站内', 'bytefisher', '淡水鱼',
+      'unity', 'unity3d', 'c#', 'csharp', 'lua', 'python', 'ai编程', 'agent',
+      'rag', 'mcp', 'prompt', 'hexo', 'next主题', 'vercel', 'deepseek',
+      '钓鱼', '鱼', '花碑', '水库', '相册', '地图', '钓点', '抖音',
+      '小游戏', '游戏', '贪吃蛇', '俄罗斯方块', '扫雷', '五子棋', '拼图',
+      '小鸟', 'flappy', 'snake', 'tetris', 'minesweeper', 'gomoku', 'puzzle'
+    ];
+    for (var i = 0; i < keywords.length; i++) {
+      if (text.indexOf(keywords[i]) !== -1) return true;
+    }
+    return /(有哪些|有没有|推荐|找|查|看看|在哪里|链接|入门|学习|系列|目录|合集|日记)/.test(text) &&
+      /(文章|教程|博客|站内|链接|目录|系列|日记|相册|地图|游戏)/.test(text);
+  }
+
   function showFallbackRecommendations(question) {
+    if (!isBlogRelatedQuestion(question)) return false;
     if (!postsIndexCache || !postsIndexCache.posts || !postsIndexCache.posts.length) return false;
     var articles = rankArticles(question, postsIndexCache.posts).slice(0, 5);
     if (!articles.length) return false;

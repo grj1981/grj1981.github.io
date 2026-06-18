@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="preconnect" href="https://fonts.loli.net">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://img.bytefisher.top">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#37c6c0">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#37c6c0">
+
+<meta http-equiv="Permissions-Policy" content="encrypted-media=*">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="codeva-7SG6ROHyTg">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"></noscript>
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com busuanzi.ibruce.info static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
+  <meta name="description" content="本系列第4篇，共21篇。搭建 AI 编程所需的开发环境——Python、Node.js、Git、VS Code 的安装配置，以及必备插件推荐，为后续工具实战打下坚实基础。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ByteFisher AI 编程实战（四）：AI编程的编程语言基础">
+<meta property="og:url" content="https://www.bytefisher.top/2026/06/18/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-04-AI%E7%BC%96%E7%A8%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="本系列第4篇，共21篇。搭建 AI 编程所需的开发环境——Python、Node.js、Git、VS Code 的安装配置，以及必备插件推荐，为后续工具实战打下坚实基础。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-06-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-08T06:59:09.412Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="series:ByteFisher AI编程实战教程">
+<meta property="article:tag" content="教程">
+<meta name="twitter:card" content="summary">
+  <meta name="keywords" content="Python安装,Node.js安装,Git配置,VS Code插件,开发环境搭建,AI编程环境,跨平台,淡水鱼,ByteFisher">
+
+<link rel="canonical" href="https://www.bytefisher.top/2026/06/18/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-04-AI%E7%BC%96%E7%A8%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"ByteFisher AI 编程实战（四）：AI编程的编程语言基础","description":"本系列第4篇，共21篇。搭建 AI 编程所需的开发环境——Python、Node.js、Git、VS Code 的安装配置，以及必备插件推荐，为后续工具实战打下坚实基础。","url":"https://www.bytefisher.top/2026/06/18/ByteFisher-AI编程实战-04-AI编程的编程语言基础/","datePublished":"2026-06-17T16:00:00.000Z","dateModified":"2026-06-08T06:59:09.412Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/06/18/ByteFisher-AI编程实战-04-AI编程的编程语言基础/"},"keywords":"AI, 教程, series:ByteFisher AI编程实战教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"AI","item":"https://www.bytefisher.top/categories/AI/"},{"@type":"ListItem","position":3,"name":"ByteFisher AI 编程实战（四）：AI编程的编程语言基础"}]}</script>
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ByteFisher AI 编程实战（四）：AI编程的编程语言基础 | ByteFisher</title>
+  
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dc50e0997d43c3a8dbf2afdb3fdff233";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#37c6c0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-tutorials">
+
+    <a href="/tutorials/" rel="section"><i class="fa fa-book fa-fw"></i>教程<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>钓鱼专题<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-aigames">
+
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">55</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">230</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>rss</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/06/18/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-04-AI%E7%BC%96%E7%A8%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.webp">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ByteFisher AI 编程实战（四）：AI编程的编程语言基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-06-18 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-18T00:00:00+08:00">2026-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2026/06/18/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-04-AI%E7%BC%96%E7%A8%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2026/06/18/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-04-AI%E7%BC%96%E7%A8%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">本系列第4篇，共21篇。搭建 AI 编程所需的开发环境——Python、Node.js、Git、VS Code 的安装配置，以及必备插件推荐，为后续工具实战打下坚实基础。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>从本篇开始，我们从概念进入实战。AI 编程需要一套基础开发环境，无论你用哪种 AI 编程工具，Python、Node.js、Git 和 VS Code 都是绕不开的基石。</p>
+<span id="more"></span>
+
+<h2 id="一、为什么需要这些工具"><a href="#一、为什么需要这些工具" class="headerlink" title="一、为什么需要这些工具"></a>一、为什么需要这些工具</h2><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>用途</th>
+<th>为什么 AI 编程需要它</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Python</strong></td>
+<td>AI 生态的第一语言</td>
+<td>大部分 AI 框架和工具用 Python 编写</td>
+</tr>
+<tr>
+<td><strong>Node.js</strong></td>
+<td>JavaScript 运行时</td>
+<td>前端工程化、CLI 工具的基础环境</td>
+</tr>
+<tr>
+<td><strong>Git</strong></td>
+<td>版本控制</td>
+<td>AI 生成的代码需要版本管理，方便对比和回滚</td>
+</tr>
+<tr>
+<td><strong>VS Code</strong></td>
+<td>编辑器</td>
+<td>插件生态丰富，是 AI 编程工具的天然宿主</td>
+</tr>
+</tbody></table>
+<p>这套环境关系紧密：你用 VS Code 写代码，Python 和 Node.js 运行 AI 工具，Git 管理 AI 生成的代码变更。</p>
+<h2 id="二、安装-Python"><a href="#二、安装-Python" class="headerlink" title="二、安装 Python"></a>二、安装 Python</h2><h3 id="2-1-下载与安装"><a href="#2-1-下载与安装" class="headerlink" title="2.1 下载与安装"></a>2.1 下载与安装</h3><p>访问 python.org 下载最新 Python 3.12+ 版本。Windows 安装时务必勾选”Add Python to PATH”。</p>
+<p>验证安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python --version</span><br><span class="line"><span class="comment"># 输出类似：Python 3.12.2</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-虚拟环境管理"><a href="#2-2-虚拟环境管理" class="headerlink" title="2.2 虚拟环境管理"></a>2.2 虚拟环境管理</h3><p>每个项目使用独立的虚拟环境，避免依赖冲突：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建虚拟环境</span></span><br><span class="line">python -m venv .venv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 激活（Windows）</span></span><br><span class="line">.venv\Scripts\activate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 激活（macOS/Linux）</span></span><br><span class="line"><span class="built_in">source</span> .venv/bin/activate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 AI 编程常用包</span></span><br><span class="line">pip install openai langchain chromadb pandas requests</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出依赖清单</span></span><br><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>为什么需要虚拟环境？</strong> AI 项目通常依赖大量第三方包。不同的项目可能需要不同版本的包（例如 LangChain 常用版本更新频繁），虚拟环境让每个项目互不干扰。</p>
+<h3 id="2-3-Poetry-可选"><a href="#2-3-Poetry-可选" class="headerlink" title="2.3 Poetry 可选"></a>2.3 Poetry 可选</h3><p>对于更专业的项目管理，推荐使用 Poetry：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pip install poetry</span><br><span class="line">poetry new my-ai-project</span><br><span class="line"><span class="built_in">cd</span> my-ai-project</span><br><span class="line">poetry add openai langchain</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、安装-Node-js"><a href="#三、安装-Node-js" class="headerlink" title="三、安装 Node.js"></a>三、安装 Node.js</h2><h3 id="3-1-下载与安装"><a href="#3-1-下载与安装" class="headerlink" title="3.1 下载与安装"></a>3.1 下载与安装</h3><p>访问 nodejs.org 下载 LTS 版本，验证安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">node --version</span><br><span class="line"><span class="comment"># 输出类似：v22.14.0</span></span><br><span class="line">npm --version</span><br><span class="line"><span class="comment"># 输出类似：10.9.2</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-npm-常用配置"><a href="#3-2-npm-常用配置" class="headerlink" title="3.2 npm 常用配置"></a>3.2 npm 常用配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置镜像源加速（中国大陆）</span></span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npmmirror.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装全局工具</span></span><br><span class="line">npm install -g typescript ts-node nodemon</span><br></pre></td></tr></table></figure>
+
+<p>Node.js 是 Cursor、Claude Code cc-switch 等工具的运行基础，也是前端开发的必备环境。</p>
+<h2 id="四、安装和配置-Git"><a href="#四、安装和配置-Git" class="headerlink" title="四、安装和配置 Git"></a>四、安装和配置 Git</h2><h3 id="4-1-安装与基本配置"><a href="#4-1-安装与基本配置" class="headerlink" title="4.1 安装与基本配置"></a>4.1 安装与基本配置</h3><p>从 git-scm.com 下载安装，配置身份：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;Your Name&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;your@email.com&quot;</span></span><br><span class="line">git config --global init.defaultBranch main</span><br><span class="line">git config --global core.autocrlf <span class="literal">true</span>  <span class="comment"># Windows 换行符处理</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-AI-编程中的-Git-工作流"><a href="#4-2-AI-编程中的-Git-工作流" class="headerlink" title="4.2 AI 编程中的 Git 工作流"></a>4.2 AI 编程中的 Git 工作流</h3><p>Git 在 AI 编程中比传统开发更重要——因为你将频繁地接受、审查、回滚 AI 的修改：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">AI 生成代码后：</span><br><span class="line">1. git status        → 看 AI 改/创建了哪些文件</span><br><span class="line">2. git diff          → 审查 AI 改了什么内容</span><br><span class="line">3. 手动检查关键逻辑</span><br><span class="line">4. git add -p        → 逐块确认修改（不是一次性全部接受）</span><br><span class="line">5. git commit -m &quot;feat: AI 生成了 XXX 功能&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键原则</strong>：每次 AI 操作后都做一次 commit。这样你可以随时 <code>git revert</code> 回滚到 AI 修改前的状态。</p>
+<h3 id="4-3-gitignore-推荐"><a href="#4-3-gitignore-推荐" class="headerlink" title="4.3 .gitignore 推荐"></a>4.3 .gitignore 推荐</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># AI 生成工具的临时文件</span><br><span class="line">.cursorrules</span><br><span class="line">.claude.json</span><br><span class="line">*.log</span><br><span class="line"></span><br><span class="line"># Python</span><br><span class="line">__pycache__/</span><br><span class="line">.env</span><br><span class="line">.venv/</span><br><span class="line"></span><br><span class="line"># Node</span><br><span class="line">node_modules/</span><br><span class="line">dist/</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、配置-VS-Code"><a href="#五、配置-VS-Code" class="headerlink" title="五、配置 VS Code"></a>五、配置 VS Code</h2><h3 id="5-1-基础配置"><a href="#5-1-基础配置" class="headerlink" title="5.1 基础配置"></a>5.1 基础配置</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;editor.fontSize&quot;</span><span class="punctuation">:</span> <span class="number">14</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;editor.tabSize&quot;</span><span class="punctuation">:</span> <span class="number">2</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;editor.wordWrap&quot;</span><span class="punctuation">:</span> <span class="string">&quot;on&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;editor.formatOnSave&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;files.autoSave&quot;</span><span class="punctuation">:</span> <span class="string">&quot;onFocusChange&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;editor.minimap.enabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;workbench.colorTheme&quot;</span><span class="punctuation">:</span> <span class="string">&quot;One Dark Pro&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-AI-编程必备插件"><a href="#5-2-AI-编程必备插件" class="headerlink" title="5.2 AI 编程必备插件"></a>5.2 AI 编程必备插件</h3><table>
+<thead>
+<tr>
+<th>插件</th>
+<th>用途</th>
+<th align="center">推荐度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GitHub Copilot</td>
+<td>AI 代码补全</td>
+<td align="center">五星</td>
+</tr>
+<tr>
+<td>Continue</td>
+<td>开源 AI 编程助手，支持多模型</td>
+<td align="center">五星</td>
+</tr>
+<tr>
+<td>GitLens</td>
+<td>增强 Git 功能</td>
+<td align="center">四星</td>
+</tr>
+<tr>
+<td>Prettier</td>
+<td>代码格式化</td>
+<td align="center">五星</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>Python 语言支持</td>
+<td align="center">五星</td>
+</tr>
+<tr>
+<td>C# Dev Kit</td>
+<td>C# 开发支持</td>
+<td align="center">四星</td>
+</tr>
+<tr>
+<td>Tailwind CSS IntelliSense</td>
+<td>前端 CSS 智能提示</td>
+<td align="center">四星</td>
+</tr>
+</tbody></table>
+<p>插件的安装原则：<strong>只装你确实需要的</strong>。插件越多 VS Code 启动越慢，而且可能互相冲突。</p>
+<h2 id="六、验证环境"><a href="#六、验证环境" class="headerlink" title="六、验证环境"></a>六、验证环境</h2><p>创建一个测试脚本验证环境是否正常：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys, subprocess</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Python: <span class="subst">&#123;sys.version&#125;</span>&quot;</span>)</span><br><span class="line">result = subprocess.run([<span class="string">&quot;node&quot;</span>, <span class="string">&quot;--version&quot;</span>], capture_output=<span class="literal">True</span>, text=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Node.js: <span class="subst">&#123;result.stdout.strip()&#125;</span>&quot;</span>)</span><br><span class="line">result = subprocess.run([<span class="string">&quot;git&quot;</span>, <span class="string">&quot;--version&quot;</span>], capture_output=<span class="literal">True</span>, text=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Git: <span class="subst">&#123;result.stdout.strip()&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;开发环境就绪！&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="七、各操作系统差异速查"><a href="#七、各操作系统差异速查" class="headerlink" title="七、各操作系统差异速查"></a>七、各操作系统差异速查</h2><p>不同操作系统在环境搭建上有一些关键差异：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>Windows</th>
+<th>macOS</th>
+<th>Linux</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Python 安装</td>
+<td>python.org 下载安装程序</td>
+<td><code>brew install python</code></td>
+<td><code>apt install python3</code></td>
+</tr>
+<tr>
+<td>PATH 问题</td>
+<td>需勾选 Add to PATH</td>
+<td>自动配置</td>
+<td>自动配置</td>
+</tr>
+<tr>
+<td>包管理器</td>
+<td>winget</td>
+<td>Homebrew</td>
+<td>apt&#x2F;yum</td>
+</tr>
+<tr>
+<td>终端</td>
+<td>PowerShell</td>
+<td>Terminal (zsh)</td>
+<td>Terminal (bash)</td>
+</tr>
+<tr>
+<td>路径分隔</td>
+<td><code>\</code></td>
+<td><code>/</code></td>
+<td><code>/</code></td>
+</tr>
+<tr>
+<td>Python 命令</td>
+<td><code>python</code></td>
+<td><code>python3</code></td>
+<td><code>python3</code></td>
+</tr>
+<tr>
+<td>虚拟环境激活</td>
+<td><code>.venv\Scripts\activate</code></td>
+<td><code>source .venv/bin/activate</code></td>
+<td><code>source .venv/bin/activate</code></td>
+</tr>
+</tbody></table>
+<h3 id="7-1-跨平台开发注意事项"><a href="#7-1-跨平台开发注意事项" class="headerlink" title="7.1 跨平台开发注意事项"></a>7.1 跨平台开发注意事项</h3><p>在 AI 编程中，跨平台差异是常见的踩坑点：</p>
+<ol>
+<li><strong>文件路径</strong>：AI 生成的代码中硬编码路径分隔符可能导致跨平台出错。使用 <code>os.path.join()</code> 或 <code>pathlib</code></li>
+<li><strong>换行符</strong>：Windows 用 <code>\r\n</code>，macOS&#x2F;Linux 用 <code>\n</code>。Git 配置 <code>core.autocrlf</code> 处理</li>
+<li><strong>权限</strong>：脚本文件在 macOS&#x2F;Linux 需 <code>chmod +x</code> 赋予执行权限</li>
+<li><strong>编码</strong>：Windows 默认 GBK，AI 生成的代码如果含中文可能乱码。Python 文件头加 <code># -*- coding: utf-8 -*-</code></li>
+</ol>
+<h2 id="八、常见问题"><a href="#八、常见问题" class="headerlink" title="八、常见问题"></a>八、常见问题</h2><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>原因</th>
+<th>解决</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Python 命令找不到</td>
+<td>未添加到 PATH</td>
+<td>重新安装，勾选”Add to PATH”或手动添加</td>
+</tr>
+<tr>
+<td>pip 安装失败</td>
+<td>网络问题</td>
+<td>使用镜像源：<code>pip install -i https://pypi.tuna.tsinghua.edu.cn/simple</code></td>
+</tr>
+<tr>
+<td>Git 中文乱码</td>
+<td>编码设置</td>
+<td><code>git config --global core.quotepath false</code></td>
+</tr>
+<tr>
+<td>VS Code 终端不识别命令</td>
+<td>PATH 未刷新</td>
+<td>重启 VS Code 或手动刷新终端</td>
+</tr>
+</tbody></table>
+<h2 id="九、推荐阅读与进阶资源"><a href="#九、推荐阅读与进阶资源" class="headerlink" title="九、推荐阅读与进阶资源"></a>九、推荐阅读与进阶资源</h2><p>搭建好环境后，推荐继续学习以下内容：</p>
+<table>
+<thead>
+<tr>
+<th>领域</th>
+<th>推荐资源</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Python</td>
+<td>Python官方教程</td>
+<td>掌握基础语法和标准库</td>
+</tr>
+<tr>
+<td>Node.js</td>
+<td>Node.js 入门指南</td>
+<td>了解 CommonJS 和 ESM 模块系统</td>
+</tr>
+<tr>
+<td>Git</td>
+<td>Pro Git 免费书籍</td>
+<td>深入理解 Git 原理和工作流</td>
+</tr>
+<tr>
+<td>VS Code</td>
+<td>VS Code 官方文档</td>
+<td>了解所有快捷键和扩展能力</td>
+</tr>
+</tbody></table>
+<p>这些资源和本系列教程后续内容配合使用，效果最佳。</p>
+<h2 id="十、AI-编程环境搭建的核心原则"><a href="#十、AI-编程环境搭建的核心原则" class="headerlink" title="十、AI 编程环境搭建的核心原则"></a>十、AI 编程环境搭建的核心原则</h2><p>回头看这一篇的内容，总结三个核心原则：</p>
+<ol>
+<li><strong>一次搭建，长期受益</strong>：环境搭建是最枯燥但回报最高的一次性投入</li>
+<li><strong>版本管理是第一道防线</strong>：AI 生成的代码不可预测，Git 是你最重要的安全网</li>
+<li><strong>用 AI 搭建 AI 环境</strong>：遇到安装问题，直接复制报错信息给 AI 工具寻求帮助——这正是本系列要教会你的能力</li>
+</ol>
+<h2 id="十一、环境验证清单"><a href="#十一、环境验证清单" class="headerlink" title="十一、环境验证清单"></a>十一、环境验证清单</h2><p>搭建完成后逐项检查：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[ ] Python 可运行: python --version</span><br><span class="line">[ ] pip 可安装包: pip install requests</span><br><span class="line">[ ] 虚拟环境可创建并激活</span><br><span class="line">[ ] Node.js 可运行: node --version</span><br><span class="line">[ ] npm 可安装包: npm install express</span><br><span class="line">[ ] Git 已配置: git config --global --list</span><br><span class="line">[ ] Git 可提交: git init &amp;&amp; git commit --allow-empty -m &quot;test&quot;</span><br><span class="line">[ ] VS Code 已安装 Copilot 插件</span><br><span class="line">[ ] Copilot 已登录并显示绿色图标</span><br><span class="line">[ ] .gitignore 已配置</span><br></pre></td></tr></table></figure>
+
+<h2 id="本章小结"><a href="#本章小结" class="headerlink" title="本章小结"></a>本章小结</h2><ul>
+<li>Python 是 AI 生态的核心语言，务必掌握虚拟环境管理</li>
+<li>Node.js 是前端开发和 CLI 工具的基础环境</li>
+<li>Git 在 AI 编程中比传统开发更重要——每次 AI 操作后 commit，方便 diff 和回滚</li>
+<li>VS Code 搭配 AI 插件是当前最主流的工作环境</li>
+<li>环境搭建是一次性投入，后续所有教程都依赖这套环境</li>
+<li>遇到安装问题时，先检查网络连接、环境变量、版本兼容性</li>
+</ul>
+<p>从下一篇开始，我们将逐一上手主流的 AI 编程工具。首先是 GitHub Copilot。</p>
+
+    </div>
+
+    
+    
+    
+    <div class="post-blog-card" style="margin:1.5em auto 0;padding:.5em .8em;border:1px solid #e8e8e8;border-radius:6px;background:var(--card-bg-color,#fff);display:flex;align-items:center;max-width:400px">
+  <div style="flex:1;min-width:0;text-align:left">
+    <div style="font-size:.8em;font-weight:700;color:#555">ByteFisher</div>
+    <div style="font-size:.68em;color:#999;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">分享编程技术 · 记录钓鱼乐趣</div>
+  </div>
+  <img src="/images/wechat-qcode.webp" alt="扫码关注" style="width:60px;height:60px;border-radius:3px;margin:0 10px;flex-shrink:0">
+  <div style="padding:3px 10px;border:1px solid #fc6423;border-radius:3px;color:#fc6423;font-size:.7em;white-space:nowrap;flex-shrink:0">▸ 扫码关注 ◂</div>
+</div>
+
+    <div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2026/06/15/ByteFisher-AI编程实战-03-Prompt Engineering核心技法/" class="related-post-item" title="ByteFisher AI 编程实战（三）：Prompt Engineering 核心技法"><span class="related-post-title">ByteFisher AI 编程实战（三）：Prompt Engineering 核心技法</span><span class="related-post-date">2026-06-15</span><span class="related-post-desc">本系列第3篇，共21篇。系统讲解 Prompt Engineering 的核心框架和编程场景下的高阶技巧，从五要素法则到反模式排查，让你每次和AI对话都能精准获得想要的结果。</span></a><a href="/2026/06/11/ByteFisher-AI编程实战-02-大语言模型原理通俗解读/" class="related-post-item" title="ByteFisher AI 编程实战（二）：大语言模型原理通俗解读"><span class="related-post-title">ByteFisher AI 编程实战（二）：大语言模型原理通俗解读</span><span class="related-post-date">2026-06-11</span><span class="related-post-desc">本系列第2篇，共21篇。用通俗易懂的方式解读大语言模型的核心原理——Token、注意力机制、Transformer架构，以及GPT到DeepSeek的演进之路，帮你理解AI为什么能写代码。</span></a><a href="/2026/06/08/ByteFisher-AI编程实战-01-AI编程是什么-编程范式的变革/" class="related-post-item" title="ByteFisher AI 编程实战（一）：AI编程是什么——编程范式的变革"><span class="related-post-title">ByteFisher AI 编程实战（一）：AI编程是什么——编程范式的变革</span><span class="related-post-date">2026-06-08</span><span class="related-post-desc">本系列第1篇，共21篇。从传统编程与AI编程的对比入手，带你理解AI编程的核心能力、工具生态与能力边界，为后续从环境搭建到高级应用打下认知基础。</span></a><a href="/2026/05/31/VSCode-OpenCode-DeepSeek-博客文章全自动开发流水线实战/" class="related-post-item" title="VSCode + OpenCode + DeepSeek：博客文章全自动开发流水线实战"><span class="related-post-title">VSCode + OpenCode + DeepSeek：博客文章全自动开发流水线实战</span><span class="related-post-date">2026-05-31</span><span class="related-post-desc">本文详细介绍如何使用 VSCode + OpenCode + DeepSeek 构建博客文章全自动开发流水线，涵盖 AI 辅助写作、GitHub Actions 自动部署、微信公众号自动同步等完整工作流。从提示词配置到 Tools 调用，从 CI/CD 到内容分发，一次编写，多平台发布。</span></a><a href="/2026/05/28/Hexo-博客AI问答助手ByteBot优化实录-Markdown渲染迁移与踩坑记/" class="related-post-item" title="Hexo 博客 AI 问答助手 ByteBot 优化实录：Markdown 渲染迁移与踩坑记"><span class="related-post-title">Hexo 博客 AI 问答助手 ByteBot 优化实录：Markdown 渲染迁移与踩坑记</span><span class="related-post-date">2026-05-28</span><span class="related-post-desc">Hexo、AI、DeepSeek: ByteBot 从第一版上线至今已经过 30+ 次提交迭代，从最初的自研 70 行 Markdown 渲染器到如今的 marked@4 + DOMPurify 专业方案，中间踩过的坑、走过的弯路值得记录。</span></a><a href="/2026/05/21/Hexo-博客AI问答助手ByteBot全栈实践/" class="related-post-item" title="Hexo 博客 AI 问答助手 ByteBot 全栈实践：从流式响应到 RAG 增强"><span class="related-post-title">Hexo 博客 AI 问答助手 ByteBot 全栈实践：从流式响应到 RAG 增强</span><span class="related-post-date">2026-05-21</span><span class="related-post-desc">Hexo、AI、DeepSeek: ByteBot 是 ByteFisher 博客的 AI 问答助手，基于 DeepSeek API + Vercel Serverless 构建，为博客访问者提供智能问答服务。本文详细记录从最初的基础问答到全功能生产级助手的完整技术实现过程。</span></a></div></div>
+    <div class="series-nav"><div class="series-nav-title">ByteFisher AI编程实战教程 系列</div><div class="series-nav-progress">第 4/4 篇</div><div class="series-nav-links"><a href="/2026/06/15/ByteFisher-AI编程实战-03-Prompt Engineering核心技法/" class="series-nav-prev">ByteFisher AI 编程实战（三）：Prompt Engineering 核心技法</a></div></div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/%E6%95%99%E7%A8%8B/" rel="tag"># 教程</a>
+              <a href="/tags/series-ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B/" rel="tag"># series:ByteFisher AI编程实战教程</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/06/17/2026-06-17-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93%E7%9A%84%E8%8A%82%E5%A5%8F%E4%B9%8B%E6%88%98%E5%BC%80%E5%B1%80%E8%BF%9E%E7%AB%BF%E4%B8%AD%E5%8D%88/" rel="prev" title="花碑水库的节奏之战：开局连竿、中午断口、下午爆连">
+      <i class="fa fa-chevron-left"></i> 花碑水库的节奏之战：开局连竿、中午断口、下午爆连
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+  <div class="post-share">
+    <span class="post-share-label">分享：</span>
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2026%2F06%2F18%2FByteFisher-AI%25E7%25BC%2596%25E7%25A8%258B%25E5%25AE%259E%25E6%2588%2598-04-AI%25E7%25BC%2596%25E7%25A8%258B%25E7%259A%2584%25E7%25BC%2596%25E7%25A8%258B%25E8%25AF%25AD%25E8%25A8%2580%25E5%259F%25BA%25E7%25A1%2580%2F&amp;title=ByteFisher%20AI%20%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9AAI%E7%BC%96%E7%A8%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80" target="_blank" rel="noopener" title="分享到微博">
+      <i class="fab fa-weibo"></i>
+    </a>
+    <a href="#" onclick="navigator.clipboard.writeText(location.href);var t=this;t.innerHTML='<i class=fa fa-check></i>';setTimeout(function(){t.innerHTML='<i class=fa fa-link></i>'},1500);return false" title="复制链接">
+      <i class="fa fa-link"></i>
+    </a>
+  </div>
+
+  
+  <div class="post-author-bio">
+    <div class="post-author-avatar">
+      <img src="/images/avatar2.gif" alt="淡水鱼">
+    </div>
+    <div class="post-author-info">
+      <div class="post-author-name">淡水鱼</div>
+      <div class="post-author-desc">钓鱼爱好者 &amp; Unity 游戏开发者，分享编程技术与钓鱼经验。</div>
+      <div class="post-author-links">
+        <a href="https://github.com/grj1981" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="/atom.xml" title="RSS 订阅"><i class="fa fa-rss"></i></a>
+        <a href="mailto:271623821@qq.com" title="联系我"><i class="fa fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+          </div>
+          
+    <div class="comments" id="waline-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E8%BF%99%E4%BA%9B%E5%B7%A5%E5%85%B7"><span class="nav-number">1.</span> <span class="nav-text">一、为什么需要这些工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%85-Python"><span class="nav-number">2.</span> <span class="nav-text">二、安装 Python</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 下载与安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 虚拟环境管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Poetry-%E5%8F%AF%E9%80%89"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 Poetry 可选</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AE%89%E8%A3%85-Node-js"><span class="nav-number">3.</span> <span class="nav-text">三、安装 Node.js</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 下载与安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-npm-%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 npm 常用配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE-Git"><span class="nav-number">4.</span> <span class="nav-text">四、安装和配置 Git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 安装与基本配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-AI-%E7%BC%96%E7%A8%8B%E4%B8%AD%E7%9A%84-Git-%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 AI 编程中的 Git 工作流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-gitignore-%E6%8E%A8%E8%8D%90"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 .gitignore 推荐</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E9%85%8D%E7%BD%AE-VS-Code"><span class="nav-number">5.</span> <span class="nav-text">五、配置 VS Code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 基础配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-AI-%E7%BC%96%E7%A8%8B%E5%BF%85%E5%A4%87%E6%8F%92%E4%BB%B6"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 AI 编程必备插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E9%AA%8C%E8%AF%81%E7%8E%AF%E5%A2%83"><span class="nav-number">6.</span> <span class="nav-text">六、验证环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E5%90%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%B7%AE%E5%BC%82%E9%80%9F%E6%9F%A5"><span class="nav-number">7.</span> <span class="nav-text">七、各操作系统差异速查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%BC%80%E5%8F%91%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 跨平台开发注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="nav-number">8.</span> <span class="nav-text">八、常见问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E3%80%81%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB%E4%B8%8E%E8%BF%9B%E9%98%B6%E8%B5%84%E6%BA%90"><span class="nav-number">9.</span> <span class="nav-text">九、推荐阅读与进阶资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E3%80%81AI-%E7%BC%96%E7%A8%8B%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E7%9A%84%E6%A0%B8%E5%BF%83%E5%8E%9F%E5%88%99"><span class="nav-number">10.</span> <span class="nav-text">十、AI 编程环境搭建的核心原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E7%8E%AF%E5%A2%83%E9%AA%8C%E8%AF%81%E6%B8%85%E5%8D%95"><span class="nav-number">11.</span> <span class="nav-text">十一、环境验证清单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93"><span class="nav-number">12.</span> <span class="nav-text">本章小结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">230</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+      <div class="site-state-item site-state-tutorials">
+        <a href="/tutorials/">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">教程</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe id="music-player" allow="encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.webp">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2023 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  <script>
+    setTimeout(function(){
+      var containers = [
+        'busuanzi_container_site_uv',
+        'busuanzi_container_site_pv'
+      ];
+      for (var i = 0; i < containers.length; i++) {
+        var el = document.getElementById(containers[i]);
+        if (el && el.style.display === 'none') {
+          el.style.display = 'inline';
+        }
+      }
+    }, 3000);
+  </script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: true,
+  scrollTo : !CONFIG.bookmark.enable
+});
+window._pjax = pjax;
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition(true);
+
+  document.querySelectorAll('.post-block, .pagination, .comments').forEach(function(el) {
+    if (parseFloat(el.style.opacity) === 0) {
+      el.style.opacity = 1;
+    }
+  });
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+    
+
+  
+
+    
+
+    </div>
+
+<link rel="preload" as="style" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css"></noscript>
+<script data-pjax>
+(function() {
+  // 抑制第三方扩展的 notice.avoidance 报错
+  window.addEventListener('error', function(e) {
+    if (e.message && e.message.indexOf('notice.avoidance') !== -1) {
+      e.preventDefault();
+      e.stopPropagation();
+      return true;
+    }
+  });
+
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+
+  function updateCounts() {
+    var countEls = document.querySelectorAll('.waline-visitor-count');
+    if (!countEls.length) return;
+    countEls.forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var url = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(json) {
+          if (json && json.data && json.data[0] && json.data[0].time != null) {
+            el.innerText = json.data[0].time;
+          }
+        }).catch(function(){});
+    });
+  }
+
+  var el = document.querySelector('#waline-comments');
+  if (el) {
+    updateCounts();
+    NexT.utils.loadComments(el, function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2.15.8/dist/waline.js', function() {
+        Waline.init({
+          el: '#waline-comments',
+          serverURL: 'https://waline.bytefisher.top/',
+          path: location.pathname,
+          lang: 'zh-CN' || 'zh-CN',
+          meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
+          requiredMeta: ["nick"] || ['nick'],
+          placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
+          avatar: 'retro' || 'retro',
+          pageSize: 10 || 10,
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
+        });
+        var pathEl = document.querySelector('.waline-visitor-count');
+        var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
+        fetch(baseURL + '/api/article', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: postPath })
+        }).finally(function() {
+          setTimeout(updateCounts, 300);
+        });
+      }, window.Waline);
+    });
+  } else {
+    updateCounts();
+  }
+
+  // Fallback for delayed Waline rendering
+  setTimeout(updateCounts, 2000);
+})();
+</script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="/css/douyin-modal.css">
+<script src="/js/douyin-modal.js" async></script>
+<script src="/js/hero-typing.js" async></script>
+
+<link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
+<script data-pjax>
+(function() {
+  if (document.querySelector('a[data-lightbox]')) {
+    if (!window._lightboxLoaded) {
+      window._lightboxLoaded = true;
+      var s = document.createElement('script');
+      s.src = '/js/lightbox-plus-jquery.min.js';
+      document.body.appendChild(s);
+    }
+  }
+})();
+</script>
+
+<button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
+  <i class="fa fa-moon-o"></i>
+  <i class="fa fa-sun-o"></i>
+</button>
+<script src="/js/darkmode-toggle.js" async></script>
+
+<script data-pjax>
+(function() {
+  function loadAI() {
+    if (window._aiLoaded) return;
+    window._aiLoaded = true;
+    var aiVersion = 'bytebot-20260618-chat-balance';
+    var scripts = ['/js/lib/marked.min.js', '/js/lib/purify.min.js', '/js/ai-assistant.js?v=' + aiVersion];
+    function loadNext() {
+      if (!scripts.length) return;
+      var s = document.createElement('script');
+      s.src = scripts.shift();
+      s.onload = s.onerror = loadNext;
+      document.body.appendChild(s);
+    }
+    loadNext();
+  }
+  if (document.readyState === 'complete') {
+    setTimeout(loadAI, 500);
+  } else {
+    window.addEventListener('load', function() { setTimeout(loadAI, 500); });
+  }
+})();
+</script>
+
+<script data-pjax>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').then(function(reg) {
+    reg.update(); // Force SW update check on each page load
+  });
+}
+</script>
+
+<script src="/js/douyin-pagination.js" async></script>
+<script src="/js/hot-posts-widget.js" async></script>
+
+</body>
+</html>

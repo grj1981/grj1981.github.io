@@ -177,7 +177,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">229</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">230</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -260,6 +260,26 @@
     <div class="collection-year">
       <span class="collection-header">2025</span>
     </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2025-03-26T08:00:00+08:00"
+              content="2025-03-26">
+          03-26
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2025/03/26/CSharp%E6%95%99%E7%A8%8B-09-%E6%96%B9%E6%B3%95%E4%B8%8E%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/" itemprop="url">
+            <span itemprop="name">C# 方法与参数传递</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
 
   <article itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -444,26 +464,6 @@
     </header>
   </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-12-08T08:00:00+08:00"
-              content="2024-12-08">
-          12-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/12/08/Python%E6%95%99%E7%A8%8B-19-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" itemprop="url">
-            <span itemprop="name">Python 正则表达式</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
     </div>
   </div>
   
@@ -541,7 +541,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">229</span>
+          <span class="site-state-item-count">230</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -911,7 +911,7 @@ window.addEventListener('pjax:success', () => {
   function loadAI() {
     if (window._aiLoaded) return;
     window._aiLoaded = true;
-    var aiVersion = 'bytebot-20260617-v2';
+    var aiVersion = 'bytebot-20260618-chat-balance';
     var scripts = ['/js/lib/marked.min.js', '/js/lib/purify.min.js', '/js/ai-assistant.js?v=' + aiVersion];
     function loadNext() {
       if (!scripts.length) return;
