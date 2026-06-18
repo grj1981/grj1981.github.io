@@ -1313,7 +1313,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #45ff17;
+  background: #8859aa;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -4154,13 +4154,13 @@ figure.highlight table {
 }
 .ai-games-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.38fr);
-  gap: 18px;
-  align-items: stretch;
-  padding: 28px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  padding: 16px 18px;
   border: 1px solid rgba(55,198,192,0.14);
-  border-radius: 16px;
-  background: linear-gradient(135deg, rgba(55,198,192,0.09), rgba(255,255,255,0.96) 58%, rgba(249,115,22,0.06));
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(55,198,192,0.08), rgba(255,255,255,0.97) 72%);
 }
 .ai-games-hero-main {
   display: flex;
@@ -4169,9 +4169,9 @@ figure.highlight table {
   min-width: 0;
 }
 .ai-games-hero-main h1 {
-  margin: 8px 0 12px;
+  margin: 6px 0 6px;
   color: #243238;
-  font-size: 32px;
+  font-size: 24px;
   line-height: 1.25;
   font-weight: 800;
 }
@@ -4179,42 +4179,49 @@ figure.highlight table {
   max-width: 720px;
   margin: 0;
   color: #5f6f75;
-  font-size: 15px;
-  line-height: 1.8;
+  font-size: 13px;
+  line-height: 1.65;
 }
 .ai-games-kicker {
   display: inline-flex;
   width: fit-content;
-  padding: 5px 10px;
+  padding: 4px 9px;
   border-radius: 999px;
   background: rgba(55,198,192,0.13);
   color: #168c87;
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1;
   font-weight: 700;
 }
 .ai-games-stats {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
+  grid-template-columns: repeat(3, auto);
+  gap: 8px;
+  align-items: center;
 }
 .ai-games-stats div {
-  padding: 14px 16px;
-  border: 1px solid rgba(36,50,56,0.08);
-  border-radius: 12px;
-  background: rgba(255,255,255,0.82);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 11px;
+  border: 1px solid rgba(55,198,192,0.16);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.76);
 }
 .ai-games-stats strong {
-  display: block;
+  display: inline;
   color: #243238;
-  font-size: 22px;
-  line-height: 1.15;
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 700;
 }
 .ai-games-stats span {
-  display: block;
-  margin-top: 5px;
+  display: inline;
+  margin-top: 0;
   color: #7a878c;
   font-size: 12px;
+  line-height: 1;
 }
 .ai-games-section,
 .ai-games-guide {
@@ -4632,16 +4639,24 @@ figure.highlight table {
   .ai-games-hero,
   .ai-games-guide {
     grid-template-columns: 1fr;
-    padding: 18px;
+    padding: 14px;
     border-radius: 12px;
   }
   .ai-games-hero-main h1 {
-    font-size: 26px;
+    font-size: 22px;
   }
-  .ai-games-stats,
   .ai-games-grid,
   .ai-games-guide-list {
     grid-template-columns: 1fr;
+  }
+  .ai-games-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+  .ai-games-stats div {
+    min-height: 30px;
+    padding: 0 10px;
   }
   .ai-games-section {
     padding: 18px;
