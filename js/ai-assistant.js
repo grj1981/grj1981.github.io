@@ -260,13 +260,52 @@
       post.title || '',
       post.textForSearch || '',
       post.summary || '',
-      post.excerpt || ''
+      post.excerpt || '',
+      post.series || '',
+      post.tags ? post.tags.join(' ') : '',
+      post.categories ? post.categories.join(' ') : ''
     ].join(' ').toLowerCase();
+  }
+
+  function tokenizeQuestion(question) {
+    var lower = (question || '').toLowerCase();
+    var tokens = [];
+    var latin = lower.match(/[a-z0-9#+.]+/g) || [];
+    for (var i = 0; i < latin.length; i++) {
+      if (latin[i].length > 1) tokens.push(latin[i]);
+    }
+
+    var parts = lower.split(/[\s,，。.、！？;；：:()（）\[\]【】"'“”‘’\/\\|]+/);
+    for (var j = 0; j < parts.length; j++) {
+      if (parts[j].length > 1 && !/^[a-z0-9#+.]+$/i.test(parts[j])) tokens.push(parts[j]);
+    }
+
+    var chinese = lower.replace(/[^\u4e00-\u9fff]/g, '');
+    for (var k = 0; k < chinese.length - 1; k++) tokens.push(chinese.substring(k, k + 2));
+    for (var m = 0; m < chinese.length - 2; m++) tokens.push(chinese.substring(m, m + 3));
+
+    var seen = {};
+    return tokens.filter(function(token) {
+      if (seen[token]) return false;
+      seen[token] = true;
+      return true;
+    });
+  }
+
+  function hasExactMetaMatch(post, token) {
+    var meta = [];
+    if (post.tags) meta = meta.concat(post.tags);
+    if (post.categories) meta = meta.concat(post.categories);
+    if (post.series) meta.push(post.series);
+    for (var i = 0; i < meta.length; i++) {
+      if ((meta[i] || '').toLowerCase() === token) return true;
+    }
+    return false;
   }
 
   function rankArticles(question, posts) {
     if (!question || !posts || !posts.length) return [];
-    var qTokens = question.toLowerCase().split(/[\s,，。.、！？;；：:()（）\[\]【】]+/).filter(function(w) { return w.length > 1; });
+    var qTokens = tokenizeQuestion(question);
     if (qTokens.length === 0) return posts.slice(0, 10);
 
     var N = posts.length;
@@ -302,6 +341,11 @@
       for (var ti = 0; ti < qTokens.length; ti++) {
         var w = qTokens[ti];
         if (!idf[w]) continue;
+        if (hasExactMetaMatch(posts[pi], w)) score += 40;
+        if (posts[pi].series && posts[pi].series.toLowerCase().indexOf(w) !== -1) score += 15;
+        if ((posts[pi].title || '').toLowerCase().indexOf(w) !== -1) score += 12;
+        if (posts[pi].tags && posts[pi].tags.join(' ').toLowerCase().indexOf(w) !== -1) score += 10;
+        if (posts[pi].categories && posts[pi].categories.join(' ').toLowerCase().indexOf(w) !== -1) score += 8;
         // Term frequency in this doc
         var tf = 0, idx = 0;
         while ((idx = text.indexOf(w, idx)) !== -1) { tf++; idx += w.length; }
