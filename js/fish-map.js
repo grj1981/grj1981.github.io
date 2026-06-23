@@ -128,7 +128,7 @@
           });
           marker.setMap(map);
 
-          var corr = correlationMap && correlationMap[spot.name] ? correlationMap[spot.name] : null;
+          var corr = correlationMap && correlationMap.map && correlationMap.map[spot.name] ? correlationMap.map[spot.name] : null;
 
           var info = new AMap.InfoWindow({
             content: buildInfoContent(spot, corr),
