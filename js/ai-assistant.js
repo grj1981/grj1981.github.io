@@ -8,7 +8,8 @@
     placeholder: '问博客内容，或随便聊两句...',
     maxInputLength: 2000,
     maxHistoryTurns: 6,
-    debounceInterval: 1000
+    debounceInterval: 1000,
+    sessionVersion: '2026-06-22-ai-index-v2'
   };
 
   var isOpen = false;
@@ -250,8 +251,52 @@
     if (postsIndexCache) return Promise.resolve(postsIndexCache);
     return fetch('/api/posts-index.json')
       .then(function(r) { return r.json(); })
-      .then(function(d) { postsIndexCache = d; return d; })
+      .then(function(d) {
+        postsIndexCache = d;
+        syncSessionToPostsIndex(d);
+        return d;
+      })
       .catch(function() { return null; });
+  }
+
+  function getPostsIndexVersion(index) {
+    if (!index) return '';
+    if (index.updated) return String(index.updated);
+    var latest = index.posts && index.posts[0];
+    return [
+      index.total || '',
+      latest && latest.date || '',
+      latest && latest.title || ''
+    ].join('|');
+  }
+
+  function resetConversationUi() {
+    messages = [];
+    conversationTopic = null;
+    currentArticles = [];
+    lastUserQuestion = '';
+    try {
+      sessionStorage.removeItem('ai_messages');
+    } catch(e) { /* ignore */ }
+
+    var container = document.getElementById('ai-msgs');
+    if (container) {
+      container.innerHTML = '';
+      addMsg('bot', CONFIG.welcomeMessage);
+    }
+  }
+
+  function syncSessionToPostsIndex(index) {
+    var currentVersion = getPostsIndexVersion(index);
+    if (!currentVersion) return;
+
+    try {
+      var savedVersion = sessionStorage.getItem('ai_posts_index_version');
+      if (savedVersion && savedVersion !== currentVersion && messages.length) {
+        resetConversationUi();
+      }
+      sessionStorage.setItem('ai_posts_index_version', currentVersion);
+    } catch(e) { /* ignore */ }
   }
 
   /* ---------- RAG: Article ranking (BM25) ---------- */
@@ -354,9 +399,7 @@
       // Recency boost
       if (posts[pi].date) {
         var days = (now - new Date(posts[pi].date).getTime()) / 86400000;
-        if (days < 30) score *= 1.8;
-        else if (days < 90) score *= 1.4;
-        else if (days < 365) score *= 1.1;
+        if (days < 30) score *= Math.max(1.0, 1.8 - days / 30);
       }
       scored.push({ post: posts[pi], score: score });
     }
@@ -894,6 +937,11 @@
   /* ---------- Init ---------- */
   function restoreSession() {
     try {
+      var version = sessionStorage.getItem('ai_session_version');
+      if (version !== CONFIG.sessionVersion) {
+        sessionStorage.removeItem('ai_messages');
+        sessionStorage.setItem('ai_session_version', CONFIG.sessionVersion);
+      }
       var saved = sessionStorage.getItem('ai_messages');
       if (saved) messages = JSON.parse(saved);
     } catch(e) { /* ignore */ }
@@ -904,6 +952,7 @@
 
   function saveSession() {
     try {
+      sessionStorage.setItem('ai_session_version', CONFIG.sessionVersion);
       sessionStorage.setItem('ai_messages', JSON.stringify(messages));
       sessionStorage.setItem('ai_open', isOpen ? '1' : '0');
     } catch(e) { /* ignore */ }

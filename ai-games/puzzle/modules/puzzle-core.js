@@ -27,13 +27,12 @@
             this.enableRotation = config.rotation;
             this.gridSize = config.grid;
             
-            const seed = imageSeed || Date.now();
-            const imageUrl = `${window.PuzzleConfig.IMAGE_BASE_URL}/${canvasWidth}/${canvasHeight}?random=${seed}`;
             this.puzzleImage = new Image();
-            
+
             // 使用ImageLoadManager优化图片加载
             if (window.ImageLoadManager) {
-                return window.ImageLoadManager.loadImage(imageUrl, { maxRetries: 3, timeout: 15000 })
+                return this._getAlbumImageUrl().then(imageUrl => {
+                    return window.ImageLoadManager.loadImage(imageUrl)
                     .then(img => {
                         this.puzzleImage = img;
                         this.imageLoaded = true;
@@ -49,8 +48,8 @@
                         };
                     })
                     .catch(error => {
-                        console.warn('图片加载失败，使用纯色模式:', error);
-                        this.imageLoaded = false;
+                        console.warn('[Puzzle] 图片加载失败，使用程序生成图:', error);
+                        this._generateFallbackImage(canvasWidth, canvasHeight);
                         this.generatePuzzle(config, canvasWidth, canvasHeight);
                         this.completedPieces = 0;
                         
@@ -62,10 +61,13 @@
                             cellSize: this.cellSize
                         };
                     });
+                });
             }
             
-            // 原始加载方式（兼容）
+            // 原始加载方式（兼容 — 无 ImageLoadManager 时）
+            const fallbackUrl = `${window.PuzzleConfig.IMAGE_BASE_URL}/${canvasWidth}/${canvasHeight}?random=${Date.now()}`;
             return new Promise((resolve) => {
+                this.puzzleImage.crossOrigin = 'anonymous';
                 this.puzzleImage.onload = () => {
                     this.imageLoaded = true;
                     this.generatePuzzle(config, canvasWidth, canvasHeight);
@@ -82,7 +84,8 @@
                 
                 this.puzzleImage.onerror = () => {
                     this.imageLoaded = false;
-                    console.warn('图片加载失败，使用纯色模式');
+                    console.warn('图片加载失败（兼容模式），使用程序生成图');
+                    this._generateFallbackImage(canvasWidth, canvasHeight);
                     this.generatePuzzle(config, canvasWidth, canvasHeight);
                     this.completedPieces = 0;
                     
@@ -95,7 +98,7 @@
                     });
                 };
                 
-                this.puzzleImage.src = imageUrl;
+                this.puzzleImage.src = fallbackUrl;
             });
         },
 
@@ -422,6 +425,77 @@
             this.cellSize = null;
             this.gridOffsetX = null;
             this.gridOffsetY = null;
+        },
+
+        _albumImagesCache: null,
+
+        _getAlbumImageUrl() {
+            var self = this;
+            var apiUrl = window.PuzzleConfig.ALBUM_API_URL;
+            var baseUrl = window.PuzzleConfig.ALBUM_BASE_URL;
+            var fallbackUrl = window.PuzzleConfig.IMAGE_BASE_URL + '/' + this.canvasWidth + '/' + this.canvasHeight + '?random=' + Date.now();
+
+            // 首次 fetch 缓存整个图片列表
+            if (!this._albumImagesCache) {
+                this._albumImagesCache = fetch(apiUrl)
+                    .then(function(res) {
+                        if (!res.ok) throw new Error('album API ' + res.status);
+                        return res.json();
+                    })
+                    .then(function(data) {
+                        if (!data.images || !data.images.length) throw new Error('no images in album API');
+                        console.log('[Puzzle] 相册图片数:', data.images.length);
+                        return data.images;
+                    })
+                    .catch(function(err) {
+                        console.warn('[Puzzle] 相册API失败，降级到picSum:', err.message || err);
+                        return null;
+                    });
+            }
+
+            // 每次调用重新随机选一张
+            return this._albumImagesCache.then(function(images) {
+                if (images && images.length) {
+                    var url = images[Math.floor(Math.random() * images.length)];
+                    console.log('[Puzzle] 选中相册图片:', url);
+                    return url;
+                }
+                return fallbackUrl;
+            });
+        },
+
+        _generateFallbackImage(width, height) {
+            var canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            var ctx = canvas.getContext('2d');
+
+            // 渐变背景
+            var grad = ctx.createLinearGradient(0, 0, width, height);
+            grad.addColorStop(0, '#FF6B6B');
+            grad.addColorStop(0.25, '#4ECDC4');
+            grad.addColorStop(0.5, '#45B7D1');
+            grad.addColorStop(0.75, '#96CEB4');
+            grad.addColorStop(1, '#FFEAA7');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, width, height);
+
+            // 噪点纹理
+            for (var i = 0; i < 2000; i++) {
+                var x = Math.random() * width;
+                var y = Math.random() * height;
+                var r = Math.random() * 3;
+                var alpha = Math.random() * 0.3;
+                ctx.fillStyle = 'rgba(255,255,255,' + alpha + ')';
+                ctx.beginPath();
+                ctx.arc(x, y, r, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            this.puzzleImage = new Image();
+            this.puzzleImage.src = canvas.toDataURL();
+            this.imageLoaded = true;
+            console.log('[Puzzle] 使用程序生成图作为最终降级');
         }
     };
 

@@ -7,6 +7,7 @@
         maxRetries: 3,
         currentRetry: 0,
         sources: [
+            'https://img.bytefisher.top/album',
             'https://picsum.photos',
             'https://api.paugram.com/wallpaper/',
             'https://source.unsplash.com/1600x900'
@@ -163,6 +164,7 @@
                     this.showLoadingProgress(`正在加载图片... (源${this.currentIndex + 1}/${this.sources.length})`);
                 }
                 
+                img.crossOrigin = 'anonymous';
                 img.src = url;
             });
         },
@@ -244,6 +246,7 @@
                         }
                     };
                     
+                    img.crossOrigin = 'anonymous';
                     this.showLoadingProgress(`加载图片... (${attempt + 1}/${maxRetries})`);
                     img.src = url;
                 };
