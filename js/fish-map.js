@@ -77,10 +77,10 @@
     if (corr && (corr.diaries.length > 0 || corr.videos.length > 0)) {
       html += '<div class="map-info-links">';
       if (corr.diaries.length > 0) {
-        html += '<span class="map-info-btn" onclick="event.stopPropagation();var w=window;w._pjax?w._pjax.loadUrl(\'/tags/series-钓鱼日记/\'):(w.location.href=\'/tags/series-钓鱼日记/\');">📝 相关日记 (' + corr.diaryCount + ')</span>';
+        html += '<a href="/tags/series-钓鱼日记/" class="map-info-btn">📝 相关日记 (' + corr.diaryCount + ')</a>';
       }
       if (corr.videos.length > 0) {
-        html += '<span class="map-info-btn" onclick="event.stopPropagation();var w=window;w._pjax?w._pjax.loadUrl(\'/douyin/\'):(w.location.href=\'/douyin/\');">🎬 相关视频 (' + corr.videoCount + ')</span>';
+        html += '<a href="/douyin/" class="map-info-btn">🎬 相关视频 (' + corr.videoCount + ')</a>';
       }
       html += '</div>';
     }
@@ -89,11 +89,26 @@
     return html;
   }
 
+  function setupPjaxBtn() {
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('.map-info-btn');
+      if (!btn) return;
+      e.preventDefault();
+      var url = btn.getAttribute('href');
+      if (url && window._pjax) {
+        window._pjax.loadUrl(url);
+      } else if (url) {
+        window.location.href = url;
+      }
+    }, true);
+  }
+
   function init() {
     var container = document.getElementById('fish-map');
     if (!container) return;
 
     correlationMap = loadCorrelationData();
+    setupPjaxBtn();
 
     var map = new AMap.Map('fish-map', {
       zoom: 12,

@@ -93,6 +93,7 @@
     window._douyinInit = true;
 
     document.addEventListener('click', function(e) {
+      if (e.target.closest('.video-related-diaries')) return;
       var card = e.target.closest('.video-card');
       if (card) openModal({ currentTarget: card });
     });
