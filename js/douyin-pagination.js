@@ -28,10 +28,10 @@
       var maxShow = Math.min(video.relatedDiaries.length, 3);
       for (var i = 0; i < maxShow; i++) {
         var d = video.relatedDiaries[i];
-        relatedHtml += '<a href="' + d.path + '" class="related-diary-link" title="' + escapeHtml(d.title) + '">' + escapeHtml(d.title).substring(0, 8) + '</a>';
+        relatedHtml += '<a href="' + d.path + '" class="related-diary-link" title="' + escapeHtml(d.title) + '" onclick="event.stopPropagation();">' + escapeHtml(d.title).substring(0, 8) + '</a>';
       }
       if (video.relatedDiaries.length > 3) {
-        relatedHtml += '<span class="related-more">+' + (video.relatedDiaries.length - 3) + '</span>';
+        relatedHtml += '<span class="related-more" onclick="event.stopPropagation();">+' + (video.relatedDiaries.length - 3) + '</span>';
       }
       relatedHtml += '</div>';
     }

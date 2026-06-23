@@ -77,10 +77,10 @@
     if (corr && (corr.diaries.length > 0 || corr.videos.length > 0)) {
       html += '<div class="map-info-links">';
       if (corr.diaries.length > 0) {
-        html += '<a href="/tags/series-钓鱼日记/" class="map-info-btn">📝 相关日记 (' + corr.diaryCount + ')</a>';
+        html += '<span class="map-info-btn" onclick="event.stopPropagation();var w=window;w._pjax?w._pjax.loadUrl(\'/tags/series-钓鱼日记/\'):(w.location.href=\'/tags/series-钓鱼日记/\');">📝 相关日记 (' + corr.diaryCount + ')</span>';
       }
       if (corr.videos.length > 0) {
-        html += '<a href="/douyin/" class="map-info-btn">🎬 相关视频 (' + corr.videoCount + ')</a>';
+        html += '<span class="map-info-btn" onclick="event.stopPropagation();var w=window;w._pjax?w._pjax.loadUrl(\'/douyin/\'):(w.location.href=\'/douyin/\');">🎬 相关视频 (' + corr.videoCount + ')</span>';
       }
       html += '</div>';
     }
