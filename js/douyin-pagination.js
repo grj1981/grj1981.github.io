@@ -20,6 +20,22 @@
     var cover = video.cover
       ? 'background-image: url(\'' + video.cover + '\');'
       : 'background-image: url(https://picsum.photos/360/440?random=' + video.video_id + ');';
+
+    var relatedHtml = '';
+    if (video.relatedDiaries && video.relatedDiaries.length > 0) {
+      relatedHtml = '<div class="video-related-diaries">';
+      relatedHtml += '<div class="related-label">相关日记</div>';
+      var maxShow = Math.min(video.relatedDiaries.length, 3);
+      for (var i = 0; i < maxShow; i++) {
+        var d = video.relatedDiaries[i];
+        relatedHtml += '<a href="' + d.path + '" class="related-diary-link" title="' + escapeHtml(d.title) + '">' + escapeHtml(d.title).substring(0, 8) + '</a>';
+      }
+      if (video.relatedDiaries.length > 3) {
+        relatedHtml += '<span class="related-more">+' + (video.relatedDiaries.length - 3) + '</span>';
+      }
+      relatedHtml += '</div>';
+    }
+
     return '<div class="videos-item video-card" data-id="' + video.video_id + '">' +
       '<div class="video-cover" style="' + cover + '">' +
         '<div class="video-play-icon"><i class="fa fa-play"></i></div>' +
@@ -29,6 +45,7 @@
         '</div>' +
       '</div>' +
       '<div class="video-desc">' + escapeHtml(video.desc) + '</div>' +
+      relatedHtml +
     '</div>';
   }
 

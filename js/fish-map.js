@@ -8,6 +8,18 @@
     '溪流': { start: '#4FC3F7', end: '#0984E3' }
   };
 
+  var correlationMap = null;
+
+  function loadCorrelationData() {
+    var el = document.getElementById('fish-correlation-data');
+    if (!el) return null;
+    try {
+      return JSON.parse(el.textContent || el.innerText);
+    } catch (e) {
+      return null;
+    }
+  }
+
   function loadAmap(callback, retryCount) {
     if (typeof AMap !== 'undefined') {
       callback();
@@ -43,9 +55,45 @@
       '<div class="pin-tail"></div></div>';
   }
 
+  function buildInfoContent(spot, corr) {
+    var html = '<div class="map-info-window">';
+    html += '<div class="map-info-header">' +
+      '<b>' + spot.name + '</b>' +
+      '<span class="map-info-type">' + spot.type + '</span>' +
+    '</div>';
+
+    html += '<div class="map-info-stats">';
+    html += '<span>📸 ' + spot.photos + ' 张照片</span>';
+    html += '<span>🎣 ' + spot.species.join('、') + '</span>';
+    html += '<span>📅 ' + spot.year + '</span>';
+    if (corr) {
+      html += '<span>📝 ' + corr.diaryCount + ' 篇日记</span>';
+      html += '<span>🎬 ' + corr.videoCount + ' 个视频</span>';
+    }
+    html += '</div>';
+
+    html += '<p class="map-info-desc">' + spot.desc + '</p>';
+
+    if (corr && (corr.diaries.length > 0 || corr.videos.length > 0)) {
+      html += '<div class="map-info-links">';
+      if (corr.diaries.length > 0) {
+        html += '<a href="/tags/series-钓鱼日记/" class="map-info-btn">📝 相关日记 (' + corr.diaryCount + ')</a>';
+      }
+      if (corr.videos.length > 0) {
+        html += '<a href="/douyin/" class="map-info-btn">🎬 相关视频 (' + corr.videoCount + ')</a>';
+      }
+      html += '</div>';
+    }
+
+    html += '</div>';
+    return html;
+  }
+
   function init() {
     var container = document.getElementById('fish-map');
     if (!container) return;
+
+    correlationMap = loadCorrelationData();
 
     var map = new AMap.Map('fish-map', {
       zoom: 12,
@@ -80,15 +128,12 @@
           });
           marker.setMap(map);
 
+          var corr = correlationMap && correlationMap[spot.name] ? correlationMap[spot.name] : null;
+
           var info = new AMap.InfoWindow({
-            content:
-              '<b>' + spot.name + '</b><br>' +
-              '📸 ' + spot.photos + ' 张照片<br>' +
-              '🎣 ' + spot.species.join('、') + '<br>' +
-              '📅 ' + spot.year + '<br>' +
-              '<small>' + spot.desc + '</small>',
+            content: buildInfoContent(spot, corr),
             offset: new AMap.Pixel(0, -20),
-            size: new AMap.Size(0, 0)
+            size: new AMap.Size(280, 0)
           });
 
           marker.on('click', function() {
