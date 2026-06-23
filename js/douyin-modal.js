@@ -1,42 +1,8 @@
 'use strict';
 
 (function() {
-  var musicIframe = null;
-  var isMusicPaused = false;
   var videoIds = [];
   var currentIndex = 0;
-
-  function findMusicIframe() {
-    var iframes = document.getElementsByTagName('iframe');
-    for (var i = 0; i < iframes.length; i++) {
-      var src = iframes[i].src || '';
-      if (src.indexOf('music.163.com') > -1 || src.indexOf('outchain/player') > -1) {
-        return iframes[i];
-      }
-    }
-    return null;
-  }
-
-  function pauseMusic() {
-    musicIframe = findMusicIframe();
-    if (musicIframe) {
-      var src = musicIframe.src || '';
-      if (src.indexOf('auto=1') > -1) {
-        musicIframe.src = src.replace('auto=1', 'auto=0');
-      }
-      isMusicPaused = true;
-    }
-  }
-
-  function resumeMusic() {
-    if (musicIframe && isMusicPaused) {
-      var src = musicIframe.src || '';
-      if (src.indexOf('auto=0') > -1) {
-        musicIframe.src = src.replace('auto=0', 'auto=1');
-      }
-      isMusicPaused = false;
-    }
-  }
 
   function init() {
     var cards = document.querySelectorAll('.video-card');
@@ -69,7 +35,6 @@
     var modal = document.getElementById('douyin-modal');
     currentIndex = videoIds.indexOf(videoId);
     if (player && modal && videoId) {
-      pauseMusic();
       player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -85,7 +50,6 @@
     if (modal) modal.classList.remove('active');
     document.body.style.overflow = '';
     document.documentElement.style.overflow = '';
-    resumeMusic();
   }
 
   function setupEvents() {

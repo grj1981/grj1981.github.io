@@ -77,10 +77,10 @@
     if (corr && (corr.diaries.length > 0 || corr.videos.length > 0)) {
       html += '<div class="map-info-links">';
       if (corr.diaries.length > 0) {
-        html += '<a href="/tags/series-钓鱼日记/" class="map-info-btn">📝 相关日记 (' + corr.diaryCount + ')</a>';
+        html += '<a href="/tags/series-钓鱼日记/" class="map-info-btn" onclick="event.stopPropagation();if(window._pjax){window._pjax.loadUrl(this.href);return false}">📝 相关日记 (' + corr.diaryCount + ')</a>';
       }
       if (corr.videos.length > 0) {
-        html += '<a href="/douyin/" class="map-info-btn">🎬 相关视频 (' + corr.videoCount + ')</a>';
+        html += '<a href="/douyin/" class="map-info-btn" onclick="event.stopPropagation();if(window._pjax){window._pjax.loadUrl(this.href);return false}">🎬 相关视频 (' + corr.videoCount + ')</a>';
       }
       html += '</div>';
     }
@@ -89,12 +89,16 @@
     return html;
   }
 
+  var _pjaxBtnSetup = false;
   function setupPjaxBtn() {
+    if (_pjaxBtnSetup) return;
+    _pjaxBtnSetup = true;
     document.addEventListener('click', function(e) {
-      var btn = e.target.closest('.map-info-btn');
-      if (!btn) return;
+      var link = e.target.closest('.map-info-btn');
+      if (!link) return;
       e.preventDefault();
-      var url = btn.getAttribute('href');
+      e.stopPropagation();
+      var url = link.href;
       if (url && window._pjax) {
         window._pjax.loadUrl(url);
       } else if (url) {
