@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="preconnect" href="https://fonts.loli.net">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://img.bytefisher.top">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#37c6c0">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#37c6c0">
+
+<meta http-equiv="Permissions-Policy" content="encrypted-media=*">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="codeva-7SG6ROHyTg">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"></noscript>
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com busuanzi.ibruce.info static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
+  <meta name="description" content="钓鱼、钓鱼日记: 端午假期最后一天，冒雨去三一水库，本想复刻上周小钩细线搏大鱼的惊喜，结果沦为旁边钓友的“观众”。看着别人连竿裸鲤、鱼竿被拖跑，自己却只收获小奶鲫和小田螺，这波debug失败。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="端午最后一天，我在三一水库当了一回“看客”">
+<meta property="og:url" content="https://www.bytefisher.top/2026/06/23/2026-06-23-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E7%AB%AF%E5%8D%88%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9%E6%88%91%E5%9C%A8%E4%B8%89%E4%B8%80%E6%B0%B4%E5%BA%93%E5%BD%93%E4%BA%86%E4%B8%80/">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="钓鱼、钓鱼日记: 端午假期最后一天，冒雨去三一水库，本想复刻上周小钩细线搏大鱼的惊喜，结果沦为旁边钓友的“观众”。看着别人连竿裸鲤、鱼竿被拖跑，自己却只收获小奶鲫和小田螺，这波debug失败。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.bytefisher.top/album/img2026/2026.06.21_1.webp">
+<meta property="og:image" content="https://img.bytefisher.top/album/img2026/2026.06.21_2.webp">
+<meta property="og:image" content="https://img.bytefisher.top/album/img2026/2026.06.21_0.webp">
+<meta property="og:image" content="https://img.bytefisher.top/album/img2026/2026.06.21_3.webp">
+<meta property="article:published_time" content="2026-06-23T05:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-23T04:50:44.687Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="series:钓鱼日记">
+<meta property="article:tag" content="钓鱼">
+<meta property="article:tag" content="钓鱼日记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.bytefisher.top/album/img2026/2026.06.21_1.webp">
+  <meta name="keywords" content="钓鱼,钓鱼日记,三一水库,程序员钓鱼,ByteFisher,野钓,小田螺,端午钓鱼,钓鱼,淡水鱼,ByteFisher">
+
+<link rel="canonical" href="https://www.bytefisher.top/2026/06/23/2026-06-23-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E7%AB%AF%E5%8D%88%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9%E6%88%91%E5%9C%A8%E4%B8%89%E4%B8%80%E6%B0%B4%E5%BA%93%E5%BD%93%E4%BA%86%E4%B8%80/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"端午最后一天，我在三一水库当了一回“看客”","description":"钓鱼、钓鱼日记: 端午假期最后一天，冒雨去三一水库，本想复刻上周小钩细线搏大鱼的惊喜，结果沦为旁边钓友的“观众”。看着别人连竿裸鲤、鱼竿被拖跑，自己却只收获小奶鲫和小田螺，这波debug失败。","url":"https://www.bytefisher.top/2026/06/23/2026-06-23-钓鱼日记-端午最后一天我在三一水库当了一/","datePublished":"2026-06-23T05:00:00.000Z","dateModified":"2026-06-23T04:50:44.687Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/06/23/2026-06-23-钓鱼日记-端午最后一天我在三一水库当了一/"},"keywords":"钓鱼, 钓鱼日记, series:钓鱼日记"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"钓鱼日记","item":"https://www.bytefisher.top/categories/钓鱼日记/"},{"@type":"ListItem","position":3,"name":"端午最后一天，我在三一水库当了一回“看客”"}]}</script>
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>端午最后一天，我在三一水库当了一回“看客” | ByteFisher</title>
+  
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dc50e0997d43c3a8dbf2afdb3fdff233";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#37c6c0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-tutorials">
+
+    <a href="/tutorials/" rel="section"><i class="fa fa-book fa-fw"></i>教程<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>钓鱼专题<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-aigames">
+
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">56</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">232</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>rss</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/06/23/2026-06-23-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E7%AB%AF%E5%8D%88%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9%E6%88%91%E5%9C%A8%E4%B8%89%E4%B8%80%E6%B0%B4%E5%BA%93%E5%BD%93%E4%BA%86%E4%B8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.webp">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          端午最后一天，我在三一水库当了一回“看客”
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-06-23 13:00:00" itemprop="dateCreated datePublished" datetime="2026-06-23T13:00:00+08:00">2026-06-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2026/06/23/2026-06-23-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E7%AB%AF%E5%8D%88%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9%E6%88%91%E5%9C%A8%E4%B8%89%E4%B8%80%E6%B0%B4%E5%BA%93%E5%BD%93%E4%BA%86%E4%B8%80/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2026/06/23/2026-06-23-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E7%AB%AF%E5%8D%88%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9%E6%88%91%E5%9C%A8%E4%B8%89%E4%B8%80%E6%B0%B4%E5%BA%93%E5%BD%93%E4%BA%86%E4%B8%80/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">钓鱼、钓鱼日记: 端午假期最后一天，冒雨去三一水库，本想复刻上周小钩细线搏大鱼的惊喜，结果沦为旁边钓友的“观众”。看着别人连竿裸鲤、鱼竿被拖跑，自己却只收获小奶鲫和小田螺，这波debug失败。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>端午三天假期，前两天下得跟天漏了似的。我窝在家里，看着外面哗啦啦的雨，再瞅一眼墙边那根还没擦干的波纹鲤，心里那个痒啊——原本计划着再去花碑水库算一笔账，结果老天爷直接给我来了个“系统中断”。</p>
+<p>假期最后一天，雨总算小了些，变成了那种绵绵的、带着凉意的细雨。我看了眼手机天气预报：小雨，24℃，东北风2级。</p>
+<p>“这天气，鱼应该活性不错。”我脑子里那个钓鱼的线程开始疯狂抢占CPU，最终战胜了“在家躺平”的进程。出发！</p>
+<p>目标：三一水库。上周在那用玄武人Y小钩细线搏了条大鲤鱼，手都搞酸了，今天换根硬点的竿子，看看还有没有惊喜。</p>
+<p><img data-src="https://img.bytefisher.top/album/img2026/2026.06.21_1.webp"></p>
+<p>驱车到水库边，雨滴打在车玻璃上，噼里啪啦的。我熟门熟路地找到上周那个钓位，水位涨了些，水色带着点浑浊，这是好信号——浑水钓边，大鱼靠岸。</p>
+<p>架好钓伞，开饵、调漂。今天用的是特作色华13尺，比上周的玄武人Y长了30公分，硬度也上了一个档次。我一边绑线一边想：上周用那根软竿遛鱼，手感是好，但控鱼太费劲了，差点被鱼带进水里。今天这根竿子腰力足，再遇到那种货色，应该能硬刚一下。</p>
+<span id="more"></span>
+
+<p>正摆弄着装备，旁边传来“嗖”的一声切水声。我扭头一看，旁边钓友大哥已经扬竿中鱼了！鱼不大，但力气不小，在水面翻滚着，金黄色的尾巴拍起一片水花。</p>
+<p>“裸鲤，一斤多点。”大哥一边遛鱼一边淡定地说，脸上带着那种“我就知道今天有戏”的表情。</p>
+<p>我这边还在调漂桶里找底呢，人家已经开张了。这开局，有点不对啊。</p>
+<p>等我把所有参数都配置好，第一竿抛下去，浮漂刚站稳就有了动作——点、点、顶，标准的鲫鱼漂相。我手腕一抖，扬竿，中！手感很轻，直接飞上来一看：一条拇指大的小奶鲫，金黄金黄的，眼睛比鱼头还大。</p>
+<p><img data-src="https://img.bytefisher.top/album/img2026/2026.06.21_2.webp"></p>
+<p>“行吧，小也是鱼。”我把它放进鱼护，继续抛竿。</p>
+<p>接下来的一个小时，我进入了一种诡异的循环：抛竿→浮漂跳舞→扬竿→小奶鲫&#x2F;金麦线→摘钩→抛竿。鱼情确实好，连竿不断，但全是拇指大的鱼苗。旁边大哥那边也是连竿，但他连的是巴掌大的裸鲤，偶尔还能飞上来一条半斤的。</p>
+<p>我盯着浮漂，脑子里开始跑排查流程：</p>
+<ul>
+<li><strong>环境变量</strong>：下雨天，水温凉爽，溶氧量高，鱼活性应该好。没问题。</li>
+<li><strong>钓位选择</strong>：上周在这个位置中了大鱼，地形没问题。</li>
+<li><strong>装备配置</strong>：特作色华13尺，比玄武人Y硬，线组是1.0+0.6，钩子是3号袖。这配置钓小鱼绰绰有余，但也没大到挡口的地步。</li>
+<li><strong>饵料状态</strong>：拉饵，雾化适中，味型偏腥。没问题。</li>
+</ul>
+<p>那问题出在哪？难道是鱼层不对？我试着钓浮、钓离底、钓跑铅，挨个试了一遍——结果一样，全是小奶鲫。</p>
+<p>“这就像你写了一堆单元测试，用例全过了，但集成测试就是跑不通。”我苦笑着自言自语。</p>
+<p>快中午的时候，雨停了，但天还是阴沉沉的。我正机械地抛着竿，突然听到旁边传来一阵惊呼：“卧槽！竿子！”</p>
+<p>我扭头一看，离我大概十米远的一个钓友，他的鱼竿正被什么东西拖着，以一种诡异的姿态滑向水里。竿梢入水，然后整根竿子被拖进了水库，像一艘无人驾驶的小船，在水面上划出一道歪歪扭扭的轨迹。</p>
+<p>“鱼！鱼把竿子拖跑了！”那钓友急得直跺脚。</p>
+<p><img data-src="https://img.bytefisher.top/album/img2026/2026.06.21_0.webp"></p>
+<p>水库里那根竿子越漂越远，鱼线绷得紧紧的，时不时能看到水下一个巨大的黑影翻动。我放下自己的竿子，跑过去看热闹。那钓友手忙脚乱地从车里翻出路亚竿，挂上亮片，开始往水里抛投，试图把被拖走的竿子捞回来。</p>
+<p>折腾了得有十来分钟，路亚钩终于挂住了那根竿子的线。他小心翼翼地收线，把竿子拖到岸边，伸手一捞——鱼还在上面！一条两斤左右的鲤鱼，银白色的鳞片在浑浊的水里闪着光。</p>
+<p>“好家伙，这鱼够聪明，知道用竿子当替身。”我忍不住笑了。</p>
+<p>闹剧结束后，我回到自己的钓位，看着鱼护里那几条小奶鲫，再看看旁边大哥鱼护里噼里啪啦响个不停的裸鲤，心里那叫一个五味杂陈。</p>
+<p>下午的雨又大了起来，我撑着伞，有一竿没一竿地抛着。浮漂的每一次动作都让我燃起希望，但提上来的永远是那些拇指大的小家伙。</p>
+<p>最后，我决定收竿。正当我准备把最后一团饵料扔进水里时，浮漂上浮了一目，然后缓缓下沉。我习惯性地扬竿——手感很沉，但不是鱼挣扎的那种力道，而是像挂了个小石头。</p>
+<p>提上来一看，钩子上挂着一只小田螺，比指甲盖大一点，壳上还带着青苔。</p>
+<p>我把田螺摘下来，放在手心里端详了半天：“行吧，今天最大的收获，就是你。”</p>
+<p><img data-src="https://img.bytefisher.top/album/img2026/2026.06.21_3.webp"></p>
+<p>回来的路上，我理了理今天的debug日志：</p>
+<ul>
+<li><strong>环境变更</strong>：端午连续下雨 → 三一水库水位上涨，水色浑浊</li>
+<li><strong>症状</strong>：特作色华13尺 + 拉饵，连竿小奶鲫，目标鱼种（裸鲤&#x2F;大个体鲫鱼）未响应</li>
+<li><strong>初步诊断</strong>：鱼群结构问题——大鱼在深水区或障碍物区，浅水区被小鱼苗占据</li>
+<li><strong>热修复尝试</strong>：调整钓层（浮→底→离底）、更换饵料状态 → 效果：无</li>
+<li><strong>遗留bug</strong>：小雨天气大鱼活性是否受影响？需进一步观察</li>
+<li><strong>外部干扰</strong>：旁边钓友鱼竿被拖跑事件，造成系统注意力分散</li>
+</ul>
+<p>今天最大的收获不是鱼，是终于弄明白了一个道理：有时候不是你技术不行，也不是装备不对，而是那天的“用户需求”就不是你想要的。三一水库今天的需求方是小奶鲫和金麦线，旁边大哥的需求方是裸鲤，而我——我拿着特作色华，想接大鲤鱼的项目，结果连个需求文档都没对上。</p>
+<p>这就像你精心设计了一个高并发系统，结果上线后发现用户量只有几十个，而且全是测试账号在跑冒烟测试。架构对了，场景错了。</p>
+<p>不过话说回来，那只小田螺倒是挺可爱的。回家养在鱼缸里，也算是个纪念品。</p>
+<p>花碑水库的大货们，等我。下个周末，咱们的账继续算。</p>
+<ul>
+<li><a href="/douyin/">🎣 抖音渔获视频</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+    <div class="post-blog-card" style="margin:1.5em auto 0;padding:.5em .8em;border:1px solid #e8e8e8;border-radius:6px;background:var(--card-bg-color,#fff);display:flex;align-items:center;max-width:400px">
+  <div style="flex:1;min-width:0;text-align:left">
+    <div style="font-size:.8em;font-weight:700;color:#555">ByteFisher</div>
+    <div style="font-size:.68em;color:#999;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">分享编程技术 · 记录钓鱼乐趣</div>
+  </div>
+  <img src="/images/wechat-qcode.webp" alt="扫码关注" style="width:60px;height:60px;border-radius:3px;margin:0 10px;flex-shrink:0">
+  <div style="padding:3px 10px;border:1px solid #fc6423;border-radius:3px;color:#fc6423;font-size:.7em;white-space:nowrap;flex-shrink:0">▸ 扫码关注 ◂</div>
+</div>
+
+    <div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2026/06/17/2026-06-17-钓鱼日记-花碑水库的节奏之战开局连竿中午/" class="related-post-item" title="花碑水库的节奏之战：开局连竿、中午断口、下午爆连"><span class="related-post-title">花碑水库的节奏之战：开局连竿、中午断口、下午爆连</span><span class="related-post-date">2026-06-17</span><span class="related-post-desc">钓鱼、钓鱼日记: 周六临时改去三一水库，周日才杀回花碑。大太阳底下，九点到爆护位，半小时连中两尾鲤鱼，以为要爆护，结果中午断口两小时，下午三点才来口。1.5子线被切，最后收竿鱼大鲢鳙。全天六条鲤鱼，三小三大，节奏像写代码——开局兴奋，中间debug，最后上线。</span></a><a href="/2026/06/16/2026-06-16-钓鱼日记-小钩细线搏大鱼程序员式遛鱼全记/" class="related-post-item" title="小钩细线搏大鱼，程序员式遛鱼全记录"><span class="related-post-title">小钩细线搏大鱼，程序员式遛鱼全记录</span><span class="related-post-date">2026-06-16</span><span class="related-post-desc">钓鱼、钓鱼日记: 周六改道三一水库，农家乐门口树下平台全天遮阴，一米五水深比往年涨了近一米。0.8主线0.4子线小钩细线抽白条，意外遭遇大鲤鱼，软竿卸力极限拉扯十多分钟。灌溉水库的水位变化如何改变了鱼情，程序员视角的遛鱼复盘。</span></a><a href="/2026/06/06/2026-06-06-钓鱼日记-花碑水库七战记/" class="related-post-item" title="花碑水库七战记——女高手携夫连竿秀，我换竿还让她帮忙操鱼"><span class="related-post-title">花碑水库七战记——女高手携夫连竿秀，我换竿还让她帮忙操鱼</span><span class="related-post-date">2026-06-06</span><span class="related-post-desc">上周在花碑水库当了一天观众，运动相机拍到没电也没拍到上鱼镜头。回家复盘了一整晚，把所有可能性都列了一遍——线组太粗、竿子太长、调钓不对、窝子没做好。越想越觉得再这么下去，花碑水库这副本我要卡一年。周六起了个大早直奔花碑，结果一到水库就看到了熟悉的身影——上周那位女钓友，旁边还多了个老公。</span></a><a href="/2026/05/31/2026-05-30-钓鱼日记-花碑水库六战记/" class="related-post-item" title="花碑水库六战记——女钓友连竿我当观众，运动相机拍到没电也没拍到"><span class="related-post-title">花碑水库六战记——女钓友连竿我当观众，运动相机拍到没电也没拍到</span><span class="related-post-date">2026-05-31</span><span class="related-post-desc">钓鱼、钓鱼日记: 上周末在花碑水库四连空切主线丢漂，水底下又躺了一支新达摩。回家之后我翻来覆去睡不着，坐在电脑前把录像回放看了两遍，越看越憋屈。当晚就在购物车下单了一支新浮漂。不就是大物吗？不就是切主线吗？我上周在文章结尾放了狠话——下周7.2米鱼竿加3.0主线和有倒刺钩，我倒要看看你们还能整出什么幺蛾子。</span></a><a href="/2026/05/23/2026-05-23-钓鱼日记-花碑水库五战记/" class="related-post-item" title="花碑水库五战记——第三支达摩沉底，银鳕鱼倒是连竿了"><span class="related-post-title">花碑水库五战记——第三支达摩沉底，银鳕鱼倒是连竿了</span><span class="related-post-date">2026-05-23</span><span class="related-post-desc">钓鱼、钓鱼日记: 上周解锁完淡水银鳕鱼，回家在钓友群发了个短视频，评论区又是一片"这水库还有这玩意儿？"的惊叹。我盯着手机屏幕翻来覆去看了好几遍那条银白色修长鱼身的照片，心里惦记的却是另一件事——上次debug日志里写的那个hotfix方案还没实战验证过：备两套线组，一套0.8+1.0专攻浅水轻口，一套2.</span></a><a href="/2026/05/16/2026-05-16-钓鱼日记-花碑水库新鱼种/" class="related-post-item" title="花碑水库再开新图鉴——淡水银鳕鱼入护，程序员调整策略立竿见影"><span class="related-post-title">花碑水库再开新图鉴——淡水银鳕鱼入护，程序员调整策略立竿见影</span><span class="related-post-date">2026-05-16</span><span class="related-post-desc">钓鱼、钓鱼日记: 四月下旬到现在，花碑水库已经连战三次了。第一次被切子线拖走浮漂，气得回去发狠写了两千字复仇宣言。第二次五一蒙蒙细雨，波纹鲤K6.3五条大鲤三条鲢鳙入户，连本带利讨了回来。第三次五一约上老表，十二加六十八条，50斤爆护，老表两小时空军被我一个人填了坑。</span></a></div></div>
+    <div class="series-nav"><div class="series-nav-title">钓鱼日记 系列</div><div class="series-nav-progress">第 29/29 篇</div><div class="series-nav-links"><a href="/2026/06/17/2026-06-17-钓鱼日记-花碑水库的节奏之战开局连竿中午/" class="series-nav-prev">花碑水库的节奏之战：开局连竿、中午断口、下午爆连</a></div></div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%92%93%E9%B1%BC/" rel="tag"># 钓鱼</a>
+              <a href="/tags/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" rel="tag"># 钓鱼日记</a>
+              <a href="/tags/series-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" rel="tag"># series:钓鱼日记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/06/22/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-05-GitHub%20Copilot%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/" rel="prev" title="ByteFisher AI 编程实战（五）：GitHub Copilot 从入门到精通">
+      <i class="fa fa-chevron-left"></i> ByteFisher AI 编程实战（五）：GitHub Copilot 从入门到精通
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+  <div class="post-share">
+    <span class="post-share-label">分享：</span>
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2026%2F06%2F23%2F2026-06-23-%25E9%2592%2593%25E9%25B1%25BC%25E6%2597%25A5%25E8%25AE%25B0-%25E7%25AB%25AF%25E5%258D%2588%25E6%259C%2580%25E5%2590%258E%25E4%25B8%2580%25E5%25A4%25A9%25E6%2588%2591%25E5%259C%25A8%25E4%25B8%2589%25E4%25B8%2580%25E6%25B0%25B4%25E5%25BA%2593%25E5%25BD%2593%25E4%25BA%2586%25E4%25B8%2580%2F&amp;title=%E7%AB%AF%E5%8D%88%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9%EF%BC%8C%E6%88%91%E5%9C%A8%E4%B8%89%E4%B8%80%E6%B0%B4%E5%BA%93%E5%BD%93%E4%BA%86%E4%B8%80%E5%9B%9E%E2%80%9C%E7%9C%8B%E5%AE%A2%E2%80%9D" target="_blank" rel="noopener" title="分享到微博">
+      <i class="fab fa-weibo"></i>
+    </a>
+    <a href="#" onclick="navigator.clipboard.writeText(location.href);var t=this;t.innerHTML='<i class=fa fa-check></i>';setTimeout(function(){t.innerHTML='<i class=fa fa-link></i>'},1500);return false" title="复制链接">
+      <i class="fa fa-link"></i>
+    </a>
+  </div>
+
+  
+  <div class="post-author-bio">
+    <div class="post-author-avatar">
+      <img src="/images/avatar2.gif" alt="淡水鱼">
+    </div>
+    <div class="post-author-info">
+      <div class="post-author-name">淡水鱼</div>
+      <div class="post-author-desc">钓鱼爱好者 &amp; Unity 游戏开发者，分享编程技术与钓鱼经验。</div>
+      <div class="post-author-links">
+        <a href="https://github.com/grj1981" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="/atom.xml" title="RSS 订阅"><i class="fa fa-rss"></i></a>
+        <a href="mailto:271623821@qq.com" title="联系我"><i class="fa fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+          </div>
+          
+    <div class="comments" id="waline-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">232</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+      <div class="site-state-item site-state-tutorials">
+        <a href="/tutorials/">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">教程</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe id="music-player" allow="encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.webp">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2023 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  <script>
+    setTimeout(function(){
+      var containers = [
+        'busuanzi_container_site_uv',
+        'busuanzi_container_site_pv'
+      ];
+      for (var i = 0; i < containers.length; i++) {
+        var el = document.getElementById(containers[i]);
+        if (el && el.style.display === 'none') {
+          el.style.display = 'inline';
+        }
+      }
+    }, 3000);
+  </script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: true,
+  scrollTo : !CONFIG.bookmark.enable
+});
+window._pjax = pjax;
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition(true);
+
+  document.querySelectorAll('.post-block, .pagination, .comments').forEach(function(el) {
+    if (parseFloat(el.style.opacity) === 0) {
+      el.style.opacity = 1;
+    }
+  });
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+    
+
+  
+
+    
+
+    </div>
+
+<link rel="preload" as="style" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css"></noscript>
+<script data-pjax>
+(function() {
+  // 抑制第三方扩展的 notice.avoidance 报错
+  window.addEventListener('error', function(e) {
+    if (e.message && e.message.indexOf('notice.avoidance') !== -1) {
+      e.preventDefault();
+      e.stopPropagation();
+      return true;
+    }
+  });
+
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+
+  function updateCounts() {
+    var countEls = document.querySelectorAll('.waline-visitor-count');
+    if (!countEls.length) return;
+    countEls.forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var url = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(json) {
+          if (json && json.data && json.data[0] && json.data[0].time != null) {
+            el.innerText = json.data[0].time;
+          }
+        }).catch(function(){});
+    });
+  }
+
+  var el = document.querySelector('#waline-comments');
+  if (el) {
+    updateCounts();
+    NexT.utils.loadComments(el, function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2.15.8/dist/waline.js', function() {
+        Waline.init({
+          el: '#waline-comments',
+          serverURL: 'https://waline.bytefisher.top/',
+          path: location.pathname,
+          lang: 'zh-CN' || 'zh-CN',
+          meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
+          requiredMeta: ["nick"] || ['nick'],
+          placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
+          avatar: 'retro' || 'retro',
+          pageSize: 10 || 10,
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
+        });
+        var pathEl = document.querySelector('.waline-visitor-count');
+        var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
+        fetch(baseURL + '/api/article', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: postPath })
+        }).finally(function() {
+          setTimeout(updateCounts, 300);
+        });
+      }, window.Waline);
+    });
+  } else {
+    updateCounts();
+  }
+
+  // Fallback for delayed Waline rendering
+  setTimeout(updateCounts, 2000);
+})();
+</script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="/css/douyin-modal.css">
+<script src="/js/douyin-modal.js" async></script>
+<script src="/js/hero-typing.js" async></script>
+
+<link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
+<script data-pjax>
+(function() {
+  if (document.querySelector('a[data-lightbox]')) {
+    if (!window._lightboxLoaded) {
+      window._lightboxLoaded = true;
+      var s = document.createElement('script');
+      s.src = '/js/lightbox-plus-jquery.min.js';
+      document.body.appendChild(s);
+    }
+  }
+})();
+</script>
+
+<button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
+  <i class="fa fa-moon-o"></i>
+  <i class="fa fa-sun-o"></i>
+</button>
+<script src="/js/darkmode-toggle.js" async></script>
+
+<script data-pjax>
+(function() {
+  function loadAI() {
+    if (window._aiLoaded) return;
+    window._aiLoaded = true;
+    var aiVersion = 'bytebot-20260618-lua-rag-fix';
+    var scripts = ['/js/lib/marked.min.js', '/js/lib/purify.min.js', '/js/ai-assistant.js?v=' + aiVersion];
+    function loadNext() {
+      if (!scripts.length) return;
+      var s = document.createElement('script');
+      s.src = scripts.shift();
+      s.onload = s.onerror = loadNext;
+      document.body.appendChild(s);
+    }
+    loadNext();
+  }
+  if (document.readyState === 'complete') {
+    setTimeout(loadAI, 500);
+  } else {
+    window.addEventListener('load', function() { setTimeout(loadAI, 500); });
+  }
+})();
+</script>
+
+<script data-pjax>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').then(function(reg) {
+    reg.update(); // Force SW update check on each page load
+  });
+}
+</script>
+
+<script src="/js/douyin-pagination.js" async></script>
+<script src="/js/hot-posts-widget.js" async></script>
+
+</body>
+</html>
