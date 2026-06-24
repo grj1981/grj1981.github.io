@@ -23,17 +23,16 @@
 
     var relatedHtml = '';
     if (video.relatedDiaries && video.relatedDiaries.length > 0) {
-      relatedHtml = '<div class="video-related-diaries">';
-      relatedHtml += '<div class="related-label">相关日记</div>';
-      var maxShow = Math.min(video.relatedDiaries.length, 3);
-      for (var i = 0; i < maxShow; i++) {
-        var d = video.relatedDiaries[i];
-        relatedHtml += '<a href="' + d.path + '" class="related-diary-link" title="' + escapeHtml(d.title) + '" onclick="event.stopPropagation();if(window._pjax){window._pjax.loadUrl(this.href);return false}">' + escapeHtml(d.title).substring(0, 8) + '</a>';
-      }
-      if (video.relatedDiaries.length > 3) {
-        relatedHtml += '<span class="related-more">+' + (video.relatedDiaries.length - 3) + '</span>';
-      }
-      relatedHtml += '</div>';
+      var d = video.relatedDiaries[0];
+      relatedHtml = '<div class="video-related-diaries">' +
+        '<div class="related-label">相关日记</div>' +
+        '<a href="' + d.path + '" class="related-diary-link" title="' + escapeHtml(d.title) + '">' + escapeHtml(d.title) + '</a>' +
+      '</div>';
+    }
+
+    var spotHtml = '';
+    if (video.spot) {
+      spotHtml = '<div class="video-spot">📍 ' + escapeHtml(video.spot) + '</div>';
     }
 
     return '<div class="videos-item video-card" data-id="' + video.video_id + '">' +
@@ -45,6 +44,7 @@
         '</div>' +
       '</div>' +
       '<div class="video-desc">' + escapeHtml(video.desc) + '</div>' +
+      spotHtml +
       relatedHtml +
     '</div>';
   }

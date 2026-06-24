@@ -1,8 +1,43 @@
 'use strict';
 
 (function() {
+  var _musicIframe = null;
+  var _musicParent = null;
+  var _musicSibling = null;
   var videoIds = [];
   var currentIndex = 0;
+
+  function findMusicIframe() {
+    var iframes = document.getElementsByTagName('iframe');
+    for (var i = 0; i < iframes.length; i++) {
+      var src = iframes[i].src || '';
+      if (src.indexOf('music.163.com') > -1 || src.indexOf('outchain/player') > -1) {
+        return iframes[i];
+      }
+    }
+    return null;
+  }
+
+  function pauseMusic() {
+    var iframe = findMusicIframe();
+    if (!iframe || _musicIframe) return;
+    _musicParent = iframe.parentNode;
+    _musicSibling = iframe.nextSibling;
+    _musicIframe = iframe;
+    _musicParent.removeChild(iframe);
+  }
+
+  function resumeMusic() {
+    if (!_musicIframe || !_musicParent) return;
+    if (_musicSibling) {
+      _musicParent.insertBefore(_musicIframe, _musicSibling);
+    } else {
+      _musicParent.appendChild(_musicIframe);
+    }
+    _musicIframe = null;
+    _musicParent = null;
+    _musicSibling = null;
+  }
 
   function init() {
     var cards = document.querySelectorAll('.video-card');
@@ -35,6 +70,7 @@
     var modal = document.getElementById('douyin-modal');
     currentIndex = videoIds.indexOf(videoId);
     if (player && modal && videoId) {
+      pauseMusic();
       player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -50,6 +86,7 @@
     if (modal) modal.classList.remove('active');
     document.body.style.overflow = '';
     document.documentElement.style.overflow = '';
+    resumeMusic();
   }
 
   function setupEvents() {
@@ -57,7 +94,17 @@
     window._douyinInit = true;
 
     document.addEventListener('click', function(e) {
-      if (e.target.closest('.video-related-diaries')) return;
+      var diaryLink = e.target.closest('.related-diary-link');
+      if (diaryLink) {
+        e.preventDefault();
+        if (window._pjax) {
+          window._pjax.loadUrl(diaryLink.href);
+        } else {
+          window.location.href = diaryLink.href;
+        }
+        return;
+      }
+
       var card = e.target.closest('.video-card');
       if (card) openModal({ currentTarget: card });
     });
@@ -87,6 +134,15 @@
       });
     }
 
+    window.addEventListener('pjax:send', function() {
+      if (_musicIframe) resumeMusic();
+      var modal = document.getElementById('douyin-modal');
+      if (modal && modal.classList.contains('active')) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+      }
+    });
     window.addEventListener('pjax:success', init);
     window.addEventListener('pageshow', function(e) {
       if (e.persisted) init();
