@@ -11,7 +11,54 @@
   <rights>All rights reserved 2026, 淡水鱼</rights>
   <subtitle>钓鱼爱好者的编程世界</subtitle>
   <title>ByteFisher</title>
-  <updated>2026-06-24T03:13:42.297Z</updated>
+  <updated>2026-06-08T06:59:12.132Z</updated>
+  <entry>
+    <author>
+      <name>淡水鱼</name>
+    </author>
+    <category term="AI" scheme="https://www.bytefisher.top/categories/AI/"/>
+    <category term="教程" scheme="https://www.bytefisher.top/categories/%E6%95%99%E7%A8%8B/"/>
+    <category term="AI" scheme="https://www.bytefisher.top/tags/AI/"/>
+    <category term="教程" scheme="https://www.bytefisher.top/tags/%E6%95%99%E7%A8%8B/"/>
+    <category term="series:ByteFisher AI编程实战教程" scheme="https://www.bytefisher.top/tags/series-ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B/"/>
+    <id>https://www.bytefisher.top/2026/06/29/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-07-Claude%20Code%E7%BB%88%E7%AB%AFAI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/</id>
+    <link href="https://www.bytefisher.top/2026/06/29/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-07-Claude%20Code%E7%BB%88%E7%AB%AFAI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/"/>
+    <published>2026-06-28T16:00:00.000Z</published>
+    <summary>本系列第7篇，共21篇。详细介绍 Claude Code 终端 AI 编程助手的安装配置、核心命令详解，以及接入国产大模型（DeepSeek/Qwen/MiniMax）的实战配置。</summary>
+    <title>ByteFisher AI 编程实战（七）：Claude Code 终端AI编程实战</title>
+    <updated>2026-06-08T06:59:12.132Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>淡水鱼</name>
+    </author>
+    <category term="钓鱼日记" scheme="https://www.bytefisher.top/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/"/>
+    <category term="钓鱼" scheme="https://www.bytefisher.top/tags/%E9%92%93%E9%B1%BC/"/>
+    <category term="钓鱼日记" scheme="https://www.bytefisher.top/tags/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/"/>
+    <category term="series:钓鱼日记" scheme="https://www.bytefisher.top/tags/series-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/"/>
+    <id>https://www.bytefisher.top/2026/06/28/2026-06-28-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93%E7%B2%97%E7%BA%BF%E7%BB%84%E7%8B%82%E6%8B%89%E5%B0%8F%E9%B2%AB%E9%B1%BC/</id>
+    <link href="https://www.bytefisher.top/2026/06/28/2026-06-28-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E8%8A%B1%E7%A2%91%E6%B0%B4%E5%BA%93%E7%B2%97%E7%BA%BF%E7%BB%84%E7%8B%82%E6%8B%89%E5%B0%8F%E9%B2%AB%E9%B1%BC/"/>
+    <published>2026-06-28T13:00:00.000Z</published>
+    <summary>钓鱼、钓鱼日记: 花碑水库钓鱼日记：鲢鳙4条、鲤鱼2条、鲫鱼8条、银鳕鱼1条，但接连脱钩跑大鱼，上的全是无效鱼和小卡拉米，一场治愈又扎心的程序员式复盘。</summary>
+    <title>花碑水库的&quot;脱钩&quot;bug：大鱼全部跑路，小卡拉米疯狂上钩</title>
+    <updated>2026-06-30T04:49:45.239Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>淡水鱼</name>
+    </author>
+    <category term="AI" scheme="https://www.bytefisher.top/categories/AI/"/>
+    <category term="教程" scheme="https://www.bytefisher.top/categories/%E6%95%99%E7%A8%8B/"/>
+    <category term="AI" scheme="https://www.bytefisher.top/tags/AI/"/>
+    <category term="教程" scheme="https://www.bytefisher.top/tags/%E6%95%99%E7%A8%8B/"/>
+    <category term="series:ByteFisher AI编程实战教程" scheme="https://www.bytefisher.top/tags/series-ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B/"/>
+    <id>https://www.bytefisher.top/2026/06/25/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-06-Cursor%E4%B8%BAAI%E8%80%8C%E7%94%9F%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8/</id>
+    <link href="https://www.bytefisher.top/2026/06/25/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-06-Cursor%E4%B8%BAAI%E8%80%8C%E7%94%9F%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8/"/>
+    <published>2026-06-24T16:00:00.000Z</published>
+    <summary>本系列第6篇，共21篇。深入介绍 Cursor 编辑器的核心功能——Tab 补全、Cmd+K 生成、Composer 多文件编辑、项目上下文管理和 .cursorrules 规则编写，并与 VS Code + Copilot 全面对比。</summary>
+    <title>ByteFisher AI 编程实战（六）：Cursor——为AI而生的编辑器</title>
+    <updated>2026-06-08T06:59:11.193Z</updated>
+  </entry>
   <entry>
     <author>
       <name>淡水鱼</name>
@@ -265,9 +312,9 @@
     <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
     <category term="JavaScript" scheme="https://www.bytefisher.top/tags/JavaScript/"/>
     <category term="游戏开发" scheme="https://www.bytefisher.top/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
-    <category term="series:博客实战-小游戏" scheme="https://www.bytefisher.top/tags/series-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E6%B8%B8%E6%88%8F/"/>
     <category term="Canvas" scheme="https://www.bytefisher.top/tags/Canvas/"/>
     <category term="响应式设计" scheme="https://www.bytefisher.top/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1/"/>
+    <category term="series:博客实战-小游戏" scheme="https://www.bytefisher.top/tags/series-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E6%B8%B8%E6%88%8F/"/>
     <id>https://www.bytefisher.top/2026/05/19/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E9%B8%9F%E9%97%AF%E5%85%B3%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</id>
     <link href="https://www.bytefisher.top/2026/05/19/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%B0%8F%E9%B8%9F%E9%97%AF%E5%85%B3%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/"/>
     <published>2026-05-19T12:00:00.000Z</published>
@@ -289,60 +336,5 @@
     <summary>钓鱼、钓鱼日记: 四月下旬到现在，花碑水库已经连战三次了。第一次被切子线拖走浮漂，气得回去发狠写了两千字复仇宣言。第二次五一蒙蒙细雨，波纹鲤K6.3五条大鲤三条鲢鳙入户，连本带利讨了回来。第三次五一约上老表，十二加六十八条，50斤爆护，老表两小时空军被我一个人填了坑。</summary>
     <title>花碑水库再开新图鉴——淡水银鳕鱼入护，程序员调整策略立竿见影</title>
     <updated>2026-06-24T03:13:42.293Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>淡水鱼</name>
-    </author>
-    <category term="Hexo博客搭建" scheme="https://www.bytefisher.top/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
-    <category term="series:Hexo博客搭建" scheme="https://www.bytefisher.top/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
-    <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
-    <category term="Waline" scheme="https://www.bytefisher.top/tags/Waline/"/>
-    <category term="博客优化" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/"/>
-    <category term="评论系统" scheme="https://www.bytefisher.top/tags/%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/"/>
-    <category term="TiDB" scheme="https://www.bytefisher.top/tags/TiDB/"/>
-    <category term="数据库" scheme="https://www.bytefisher.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    <id>https://www.bytefisher.top/2026/05/15/Hexo-%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E6%B7%B1%E5%BA%A6%E8%BF%81%E7%A7%BB-%E4%BB%8ELeanCloud%E5%88%B0TiDB%20Cloud%E5%85%A8%E8%AE%B0%E5%BD%95/</id>
-    <link href="https://www.bytefisher.top/2026/05/15/Hexo-%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E6%B7%B1%E5%BA%A6%E8%BF%81%E7%A7%BB-%E4%BB%8ELeanCloud%E5%88%B0TiDB%20Cloud%E5%85%A8%E8%AE%B0%E5%BD%95/"/>
-    <published>2026-05-15T12:00:00.000Z</published>
-    <summary>Hexo、Waline、TiDB: ByteFisher 博客的评论系统使用 Waline（部署于 Vercel） + LeanCloud（国内版）的组合已运行一年多，积累了 19 条评论和 137 篇文章阅读计数。</summary>
-    <title>Hexo 博客评论系统深度迁移：从 LeanCloud 到 TiDB Cloud</title>
-    <updated>2026-06-04T10:41:17.585Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>淡水鱼</name>
-    </author>
-    <category term="Hexo博客搭建" scheme="https://www.bytefisher.top/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
-    <category term="series:Hexo博客搭建" scheme="https://www.bytefisher.top/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
-    <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
-    <category term="博客优化" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/"/>
-    <category term="WebP" scheme="https://www.bytefisher.top/tags/WebP/"/>
-    <category term="Cloudflare" scheme="https://www.bytefisher.top/tags/Cloudflare/"/>
-    <category term="CDN" scheme="https://www.bytefisher.top/tags/CDN/"/>
-    <id>https://www.bytefisher.top/2026/05/14/Hexo-%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%E8%BF%81%E7%A7%BB%E5%AE%9E%E6%88%98-%E4%BB%8Eiili.io%E5%88%B0Cloudflare%20Workers+%E5%B7%A5%E5%85%B7%E9%93%BE%E6%94%B9%E9%80%A0%E5%85%A8%E8%AE%B0%E5%BD%95/</id>
-    <link href="https://www.bytefisher.top/2026/05/14/Hexo-%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%E8%BF%81%E7%A7%BB%E5%AE%9E%E6%88%98-%E4%BB%8Eiili.io%E5%88%B0Cloudflare%20Workers+%E5%B7%A5%E5%85%B7%E9%93%BE%E6%94%B9%E9%80%A0%E5%85%A8%E8%AE%B0%E5%BD%95/"/>
-    <published>2026-05-14T12:00:00.000Z</published>
-    <summary>Hexo、WebP、Cloudflare: ByteFisher 博客从建站第一天起，所有图片就托管在 iili.io（FreeImage.Host）——一个免费的第三方图床。免费的东西往往最贵——你不知道它什么时候会关停、限速、删图、或者域名变更。</summary>
-    <title>Hexo 博客图床迁移实战：从 iili.io 到 Cloudflare Workers</title>
-    <updated>2026-06-04T10:36:32.326Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>淡水鱼</name>
-    </author>
-    <category term="Hexo博客搭建" scheme="https://www.bytefisher.top/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
-    <category term="series:Hexo博客搭建" scheme="https://www.bytefisher.top/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
-    <category term="Hexo" scheme="https://www.bytefisher.top/tags/Hexo/"/>
-    <category term="Next主题" scheme="https://www.bytefisher.top/tags/Next%E4%B8%BB%E9%A2%98/"/>
-    <category term="博客优化" scheme="https://www.bytefisher.top/tags/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/"/>
-    <category term="SEO" scheme="https://www.bytefisher.top/tags/SEO/"/>
-    <category term="PWA" scheme="https://www.bytefisher.top/tags/PWA/"/>
-    <id>https://www.bytefisher.top/2026/05/12/Hexo-%E5%8D%9A%E5%AE%A2%E4%BA%8C%E6%AC%A1%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E4%BB%8E%E6%80%A7%E8%83%BD%E5%8E%8B%E7%BC%A9%E5%88%B0%E5%93%81%E7%89%8C%E6%89%93%E7%A3%A8%E5%85%A8%E8%AE%B0%E5%BD%95/</id>
-    <link href="https://www.bytefisher.top/2026/05/12/Hexo-%E5%8D%9A%E5%AE%A2%E4%BA%8C%E6%AC%A1%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E4%BB%8E%E6%80%A7%E8%83%BD%E5%8E%8B%E7%BC%A9%E5%88%B0%E5%93%81%E7%89%8C%E6%89%93%E7%A3%A8%E5%85%A8%E8%AE%B0%E5%BD%95/"/>
-    <published>2026-05-12T14:00:00.000Z</published>
-    <summary>Hexo、Next主题、SEO: ByteFisher 博客第一期优化（RSS 修复、AI 助手、评论迁移等）完成后，博客能正常跑了，但离&quot;好用&quot;还有距离。 - 配置层：Google Analytics 的 tracking ID 填的是 G-XXXXXXXXXX——占位符，从未生效。</summary>
-    <title>Hexo 博客二次优化实战：从性能压缩到品牌打磨全记录</title>
-    <updated>2026-06-04T10:36:06.846Z</updated>
   </entry>
 </feed>
