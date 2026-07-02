@@ -1313,7 +1313,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #66ff65;
+  background: #52621b;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2759,55 +2759,59 @@ body {
   }
 }
 .douyin-qr-section {
-  margin: 24px 0 6px;
+  margin: 32px 0 0;
 }
 .douyin-qr-card {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  padding: 16px 22px;
-  background: linear-gradient(135deg, #f5faf9 0%, #fff 100%);
+  text-align: center;
+  padding: 22px 20px 18px;
+  background: linear-gradient(135deg, #f8fcfb 0%, #fff 100%);
   border: 1px solid #e8e8e8;
-  border-left: 4px solid #37c6c0;
-  border-radius: 8px;
+  border-top: 3px solid #37c6c0;
+  border-radius: 10px;
   transition: all 0.3s;
 }
 .douyin-qr-card:hover {
   border-color: #d0d0d0;
-  border-left-color: #2ba8a3;
-  box-shadow: 0 3px 16px rgba(55,198,192,0.1);
+  border-top-color: #2ba8a3;
+  box-shadow: 0 4px 20px rgba(55,198,192,0.12);
+}
+.douyin-qr-card .qr-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #37c6c0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.douyin-qr-card .qr-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
 }
 .douyin-qr-card .qr-code-frame {
   display: flex;
   flex-shrink: 0;
-  padding: 3px;
+  padding: 4px;
   background: #fff;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 .douyin-qr-card .qr-code-frame img {
   display: block;
-  height: 200px;
+  height: 190px;
   width: auto;
   border-radius: 4px;
   margin-bottom: 0 !important;
 }
-.douyin-qr-card .qr-info {
-  flex: 1;
-}
-.douyin-qr-card .qr-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: #37c6c0;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 3px;
+.douyin-qr-card .qr-text {
+  text-align: left;
 }
 .douyin-qr-card .qr-handle {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   color: #222;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 }
 .douyin-qr-card .qr-desc {
   font-size: 13px;
