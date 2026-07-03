@@ -39,7 +39,7 @@
 <meta property="og:description" content="C#、IT: 属性可以看作是对字段的包装器，通常由 get 和 set 访问器组成。 属性（Property）不会确定存储位置。相反，它们具有可读写或计算它们值的 访问器（accessors）。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-02-05T06:59:27.000Z">
-<meta property="article:modified_time" content="2026-07-03T07:45:25.677Z">
+<meta property="article:modified_time" content="2026-07-03T08:13:06.379Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="C#">
 <meta property="article:tag" content="IT">
@@ -49,7 +49,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%B1%9E%E6%80%A7Property%E3%80%91/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C#学习笔记【属性Property】","description":"C#、IT: 属性可以看作是对字段的包装器，通常由 get 和 set 访问器组成。 属性（Property）不会确定存储位置。相反，它们具有可读写或计算它们值的 访问器（accessors）。","url":"https://www.bytefisher.top/2025/02/05/C-学习笔记【属性Property】/","datePublished":"2025-02-05T06:59:27.000Z","dateModified":"2026-07-03T07:45:25.677Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/02/05/C-学习笔记【属性Property】/"},"keywords":"IT, C#, series:C#学习笔记"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C#学习笔记【属性Property】","description":"C#、IT: 属性可以看作是对字段的包装器，通常由 get 和 set 访问器组成。 属性（Property）不会确定存储位置。相反，它们具有可读写或计算它们值的 访问器（accessors）。","url":"https://www.bytefisher.top/2025/02/05/C-学习笔记【属性Property】/","datePublished":"2025-02-05T06:59:27.000Z","dateModified":"2026-07-03T08:13:06.379Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/02/05/C-学习笔记【属性Property】/"},"keywords":"IT, C#, series:C#学习笔记"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"IT","item":"https://www.bytefisher.top/categories/IT/"},{"@type":"ListItem","position":3,"name":"C#学习笔记【属性Property】"}]}</script>
 
 
@@ -544,7 +544,7 @@
 
 
       </div>
-	  <iframe id="music-player" allow="encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <iframe id="music-player" allow="autoplay; encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
 	  <div class="wechat_OA">
 		<span>欢迎关注我的公众号</span>
 		<!-- 这里添加你的二维码图片 -->
@@ -644,7 +644,6 @@
 <script src="/js/next-boot.js"></script>
 
   <script>
-if (!window.matchMedia('(max-width: 767px)').matches) {
 var pjax = new Pjax({
   selectors: [
     'head title',
@@ -708,7 +707,6 @@ window.addEventListener('pjax:success', () => {
     }
   });
 });
-}
 </script>
 
 
@@ -904,6 +902,10 @@ if ('serviceWorker' in navigator) {
 
 <script src="/js/douyin-pagination.js" async></script>
 <script src="/js/hot-posts-widget.js" async></script>
+
+<div id="mobile-music-player" class="mobile-music-player" aria-hidden="true"></div>
+<link rel="stylesheet" type="text/css" href="/css/mobile-music.css">
+<script src="/js/mobile-music.js" async></script>
 
 </body>
 </html>

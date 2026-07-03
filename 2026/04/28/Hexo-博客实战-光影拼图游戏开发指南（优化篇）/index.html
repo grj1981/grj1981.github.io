@@ -39,7 +39,7 @@
 <meta property="og:description" content="继光影拼图游戏开发指南（功能篇）介绍功能实现后，本篇聚焦优化过程中解决的 7 个 P0 级集成问题 与运行 Bug。问题的根源在于：Phase 1&#x2F;Phase 2 的优化模块代码已完成，但未正确集成到游戏主流程中。 本文重点讲解： 1. 模块集成问题：优化代码为何闲置，如何激活 2.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-04-28T13:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-03T07:45:25.683Z">
+<meta property="article:modified_time" content="2026-07-03T08:13:06.388Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="Canvas">
 <meta property="article:tag" content="Hexo">
@@ -52,7 +52,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2026/04/28/Hexo-%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98-%E5%85%89%E5%BD%B1%E6%8B%BC%E5%9B%BE%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97%EF%BC%88%E4%BC%98%E5%8C%96%E7%AF%87%EF%BC%89/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo 博客实战：光影拼图游戏开发指南（优化篇）","description":"继光影拼图游戏开发指南（功能篇）介绍功能实现后，本篇聚焦优化过程中解决的 7 个 P0 级集成问题 与运行 Bug。问题的根源在于：Phase 1/Phase 2 的优化模块代码已完成，但未正确集成到游戏主流程中。 本文重点讲解： 1. 模块集成问题：优化代码为何闲置，如何激活 2.","url":"https://www.bytefisher.top/2026/04/28/Hexo-博客实战-光影拼图游戏开发指南（优化篇）/","datePublished":"2026-04-28T13:00:00.000Z","dateModified":"2026-07-03T07:45:25.683Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/04/28/Hexo-博客实战-光影拼图游戏开发指南（优化篇）/"},"keywords":"Hexo, JavaScript, 游戏开发, series:博客实战-小游戏, Canvas, 性能优化"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo 博客实战：光影拼图游戏开发指南（优化篇）","description":"继光影拼图游戏开发指南（功能篇）介绍功能实现后，本篇聚焦优化过程中解决的 7 个 P0 级集成问题 与运行 Bug。问题的根源在于：Phase 1/Phase 2 的优化模块代码已完成，但未正确集成到游戏主流程中。 本文重点讲解： 1. 模块集成问题：优化代码为何闲置，如何激活 2.","url":"https://www.bytefisher.top/2026/04/28/Hexo-博客实战-光影拼图游戏开发指南（优化篇）/","datePublished":"2026-04-28T13:00:00.000Z","dateModified":"2026-07-03T08:13:06.388Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/04/28/Hexo-博客实战-光影拼图游戏开发指南（优化篇）/"},"keywords":"Hexo, JavaScript, 游戏开发, series:博客实战-小游戏, Canvas, 性能优化"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"编程","item":"https://www.bytefisher.top/categories/编程/"},{"@type":"ListItem","position":3,"name":"Hexo 博客实战：光影拼图游戏开发指南（优化篇）"}]}</script>
 
 
@@ -843,7 +843,7 @@
 
 
       </div>
-	  <iframe id="music-player" allow="encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <iframe id="music-player" allow="autoplay; encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
 	  <div class="wechat_OA">
 		<span>欢迎关注我的公众号</span>
 		<!-- 这里添加你的二维码图片 -->
@@ -943,7 +943,6 @@
 <script src="/js/next-boot.js"></script>
 
   <script>
-if (!window.matchMedia('(max-width: 767px)').matches) {
 var pjax = new Pjax({
   selectors: [
     'head title',
@@ -1007,7 +1006,6 @@ window.addEventListener('pjax:success', () => {
     }
   });
 });
-}
 </script>
 
 
@@ -1203,6 +1201,10 @@ if ('serviceWorker' in navigator) {
 
 <script src="/js/douyin-pagination.js" async></script>
 <script src="/js/hot-posts-widget.js" async></script>
+
+<div id="mobile-music-player" class="mobile-music-player" aria-hidden="true"></div>
+<link rel="stylesheet" type="text/css" href="/css/mobile-music.css">
+<script src="/js/mobile-music.js" async></script>
 
 </body>
 </html>

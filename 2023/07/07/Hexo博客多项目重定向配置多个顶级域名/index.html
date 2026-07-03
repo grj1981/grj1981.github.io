@@ -49,7 +49,7 @@
 <meta property="og:image" content="https://img.bytefisher.top/album/screenshots/HsjugwX.webp">
 <meta property="og:image" content="https://img.bytefisher.top/album/screenshots/HsjuS9I.webp">
 <meta property="article:published_time" content="2023-07-07T09:59:34.000Z">
-<meta property="article:modified_time" content="2026-07-03T07:45:25.684Z">
+<meta property="article:modified_time" content="2026-07-03T08:13:06.389Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="GitHub多域名配置">
 <meta property="article:tag" content="Hexo博客搭建">
@@ -60,7 +60,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2023/07/07/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%9A%E9%A1%B9%E7%9B%AE%E9%87%8D%E5%AE%9A%E5%90%91%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E9%A1%B6%E7%BA%A7%E5%9F%9F%E5%90%8D/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo博客多项目重定向配置多个顶级域名","description":"大概看了一下，对于向我这种新手小白，还是觉得GitHub多项目重定向这一方案要简单一些。那就先折腾简单的吧，另外几种方案有机会再尝试。 需要在 GitHub 上再新建一个仓库，用来中转旧域名 www.ai-fish.top 中的访问到新的域名 www.bytefisher.","url":"https://www.bytefisher.top/2023/07/07/Hexo博客多项目重定向配置多个顶级域名/","datePublished":"2023-07-07T09:59:34.000Z","dateModified":"2026-07-03T07:45:25.684Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/07/07/Hexo博客多项目重定向配置多个顶级域名/"},"keywords":"series:Hexo博客搭建, GitHub多域名配置, Hexo博客搭建"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo博客多项目重定向配置多个顶级域名","description":"大概看了一下，对于向我这种新手小白，还是觉得GitHub多项目重定向这一方案要简单一些。那就先折腾简单的吧，另外几种方案有机会再尝试。 需要在 GitHub 上再新建一个仓库，用来中转旧域名 www.ai-fish.top 中的访问到新的域名 www.bytefisher.","url":"https://www.bytefisher.top/2023/07/07/Hexo博客多项目重定向配置多个顶级域名/","datePublished":"2023-07-07T09:59:34.000Z","dateModified":"2026-07-03T08:13:06.389Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/07/07/Hexo博客多项目重定向配置多个顶级域名/"},"keywords":"series:Hexo博客搭建, GitHub多域名配置, Hexo博客搭建"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Hexo博客搭建","item":"https://www.bytefisher.top/categories/Hexo博客搭建/"},{"@type":"ListItem","position":3,"name":"Hexo博客多项目重定向配置多个顶级域名"}]}</script>
 
 
@@ -522,7 +522,7 @@
 
 
       </div>
-	  <iframe id="music-player" allow="encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <iframe id="music-player" allow="autoplay; encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
 	  <div class="wechat_OA">
 		<span>欢迎关注我的公众号</span>
 		<!-- 这里添加你的二维码图片 -->
@@ -622,7 +622,6 @@
 <script src="/js/next-boot.js"></script>
 
   <script>
-if (!window.matchMedia('(max-width: 767px)').matches) {
 var pjax = new Pjax({
   selectors: [
     'head title',
@@ -686,7 +685,6 @@ window.addEventListener('pjax:success', () => {
     }
   });
 });
-}
 </script>
 
 
@@ -882,6 +880,10 @@ if ('serviceWorker' in navigator) {
 
 <script src="/js/douyin-pagination.js" async></script>
 <script src="/js/hot-posts-widget.js" async></script>
+
+<div id="mobile-music-player" class="mobile-music-player" aria-hidden="true"></div>
+<link rel="stylesheet" type="text/css" href="/css/mobile-music.css">
+<script src="/js/mobile-music.js" async></script>
 
 </body>
 </html>

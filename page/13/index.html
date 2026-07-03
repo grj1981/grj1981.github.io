@@ -1589,7 +1589,7 @@
 
 
       </div>
-	  <iframe id="music-player" allow="encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <iframe id="music-player" allow="autoplay; encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
 	  <div class="wechat_OA">
 		<span>欢迎关注我的公众号</span>
 		<!-- 这里添加你的二维码图片 -->
@@ -1689,7 +1689,6 @@
 <script src="/js/next-boot.js"></script>
 
   <script>
-if (!window.matchMedia('(max-width: 767px)').matches) {
 var pjax = new Pjax({
   selectors: [
     'head title',
@@ -1753,7 +1752,6 @@ window.addEventListener('pjax:success', () => {
     }
   });
 });
-}
 </script>
 
 
@@ -1949,6 +1947,10 @@ if ('serviceWorker' in navigator) {
 
 <script src="/js/douyin-pagination.js" async></script>
 <script src="/js/hot-posts-widget.js" async></script>
+
+<div id="mobile-music-player" class="mobile-music-player" aria-hidden="true"></div>
+<link rel="stylesheet" type="text/css" href="/css/mobile-music.css">
+<script src="/js/mobile-music.js" async></script>
 
 </body>
 </html>
