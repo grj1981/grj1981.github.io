@@ -58,13 +58,15 @@
     return !!((uvText && uvText !== '...') || (pvText && pvText !== '...'));
   }
 
-  function markUnavailable() {
-    if (!hasBusuanziValue()) {
-      setText('busuanzi_value_site_uv', '-');
-      setText('busuanzi_value_site_pv', '-');
-    }
-    showContainer('busuanzi_container_site_uv');
-    showContainer('busuanzi_container_site_pv');
+  function hideIfUnavailable() {
+    setTimeout(function() {
+      if (hasBusuanziValue()) return;
+
+      var uv = getCounter('busuanzi_container_site_uv');
+      var pv = getCounter('busuanzi_container_site_pv');
+      if (uv) uv.style.display = 'none';
+      if (pv) pv.style.display = 'none';
+    }, 8000);
   }
 
   function loadStats() {
@@ -91,7 +93,10 @@
         setText('busuanzi_value_site_uv', formatNumber(payload.data.uv));
         setText('busuanzi_value_site_pv', formatNumber(payload.data.pv));
       })
-      .catch(markUnavailable)
+      .catch(function(error) {
+        console.warn('Site stats unavailable:', error);
+        hideIfUnavailable();
+      })
       .finally(function() {
         if (timer) clearTimeout(timer);
       });
