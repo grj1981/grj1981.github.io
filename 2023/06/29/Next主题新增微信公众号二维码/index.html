@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://img.bytefisher.top/album/screenshots/HiKoygV.webp">
 <meta property="og:image" content="https://img.bytefisher.top/album/screenshots/HiKoKKl.webp">
 <meta property="article:published_time" content="2023-06-29T10:04:52.000Z">
-<meta property="article:modified_time" content="2026-07-03T08:13:06.392Z">
+<meta property="article:modified_time" content="2026-07-03T08:22:03.719Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="Hexo博客搭建">
 <meta property="article:tag" content="Next订阅微信公众号">
@@ -52,7 +52,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2023/06/29/Next%E4%B8%BB%E9%A2%98%E6%96%B0%E5%A2%9E%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E4%BA%8C%E7%BB%B4%E7%A0%81/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Next主题新增微信公众号二维码","description":"Next订阅微信公众号、Hexo博客搭建: 从公众号管理后台下载公众号二维码图片，如下图所示。将选中的图片放入主题目录下的./themes/next/source/images/目录中，并将图片改名为wechat-qcode.jpg。","url":"https://www.bytefisher.top/2023/06/29/Next主题新增微信公众号二维码/","datePublished":"2023-06-29T10:04:52.000Z","dateModified":"2026-07-03T08:13:06.392Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/06/29/Next主题新增微信公众号二维码/"},"keywords":"series:Hexo博客搭建, Hexo博客搭建, Next订阅微信公众号"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Next主题新增微信公众号二维码","description":"Next订阅微信公众号、Hexo博客搭建: 从公众号管理后台下载公众号二维码图片，如下图所示。将选中的图片放入主题目录下的./themes/next/source/images/目录中，并将图片改名为wechat-qcode.jpg。","url":"https://www.bytefisher.top/2023/06/29/Next主题新增微信公众号二维码/","datePublished":"2023-06-29T10:04:52.000Z","dateModified":"2026-07-03T08:22:03.719Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/06/29/Next主题新增微信公众号二维码/"},"keywords":"series:Hexo博客搭建, Hexo博客搭建, Next订阅微信公众号"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Hexo博客搭建","item":"https://www.bytefisher.top/categories/Hexo博客搭建/"},{"@type":"ListItem","position":3,"name":"Next主题新增微信公众号二维码"}]}</script>
 
 
@@ -606,6 +606,7 @@
 <script src="/js/next-boot.js"></script>
 
   <script>
+if (!window.matchMedia('(max-width: 767px)').matches) {
 var pjax = new Pjax({
   selectors: [
     'head title',
@@ -653,6 +654,7 @@ window.addEventListener('pjax:success', () => {
     parent.appendChild(script);
   });
   NexT.boot.refresh();
+  NexT.boot.registerEvents();
   // Define Motion Sequence & Bootstrap Motion.
   if (CONFIG.motion.enable) {
     NexT.motion.integrator
@@ -669,6 +671,7 @@ window.addEventListener('pjax:success', () => {
     }
   });
 });
+}
 </script>
 
 

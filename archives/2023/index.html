@@ -688,6 +688,7 @@
 <script src="/js/next-boot.js"></script>
 
   <script>
+if (!window.matchMedia('(max-width: 767px)').matches) {
 var pjax = new Pjax({
   selectors: [
     'head title',
@@ -735,6 +736,7 @@ window.addEventListener('pjax:success', () => {
     parent.appendChild(script);
   });
   NexT.boot.refresh();
+  NexT.boot.registerEvents();
   // Define Motion Sequence & Bootstrap Motion.
   if (CONFIG.motion.enable) {
     NexT.motion.integrator
@@ -751,6 +753,7 @@ window.addEventListener('pjax:success', () => {
     }
   });
 });
+}
 </script>
 
 
