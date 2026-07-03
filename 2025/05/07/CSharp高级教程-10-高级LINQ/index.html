@@ -39,7 +39,7 @@
 <meta property="og:description" content="C#、高级: 基础教程中我们学习了 LINQ 的基本查询语法和方法链。真正的 LINQ 高手不仅会用 Where、Select 和 ToList，还能熟练运用高级分组连接、聚合操作、自定义扩展方法、以及理解延迟执行与 IQueryable 的底层原理。本文将深入 LINQ 的核心机制和最佳实践。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-05-07T12:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-03T07:29:40.017Z">
+<meta property="article:modified_time" content="2026-07-03T07:45:25.680Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="C#">
 <meta property="article:tag" content="series:C#高级教程">
@@ -49,7 +49,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/05/07/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-10-%E9%AB%98%E7%BA%A7LINQ/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C# 高级教程 - 10 高级 LINQ","description":"C#、高级: 基础教程中我们学习了 LINQ 的基本查询语法和方法链。真正的 LINQ 高手不仅会用 Where、Select 和 ToList，还能熟练运用高级分组连接、聚合操作、自定义扩展方法、以及理解延迟执行与 IQueryable 的底层原理。本文将深入 LINQ 的核心机制和最佳实践。","url":"https://www.bytefisher.top/2025/05/07/CSharp高级教程-10-高级LINQ/","datePublished":"2025-05-07T12:00:00.000Z","dateModified":"2026-07-03T07:29:40.017Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/05/07/CSharp高级教程-10-高级LINQ/"},"keywords":"C#, 高级, series:C#高级教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C# 高级教程 - 10 高级 LINQ","description":"C#、高级: 基础教程中我们学习了 LINQ 的基本查询语法和方法链。真正的 LINQ 高手不仅会用 Where、Select 和 ToList，还能熟练运用高级分组连接、聚合操作、自定义扩展方法、以及理解延迟执行与 IQueryable 的底层原理。本文将深入 LINQ 的核心机制和最佳实践。","url":"https://www.bytefisher.top/2025/05/07/CSharp高级教程-10-高级LINQ/","datePublished":"2025-05-07T12:00:00.000Z","dateModified":"2026-07-03T07:45:25.680Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/05/07/CSharp高级教程-10-高级LINQ/"},"keywords":"C#, 高级, series:C#高级教程"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"教程","item":"https://www.bytefisher.top/categories/教程/"},{"@type":"ListItem","position":3,"name":"C# 高级教程 - 10 高级 LINQ"}]}</script>
 
 
@@ -635,6 +635,7 @@
 <script src="/js/next-boot.js"></script>
 
   <script>
+if (!window.matchMedia('(max-width: 767px)').matches) {
 var pjax = new Pjax({
   selectors: [
     'head title',
@@ -682,7 +683,6 @@ window.addEventListener('pjax:success', () => {
     parent.appendChild(script);
   });
   NexT.boot.refresh();
-  NexT.boot.registerEvents();
   // Define Motion Sequence & Bootstrap Motion.
   if (CONFIG.motion.enable) {
     NexT.motion.integrator
@@ -699,6 +699,7 @@ window.addEventListener('pjax:success', () => {
     }
   });
 });
+}
 </script>
 
 
