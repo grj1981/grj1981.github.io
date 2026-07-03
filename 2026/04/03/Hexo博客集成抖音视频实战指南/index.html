@@ -30,7 +30,7 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com busuanzi.ibruce.info static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com busuanzi.ibruce.info static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com busuanzi.ibruce.info; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
   <meta name="description" content="Hexo、Next主题、抖音视频集成: 作为一名钓鱼爱好者，我在抖音分享了许多钓鱼视频。为了让博客访问者能够直观地浏览我的抖音作品，决定在Hexo博客中集成抖音视频相册功能。 本文将详细介绍整个实现过程，从数据配置到页面展示，再到进阶优化，帮助你快速在博客中实现类似功能。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo博客集成抖音视频实战指南">
@@ -39,7 +39,7 @@
 <meta property="og:description" content="Hexo、Next主题、抖音视频集成: 作为一名钓鱼爱好者，我在抖音分享了许多钓鱼视频。为了让博客访问者能够直观地浏览我的抖音作品，决定在Hexo博客中集成抖音视频相册功能。 本文将详细介绍整个实现过程，从数据配置到页面展示，再到进阶优化，帮助你快速在博客中实现类似功能。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-04-03T05:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-03T05:40:17.213Z">
+<meta property="article:modified_time" content="2026-07-03T06:24:54.554Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Next主题">
@@ -51,7 +51,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2026/04/03/Hexo%E5%8D%9A%E5%AE%A2%E9%9B%86%E6%88%90%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo博客集成抖音视频实战指南","description":"Hexo、Next主题、抖音视频集成: 作为一名钓鱼爱好者，我在抖音分享了许多钓鱼视频。为了让博客访问者能够直观地浏览我的抖音作品，决定在Hexo博客中集成抖音视频相册功能。 本文将详细介绍整个实现过程，从数据配置到页面展示，再到进阶优化，帮助你快速在博客中实现类似功能。","url":"https://www.bytefisher.top/2026/04/03/Hexo博客集成抖音视频实战指南/","datePublished":"2026-04-03T05:00:00.000Z","dateModified":"2026-07-03T05:40:17.213Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/04/03/Hexo博客集成抖音视频实战指南/"},"keywords":"Hexo, Next主题, 博客开发, series:抖音视频集成, 抖音视频集成"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo博客集成抖音视频实战指南","description":"Hexo、Next主题、抖音视频集成: 作为一名钓鱼爱好者，我在抖音分享了许多钓鱼视频。为了让博客访问者能够直观地浏览我的抖音作品，决定在Hexo博客中集成抖音视频相册功能。 本文将详细介绍整个实现过程，从数据配置到页面展示，再到进阶优化，帮助你快速在博客中实现类似功能。","url":"https://www.bytefisher.top/2026/04/03/Hexo博客集成抖音视频实战指南/","datePublished":"2026-04-03T05:00:00.000Z","dateModified":"2026-07-03T06:24:54.554Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/04/03/Hexo博客集成抖音视频实战指南/"},"keywords":"Hexo, Next主题, 博客开发, series:抖音视频集成, 抖音视频集成"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Hexo博客搭建","item":"https://www.bytefisher.top/categories/Hexo博客搭建/"},{"@type":"ListItem","position":3,"name":"Hexo博客集成抖音视频实战指南"}]}</script>
 
 
@@ -1026,6 +1026,7 @@ window.addEventListener('pjax:success', () => {
     parent.appendChild(script);
   });
   NexT.boot.refresh();
+  NexT.boot.registerEvents();
   // Define Motion Sequence & Bootstrap Motion.
   if (CONFIG.motion.enable) {
     NexT.motion.integrator
