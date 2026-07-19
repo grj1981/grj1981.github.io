@@ -1,4 +1,5 @@
-var CACHE_NAME = 'bytefisher-v4';
+// v20260617 - force SW update, add clients.claim
+var CACHE_NAME = 'bytefisher-' + Date.now();
 var urlsToCache = [
   '/',
   '/css/main.css',
@@ -22,6 +23,8 @@ self.addEventListener('activate', function(event) {
       return Promise.all(
         keys.filter(function(k) { return k !== CACHE_NAME; }).map(function(k) { return caches.delete(k); })
       );
+    }).then(function() {
+      return self.clients.claim();
     })
   );
 });
@@ -38,8 +41,13 @@ self.addEventListener('fetch', function(event) {
   // Passthrough cross-origin requests (CDN images, external resources)
   if (req.url.indexOf(self.location.origin) !== 0) return;
 
-  // Network-first for HTML pages (fresh content)
-  if (req.headers.get('Accept') && req.headers.get('Accept').indexOf('text/html') !== -1) {
+  // Determine strategy by file type
+  var isCSS = /\.css(\?|$)/.test(req.url);
+  var isHTML = req.headers.get('Accept') && req.headers.get('Accept').indexOf('text/html') !== -1;
+  var isAIAssistant = /\/js\/ai-assistant\.js(\?|$)/.test(req.url);
+
+  // Network-first for HTML, CSS, and AI assistant script (fresh UI after deploy)
+  if (isHTML || isCSS || isAIAssistant) {
     event.respondWith(
       fetch(req).then(function(res) {
         var copy = res.clone();
@@ -52,17 +60,18 @@ self.addEventListener('fetch', function(event) {
     return;
   }
 
-  // Cache-first for static assets
+  // Stale-while-revalidate for JS, images, fonts (non-critical assets)
   event.respondWith(
     caches.match(req).then(function(cached) {
-      if (cached) return cached;
-      return fetch(req).then(function(res) {
-        var copy = res.clone();
-        caches.open(CACHE_NAME).then(function(cache) { cache.put(req, copy); });
-        return res;
+      var fetchPromise = fetch(req).then(function(res) {
+        return caches.open(CACHE_NAME).then(function(cache) {
+          cache.put(req, res.clone());
+          return res;
+        });
+      }).catch(function() {
+        return cached;
       });
-    }).catch(function() {
-      return fetch(req).catch(function() {});
+      return cached || fetchPromise;
     })
   );
 });

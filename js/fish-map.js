@@ -8,11 +8,24 @@
     '溪流': { start: '#4FC3F7', end: '#0984E3' }
   };
 
-  function loadAmap(callback) {
+  var correlationMap = null;
+
+  function loadCorrelationData() {
+    var el = document.getElementById('fish-correlation-data');
+    if (!el) return null;
+    try {
+      return JSON.parse(el.textContent || el.innerText);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function loadAmap(callback, retryCount) {
     if (typeof AMap !== 'undefined') {
       callback();
       return;
     }
+    retryCount = retryCount || 0;
     window._AMapSecurityConfig = {
       securityJsCode: '8210555c6356b64ebe70c137c6426391'
     };
@@ -20,8 +33,13 @@
     script.src = 'https://webapi.amap.com/maps?v=2.0&key=8d1186c326c9273d8c7a9d5d5256bf42';
     script.onload = callback;
     script.onerror = function() {
-      var el = document.getElementById('fish-map');
-      if (el) el.innerHTML = '<p style="text-align:center;color:#999;padding:40px;">地图加载失败 🐟</p>';
+      if (retryCount < 1) {
+        script.remove();
+        setTimeout(function() { loadAmap(callback, retryCount + 1); }, 2000);
+      } else {
+        var el = document.getElementById('fish-map');
+        if (el) el.innerHTML = '<p style="text-align:center;color:#999;padding:40px;">地图加载失败 🐟</p>';
+      }
     };
     document.head.appendChild(script);
   }
@@ -37,9 +55,64 @@
       '<div class="pin-tail"></div></div>';
   }
 
+  function buildInfoContent(spot, corr) {
+    var html = '<div class="map-info-window">';
+    html += '<div class="map-info-header">' +
+      '<b>' + spot.name + '</b>' +
+      '<span class="map-info-type">' + spot.type + '</span>' +
+    '</div>';
+
+    html += '<div class="map-info-stats">';
+    html += '<span>📸 ' + spot.photos + ' 张照片</span>';
+    html += '<span>🎣 ' + spot.species.join('、') + '</span>';
+    html += '<span>📅 ' + spot.year + '</span>';
+    if (corr) {
+      html += '<span>📝 ' + corr.diaryCount + ' 篇日记</span>';
+      html += '<span>🎬 ' + corr.videoCount + ' 个视频</span>';
+    }
+    html += '</div>';
+
+    html += '<p class="map-info-desc">' + spot.desc + '</p>';
+
+    if (corr && (corr.diaries.length > 0 || corr.videos.length > 0)) {
+      html += '<div class="map-info-links">';
+      if (corr.diaries.length > 0) {
+        html += '<a href="/tags/series-钓鱼日记/" class="map-info-btn" onclick="event.stopPropagation();if(window._pjax){window._pjax.loadUrl(this.href);return false}">📝 相关日记 (' + corr.diaryCount + ')</a>';
+      }
+      if (corr.videos.length > 0) {
+        html += '<a href="/douyin/" class="map-info-btn" onclick="event.stopPropagation();if(window._pjax){window._pjax.loadUrl(this.href);return false}">🎬 相关视频 (' + corr.videoCount + ')</a>';
+      }
+      html += '</div>';
+    }
+
+    html += '</div>';
+    return html;
+  }
+
+  var _pjaxBtnSetup = false;
+  function setupPjaxBtn() {
+    if (_pjaxBtnSetup) return;
+    _pjaxBtnSetup = true;
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('.map-info-btn');
+      if (!link) return;
+      e.preventDefault();
+      e.stopPropagation();
+      var url = link.href;
+      if (url && window._pjax) {
+        window._pjax.loadUrl(url);
+      } else if (url) {
+        window.location.href = url;
+      }
+    }, true);
+  }
+
   function init() {
     var container = document.getElementById('fish-map');
     if (!container) return;
+
+    correlationMap = loadCorrelationData();
+    setupPjaxBtn();
 
     var map = new AMap.Map('fish-map', {
       zoom: 12,
@@ -74,15 +147,12 @@
           });
           marker.setMap(map);
 
+          var corr = correlationMap && correlationMap.map && correlationMap.map[spot.name] ? correlationMap.map[spot.name] : null;
+
           var info = new AMap.InfoWindow({
-            content:
-              '<b>' + spot.name + '</b><br>' +
-              '📸 ' + spot.photos + ' 张照片<br>' +
-              '🎣 ' + spot.species.join('、') + '<br>' +
-              '📅 ' + spot.year + '<br>' +
-              '<small>' + spot.desc + '</small>',
+            content: buildInfoContent(spot, corr),
             offset: new AMap.Pixel(0, -20),
-            size: new AMap.Size(0, 0)
+            size: new AMap.Size(280, 0)
           });
 
           marker.on('click', function() {

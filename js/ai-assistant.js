@@ -4,11 +4,12 @@
   var CONFIG = {
     apiEndpoint: 'https://api.bytefisher.top/api/chat',
     botName: 'ByteBot',
-    welcomeMessage: '🎣 欢迎来到 ByteFisher 博客！\n\n我是 ByteBot，可以帮你：\n📖 推荐文章\n💡 解答技术问题\n🎯 了解博客内容\n\n有什么想了解的？',
-    placeholder: '输入你的问题...',
+    welcomeMessage: '🎣 欢迎来到 ByteFisher 博客！\n\n我是 ByteBot，可以帮你优先查找和理解本站内容，也可以像日常助手一样陪你聊两句。\n\n📖 找 Unity / C# / AI 编程教程\n🎣 查钓鱼日记、相册和地图\n🎮 了解博客里的小游戏\n💬 闲聊、提问、整理思路\n\n可以问我：博客里有哪些 Unity 入门文章？或者：今天有点累，聊两句。',
+    placeholder: '问博客内容，或随便聊两句...',
     maxInputLength: 2000,
     maxHistoryTurns: 6,
-    debounceInterval: 1000
+    debounceInterval: 1000,
+    sessionVersion: '2026-06-22-ai-index-v2'
   };
 
   var isOpen = false;
@@ -17,6 +18,9 @@
   var messages = [];
   var lastSentTime = 0;
   var abortController = null;
+  var conversationTopic = null;
+  var currentArticles = [];
+  var lastUserQuestion = '';
 
   /* ---------- Analytics ---------- */
   function trackEvent(type) {
@@ -62,6 +66,29 @@
     return 'error';
   }
 
+  /* ---------- Retry ---------- */
+  function showRetry(text) {
+    var container = document.getElementById('ai-msgs');
+    if (!container) return;
+    var div = document.createElement('div');
+    div.className = 'ai-message ai-message-error';
+    div.innerHTML = '<p>' + text + '</p><button class="ai-retry-btn" style="margin-top:6px;padding:4px 12px;border:1px solid #e74c3c;border-radius:4px;background:transparent;color:#e74c3c;cursor:pointer">重试</button>';
+    div.querySelector('.ai-retry-btn').addEventListener('click', function() {
+      div.remove();
+      var msgs = messages;
+      var lastUserMsg = '';
+      for (var i = msgs.length - 1; i >= 0; i--) {
+        if (msgs[i].role === 'user') { lastUserMsg = msgs[i].content; break; }
+      }
+      if (lastUserMsg) {
+        document.getElementById('ai-input').value = lastUserMsg;
+        send();
+      }
+    });
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+  }
+
   /* ---------- Token estimation ---------- */
   function estimateTokens(text) {
     var chinese = (text.match(/[\u4e00-\u9fff]/g) || []).length;
@@ -71,15 +98,21 @@
 
   function truncateMessages(msgs) {
     var maxTokens = 3000;
+    if (msgs.length <= 4) return msgs;
+
+    // Always keep first user + assistant pair
+    var head = msgs.slice(0, 2);
+    var tail = msgs.slice(2);
+
     var result = [];
-    var total = 0;
-    for (var i = msgs.length - 1; i >= 0; i--) {
-      var tokens = estimateTokens(msgs[i].content);
-      if (total + tokens > maxTokens) break;
-      total += tokens;
-      result.unshift(msgs[i]);
+    var total = head.reduce(function(s, m) { return s + estimateTokens(m.content); }, 0);
+    for (var i = tail.length - 1; i >= 0; i--) {
+      var t = estimateTokens(tail[i].content);
+      if (total + t > maxTokens) break;
+      total += t;
+      result.unshift(tail[i]);
     }
-    return result;
+    return head.concat(result);
   }
 
   /* ---------- Create UI ---------- */
@@ -131,7 +164,10 @@
     panel.innerHTML =
       '<div class="ai-header">' +
         '<span>🎣 ' + CONFIG.botName + '</span>' +
-        '<button class="ai-close">&times;</button>' +
+        '<div class="ai-header-actions">' +
+          '<button class="ai-clear" title="清空对话">清空</button>' +
+          '<button class="ai-close" title="关闭">&times;</button>' +
+        '</div>' +
       '</div>' +
       '<div class="ai-messages" id="ai-msgs"></div>' +
       '<div class="ai-input-area">' +
@@ -149,6 +185,7 @@
     document.body.appendChild(panel);
 
     panel.querySelector('.ai-close').addEventListener('click', toggle);
+    panel.querySelector('.ai-clear').addEventListener('click', clearConversation);
     document.getElementById('ai-send').addEventListener('click', send);
     document.getElementById('ai-stop').addEventListener('click', stopGeneration);
     document.getElementById('ai-input').addEventListener('keydown', function(e) {
@@ -184,7 +221,7 @@
       var href = link.getAttribute('href');
       if (!href || href.indexOf('javascript:') === 0) return;
       if (link.getAttribute('target') === '_blank') return;
-      var isInternal = href.indexOf('/') === 0 || href.indexOf(location.hostname) !== -1;
+      var isInternal = href.indexOf('/') === 0 || href.indexOf('bytefisher.top') !== -1;
       if (!isInternal) return;
       e.preventDefault();
       if (window.pjax && typeof window.pjax.loadUrl === 'function') {
@@ -214,51 +251,215 @@
     if (postsIndexCache) return Promise.resolve(postsIndexCache);
     return fetch('/api/posts-index.json')
       .then(function(r) { return r.json(); })
-      .then(function(d) { postsIndexCache = d; return d; })
+      .then(function(d) {
+        postsIndexCache = d;
+        syncSessionToPostsIndex(d);
+        return d;
+      })
       .catch(function() { return null; });
   }
 
-  /* ---------- RAG: Keyword extraction ---------- */
-  function extractKeywords(text) {
-    if (!text) return [];
-    var cleaned = text.replace(/[的了吗是和我有在就了也吗啊呢吧呗给被把让向从对于关于]|[，。！？、；：""''（）【】《》\s,.!?;:'"()\[\]{}<>]/g, ' ');
-    var words = cleaned.split(/\s+/).filter(function(w) { return w.length > 1; });
-    var unique = {};
-    for (var i = 0; i < words.length; i++) unique[words[i].toLowerCase()] = true;
-    var tech = ['unity', 'c#', 'lua', 'python', 'csharp', 'c井', 'javascript', 'hexo', '博客', '游戏', '钓鱼', '教程', '学习', '笔记', '委托', '事件', '接口', '类', '对象', '继承', '多态', '数组', '字符串', '异步', '协程', '线程', '性能', '优化', '动画', '物理', '碰撞', '相机', '场景', 'ui', '导航', '寻路', '粒子', '序列化', '网络', '加密', 'linq', '泛型', '反射', '特性', '依赖', '注入', '设计模式', '函数式', '编译器', 'roslyn', 'sourcegen', '互操作', '延迟', 'ai', 'deepseek', 'opencode', 'qwen', 'ollama', 'rag', 'docker', 'vercel', 'cloudflare', 'turso', 'waline', 'tidb', 'leancloud', 'seo', 'pwa', 'webp', 'cdn', 'pjax', 'rss', 'sitemap', '图床', '评论', '抖音', '微信', 'github', '域名', '重定向', '多项目'];
-    for (var t = 0; t < tech.length; t++) {
-      if (text.toLowerCase().indexOf(tech[t]) !== -1) unique[tech[t]] = true;
+  function getPostsIndexVersion(index) {
+    if (!index) return '';
+    if (index.updated) return String(index.updated);
+    var latest = index.posts && index.posts[0];
+    return [
+      index.total || '',
+      latest && latest.date || '',
+      latest && latest.title || ''
+    ].join('|');
+  }
+
+  function resetConversationUi() {
+    messages = [];
+    conversationTopic = null;
+    currentArticles = [];
+    lastUserQuestion = '';
+    try {
+      sessionStorage.removeItem('ai_messages');
+    } catch(e) { /* ignore */ }
+
+    var container = document.getElementById('ai-msgs');
+    if (container) {
+      container.innerHTML = '';
+      addMsg('bot', CONFIG.welcomeMessage);
     }
-    return Object.keys(unique);
+  }
+
+  function syncSessionToPostsIndex(index) {
+    var currentVersion = getPostsIndexVersion(index);
+    if (!currentVersion) return;
+
+    try {
+      var savedVersion = sessionStorage.getItem('ai_posts_index_version');
+      if (savedVersion && savedVersion !== currentVersion && messages.length) {
+        resetConversationUi();
+      }
+      sessionStorage.setItem('ai_posts_index_version', currentVersion);
+    } catch(e) { /* ignore */ }
+  }
+
+  /* ---------- RAG: Article ranking (BM25) ---------- */
+  function getArticleSearchText(post) {
+    return [
+      post.title || '',
+      post.textForSearch || '',
+      post.summary || '',
+      post.excerpt || '',
+      post.series || '',
+      post.tags ? post.tags.join(' ') : '',
+      post.categories ? post.categories.join(' ') : ''
+    ].join(' ').toLowerCase();
+  }
+
+  function tokenizeQuestion(question) {
+    var lower = (question || '').toLowerCase();
+    var tokens = [];
+    var latin = lower.match(/[a-z0-9#+.]+/g) || [];
+    for (var i = 0; i < latin.length; i++) {
+      if (latin[i].length > 1) tokens.push(latin[i]);
+    }
+
+    var parts = lower.split(/[\s,，。.、！？;；：:()（）\[\]【】"'“”‘’\/\\|]+/);
+    for (var j = 0; j < parts.length; j++) {
+      if (parts[j].length > 1 && !/^[a-z0-9#+.]+$/i.test(parts[j])) tokens.push(parts[j]);
+    }
+
+    var chinese = lower.replace(/[^\u4e00-\u9fff]/g, '');
+    for (var k = 0; k < chinese.length - 1; k++) tokens.push(chinese.substring(k, k + 2));
+    for (var m = 0; m < chinese.length - 2; m++) tokens.push(chinese.substring(m, m + 3));
+
+    var seen = {};
+    return tokens.filter(function(token) {
+      if (seen[token]) return false;
+      seen[token] = true;
+      return true;
+    });
+  }
+
+  function hasExactMetaMatch(post, token) {
+    var meta = [];
+    if (post.tags) meta = meta.concat(post.tags);
+    if (post.categories) meta = meta.concat(post.categories);
+    if (post.series) meta.push(post.series);
+    for (var i = 0; i < meta.length; i++) {
+      if ((meta[i] || '').toLowerCase() === token) return true;
+    }
+    return false;
   }
 
   function rankArticles(question, posts) {
     if (!question || !posts || !posts.length) return [];
-    var keywords = extractKeywords(question);
-    if (keywords.length === 0) return posts.slice(0, 5);
-    var scored = posts.map(function(post) {
-      var score = 0;
-      var title = (post.title || '').toLowerCase();
-      var excerpt = (post.excerpt || '').toLowerCase();
-      var tags = (post.tags || []).join(' ').toLowerCase();
-      var cats = (post.categories || []).join(' ').toLowerCase();
-      var text = title + ' ' + excerpt + ' ' + tags + ' ' + cats;
-      for (var i = 0; i < keywords.length; i++) {
-        var kw = keywords[i].toLowerCase();
-        if (title.indexOf(kw) !== -1) score += 3;
-        else if (tags.indexOf(kw) !== -1) score += 2;
-        else if (excerpt.indexOf(kw) !== -1) score += 1;
-        else if (cats.indexOf(kw) !== -1) score += 1;
+    var qTokens = tokenizeQuestion(question);
+    if (qTokens.length === 0) return posts.slice(0, 10);
+
+    var N = posts.length;
+    var k1 = 1.5, b = 0.75;
+    var totalLen = 0;
+    for (var i = 0; i < posts.length; i++) totalLen += getArticleSearchText(posts[i]).length;
+    var avgDocLen = totalLen / N || 1;
+
+    // Document frequency
+    var df = {};
+    for (var ti = 0; ti < qTokens.length; ti++) {
+      var w = qTokens[ti];
+      if (df[w] !== undefined) continue;
+      var count = 0;
+      for (var pi = 0; pi < posts.length; pi++) {
+        if (getArticleSearchText(posts[pi]).indexOf(w) !== -1) count++;
       }
-      return { post: post, score: score };
-    });
+      df[w] = count;
+    }
+
+    // IDF
+    var idf = {};
+    for (var w in df) {
+      idf[w] = Math.log((N - df[w] + 0.5) / (df[w] + 0.5) + 1);
+    }
+
+    var now = Date.now();
+    var scored = [];
+    for (var pi = 0; pi < posts.length; pi++) {
+      var text = getArticleSearchText(posts[pi]);
+      var docLen = text.length || 1;
+      var score = 0;
+      for (var ti = 0; ti < qTokens.length; ti++) {
+        var w = qTokens[ti];
+        if (!idf[w]) continue;
+        if (hasExactMetaMatch(posts[pi], w)) score += 40;
+        if (posts[pi].series && posts[pi].series.toLowerCase().indexOf(w) !== -1) score += 15;
+        if ((posts[pi].title || '').toLowerCase().indexOf(w) !== -1) score += 12;
+        if (posts[pi].tags && posts[pi].tags.join(' ').toLowerCase().indexOf(w) !== -1) score += 10;
+        if (posts[pi].categories && posts[pi].categories.join(' ').toLowerCase().indexOf(w) !== -1) score += 8;
+        // Term frequency in this doc
+        var tf = 0, idx = 0;
+        while ((idx = text.indexOf(w, idx)) !== -1) { tf++; idx += w.length; }
+        score += idf[w] * (tf * (k1 + 1)) / (tf + k1 * (1 - b + b * docLen / avgDocLen));
+      }
+      // Recency boost
+      if (posts[pi].date) {
+        var days = (now - new Date(posts[pi].date).getTime()) / 86400000;
+        if (days < 30) score *= Math.max(1.0, 1.8 - days / 30);
+      }
+      scored.push({ post: posts[pi], score: score });
+    }
+
     scored.sort(function(a, b) { return b.score - a.score; });
-    var matched = scored.filter(function(s) { return s.score > 0; }).slice(0, 5).map(function(s) { return s.post; });
-    return matched.length > 0 ? matched : posts.slice(0, 5);
+
+    // Series dedup: max 4 per series
+    var seriesCount = {}, result = [];
+    for (var i = 0; i < scored.length && result.length < 10; i++) {
+      var s = scored[i].post.series;
+      if (s) {
+        seriesCount[s] = (seriesCount[s] || 0) + 1;
+        if (seriesCount[s] > 4) continue;
+      }
+      result.push(scored[i].post);
+    }
+    return result.length > 0 ? result : posts.slice(0, 10);
+  }
+
+  function isBlogRelatedQuestion(question) {
+    var text = (question || '').toLowerCase().replace(/\s+/g, '');
+    var keywords = [
+      '博客', '文章', '教程', '站内', 'bytefisher', '淡水鱼',
+      'unity', 'unity3d', 'c#', 'csharp', 'lua', 'python', 'ai编程', 'agent',
+      'rag', 'mcp', 'prompt', 'hexo', 'next主题', 'vercel', 'deepseek',
+      '钓鱼', '鱼', '花碑', '水库', '相册', '地图', '钓点', '抖音',
+      '小游戏', '游戏', '贪吃蛇', '俄罗斯方块', '扫雷', '五子棋', '拼图',
+      '小鸟', 'flappy', 'snake', 'tetris', 'minesweeper', 'gomoku', 'puzzle'
+    ];
+    for (var i = 0; i < keywords.length; i++) {
+      if (text.indexOf(keywords[i]) !== -1) return true;
+    }
+    return /(有哪些|有没有|推荐|找|查|看看|在哪里|链接|入门|学习|系列|目录|合集|日记)/.test(text) &&
+      /(文章|教程|博客|站内|链接|目录|系列|日记|相册|地图|游戏)/.test(text);
+  }
+
+  function showFallbackRecommendations(question) {
+    if (!isBlogRelatedQuestion(question)) return false;
+    if (!postsIndexCache || !postsIndexCache.posts || !postsIndexCache.posts.length) return false;
+    var articles = rankArticles(question, postsIndexCache.posts).slice(0, 5);
+    if (!articles.length) return false;
+
+    var lines = [
+      'AI 服务暂时不可用，先为你匹配到这些站内内容：',
+      ''
+    ];
+    for (var i = 0; i < articles.length; i++) {
+      var p = articles[i];
+      var url = (p.url || '').replace(/^https?:\/\/[^\/]+/, '') || '/';
+      lines.push('- [' + p.title.replace(/\]/g, '\\]') + '](' + url + ')');
+    }
+    addMsg('bot', lines.join('\n'));
+    return true;
   }
 
   /* ---------- System prompt ---------- */
-  function buildSystemPrompt(index, topArticles) {
+  function buildSystemPrompt(index, topArticles, isNewTopic) {
+    if (!isNewTopic && conversationTopic) {
+      return '你是 ByteBot。继续当前话题回答，推荐文章时使用 Markdown 链接格式 `- [标题](URL)`。';
+    }
     var lines = [
       '你是 ByteFisher 博客的 AI 助手 ByteBot。',
       '作者是淡水鱼，Unity 游戏开发者 + 钓鱼爱好者。',
@@ -267,7 +468,7 @@
     if (index && index.meta) {
       var m = index.meta;
       lines.push('');
-      lines.push('博客概况（可信数据，回答基于此，推荐页面时复制 Markdown 链接）：');
+      lines.push('博客概况（回答基于此数据，但构建时生成可能滞后，若与页面显示有出入，以归档页/侧边栏为准）：');
       lines.push('- 文章：共 ' + m.totalPosts + ' 篇');
       if (m.games) lines.push('- 小游戏：' + m.games.count + ' 款（' + m.games.names.join('、') + '）');
       if (m.videos && m.videos.count) lines.push('- 钓鱼视频：' + m.videos.count + ' 个（收录在[抖音专栏](/douyin/)）');
@@ -289,6 +490,15 @@
         }
       }
       lines.push('');
+      if (m.seriesSummary && m.seriesSummary.length) {
+        lines.push('博客教程系列（只能从以下列表中推荐，不要编造不存在的系列）：');
+        for (var si = 0; si < m.seriesSummary.length; si++) {
+          var ss = m.seriesSummary[si];
+          var seriesUrl = ss.slug ? '/tags/' + encodeURIComponent(ss.slug) + '/' : ('/tutorials/#' + ss.name);
+          lines.push('- [' + ss.name + '](' + seriesUrl + ')：' + ss.count + ' 篇，' + ss.difficulty + '，' + ss.status + '）');
+        }
+      }
+      lines.push('');
       lines.push('博客功能页面（复制这些 Markdown 链接推荐给用户）：');
       lines.push('- [游戏合集](/ai-games/)：' + m.games.count + ' 款小游戏');
       lines.push('- [抖音专栏](/douyin/)：' + m.videos.count + ' 个钓鱼视频');
@@ -298,13 +508,15 @@
       lines.push('- [关于博主](/about/)');
       lines.push('- [留言互动](/guestbook/)');
       lines.push('');
-      lines.push('推荐文章时直接复制下方整行 Markdown 链接：');
+      lines.push('（仅当用户明确询问博客内容或寻找文章时，才从下方列表推荐文章，否则忽略此列表）');
       lines.push('');
-      lines.push('可推荐的文章（与用户问题相关）：');
-      var articles = topArticles && topArticles.length ? topArticles : index.posts.slice(0, 5);
+      lines.push('文章列表（仅限以下列表，严禁编造）：');
+      var articles = topArticles && topArticles.length ? topArticles : index.posts.slice(0, 10);
       for (var i = 0; i < articles.length; i++) {
         var p = articles[i];
         lines.push('- [' + p.title.replace(/\]/g, '\\]') + '](' + p.url + ')');
+        if (p.series) lines.push('  系列：' + p.series);
+        if (i < 3 && p.summary) lines.push('  摘要：' + p.summary.substring(0, 150));
       }
     } else {
       lines.push('博客共有 ' + (index ? index.total : 0) + ' 篇文章。');
@@ -312,9 +524,15 @@
     }
     lines.push('');
     lines.push('回答规则：');
-    lines.push('- 简洁中文，可适当使用 emoji');
-    lines.push('- 推荐文章时给出标题和链接');
-    lines.push('- 不确定的不编造');
+    lines.push('- 用 `##` 小标题 + `---` 分隔线 + `-` 无序列表 + `**加粗**` 组织回答');
+    lines.push('- 推荐链接格式 `- [原文标题](URL)`，严禁只写标题不加链接');
+    lines.push('- 优先推荐系列对应文章，说明是第几篇；章节名放在 `](URL)` 后说明');
+    lines.push('- **日常问候、闲聊无需推荐文章**，直接回答即可');
+    lines.push('');
+    lines.push('⚠️ **重要规则**：');
+    lines.push('- **严禁编造不存在的文章标题或 URL**');
+    lines.push('- 如果实在找不到相关内容，如实说"博客目前还没有这方面的文章"');
+    lines.push('- **不要为了推荐而推荐**，用户没问文章就不要提文章链接');
     return lines.join('\n');
   }
 
@@ -332,6 +550,7 @@
     input.style.height = 'auto';
     updateCharCount();
     addMsg('user', text);
+    lastUserQuestion = text;
 
     messages.push({ role: 'user', content: text });
     messages = truncateMessages(messages);
@@ -344,20 +563,14 @@
     showTyping();
 
     abortController = new AbortController();
+    ensurePostsIndex();
 
-    ensurePostsIndex()
-      .then(function(index) {
-        var topArticles = rankArticles(text, index.posts);
-        var msgs = [{ role: 'system', content: buildSystemPrompt(index, topArticles) }];
-        for (var i = 0; i < messages.length; i++) msgs.push(messages[i]);
-
-        return fetch(CONFIG.apiEndpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          signal: abortController.signal,
-          body: JSON.stringify({ messages: msgs, stream: true })
-        });
-      })
+    fetch(CONFIG.apiEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      signal: abortController.signal,
+      body: JSON.stringify({ messages: messages, stream: true })
+    })
       .then(function(response) {
         if (!response.ok) {
           var errMsg = classifyError(null, response);
@@ -365,6 +578,7 @@
           isLoading = false;
           showStopBtn(false);
           if (errMsg) showToast(errMsg, getToastType(null, response));
+          showFallbackRecommendations(text);
           return null;
         }
         var contentType = response.headers.get('Content-Type') || '';
@@ -389,7 +603,9 @@
         showStopBtn(false);
         if (err.name === 'AbortError') return;
         trackEvent('error');
-        showToast(classifyError(err, null), 'error');
+        if (!showFallbackRecommendations(text)) {
+          showRetry(classifyError(err, null));
+        }
       });
   }
 
@@ -400,26 +616,53 @@
     var buffer = '';
     var fullReply = '';
     var botDiv = null;
+    var pending = '';
+    var rafId = null;
 
-    function appendToken(text) {
+    function flush() {
+      rafId = null;
       if (!botDiv) {
         botDiv = createBotMessageDiv();
         hideTyping();
       }
-      fullReply += text;
+      fullReply += pending;
+      pending = '';
       botDiv.innerHTML = render(fullReply);
       var container = document.getElementById('ai-msgs');
       container.scrollTop = container.scrollHeight;
     }
 
+    function queue(text) {
+      pending += text;
+      if (rafId === null) {
+        rafId = requestAnimationFrame(flush);
+      }
+    }
+
+    function endStream() {
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      if (pending || fullReply) flush();
+      if (fullReply) { messages.push({ role: 'assistant', content: fullReply }); saveSession(); }
+      isLoading = false;
+      showStopBtn(false);
+    }
+
+    function failStream(message) {
+      hideTyping();
+      isLoading = false;
+      showStopBtn(false);
+      trackEvent('error');
+      if (!showFallbackRecommendations(lastUserQuestion)) {
+        showRetry(message || '服务暂时不可用，请稍后重试');
+      }
+    }
+
     function readChunk() {
       return reader.read().then(function(result) {
-        if (result.done) {
-          if (fullReply) { messages.push({ role: 'assistant', content: fullReply }); saveSession(); }
-          isLoading = false;
-          showStopBtn(false);
-          return;
-        }
+        if (result.done) { endStream(); return; }
         buffer += decoder.decode(result.value, { stream: true });
         var lines = buffer.split('\n');
         buffer = lines.pop() || '';
@@ -428,25 +671,19 @@
           var line = lines[i].trim();
           if (!line || !line.startsWith('data: ')) continue;
           var data = line.substring(6);
-          if (data === '[DONE]') {
-            if (fullReply) { messages.push({ role: 'assistant', content: fullReply }); saveSession(); }
-            isLoading = false;
-            showStopBtn(false);
-            return;
-          }
+          if (data === '[DONE]') { endStream(); return; }
           try {
             var parsed = JSON.parse(data);
-            var choice = parsed.choices && parsed.choices[0];
-            if (!choice) continue;
-            if (choice.finish_reason === 'stop') {
-              if (fullReply) { messages.push({ role: 'assistant', content: fullReply }); saveSession(); }
-              isLoading = false;
-              showStopBtn(false);
+            if (parsed.error) {
+              failStream(parsed.error.message);
               return;
             }
+            var choice = parsed.choices && parsed.choices[0];
+            if (!choice) continue;
+            if (choice.finish_reason === 'stop') { endStream(); return; }
             var delta = choice.delta;
             if (delta && delta.content) {
-              appendToken(delta.content);
+              queue(delta.content);
             }
           } catch(e) { /* skip malformed chunk */ }
         }
@@ -474,6 +711,27 @@
     isLoading = false;
     hideTyping();
     showStopBtn(false);
+  }
+
+  function clearConversation() {
+    if (abortController) {
+      abortController.abort();
+      abortController = null;
+    }
+    messages = [];
+    conversationTopic = null;
+    currentArticles = [];
+    lastUserQuestion = '';
+    isLoading = false;
+    hideTyping();
+    showStopBtn(false);
+    try {
+      sessionStorage.removeItem('ai_messages');
+      sessionStorage.setItem('ai_open', isOpen ? '1' : '0');
+    } catch(e) { /* ignore */ }
+    var container = document.getElementById('ai-msgs');
+    if (container) container.innerHTML = '';
+    addMsg('bot', CONFIG.welcomeMessage);
   }
 
   function showStopBtn(show) {
@@ -507,75 +765,138 @@
     if (el) el.remove();
   }
 
-  /* ---------- Markdown render (enhanced) ---------- */
-  function render(text) {
-    // Strip AI-generated HTML artifacts before Markdown processing
-    var escaped = text
-      .replace(/<a\s[^>]*>/gi, '')
-      .replace(/<\/a>/gi, '')
-      .replace(/\s*target="[^"]*"/gi, '')
-      .replace(/\s*rel="[^"]*"/gi, '')
-      .replace(/打开链接\s*/g, '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
-
-    var blocks = {};
-    var idx = 0;
-
-    escaped = escaped.replace(/```([\s\S]*?)```/g, function(m, code) {
-      var key = '%%BLOCK' + (idx++) + '%%';
-      blocks[key] = '<pre><code>' + code.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>') + '</code></pre>';
-      return key;
+  /* ---------- Markdown render (marked + DOMPurify) ---------- */
+  if (typeof marked !== 'undefined') {
+    marked.use({
+      renderer: {
+        heading: function(text, level) {
+          var tag = level <= 2 ? 'h3' : 'h4';
+          return '<' + tag + '>' + text + '</' + tag + '>';
+        },
+        link: function(href, title, text) {
+          if (href.indexOf('bytefisher.top') !== -1) {
+            href = href.replace(/^https?:\/\/[^\/]+/, '') || '/';
+          }
+          var isInternal = href.indexOf('/') === 0;
+          return '<a href="' + href + '"' + (isInternal ? '' : ' target="_blank" rel="noopener noreferrer"') + '>' + text + '</a>';
+        }
+      },
+      gfm: true,
+      breaks: true
     });
+  }
 
-    escaped = escaped
-      .replace(/`([^`]+)`/g, '<code>$1</code>')
-      .replace(/\[(.+?)\]\(([^)]+)\)/g, function(m, txt, url) {
-        if (/^(?:javascript|data|vbscript|file):/i.test(url)) return txt;
-        var href = url.replace(/&amp;/g, '&').replace(/['">\s].*$/, '');
-        txt = txt.replace(/\\([\[\]])/g, '$1');
-        var isInternal = href.indexOf('/') === 0 || href.indexOf(location.hostname) !== -1;
-        return '<a href="' + href + '"' + (isInternal ? '' : ' target="_blank"') + ' rel="noopener noreferrer">' + txt + '</a>';
-      })
-      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-      .replace(/^### (.+)$/gm, '<h4>$1</h4>')
-      .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
-      .replace(/^- (.+)$/gm, '<li class="ai-li-u">$1</li>')
-      .replace(/^\d+\. (.+)$/gm, '<li class="ai-li-o">$1</li>');
+  function preLinkArticles(text) {
+    if (!postsIndexCache || !postsIndexCache.posts) return text;
 
-    escaped = escaped.replace(/(<li class="ai-li-u">.*?<\/li>(\s|(<br>))*)+/g, function(m) {
-      return '<ul>' + m.replace(/<br>/g, '').replace(/ class="ai-li-u"/g, '') + '</ul>';
-    });
-    escaped = escaped.replace(/(<li class="ai-li-o">.*?<\/li>(\s|(<br>))*)+/g, function(m) {
-      return '<ol>' + m.replace(/<br>/g, '').replace(/ class="ai-li-o"/g, '') + '</ol>';
-    });
-
-    // Table: simple pipe-to-table conversion
-    escaped = escaped.replace(/^\|(.+?)\|$/gm, function(m, content) {
-      if (/^[-:\s]+\|/.test(content)) return m; // skip separator row
-      var cells = content.split('|');
-      var html = '<tr>';
-      for (var i = 0; i < cells.length; i++) html += '<td>' + cells[i].trim() + '</td>';
-      html += '</tr>';
-      return html;
-    });
-    escaped = escaped.replace(/(<tr>.*?<\/tr>(\s|(<br>))*)+/g, function(m) {
-      return '<table>' + m.replace(/<br>/g, '') + '</table>';
-    });
-
-    // Bare URL to clickable link (matched before <a> tags with same pattern)
-    escaped = escaped.replace(/(^|[\s>])(https?:\/\/[^\s"'<>]+|www\.[^\s"'<>]+)/g, function(m, prefix, url) {
-      var href = url.indexOf('http') === 0 ? url : 'https://' + url;
-      return prefix + '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + href.replace(/^https?:\/\//, '') + '</a>';
-    });
-
-    for (var key in blocks) {
-      escaped = escaped.replace(key, blocks[key]);
+    function norm(s) {
+      return s.replace(/\s/g, '')
+              .replace(/[－—–―]/g, '-')
+              .replace(/[：:]/g, ':')
+              .replace(/[；;]/g, ';')
+              .replace(/[，,]/g, ',')
+              .replace(/[。.]/g, '.')
+              .replace(/[（(]/g, '(')
+              .replace(/[）)]/g, ')')
+              .replace(/[／/]/g, '/')
+              .replace(/[’']/g, "'")
+              .replace(/[“”]/g, '"')
+              .replace(/[Ａ-Ｚ]/g, function(c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
+              .replace(/[ａ-ｚ]/g, function(c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
+              .replace(/[０-９]/g, function(c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
+              .replace(/[＃]/g, '#');
     }
 
-    escaped = escaped.replace(/\n/g, '<br>');
-    return escaped;
+    var sorted = postsIndexCache.posts.slice().sort(function(a, b) { return b.title.length - a.title.length; });
+    var lines = text.split('\n');
+    for (var li = 0; li < lines.length; li++) {
+      var line = lines[li].trim();
+      if (!line || line.indexOf('[') === 0) continue;
+      var normLine = norm(line);
+      for (var pi = 0; pi < sorted.length; pi++) {
+        var title = sorted[pi].title;
+        var normTitle = norm(title);
+        if (normLine === normTitle || normLine.indexOf(normTitle) === 0) {
+          var rest = line.substring(title.length);
+          var url = sorted[pi].url.replace(/^https?:\/\/[^\/]+/, '');
+          lines[li] = '[' + title + '](' + url + ')' + rest;
+          break;
+        }
+      }
+    }
+
+    return lines.join('\n');
+  }
+
+  /* ---------- URL validation ---------- */
+  function validateLinks(text, index) {
+    if (!index || !index.posts || !index.posts.length) return text;
+
+    var articleUrls = {};
+    for (var i = 0; i < index.posts.length; i++) {
+      var relUrl = index.posts[i].url.replace(/^https?:\/\/[^\/]+/, '');
+      articleUrls[relUrl] = index.posts[i].title;
+    }
+
+    var pathPrefixes = [
+      '/fish/', '/ai-games/', '/douyin/',
+      '/about/', '/guestbook/', '/tutorials/', '/program/',
+      '/tags/', '/categories/', '/archives/',
+      '/page/', '/images/', '/css/', '/js/', '/lib/',
+      '/search.xml', '/atom.xml', '/sitemap.xml',
+      '/sitemap_images.xml', '/api/'
+    ];
+
+    return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) {
+      var relUrl = url.replace(/^https?:\/\/[^\/]+/, '');
+
+      // External URL → pass through
+      if (url.indexOf('://') !== -1 && url.indexOf('bytefisher.top') === -1) return match;
+
+      // Known article URL → pass
+      if (articleUrls[relUrl]) return match;
+
+      // Matches a known path prefix → pass (tags, categories, albums, etc.)
+      for (var p = 0; p < pathPrefixes.length; p++) {
+        if (relUrl.indexOf(pathPrefixes[p]) === 0) return match;
+      }
+
+      // Root path
+      if (relUrl === '/' || relUrl === '') return match;
+
+      // Try to match link text to article title → auto-correct URL
+      for (var i = 0; i < index.posts.length; i++) {
+        if (index.posts[i].title === linkText) {
+          return '[' + linkText + '](' + index.posts[i].url.replace(/^https?:\/\/[^\/]+/, '') + ')';
+        }
+      }
+      // Partial title match → auto-correct (only if lengths are close)
+      for (var i = 0; i < index.posts.length; i++) {
+        var title = index.posts[i].title;
+        if (Math.abs(title.length - linkText.length) <= 4 && (title.indexOf(linkText) !== -1 || linkText.indexOf(title) !== -1)) {
+          return '[' + linkText + '](' + index.posts[i].url.replace(/^https?:\/\/[^\/]+/, '') + ')';
+        }
+      }
+
+      // Cannot fix — strip link, keep plain text
+      return linkText;
+    });
+  }
+
+  function render(text) {
+    text = preLinkArticles(text);
+    text = validateLinks(text, postsIndexCache);
+    if (typeof marked === 'undefined') {
+      return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+    var html = marked.parse(text);
+    if (typeof DOMPurify !== 'undefined') {
+      html = DOMPurify.sanitize(html, {
+        ALLOWED_TAGS: ['h3', 'h4', 'p', 'br', 'hr', 'strong', 'b', 'em', 'i', 'code', 'pre', 'a', 'ul', 'ol', 'li', 'blockquote', 'table', 'thead', 'tbody', 'tr', 'th', 'td'],
+        ALLOWED_ATTR: ['href', 'target', 'rel']
+      });
+    }
+    return html;
   }
 
   /* ---------- Input ---------- */
@@ -616,6 +937,11 @@
   /* ---------- Init ---------- */
   function restoreSession() {
     try {
+      var version = sessionStorage.getItem('ai_session_version');
+      if (version !== CONFIG.sessionVersion) {
+        sessionStorage.removeItem('ai_messages');
+        sessionStorage.setItem('ai_session_version', CONFIG.sessionVersion);
+      }
       var saved = sessionStorage.getItem('ai_messages');
       if (saved) messages = JSON.parse(saved);
     } catch(e) { /* ignore */ }
@@ -626,6 +952,7 @@
 
   function saveSession() {
     try {
+      sessionStorage.setItem('ai_session_version', CONFIG.sessionVersion);
       sessionStorage.setItem('ai_messages', JSON.stringify(messages));
       sessionStorage.setItem('ai_open', isOpen ? '1' : '0');
     } catch(e) { /* ignore */ }

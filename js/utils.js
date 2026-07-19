@@ -12,7 +12,7 @@ NexT.utils = {
    * Wrap images with fancybox.
    */
   wrapImageWithFancyBox: function() {
-    document.querySelectorAll('.post-body :not(a) > img, .post-body > img').forEach(element => {
+    document.querySelectorAll('.post-body :not(a) > img:not(.no-zoom), .post-body > img:not(.no-zoom)').forEach(element => {
       var $image = $(element);
       var imageLink = $image.attr('data-src') || $image.attr('src');
       var $imageWrapLink = $image.wrap(`<a class="fancybox fancybox.image" href="${imageLink}" itemscope itemtype="http://schema.org/ImageObject" itemprop="url"></a>`).parent('a');
@@ -355,7 +355,7 @@ NexT.utils = {
     document.querySelector('.post-toc-wrap').style.maxHeight = sidebarWrapperHeight;
   },
 
-  updateSidebarPosition: function() {
+  updateSidebarPosition: function(isPjax) {
     var sidebarNav = document.querySelector('.sidebar-nav');
     var hasTOC = document.querySelector('.post-toc');
     if (hasTOC) {
@@ -367,7 +367,9 @@ NexT.utils = {
       sidebarNav.classList.remove('motion-element');
       document.querySelector('.sidebar-nav-overview').click();
     }
-    NexT.utils.initSidebarDimension();
+    if (!isPjax) {
+      NexT.utils.initSidebarDimension();
+    }
     if (!this.isDesktop() || CONFIG.scheme === 'Pisces' || CONFIG.scheme === 'Gemini') return;
     // Expand sidebar on post detail page by default, when post has a toc.
     var display = CONFIG.page.sidebar;

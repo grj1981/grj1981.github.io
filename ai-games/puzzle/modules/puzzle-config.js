@@ -6,6 +6,8 @@
     window.PuzzleConfig = {
         IMAGE_BASE_URL: 'https://picsum.photos',
         enableImageMode: true,
+        ALBUM_BASE_URL: 'https://img.bytefisher.top/album',
+    ALBUM_API_URL: '/api/album-images.json',
 
         DIFFICULTY: {
             1: { grid: 2, size: 4, hints: 6, rotation: true, time: 60 },

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.loli.net">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://img.bytefisher.top">
   <link rel="preconnect" href="https://waline.bytefisher.top">
-  <link rel="preconnect" href="https://iili.io">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#37c6c0">
@@ -12,19 +13,24 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-<link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#37c6c0">
 
 <meta http-equiv="Permissions-Policy" content="encrypted-media=*">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="codeva-7SG6ROHyTg">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"></noscript>
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com busuanzi.ibruce.info static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com busuanzi.ibruce.info; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
   <meta name="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ByteFisher">
@@ -35,10 +41,11 @@
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="unity,游戏开发,C#,Lua,Python,Hexo,博客,钓鱼,教程,编程">
 <meta name="twitter:card" content="summary">
+  <meta name="keywords" content="unity,游戏开发,C#,Lua,Python,Hexo,博客,钓鱼,教程,编程">
 
 <link rel="canonical" href="https://www.bytefisher.top/archives/page/15/">
 
-
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"}]}</script>
 
 
 <script id="page-configurations">
@@ -145,12 +152,12 @@
   </li>
         <li class="menu-item menu-item-tutorials">
 
-    <a href="/tutorials/" rel="section"><i class="fa fa-book fa-fw"></i>教程</a>
+    <a href="/tutorials/" rel="section"><i class="fa fa-book fa-fw"></i>教程<span class="badge">9</span></a>
 
   </li>
         <li class="menu-item menu-item-fish">
 
-    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>相册<span class="badge">7</span></a>
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>钓鱼专题<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-aigames">
@@ -160,7 +167,7 @@
   </li>
         <li class="menu-item menu-item-douyin">
 
-    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">48</span></a>
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">53</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -170,12 +177,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">198</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">243</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">57</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a>
 
   </li>
         <li class="menu-item menu-item-guestbook">
@@ -245,20 +252,20 @@
     <div class="posts-collapse">
       <div class="collection-title">
         
-        <span class="collection-header">非常好! 目前共计 198 篇日志。 继续努力。</span>
+        <span class="collection-header">太棒了! 目前共计 243 篇日志。 继续努力。</span>
       </div>
 
       <div class="archive-summary">
-        <span>共 198 篇文章</span>
+        <span>共 243 篇文章</span>
         <span>｜</span>
-        <span>最新更新：2026-04-26</span>
+        <span>最新更新：2026-07-17</span>
         <span>｜</span>
-        <span>最早文章：2024-02-25</span>
+        <span>最早文章：2023-12-16</span>
       </div>
 
       
     <div class="collection-year">
-      <span class="collection-header">2024</span>
+      <span class="collection-header">2025</span>
     </div>
 
   <article itemscope itemtype="http://schema.org/Article">
@@ -266,15 +273,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2024-06-19T14:25:43+08:00"
-              content="2024-06-19">
-          06-19
+              datetime="2025-03-20T08:00:00+08:00"
+              content="2025-03-20">
+          03-20
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2024/06/19/Unity%E8%B7%AF%E5%BE%84%E6%9D%83%E9%99%90/" itemprop="url">
-            <span itemprop="name">Unity3D路径权限</span>
+          <a class="post-title-link" href="/2025/03/20/CSharp%E6%95%99%E7%A8%8B-06-%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5-%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" itemprop="url">
+            <span itemprop="name">C# 控制语句 - 循环结构</span>
           </a>
       </div>
 
@@ -286,15 +293,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2024-02-25T19:21:05+08:00"
-              content="2024-02-25">
-          02-25
+              datetime="2025-03-18T08:00:00+08:00"
+              content="2025-03-18">
+          03-18
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2024/02/25/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-24-02-24/" itemprop="url">
-            <span itemprop="name">钓鱼日记[24.02.24]</span>
+          <a class="post-title-link" href="/2025/03/18/CSharp%E6%95%99%E7%A8%8B-05-%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5-%E6%9D%A1%E4%BB%B6%E5%88%86%E6%94%AF/" itemprop="url">
+            <span itemprop="name">C# 控制语句 - 条件分支</span>
           </a>
       </div>
 
@@ -306,15 +313,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2024-01-31T18:11:16+08:00"
-              content="2024-01-31">
-          01-31
+              datetime="2025-03-16T08:00:00+08:00"
+              content="2025-03-16">
+          03-16
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E5%A0%86%E5%8F%A0%E6%B6%88%E9%99%A4%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="url">
-            <span itemprop="name">Lua实现Unity堆叠消除小游戏摘要</span>
+          <a class="post-title-link" href="/2025/03/16/CSharp%E6%95%99%E7%A8%8B-04-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6/" itemprop="url">
+            <span itemprop="name">C# 类型转换与运算符</span>
           </a>
       </div>
 
@@ -326,38 +333,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2024-01-31T16:48:39+08:00"
-              content="2024-01-31">
-          01-31
+              datetime="2025-03-14T16:52:24+08:00"
+              content="2025-03-14">
+          03-14
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2024/01/31/Lua%E5%AE%9E%E7%8E%B0Unity%E8%BF%9E%E8%BF%9E%E7%9C%8B%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="url">
-            <span itemprop="name">Lua实现Unity连连看小游戏摘要</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2023-12-16T20:21:05+08:00"
-              content="2023-12-16">
-          12-16
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/12/16/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-16/" itemprop="url">
-            <span itemprop="name">钓鱼日记[23.12.16]</span>
+          <a class="post-title-link" href="/2025/03/14/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90DOTween%E5%BA%93%E3%80%91/" itemprop="url">
+            <span itemprop="name">C#学习笔记【DOTween库】</span>
           </a>
       </div>
 
@@ -369,15 +353,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2023-12-10T21:01:05+08:00"
-              content="2023-12-10">
-          12-10
+              datetime="2025-03-14T08:00:00+08:00"
+              content="2025-03-14">
+          03-14
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2023/12/10/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-10/" itemprop="url">
-            <span itemprop="name">钓鱼日记[23.12.10]</span>
+          <a class="post-title-link" href="/2025/03/14/CSharp%E6%95%99%E7%A8%8B-03-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%8F%98%E9%87%8F/" itemprop="url">
+            <span itemprop="name">C# 数据类型与变量</span>
           </a>
       </div>
 
@@ -389,15 +373,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2023-12-06T11:04:38+08:00"
-              content="2023-12-06">
-          12-06
+              datetime="2025-03-12T08:00:00+08:00"
+              content="2025-03-12">
+          03-12
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2023/12/06/Lua%E5%AE%9E%E7%8E%B0U3D%E5%BC%B9%E5%B9%95%E9%A3%9E%E8%A1%8C%E6%B8%B8%E6%88%8F%E6%91%98%E8%A6%81/" itemprop="url">
-            <span itemprop="name">Lua实现U3D弹幕飞行游戏摘要</span>
+          <a class="post-title-link" href="/2025/03/12/CSharp%E6%95%99%E7%A8%8B-02-%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84%E4%B8%8E%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" itemprop="url">
+            <span itemprop="name">C# 程序结构与基本语法</span>
           </a>
       </div>
 
@@ -409,15 +393,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2023-12-02T20:11:01+08:00"
-              content="2023-12-02">
-          12-02
+              datetime="2025-03-10T08:00:00+08:00"
+              content="2025-03-10">
+          03-10
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2023/12/02/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-12-02/" itemprop="url">
-            <span itemprop="name">钓鱼日记[23.12.02]</span>
+          <a class="post-title-link" href="/2025/03/10/CSharp%E6%95%99%E7%A8%8B-01-CSharp%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" itemprop="url">
+            <span itemprop="name">C# 简介与环境搭建</span>
           </a>
       </div>
 
@@ -429,15 +413,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2023-11-26T19:34:01+08:00"
-              content="2023-11-26">
-          11-26
+              datetime="2025-02-05T17:46:14+08:00"
+              content="2025-02-05">
+          02-05
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2023/11/26/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-26/" itemprop="url">
-            <span itemprop="name">钓鱼日记[23.11.26]</span>
+          <a class="post-title-link" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%9B%86%E5%90%88Collection%E3%80%91/" itemprop="url">
+            <span itemprop="name">C#学习笔记【集合Collection】</span>
           </a>
       </div>
 
@@ -449,15 +433,35 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2023-11-18T21:10:01+08:00"
-              content="2023-11-18">
-          11-18
+              datetime="2025-02-05T16:43:10+08:00"
+              content="2025-02-05">
+          02-05
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2023/11/18/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-23-11-18/" itemprop="url">
-            <span itemprop="name">钓鱼日记[23.11.18]</span>
+          <a class="post-title-link" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%BA%8B%E4%BB%B6Event%E3%80%91/" itemprop="url">
+            <span itemprop="name">C#学习笔记【事件Event】</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2025-02-05T15:39:03+08:00"
+              content="2025-02-05">
+          02-05
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2025/02/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%A7%94%E6%89%98Delegate%E3%80%91/" itemprop="url">
+            <span itemprop="name">C#学习笔记【委托Delegate】</span>
           </a>
       </div>
 
@@ -473,7 +477,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/archives/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/20/">20</a><a class="extend next" rel="next" href="/archives/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/archives/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/archives/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/25/">25</a><a class="extend next" rel="next" href="/archives/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -533,7 +537,7 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="淡水鱼"
-      src="/images/avatar.gif">
+      src="/images/avatar.webp">
   <p class="site-author-name" itemprop="name">淡水鱼</p>
   <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
 </div>
@@ -542,7 +546,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">198</span>
+          <span class="site-state-item-count">243</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -555,8 +559,14 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">标签</span></a>
+      </div>
+      <div class="site-state-item site-state-tutorials">
+        <a href="/tutorials/">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">教程</span>
+        </a>
       </div>
   </nav>
 </div>
@@ -578,11 +588,11 @@
 
 
       </div>
-	  <iframe id="music-player" allow="encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <iframe id="music-player" allow="autoplay; encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
 	  <div class="wechat_OA">
 		<span>欢迎关注我的公众号</span>
 		<!-- 这里添加你的二维码图片 -->
-		<img src ="/images/wechat-qcode.jpg">
+		<img src ="/images/wechat-qcode.webp">
 	  </div>
         <div class="back-to-top motion-element">
           <i class="fa fa-arrow-up"></i>
@@ -619,7 +629,7 @@
         <i class="fa fa-user"></i>
       </span>
       <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
+        <span id="busuanzi_value_site_uv">...</span>
       </span>
     </span>
     <span class="post-meta-divider">|</span>
@@ -628,9 +638,24 @@
         <i class="fa fa-eye"></i>
       </span>
       <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
+        <span id="busuanzi_value_site_pv">...</span>
       </span>
     </span>
+  <script>
+    setTimeout(function(){
+      var containers = [
+        'busuanzi_container_site_uv',
+        'busuanzi_container_site_pv'
+      ];
+      for (var i = 0; i < containers.length; i++) {
+        var el = document.getElementById(containers[i]);
+        if (el && el.style.display === 'none') {
+          el.style.display = 'inline';
+        }
+      }
+    }, 3000);
+  </script>
+  <script src="/js/site-stats.js" defer></script>
 </div>
 
 
@@ -663,6 +688,7 @@
 <script src="/js/next-boot.js"></script>
 
   <script>
+if (!window.matchMedia('(max-width: 767px)').matches) {
 var pjax = new Pjax({
   selectors: [
     'head title',
@@ -676,9 +702,10 @@ var pjax = new Pjax({
     '.post-toc-wrap': Pjax.switches.innerHTML
   },
   analytics: false,
-  cacheBust: false,
+  cacheBust: true,
   scrollTo : !CONFIG.bookmark.enable
 });
+window._pjax = pjax;
 
 window.addEventListener('pjax:success', () => {
   document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
@@ -709,6 +736,7 @@ window.addEventListener('pjax:success', () => {
     parent.appendChild(script);
   });
   NexT.boot.refresh();
+  NexT.boot.registerEvents();
   // Define Motion Sequence & Bootstrap Motion.
   if (CONFIG.motion.enable) {
     NexT.motion.integrator
@@ -717,8 +745,15 @@ window.addEventListener('pjax:success', () => {
       .add(NexT.motion.middleWares.postList)
       .bootstrap();
   }
-  NexT.utils.updateSidebarPosition();
+  NexT.utils.updateSidebarPosition(true);
+
+  document.querySelectorAll('.post-block, .pagination, .comments').forEach(function(el) {
+    if (parseFloat(el.style.opacity) === 0) {
+      el.style.opacity = 1;
+    }
+  });
 });
+}
 </script>
 
 
@@ -778,9 +813,19 @@ window.addEventListener('pjax:success', () => {
 
     </div>
 
-<link rel="stylesheet" href="//unpkg.com/@waline/client@2/dist/waline.css">
+<link rel="preload" as="style" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css"></noscript>
 <script data-pjax>
 (function() {
+  // 抑制第三方扩展的 notice.avoidance 报错
+  window.addEventListener('error', function(e) {
+    if (e.message && e.message.indexOf('notice.avoidance') !== -1) {
+      e.preventDefault();
+      e.stopPropagation();
+      return true;
+    }
+  });
+
   var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
 
   function updateCounts() {
@@ -804,7 +849,7 @@ window.addEventListener('pjax:success', () => {
   if (el) {
     updateCounts();
     NexT.utils.loadComments(el, function() {
-      NexT.utils.getScript('//unpkg.com/@waline/client@2/dist/waline.js', function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2.15.8/dist/waline.js', function() {
         Waline.init({
           el: '#waline-comments',
           serverURL: 'https://waline.bytefisher.top/',
@@ -831,35 +876,9 @@ window.addEventListener('pjax:success', () => {
   } else {
     updateCounts();
   }
-})();
-</script>
 
-<script data-pjax>
-(function() {
-  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
-  function fetchAll() {
-    document.querySelectorAll('.waline-visitor-count').forEach(function(el) {
-      var p = el.getAttribute('data-path');
-      if (!p) return;
-      var d = decodeURIComponent(p);
-      fetch(baseURL + '/api/article?path=' + encodeURIComponent(d) + '&type=time')
-        .then(function(r) { return r.json(); })
-        .then(function(d) {
-          var t = d && d.data && d.data[0] && d.data[0].time;
-          if (t > 0) el.textContent = t;
-        });
-    });
-  }
-  // Run immediately, after 2s, and after 4s (handles PJAX + Waline load)
-  if (document.readyState === 'complete') { fetchAll(); }
-  else { window.addEventListener('load', fetchAll); }
-  setTimeout(fetchAll, 2000);
-  setTimeout(fetchAll, 4000);
-  // MutationObserver: if anything changes the span text, fix it
-  document.querySelectorAll('.waline-visitor-count').forEach(function(el) {
-    var obs = new MutationObserver(function() { fetchAll(); });
-    obs.observe(el, { characterData: true, childList: true, subtree: true });
-  });
+  // Fallback for delayed Waline rendering
+  setTimeout(updateCounts, 2000);
 })();
 </script>
 <!-- 抖音视频弹窗 -->
@@ -872,439 +891,68 @@ window.addEventListener('pjax:success', () => {
   </div>
 </div>
 
-<style>
-html {
-  scrollbar-gutter: stable;
-}
+<link rel="stylesheet" type="text/css" href="/css/douyin-modal.css">
+<script src="/js/douyin-modal.js" async></script>
+<script src="/js/hero-typing.js" async></script>
 
-body {
-  scrollbar-gutter: stable;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.85);
-  z-index: 9999;
-  overflow: hidden;
-}
-
-.modal::-webkit-scrollbar {
-  display: none !important;
-}
-
-.modal.active {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.modal-content {
-  position: relative;
-  width: min(71%, 340px);
-  max-width: calc((100vh - 100px) * 9 / 17.5);
-  height: auto;
-  aspect-ratio: 9 / 17.5;
-  max-height: calc(100vh - 100px);
-  margin: 0 auto;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-@media (max-width: 768px) {
-  .modal-content {
-    width: min(81%, 320px);
-    height: auto;
-    aspect-ratio: 9 / 17.5;
-  }
-}
-
-@media (max-width: 480px) {
-  .modal-content {
-    width: min(94%, 300px);
-    max-width: calc((100vh - 80px) * 9 / 17.5);
-    height: auto;
-    aspect-ratio: 9 / 17.5;
-    max-height: calc(100vh - 80px);
-  }
-}
-
-.modal-content iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
-  border: none;
-}
-
-.close-btn {
-  position: absolute;
-  top: 0;
-  right: 10px;
-  left: auto;
-  color: #fff;
-  font-size: 36px;
-  font-weight: bold;
-  cursor: pointer;
-  line-height: 1;
-  z-index: 10000;
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  background: rgba(0,0,0,0.2);
-  border-radius: 50%;
-}
-
-.close-btn:hover {
-  color: #e74c3c;
-}
-
-.nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #fff;
-  font-size: 40px;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 10000;
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  background: rgba(0,0,0,0.1);
-  border-radius: 50%;
-  line-height: 50px;
-  user-select: none;
-}
-
-.nav-btn:hover {
-  background: rgba(0,0,0,0.2);
-}
-
-.prev-btn {
-  left: 0;
-}
-
-.next-btn {
-  right: 15px;
-}
-
-@media (max-width: 768px) {
-  .modal-content {
-    width: calc(100% - 60px);
-    max-width: calc((100vh - 100px) * 9 / 17.5);
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-  .prev-btn {
-    left: 0;
-  }
-  .next-btn {
-    right: 5px;
-  }
-}
-
-@media (max-width: 480px) {
-  .nav-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 30px;
-    line-height: 40px;
-  }
-  .prev-btn {
-    left: 0;
-  }
-  .next-btn {
-    right: 5px;
-  }
-}
-</style>
-
-<script>
+<link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
+<script data-pjax>
 (function() {
-  var musicIframe = null;
-  var musicDisplayStyle = '';
-  var isMusicPaused = false;
-  var videoIds = [];
-  var currentIndex = 0;
-  
-  function findMusicIframe() {
-    var iframes = document.getElementsByTagName('iframe');
-    for (var i = 0; i < iframes.length; i++) {
-      var src = iframes[i].src || '';
-      if (src.indexOf('music.163.com') > -1 || src.indexOf('outchain/player') > -1) {
-        return iframes[i];
-      }
+  if (document.querySelector('a[data-lightbox]')) {
+    if (!window._lightboxLoaded) {
+      window._lightboxLoaded = true;
+      var s = document.createElement('script');
+      s.src = '/js/lightbox-plus-jquery.min.js';
+      document.body.appendChild(s);
     }
-    console.log('[Douyin] Music iframe not found in', iframes.length, 'iframes');
-    return null;
-  }
-  
-  function pauseMusic() {
-    console.log('[Douyin] Trying to pause music...');
-    musicIframe = findMusicIframe();
-    
-    if (musicIframe) {
-      console.log('[Douyin] Music iframe found');
-      var src = musicIframe.src || '';
-      
-      if (src.indexOf('auto=1') > -1) {
-        musicIframe.src = src.replace('auto=1', 'auto=0');
-        console.log('[Douyin] Changed auto=1 to auto=0');
-      }
-      isMusicPaused = true;
-    } else {
-      console.log('[Douyin] Music iframe NOT found!');
-    }
-  }
-  
-  function resumeMusic() {
-    console.log('[Douyin] Trying to resume music...');
-    
-    if (musicIframe && isMusicPaused) {
-      var src = musicIframe.src || '';
-      
-      if (src.indexOf('auto=0') > -1) {
-        musicIframe.src = src.replace('auto=0', 'auto=1');
-        console.log('[Douyin] Changed auto=0 to auto=1');
-      }
-      isMusicPaused = false;
-    }
-  }
-  
-  function init() {
-    console.log('[Douyin] Initializing...');
-    var cards = document.querySelectorAll('.video-card');
-    console.log('[Douyin] Found', cards.length, 'video cards');
-    
-    videoIds = [];
-    for (var j = 0; j < cards.length; j++) {
-      var videoId = cards[j].getAttribute('data-id');
-      if (videoId) {
-        videoIds.push(videoId);
-      }
-      cards[j].addEventListener('click', openModal);
-    }
-    
-    var closeBtn = document.querySelector('.close-btn');
-    if (closeBtn) {
-      closeBtn.addEventListener('click', closeModal);
-    }
-    
-    var prevBtn = document.querySelector('.prev-btn');
-    var nextBtn = document.querySelector('.next-btn');
-    if (prevBtn) {
-      prevBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        navigateVideo(-1);
-      });
-    }
-    if (nextBtn) {
-      nextBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        navigateVideo(1);
-      });
-    }
-    
-    var modal = document.getElementById('douyin-modal');
-    if (modal) {
-      modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-          closeModal();
-        }
-      });
-    }
-  }
-  
-  function navigateVideo(direction) {
-    if (videoIds.length === 0) return;
-    
-    currentIndex += direction;
-    if (currentIndex < 0) {
-      currentIndex = videoIds.length - 1;
-    } else if (currentIndex >= videoIds.length) {
-      currentIndex = 0;
-    }
-    
-    var videoId = videoIds[currentIndex];
-    var player = document.getElementById('douyin-player');
-    if (player && videoId) {
-      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
-    }
-  }
-  
-  function openModal(e) {
-    console.log('[Douyin] Opening modal...');
-    var card = e.currentTarget;
-    var videoId = card.getAttribute('data-id');
-    var player = document.getElementById('douyin-player');
-    var modal = document.getElementById('douyin-modal');
-    
-    currentIndex = videoIds.indexOf(videoId);
-    
-    if (player && modal && videoId) {
-      pauseMusic();
-      
-      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
-      document.body.style.marginRight = '0px';
-    }
-  }
-  
-  function closeModal() {
-    console.log('[Douyin] Closing modal...');
-    var player = document.getElementById('douyin-player');
-    var modal = document.getElementById('douyin-modal');
-    
-    if (player) {
-      player.src = '';
-    }
-    
-    if (modal) {
-      modal.classList.remove('active');
-    }
-    
-    document.body.style.overflow = '';
-    document.documentElement.style.overflow = '';
-    
-    resumeMusic();
-  }
-  
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
   }
 })();
 </script>
 
-<!-- Hero 打字机效果 -->
-<script>
-(function() {
-  function initHeroTyping() {
-    var el = document.getElementById('hero-typing');
-    if (!el) return;
-    var texts = ['编程世界', '数字乐园', '钓鱼天地', '技术博客'];
-    var textIndex = 0;
-    var charIndex = 0;
-    var isDeleting = false;
-
-    function type() {
-      var current = texts[textIndex];
-      if (isDeleting) {
-        el.textContent = current.substring(0, charIndex--);
-      } else {
-        el.textContent = current.substring(0, charIndex++);
-      }
-
-      if (!isDeleting && charIndex === current.length) {
-        setTimeout(function() { isDeleting = true; }, 2000);
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        textIndex = (textIndex + 1) % texts.length;
-      }
-
-      setTimeout(type, isDeleting ? 50 : 100);
-    }
-    type();
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHeroTyping);
-  } else {
-    initHeroTyping();
-  }
-})();
-</script>
-
-
-
-<!-- 深色模式切换 -->
 <button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
   <i class="fa fa-moon-o"></i>
   <i class="fa fa-sun-o"></i>
 </button>
+<script src="/js/darkmode-toggle.js" async></script>
+
 <script data-pjax>
 (function() {
-  var btn = document.getElementById('darkmode-toggle');
-  if (!btn) return;
-  if (document.body.classList.contains('dark-mode')) btn.classList.add('on');
-  btn.addEventListener('click', function() {
-    document.body.classList.toggle('dark-mode');
-    btn.classList.toggle('on');
-    localStorage.setItem('blog-darkmode', document.body.classList.contains('dark-mode') ? '1' : '0');
-  });
-  if (localStorage.getItem('blog-darkmode') === '1') {
-    document.body.classList.add('dark-mode');
-    btn.classList.add('on');
+  function loadAI() {
+    if (window._aiLoaded) return;
+    window._aiLoaded = true;
+    var aiVersion = 'bytebot-20260618-lua-rag-fix';
+    var scripts = ['/js/lib/marked.min.js', '/js/lib/purify.min.js', '/js/ai-assistant.js?v=' + aiVersion];
+    function loadNext() {
+      if (!scripts.length) return;
+      var s = document.createElement('script');
+      s.src = scripts.shift();
+      s.onload = s.onerror = loadNext;
+      document.body.appendChild(s);
+    }
+    loadNext();
+  }
+  if (document.readyState === 'complete') {
+    setTimeout(loadAI, 500);
+  } else {
+    window.addEventListener('load', function() { setTimeout(loadAI, 500); });
   }
 })();
 </script>
 
-<!-- AI 博客助手 -->
-<script src="/js/ai-assistant.js" data-pjax></script>
-
 <script data-pjax>
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js');
+  navigator.serviceWorker.register('/sw.js').then(function(reg) {
+    reg.update(); // Force SW update check on each page load
+  });
 }
 </script>
 
-<!-- 热门文章侧边栏 -->
-<script data-pjax>
-(function() {
-  var container = document.querySelector('.sidebar-inner');
-  if (!container) return;
+<script src="/js/douyin-pagination.js" async></script>
+<script src="/js/hot-posts-widget.js" async></script>
 
-  var existEl = document.getElementById('hot-posts-widget');
-  if (existEl) return;
+<div id="mobile-music-player" class="mobile-music-player" aria-hidden="true"></div>
+<link rel="stylesheet" type="text/css" href="/css/mobile-music.css">
+<script src="/js/mobile-music.js" async></script>
 
-  var widget = document.createElement('div');
-  widget.id = 'hot-posts-widget';
-  widget.className = 'sidebar-widget hot-posts-widget';
-  widget.innerHTML = '<div class="sidebar-widget-title"><i class="fa fa-fire"></i> 热门文章</div>' +
-    '<div class="sidebar-widget-body" id="hot-posts-list">' +
-    '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">加载中...</p></div>';
-  container.appendChild(widget);
-
-  fetch('/api/hot-articles.json')
-    .then(function(r) { return r.json(); })
-    .then(function(res) {
-      var el = document.getElementById('hot-posts-list');
-      if (!el) return;
-      if (res.errno !== 0 || !res.data || !res.data.length) {
-        el.innerHTML = '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">暂无数据</p>';
-        return;
-      }
-      var html = '<ul style="list-style:none;padding:0;margin:0;">';
-      res.data.forEach(function(item, i) {
-        html += '<li style="padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' +
-          '<span style="color:#37c6c0;font-weight:700;margin-right:4px;">' + (i+1) + '.</span>' +
-          '<a href="' + item.url + '" style="color:#555;text-decoration:none;border:none;" title="' + (item.title || '') + '">' +
-          (item.title || item.url) + '</a>' +
-          '<span style="color:#ccc;margin-left:4px;font-size:10px;">' + item.count + '℃</span>' +
-        '</li>';
-      });
-      html += '</ul>';
-      el.innerHTML = html;
-      if (window.pjax && window.pjax.refresh) {
-        window.pjax.refresh(document.getElementById('hot-posts-widget'));
-      }
-    })
-    .catch(function() {
-      var el = document.getElementById('hot-posts-list');
-      if (el) el.innerHTML = '<p style="color:#999;font-size:13px;text-align:center;padding:10px 0;">加载失败</p>';
-    });
-})();
-</script>
 </body>
 </html>
