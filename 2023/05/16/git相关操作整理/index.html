@@ -30,7 +30,8 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com busuanzi.ibruce.info static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com busuanzi.ibruce.info; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
+
   <meta name="description" content="Linux&#x2F;macOS系统下在提交代码时自动将CRLF转换为LF Windows系统下在提交代码时自动将LF转换为CRLF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git相关操作整理">
@@ -39,7 +40,7 @@
 <meta property="og:description" content="Linux&#x2F;macOS系统下在提交代码时自动将CRLF转换为LF Windows系统下在提交代码时自动将LF转换为CRLF">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-16T15:27:48.000Z">
-<meta property="article:modified_time" content="2026-07-03T08:22:03.725Z">
+<meta property="article:modified_time" content="2026-06-04T10:33:22.048Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="IT">
 <meta property="article:tag" content="git操作">
@@ -48,7 +49,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2023/05/16/git%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"git相关操作整理","description":"Linux/macOS系统下在提交代码时自动将CRLF转换为LF Windows系统下在提交代码时自动将LF转换为CRLF","url":"https://www.bytefisher.top/2023/05/16/git相关操作整理/","datePublished":"2023-05-16T15:27:48.000Z","dateModified":"2026-07-03T08:22:03.725Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/05/16/git相关操作整理/"},"keywords":"IT, git操作"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"git相关操作整理","description":"Linux/macOS系统下在提交代码时自动将CRLF转换为LF Windows系统下在提交代码时自动将LF转换为CRLF","url":"https://www.bytefisher.top/2023/05/16/git相关操作整理/","datePublished":"2023-05-16T15:27:48.000Z","dateModified":"2026-06-04T10:33:22.048Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/05/16/git相关操作整理/"},"keywords":"IT, git操作"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"IT","item":"https://www.bytefisher.top/categories/IT/"},{"@type":"ListItem","position":3,"name":"git相关操作整理"}]}</script>
 
 
@@ -171,7 +172,7 @@
   </li>
         <li class="menu-item menu-item-douyin">
 
-    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">49</span></a>
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">54</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -181,7 +182,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">236</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">246</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -381,7 +382,7 @@
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>打开github，在头像下面点击settings，再点击SSH and GPG keys，新建一个SSH，名字随便。将输出的内容复制到框中，点击确定保存。</p>
-<p>输入ssh -T <a href="mailto:&#103;&#105;&#116;&#x40;&#103;&#105;&#x74;&#104;&#117;&#98;&#46;&#99;&#x6f;&#x6d;">git@github.com</a>，如果出现你的用户名，验证成功。</p>
+<p>输入ssh -T <a href="mailto:&#x67;&#105;&#116;&#x40;&#103;&#105;&#x74;&#x68;&#x75;&#x62;&#46;&#99;&#111;&#x6d;">git@github.com</a>，如果出现你的用户名，验证成功。</p>
 <p>打开博客根目录下的_config.yml文件，这是博客的配置文件，在这里你可以修改与博客相关的各种信息。</p>
 <p>修改最后一行的配置：</p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">	type: git</span><br><span class="line">	repository: https://github.com/godweiyang/godweiyang.github.io</span><br><span class="line">	branch: master</span><br></pre></td></tr></table></figure>
@@ -542,7 +543,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-count">246</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -618,39 +619,24 @@
   <span class="author" itemprop="copyrightHolder">淡水鱼</span>
 </div>
         
-<div class="busuanzi-count">
-  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+<div class="site-stats-count">
+    <span class="post-meta-item" id="site_stats_container_uv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
       </span>
       <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv">...</span>
+        <span id="site_stats_value_uv">...</span>
       </span>
     </span>
     <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+    <span class="post-meta-item" id="site_stats_container_pv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="fa fa-eye"></i>
       </span>
       <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv">...</span>
+        <span id="site_stats_value_pv">...</span>
       </span>
     </span>
-  <script>
-    setTimeout(function(){
-      var containers = [
-        'busuanzi_container_site_uv',
-        'busuanzi_container_site_pv'
-      ];
-      for (var i = 0; i < containers.length; i++) {
-        var el = document.getElementById(containers[i]);
-        if (el && el.style.display === 'none') {
-          el.style.display = 'inline';
-        }
-      }
-    }, 3000);
-  </script>
   <script src="/js/site-stats.js" defer></script>
 </div>
 

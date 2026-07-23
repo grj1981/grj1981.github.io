@@ -28,7 +28,7 @@
         '<span style="color:#37c6c0;font-weight:700;margin-right:4px;">' + (i+1) + '.</span>' +
         '<a href="' + item.url + '" style="color:#555;text-decoration:none;border:none;" title="' + (item.title || '') + '">' +
         (item.title || item.url) + '</a>' +
-        '<span style="color:#ccc;margin-left:4px;font-size:10px;">' + item.count + '℃</span>' +
+        '<span style="color:#ccc;margin-left:4px;font-size:10px;">' + item.count + ' 次</span>' +
       '</li>';
     });
     html += '</ul>';
@@ -36,7 +36,7 @@
     if (window._pjax) window._pjax.refresh();
   }
 
-  fetch('/api/hot-articles.json')
+  fetch('/api/hot-articles.json?t=' + Date.now(), { cache: 'no-store' })
     .then(function(r) { return r.json(); })
     .then(renderHotArticles)
     .catch(function() {

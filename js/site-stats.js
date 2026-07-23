@@ -1,10 +1,13 @@
-// Site statistics fallback for footer counters.
+// Site statistics powered by the ByteFisher TiDB API.
 'use strict';
 
 (function() {
   var API_URL = 'https://api.bytefisher.top/api/site-stats';
+  var LOCAL_API_URL = '/api/site-stats-local.json';
   var VISITOR_KEY = 'bytefisher_site_visitor';
+  var LAST_STATS_KEY = 'bytefisher_site_stats';
   var TIMEOUT_MS = 6000;
+  var RETRIES = 2;
 
   function getCounter(id) {
     return document.getElementById(id);
@@ -50,35 +53,43 @@
     }
   }
 
-  function hasBusuanziValue() {
-    var uv = getCounter('busuanzi_value_site_uv');
-    var pv = getCounter('busuanzi_value_site_pv');
-    var uvText = uv ? uv.textContent.trim() : '';
-    var pvText = pv ? pv.textContent.trim() : '';
-    return !!((uvText && uvText !== '...') || (pvText && pvText !== '...'));
+  function isLocalPreview() {
+    return location.hostname === 'localhost' ||
+      location.hostname === '127.0.0.1' ||
+      location.hostname === '[::1]';
   }
 
-  function hideIfUnavailable() {
-    setTimeout(function() {
-      if (hasBusuanziValue()) return;
-
-      var uv = getCounter('busuanzi_container_site_uv');
-      var pv = getCounter('busuanzi_container_site_pv');
-      if (uv) uv.style.display = 'none';
-      if (pv) pv.style.display = 'none';
-    }, 8000);
+  function readLastStats() {
+    try {
+      var payload = JSON.parse(localStorage.getItem(LAST_STATS_KEY) || '');
+      return payload && payload.uv >= 0 && payload.pv >= 0 ? payload : null;
+    } catch (err) {
+      return null;
+    }
   }
 
-  function loadStats() {
-    showContainer('busuanzi_container_site_uv');
-    showContainer('busuanzi_container_site_pv');
+  function renderStats(data) {
+    setText('site_stats_value_uv', formatNumber(data.uv));
+    setText('site_stats_value_pv', formatNumber(data.pv));
+    try {
+      localStorage.setItem(LAST_STATS_KEY, JSON.stringify({
+        uv: Number(data.uv),
+        pv: Number(data.pv)
+      }));
+    } catch (err) {}
+  }
 
+  function requestStats(visitor, view, attempt) {
+    var requestUrl = API_URL +
+      '?visitor=' + encodeURIComponent(visitor) +
+      '&view=' + encodeURIComponent(view) +
+      '&path=' + encodeURIComponent(location.pathname);
     var controller = window.AbortController ? new AbortController() : null;
     var timer = controller ? setTimeout(function() {
       controller.abort();
     }, TIMEOUT_MS) : null;
 
-    fetch(API_URL + '?visitor=' + encodeURIComponent(getVisitorId()) + '&path=' + encodeURIComponent(location.pathname), {
+    return fetch(requestUrl, {
       method: 'GET',
       mode: 'cors',
       cache: 'no-store',
@@ -89,22 +100,64 @@
         return res.json();
       })
       .then(function(payload) {
-        if (!payload || payload.errno || !payload.data) throw new Error('Invalid stats response');
-        setText('busuanzi_value_site_uv', formatNumber(payload.data.uv));
-        setText('busuanzi_value_site_pv', formatNumber(payload.data.pv));
+        if (!payload || payload.errno || !payload.data) {
+          throw new Error('Invalid stats response');
+        }
+        renderStats(payload.data);
       })
       .catch(function(error) {
-        console.warn('Site stats unavailable:', error);
-        hideIfUnavailable();
+        if (attempt < RETRIES) {
+          return new Promise(function(resolve) {
+            setTimeout(resolve, 500 * Math.pow(2, attempt));
+          }).then(function() {
+            return requestStats(visitor, view, attempt + 1);
+          });
+        }
+        throw error;
       })
       .finally(function() {
         if (timer) clearTimeout(timer);
       });
   }
 
+  function loadStats() {
+    showContainer('site_stats_container_uv');
+    showContainer('site_stats_container_pv');
+
+    var lastStats = readLastStats();
+    if (lastStats) renderStats(lastStats);
+
+    var isLocal = isLocalPreview();
+    var visitor = getVisitorId();
+    var view = randomId();
+    requestStats(visitor, view, 0).catch(function(error) {
+      console.warn('Site stats unavailable:', error);
+      if (!lastStats) setText('site_stats_value_uv', '-');
+      if (!lastStats) setText('site_stats_value_pv', '-');
+      if (isLocal) {
+        fetch(LOCAL_API_URL, { cache: 'no-store' })
+          .then(function(res) { return res.json(); })
+          .then(function(payload) {
+            if (payload && !payload.errno && payload.data) renderStats(payload.data);
+          })
+          .catch(function() {});
+      }
+    });
+  }
+
+  function bindPjax() {
+    if (window.__bytefisherSiteStatsBound) return;
+    window.__bytefisherSiteStatsBound = true;
+    window.addEventListener('pjax:success', loadStats);
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadStats);
+    document.addEventListener('DOMContentLoaded', function() {
+      loadStats();
+      bindPjax();
+    });
   } else {
     loadStats();
+    bindPjax();
   }
 })();
