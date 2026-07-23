@@ -6,8 +6,10 @@
   var LOCAL_API_URL = '/api/site-stats-local.json';
   var VISITOR_KEY = 'bytefisher_site_visitor';
   var LAST_STATS_KEY = 'bytefisher_site_stats';
-  var TIMEOUT_MS = 6000;
-  var RETRIES = 2;
+  var TIMEOUT_MS = 4000;
+  var RETRIES = 1;
+  var CACHE_TTL_MS = 10 * 60 * 1000;
+  var REFRESH_INTERVAL_MS = 10 * 60 * 1000;
 
   function getCounter(id) {
     return document.getElementById(id);
@@ -68,13 +70,23 @@
     }
   }
 
+  function isCacheFresh() {
+    try {
+      var payload = JSON.parse(localStorage.getItem(LAST_STATS_KEY) || '');
+      return payload && payload.ts && (Date.now() - payload.ts < CACHE_TTL_MS);
+    } catch (err) {
+      return false;
+    }
+  }
+
   function renderStats(data) {
     setText('site_stats_value_uv', formatNumber(data.uv));
     setText('site_stats_value_pv', formatNumber(data.pv));
     try {
       localStorage.setItem(LAST_STATS_KEY, JSON.stringify({
         uv: Number(data.uv),
-        pv: Number(data.pv)
+        pv: Number(data.pv),
+        ts: Date.now()
       }));
     } catch (err) {}
   }
@@ -127,6 +139,8 @@
     var lastStats = readLastStats();
     if (lastStats) renderStats(lastStats);
 
+    if (isCacheFresh()) return;
+
     var isLocal = isLocalPreview();
     var visitor = getVisitorId();
     var view = randomId();
@@ -151,13 +165,20 @@
     window.addEventListener('pjax:success', loadStats);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-      loadStats();
-      bindPjax();
-    });
-  } else {
+  function startAutoRefresh() {
+    if (window.__bytefisherStatsTimer) return;
+    window.__bytefisherStatsTimer = setInterval(loadStats, REFRESH_INTERVAL_MS);
+  }
+
+  function init() {
     loadStats();
     bindPjax();
+    startAutoRefresh();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
 })();
