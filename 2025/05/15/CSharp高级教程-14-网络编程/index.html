@@ -40,7 +40,7 @@
 <meta property="og:description" content="C#、高级: 网络编程是后端开发的核心能力。C# 提供了从高层级的 HttpClient 到低层级的 Socket 的完整网络编程栈。本文将深入探讨 HTTP 请求调优、gRPC 通信、Socket 编程、以及 ASP.NET Core 中的网络性能优化。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-05-15T12:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-23T09:28:20.292Z">
+<meta property="article:modified_time" content="2026-07-23T10:40:56.122Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="C#">
 <meta property="article:tag" content="series:C#高级教程">
@@ -50,7 +50,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/05/15/CSharp%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8B-14-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C# 高级教程 - 14 网络编程","description":"C#、高级: 网络编程是后端开发的核心能力。C# 提供了从高层级的 HttpClient 到低层级的 Socket 的完整网络编程栈。本文将深入探讨 HTTP 请求调优、gRPC 通信、Socket 编程、以及 ASP.NET Core 中的网络性能优化。","url":"https://www.bytefisher.top/2025/05/15/CSharp高级教程-14-网络编程/","datePublished":"2025-05-15T12:00:00.000Z","dateModified":"2026-07-23T09:28:20.292Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/05/15/CSharp高级教程-14-网络编程/"},"keywords":"C#, 高级, series:C#高级教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"C# 高级教程 - 14 网络编程","description":"C#、高级: 网络编程是后端开发的核心能力。C# 提供了从高层级的 HttpClient 到低层级的 Socket 的完整网络编程栈。本文将深入探讨 HTTP 请求调优、gRPC 通信、Socket 编程、以及 ASP.NET Core 中的网络性能优化。","url":"https://www.bytefisher.top/2025/05/15/CSharp高级教程-14-网络编程/","datePublished":"2025-05-15T12:00:00.000Z","dateModified":"2026-07-23T10:40:56.122Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/05/15/CSharp高级教程-14-网络编程/"},"keywords":"C#, 高级, series:C#高级教程"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"教程","item":"https://www.bytefisher.top/categories/教程/"},{"@type":"ListItem","position":3,"name":"C# 高级教程 - 14 网络编程"}]}</script>
 
 
@@ -565,24 +565,24 @@
 </div>
         
 <div class="site-stats-count">
-    <span class="post-meta-item" id="site_stats_container_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="site_stats_value_uv"></span>
+      <span class="post-meta-item" id="site_stats_container_uv">
+        <span class="post-meta-item-icon">
+          <i class="fa fa-user"></i>
+        </span>
+        <span class="site-uv" title="总访客量">
+          <span id="site_stats_value_uv">-</span>
       </span>
     </span>
     <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="site_stats_container_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="site_stats_value_pv"></span>
+      <span class="post-meta-item" id="site_stats_container_pv">
+        <span class="post-meta-item-icon">
+          <i class="fa fa-eye"></i>
+        </span>
+        <span class="site-pv" title="总访问量">
+          <span id="site_stats_value_pv">-</span>
       </span>
     </span>
-  <script src="/js/site-stats.js" defer></script>
+  <script src="/js/site-stats.js"></script>
 </div>
 
 

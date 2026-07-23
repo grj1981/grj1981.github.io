@@ -1313,7 +1313,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #3e0e39;
+  background: #7712ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -5594,6 +5594,15 @@ figure.highlight table {
   background: #37c6c0;
   color: #fff;
   border-color: #37c6c0;
+}
+@media (max-width: 413px) {
+  .site-stats-count .post-meta-divider {
+    display: none;
+  }
+  .site-stats-count .post-meta-item {
+    display: block;
+    margin: 2px 0;
+  }
 }
 @-moz-keyframes blink {
   0%, 50% {
