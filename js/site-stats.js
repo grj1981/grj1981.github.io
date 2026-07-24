@@ -1,15 +1,16 @@
-// Site statistics powered by the ByteFisher TiDB API.
+// Fast footer statistics with a static snapshot and async event reporting.
 'use strict';
 
 (function() {
   var API_URL = 'https://api.bytefisher.top/api/site-stats';
-  var LOCAL_API_URL = '/api/site-stats-local.json';
+  var EVENT_URL = 'https://api.bytefisher.top/api/site-stats-event';
+  var SNAPSHOT_URL = '/api/site-stats-local.json';
   var VISITOR_KEY = 'bytefisher_site_visitor';
   var LAST_STATS_KEY = 'bytefisher_site_stats';
   var TIMEOUT_MS = 4000;
-  var RETRIES = 1;
   var CACHE_TTL_MS = 10 * 60 * 1000;
   var REFRESH_INTERVAL_MS = 10 * 60 * 1000;
+  var liveStatsRendered = false;
 
   function getCounter(id) {
     return document.getElementById(id);
@@ -50,7 +51,7 @@
       var id = randomId();
       localStorage.setItem(VISITOR_KEY, id);
       return id;
-    } catch (err) {
+    } catch (error) {
       return randomId();
     }
   }
@@ -65,46 +66,57 @@
     try {
       var payload = JSON.parse(localStorage.getItem(LAST_STATS_KEY) || '');
       return payload && payload.uv >= 0 && payload.pv >= 0 ? payload : null;
-    } catch (err) {
+    } catch (error) {
       return null;
     }
   }
 
-  function isCacheFresh() {
-    try {
-      var payload = JSON.parse(localStorage.getItem(LAST_STATS_KEY) || '');
-      return payload && payload.ts && (Date.now() - payload.ts < CACHE_TTL_MS);
-    } catch (err) {
-      return false;
-    }
+  function isCacheFresh(payload) {
+    return !!(payload && payload.ts && (Date.now() - payload.ts < CACHE_TTL_MS));
   }
 
-  function renderStats(data) {
+  function renderStats(data, persist) {
+    if (!data || data.uv == null || data.pv == null) return;
+
     setText('site_stats_value_uv', formatNumber(data.uv));
     setText('site_stats_value_pv', formatNumber(data.pv));
+
+    if (!persist) return;
     try {
       localStorage.setItem(LAST_STATS_KEY, JSON.stringify({
         uv: Number(data.uv),
         pv: Number(data.pv),
         ts: Date.now()
       }));
-    } catch (err) {}
+    } catch (error) {}
   }
 
-  function requestStats(visitor, view, attempt) {
-    var requestUrl = API_URL +
-      '?visitor=' + encodeURIComponent(visitor) +
-      '&view=' + encodeURIComponent(view) +
-      '&path=' + encodeURIComponent(location.pathname);
+  function fetchSnapshot() {
+    return fetch(SNAPSHOT_URL, { cache: 'no-cache' })
+      .then(function(res) {
+        if (!res.ok) throw new Error('Snapshot HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function(payload) {
+        if (!liveStatsRendered && payload && !payload.errno && payload.data) {
+          renderStats(payload.data, true);
+        }
+      })
+      .catch(function() {});
+  }
+
+  function refreshStats(force) {
+    var cached = readLastStats();
+    if (!force && isCacheFresh(cached)) return Promise.resolve();
+
     var controller = window.AbortController ? new AbortController() : null;
     var timer = controller ? setTimeout(function() {
       controller.abort();
     }, TIMEOUT_MS) : null;
 
-    return fetch(requestUrl, {
+    return fetch(API_URL, {
       method: 'GET',
       mode: 'cors',
-      cache: 'no-store',
       signal: controller ? controller.signal : undefined
     })
       .then(function(res) {
@@ -115,63 +127,77 @@
         if (!payload || payload.errno || !payload.data) {
           throw new Error('Invalid stats response');
         }
-        renderStats(payload.data);
+        liveStatsRendered = true;
+        renderStats(payload.data, true);
       })
       .catch(function(error) {
-        if (attempt < RETRIES) {
-          return new Promise(function(resolve) {
-            setTimeout(resolve, 500 * Math.pow(2, attempt));
-          }).then(function() {
-            return requestStats(visitor, view, attempt + 1);
-          });
-        }
-        throw error;
+        console.warn('Live site stats unavailable:', error);
       })
       .finally(function() {
         if (timer) clearTimeout(timer);
       });
   }
 
-  function loadStats() {
+  function postVisitEvent() {
+    if (isLocalPreview()) return;
+
+    var body = new URLSearchParams({
+      visitor: getVisitorId(),
+      view: randomId(),
+      path: location.pathname
+    }).toString();
+
+    if (navigator.sendBeacon && window.Blob) {
+      var queued = navigator.sendBeacon(
+        EVENT_URL,
+        new Blob([body], {
+          type: 'application/x-www-form-urlencoded;charset=UTF-8'
+        })
+      );
+      if (queued) return;
+    }
+
+    fetch(EVENT_URL, {
+      method: 'POST',
+      mode: 'cors',
+      keepalive: true,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+      },
+      body: body
+    }).catch(function() {});
+  }
+
+  function loadPageStats() {
     showContainer('site_stats_container_uv');
     showContainer('site_stats_container_pv');
 
-    var lastStats = readLastStats();
-    if (lastStats) renderStats(lastStats);
+    var cached = readLastStats();
+    if (cached) {
+      renderStats(cached, false);
+    } else {
+      fetchSnapshot();
+    }
 
-    if (isCacheFresh()) return;
-
-    var isLocal = isLocalPreview();
-    var visitor = getVisitorId();
-    var view = randomId();
-    requestStats(visitor, view, 0).catch(function(error) {
-      console.warn('Site stats unavailable:', error);
-      if (!lastStats) setText('site_stats_value_uv', '-');
-      if (!lastStats) setText('site_stats_value_pv', '-');
-      if (isLocal) {
-        fetch(LOCAL_API_URL, { cache: 'no-store' })
-          .then(function(res) { return res.json(); })
-          .then(function(payload) {
-            if (payload && !payload.errno && payload.data) renderStats(payload.data);
-          })
-          .catch(function() {});
-      }
-    });
+    postVisitEvent();
+    refreshStats(false);
   }
 
   function bindPjax() {
     if (window.__bytefisherSiteStatsBound) return;
     window.__bytefisherSiteStatsBound = true;
-    window.addEventListener('pjax:success', loadStats);
+    window.addEventListener('pjax:success', loadPageStats);
   }
 
   function startAutoRefresh() {
     if (window.__bytefisherStatsTimer) return;
-    window.__bytefisherStatsTimer = setInterval(loadStats, REFRESH_INTERVAL_MS);
+    window.__bytefisherStatsTimer = setInterval(function() {
+      refreshStats(true);
+    }, REFRESH_INTERVAL_MS);
   }
 
   function init() {
-    loadStats();
+    loadPageStats();
     bindPjax();
     startAutoRefresh();
   }

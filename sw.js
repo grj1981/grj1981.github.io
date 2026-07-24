@@ -1,4 +1,4 @@
-// v20260617 - force SW update, add clients.claim
+// v20260724 - keep statistics assets fresh after deploys
 var CACHE_NAME = 'bytefisher-' + Date.now();
 var urlsToCache = [
   '/',
@@ -45,11 +45,14 @@ self.addEventListener('fetch', function(event) {
   var isCSS = /\.css(\?|$)/.test(req.url);
   var isHTML = req.headers.get('Accept') && req.headers.get('Accept').indexOf('text/html') !== -1;
   var isAIAssistant = /\/js\/ai-assistant\.js(\?|$)/.test(req.url);
+  var isSiteStats = /\/js\/site-stats\.js(\?|$)/.test(req.url) ||
+    /\/api\/site-stats-local\.json(\?|$)/.test(req.url);
 
-  // Network-first for HTML, CSS, and AI assistant script (fresh UI after deploy)
-  if (isHTML || isCSS || isAIAssistant) {
+  // Network-first for deploy-sensitive UI assets.
+  if (isHTML || isCSS || isAIAssistant || isSiteStats) {
+    var networkRequest = isSiteStats ? new Request(req, { cache: 'no-store' }) : req;
     event.respondWith(
-      fetch(req).then(function(res) {
+      fetch(networkRequest).then(function(res) {
         var copy = res.clone();
         caches.open(CACHE_NAME).then(function(cache) { cache.put(req, copy); });
         return res;
