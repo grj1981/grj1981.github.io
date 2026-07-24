@@ -8,9 +8,14 @@
   var VISITOR_KEY = 'bytefisher_site_visitor';
   var LAST_STATS_KEY = 'bytefisher_site_stats';
   var TIMEOUT_MS = 4000;
+  var EVENT_TIMEOUT_MS = 10000;
   var CACHE_TTL_MS = 10 * 60 * 1000;
   var REFRESH_INTERVAL_MS = 10 * 60 * 1000;
-  var liveStatsRendered = false;
+  var authoritativeStats = null;
+  var pendingPv = 0;
+  var pendingUv = 0;
+  var fallbackVisitorId = null;
+  var eventQueue = Promise.resolve();
 
   function getCounter(id) {
     return document.getElementById(id);
@@ -43,16 +48,22 @@
     return String(Date.now()) + Math.random().toString(36).slice(2, 18);
   }
 
-  function getVisitorId() {
+  function getVisitorIdentity() {
     try {
       var existing = localStorage.getItem(VISITOR_KEY);
-      if (existing) return existing;
+      if (existing) {
+        return { id: existing, isNew: false };
+      }
 
       var id = randomId();
       localStorage.setItem(VISITOR_KEY, id);
-      return id;
+      return { id: id, isNew: true };
     } catch (error) {
-      return randomId();
+      if (!fallbackVisitorId) {
+        fallbackVisitorId = randomId();
+        return { id: fallbackVisitorId, isNew: true };
+      }
+      return { id: fallbackVisitorId, isNew: false };
     }
   }
 
@@ -75,17 +86,43 @@
     return !!(payload && payload.ts && (Date.now() - payload.ts < CACHE_TTL_MS));
   }
 
-  function renderStats(data, persist) {
-    if (!data || data.uv == null || data.pv == null) return;
+  function normalizeStats(data) {
+    if (!data || data.uv == null || data.pv == null) return null;
+    var uv = Number(data.uv);
+    var pv = Number(data.pv);
+    if (!Number.isFinite(uv) || !Number.isFinite(pv) || uv < 0 || pv < 0) {
+      return null;
+    }
+    return { uv: uv, pv: pv };
+  }
 
-    setText('site_stats_value_uv', formatNumber(data.uv));
-    setText('site_stats_value_pv', formatNumber(data.pv));
+  function renderCurrentStats() {
+    if (!authoritativeStats) return;
+
+    setText('site_stats_value_uv', formatNumber(authoritativeStats.uv + pendingUv));
+    setText('site_stats_value_pv', formatNumber(authoritativeStats.pv + pendingPv));
+  }
+
+  function setAuthoritativeStats(data, persist) {
+    var normalized = normalizeStats(data);
+    if (!normalized) return;
+
+    if (authoritativeStats) {
+      authoritativeStats = {
+        uv: Math.max(authoritativeStats.uv, normalized.uv),
+        pv: Math.max(authoritativeStats.pv, normalized.pv)
+      };
+    } else {
+      authoritativeStats = normalized;
+    }
+
+    renderCurrentStats();
 
     if (!persist) return;
     try {
       localStorage.setItem(LAST_STATS_KEY, JSON.stringify({
-        uv: Number(data.uv),
-        pv: Number(data.pv),
+        uv: authoritativeStats.uv,
+        pv: authoritativeStats.pv,
         ts: Date.now()
       }));
     } catch (error) {}
@@ -98,8 +135,8 @@
         return res.json();
       })
       .then(function(payload) {
-        if (!liveStatsRendered && payload && !payload.errno && payload.data) {
-          renderStats(payload.data, true);
+        if (payload && !payload.errno && payload.data) {
+          setAuthoritativeStats(payload.data, true);
         }
       })
       .catch(function() {});
@@ -114,9 +151,11 @@
       controller.abort();
     }, TIMEOUT_MS) : null;
 
-    return fetch(API_URL, {
+    var url = force ? API_URL + '?t=' + Date.now() : API_URL;
+    return fetch(url, {
       method: 'GET',
       mode: 'cors',
+      cache: force ? 'no-store' : 'default',
       signal: controller ? controller.signal : undefined
     })
       .then(function(res) {
@@ -127,8 +166,7 @@
         if (!payload || payload.errno || !payload.data) {
           throw new Error('Invalid stats response');
         }
-        liveStatsRendered = true;
-        renderStats(payload.data, true);
+        setAuthoritativeStats(payload.data, true);
       })
       .catch(function(error) {
         console.warn('Live site stats unavailable:', error);
@@ -138,34 +176,111 @@
       });
   }
 
-  function postVisitEvent() {
-    if (isLocalPreview()) return;
-
-    var body = new URLSearchParams({
-      visitor: getVisitorId(),
+  function createVisitEvent() {
+    var visitor = getVisitorIdentity();
+    return {
+      visitor: visitor.id,
       view: randomId(),
-      path: location.pathname
+      path: location.pathname,
+      uvIncrement: visitor.isNew ? 1 : 0
+    };
+  }
+
+  function getEventBody(event) {
+    return new URLSearchParams({
+      visitor: event.visitor,
+      view: event.view,
+      path: event.path
     }).toString();
+  }
 
-    if (navigator.sendBeacon && window.Blob) {
-      var queued = navigator.sendBeacon(
-        EVENT_URL,
-        new Blob([body], {
-          type: 'application/x-www-form-urlencoded;charset=UTF-8'
-        })
-      );
-      if (queued) return;
-    }
+  function addPendingEvent(event) {
+    event.pending = true;
+    pendingPv += 1;
+    pendingUv += event.uvIncrement;
+    renderCurrentStats();
+  }
 
-    fetch(EVENT_URL, {
+  function settlePendingEvent(event) {
+    if (!event.pending) return;
+    event.pending = false;
+    pendingPv = Math.max(0, pendingPv - 1);
+    pendingUv = Math.max(0, pendingUv - event.uvIncrement);
+    renderCurrentStats();
+  }
+
+  function queueBeacon(event) {
+    if (!navigator.sendBeacon || !window.Blob) return false;
+    return navigator.sendBeacon(
+      EVENT_URL,
+      new Blob([getEventBody(event)], {
+        type: 'application/x-www-form-urlencoded;charset=UTF-8'
+      })
+    );
+  }
+
+  function sendVisitEvent(event) {
+    var controller = window.AbortController ? new AbortController() : null;
+    var timer = controller ? setTimeout(function() {
+      controller.abort();
+    }, EVENT_TIMEOUT_MS) : null;
+
+    return fetch(EVENT_URL, {
       method: 'POST',
       mode: 'cors',
       keepalive: true,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
       },
-      body: body
-    }).catch(function() {});
+      body: getEventBody(event),
+      signal: controller ? controller.signal : undefined
+    })
+      .then(function(res) {
+        if (!res.ok) throw new Error('Event HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function(payload) {
+        settlePendingEvent(event);
+        if (payload && !payload.errno && payload.data &&
+            payload.data.pv != null && payload.data.uv != null) {
+          setAuthoritativeStats(payload.data, true);
+          return;
+        }
+        return refreshStats(true);
+      })
+      .catch(function(error) {
+        if (queueBeacon(event)) {
+          return new Promise(function(resolve) {
+            setTimeout(resolve, 1500);
+          }).then(function() {
+            return refreshStats(true);
+          }).finally(function() {
+            settlePendingEvent(event);
+          });
+        }
+
+        settlePendingEvent(event);
+        console.warn('Site stats event unavailable:', error);
+        return refreshStats(true);
+      })
+      .finally(function() {
+        if (timer) clearTimeout(timer);
+      });
+  }
+
+  function postVisitEvent() {
+    if (isLocalPreview()) return;
+
+    var event = createVisitEvent();
+    addPendingEvent(event);
+    eventQueue = eventQueue
+      .then(function() {
+        return sendVisitEvent(event);
+      })
+      .catch(function(error) {
+        settlePendingEvent(event);
+        console.warn('Site stats event queue failed:', error);
+      });
   }
 
   function loadPageStats() {
@@ -174,13 +289,16 @@
 
     var cached = readLastStats();
     if (cached) {
-      renderStats(cached, false);
+      setAuthoritativeStats(cached, false);
     } else {
       fetchSnapshot();
     }
 
-    postVisitEvent();
-    refreshStats(false);
+    if (isLocalPreview()) {
+      refreshStats(false);
+    } else {
+      postVisitEvent();
+    }
   }
 
   function bindPjax() {
@@ -192,7 +310,7 @@
   function startAutoRefresh() {
     if (window.__bytefisherStatsTimer) return;
     window.__bytefisherStatsTimer = setInterval(function() {
-      refreshStats(true);
+      if (pendingPv === 0) refreshStats(true);
     }, REFRESH_INTERVAL_MS);
   }
 
