@@ -40,7 +40,7 @@
 <meta property="og:description" content="Unity3D、高级: 入门系列第 07-08 篇介绍了 PhysX 引擎的基础——Rigidbody、Collider、碰撞事件。当游戏需要 非标准碰撞形状、自定义物理材质、大规模碰撞检测、或 超越 PhysX 的功能 时，内置物理引擎就不够了。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-09-07T12:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-24T04:57:08.038Z">
+<meta property="article:modified_time" content="2026-07-24T05:26:13.883Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="Unity3D">
 <meta property="article:tag" content="series:Unity3D进阶教程">
@@ -50,7 +50,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/09/07/Unity3D%E8%BF%9B%E9%98%B6%E6%95%99%E7%A8%8B-19-%E9%AB%98%E7%BA%A7%E7%89%A9%E7%90%86%E4%B8%8E%E8%87%AA%E5%AE%9A%E4%B9%89%E7%A2%B0%E6%92%9E/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Unity3D 进阶教程 - 19 高级物理与自定义碰撞","description":"Unity3D、高级: 入门系列第 07-08 篇介绍了 PhysX 引擎的基础——Rigidbody、Collider、碰撞事件。当游戏需要 非标准碰撞形状、自定义物理材质、大规模碰撞检测、或 超越 PhysX 的功能 时，内置物理引擎就不够了。","url":"https://www.bytefisher.top/2025/09/07/Unity3D进阶教程-19-高级物理与自定义碰撞/","datePublished":"2025-09-07T12:00:00.000Z","dateModified":"2026-07-24T04:57:08.038Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/09/07/Unity3D进阶教程-19-高级物理与自定义碰撞/"},"keywords":"Unity3D, 高级, series:Unity3D进阶教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Unity3D 进阶教程 - 19 高级物理与自定义碰撞","description":"Unity3D、高级: 入门系列第 07-08 篇介绍了 PhysX 引擎的基础——Rigidbody、Collider、碰撞事件。当游戏需要 非标准碰撞形状、自定义物理材质、大规模碰撞检测、或 超越 PhysX 的功能 时，内置物理引擎就不够了。","url":"https://www.bytefisher.top/2025/09/07/Unity3D进阶教程-19-高级物理与自定义碰撞/","datePublished":"2025-09-07T12:00:00.000Z","dateModified":"2026-07-24T05:26:13.883Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/09/07/Unity3D进阶教程-19-高级物理与自定义碰撞/"},"keywords":"Unity3D, 高级, series:Unity3D进阶教程"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Unity3D","item":"https://www.bytefisher.top/categories/Unity3D/"},{"@type":"ListItem","position":3,"name":"Unity3D 进阶教程 - 19 高级物理与自定义碰撞"}]}</script>
 
 
@@ -616,7 +616,7 @@
           <span id="site_stats_value_pv">-</span>
       </span>
     </span>
-  <script src="/js/site-stats.js?v=20260724-live-feedback"></script>
+  <script src="/js/site-stats.js?v=20260724-mobile-cache"></script>
 </div>
 
 
@@ -902,7 +902,9 @@ window.addEventListener('pjax:success', () => {
 
 <script data-pjax>
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js').then(function(reg) {
+  navigator.serviceWorker.register('/sw.js?v=20260724-mobile-cache', {
+    updateViaCache: 'none'
+  }).then(function(reg) {
     reg.update(); // Force SW update check on each page load
   });
 }

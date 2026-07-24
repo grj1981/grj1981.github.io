@@ -1,5 +1,7 @@
-// v20260724 - keep statistics assets fresh after deploys
-var CACHE_NAME = 'bytefisher-' + Date.now();
+// Stable cache version: bump this value when cache behavior or core assets change.
+var CACHE_VERSION = '20260724-mobile-cache';
+var CACHE_PREFIX = 'bytefisher-';
+var CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
 var urlsToCache = [
   '/',
   '/css/main.css',
@@ -21,7 +23,11 @@ self.addEventListener('activate', function(event) {
   event.waitUntil(
     caches.keys().then(function(keys) {
       return Promise.all(
-        keys.filter(function(k) { return k !== CACHE_NAME; }).map(function(k) { return caches.delete(k); })
+        keys.filter(function(k) {
+          return k.indexOf(CACHE_PREFIX) === 0 && k !== CACHE_NAME;
+        }).map(function(k) {
+          return caches.delete(k);
+        })
       );
     }).then(function() {
       return self.clients.claim();
