@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="preconnect" href="https://fonts.loli.net">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://img.bytefisher.top">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#37c6c0">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#37c6c0">
+
+<meta http-equiv="Permissions-Policy" content="encrypted-media=*">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="codeva-7SG6ROHyTg">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"></noscript>
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
+
+  <meta name="description" content="本系列第15篇，共21篇。实战讲解如何用 AI 进行数据分析和可视化，涵盖 CSV&#x2F;Excel 文件处理、数据清洗统计、图表生成和自然语言查数据。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ByteFisher AI 编程实战（十五）：AI数据分析与可视化">
+<meta property="og:url" content="https://www.bytefisher.top/2026/07/27/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-15-AI%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E5%8F%AF%E8%A7%86%E5%8C%96/">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="本系列第15篇，共21篇。实战讲解如何用 AI 进行数据分析和可视化，涵盖 CSV&#x2F;Excel 文件处理、数据清洗统计、图表生成和自然语言查数据。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-07-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-07-26T17:10:48.599Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="series:ByteFisher AI编程实战教程">
+<meta property="article:tag" content="教程">
+<meta name="twitter:card" content="summary">
+  <meta name="keywords" content="AI数据分析,数据可视化,Python,CSV处理,图表生成,自然语言查询,Matplotlib,淡水鱼,ByteFisher">
+
+<link rel="canonical" href="https://www.bytefisher.top/2026/07/27/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-15-AI%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E5%8F%AF%E8%A7%86%E5%8C%96/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"ByteFisher AI 编程实战（十五）：AI数据分析与可视化","description":"本系列第15篇，共21篇。实战讲解如何用 AI 进行数据分析和可视化，涵盖 CSV/Excel 文件处理、数据清洗统计、图表生成和自然语言查数据。","url":"https://www.bytefisher.top/2026/07/27/ByteFisher-AI编程实战-15-AI数据分析与可视化/","datePublished":"2026-07-26T16:00:00.000Z","dateModified":"2026-07-26T17:10:48.599Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/07/27/ByteFisher-AI编程实战-15-AI数据分析与可视化/"},"keywords":"AI, 教程, series:ByteFisher AI编程实战教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"AI","item":"https://www.bytefisher.top/categories/AI/"},{"@type":"ListItem","position":3,"name":"ByteFisher AI 编程实战（十五）：AI数据分析与可视化"}]}</script>
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ByteFisher AI 编程实战（十五）：AI数据分析与可视化 | ByteFisher</title>
+  
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dc50e0997d43c3a8dbf2afdb3fdff233";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#37c6c0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-tutorials">
+
+    <a href="/tutorials/" rel="section"><i class="fa fa-book fa-fw"></i>教程<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>钓鱼专题<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-aigames">
+
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">54</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">247</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>rss</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/07/27/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-15-AI%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E5%8F%AF%E8%A7%86%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.webp">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ByteFisher AI 编程实战（十五）：AI数据分析与可视化
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-07-27 00:00:00" itemprop="dateCreated datePublished" datetime="2026-07-27T00:00:00+08:00">2026-07-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2026/07/27/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-15-AI%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E5%8F%AF%E8%A7%86%E5%8C%96/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2026/07/27/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-15-AI%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E5%8F%AF%E8%A7%86%E5%8C%96/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">本系列第15篇，共21篇。实战讲解如何用 AI 进行数据分析和可视化，涵盖 CSV/Excel 文件处理、数据清洗统计、图表生成和自然语言查数据。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>数据分析也是 AI 的强项。不懂 Python 的 Excel 用户可以用自然语言分析数据，而开发者则可以用 AI 把数据分析效率提升数倍。</p>
+<span id="more"></span>
+
+<h2 id="一、AI-数据分析的核心场景"><a href="#一、AI-数据分析的核心场景" class="headerlink" title="一、AI 数据分析的核心场景"></a>一、AI 数据分析的核心场景</h2><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>传统方式</th>
+<th>AI 辅助方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据清洗</td>
+<td>手写正则和替换规则，耗时长</td>
+<td>自然语言描述清洗规则，AI 生成完整代码</td>
+</tr>
+<tr>
+<td>统计分析</td>
+<td>记忆各种统计函数和参数</td>
+<td>描述分析目标即可，AI 选择合适方法</td>
+</tr>
+<tr>
+<td>图表生成</td>
+<td>查阅 Matplotlib 文档逐行写代码</td>
+<td>AI 生成完整绘图代码，含中文配置</td>
+</tr>
+<tr>
+<td>SQL 查询</td>
+<td>手写复杂 SQL，多层嵌套容易出错</td>
+<td>自然语言转 SQL，准确率&gt;90%</td>
+</tr>
+<tr>
+<td>报告生成</td>
+<td>手动整理结论和图表</td>
+<td>AI 综合分析结果，自动生成报告</td>
+</tr>
+</tbody></table>
+<h2 id="二、CSV-Excel-数据处理"><a href="#二、CSV-Excel-数据处理" class="headerlink" title="二、CSV&#x2F;Excel 数据处理"></a>二、CSV&#x2F;Excel 数据处理</h2><h3 id="2-1-用-AI-加载和预览数据"><a href="#2-1-用-AI-加载和预览数据" class="headerlink" title="2.1 用 AI 加载和预览数据"></a>2.1 用 AI 加载和预览数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># AI 生成的代码：</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">&quot;sales.csv&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;数据集形状:&quot;</span>, df.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;列名:&quot;</span>, df.columns.tolist())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;前 5 行:&quot;</span>, df.head())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;数据类型:&quot;</span>, df.dtypes)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;基本统计:&quot;</span>, df.describe())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;非空值统计:&quot;</span>, df.count())</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-数据清洗"><a href="#2-2-数据清洗" class="headerlink" title="2.2 数据清洗"></a>2.2 数据清洗</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">对 sales.csv 进行数据清洗：</span><br><span class="line">1. 删除&quot;备注&quot;列（全是空值）</span><br><span class="line">2. &quot;金额&quot;列中的符号去掉，转为浮点数</span><br><span class="line">3. &quot;日期&quot;列转为 datetime 类型</span><br><span class="line">4. &quot;数量&quot;列中的负值替换为 0</span><br></pre></td></tr></table></figure>
+
+<p>AI 生成的清洗代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">df = pd.read_csv(<span class="string">&quot;sales.csv&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 删除全空列</span></span><br><span class="line">df = df.drop(columns=[<span class="string">&quot;备注&quot;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 金额列去符号转浮点</span></span><br><span class="line">df[<span class="string">&quot;金额&quot;</span>] = df[<span class="string">&quot;金额&quot;</span>].apply(</span><br><span class="line">    <span class="keyword">lambda</span> x: <span class="built_in">float</span>(re.sub(<span class="string">r&#x27;[￥$,]&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="built_in">str</span>(x)))</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 日期列转换</span></span><br><span class="line">df[<span class="string">&quot;日期&quot;</span>] = pd.to_datetime(df[<span class="string">&quot;日期&quot;</span>], <span class="built_in">format</span>=<span class="string">&quot;%Y-%m-%d&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 负数量替换为 0</span></span><br><span class="line">df[<span class="string">&quot;数量&quot;</span>] = df[<span class="string">&quot;数量&quot;</span>].clip(lower=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;清洗完成，剩余行数:&quot;</span>, <span class="built_in">len</span>(df))</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-高级数据操作"><a href="#2-3-高级数据操作" class="headerlink" title="2.3 高级数据操作"></a>2.3 高级数据操作</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">对清洗后的数据做聚合分析：</span><br><span class="line">1. 按月份统计总销售额和订单数</span><br><span class="line">2. 找出销售额前 5 的产品</span><br><span class="line">3. 计算每个用户的平均订单金额</span><br><span class="line">4. 标注每个用户的消费等级（高/中/低）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 月度统计</span></span><br><span class="line">df[<span class="string">&quot;月份&quot;</span>] = df[<span class="string">&quot;日期&quot;</span>].dt.to_period(<span class="string">&quot;M&quot;</span>)</span><br><span class="line">monthly = df.groupby(<span class="string">&quot;月份&quot;</span>).agg(</span><br><span class="line">    总销售额=(<span class="string">&quot;金额&quot;</span>, <span class="string">&quot;sum&quot;</span>),</span><br><span class="line">    订单数=(<span class="string">&quot;订单ID&quot;</span>, <span class="string">&quot;count&quot;</span>)</span><br><span class="line">).reset_index()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 热销产品</span></span><br><span class="line">top_products = df.groupby(<span class="string">&quot;产品名称&quot;</span>).agg(</span><br><span class="line">    销售额=(<span class="string">&quot;金额&quot;</span>, <span class="string">&quot;sum&quot;</span>),</span><br><span class="line">    销量=(<span class="string">&quot;数量&quot;</span>, <span class="string">&quot;sum&quot;</span>)</span><br><span class="line">).sort_values(<span class="string">&quot;销售额&quot;</span>, ascending=<span class="literal">False</span>).head(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 用户平均消费</span></span><br><span class="line">user_avg = df.groupby(<span class="string">&quot;用户ID&quot;</span>)[<span class="string">&quot;金额&quot;</span>].mean().reset_index()</span><br><span class="line">user_avg.columns = [<span class="string">&quot;用户ID&quot;</span>, <span class="string">&quot;平均订单金额&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 消费等级</span></span><br><span class="line">df[<span class="string">&quot;消费等级&quot;</span>] = pd.qcut(df[<span class="string">&quot;金额&quot;</span>], q=<span class="number">3</span>, labels=[<span class="string">&quot;低&quot;</span>, <span class="string">&quot;中&quot;</span>, <span class="string">&quot;高&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、图表生成"><a href="#三、图表生成" class="headerlink" title="三、图表生成"></a>三、图表生成</h2><h3 id="3-1-基础图表"><a href="#3-1-基础图表" class="headerlink" title="3.1 基础图表"></a>3.1 基础图表</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">基于 sales.csv 生成以下图表：</span><br><span class="line">1. 折线图：每月销售额趋势</span><br><span class="line">2. 柱状图：各产品销量对比</span><br><span class="line">3. 饼图：各分类销售额占比</span><br><span class="line"></span><br><span class="line">要求：使用 Matplotlib，中文标签，保存为 PNG</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line">matplotlib.rcParams[<span class="string">&#x27;font.sans-serif&#x27;</span>] = [<span class="string">&#x27;SimHei&#x27;</span>]</span><br><span class="line">matplotlib.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 每月销售额折线图</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">plt.plot(monthly[<span class="string">&quot;月份&quot;</span>].astype(<span class="built_in">str</span>), monthly[<span class="string">&quot;总销售额&quot;</span>], </span><br><span class="line">         marker=<span class="string">&#x27;o&#x27;</span>, linewidth=<span class="number">2</span>, color=<span class="string">&#x27;#4F46E5&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&quot;每月销售额趋势&quot;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&quot;月份&quot;</span>); plt.ylabel(<span class="string">&quot;销售额（元）&quot;</span>)</span><br><span class="line">plt.xticks(rotation=<span class="number">45</span>)</span><br><span class="line">plt.grid(alpha=<span class="number">0.3</span>)</span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.savefig(<span class="string">&quot;monthly_sales.png&quot;</span>, dpi=<span class="number">150</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 产品销量柱状图（略）</span></span><br><span class="line"><span class="comment"># 3. 分类占比饼图（略）</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-高级可视化"><a href="#3-2-高级可视化" class="headerlink" title="3.2 高级可视化"></a>3.2 高级可视化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">生成一个仪表盘风格的图表组合：</span><br><span class="line">- 左上方：KPI 卡片（总销售额、订单数、客单价、同比）</span><br><span class="line">- 左下方：销售额趋势折线图</span><br><span class="line">- 右上方：产品销量排行柱状图</span><br><span class="line">- 右下方：分类占比环形图</span><br></pre></td></tr></table></figure>
+
+<p>AI 会生成多子图的组合图表代码，使用 <code>plt.subplots</code> 或 <code>GridSpec</code> 实现仪表盘布局。在 Cursor 中，你可以直接用自然语言描述想看到的可视化效果，AI 会生成对应的 Python 代码。</p>
+<h2 id="四、自然语言查询数据"><a href="#四、自然语言查询数据" class="headerlink" title="四、自然语言查询数据"></a>四、自然语言查询数据</h2><h3 id="4-1-SQL-生成"><a href="#4-1-SQL-生成" class="headerlink" title="4.1 SQL 生成"></a>4.1 SQL 生成</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">表结构：</span><br><span class="line">orders(id, user_id, product_id, amount, created_at, status)</span><br><span class="line">products(id, name, category, price)</span><br><span class="line"></span><br><span class="line">查询：</span><br><span class="line">1. 每个分类的销售总额（按金额降序）</span><br><span class="line">2. 过去 30 天每天的下单人数</span><br><span class="line">3. 购买次数最多的前 10 名用户</span><br></pre></td></tr></table></figure>
+
+<p>AI 生成：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 1. 分类销售总额</span></span><br><span class="line"><span class="keyword">SELECT</span> p.category, <span class="built_in">SUM</span>(o.amount) <span class="keyword">AS</span> total_sales</span><br><span class="line"><span class="keyword">FROM</span> orders o <span class="keyword">JOIN</span> products p <span class="keyword">ON</span> o.product_id <span class="operator">=</span> p.id</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> p.category <span class="keyword">ORDER</span> <span class="keyword">BY</span> total_sales <span class="keyword">DESC</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 2. 过去 30 天每日下单人数</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="type">DATE</span>(created_at) <span class="keyword">AS</span> <span class="keyword">day</span>, <span class="built_in">COUNT</span>(<span class="keyword">DISTINCT</span> user_id) <span class="keyword">AS</span> users</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br><span class="line"><span class="keyword">WHERE</span> created_at <span class="operator">&gt;=</span> <span class="type">DATE</span>(<span class="string">&#x27;now&#x27;</span>, <span class="string">&#x27;-30 days&#x27;</span>)</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="type">DATE</span>(created_at) <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">day</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 3. 购买次数最多的前 10 名用户</span></span><br><span class="line"><span class="keyword">SELECT</span> user_id, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> order_count</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> user_id</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> order_count <span class="keyword">DESC</span></span><br><span class="line">LIMIT <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-自然语言转-pandas"><a href="#4-2-自然语言转-pandas" class="headerlink" title="4.2 自然语言转 pandas"></a>4.2 自然语言转 pandas</h3><p>如果你更习惯 Python 而非 SQL，也可以用自然语言描述后让 AI 生成 pandas 代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用 pandas 实现：找出过去 30 天复购率最高的商品分类</span><br><span class="line">（复购率 = 购买超过 1 次的用户数 / 总购买用户数）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">recent = df[df[<span class="string">&quot;日期&quot;</span>] &gt;= df[<span class="string">&quot;日期&quot;</span>].<span class="built_in">max</span>() - pd.Timedelta(days=<span class="number">30</span>)]</span><br><span class="line">repurchase = recent.groupby([<span class="string">&quot;分类&quot;</span>, <span class="string">&quot;用户ID&quot;</span>]).size().reset_index(name=<span class="string">&quot;购买次数&quot;</span>)</span><br><span class="line">repurchase[<span class="string">&quot;是否复购&quot;</span>] = repurchase[<span class="string">&quot;购买次数&quot;</span>] &gt; <span class="number">1</span></span><br><span class="line">repurchase_rate = repurchase.groupby(<span class="string">&quot;分类&quot;</span>)[<span class="string">&quot;是否复购&quot;</span>].mean().sort_values(ascending=<span class="literal">False</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;复购率最高的分类：&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(repurchase_rate)</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、报告生成"><a href="#五、报告生成" class="headerlink" title="五、报告生成"></a>五、报告生成</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">基于上面的分析结果，生成一份中文分析报告：</span><br><span class="line">1. 数据概况（数据量、时间范围、整体趋势）</span><br><span class="line">2. 核心发现（3-5 个关键结论）</span><br><span class="line">3. 建议措施</span><br><span class="line"></span><br><span class="line">风格：给业务负责人看的，避免专业术语</span><br></pre></td></tr></table></figure>
+
+<p>AI 生成的不仅仅是代码，还有可直接使用的文字内容：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## 销售数据分析报告</span></span><br><span class="line"></span><br><span class="line"><span class="section">### 数据概况</span></span><br><span class="line"><span class="bullet">-</span> 分析周期：2025年1月 - 2025年12月</span><br><span class="line"><span class="bullet">-</span> 总订单数：12,847 笔</span><br><span class="line"><span class="bullet">-</span> 总销售额：￥3,285,690</span><br><span class="line"><span class="bullet">-</span> 平均客单价：￥255.7</span><br><span class="line"></span><br><span class="line"><span class="section">### 核心发现</span></span><br><span class="line"><span class="bullet">1.</span> <span class="strong">**Q4 销售额增长 35%**</span>：受双十一和年终促销推动</span><br><span class="line"><span class="bullet">2.</span> <span class="strong">**电子配件类贡献最大**</span>：占总销售额的 42%</span><br><span class="line"><span class="bullet">3.</span> <span class="strong">**复购率持续提升**</span>：老用户贡献了 65% 的订单</span><br><span class="line"><span class="bullet">4.</span> <span class="strong">**高价值用户集中在北上广深**</span>：客单价高于均值 2.1 倍</span><br><span class="line"><span class="bullet">5.</span> <span class="strong">**退货率偏高**</span>：服装类退货率达 12%，需关注</span><br><span class="line"></span><br><span class="line"><span class="section">### 建议</span></span><br><span class="line"><span class="bullet">1.</span> 增加高价值用户的专属优惠</span><br><span class="line"><span class="bullet">2.</span> 优化服装类商品详情页，降低退货率</span><br><span class="line"><span class="bullet">3.</span> 拓展二三线城市市场</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、进阶：时间序列分析"><a href="#六、进阶：时间序列分析" class="headerlink" title="六、进阶：时间序列分析"></a>六、进阶：时间序列分析</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">分析过去 12 个月的销售趋势，并预测下 3 个月的销售额：</span><br><span class="line">- 使用 statsmodels 或 Prophet</span><br><span class="line">- 标注节假日效应</span><br><span class="line">- 输出预测区间</span><br><span class="line">- 可视化实际 vs 预测</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> statsmodels.tsa.seasonal <span class="keyword">import</span> seasonal_decompose</span><br><span class="line"><span class="keyword">from</span> statsmodels.tsa.holtwinters <span class="keyword">import</span> ExponentialSmoothing</span><br><span class="line"></span><br><span class="line"><span class="comment"># 月度销售额时间序列</span></span><br><span class="line">ts = monthly.set_index(<span class="string">&quot;月份&quot;</span>)[<span class="string">&quot;总销售额&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 季节性分解</span></span><br><span class="line">decomp = seasonal_decompose(ts, model=<span class="string">&#x27;multiplicative&#x27;</span>)</span><br><span class="line">decomp.plot()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 预测</span></span><br><span class="line">model = ExponentialSmoothing(ts, seasonal_periods=<span class="number">12</span>, </span><br><span class="line">                              trend=<span class="string">&#x27;add&#x27;</span>, seasonal=<span class="string">&#x27;mul&#x27;</span>)</span><br><span class="line">fitted = model.fit()</span><br><span class="line">forecast = fitted.forecast(<span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;下三个月预测销售额：&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(forecast)</span><br></pre></td></tr></table></figure>
+
+<h2 id="本章小结"><a href="#本章小结" class="headerlink" title="本章小结"></a>本章小结</h2><ul>
+<li>数据处理（清洗、筛选、聚合）是 AI 的强项，描述清楚规则即可</li>
+<li>自然语言转 SQL 能大幅降低数据查询门槛，准确率超过 90%</li>
+<li>AI 能生成美观的可视化图表，只需描述意图和要求</li>
+<li>让 AI 生成代码再运行，比直接给结论更可靠——代码可审计、可复现</li>
+<li>进阶用法包括时间序列分析、预测建模等，AI 能选择合适的算法</li>
+<li>数据分析中 AI 最大的价值是缩短”想法 → 结果”的反馈周期</li>
+</ul>
+<p>下一篇看 AI 如何实现自动化工作流。</p>
+
+    </div>
+
+    
+    
+    
+    
+    <div class="post-blog-card" style="margin:1.5em auto 0;padding:.5em .8em;border:1px solid #e8e8e8;border-radius:6px;background:var(--card-bg-color,#fff);display:flex;align-items:center;max-width:400px">
+  <div style="flex:1;min-width:0;text-align:left">
+    <div style="font-size:.8em;font-weight:700;color:#555">ByteFisher</div>
+    <div style="font-size:.68em;color:#999;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">分享编程技术 · 记录钓鱼乐趣</div>
+  </div>
+  <img src="/images/wechat-qcode.webp" alt="扫码关注" style="width:60px;height:60px;border-radius:3px;margin:0 10px;flex-shrink:0">
+  <div style="padding:3px 10px;border:1px solid #fc6423;border-radius:3px;color:#fc6423;font-size:.7em;white-space:nowrap;flex-shrink:0">▸ 扫码关注 ◂</div>
+</div>
+
+    <div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2026/07/23/ByteFisher-AI编程实战-14-AI写作-技术创作新范式/" class="related-post-item" title="ByteFisher AI 编程实战（十四）：AI写作——技术创作新范式"><span class="related-post-title">ByteFisher AI 编程实战（十四）：AI写作——技术创作新范式</span><span class="related-post-date">2026-07-23</span><span class="related-post-desc">本系列第14篇，共21篇。讲解如何用 AI 提升技术写作效率，涵盖 Markdown + AI 工作流、技术博客/API 文档/翻译任务实战，以及与 Hexo 博客的深度融合。</span></a><a href="/2026/07/20/ByteFisher-AI编程实战-13-AI辅助调试-从报错到修复/" class="related-post-item" title="ByteFisher AI 编程实战（十三）：AI辅助调试——从报错到修复"><span class="related-post-title">ByteFisher AI 编程实战（十三）：AI辅助调试——从报错到修复</span><span class="related-post-date">2026-07-20</span><span class="related-post-desc">本系列第13篇，共21篇。实战讲解 AI 辅助调试的技巧和方法，涵盖错误栈解读、调试对话技巧、性能瓶颈分析、复杂 Bug 排查案例。</span></a><a href="/2026/07/16/ByteFisher-AI编程实战-12-AI代码审查与重构/" class="related-post-item" title="ByteFisher AI 编程实战（十二）：AI代码审查与重构"><span class="related-post-title">ByteFisher AI 编程实战（十二）：AI代码审查与重构</span><span class="related-post-date">2026-07-16</span><span class="related-post-desc">本系列第12篇，共21篇。实战讲解如何用 AI 进行代码审查与重构，涵盖安全漏洞检测、性能优化建议、单元测试自动生成和文档自动生成。</span></a><a href="/2026/07/13/ByteFisher-AI编程实战-11-AI辅助Unity开发（下）-完整项目实战/" class="related-post-item" title="ByteFisher AI 编程实战（十一）：AI辅助Unity开发（下）——完整项目实战"><span class="related-post-title">ByteFisher AI 编程实战（十一）：AI辅助Unity开发（下）——完整项目实战</span><span class="related-post-date">2026-07-13</span><span class="related-post-desc">本系列第11篇，共21篇。用 AI 从零构建一个完整的 Unity 游戏项目，涵盖需求分析、项目骨架生成、核心玩法、AI 行为树、UI 界面和性能调优全流程，展示 AI 在游戏开发中的实战价值。</span></a><a href="/2026/07/09/ByteFisher-AI编程实战-10-AI辅助Unity开发（上）-脚本与逻辑/" class="related-post-item" title="ByteFisher AI 编程实战（十）：AI辅助Unity开发（上）——脚本与逻辑"><span class="related-post-title">ByteFisher AI 编程实战（十）：AI辅助Unity开发（上）——脚本与逻辑</span><span class="related-post-date">2026-07-09</span><span class="related-post-desc">本系列第10篇，共21篇。深入实战 AI 辅助 Unity 开发，聚焦 C# 脚本生成、游戏逻辑编写、组件系统交互和动画物理控制，结合 Cursor 和 Copilot 提升 Unity 开发效率。</span></a><a href="/2026/07/06/ByteFisher-AI编程实战-09-AI辅助后端开发/" class="related-post-item" title="ByteFisher AI 编程实战（九）：AI辅助后端开发"><span class="related-post-title">ByteFisher AI 编程实战（九）：AI辅助后端开发</span><span class="related-post-date">2026-07-06</span><span class="related-post-desc">本系列第9篇，共21篇。实战讲解 AI 辅助后端开发，涵盖 Python/Node.js API 生成、数据库设计与 SQL 生成、完整 CRUD 实现和错误处理，帮你快速搭建后端服务。</span></a></div></div>
+    <div class="series-nav"><div class="series-nav-title">ByteFisher AI编程实战教程 系列</div><div class="series-nav-progress">第 15/15 篇</div><div class="series-nav-links"><a href="/2026/07/23/ByteFisher-AI编程实战-14-AI写作-技术创作新范式/" class="series-nav-prev">ByteFisher AI 编程实战（十四）：AI写作——技术创作新范式</a></div></div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/%E6%95%99%E7%A8%8B/" rel="tag"># 教程</a>
+              <a href="/tags/series-ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B/" rel="tag"># series:ByteFisher AI编程实战教程</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/07/23/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-14-AI%E5%86%99%E4%BD%9C-%E6%8A%80%E6%9C%AF%E5%88%9B%E4%BD%9C%E6%96%B0%E8%8C%83%E5%BC%8F/" rel="prev" title="ByteFisher AI 编程实战（十四）：AI写作——技术创作新范式">
+      <i class="fa fa-chevron-left"></i> ByteFisher AI 编程实战（十四）：AI写作——技术创作新范式
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+  <div class="post-share">
+    <span class="post-share-label">分享：</span>
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2026%2F07%2F27%2FByteFisher-AI%25E7%25BC%2596%25E7%25A8%258B%25E5%25AE%259E%25E6%2588%2598-15-AI%25E6%2595%25B0%25E6%258D%25AE%25E5%2588%2586%25E6%259E%2590%25E4%25B8%258E%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%2F&amp;title=ByteFisher%20AI%20%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98%EF%BC%88%E5%8D%81%E4%BA%94%EF%BC%89%EF%BC%9AAI%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E5%8F%AF%E8%A7%86%E5%8C%96" target="_blank" rel="noopener" title="分享到微博">
+      <i class="fab fa-weibo"></i>
+    </a>
+    <a href="#" onclick="navigator.clipboard.writeText(location.href);var t=this;t.innerHTML='<i class=fa fa-check></i>';setTimeout(function(){t.innerHTML='<i class=fa fa-link></i>'},1500);return false" title="复制链接">
+      <i class="fa fa-link"></i>
+    </a>
+  </div>
+
+  
+  <div class="post-author-bio">
+    <div class="post-author-avatar">
+      <img src="/images/avatar2.gif" alt="淡水鱼">
+    </div>
+    <div class="post-author-info">
+      <div class="post-author-name">淡水鱼</div>
+      <div class="post-author-desc">钓鱼爱好者 &amp; Unity 游戏开发者，分享编程技术与钓鱼经验。</div>
+      <div class="post-author-links">
+        <a href="https://github.com/grj1981" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="/atom.xml" title="RSS 订阅"><i class="fa fa-rss"></i></a>
+        <a href="mailto:271623821@qq.com" title="联系我"><i class="fa fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+          </div>
+          
+    <div class="comments" id="waline-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81AI-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9A%84%E6%A0%B8%E5%BF%83%E5%9C%BA%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">一、AI 数据分析的核心场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81CSV-Excel-%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">二、CSV&#x2F;Excel 数据处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E7%94%A8-AI-%E5%8A%A0%E8%BD%BD%E5%92%8C%E9%A2%84%E8%A7%88%E6%95%B0%E6%8D%AE"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 用 AI 加载和预览数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 数据清洗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E9%AB%98%E7%BA%A7%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 高级数据操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%9B%BE%E8%A1%A8%E7%94%9F%E6%88%90"><span class="nav-number">3.</span> <span class="nav-text">三、图表生成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%9F%BA%E7%A1%80%E5%9B%BE%E8%A1%A8"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 基础图表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E9%AB%98%E7%BA%A7%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 高级可视化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">4.</span> <span class="nav-text">四、自然语言查询数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-SQL-%E7%94%9F%E6%88%90"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 SQL 生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E8%BD%AC-pandas"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 自然语言转 pandas</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%8A%A5%E5%91%8A%E7%94%9F%E6%88%90"><span class="nav-number">5.</span> <span class="nav-text">五、报告生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E8%BF%9B%E9%98%B6%EF%BC%9A%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90"><span class="nav-number">6.</span> <span class="nav-text">六、进阶：时间序列分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">本章小结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">247</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+      <div class="site-state-item site-state-tutorials">
+        <a href="/tutorials/">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">教程</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe id="music-player" allow="autoplay; encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.webp">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2023 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+        
+<div class="site-stats-count">
+      <span class="post-meta-item" id="site_stats_container_uv">
+        <span class="post-meta-item-icon">
+          <i class="fa fa-user"></i>
+        </span>
+        <span class="site-uv" title="总访客量">
+          <span id="site_stats_value_uv">-</span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+      <span class="post-meta-item" id="site_stats_container_pv">
+        <span class="post-meta-item-icon">
+          <i class="fa fa-eye"></i>
+        </span>
+        <span class="site-pv" title="总访问量">
+          <span id="site_stats_value_pv">-</span>
+      </span>
+    </span>
+  <script src="/js/site-stats.js?v=20260724-mobile-cache"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+if (!window.matchMedia('(max-width: 767px)').matches) {
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: true,
+  scrollTo : !CONFIG.bookmark.enable
+});
+window._pjax = pjax;
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  NexT.boot.registerEvents();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition(true);
+
+  document.querySelectorAll('.post-block, .pagination, .comments').forEach(function(el) {
+    if (parseFloat(el.style.opacity) === 0) {
+      el.style.opacity = 1;
+    }
+  });
+});
+}
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+    
+
+  
+
+    
+
+    </div>
+
+<link rel="preload" as="style" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css"></noscript>
+<script data-pjax>
+(function() {
+  // 抑制第三方扩展的 notice.avoidance 报错
+  window.addEventListener('error', function(e) {
+    if (e.message && e.message.indexOf('notice.avoidance') !== -1) {
+      e.preventDefault();
+      e.stopPropagation();
+      return true;
+    }
+  });
+
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+
+  function updateCounts() {
+    var countEls = document.querySelectorAll('.waline-visitor-count');
+    if (!countEls.length) return;
+    countEls.forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var url = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(json) {
+          if (json && json.data && json.data[0] && json.data[0].time != null) {
+            el.innerText = json.data[0].time;
+          }
+        }).catch(function(){});
+    });
+  }
+
+  var el = document.querySelector('#waline-comments');
+  if (el) {
+    updateCounts();
+    NexT.utils.loadComments(el, function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2.15.8/dist/waline.js', function() {
+        Waline.init({
+          el: '#waline-comments',
+          serverURL: 'https://waline.bytefisher.top/',
+          path: location.pathname,
+          lang: 'zh-CN' || 'zh-CN',
+          meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
+          requiredMeta: ["nick"] || ['nick'],
+          placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
+          avatar: 'retro' || 'retro',
+          pageSize: 10 || 10,
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
+        });
+        var pathEl = document.querySelector('.waline-visitor-count');
+        var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
+        fetch(baseURL + '/api/article', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: postPath })
+        }).finally(function() {
+          setTimeout(updateCounts, 300);
+        });
+      }, window.Waline);
+    });
+  } else {
+    updateCounts();
+  }
+
+  // Fallback for delayed Waline rendering
+  setTimeout(updateCounts, 2000);
+})();
+</script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="/css/douyin-modal.css">
+<script src="/js/douyin-modal.js" async></script>
+<script src="/js/hero-typing.js" async></script>
+
+<link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
+<script data-pjax>
+(function() {
+  if (document.querySelector('a[data-lightbox]')) {
+    if (!window._lightboxLoaded) {
+      window._lightboxLoaded = true;
+      var s = document.createElement('script');
+      s.src = '/js/lightbox-plus-jquery.min.js';
+      document.body.appendChild(s);
+    }
+  }
+})();
+</script>
+
+<button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
+  <i class="fa fa-moon-o"></i>
+  <i class="fa fa-sun-o"></i>
+</button>
+<script src="/js/darkmode-toggle.js" async></script>
+
+<script data-pjax>
+(function() {
+  function loadAI() {
+    if (window._aiLoaded) return;
+    window._aiLoaded = true;
+    var aiVersion = 'bytebot-20260618-lua-rag-fix';
+    var scripts = ['/js/lib/marked.min.js', '/js/lib/purify.min.js', '/js/ai-assistant.js?v=' + aiVersion];
+    function loadNext() {
+      if (!scripts.length) return;
+      var s = document.createElement('script');
+      s.src = scripts.shift();
+      s.onload = s.onerror = loadNext;
+      document.body.appendChild(s);
+    }
+    loadNext();
+  }
+  if (document.readyState === 'complete') {
+    setTimeout(loadAI, 500);
+  } else {
+    window.addEventListener('load', function() { setTimeout(loadAI, 500); });
+  }
+})();
+</script>
+
+<script data-pjax>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?v=20260724-mobile-cache', {
+    updateViaCache: 'none'
+  }).then(function(reg) {
+    reg.update(); // Force SW update check on each page load
+  });
+}
+</script>
+
+<script src="/js/douyin-pagination.js" async></script>
+<script src="/js/hot-posts-widget.js" async></script>
+
+<div id="mobile-music-player" class="mobile-music-player" aria-hidden="true"></div>
+<link rel="stylesheet" type="text/css" href="/css/mobile-music.css">
+<script src="/js/mobile-music.js" async></script>
+
+</body>
+</html>
