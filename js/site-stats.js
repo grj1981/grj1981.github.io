@@ -2,8 +2,8 @@
 'use strict';
 
 (function() {
-  var API_URL = 'https://api.bytefisher.top/api/site-stats';
-  var EVENT_URL = 'https://api.bytefisher.top/api/site-stats-event';
+  var API_URL = '/api/site-stats';
+  var EVENT_URL = '/api/site-stats-event';
   var SNAPSHOT_URL = '/api/site-stats-local.json';
   var VISITOR_KEY = 'bytefisher_site_visitor';
   var LAST_STATS_KEY = 'bytefisher_site_stats';
@@ -151,10 +151,8 @@
       controller.abort();
     }, TIMEOUT_MS) : null;
 
-    var url = force ? API_URL + '?t=' + Date.now() : API_URL;
-    return fetch(url, {
+    return fetch(API_URL, {
       method: 'GET',
-      mode: 'cors',
       cache: force ? 'no-store' : 'default',
       signal: controller ? controller.signal : undefined
     })
@@ -227,7 +225,6 @@
 
     return fetch(EVENT_URL, {
       method: 'POST',
-      mode: 'cors',
       keepalive: true,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -294,9 +291,7 @@
       fetchSnapshot();
     }
 
-    if (isLocalPreview()) {
-      refreshStats(false);
-    } else {
+    if (!isLocalPreview()) {
       postVisitEvent();
     }
   }
@@ -310,7 +305,7 @@
   function startAutoRefresh() {
     if (window.__bytefisherStatsTimer) return;
     window.__bytefisherStatsTimer = setInterval(function() {
-      if (pendingPv === 0) refreshStats(true);
+      if (!isLocalPreview() && pendingPv === 0) refreshStats(true);
     }, REFRESH_INTERVAL_MS);
   }
 
