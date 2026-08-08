@@ -40,7 +40,7 @@
 <meta property="og:description" content="不蒜子三天两头 503，LeanCloud 国际版延迟 300ms+，商业方案数据不在自己手里——干脆自建。本文从数据库设计到前端统计脚本，从构建时快照到移动端请求拦截，完整记录一套自建博客访问计数系统的技术选型、架构设计和踩坑修复过程。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-07-30T04:00:00.000Z">
-<meta property="article:modified_time" content="2026-08-07T17:01:07.556Z">
+<meta property="article:modified_time" content="2026-08-08T03:14:24.689Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Next主题">
@@ -53,7 +53,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2026/07/30/Hexo-%E5%8D%9A%E5%AE%A2%E8%AE%BF%E9%97%AE%E8%AE%A1%E6%95%B0%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E5%AE%9E%E5%BD%95-TiDB%E5%85%A8%E6%A0%88%E6%96%B9%E6%A1%88%E4%B8%8E%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%B8%A9%E5%9D%91%E8%AE%B0/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo 博客访问计数系统搭建实录：TiDB 全栈方案与移动端踩坑记","description":"不蒜子三天两头 503，LeanCloud 国际版延迟 300ms+，商业方案数据不在自己手里——干脆自建。本文从数据库设计到前端统计脚本，从构建时快照到移动端请求拦截，完整记录一套自建博客访问计数系统的技术选型、架构设计和踩坑修复过程。","url":"https://www.bytefisher.top/2026/07/30/Hexo-博客访问计数系统搭建实录-TiDB全栈方案与移动端踩坑记/","datePublished":"2026-07-30T04:00:00.000Z","dateModified":"2026-08-07T17:01:07.556Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/07/30/Hexo-博客访问计数系统搭建实录-TiDB全栈方案与移动端踩坑记/"},"keywords":"series:Hexo博客搭建, Hexo, Next主题, 博客优化, TiDB, 自建服务"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo 博客访问计数系统搭建实录：TiDB 全栈方案与移动端踩坑记","description":"不蒜子三天两头 503，LeanCloud 国际版延迟 300ms+，商业方案数据不在自己手里——干脆自建。本文从数据库设计到前端统计脚本，从构建时快照到移动端请求拦截，完整记录一套自建博客访问计数系统的技术选型、架构设计和踩坑修复过程。","url":"https://www.bytefisher.top/2026/07/30/Hexo-博客访问计数系统搭建实录-TiDB全栈方案与移动端踩坑记/","datePublished":"2026-07-30T04:00:00.000Z","dateModified":"2026-08-08T03:14:24.689Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/07/30/Hexo-博客访问计数系统搭建实录-TiDB全栈方案与移动端踩坑记/"},"keywords":"series:Hexo博客搭建, Hexo, Next主题, 博客优化, TiDB, 自建服务"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"博客实战","item":"https://www.bytefisher.top/categories/博客实战/"},{"@type":"ListItem","position":3,"name":"Hexo 博客访问计数系统搭建实录：TiDB 全栈方案与移动端踩坑记"}]}</script>
 
 
