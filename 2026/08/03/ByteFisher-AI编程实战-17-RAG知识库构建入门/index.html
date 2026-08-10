@@ -40,7 +40,7 @@
 <meta property="og:description" content="本系列第17篇，共21篇。从零构建 RAG 知识库，讲解 Embedding 和向量数据库的核心概念，用 Chroma 实战搭建个人知识问答系统，让 AI 能访问你的私有数据。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-08-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-08-10T03:41:17.248Z">
+<meta property="article:modified_time" content="2026-08-10T09:06:13.991Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="series:ByteFisher AI编程实战教程">
@@ -50,7 +50,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2026/08/03/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-17-RAG%E7%9F%A5%E8%AF%86%E5%BA%93%E6%9E%84%E5%BB%BA%E5%85%A5%E9%97%A8/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"ByteFisher AI 编程实战（十七）：RAG知识库构建入门","description":"本系列第17篇，共21篇。从零构建 RAG 知识库，讲解 Embedding 和向量数据库的核心概念，用 Chroma 实战搭建个人知识问答系统，让 AI 能访问你的私有数据。","url":"https://www.bytefisher.top/2026/08/03/ByteFisher-AI编程实战-17-RAG知识库构建入门/","datePublished":"2026-08-02T16:00:00.000Z","dateModified":"2026-08-10T03:41:17.248Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/08/03/ByteFisher-AI编程实战-17-RAG知识库构建入门/"},"keywords":"AI, 教程, series:ByteFisher AI编程实战教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"ByteFisher AI 编程实战（十七）：RAG知识库构建入门","description":"本系列第17篇，共21篇。从零构建 RAG 知识库，讲解 Embedding 和向量数据库的核心概念，用 Chroma 实战搭建个人知识问答系统，让 AI 能访问你的私有数据。","url":"https://www.bytefisher.top/2026/08/03/ByteFisher-AI编程实战-17-RAG知识库构建入门/","datePublished":"2026-08-02T16:00:00.000Z","dateModified":"2026-08-10T09:06:13.991Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/08/03/ByteFisher-AI编程实战-17-RAG知识库构建入门/"},"keywords":"AI, 教程, series:ByteFisher AI编程实战教程"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"AI","item":"https://www.bytefisher.top/categories/AI/"},{"@type":"ListItem","position":3,"name":"ByteFisher AI 编程实战（十七）：RAG知识库构建入门"}]}</script>
 
 
@@ -173,7 +173,7 @@
   </li>
         <li class="menu-item menu-item-douyin">
 
-    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">57</span></a>
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">58</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -183,7 +183,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">255</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">256</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -609,8 +609,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2026/08/01/2026-08-01-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E9%9B%A8%E5%B9%95%E9%87%8C%E7%9A%84%E5%8F%98%E9%87%8F/" rel="prev" title="雨幕里的变量">
-      <i class="fa fa-chevron-left"></i> 雨幕里的变量
+    <a href="/2026/08/02/2026-08-02-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E6%B5%85%E6%B0%B4%E5%87%BA%E5%A5%87%E8%BF%B9%E9%80%80%E6%B0%B4%E5%85%AC%E5%88%86%E7%9A%84%E6%84%8F%E5%A4%96%E4%B8%B0%E6%94%B6/" rel="prev" title="浅水出奇迹：退水50公分的意外丰收">
+      <i class="fa fa-chevron-left"></i> 浅水出奇迹：退水50公分的意外丰收
     </a></div>
       <div class="post-nav-item">
     <a href="/2026/08/06/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-18-AI%20Agent%E5%85%A5%E9%97%A8/" rel="next" title="ByteFisher AI 编程实战（十八）：AI Agent 入门——从对话到自主决策">
@@ -719,7 +719,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">255</span>
+          <span class="site-state-item-count">256</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
