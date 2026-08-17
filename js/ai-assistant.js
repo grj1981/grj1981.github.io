@@ -786,26 +786,26 @@
     });
   }
 
+  function norm(s) {
+    return s.replace(/\s/g, '')
+            .replace(/[－—–―]/g, '-')
+            .replace(/[：:]/g, ':')
+            .replace(/[；;]/g, ';')
+            .replace(/[，,]/g, ',')
+            .replace(/[。.]/g, '.')
+            .replace(/[（(]/g, '(')
+            .replace(/[）)]/g, ')')
+            .replace(/[／/]/g, '/')
+            .replace(/[’']/g, "'")
+            .replace(/[“”]/g, '"')
+            .replace(/[Ａ-Ｚ]/g, function(c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
+            .replace(/[ａ-ｚ]/g, function(c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
+            .replace(/[０-９]/g, function(c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
+            .replace(/[＃]/g, '#');
+  }
+
   function preLinkArticles(text) {
     if (!postsIndexCache || !postsIndexCache.posts) return text;
-
-    function norm(s) {
-      return s.replace(/\s/g, '')
-              .replace(/[－—–―]/g, '-')
-              .replace(/[：:]/g, ':')
-              .replace(/[；;]/g, ';')
-              .replace(/[，,]/g, ',')
-              .replace(/[。.]/g, '.')
-              .replace(/[（(]/g, '(')
-              .replace(/[）)]/g, ')')
-              .replace(/[／/]/g, '/')
-              .replace(/[’']/g, "'")
-              .replace(/[“”]/g, '"')
-              .replace(/[Ａ-Ｚ]/g, function(c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
-              .replace(/[ａ-ｚ]/g, function(c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
-              .replace(/[０-９]/g, function(c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
-              .replace(/[＃]/g, '#');
-    }
 
     var sorted = postsIndexCache.posts.slice().sort(function(a, b) { return b.title.length - a.title.length; });
     var lines = text.split('\n');
@@ -866,14 +866,16 @@
 
       // Try to match link text to article title → auto-correct URL
       for (var i = 0; i < index.posts.length; i++) {
-        if (index.posts[i].title === linkText) {
+        if (index.posts[i].title === linkText || norm(index.posts[i].title) === norm(linkText)) {
           return '[' + linkText + '](' + index.posts[i].url.replace(/^https?:\/\/[^\/]+/, '') + ')';
         }
       }
       // Partial title match → auto-correct (only if lengths are close)
       for (var i = 0; i < index.posts.length; i++) {
         var title = index.posts[i].title;
-        if (Math.abs(title.length - linkText.length) <= 4 && (title.indexOf(linkText) !== -1 || linkText.indexOf(title) !== -1)) {
+        var normTitle = norm(title);
+        var normLink = norm(linkText);
+        if (Math.abs(title.length - linkText.length) <= 4 && (title.indexOf(linkText) !== -1 || linkText.indexOf(title) !== -1 || normTitle.indexOf(normLink) !== -1 || normLink.indexOf(normTitle) !== -1)) {
           return '[' + linkText + '](' + index.posts[i].url.replace(/^https?:\/\/[^\/]+/, '') + ')';
         }
       }
