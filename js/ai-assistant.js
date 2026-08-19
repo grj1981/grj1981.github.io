@@ -21,6 +21,8 @@
   var conversationTopic = null;
   var currentArticles = [];
   var lastUserQuestion = '';
+  var cachedLocation = null;
+  var locationDenied = false;
 
   /* ---------- Analytics ---------- */
   function trackEvent(type) {
@@ -537,6 +539,37 @@
   }
 
   /* ---------- Send ---------- */
+  function isWeatherLike(text) {
+    var t = String(text || '').toLowerCase();
+    return /天气|气温|温度|下雨|雨|雪|刮风|风|热|冷|晴|阴|多云|湿度|最高温|最低温|适合钓鱼|好钓鱼/.test(t);
+  }
+
+  function getLocationIfWeatherLike(text) {
+    return new Promise(function(resolve) {
+      if (!isWeatherLike(text) || cachedLocation || locationDenied) {
+        return resolve(cachedLocation);
+      }
+      if (!navigator.geolocation) {
+        locationDenied = true;
+        return resolve(null);
+      }
+      navigator.geolocation.getCurrentPosition(
+        function(pos) {
+          cachedLocation = {
+            latitude: pos.coords.latitude,
+            longitude: pos.coords.longitude
+          };
+          resolve(cachedLocation);
+        },
+        function() {
+          locationDenied = true;
+          resolve(null);
+        },
+        { timeout: 3000, maximumAge: 10 * 60 * 1000 }
+      );
+    });
+  }
+
   function send() {
     var input = document.getElementById('ai-input');
     var text = input.value.trim();
@@ -565,12 +598,16 @@
     abortController = new AbortController();
     ensurePostsIndex();
 
-    fetch(CONFIG.apiEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      signal: abortController.signal,
-      body: JSON.stringify({ messages: messages, stream: true })
-    })
+    getLocationIfWeatherLike(text).then(function(location) {
+      var body = { messages: messages, stream: true };
+      if (location) body.location = location;
+
+      fetch(CONFIG.apiEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        signal: abortController.signal,
+        body: JSON.stringify(body)
+      })
       .then(function(response) {
         if (!response.ok) {
           var errMsg = classifyError(null, response);
@@ -607,6 +644,7 @@
           showRetry(classifyError(err, null));
         }
       });
+    });
   }
 
   /* ---------- Streaming ---------- */
