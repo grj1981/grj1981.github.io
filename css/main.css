@@ -1313,7 +1313,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #5effff;
+  background: #9034c7;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3430,6 +3430,33 @@ body {
 }
 #ai-assistant-panel .ai-messages .ai-message.ai-message-typing span:nth-child(3) {
   animation-delay: 0.4s;
+}
+#ai-assistant-panel .ai-messages .ai-loc-prompt {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+#ai-assistant-panel .ai-messages .ai-loc-prompt .ai-loc-text {
+  font-size: 13px;
+  line-height: 1.5;
+}
+#ai-assistant-panel .ai-messages .ai-loc-btn {
+  align-self: flex-start;
+  background: #37c6c0;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+#ai-assistant-panel .ai-messages .ai-loc-btn:hover {
+  opacity: 0.9;
+}
+#ai-assistant-panel .ai-messages .ai-loc-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
 }
 #ai-assistant-panel .ai-input-area {
   display: flex;

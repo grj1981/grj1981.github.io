@@ -544,11 +544,8 @@
     return /天气|气温|温度|下雨|雨|雪|刮风|风|热|冷|晴|阴|多云|湿度|最高温|最低温|适合钓鱼|好钓鱼/.test(t);
   }
 
-  function getLocationIfWeatherLike(text) {
+  function requestGeolocation() {
     return new Promise(function(resolve) {
-      if (!isWeatherLike(text) || cachedLocation || locationDenied) {
-        return resolve(cachedLocation);
-      }
       if (!navigator.geolocation) {
         locationDenied = true;
         return resolve(null);
@@ -559,6 +556,7 @@
             latitude: pos.coords.latitude,
             longitude: pos.coords.longitude
           };
+          locationDenied = false;
           resolve(cachedLocation);
         },
         function() {
@@ -567,6 +565,34 @@
         },
         { timeout: 3000, maximumAge: 10 * 60 * 1000 }
       );
+    });
+  }
+
+  function getLocationIfWeatherLike(text) {
+    return new Promise(function(resolve) {
+      if (!isWeatherLike(text) || cachedLocation) return resolve(cachedLocation);
+      if (locationDenied) return resolve(null);
+      if (!navigator.geolocation) {
+        locationDenied = true;
+        return resolve(null);
+      }
+      if (!navigator.permissions || !navigator.permissions.query) {
+        return requestGeolocation().then(resolve);
+      }
+      navigator.permissions.query({ name: 'geolocation' }).then(function(status) {
+        if (status.state === 'granted') {
+          requestGeolocation().then(resolve);
+        } else if (status.state === 'denied') {
+          locationDenied = true;
+          showLocationHint('blocked');
+          resolve(null);
+        } else {
+          showLocationPromptButton();
+          resolve(null);
+        }
+      }).catch(function() {
+        requestGeolocation().then(resolve);
+      });
     });
   }
 
@@ -595,55 +621,65 @@
     document.getElementById('ai-stop').style.display = '';
     showTyping();
 
+    getLocationIfWeatherLike(text).then(function(location) {
+      fireRequest(location);
+    });
+  }
+
+  function fireRequest(location) {
+    if (!isLoading) {
+      isLoading = true;
+      document.getElementById('ai-send').style.display = 'none';
+      document.getElementById('ai-stop').style.display = '';
+      showTyping();
+    }
     abortController = new AbortController();
     ensurePostsIndex();
 
-    getLocationIfWeatherLike(text).then(function(location) {
-      var body = { messages: messages, stream: true };
-      if (location) body.location = location;
+    var body = { messages: messages, stream: true };
+    if (location) body.location = location;
 
-      fetch(CONFIG.apiEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        signal: abortController.signal,
-        body: JSON.stringify(body)
-      })
-      .then(function(response) {
-        if (!response.ok) {
-          var errMsg = classifyError(null, response);
-          hideTyping();
-          isLoading = false;
-          showStopBtn(false);
-          if (errMsg) showToast(errMsg, getToastType(null, response));
-          showFallbackRecommendations(text);
-          return null;
-        }
-        var contentType = response.headers.get('Content-Type') || '';
-        if (contentType.indexOf('text/event-stream') === -1) {
-          return response.json().then(function(data) {
-            hideTyping();
-            isLoading = false;
-            showStopBtn(false);
-            var reply = data.choices && data.choices[0] && data.choices[0].message;
-            if (reply) {
-              addMsg('bot', reply.content);
-              messages.push({ role: 'assistant', content: reply.content });
-              saveSession();
-            }
-          });
-        }
-        return handleStream(response);
-      })
-      .catch(function(err) {
+    fetch(CONFIG.apiEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      signal: abortController.signal,
+      body: JSON.stringify(body)
+    })
+    .then(function(response) {
+      if (!response.ok) {
+        var errMsg = classifyError(null, response);
         hideTyping();
         isLoading = false;
         showStopBtn(false);
-        if (err.name === 'AbortError') return;
-        trackEvent('error');
-        if (!showFallbackRecommendations(text)) {
-          showRetry(classifyError(err, null));
-        }
-      });
+        if (errMsg) showToast(errMsg, getToastType(null, response));
+        showFallbackRecommendations(lastUserQuestion);
+        return null;
+      }
+      var contentType = response.headers.get('Content-Type') || '';
+      if (contentType.indexOf('text/event-stream') === -1) {
+        return response.json().then(function(data) {
+          hideTyping();
+          isLoading = false;
+          showStopBtn(false);
+          var reply = data.choices && data.choices[0] && data.choices[0].message;
+          if (reply) {
+            addMsg('bot', reply.content);
+            messages.push({ role: 'assistant', content: reply.content });
+            saveSession();
+          }
+        });
+      }
+      return handleStream(response);
+    })
+    .catch(function(err) {
+      hideTyping();
+      isLoading = false;
+      showStopBtn(false);
+      if (err.name === 'AbortError') return;
+      trackEvent('error');
+      if (!showFallbackRecommendations(lastUserQuestion)) {
+        showRetry(classifyError(err, null));
+      }
     });
   }
 
@@ -783,6 +819,50 @@
     var div = document.createElement('div');
     div.className = 'ai-message ai-message-' + role;
     div.innerHTML = render(text);
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+  }
+
+  function showLocationPromptButton() {
+    var old = document.querySelectorAll('.ai-loc-prompt');
+    for (var i = 0; i < old.length; i++) old[i].remove();
+    var container = document.getElementById('ai-msgs');
+    var div = document.createElement('div');
+    div.className = 'ai-message ai-message-bot ai-loc-prompt';
+    div.innerHTML =
+      '<div class="ai-loc-text">📍 想用更精确的实时定位获取天气？点击允许，之后问天气就用你的准确位置。</div>' +
+      '<button class="ai-loc-btn" id="ai-loc-btn">允许定位</button>';
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+    var btn = document.getElementById('ai-loc-btn');
+    if (btn) {
+      btn.addEventListener('click', function() {
+        btn.disabled = true;
+        btn.textContent = '定位中…';
+        requestGeolocation().then(function(location) {
+          var holder = document.querySelector('.ai-loc-prompt');
+          if (holder) holder.remove();
+          if (location) {
+            if (isLoading && abortController) abortController.abort();
+            fireRequest(location);
+          } else {
+            showLocationHint('error');
+          }
+        });
+      });
+    }
+  }
+
+  function showLocationHint(state) {
+    var old = document.querySelectorAll('.ai-loc-hint');
+    for (var i = 0; i < old.length; i++) old[i].remove();
+    var text = state === 'blocked'
+      ? '⚠️ 定位已被浏览器阻止，暂时按 IP 城市提供天气。可在地址栏左侧权限图标处允许本站访问位置，之后问天气就会用精确定位。'
+      : '⚠️ 无法获取定位（可能被浏览器拦截）。可在地址栏权限设置中允许定位，或直接告诉我你所在的城市。';
+    var div = document.createElement('div');
+    div.className = 'ai-message ai-message-bot ai-loc-hint';
+    div.innerHTML = render(text);
+    var container = document.getElementById('ai-msgs');
     container.appendChild(div);
     container.scrollTop = container.scrollHeight;
   }
