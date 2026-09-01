@@ -11,7 +11,7 @@
   <rights>All rights reserved 2026, 淡水鱼</rights>
   <subtitle>钓鱼爱好者的编程世界</subtitle>
   <title>ByteFisher</title>
-  <updated>2026-08-31T21:25:29.592Z</updated>
+  <updated>2026-09-01T06:52:50.064Z</updated>
   <entry>
     <author>
       <name>淡水鱼</name>
@@ -25,7 +25,7 @@
     <published>2026-08-29T16:00:00.000Z</published>
     <summary>本系列第2篇。基于 api/chat.js 真实代码，把重试（指数退避）、流式 SSE、429 限流、降级、缓存、Token 成本建模、模型路由逐项落地，分析 serverless 函数下的工程化取舍。</summary>
     <title>ByteFisher AI 工程化深度实战（二）：LLM 调用层工程化</title>
-    <updated>2026-08-31T21:25:29.592Z</updated>
+    <updated>2026-09-01T06:52:50.064Z</updated>
   </entry>
   <entry>
     <author>
@@ -40,7 +40,7 @@
     <published>2026-08-23T13:00:00.000Z</published>
     <summary>中雨天的三一水库，老配置粘米钓鲫鱼意外连连。鱼口好到双飞不断，半路还杀出一条半斤鲈鱼，软竿细线在水下搏斗十分钟，治愈了连日加班的疲惫。</summary>
     <title>雨幕里的双飞与一场意外</title>
-    <updated>2026-08-31T21:25:29.592Z</updated>
+    <updated>2026-09-01T06:52:50.064Z</updated>
   </entry>
   <entry>
     <author>
@@ -55,7 +55,7 @@
     <published>2026-08-22T16:00:00.000Z</published>
     <summary>本系列第1篇，共12篇。以博客真实运行的 ByteBot 为解剖对象，拆解 LLM 应用工程的分层架构，逐层诊断现有系统的痛点，给出编排框架选型决策树，并绘制本系列 12 篇的完整改造路线图。</summary>
     <title>ByteFisher AI 工程化深度实战（一）：AI 应用工程全景与架构选型</title>
-    <updated>2026-08-31T21:25:29.592Z</updated>
+    <updated>2026-09-01T06:52:50.064Z</updated>
   </entry>
   <entry>
     <author>
@@ -70,7 +70,7 @@
     <published>2026-08-22T13:00:00.000Z</published>
     <summary>三一水库晴转小雨的一天，枯法师十五尺搭配粘米钓法，小鲫鱼连杆不断。烈日下的偏光镜与伞，雨中的清凉与治愈，小钩细线拉出大鱼的绵柔手感。</summary>
     <title>雨天治愈：小鲫鱼大快乐</title>
-    <updated>2026-08-31T21:25:29.592Z</updated>
+    <updated>2026-09-01T06:52:50.063Z</updated>
   </entry>
   <entry>
     <author>
@@ -85,7 +85,7 @@
     <published>2026-08-16T16:00:00.000Z</published>
     <summary>本系列第21篇，终篇。深入多 Agent 协作架构，讲解 LangGraph 和 CrewAI 框架实战，构建自动化项目开发流水线，用综合案例串联本系列所有知识点。</summary>
     <title>ByteFisher AI 编程实战（二十一）：多Agent协作与综合实战</title>
-    <updated>2026-08-31T21:25:29.595Z</updated>
+    <updated>2026-09-01T06:52:50.066Z</updated>
   </entry>
   <entry>
     <author>
@@ -100,7 +100,7 @@
     <published>2026-08-16T13:00:00.000Z</published>
     <summary>阴天古镇小河，一小时狂拉二十多条小奶鲤，从鲫鱼饵换粘米再到搓饵，像排查重复数据一样找原因，最终放流几十条鱼苗，体会野钓的治愈时刻。</summary>
     <title>小奶鲤刷屏的下午</title>
-    <updated>2026-08-31T21:25:29.592Z</updated>
+    <updated>2026-09-01T06:52:50.063Z</updated>
   </entry>
   <entry>
     <author>
@@ -115,7 +115,7 @@
     <published>2026-08-15T13:00:00.000Z</published>
     <summary>三一水库放新鱼，满配参数守底钓法却全天空军。浮沫封层、饵料失重、鱼群蹭线不开口，技术型钓手在动态水情面前遭遇思维盲区。</summary>
     <title>参数拉满，空军而归——三一水库的“全绿”调试日</title>
-    <updated>2026-08-31T21:25:29.592Z</updated>
+    <updated>2026-09-01T06:52:50.063Z</updated>
   </entry>
   <entry>
     <author>
@@ -130,7 +130,7 @@
     <published>2026-08-12T16:00:00.000Z</published>
     <summary>本系列第20篇，共21篇。实战讲解如何构建自定义 AI Skill，涵盖 OpenCode Agent 开发和 Claude Code Skill 开发，从指令定义到工具封装再到发布复用。</summary>
     <title>ByteFisher AI 编程实战（二十）：构建自定义 Skill——让AI拥有专属能力</title>
-    <updated>2026-08-31T21:25:29.595Z</updated>
+    <updated>2026-09-01T06:52:50.066Z</updated>
   </entry>
   <entry>
     <author>
@@ -145,7 +145,7 @@
     <published>2026-08-09T16:00:00.000Z</published>
     <summary>本系列第19篇，共21篇。深入讲解 MCP（Model Context Protocol）协议，从原理到实战，涵盖 MCP Server 开发、Client 使用和常用 MCP Server 介绍。</summary>
     <title>ByteFisher AI 编程实战（十九）：MCP协议深入——打通AI与工具</title>
-    <updated>2026-08-31T21:25:29.595Z</updated>
+    <updated>2026-09-01T06:52:50.066Z</updated>
   </entry>
   <entry>
     <author>
@@ -160,7 +160,7 @@
     <published>2026-08-09T13:00:00.000Z</published>
     <summary>三一水库，一包釜底抽薪饵料引发的鱼情过山车。上午鲈鱼闹窝、中午水面杂物断口、下午起风后鱼口回归，同一天四次变化，比调接口还刺激。</summary>
     <title>一包贵饵料的一天：鱼情像极了生产环境的接口</title>
-    <updated>2026-08-31T21:25:29.592Z</updated>
+    <updated>2026-09-01T06:52:50.063Z</updated>
   </entry>
   <entry>
     <author>
@@ -175,7 +175,7 @@
     <published>2026-08-08T13:00:00.000Z</published>
     <summary>水库放鱼后人多，黄金钓位全满，我在树下用3.6米短竿，重铅搓饵没口，改拉饵全是杂鱼，最后用无漂相起竿法连中奶鲫，收竿前意外钓上一条鲶鱼。</summary>
     <title>短竿重铅钓奶鲫，意外解锁鲶鱼</title>
-    <updated>2026-08-31T21:25:29.592Z</updated>
+    <updated>2026-09-01T06:52:50.063Z</updated>
   </entry>
   <entry>
     <author>
@@ -190,7 +190,7 @@
     <published>2026-08-05T16:00:00.000Z</published>
     <summary>本系列第18篇，共21篇。AI Agent 入门教程，讲解 ReAct 模式、Function Calling/Tool Use 机制，手把手构建第一个能自主决策和调用工具的 AI 智能体。</summary>
     <title>ByteFisher AI 编程实战（十八）：AI Agent 入门——从对话到自主决策</title>
-    <updated>2026-08-31T21:25:29.595Z</updated>
+    <updated>2026-09-01T06:52:50.066Z</updated>
   </entry>
   <entry>
     <author>
@@ -205,7 +205,7 @@
     <published>2026-08-02T16:00:00.000Z</published>
     <summary>本系列第17篇，共21篇。从零构建 RAG 知识库，讲解 Embedding 和向量数据库的核心概念，用 Chroma 实战搭建个人知识问答系统，让 AI 能访问你的私有数据。</summary>
     <title>ByteFisher AI 编程实战（十七）：RAG知识库构建入门</title>
-    <updated>2026-08-31T21:25:29.595Z</updated>
+    <updated>2026-09-01T06:52:50.066Z</updated>
   </entry>
   <entry>
     <author>
@@ -220,7 +220,7 @@
     <published>2026-08-02T13:00:00.000Z</published>
     <summary>三一水库一夜退水50公分，浅水区用搓饵钓法意外收获鲫鱼、鲤鱼、大白条和鲶鱼，浅水不调漂铅坠躺底反而漂相凶猛，夏日鱼情出奇活跃。</summary>
     <title>浅水出奇迹：退水50公分的意外丰收</title>
-    <updated>2026-08-31T21:25:29.591Z</updated>
+    <updated>2026-09-01T06:52:50.063Z</updated>
   </entry>
   <entry>
     <author>
@@ -235,7 +235,7 @@
     <published>2026-08-01T13:00:00.000Z</published>
     <summary>连续雨天水位上涨，三一水库浑水钓鲫鱼连竿，调整饵料后大板鲫小鲤鱼鲈鱼接连上钩，中获大鲤鱼却因钩小脱钩挂树。暴雨与烈日交替，独自坚守的治愈午后。</summary>
     <title>雨幕里的变量</title>
-    <updated>2026-08-31T21:25:29.591Z</updated>
+    <updated>2026-09-01T06:52:50.063Z</updated>
   </entry>
   <entry>
     <author>
@@ -253,7 +253,7 @@
     <published>2026-07-30T04:00:00.000Z</published>
     <summary>不蒜子三天两头 503，LeanCloud 国际版延迟 300ms+，商业方案数据不在自己手里——干脆自建。本文从数据库设计到前端统计脚本，从构建时快照到移动端请求拦截，完整记录一套自建博客访问计数系统的技术选型、架构设计和踩坑修复过程。</summary>
     <title>Hexo 博客访问计数系统搭建实录：TiDB 全栈方案与移动端踩坑记</title>
-    <updated>2026-08-31T21:25:29.602Z</updated>
+    <updated>2026-09-01T06:52:50.071Z</updated>
   </entry>
   <entry>
     <author>
@@ -268,7 +268,7 @@
     <published>2026-07-29T16:00:00.000Z</published>
     <summary>本系列第16篇，共21篇。实战讲解如何用 AI 实现自动化工作流，涵盖 Shell 脚本生成、文件批量处理、GitHub Actions 与 AI 编排，让你的日常工作自动化。</summary>
     <title>ByteFisher AI 编程实战（十六）：AI自动化工作流</title>
-    <updated>2026-08-31T21:25:29.595Z</updated>
+    <updated>2026-09-01T06:52:50.066Z</updated>
   </entry>
   <entry>
     <author>
@@ -283,7 +283,7 @@
     <published>2026-07-26T16:00:00.000Z</published>
     <summary>本系列第15篇，共21篇。实战讲解如何用 AI 进行数据分析和可视化，涵盖 CSV/Excel 文件处理、数据清洗统计、图表生成和自然语言查数据。</summary>
     <title>ByteFisher AI 编程实战（十五）：AI数据分析与可视化</title>
-    <updated>2026-08-31T21:25:29.594Z</updated>
+    <updated>2026-09-01T06:52:50.066Z</updated>
   </entry>
   <entry>
     <author>
@@ -298,7 +298,7 @@
     <published>2026-07-26T13:00:00.000Z</published>
     <summary>37度高温，两河口旧地重游，在回水湾浅滩中得鲤鱼鲫鱼，换树荫避暑后却再无鱼口。程序员钓鱼人的一次舒适与收获的取舍。</summary>
     <title>蒸笼与鱼</title>
-    <updated>2026-08-31T21:25:29.591Z</updated>
+    <updated>2026-09-01T06:52:50.063Z</updated>
   </entry>
   <entry>
     <author>
@@ -313,6 +313,6 @@
     <published>2026-07-25T13:00:00.000Z</published>
     <summary>37度高温天出钓，先被渔政劝退，后辗转竹林小河，意外解锁金麦线连竿模式。程序员用debug思维对抗酷暑，最终被小鱼治愈。</summary>
     <title>高温天里的竹林清凉</title>
-    <updated>2026-08-31T21:25:29.591Z</updated>
+    <updated>2026-09-01T06:52:50.063Z</updated>
   </entry>
 </feed>
