@@ -180,7 +180,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">267</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">268</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -262,7 +262,7 @@
     <p class="hero-desc">分享游戏开发技术与钓鱼乐趣</p>
     <div class="hero-stats">
       <div class="hero-stat">
-        <span class="hero-stat-value">267</span>
+        <span class="hero-stat-value">268</span>
         <span class="hero-stat-label">文章</span>
       </div>
       <div class="hero-stat">
@@ -405,6 +405,8 @@
 
 
 
+
+  
 
   
 
@@ -991,6 +993,94 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/09/06/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-03-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B%E4%B8%8E%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.webp">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/09/06/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-03-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B%E4%B8%8E%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA/" class="post-title-link" itemprop="url">ByteFisher AI 工程化深度实战（三）：上下文工程与结构化输出</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-09-06 00:00:00" itemprop="dateCreated datePublished" datetime="2026-09-06T00:00:00+08:00">2026-09-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2026/09/06/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-03-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B%E4%B8%8E%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2026/09/06/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-03-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B%E4%B8%8E%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>本系列第3篇。围绕 ByteBot 的会话记忆与 system prompt，讲解上下文压缩（滚动摘要）、记忆分层（短期/工作/长期）、长上下文策略，以及用 JSON Schema 强制结构化输出，把检索结果从字符串升级为结构化数据。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/09/06/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-03-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B%E4%B8%8E%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/08/30/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-02-%E8%B0%83%E7%94%A8%E5%B1%82%E5%B7%A5%E7%A8%8B%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1427,94 +1517,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/08/17/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-21-%E5%A4%9AAgent%E5%8D%8F%E4%BD%9C%E4%B8%8E%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.webp">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/17/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-21-%E5%A4%9AAgent%E5%8D%8F%E4%BD%9C%E4%B8%8E%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/" class="post-title-link" itemprop="url">ByteFisher AI 编程实战（二十一）：多Agent协作与综合实战</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2026-08-17 00:00:00" itemprop="dateCreated datePublished" datetime="2026-08-17T00:00:00+08:00">2026-08-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/2026/08/17/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-21-%E5%A4%9AAgent%E5%8D%8F%E4%BD%9C%E4%B8%8E%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2026/08/17/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-21-%E5%A4%9AAgent%E5%8D%8F%E4%BD%9C%E4%B8%8E%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本系列第21篇，终篇。深入多 Agent 协作架构，讲解 LangGraph 和 CrewAI 框架实战，构建自动化项目开发流水线，用综合案例串联本系列所有知识点。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2026/08/17/ByteFisher-AI%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-21-%E5%A4%9AAgent%E5%8D%8F%E4%BD%9C%E4%B8%8E%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1586,7 +1588,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">267</span>
+          <span class="site-state-item-count">268</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
