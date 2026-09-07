@@ -48,6 +48,27 @@
     }
   }
 
+  function getPlayerUrl(videoId) {
+    return 'https://open.douyin.com/player/video?vid=' + encodeURIComponent(videoId);
+  }
+
+  function resetPlayer() {
+    var currentPlayer = document.getElementById('douyin-player');
+    if (!currentPlayer || !currentPlayer.parentNode) return null;
+
+    currentPlayer.src = '';
+    var freshPlayer = currentPlayer.cloneNode(false);
+    freshPlayer.src = '';
+    currentPlayer.replaceWith(freshPlayer);
+    return freshPlayer;
+  }
+
+  function loadVideo(videoId) {
+    if (!videoId) return;
+    var player = resetPlayer();
+    if (player) player.src = getPlayerUrl(videoId);
+  }
+
   function navigateVideo(direction) {
     if (videoIds.length === 0) return;
     currentIndex += direction;
@@ -57,21 +78,18 @@
       currentIndex = 0;
     }
     var videoId = videoIds[currentIndex];
-    var player = document.getElementById('douyin-player');
-    if (player && videoId) {
-      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
-    }
+    loadVideo(videoId);
   }
 
   function openModal(e) {
     var card = e.currentTarget;
     var videoId = card.getAttribute('data-id');
-    var player = document.getElementById('douyin-player');
     var modal = document.getElementById('douyin-modal');
     currentIndex = videoIds.indexOf(videoId);
-    if (player && modal && videoId) {
+    if (currentIndex < 0) currentIndex = 0;
+    if (modal && videoId) {
       pauseMusic();
-      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+      loadVideo(videoId);
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
       document.documentElement.style.overflow = 'hidden';
