@@ -75,6 +75,50 @@ body {
   border: none;
 }
 
+.douyin-player-status {
+  display: none;
+  position: absolute;
+  bottom: 52px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10001;
+  max-width: calc(100% - 40px);
+  padding: 8px 12px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.72);
+  border-radius: 4px;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: center;
+  pointer-events: none;
+}
+
+.douyin-player-status.is-visible {
+  display: block;
+}
+
+.douyin-fallback-link {
+  position: absolute;
+  right: 50%;
+  bottom: 12px;
+  z-index: 10001;
+  transform: translateX(50%);
+  padding: 6px 10px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.4;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.douyin-fallback-link:hover {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.82);
+}
+
 .close-btn {
   position: absolute;
   top: 0;
@@ -117,6 +161,12 @@ body {
 
 .nav-btn:hover {
   background: rgba(0,0,0,0.2);
+}
+
+.nav-btn.is-disabled {
+  opacity: 0.35;
+  cursor: wait;
+  pointer-events: none;
 }
 
 .prev-btn {
