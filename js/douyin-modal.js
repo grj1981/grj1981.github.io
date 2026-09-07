@@ -109,11 +109,12 @@
       if (card) openModal({ currentTarget: card });
     });
 
-    var closeBtn = document.querySelector('.close-btn');
+    var modal = document.getElementById('douyin-modal');
+    var closeBtn = modal ? modal.querySelector('.close-btn') : null;
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
-    var prevBtn = document.querySelector('.prev-btn');
-    var nextBtn = document.querySelector('.next-btn');
+    var prevBtn = modal ? modal.querySelector('.nav-btn.prev-btn') : null;
+    var nextBtn = modal ? modal.querySelector('.nav-btn.next-btn') : null;
     if (prevBtn) {
       prevBtn.addEventListener('click', function(e) {
         e.stopPropagation();
@@ -127,7 +128,6 @@
       });
     }
 
-    var modal = document.getElementById('douyin-modal');
     if (modal) {
       modal.addEventListener('click', function(e) {
         if (e.target === modal) closeModal();
