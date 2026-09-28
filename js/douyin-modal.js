@@ -1,9 +1,12 @@
 'use strict';
 
 (function() {
+  var SWITCH_TIMEOUT = 3000;
   var _musicIframe = null;
   var _musicParent = null;
   var _musicSibling = null;
+  var _switchTimer = null;
+  var _isSwitching = false;
   var videoIds = [];
   var currentIndex = 0;
 
@@ -48,8 +51,106 @@
     }
   }
 
+  function getPlayerUrl(videoId) {
+    return 'https://open.douyin.com/player/video?vid=' + encodeURIComponent(videoId);
+  }
+
+  function getModalElement(selector) {
+    var modal = document.getElementById('douyin-modal');
+    return modal ? modal.querySelector(selector) : null;
+  }
+
+  function setNavigationState(disabled) {
+    var buttons = [
+      getModalElement('.nav-btn.prev-btn'),
+      getModalElement('.nav-btn.next-btn')
+    ];
+
+    buttons.forEach(function(button) {
+      if (!button) return;
+      if (disabled) {
+        button.classList.add('is-disabled');
+        button.setAttribute('aria-disabled', 'true');
+      } else {
+        button.classList.remove('is-disabled');
+        button.removeAttribute('aria-disabled');
+      }
+    });
+  }
+
+  function clearSwitchTimer() {
+    if (_switchTimer !== null) {
+      clearTimeout(_switchTimer);
+      _switchTimer = null;
+    }
+  }
+
+  function finishSwitch(showTimeout) {
+    clearSwitchTimer();
+    _isSwitching = false;
+    setNavigationState(false);
+
+    var status = getModalElement('.douyin-player-status');
+    if (!status) return;
+
+    if (showTimeout) {
+      status.textContent = '视频加载超时，请打开抖音原页播放';
+      status.classList.add('is-visible');
+    } else {
+      status.textContent = '';
+      status.classList.remove('is-visible');
+    }
+  }
+
+  function updateFallbackLink(videoId) {
+    var link = getModalElement('.douyin-fallback-link');
+    if (!link) return;
+    link.href = 'https://www.douyin.com/video/' + encodeURIComponent(videoId);
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+  }
+
+  function resetPlayer() {
+    var currentPlayer = document.getElementById('douyin-player');
+    if (!currentPlayer || !currentPlayer.parentNode) return null;
+
+    currentPlayer.src = '';
+    var freshPlayer = currentPlayer.cloneNode(false);
+    freshPlayer.src = '';
+    currentPlayer.replaceWith(freshPlayer);
+    return freshPlayer;
+  }
+
+  function loadVideo(videoId) {
+    if (!videoId || _isSwitching) return;
+    clearSwitchTimer();
+    _isSwitching = true;
+    setNavigationState(true);
+    updateFallbackLink(videoId);
+
+    var status = getModalElement('.douyin-player-status');
+    if (status) {
+      status.textContent = '正在加载视频…';
+      status.classList.remove('is-visible');
+    }
+
+    var player = resetPlayer();
+    if (!player) {
+      finishSwitch(true);
+      return;
+    }
+
+    player.addEventListener('load', function() {
+      finishSwitch(false);
+    });
+    _switchTimer = setTimeout(function() {
+      finishSwitch(true);
+    }, SWITCH_TIMEOUT);
+    player.src = getPlayerUrl(videoId);
+  }
+
   function navigateVideo(direction) {
-    if (videoIds.length === 0) return;
+    if (videoIds.length === 0 || _isSwitching) return;
     currentIndex += direction;
     if (currentIndex < 0) {
       currentIndex = videoIds.length - 1;
@@ -57,21 +158,18 @@
       currentIndex = 0;
     }
     var videoId = videoIds[currentIndex];
-    var player = document.getElementById('douyin-player');
-    if (player && videoId) {
-      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
-    }
+    loadVideo(videoId);
   }
 
   function openModal(e) {
     var card = e.currentTarget;
     var videoId = card.getAttribute('data-id');
-    var player = document.getElementById('douyin-player');
     var modal = document.getElementById('douyin-modal');
     currentIndex = videoIds.indexOf(videoId);
-    if (player && modal && videoId) {
+    if (currentIndex < 0) currentIndex = 0;
+    if (modal && videoId) {
       pauseMusic();
-      player.src = 'https://open.douyin.com/player/video?vid=' + videoId;
+      loadVideo(videoId);
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
       document.documentElement.style.overflow = 'hidden';
@@ -82,8 +180,16 @@
   function closeModal() {
     var player = document.getElementById('douyin-player');
     var modal = document.getElementById('douyin-modal');
+    clearSwitchTimer();
+    _isSwitching = false;
+    setNavigationState(false);
     if (player) player.src = '';
     if (modal) modal.classList.remove('active');
+    var status = getModalElement('.douyin-player-status');
+    if (status) {
+      status.textContent = '';
+      status.classList.remove('is-visible');
+    }
     document.body.style.overflow = '';
     document.documentElement.style.overflow = '';
     resumeMusic();
@@ -109,11 +215,12 @@
       if (card) openModal({ currentTarget: card });
     });
 
-    var closeBtn = document.querySelector('.close-btn');
+    var modal = document.getElementById('douyin-modal');
+    var closeBtn = modal ? modal.querySelector('.close-btn') : null;
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
-    var prevBtn = document.querySelector('.prev-btn');
-    var nextBtn = document.querySelector('.next-btn');
+    var prevBtn = modal ? modal.querySelector('.nav-btn.prev-btn') : null;
+    var nextBtn = modal ? modal.querySelector('.nav-btn.next-btn') : null;
     if (prevBtn) {
       prevBtn.addEventListener('click', function(e) {
         e.stopPropagation();
@@ -127,7 +234,6 @@
       });
     }
 
-    var modal = document.getElementById('douyin-modal');
     if (modal) {
       modal.addEventListener('click', function(e) {
         if (e.target === modal) closeModal();
@@ -138,6 +244,9 @@
       if (_musicIframe) resumeMusic();
       var modal = document.getElementById('douyin-modal');
       if (modal && modal.classList.contains('active')) {
+        clearSwitchTimer();
+        _isSwitching = false;
+        setNavigationState(false);
         modal.classList.remove('active');
         document.body.style.overflow = '';
         document.documentElement.style.overflow = '';

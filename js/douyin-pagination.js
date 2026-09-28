@@ -92,7 +92,7 @@
 
     var html = '';
 
-    html += '<span class="page-btn prev-btn" data-page="' + (currentPage - 1) + '">&#10094;</span>';
+    html += '<span class="page-btn" data-page="' + (currentPage - 1) + '">&#10094;</span>';
 
     var range = getPageRange(total);
     range.forEach(function(p) {
@@ -103,7 +103,7 @@
       }
     });
 
-    html += '<span class="page-btn next-btn" data-page="' + (currentPage + 1) + '">&#10095;</span>';
+    html += '<span class="page-btn" data-page="' + (currentPage + 1) + '">&#10095;</span>';
 
     el.innerHTML = html;
     el.style.display = '';
