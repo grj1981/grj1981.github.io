@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="preconnect" href="https://fonts.loli.net">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://img.bytefisher.top">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#37c6c0">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#37c6c0">
+
+<meta http-equiv="Permissions-Policy" content="encrypted-media=*">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="codeva-7SG6ROHyTg">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"></noscript>
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
+
+  <meta name="description" content="本系列第8篇。剖析 CrewAI 的 Agent&#x2F;Task&#x2F;Crew&#x2F;Process 编排模型，与 LangGraph 用同一&quot;钓鱼日记生成&quot;场景对比，讲解角色协作框架的取舍，并把 tools&#x2F;douyin-blog 的串行流程改写为 Crew 协作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ByteFisher AI 工程化深度实战（八）：Agent 框架源码剖析——CrewAI">
+<meta property="og:url" content="https://www.bytefisher.top/2026/10/11/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-08-Agent%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-CrewAI/">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="本系列第8篇。剖析 CrewAI 的 Agent&#x2F;Task&#x2F;Crew&#x2F;Process 编排模型，与 LangGraph 用同一&quot;钓鱼日记生成&quot;场景对比，讲解角色协作框架的取舍，并把 tools&#x2F;douyin-blog 的串行流程改写为 Crew 协作。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-10-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-10-10T19:59:07.879Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="series:ByteFisher AI工程化深度实战教程">
+<meta property="article:tag" content="教程">
+<meta name="twitter:card" content="summary">
+  <meta name="keywords" content="CrewAI,Agent,Tool,Task,Crew,Process,角色协作,编排框架,LangGraph对比,钓鱼日记流水线,generate-blog,ByteFisher,淡水鱼">
+
+<link rel="canonical" href="https://www.bytefisher.top/2026/10/11/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-08-Agent%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-CrewAI/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"ByteFisher AI 工程化深度实战（八）：Agent 框架源码剖析——CrewAI","description":"本系列第8篇。剖析 CrewAI 的 Agent/Task/Crew/Process 编排模型，与 LangGraph 用同一\\\"钓鱼日记生成\\\"场景对比，讲解角色协作框架的取舍，并把 tools/douyin-blog 的串行流程改写为 Crew 协作。","url":"https://www.bytefisher.top/2026/10/11/ByteFisher-AI工程化深度实战-08-Agent框架源码剖析-CrewAI/","datePublished":"2026-10-10T16:00:00.000Z","dateModified":"2026-10-10T19:59:07.879Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/10/11/ByteFisher-AI工程化深度实战-08-Agent框架源码剖析-CrewAI/"},"keywords":"AI, 教程, series:ByteFisher AI工程化深度实战教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"AI","item":"https://www.bytefisher.top/categories/AI/"},{"@type":"ListItem","position":3,"name":"ByteFisher AI 工程化深度实战（八）：Agent 框架源码剖析——CrewAI"}]}</script>
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ByteFisher AI 工程化深度实战（八）：Agent 框架源码剖析——CrewAI | ByteFisher</title>
+  
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dc50e0997d43c3a8dbf2afdb3fdff233";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#37c6c0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-tutorials">
+
+    <a href="/tutorials/" rel="section"><i class="fa fa-book fa-fw"></i>教程<span class="badge">10</span></a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>钓鱼专题<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-aigames">
+
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">67</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">283</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">62</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>rss</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/10/11/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-08-Agent%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-CrewAI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.webp">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ByteFisher AI 工程化深度实战（八）：Agent 框架源码剖析——CrewAI
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-10-11 00:00:00" itemprop="dateCreated datePublished" datetime="2026-10-11T00:00:00+08:00">2026-10-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2026/10/11/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-08-Agent%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-CrewAI/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2026/10/11/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-08-Agent%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-CrewAI/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">本系列第8篇。剖析 CrewAI 的 Agent/Task/Crew/Process 编排模型，与 LangGraph 用同一"钓鱼日记生成"场景对比，讲解角色协作框架的取舍，并把 tools/douyin-blog 的串行流程改写为 Crew 协作。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>第 07 篇拆了 LangGraph，理解了一个”图状态机”框架。本篇拆它的反面——<strong>CrewAI</strong>：一个”角色协作”框架。两者都做 Agent 编排，但哲学完全不同。本篇目标是看懂 CrewAI 的四大核心类（Agent &#x2F; Tool &#x2F; Task &#x2F; Crew）的源码结构与协作机制，并用第 01 篇承诺过的”钓鱼日记生成”场景，把 <code>tools/douyin-blog/generate-blog.py</code> 的串行流程改写为 Crew 协作。</p>
+<h2 id="一、CrewAI-的核心抽象"><a href="#一、CrewAI-的核心抽象" class="headerlink" title="一、CrewAI 的核心抽象"></a>一、CrewAI 的核心抽象</h2><h3 id="1-1-四个类，四个角色"><a href="#1-1-四个类，四个角色" class="headerlink" title="1.1 四个类，四个角色"></a>1.1 四个类，四个角色</h3><p>CrewAI 把所有 AI 工作流建模成”一个团队在干活”：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Crew（团队）</span><br><span class="line"> ├── Agent（成员：有角色、目标、个性、工具）</span><br><span class="line"> ├── Agent（成员：...）</span><br><span class="line"> └── Process（协作模式：顺序 / 层级）</span><br><span class="line">       └── 每个 Agent 执行各自的 Task</span><br><span class="line"></span><br><span class="line">Task（任务：描述 + 期望输出 + 归因到某个 Agent）</span><br><span class="line">Tool（工具：Agent 能调用的函数）</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Agent</strong>：不是通用的”执行者”，而是有”人格”的参与者——<code>role</code>（岗位）、<code>goal</code>（目标）、<code>backstory</code>（人设背景）、<code>tools</code>（工具）、<code>llm</code>（可每个角色配不同模型）。</li>
+<li><strong>Task</strong>：<code>description</code>（要做什么）+ <code>expected_output</code>（期望的产出格式）+ <code>agent</code>（谁来做）。任务之间可以传递上下文（<code>context</code>）。</li>
+<li><strong>Crew</strong>：编排器，<code>tasks</code> 列表 + <code>process</code>（sequential 顺序 &#x2F; hierarchical 层级）。<code>kickoff()</code> 启动整个流程。</li>
+<li><strong>Process</strong>：sequential 是”任务 A → B → C”；hierarchical 引入一个 <strong>Manager Agent</strong> 动态分派任务。</li>
+</ul>
+<h3 id="1-2-与-LangGraph-的哲学对比"><a href="#1-2-与-LangGraph-的哲学对比" class="headerlink" title="1.2 与 LangGraph 的哲学对比"></a>1.2 与 LangGraph 的哲学对比</h3><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>LangGraph</th>
+<th>CrewAI</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>心智模型</td>
+<td>图 &#x2F; 状态机 &#x2F; 显式控制流</td>
+<td>团队 &#x2F; 角色 &#x2F; 任务分工</td>
+</tr>
+<tr>
+<td>控制流</td>
+<td>你在代码里画边，完全显式</td>
+<td>sequential 自动串，hierarchical 交给 Manager</td>
+</tr>
+<tr>
+<td>状态管理</td>
+<td>一等公民（State+reducer+检查点）</td>
+<td>隐式，靠任务上下文传递</td>
+</tr>
+<tr>
+<td>学习成本</td>
+<td>高（Pregel&#x2F;检查点&#x2F;流式）</td>
+<td>低（四个类即全貌）</td>
+</tr>
+<tr>
+<td>复杂分支</td>
+<td>强（条件边、回退、并行）</td>
+<td>弱（hierarchical 依赖 LLM 判断）</td>
+</tr>
+<tr>
+<td>可恢复性</td>
+<td>强（检查点持久化）</td>
+<td>弱（无内建检查点）</td>
+</tr>
+<tr>
+<td>适合场景</td>
+<td>复杂状态流、需断点续跑</td>
+<td>多角色分工明确、流程相对线性</td>
+</tr>
+</tbody></table>
+<p><strong>一句话总结</strong>：LangGraph 强在”流程的确定性控制”，CrewAI 强在”角色的声明式分工”。你的流程是”图”就用 LangGraph，你的流程是”流水线分工”就用 CrewAI。</p>
+<h2 id="二、源码结构拆解"><a href="#二、源码结构拆解" class="headerlink" title="二、源码结构拆解"></a>二、源码结构拆解</h2><h3 id="2-1-Agent-的本质"><a href="#2-1-Agent-的本质" class="headerlink" title="2.1 Agent 的本质"></a>2.1 Agent 的本质</h3><p>CrewAI 的 <code>Agent</code> 并不神秘——它内部就是把”role&#x2F;goal&#x2F;backstory + tools 描述 + 任务描述”拼成一个 system prompt，然后调 LLM：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># crewai.agent.Agent.agent_executor 的关键逻辑（伪码还原）</span></span><br><span class="line">system_prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">你是 <span class="subst">&#123;self.role&#125;</span>。</span></span><br><span class="line"><span class="string">目标：<span class="subst">&#123;self.goal&#125;</span></span></span><br><span class="line"><span class="string">背景：<span class="subst">&#123;self.backstory&#125;</span></span></span><br><span class="line"><span class="string">你有以下工具可用：<span class="subst">&#123;self.tools_schema()&#125;</span></span></span><br><span class="line"><span class="string">当前任务是：<span class="subst">&#123;task.description&#125;</span></span></span><br><span class="line"><span class="string">期望输出：<span class="subst">&#123;task.expected_output&#125;</span></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">result = llm.chat(system_prompt + task_context)</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键工程点</strong>：tools 的描述（JSON Schema）会注入 prompt，模型根据描述决定”调哪个工具、传什么参数”，然后 CrewAI 帮你执行函数调用（function calling），把结果再喂回模型。这就是第 03 篇”函数调用”的 Agent 化封装。</p>
+<h3 id="2-2-Task-的上下文传递"><a href="#2-2-Task-的上下文传递" class="headerlink" title="2.2 Task 的上下文传递"></a>2.2 Task 的上下文传递</h3><p>Task 的 <code>context</code> 字段决定前置任务：Crew 按顺序执行时，会把前面任务的输出注入当前任务的上下文。这是<strong>隐式状态传递</strong>——与 LangGraph 的显式 reducer 形成对比。好处是写起来简单，坏处是”状态在哪个 Agent 手里”不透明。</p>
+<h3 id="2-3-Crew-的-kickoff"><a href="#2-3-Crew-的-kickoff" class="headerlink" title="2.3 Crew 的 kickoff"></a>2.3 Crew 的 kickoff</h3><p><code>Crew.kickoff()</code> 内部维护一个任务队列，sequential 模式下逐个执行；hierarchical 模式下先让 Manager 决定每个任务分配给谁。内部还有一个核心组件 <strong><code>TaskOutput</code> &#x2F; <code>AgentOutput</code></strong> 数据结构，把每个任务的输出和元数据（token 用量、耗时）结构化——这正是第 11 篇可观测性要采集的数据源。</p>
+<h2 id="三、实战：钓鱼日记生成流水线改写"><a href="#三、实战：钓鱼日记生成流水线改写" class="headerlink" title="三、实战：钓鱼日记生成流水线改写"></a>三、实战：钓鱼日记生成流水线改写</h2><p><code>tools/douyin-blog/generate-blog.py</code> 现在是一个 22KB 的串行 Python 脚本：读取 videos.json → 按日期找相册图片 → 调 DeepSeek 生成日记 → 写草稿。流程是”一步到底”，没有分工，也没有中间产物。</p>
+<h3 id="3-1-改写为-Crew"><a href="#3-1-改写为-Crew" class="headerlink" title="3.1 改写为 Crew"></a>3.1 改写为 Crew</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Crew: 钓鱼日记编辑部</span><br><span class="line"> ├── 素材Agent（Role: 素材整理员）</span><br><span class="line"> │     Task1: 从 videos.json 和相册目录整理出素材清单</span><br><span class="line"> ├── 策划Agent（Role: 内容策划）  </span><br><span class="line"> │     Task2: 基于素材生成写作大纲（结构、节奏、亮点）</span><br><span class="line"> ├── 写作Agent（Role: 技术宅日记作家）</span><br><span class="line"> │     Task3: 按大纲写完整日记，程序员比喻风格</span><br><span class="line"> └── 校对Agent（Role: SEO 编辑）</span><br><span class="line">       Task4: 校验 front matter、补 tags/categories、检查违禁词</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> crewai <span class="keyword">import</span> Agent, Task, Crew, Process</span><br><span class="line"></span><br><span class="line">material_agent = Agent(</span><br><span class="line">    role=<span class="string">&quot;素材整理员&quot;</span>,</span><br><span class="line">    goal=<span class="string">&quot;从 videos.json 和相册目录整理本次出钓的素材清单&quot;</span>,</span><br><span class="line">    backstory=<span class="string">&quot;严谨的钓鱼数据档案员，擅长从文件名和元数据中提取日期、地点、鱼获信息&quot;</span>,</span><br><span class="line">    tools=[read_videos_json, list_album_photos],</span><br><span class="line">    llm=<span class="string">&quot;deepseek/deepseek-chat&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">planner_agent = Agent(</span><br><span class="line">    role=<span class="string">&quot;内容策划&quot;</span>,</span><br><span class="line">    goal=<span class="string">&quot;把素材组织成有起承转合的钓鱼日记大纲&quot;</span>,</span><br><span class="line">    backstory=<span class="string">&quot;懂叙事节奏的策划，知道怎么把一次普通出钓写成有趣的故事&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">writer_agent = Agent(</span><br><span class="line">    role=<span class="string">&quot;技术宅日记作家&quot;</span>,</span><br><span class="line">    goal=<span class="string">&quot;按大纲写出有程序员味道的钓鱼日记&quot;</span>,</span><br><span class="line">    backstory=<span class="string">&quot;既是程序员又是钓友，善用代码、Bug、调参比喻写钓鱼&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">editor_agent = Agent(</span><br><span class="line">    role=<span class="string">&quot;SEO 编辑&quot;</span>,</span><br><span class="line">    goal=<span class="string">&quot;校验并补全 front matter，优化标题与关键词&quot;</span>,</span><br><span class="line">    backstory=<span class="string">&quot;熟悉 Hexo 博客规范和 SEO，能发现违禁词和格式问题&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">task_material = Task(description=<span class="string">&quot;整理素材清单&quot;</span>, expected_output=<span class="string">&quot;包含日期/地点/图片/鱼获的结构化清单&quot;</span>, agent=material_agent)</span><br><span class="line">task_outline  = Task(description=<span class="string">&quot;生成写作大纲&quot;</span>, expected_output=<span class="string">&quot;分节大纲与亮点&quot;</span>, agent=planner_agent, context=[task_material])</span><br><span class="line">task_draft    = Task(description=<span class="string">&quot;写日记正文&quot;</span>, expected_output=<span class="string">&quot;完整 Markdown 日记&quot;</span>, agent=writer_agent, context=[task_outline])</span><br><span class="line">task_seo      = Task(description=<span class="string">&quot;SEO 校验&quot;</span>, expected_output=<span class="string">&quot;front matter + 标签 + 关键词&quot;</span>, agent=editor_agent, context=[task_draft])</span><br><span class="line"></span><br><span class="line">crew = Crew(agents=[material_agent, planner_agent, writer_agent, editor_agent],</span><br><span class="line">            tasks=[task_material, task_outline, task_draft, task_seo],</span><br><span class="line">            process=Process.sequential)</span><br><span class="line">result = crew.kickoff()</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-对比：CrewAI-版-vs-原串行版"><a href="#3-2-对比：CrewAI-版-vs-原串行版" class="headerlink" title="3.2 对比：CrewAI 版 vs 原串行版"></a>3.2 对比：CrewAI 版 vs 原串行版</h3><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>原 generate-blog.py</th>
+<th>CrewAI 版</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>代码结构</td>
+<td>一个函数串到底</td>
+<td>四角色职责分离</td>
+</tr>
+<tr>
+<td>中间产物</td>
+<td>无（一次生成）</td>
+<td>素材清单→大纲→草稿→SEO，每步可审查</td>
+</tr>
+<tr>
+<td>改一处逻辑</td>
+<td>改主函数，牵一发动全身</td>
+<td>只改对应 Agent 的 role&#x2F;goal</td>
+</tr>
+<tr>
+<td>每角色模型</td>
+<td>单一模型</td>
+<td>可给校对 Agent 配更强&#x2F;更弱模型</td>
+</tr>
+<tr>
+<td>可控性</td>
+<td>完全确定</td>
+<td>依赖 prompt 质量，需人工审查</td>
+</tr>
+<tr>
+<td>部署</td>
+<td>纯脚本</td>
+<td>依赖 crewai 包，运行成本更高</td>
+</tr>
+</tbody></table>
+<p><strong>结论</strong>：对于”生成一篇日记”这种角色分工明确的线性任务，CrewAI 的声明式写法更清晰、更易维护、可插拔（想给校对加工具，给 Agent 加一行就行）。但注意——<strong>改写不等于必然更好</strong>，原脚本一次调用 1 次 DeepSeek，Crew 版要 4 次调用（4 个 Agent），成本翻 4 倍。这是第 10 篇要深入讨论的成本问题。</p>
+<h2 id="四、LangGraph-vs-CrewAI：同场景对比复盘"><a href="#四、LangGraph-vs-CrewAI：同场景对比复盘" class="headerlink" title="四、LangGraph vs CrewAI：同场景对比复盘"></a>四、LangGraph vs CrewAI：同场景对比复盘</h2><p>用第 07 篇的”鱼获数据提取 Agent”在同一场景下对比：</p>
+<table>
+<thead>
+<tr>
+<th>场景需求</th>
+<th>LangGraph</th>
+<th>CrewAI</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>提取失败自动重试（条件边）</td>
+<td>原生支持，显式</td>
+<td>无原生，需 Manager 或外部循环</td>
+</tr>
+<tr>
+<td>提取到一半崩溃恢复</td>
+<td>检查点 + thread_id</td>
+<td>无内建，需自建重入</td>
+</tr>
+<tr>
+<td>拆成”提取员&#x2F;校验员&#x2F;写入员”</td>
+<td>也能做，但要自己画图</td>
+<td>声明式，更自然</td>
+</tr>
+<tr>
+<td>需要并行提取多篇</td>
+<td>超步天然并行</td>
+<td>需 <code>await_fork</code> 或自定义</td>
+</tr>
+</tbody></table>
+<p><strong>选型最终建议（回扣第 01 篇决策树）</strong>：</p>
+<ul>
+<li>有重试&#x2F;分支&#x2F;持久化需求 → <strong>LangGraph</strong></li>
+<li>多角色线性分工、重视可读性 → <strong>CrewAI</strong></li>
+<li>两者可以混用：CrewAI 管”角色分工”，外层用 LangGraph 画”流程控制图”，把每个 Crew 当一个节点——这是大型系统常见做法（第 10 篇实践）。</li>
+</ul>
+<h2 id="五、落地清单与小结"><a href="#五、落地清单与小结" class="headerlink" title="五、落地清单与小结"></a>五、落地清单与小结</h2><ul>
+<li>CrewAI 四类核心：Agent（角色人设 + 工具）、Task（描述 + 期望输出 + 上下文）、Crew（编排器）、Process（sequential&#x2F;hierarchical）。</li>
+<li><strong>Agent 本质 &#x3D; 动态 system prompt + function calling 封装</strong>，工具描述注入 prompt 让模型决定调用。</li>
+<li>与 LangGraph 对比：<strong>确定性控制选 LangGraph，角色分工选 CrewAI</strong>；CrewAI 无内建检查点，可恢复性弱。</li>
+<li>钓鱼日记生成流水线改写为 4 角色 Crew：素材→策划→写作→SEO，职责清晰、可审查，但<strong>成本从 1 次调用变 4 次</strong>——工程决策要算账。</li>
+<li>大型系统可混用：LangGraph 画流程图，CrewAI 做分工节点。</li>
+</ul>
+<p>下一篇进入工具层：<strong>自研 MCP Server 实战</strong>。把博客的数据（TiDB 鱼获、文章检索、Hexo 草稿）封装成标准 MCP Server，接进 Claude&#x2F;Cursor，实现”AI 助手直接操作博客工具”。</p>
+<hr>
+<p><em>本系列持续更新中，每周一篇。</em></p>
+
+    </div>
+
+    
+    
+    
+    
+    <div class="post-blog-card" style="margin:1.5em auto 0;padding:.5em .8em;border:1px solid #e8e8e8;border-radius:6px;background:var(--card-bg-color,#fff);display:flex;align-items:center;max-width:400px">
+  <div style="flex:1;min-width:0;text-align:left">
+    <div style="font-size:.8em;font-weight:700;color:#555">ByteFisher</div>
+    <div style="font-size:.68em;color:#999;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">分享编程技术 · 记录钓鱼乐趣</div>
+  </div>
+  <img src="/images/wechat-qcode.webp" alt="扫码关注" style="width:60px;height:60px;border-radius:3px;margin:0 10px;flex-shrink:0">
+  <div style="padding:3px 10px;border:1px solid #fc6423;border-radius:3px;color:#fc6423;font-size:.7em;white-space:nowrap;flex-shrink:0">▸ 扫码关注 ◂</div>
+</div>
+
+    <div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2026/10/04/ByteFisher-AI工程化深度实战-07-Agent框架源码剖析-LangGraph/" class="related-post-item" title="ByteFisher AI 工程化深度实战（七）：Agent 框架源码剖析——LangGraph"><span class="related-post-title">ByteFisher AI 工程化深度实战（七）：Agent 框架源码剖析——LangGraph</span><span class="related-post-date">2026-10-04</span><span class="related-post-desc">本系列第7篇。深入 LangGraph 源码，逐层拆解状态图模型、节点执行机制、检查点持久化与流式执行原理，并用一个"钓鱼日记鱼获数据提取 Agent"展示真实落地。</span></a><a href="/2026/09/27/ByteFisher-AI工程化深度实战-06-本地模型量化与推理优化/" class="related-post-item" title="ByteFisher AI 工程化深度实战（六）：本地模型量化与推理优化"><span class="related-post-title">ByteFisher AI 工程化深度实战（六）：本地模型量化与推理优化</span><span class="related-post-date">2026-09-27</span><span class="related-post-desc">本系列第6篇。讲解 GGUF 量化原理与量化等级实测对比，Ollama 与 vLLM 的部署与并发性能对比，评估"本地模型能否承担 ByteBot 的降级兜底"，给出本地推理的完整落地清单。</span></a><a href="/2026/09/20/ByteFisher-AI工程化深度实战-05-RAG优化下-评测与迭代/" class="related-post-item" title="ByteFisher AI 工程化深度实战（五）：RAG 优化（下）——评测与迭代"><span class="related-post-title">ByteFisher AI 工程化深度实战（五）：RAG 优化（下）——评测与迭代</span><span class="related-post-date">2026-09-20</span><span class="related-post-desc">本系列第5篇。为博客 RAG 知识库建立离线评测体系：构建真实评估集、用 RAGAS 量化 faithfulness/relevancy/context precision，用指标驱动迭代，附第4篇混合检索改造前后的评测对比数据。</span></a><a href="/2026/09/13/ByteFisher-AI工程化深度实战-04-RAG优化上-检索质量/" class="related-post-item" title="ByteFisher AI 工程化深度实战（四）：RAG 优化（上）——检索质量"><span class="related-post-title">ByteFisher AI 工程化深度实战（四）：RAG 优化（上）——检索质量</span><span class="related-post-date">2026-09-13</span><span class="related-post-desc">本系列第4篇。把 ByteBot 的单路 BM25 检索升级为"向量召回 + 关键词召回 + 融合排序 + Rerank"的混合检索链路，覆盖 Embedding 模型选型、Chunking 策略、查询改写，用博客 260 篇文章构建真实知识库。</span></a><a href="/2026/09/06/ByteFisher-AI工程化深度实战-03-上下文工程与结构化输出/" class="related-post-item" title="ByteFisher AI 工程化深度实战（三）：上下文工程与结构化输出"><span class="related-post-title">ByteFisher AI 工程化深度实战（三）：上下文工程与结构化输出</span><span class="related-post-date">2026-09-06</span><span class="related-post-desc">本系列第3篇。围绕 ByteBot 的会话记忆与 system prompt，讲解上下文压缩（滚动摘要）、记忆分层（短期/工作/长期）、长上下文策略，以及用 JSON Schema 强制结构化输出，把检索结果从字符串升级为结构化数据。</span></a><a href="/2026/08/30/ByteFisher-AI工程化深度实战-02-调用层工程化/" class="related-post-item" title="ByteFisher AI 工程化深度实战（二）：LLM 调用层工程化"><span class="related-post-title">ByteFisher AI 工程化深度实战（二）：LLM 调用层工程化</span><span class="related-post-date">2026-08-30</span><span class="related-post-desc">本系列第2篇。基于 api/chat.js 真实代码，把重试（指数退避）、流式 SSE、429 限流、降级、缓存、Token 成本建模、模型路由逐项落地，分析 serverless 函数下的工程化取舍。</span></a></div></div>
+    <div class="series-nav"><div class="series-nav-title">ByteFisher AI工程化深度实战教程 系列</div><div class="series-nav-progress">第 8/8 篇</div><div class="series-nav-links"><a href="/2026/10/04/ByteFisher-AI工程化深度实战-07-Agent框架源码剖析-LangGraph/" class="series-nav-prev">ByteFisher AI 工程化深度实战（七）：Agent 框架源码剖析——LangGraph</a></div></div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/%E6%95%99%E7%A8%8B/" rel="tag"># 教程</a>
+              <a href="/tags/series-ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B/" rel="tag"># series:ByteFisher AI工程化深度实战教程</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/10/04/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-07-Agent%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-LangGraph/" rel="prev" title="ByteFisher AI 工程化深度实战（七）：Agent 框架源码剖析——LangGraph">
+      <i class="fa fa-chevron-left"></i> ByteFisher AI 工程化深度实战（七）：Agent 框架源码剖析——LangGraph
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+  <div class="post-share">
+    <span class="post-share-label">分享：</span>
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2026%2F10%2F11%2FByteFisher-AI%25E5%25B7%25A5%25E7%25A8%258B%25E5%258C%2596%25E6%25B7%25B1%25E5%25BA%25A6%25E5%25AE%259E%25E6%2588%2598-08-Agent%25E6%25A1%2586%25E6%259E%25B6%25E6%25BA%2590%25E7%25A0%2581%25E5%2589%2596%25E6%259E%2590-CrewAI%2F&amp;title=ByteFisher%20AI%20%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98%EF%BC%88%E5%85%AB%EF%BC%89%EF%BC%9AAgent%20%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E2%80%94%E2%80%94CrewAI" target="_blank" rel="noopener" title="分享到微博">
+      <i class="fab fa-weibo"></i>
+    </a>
+    <a href="#" onclick="navigator.clipboard.writeText(location.href);var t=this;t.innerHTML='<i class=fa fa-check></i>';setTimeout(function(){t.innerHTML='<i class=fa fa-link></i>'},1500);return false" title="复制链接">
+      <i class="fa fa-link"></i>
+    </a>
+  </div>
+
+  
+  <div class="post-author-bio">
+    <div class="post-author-avatar">
+      <img src="/images/avatar2.gif" alt="淡水鱼">
+    </div>
+    <div class="post-author-info">
+      <div class="post-author-name">淡水鱼</div>
+      <div class="post-author-desc">钓鱼爱好者 &amp; Unity 游戏开发者，分享编程技术与钓鱼经验。</div>
+      <div class="post-author-links">
+        <a href="https://github.com/grj1981" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="/atom.xml" title="RSS 订阅"><i class="fa fa-rss"></i></a>
+        <a href="mailto:271623821@qq.com" title="联系我"><i class="fa fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+          </div>
+          
+    <div class="comments" id="waline-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81CrewAI-%E7%9A%84%E6%A0%B8%E5%BF%83%E6%8A%BD%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">一、CrewAI 的核心抽象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%9B%9B%E4%B8%AA%E7%B1%BB%EF%BC%8C%E5%9B%9B%E4%B8%AA%E8%A7%92%E8%89%B2"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 四个类，四个角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E4%B8%8E-LangGraph-%E7%9A%84%E5%93%B2%E5%AD%A6%E5%AF%B9%E6%AF%94"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 与 LangGraph 的哲学对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%BA%90%E7%A0%81%E7%BB%93%E6%9E%84%E6%8B%86%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">二、源码结构拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Agent-%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Agent 的本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Task-%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BC%A0%E9%80%92"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Task 的上下文传递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Crew-%E7%9A%84-kickoff"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 Crew 的 kickoff</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E6%88%98%EF%BC%9A%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0%E7%94%9F%E6%88%90%E6%B5%81%E6%B0%B4%E7%BA%BF%E6%94%B9%E5%86%99"><span class="nav-number">3.</span> <span class="nav-text">三、实战：钓鱼日记生成流水线改写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%94%B9%E5%86%99%E4%B8%BA-Crew"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 改写为 Crew</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%AF%B9%E6%AF%94%EF%BC%9ACrewAI-%E7%89%88-vs-%E5%8E%9F%E4%B8%B2%E8%A1%8C%E7%89%88"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 对比：CrewAI 版 vs 原串行版</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81LangGraph-vs-CrewAI%EF%BC%9A%E5%90%8C%E5%9C%BA%E6%99%AF%E5%AF%B9%E6%AF%94%E5%A4%8D%E7%9B%98"><span class="nav-number">4.</span> <span class="nav-text">四、LangGraph vs CrewAI：同场景对比复盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E8%90%BD%E5%9C%B0%E6%B8%85%E5%8D%95%E4%B8%8E%E5%B0%8F%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">五、落地清单与小结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">283</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+      <div class="site-state-item site-state-tutorials">
+        <a href="/tutorials/">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">教程</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe id="music-player" allow="autoplay; encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.webp">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2023 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+        
+<div class="site-stats-count">
+      <span class="post-meta-item" id="site_stats_container_uv">
+        <span class="post-meta-item-icon">
+          <i class="fa fa-user"></i>
+        </span>
+        <span class="site-uv" title="总访客量">
+          <span id="site_stats_value_uv">-</span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+      <span class="post-meta-item" id="site_stats_container_pv">
+        <span class="post-meta-item-icon">
+          <i class="fa fa-eye"></i>
+        </span>
+        <span class="site-pv" title="总访问量">
+          <span id="site_stats_value_pv">-</span>
+      </span>
+    </span>
+  <script src="/js/site-stats.js?v=20260730-site-stats-proxy"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+if (!window.matchMedia('(max-width: 767px)').matches) {
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: true,
+  scrollTo : !CONFIG.bookmark.enable
+});
+window._pjax = pjax;
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  NexT.boot.registerEvents();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition(true);
+
+  document.querySelectorAll('.post-block, .pagination, .comments').forEach(function(el) {
+    if (parseFloat(el.style.opacity) === 0) {
+      el.style.opacity = 1;
+    }
+  });
+});
+}
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+    
+
+  
+
+    
+
+    </div>
+
+<link rel="preload" as="style" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css"></noscript>
+<script data-pjax>
+(function() {
+  // 抑制第三方扩展的 notice.avoidance 报错
+  window.addEventListener('error', function(e) {
+    if (e.message && e.message.indexOf('notice.avoidance') !== -1) {
+      e.preventDefault();
+      e.stopPropagation();
+      return true;
+    }
+  });
+
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+
+  function updateCounts() {
+    var countEls = document.querySelectorAll('.waline-visitor-count');
+    if (!countEls.length) return;
+    countEls.forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var url = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(json) {
+          if (json && json.data && json.data[0] && json.data[0].time != null) {
+            el.innerText = json.data[0].time;
+          }
+        }).catch(function(){});
+    });
+  }
+
+  var el = document.querySelector('#waline-comments');
+  if (el) {
+    updateCounts();
+    NexT.utils.loadComments(el, function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2.15.8/dist/waline.js', function() {
+        Waline.init({
+          el: '#waline-comments',
+          serverURL: 'https://waline.bytefisher.top/',
+          path: location.pathname,
+          lang: 'zh-CN' || 'zh-CN',
+          meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
+          requiredMeta: ["nick"] || ['nick'],
+          placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
+          avatar: 'retro' || 'retro',
+          pageSize: 10 || 10,
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
+        });
+        var pathEl = document.querySelector('.waline-visitor-count');
+        var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
+        fetch(baseURL + '/api/article', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: postPath })
+        }).finally(function() {
+          setTimeout(updateCounts, 300);
+        });
+      }, window.Waline);
+    });
+  } else {
+    updateCounts();
+  }
+
+  // Fallback for delayed Waline rendering
+  setTimeout(updateCounts, 2000);
+})();
+</script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+  <div class="douyin-player-status" aria-live="polite"></div>
+  <a class="douyin-fallback-link" href="#" target="_blank" rel="noopener noreferrer">打开抖音原页</a>
+</div>
+
+<link rel="stylesheet" type="text/css" href="/css/douyin-modal.css?v=douyin-20260907-layout-fix">
+<script src="/js/douyin-modal.js?v=douyin-20260907-layout-fix" async></script>
+<script src="/js/hero-typing.js" async></script>
+
+<link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
+<script data-pjax>
+(function() {
+  if (document.querySelector('a[data-lightbox]')) {
+    if (!window._lightboxLoaded) {
+      window._lightboxLoaded = true;
+      var s = document.createElement('script');
+      s.src = '/js/lightbox-plus-jquery.min.js';
+      document.body.appendChild(s);
+    }
+  }
+})();
+</script>
+
+<button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
+  <i class="fa fa-moon-o"></i>
+  <i class="fa fa-sun-o"></i>
+</button>
+<script src="/js/darkmode-toggle.js" async></script>
+
+<script data-pjax>
+(function() {
+  function loadAI() {
+    if (window._aiLoaded) return;
+    window._aiLoaded = true;
+    var aiVersion = 'bytebot-20260819-browser-loc';
+    var scripts = ['/js/lib/marked.min.js', '/js/lib/purify.min.js', '/js/ai-assistant.js?v=' + aiVersion];
+    function loadNext() {
+      if (!scripts.length) return;
+      var s = document.createElement('script');
+      s.src = scripts.shift();
+      s.onload = s.onerror = loadNext;
+      document.body.appendChild(s);
+    }
+    loadNext();
+  }
+  if (document.readyState === 'complete') {
+    setTimeout(loadAI, 500);
+  } else {
+    window.addEventListener('load', function() { setTimeout(loadAI, 500); });
+  }
+})();
+</script>
+
+<script data-pjax>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?v=20260730-site-stats-proxy', {
+    updateViaCache: 'none'
+  }).then(function(reg) {
+    reg.update(); // Force SW update check on each page load
+  });
+}
+</script>
+
+<script src="/js/douyin-pagination.js?v=douyin-20260907-layout-fix" async></script>
+<script src="/js/hot-posts-widget.js" async></script>
+
+<div id="mobile-music-player" class="mobile-music-player" aria-hidden="true"></div>
+<link rel="stylesheet" type="text/css" href="/css/mobile-music.css">
+<script src="/js/mobile-music.js" async></script>
+
+</body>
+</html>
