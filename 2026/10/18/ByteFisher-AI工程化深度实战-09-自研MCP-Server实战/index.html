@@ -40,7 +40,7 @@
 <meta property="og:description" content="本系列第9篇。精读 MCP 协议（JSON-RPC、tools&#x2F;resources&#x2F;prompts 三类原语、stdio 与 HTTP 传输），自研一个连接博客数据的 MCP Server（TiDB 鱼获统计、文章检索、Hexo 草稿生成），并接入 Claude&#x2F;Cursor 演示。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-10-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-10-28T20:56:33.749Z">
+<meta property="article:modified_time" content="2026-10-29T02:31:19.221Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="series:ByteFisher AI工程化深度实战教程">
@@ -50,7 +50,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2026/10/18/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-09-%E8%87%AA%E7%A0%94MCP-Server%E5%AE%9E%E6%88%98/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"ByteFisher AI 工程化深度实战（九）：自研 MCP Server 实战","description":"本系列第9篇。精读 MCP 协议（JSON-RPC、tools/resources/prompts 三类原语、stdio 与 HTTP 传输），自研一个连接博客数据的 MCP Server（TiDB 鱼获统计、文章检索、Hexo 草稿生成），并接入 Claude/Cursor 演示。","url":"https://www.bytefisher.top/2026/10/18/ByteFisher-AI工程化深度实战-09-自研MCP-Server实战/","datePublished":"2026-10-17T16:00:00.000Z","dateModified":"2026-10-28T20:56:33.749Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/10/18/ByteFisher-AI工程化深度实战-09-自研MCP-Server实战/"},"keywords":"AI, 教程, series:ByteFisher AI工程化深度实战教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"ByteFisher AI 工程化深度实战（九）：自研 MCP Server 实战","description":"本系列第9篇。精读 MCP 协议（JSON-RPC、tools/resources/prompts 三类原语、stdio 与 HTTP 传输），自研一个连接博客数据的 MCP Server（TiDB 鱼获统计、文章检索、Hexo 草稿生成），并接入 Claude/Cursor 演示。","url":"https://www.bytefisher.top/2026/10/18/ByteFisher-AI工程化深度实战-09-自研MCP-Server实战/","datePublished":"2026-10-17T16:00:00.000Z","dateModified":"2026-10-29T02:31:19.221Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/10/18/ByteFisher-AI工程化深度实战-09-自研MCP-Server实战/"},"keywords":"AI, 教程, series:ByteFisher AI工程化深度实战教程"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"AI","item":"https://www.bytefisher.top/categories/AI/"},{"@type":"ListItem","position":3,"name":"ByteFisher AI 工程化深度实战（九）：自研 MCP Server 实战"}]}</script>
 
 
@@ -183,7 +183,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">290</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">291</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -443,8 +443,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2026/10/11/2026-10-11-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E4%B8%89%E4%B8%80%E6%B0%B4%E5%BA%93%E7%9A%84Debug%E6%97%A5%E5%BF%97%E4%BB%8E%E7%A9%BA%E5%86%9B%E5%88%B0%E8%BF%9E%E7%AB%BF/" rel="prev" title="三一水库的Debug日志：从空军到连竿">
-      <i class="fa fa-chevron-left"></i> 三一水库的Debug日志：从空军到连竿
+    <a href="/2026/10/17/2026-10-17-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E4%B8%89%E4%B8%80%E6%B0%B4%E5%BA%93%E4%BB%8E%E7%A9%BA%E5%86%9B%E9%A2%84%E8%AD%A6%E5%88%B0%E5%8F%8C%E5%B0%BE%E6%94%B6%E5%9C%BA%E6%88%91%E9%9D%A0%E4%B8%A4%E5%A5%97%E6%96%B9%E6%A1%88%E7%BF%BB%E4%BA%86%E7%9B%98/" rel="prev" title="从空军预警到双尾收场，我靠两套方案翻了盘">
+      <i class="fa fa-chevron-left"></i> 从空军预警到双尾收场，我靠两套方案翻了盘
     </a></div>
       <div class="post-nav-item">
     <a href="/2026/10/25/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-10-%E5%A4%9AAgent%E7%BC%96%E6%8E%92%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="next" title="ByteFisher AI 工程化深度实战（十）：多 Agent 编排工程化">
@@ -553,7 +553,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">290</span>
+          <span class="site-state-item-count">291</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
