@@ -180,7 +180,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">297</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">298</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -262,7 +262,7 @@
     <p class="hero-desc">分享游戏开发技术与钓鱼乐趣</p>
     <div class="hero-stats">
       <div class="hero-stat">
-        <span class="hero-stat-value">297</span>
+        <span class="hero-stat-value">298</span>
         <span class="hero-stat-label">文章</span>
       </div>
       <div class="hero-stat">
@@ -405,6 +405,8 @@
 
 
 
+
+  
 
   
 
@@ -1051,6 +1053,94 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/11/15/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-13-ByteBot%E5%AE%9E%E6%97%B6%E4%B8%8A%E4%B8%8B%E6%96%87%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.webp">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/11/15/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-13-ByteBot%E5%AE%9E%E6%97%B6%E4%B8%8A%E4%B8%8B%E6%96%87%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98/" class="post-title-link" itemprop="url">ByteFisher AI 工程化深度实战（十三）：ByteBot 实时上下文注入实战——时间与天气</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-11-15 00:00:00" itemprop="dateCreated datePublished" datetime="2026-11-15T00:00:00+08:00">2026-11-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2026/11/15/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-13-ByteBot%E5%AE%9E%E6%97%B6%E4%B8%8A%E4%B8%8B%E6%96%87%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2026/11/15/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-13-ByteBot%E5%AE%9E%E6%97%B6%E4%B8%8A%E4%B8%8B%E6%96%87%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>前 12 篇收官后的第一篇实战补遗。ByteBot 此前没有实时感知能力，用户问"现在几点""今天天气"只能靠模型猜甚至编造，且 IP 定位常常不准。本篇用上下文注入（system prompt 实时信息段）+ 对话引导 + 浏览器定位三层方案：Intl 时区时间、IP 定位 + Open-Meteo 免费天气、预置城市表识别用户报出的城市并按 IP 记住 30 分钟、navigator.geolocation 浏览器坐标定位、懒加载关键词与短跟进触发、TTL 缓存、超时降级，并给出注入 vs 函数调用选型对比与完整测试验证。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/11/15/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-13-ByteBot%E5%AE%9E%E6%97%B6%E4%B8%8A%E4%B8%8B%E6%96%87%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/11/08/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-12-%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98-ByteBot-v2%E9%87%8D%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1487,94 +1577,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/10/24/2026-10-24-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E5%8D%8A%E6%96%A4%E5%A4%A7%E9%B2%AB%E5%BC%80%E5%B1%80%E7%84%B6%E5%90%8E%E5%B0%B1%E6%B2%A1%E6%9C%89%E7%84%B6%E5%90%8E%E4%BA%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.webp">
-      <meta itemprop="name" content="淡水鱼">
-      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ByteFisher">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/10/24/2026-10-24-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E5%8D%8A%E6%96%A4%E5%A4%A7%E9%B2%AB%E5%BC%80%E5%B1%80%E7%84%B6%E5%90%8E%E5%B0%B1%E6%B2%A1%E6%9C%89%E7%84%B6%E5%90%8E%E4%BA%86/" class="post-title-link" itemprop="url">半斤大鲫开局，然后就没有然后了</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2026-10-24 21:00:00" itemprop="dateCreated datePublished" datetime="2026-10-24T21:00:00+08:00">2026-10-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">钓鱼日记</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Waline：</span>
-    
-    <a title="waline" href="/2026/10/24/2026-10-24-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E5%8D%8A%E6%96%A4%E5%A4%A7%E9%B2%AB%E5%BC%80%E5%B1%80%E7%84%B6%E5%90%8E%E5%B0%B1%E6%B2%A1%E6%9C%89%E7%84%B6%E5%90%8E%E4%BA%86/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-visitor-count" data-path="/2026/10/24/2026-10-24-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E5%8D%8A%E6%96%A4%E5%A4%A7%E9%B2%AB%E5%BC%80%E5%B1%80%E7%84%B6%E5%90%8E%E5%B0%B1%E6%B2%A1%E6%9C%89%E7%84%B6%E5%90%8E%E4%BA%86/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>阴天18度的三一水库，开局半小时就擒下半斤大板鲫，本以为要爆护，结果长竿抛了一上午再无一口，换短竿钓粘米苦守三小时，最终只添几条小奶鲫，收获惨淡却心态平和。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2026/10/24/2026-10-24-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E5%8D%8A%E6%96%A4%E5%A4%A7%E9%B2%AB%E5%BC%80%E5%B1%80%E7%84%B6%E5%90%8E%E5%B0%B1%E6%B2%A1%E6%9C%89%E7%84%B6%E5%90%8E%E4%BA%86/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1646,7 +1648,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">297</span>
+          <span class="site-state-item-count">298</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="preconnect" href="https://fonts.loli.net">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://img.bytefisher.top">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#37c6c0">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#37c6c0">
+
+<meta http-equiv="Permissions-Policy" content="encrypted-media=*">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="codeva-7SG6ROHyTg">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"></noscript>
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
+
+  <meta name="description" content="前 12 篇收官后的第一篇实战补遗。ByteBot 此前没有实时感知能力，用户问&quot;现在几点&quot;&quot;今天天气&quot;只能靠模型猜甚至编造，且 IP 定位常常不准。本篇用上下文注入（system prompt 实时信息段）+ 对话引导 + 浏览器定位三层方案：Intl 时区时间、IP 定位 + Open-Meteo 免费天气、预置城市表识别用户报出的城市并按 IP 记住 30 分钟、navigator.geol">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ByteFisher AI 工程化深度实战（十三）：ByteBot 实时上下文注入实战——时间与天气">
+<meta property="og:url" content="https://www.bytefisher.top/2026/11/15/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-13-ByteBot%E5%AE%9E%E6%97%B6%E4%B8%8A%E4%B8%8B%E6%96%87%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98/">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="前 12 篇收官后的第一篇实战补遗。ByteBot 此前没有实时感知能力，用户问&quot;现在几点&quot;&quot;今天天气&quot;只能靠模型猜甚至编造，且 IP 定位常常不准。本篇用上下文注入（system prompt 实时信息段）+ 对话引导 + 浏览器定位三层方案：Intl 时区时间、IP 定位 + Open-Meteo 免费天气、预置城市表识别用户报出的城市并按 IP 记住 30 分钟、navigator.geol">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-11-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-11-14T20:35:52.598Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="series:ByteFisher AI工程化深度实战教程">
+<meta property="article:tag" content="教程">
+<meta name="twitter:card" content="summary">
+  <meta name="keywords" content="ByteBot,实时上下文,时间天气,上下文注入,对话引导,城市识别,浏览器定位,navigator.geolocation,system prompt,IP定位,Open-Meteo,地理编码,懒加载,TTL缓存,超时降级,函数调用,ByteFisher,淡水鱼">
+
+<link rel="canonical" href="https://www.bytefisher.top/2026/11/15/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-13-ByteBot%E5%AE%9E%E6%97%B6%E4%B8%8A%E4%B8%8B%E6%96%87%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"ByteFisher AI 工程化深度实战（十三）：ByteBot 实时上下文注入实战——时间与天气","description":"前 12 篇收官后的第一篇实战补遗。ByteBot 此前没有实时感知能力，用户问\\\"现在几点\\\"\\\"今天天气\\\"只能靠模型猜甚至编造，且 IP 定位常常不准。本篇用上下文注入（system prompt 实时信息段）+ 对话引导 + 浏览器定位三层方案：Intl 时区时间、IP 定位 + Open-Meteo 免费天气、预置城市表识别用户报出的城市并按 IP 记住 30 分钟、navigator.","url":"https://www.bytefisher.top/2026/11/15/ByteFisher-AI工程化深度实战-13-ByteBot实时上下文注入实战/","datePublished":"2026-11-14T16:00:00.000Z","dateModified":"2026-11-14T20:35:52.598Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/11/15/ByteFisher-AI工程化深度实战-13-ByteBot实时上下文注入实战/"},"keywords":"AI, 教程, series:ByteFisher AI工程化深度实战教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"AI","item":"https://www.bytefisher.top/categories/AI/"},{"@type":"ListItem","position":3,"name":"ByteFisher AI 工程化深度实战（十三）：ByteBot 实时上下文注入实战——时间与天气"}]}</script>
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ByteFisher AI 工程化深度实战（十三）：ByteBot 实时上下文注入实战——时间与天气 | ByteFisher</title>
+  
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dc50e0997d43c3a8dbf2afdb3fdff233";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#37c6c0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-tutorials">
+
+    <a href="/tutorials/" rel="section"><i class="fa fa-book fa-fw"></i>教程<span class="badge">10</span></a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>钓鱼专题<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-aigames">
+
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">77</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">298</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">64</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>rss</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/11/15/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-13-ByteBot%E5%AE%9E%E6%97%B6%E4%B8%8A%E4%B8%8B%E6%96%87%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.webp">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ByteFisher AI 工程化深度实战（十三）：ByteBot 实时上下文注入实战——时间与天气
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-11-15 00:00:00" itemprop="dateCreated datePublished" datetime="2026-11-15T00:00:00+08:00">2026-11-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2026/11/15/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-13-ByteBot%E5%AE%9E%E6%97%B6%E4%B8%8A%E4%B8%8B%E6%96%87%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2026/11/15/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-13-ByteBot%E5%AE%9E%E6%97%B6%E4%B8%8A%E4%B8%8B%E6%96%87%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">前 12 篇收官后的第一篇实战补遗。ByteBot 此前没有实时感知能力，用户问"现在几点""今天天气"只能靠模型猜甚至编造，且 IP 定位常常不准。本篇用上下文注入（system prompt 实时信息段）+ 对话引导 + 浏览器定位三层方案：Intl 时区时间、IP 定位 + Open-Meteo 免费天气、预置城市表识别用户报出的城市并按 IP 记住 30 分钟、navigator.geolocation 浏览器坐标定位、懒加载关键词与短跟进触发、TTL 缓存、超时降级，并给出注入 vs 函数调用选型对比与完整测试验证。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>第 12 篇是本系列收官篇，但这不代表 ByteBot 就此定型。上线后收到一个高频吐槽：<strong>问它”现在几点””今天天气怎么样”，它会一本正经地报一个过时甚至编造的时间天气</strong>——因为 ByteBot 的 system prompt 里没有任何实时信息，模型只能凭训练数据”猜”。</p>
+<p>本篇作为<strong>实战补遗</strong>，记录我给 ByteBot 补上”实时上下文”能力的完整过程：方案选型（上下文注入 vs 函数调用）、核心实现（时间、IP 定位、城市识别与地理编码、浏览器坐标、缓存、降级）、对话引导与浏览器定位、懒加载优化、测试验证，以及后续升级路径。</p>
+<h2 id="一、痛点与目标"><a href="#一、痛点与目标" class="headerlink" title="一、痛点与目标"></a>一、痛点与目标</h2><p>改造前 ByteBot 的 system prompt 结构（<code>api/chat.js</code> 的 <code>buildAdaptiveSystemPrompt</code>）：</p>
+<ul>
+<li>角色设定（ByteFisher 博客 AI 助手）</li>
+<li>意图分类 + 全局规则</li>
+<li>博客概况（文章数、小游戏、相册等）</li>
+<li>候选文章列表</li>
+</ul>
+<p>全部是<strong>静态信息</strong>。模型回答”现在几点”时只能根据训练数据估算，回答”今天天气”时基本是编造——这对一个主打”程序员 + 钓鱼”人设的助手来说很伤体验（钓鱼佬最关心的就是天气气压）。</p>
+<p>改造目标（优先级排序）：</p>
+<ol>
+<li><strong>时间</strong>：准确、不编造，用户无感</li>
+<li><strong>天气</strong>：能拿到真实数据，失败时如实说明而不是编造</li>
+<li><strong>定位准确</strong>：IP 定位可能不准（VPN、运营商 NAT、代理出口），要能给用户纠偏的手段</li>
+<li><strong>零回归</strong>：不影响现有流式链路，前端零改动</li>
+<li><strong>低成本</strong>：免费数据源、懒加载、缓存，不拖慢对话</li>
+</ol>
+<h2 id="二、方案选型：注入-vs-函数调用"><a href="#二、方案选型：注入-vs-函数调用" class="headerlink" title="二、方案选型：注入 vs 函数调用"></a>二、方案选型：注入 vs 函数调用</h2><p>实现”实时能力”有两条主流路线，我做了完整对比：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>方案 A：上下文注入</th>
+<th>方案 B：函数调用（Tools）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>原理</td>
+<td>请求时服务端拉取信息，拼进 system prompt</td>
+<td>注册 <code>tools</code>，模型按需调 API，结果回填后二次请求</td>
+</tr>
+<tr>
+<td>实现成本</td>
+<td>低，只动服务端组装逻辑</td>
+<td>高，要处理 tool_calls 分片 + 二次调用</td>
+</tr>
+<tr>
+<td>前端改动</td>
+<td>零</td>
+<td>需适配 SSE 流中的 tool_calls 事件</td>
+</tr>
+<tr>
+<td>Token 开销</td>
+<td>每次请求多几十 token</td>
+<td>按需，几乎为零</td>
+</tr>
+<tr>
+<td>时效性</td>
+<td>请求时点快照，够用</td>
+<td>可追问用户地点，更精确</td>
+</tr>
+<tr>
+<td>失败兜底</td>
+<td>缺失字段走”如实说明”规则</td>
+<td>模型自己决定是否降级</td>
+</tr>
+</tbody></table>
+<p>最终选 <strong>方案 A</strong>，理由很工程化：ByteBot 的定位是博客助手，时间&#x2F;天气属于”背景信息”而非”交互工具”，每次请求花几十 token 换”永远在线”的确定性，比函数调用的流式复杂度划算得多。函数调用留作后续 MCP 化升级（见文末）。</p>
+<p>方案 A 落地后暴露了第二个问题：<strong>IP 定位可能不准</strong>——VPN、公司 NAT、4G&#x2F;5G 运营商出口，都可能让 IP 归属地落在别的城市。所以我再加了两层定位：<strong>对话引导</strong>（用户报出所在城市就按城市取天气）和<strong>浏览器定位</strong>（用户授权后前端 <code>navigator.geolocation</code> 直接拿精确坐标）。最终定位优先级是：<strong>用户明确报的城市 → 浏览器坐标 → IP 记忆城市 → IP 兜底</strong>。这是”注入框架 + 城市识别 + 浏览器定位”的混合形态，也是本文真正的主角。</p>
+<h2 id="三、整体设计"><a href="#三、整体设计" class="headerlink" title="三、整体设计"></a>三、整体设计</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">用户提问 ──► 前端 ai-assistant.js</span><br><span class="line">                │ 命中天气关键词时，自动请求浏览器定位（授权一次，拒绝不反复打扰）</span><br><span class="line">                │ 获取到坐标 → 随请求发送 location:&#123;latitude, longitude&#125;</span><br><span class="line">                ▼</span><br><span class="line">           api/chat.js</span><br><span class="line">                ├─ sanitizeMessages + sanitizeLocation（校验坐标合法性）</span><br><span class="line">                ├─ getPostsIndex（缓存）</span><br><span class="line">                ├─ getContextInfo(req, messages, location)   ← 传入整个会话 + 坐标</span><br><span class="line">                │    ├─ 当前时间（Intl, Asia/Shanghai）</span><br><span class="line">                │    └─ 天气定位（懒加载判定）</span><br><span class="line">                │         ├─ 会话含城市？──► 城市天气（Open-Meteo 地理编码→天气）</span><br><span class="line">                │         ├─ 浏览器坐标？──► 坐标天气（Open-Meteo 按 lat/lon）</span><br><span class="line">                │         ├─ IP 记忆城市？──► 城市天气</span><br><span class="line">                │         └─ IP 兜底 ──► ip-api geoip → 城市天气</span><br><span class="line">                │     TTL 缓存(30min) 超时3s 失败→null</span><br><span class="line">                ▼</span><br><span class="line">           buildAdaptiveSystemPrompt(+实时信息段)</span><br><span class="line">                ▼</span><br><span class="line">           DeepSeek 流式 → SSE → 前端</span><br></pre></td></tr></table></figure>
+
+<p>关键设计决策：</p>
+<ol>
+<li><strong>天气懒加载</strong>：只有命中天气关键词、或会话里出现了城市、或短跟进问句（如”明天呢”），才取定位和天气</li>
+<li><strong>定位优先级</strong>：用户明确报的城市 &gt; 浏览器坐标 &gt; IP 记忆城市 &gt; IP 兜底——显式意图永远最高</li>
+<li><strong>浏览器定位</strong>：用户授权后精确到米；未授权&#x2F;拒绝&#x2F;超时静默回退，坐标只在需要时随请求发送，不落库</li>
+<li><strong>对话引导优先</strong>：用户告知城市后直接按城市出天气，并把城市按 IP 记住 30 分钟，后续”明天呢”不再追问</li>
+<li><strong>时间恒定注入</strong>：时间在服务端本地生成，零外部依赖、零延迟</li>
+<li><strong>IP 定位兜底</strong>：从未定位时用 <code>X-Forwarded-For</code> 定位，system prompt 标注”按 IP 定位，可能不准确”，并引导模型询问用户所在城市</li>
+<li><strong>三层兜底</strong>：天气获取失败 → 不注入天气行，只留时间；时间生成异常 → 整个实时段跳过，降级为改造前</li>
+<li><strong>隐私友好</strong>：所有定位数据仅存在于内存缓存，<strong>不落库、不记录日志</strong></li>
+</ol>
+<h2 id="四、核心实现"><a href="#四、核心实现" class="headerlink" title="四、核心实现"></a>四、核心实现</h2><h3 id="4-1-时间：Intl-时区格式化（含一个坑）"><a href="#4-1-时间：Intl-时区格式化（含一个坑）" class="headerlink" title="4.1 时间：Intl 时区格式化（含一个坑）"></a>4.1 时间：Intl 时区格式化（含一个坑）</h3><p>新建 <code>api/lib/context-info.js</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getNowText</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> now = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">    <span class="keyword">const</span> parts = <span class="keyword">new</span> <span class="title class_">Intl</span>.<span class="title class_">DateTimeFormat</span>(<span class="string">&#x27;zh-CN&#x27;</span>, &#123;</span><br><span class="line">      <span class="attr">timeZone</span>: <span class="string">&#x27;Asia/Shanghai&#x27;</span>,</span><br><span class="line">      <span class="attr">year</span>: <span class="string">&#x27;numeric&#x27;</span>, <span class="attr">month</span>: <span class="string">&#x27;long&#x27;</span>, <span class="attr">day</span>: <span class="string">&#x27;numeric&#x27;</span>,</span><br><span class="line">      <span class="attr">weekday</span>: <span class="string">&#x27;long&#x27;</span>, <span class="attr">hour</span>: <span class="string">&#x27;2-digit&#x27;</span>, <span class="attr">minute</span>: <span class="string">&#x27;2-digit&#x27;</span>, <span class="attr">hour12</span>: <span class="literal">false</span></span><br><span class="line">    &#125;).<span class="title function_">formatToParts</span>(now);</span><br><span class="line">    <span class="keyword">const</span> base = parts.<span class="title function_">map</span>(<span class="function"><span class="params">part</span> =&gt;</span> part.<span class="property">value</span>).<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;base.replace(/(星期[一二三四五六日])(?=\d)/, <span class="string">&#x27;$1 &#x27;</span>)&#125;</span>（北京时间）`</span>;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>踩坑记录</strong>：第一版我用 <code>formatToParts</code> 后只按 <code>part.type</code> 取值拼接，结果输出 <code>2026年819日</code>——因为 zh-CN 下 <code>month: &#39;long&#39;</code> 的”月”是 <strong>literal 部件</strong>（值为 <code>8</code> + 字面量 <code>月</code>），<code>day</code> 同理。只取 type 会把”月&#x2F;日”字面量丢掉。<strong>正解是直接拼接所有 <code>part.value</code></strong>，保持 ICU 输出的原始顺序。</p>
+</blockquote>
+<h3 id="4-2-IP-解析与过滤"><a href="#4-2-IP-解析与过滤" class="headerlink" title="4.2 IP 解析与过滤"></a>4.2 IP 解析与过滤</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getClientIp</span>(<span class="params">req</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> xff = <span class="title class_">String</span>(req.<span class="property">headers</span>[<span class="string">&#x27;x-forwarded-for&#x27;</span>] || <span class="string">&#x27;&#x27;</span>).<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>)[<span class="number">0</span>].<span class="title function_">trim</span>();</span><br><span class="line">  <span class="keyword">const</span> raw = xff || (req.<span class="property">socket</span> &amp;&amp; req.<span class="property">socket</span>.<span class="property">remoteAddress</span>) || <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="keyword">const</span> ip = raw.<span class="title function_">replace</span>(<span class="regexp">/^\[|\]$/g</span>, <span class="string">&#x27;&#x27;</span>).<span class="title function_">split</span>(<span class="string">&#x27;%&#x27;</span>)[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!ip || ip === <span class="string">&#x27;::1&#x27;</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="comment">// 私有/保留地址无法定位，直接跳过天气</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="regexp">/^(127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|0\.)/</span>.<span class="title function_">test</span>(ip)) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">return</span> ip;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要点：取 <code>X-Forwarded-For</code> 第一段（最接近真实客户端）；剔除 <code>::1</code> 和所有私有网段——本地预览时不会白打定位 API；IPv6 去掉 <code>[]</code> 与 <code>%</code> 接口后缀。</p>
+<h3 id="4-3-定位-天气（双免费源，无需-key）"><a href="#4-3-定位-天气（双免费源，无需-key）" class="headerlink" title="4.3 定位 + 天气（双免费源，无需 key）"></a>4.3 定位 + 天气（双免费源，无需 key）</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">GEO_API</span> = <span class="string">&#x27;http://ip-api.com/json/&#123;ip&#125;?lang=zh-CN&amp;fields=status,city,lat,lon&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">WEATHER_API</span> = <span class="string">&#x27;https://api.open-meteo.com/v1/forecast?latitude=&#123;lat&#125;&amp;longitude=&#123;lon&#125;&#x27;</span></span><br><span class="line">  + <span class="string">&#x27;&amp;current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m&amp;timezone=Asia%2FShanghai&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>ip-api.com</strong>：免费、无 key，返回城市 + 经纬度。硬限制 45 次&#x2F;分，用 TTL 缓存缓解</li>
+<li><strong>Open-Meteo</strong>：免费、无 key，覆盖全球含中国，<code>current</code> 参数一次拿温度&#x2F;湿度&#x2F;天气码&#x2F;风速&#x2F;风向</li>
+</ul>
+<p><code>weather_code</code> 是 WMO 编码，映射成中文描述（<code>0 晴 / 2 多云 / 61 小雨 / 95 雷阵雨</code>…），风向转 8 方位（北&#x2F;东北&#x2F;东…），风速 km&#x2F;h 转风力等级（蒲福风级近似表）。</p>
+<h3 id="4-4-懒加载：关键词触发"><a href="#4-4-懒加载：关键词触发" class="headerlink" title="4.4 懒加载：关键词触发"></a>4.4 懒加载：关键词触发</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">WEATHER_KEYWORDS</span> = [<span class="string">&#x27;天气&#x27;</span>,<span class="string">&#x27;气温&#x27;</span>,<span class="string">&#x27;温度&#x27;</span>,<span class="string">&#x27;下雨&#x27;</span>,<span class="string">&#x27;雪&#x27;</span>,<span class="string">&#x27;风&#x27;</span>,<span class="string">&#x27;热&#x27;</span>,<span class="string">&#x27;冷&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;晴&#x27;</span>,<span class="string">&#x27;阴&#x27;</span>,<span class="string">&#x27;多云&#x27;</span>,<span class="string">&#x27;今天怎么样&#x27;</span>,<span class="string">&#x27;适合钓鱼&#x27;</span>,<span class="string">&#x27;湿度&#x27;</span>, ...];</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">shouldFetchWeather</span>(<span class="params">question</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable constant_">WEATHER_KEYWORDS</span>.<span class="title function_">some</span>(<span class="function"><span class="params">k</span> =&gt;</span> <span class="title class_">String</span>(question||<span class="string">&#x27;&#x27;</span>).<span class="title function_">toLowerCase</span>().<span class="title function_">includes</span>(k));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>设计取舍：<code>适合钓鱼</code> 也会触发——钓鱼佬问这个，本质上就是想看天气，值得一次外部调用。而”现在几点””聊聊 Unity”这类问题完全不走网络。</p>
+<p>懒加载还有一个关键补充：<strong>触发条件不止关键词</strong>。只要会话里出现过城市（说明话题已进入天气&#x2F;位置），或者是一句短跟进（如”明天呢””后天呢”），也会触发——否则”明天呢”会被漏掉。</p>
+<h3 id="4-5-对话引导：城市识别与地理编码"><a href="#4-5-对话引导：城市识别与地理编码" class="headerlink" title="4.5 对话引导：城市识别与地理编码"></a>4.5 对话引导：城市识别与地理编码</h3><p>这是本次改造的核心新增。定位优先级：<strong>会话城市 → 该 IP 记忆的城市 → IP 兜底</strong>。</p>
+<p><strong>① 城市识别：预置城市表 + includes 匹配</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">CITY_LIST</span> = [<span class="string">&#x27;北京&#x27;</span>,<span class="string">&#x27;上海&#x27;</span>,<span class="string">&#x27;杭州&#x27;</span>,<span class="string">&#x27;成都&#x27;</span>,<span class="string">&#x27;义乌&#x27;</span>, ...]; <span class="comment">// 约 150 城</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">detectCityFromMessages</span>(<span class="params">messages</span>) &#123;</span><br><span class="line">  <span class="comment">// 从最新用户消息往旧扫，命中即返回城市</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = messages.<span class="property">length</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">    <span class="keyword">const</span> m = messages[i];</span><br><span class="line">    <span class="keyword">if</span> (!m || m.<span class="property">role</span> !== <span class="string">&#x27;user&#x27;</span>) <span class="keyword">continue</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> city <span class="keyword">of</span> <span class="variable constant_">CITY_LIST</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (m.<span class="property">content</span>.<span class="title function_">indexOf</span>(city) !== -<span class="number">1</span>) <span class="keyword">return</span> city;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为什么用预置城市表而不是让模型抽取？三点：确定性（同样输入永远同样输出）、可测试（单元测试直接断言）、零 token 成本。<code>includes</code> 全名匹配误命中率极低（”我在成都””成都天气””杭州好玩吗”都正确命中）。表里收录直辖市 + 省会 + 计划单列市 + 主要地级市（含义乌、东阳这些钓鱼大省常见城市）。</p>
+<p><strong>② 城市天气：Open-Meteo 地理编码（同样免费无 key）</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">GEOCODING_API</span> =</span><br><span class="line">  <span class="string">&#x27;https://geocoding-api.open-meteo.com/v1/search?name=&#123;city&#125;&amp;count=1&amp;language=zh&amp;format=json&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getWeatherByCity</span>(<span class="params">city</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> cached = weatherByCityCache.<span class="title function_">get</span>(city);</span><br><span class="line">  <span class="keyword">if</span> (cached &amp;&amp; <span class="title class_">Date</span>.<span class="title function_">now</span>() - cached.<span class="property">at</span> &lt; <span class="number">30</span>*<span class="number">60</span>*<span class="number">1000</span>) <span class="keyword">return</span> cached.<span class="property">weatherText</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> data = <span class="keyword">await</span> <span class="title function_">fetchJson</span>(<span class="variable constant_">GEOCODING_API</span>.<span class="title function_">replace</span>(<span class="string">&#x27;&#123;city&#125;&#x27;</span>, <span class="built_in">encodeURIComponent</span>(city)));</span><br><span class="line">  <span class="keyword">if</span> (!data || !data.<span class="property">results</span> || !data.<span class="property">results</span>[<span class="number">0</span>]) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">const</span> loc = data.<span class="property">results</span>[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">const</span> weather = <span class="keyword">await</span> <span class="title function_">getWeatherByCoords</span>(loc.<span class="property">latitude</span>, loc.<span class="property">longitude</span>); <span class="comment">// 复用</span></span><br><span class="line">  <span class="comment">// 拼 &quot;城市 描述 温度 湿度 风&quot; 写 weatherByCityCache</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一次地理编码拿到经纬度后，直接复用 4.3 的 <code>getWeatherByCoords</code>，两个免费源（ip-api + Open-Meteo 全家桶）零密钥组合。</p>
+<p><strong>③ 城市记忆：按 IP 记 30 分钟</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cityByIpCache.<span class="title function_">set</span>(ip, &#123; city, <span class="attr">at</span>: <span class="title class_">Date</span>.<span class="title function_">now</span>() &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>用户报一次城市后，同一 IP 的后续提问（”明天呢””后天呢”）直接命中缓存城市，<strong>不会再追问一遍</strong>——这是”对话引导”体验顺滑的关键。</p>
+<p><strong>④ 优先级汇总</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> conversationCity = <span class="title function_">detectCityFromMessages</span>(messages);</span><br><span class="line"><span class="keyword">const</span> cachedCity      = <span class="title function_">getCachedCityByIp</span>(ip);</span><br><span class="line">city = conversationCity || cachedCity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> shortFollowUp = question.<span class="title function_">trim</span>().<span class="property">length</span> &lt;= <span class="number">6</span>;</span><br><span class="line"><span class="keyword">const</span> wantsWeather  = <span class="title function_">shouldFetchWeather</span>(question)</span><br><span class="line">                   || !!conversationCity</span><br><span class="line">                   || (!!cachedCity &amp;&amp; shortFollowUp);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>杭州天气怎么样</code> → 会话命中 → 杭州</li>
+<li><code>我在成都</code> → 会话命中 → 成都（模型会顺势带一句当地天气）</li>
+<li><code>明天呢</code> → 历史有杭州 → 短跟进触发 → 杭州</li>
+<li><code>推荐点Unity教程</code> → 无关键词、无会话城市、非短跟进 → 不触发（不浪费 token）</li>
+</ul>
+<h3 id="4-7-TTL-缓存与降级"><a href="#4-7-TTL-缓存与降级" class="headerlink" title="4.7 TTL 缓存与降级"></a>4.7 TTL 缓存与降级</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getWeatherText</span>(<span class="params">ip</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> cached = contextCache.<span class="title function_">get</span>(ip);</span><br><span class="line">  <span class="keyword">if</span> (cached &amp;&amp; <span class="title class_">Date</span>.<span class="title function_">now</span>() - cached.<span class="property">at</span> &lt; <span class="number">30</span>*<span class="number">60</span>*<span class="number">1000</span>) <span class="keyword">return</span> cached.<span class="property">weatherText</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> geo = <span class="keyword">await</span> <span class="title function_">getGeoByIp</span>(ip);            <span class="comment">// 单次 3s 超时</span></span><br><span class="line">  <span class="keyword">if</span> (!geo) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">const</span> weather = <span class="keyword">await</span> <span class="title function_">getWeatherByCoords</span>(geo.<span class="property">lat</span>, geo.<span class="property">lon</span>);  <span class="comment">// 单次 3s 超时</span></span><br><span class="line">  <span class="keyword">if</span> (!weather) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="comment">// 拼 &quot;城市 描述 温度 湿度 风&quot; 并写缓存</span></span><br><span class="line">  <span class="keyword">return</span> text;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>每次外部调用用 <code>AbortController</code> + 3s 超时，<strong>失败静默返回 null</strong>，绝不阻塞对话主流程</li>
+<li>四张内存缓存（IP 天气 &#x2F; IP 城市 &#x2F; 城市天气 &#x2F; 坐标天气）均 30 分钟 TTL，超过 500 条淘汰最旧（Vercel 冷启动会丢，无所谓，本来就是加速项）</li>
+<li>降级路径全链可用：懒加载不触发 → 只注入时间；定位&#x2F;天气失败 → 只注入时间；<code>getContextInfo</code> 整体再包一层 try&#x2F;catch → 零回归</li>
+</ul>
+<h3 id="4-6-浏览器定位：前端坐标-后端坐标路径"><a href="#4-6-浏览器定位：前端坐标-后端坐标路径" class="headerlink" title="4.6 浏览器定位：前端坐标 + 后端坐标路径"></a>4.6 浏览器定位：前端坐标 + 后端坐标路径</h3><p>前两层定位（会话城市、IP）都有局限：用户没报城市时，IP 在移动网络 &#x2F; NAT 下可能偏差几百公里。终极方案是<strong>让用户自己授权定位</strong>——浏览器 <code>navigator.geolocation</code> 在授权后可精确到几十米。</p>
+<p>前端 <code>source/js/ai-assistant.js</code> 的改动（约 40 行）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cachedLocation = <span class="literal">null</span>;   <span class="comment">// 本次会话内坐标只取一次</span></span><br><span class="line"><span class="keyword">var</span> locationDenied = <span class="literal">false</span>;  <span class="comment">// 用户拒绝后不再反复弹授权框</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">isWeatherLike</span>(<span class="params">text</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> t = <span class="title class_">String</span>(text || <span class="string">&#x27;&#x27;</span>).<span class="title function_">toLowerCase</span>();</span><br><span class="line">  <span class="keyword">return</span> <span class="regexp">/天气|气温|温度|下雨|雨|雪|刮风|风|热|冷|晴|阴|多云|湿度|最高温|最低温|适合钓鱼|好钓鱼/</span>.<span class="title function_">test</span>(t);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getLocationIfWeatherLike</span>(<span class="params">text</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span>(<span class="params">resolve</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="title function_">isWeatherLike</span>(text) || cachedLocation || locationDenied) <span class="keyword">return</span> <span class="title function_">resolve</span>(cachedLocation);</span><br><span class="line">    <span class="keyword">if</span> (!navigator.<span class="property">geolocation</span>) &#123; locationDenied = <span class="literal">true</span>; <span class="keyword">return</span> <span class="title function_">resolve</span>(<span class="literal">null</span>); &#125;</span><br><span class="line">    navigator.<span class="property">geolocation</span>.<span class="title function_">getCurrentPosition</span>(</span><br><span class="line">      <span class="keyword">function</span>(<span class="params">pos</span>) &#123;</span><br><span class="line">        cachedLocation = &#123; <span class="attr">latitude</span>: pos.<span class="property">coords</span>.<span class="property">latitude</span>, <span class="attr">longitude</span>: pos.<span class="property">coords</span>.<span class="property">longitude</span> &#125;;</span><br><span class="line">        <span class="title function_">resolve</span>(cachedLocation);</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="keyword">function</span>(<span class="params"></span>) &#123; locationDenied = <span class="literal">true</span>; <span class="title function_">resolve</span>(<span class="literal">null</span>); &#125;,   <span class="comment">// 拒绝/超时 → 静默回退</span></span><br><span class="line">      &#123; <span class="attr">timeout</span>: <span class="number">3000</span>, <span class="attr">maximumAge</span>: <span class="number">10</span> * <span class="number">60</span> * <span class="number">1000</span> &#125;           <span class="comment">// 3s 超时 + 10min 缓存</span></span><br><span class="line">    );</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// send() 内：命中天气关键词时先取坐标，有坐标才放进请求体</span></span><br><span class="line"><span class="title function_">getLocationIfWeatherLike</span>(text).<span class="title function_">then</span>(<span class="keyword">function</span>(<span class="params">location</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> body = &#123; <span class="attr">messages</span>: messages, <span class="attr">stream</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">  <span class="keyword">if</span> (location) body.<span class="property">location</span> = location;</span><br><span class="line">  <span class="title function_">fetch</span>(<span class="variable constant_">CONFIG</span>.<span class="property">apiEndpoint</span>, &#123; <span class="comment">/* ... */</span> <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(body) &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>三个细节：只在<strong>命中天气关键词</strong>时触发定位（不打扰普通聊天）；授权弹窗<strong>一次性</strong>，用户拒绝或超时后 <code>locationDenied=true</code> 本会话不再请求；坐标<strong>只在本次请求携带</strong>，前端不存储。</p>
+<p>上线踩坑后迭代成<strong>显式按钮 + Permissions API</strong>：Chrome 对连续忽略 3 次的授权会进入一周”静默块”——再调 <code>getCurrentPosition</code> 也不弹框，只剩 IP 兜底，用户毫无感知。所以不再静默请求，而是先查 <code>navigator.permissions.query({name:&#39;geolocation&#39;})</code>：<code>granted</code> 静默取坐标；<code>prompt</code> 时插入一条带 <strong>“允许定位”按钮</strong>的机器人消息，点击（全新用户手势 + 明确意图）才真正请求，成功后用坐标<strong>重发当前问题</strong>；<code>denied</code> 则提示去地址栏权限图标处开启。另一个教训是<strong>静态资源缓存失效</strong>：ai-assistant.js 靠 <code>body-end.swig</code> 里硬编码的 <code>aiVersion</code> 加查询串做 cache-bust，改代码必须同步升版本号，否则浏览器&#x2F;Cloudflare 在 <code>max-age=14400</code> 窗口内继续跑旧 JS——“部署成功但功能没上”九成是这个原因。</p>
+<p>后端 <code>api/chat.js</code> + <code>api/lib/context-info.js</code> 接收坐标：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sanitizeLocation</span>(<span class="params">raw</span>) &#123;          <span class="comment">// 防御：坐标必须合法</span></span><br><span class="line">  <span class="keyword">if</span> (!raw || <span class="keyword">typeof</span> raw !== <span class="string">&#x27;object&#x27;</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">const</span> lat = <span class="title class_">Number</span>(raw.<span class="property">latitude</span>), lon = <span class="title class_">Number</span>(raw.<span class="property">longitude</span>);</span><br><span class="line">  <span class="keyword">if</span> (!<span class="title class_">Number</span>.<span class="built_in">isFinite</span>(lat) || !<span class="title class_">Number</span>.<span class="built_in">isFinite</span>(lon)) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">if</span> (lat &lt; -<span class="number">90</span> || lat &gt; <span class="number">90</span> || lon &lt; -<span class="number">180</span> || lon &gt; <span class="number">180</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">latitude</span>: lat, <span class="attr">longitude</span>: lon &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getWeatherTextByCoords</span>(<span class="params">lat, lon</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> key = <span class="string">`<span class="subst">$&#123;<span class="built_in">Number</span>(lat).toFixed(<span class="number">2</span>)&#125;</span>,<span class="subst">$&#123;<span class="built_in">Number</span>(lon).toFixed(<span class="number">2</span>)&#125;</span>`</span>;  <span class="comment">// 坐标取两位小数作缓存键</span></span><br><span class="line">  <span class="keyword">const</span> cached = weatherByCoordsCache.<span class="title function_">get</span>(key);</span><br><span class="line">  <span class="keyword">if</span> (cached &amp;&amp; <span class="title class_">Date</span>.<span class="title function_">now</span>() - cached.<span class="property">at</span> &lt; <span class="variable constant_">WEATHER_CACHE_TTL</span>) <span class="keyword">return</span> cached.<span class="property">weatherText</span>;</span><br><span class="line">  <span class="keyword">const</span> weather = <span class="keyword">await</span> <span class="title function_">getWeatherByCoords</span>(lat, lon);   <span class="comment">// Open-Meteo 直接按 lat/lon</span></span><br><span class="line">  <span class="keyword">if</span> (!weather) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">const</span> text = <span class="string">`你所在位置 <span class="subst">$&#123;weather.description&#125;</span> <span class="subst">$&#123;weather.temperature&#125;</span>°C，湿度 <span class="subst">$&#123;weather.humidity&#125;</span>%，<span class="subst">$&#123;weather.windText&#125;</span>`</span>;</span><br><span class="line">  weatherByCoordsCache.<span class="title function_">set</span>(key, &#123; <span class="attr">weatherText</span>: text, <span class="attr">at</span>: <span class="title class_">Date</span>.<span class="title function_">now</span>() &#125;);</span><br><span class="line">  <span class="title function_">evictCache</span>(weatherByCoordsCache);</span><br><span class="line">  <span class="keyword">return</span> text;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>getContextInfo</code> 的定位优先级改为<strong>四级级联</strong>，前一级取不到就滑到下一级：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> conversationCity = <span class="title function_">detectCityFromMessages</span>(messages);   <span class="comment">// ① 会话中用户报的城市</span></span><br><span class="line"><span class="keyword">const</span> coords = <span class="title function_">sanitizeLocation</span>(location);                   <span class="comment">// ② 浏览器坐标</span></span><br><span class="line"><span class="keyword">const</span> cachedCity = <span class="title function_">getCachedCityByIp</span>(ip);                    <span class="comment">// ③ IP 记忆城市（30min）</span></span><br><span class="line"><span class="comment">// ④ IP 兜底（ip-api）</span></span><br></pre></td></tr></table></figure>
+
+<p>每一级都只在上一级失败后才尝试，且返回 <code>locationType</code>（<code>coords</code> &#x2F; <code>city</code> &#x2F; <code>ip</code>）供注入段决定天气行的标注文案。用户报过城市时坐标直接跳过——<strong>显式意图永远最高</strong>。</p>
+<h3 id="4-8-注入点：system-prompt-实时信息段"><a href="#4-8-注入点：system-prompt-实时信息段" class="headerlink" title="4.8 注入点：system prompt 实时信息段"></a>4.8 注入点：system prompt 实时信息段</h3><p><code>api/chat.js</code> 的 <code>buildBlogMessages</code> 增加上下文获取，<code>buildAdaptiveSystemPrompt</code> 增加实时信息段。根据定位来源（<code>locationType</code>），天气行有三种形态：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">实时信息（当前请求时点由系统获取，可直接引用，不要自行推测或编造）：</span><br><span class="line">- 当前时间：2026年8月19日星期三 15:28（北京时间）</span><br><span class="line">- 当前天气：你所在位置 晴 29°C，湿度 77%，东北风3级（已按你的实时定位提供）</span><br><span class="line">- 用户询问时间、日期、星期、天气等基本信息时，优先使用以上信息作答。</span><br><span class="line">- 用户若询问天气但未告知所在城市，可礼貌询问所在城市以获得更准确的天气；若已告知，直接按该城市作答。</span><br><span class="line"></span><br><span class="line">天气行按定位来源有三种形态：</span><br><span class="line">浏览器坐标（最高精度）：你所在位置 晴 29°C…（已按你的实时定位提供）</span><br><span class="line">用户告知城市：杭州 多云 32°C…（已按用户所在城市提供）</span><br><span class="line">未告知城市（IP 兜底）：北京 大部晴朗 32°C…（按 IP 定位，可能不准确）</span><br></pre></td></tr></table></figure>
+
+<p>关键在<strong>信任边界与纠偏入口</strong>：坐标&#x2F;城市标注让用户信任数据来源，”按 IP 定位，可能不准确”主动坦白局限并触发询问引导——用户回一句”我在杭州”，下一轮立刻切到杭州天气。天气缺失时该行变成”暂未获取到天气信息；用户若询问天气，请如实说明暂时无法获取，不要编造”。</p>
+<h2 id="五、测试验证"><a href="#五、测试验证" class="headerlink" title="五、测试验证"></a>五、测试验证</h2><p>没有现成的 chat 测试，我补了两层：</p>
+<p><strong>1. 模块单测</strong>（真实调 API）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">getNowText: 2026年8月19日星期三 15:27（北京时间）</span><br><span class="line">[今天天气怎么样] + 坐标(杭州) → 你所在位置 晴 29°C…（locationType=coords）</span><br><span class="line">[我在杭州] + 坐标 → 用户城市优先于坐标（locationType=city）</span><br><span class="line">[今天天气怎么样] 无坐标无城市 → IP 兜底（locationType=ip）</span><br><span class="line">[明天呢]（历史有杭州）→ 杭州（短跟进触发，0ms 缓存）</span><br><span class="line">[随便聊聊]        → 无天气（不浪费 token）</span><br><span class="line">sanitizeLocation: 越界/字符串/空对象 → null；合法坐标 → 通过</span><br><span class="line">getWeatherTextByCoords(30.27,120.16) 真实拉取 ✓；再次调用 0ms 缓存命中（坐标取整命中同一键）</span><br><span class="line">私有IP/本地 → null（跳过天气）；多级 XFF → 取第一段</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 集成测试</strong>（mock DeepSeek，验证 system prompt 真实输出）五组用例：报城市 → 校验”已按用户所在城市提供” + 城市天气 + 询问规则；无城市 → 校验”按 IP 定位，可能不准确” + 询问引导；带坐标 → 校验”已按你的实时定位提供”且无 IP 标注；坐标 vs 城市冲突 → 校验城市优先；<code>明天呢</code> → 校验复用城市天气。全部 PASS。</p>
+<h2 id="六、线上效果"><a href="#六、线上效果" class="headerlink" title="六、线上效果"></a>六、线上效果</h2><p>上线后几个典型交互的表现：</p>
+<table>
+<thead>
+<tr>
+<th>提问</th>
+<th>改造前</th>
+<th>改造后</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>现在几点了</td>
+<td>编造&#x2F;过时时间</td>
+<td>精确到分钟（北京时间）</td>
+</tr>
+<tr>
+<td>今天天气怎么样（未报城市）</td>
+<td>编造”晴天 25℃”</td>
+<td>浏览器坐标&#x2F;城市&#x2F;IP 兜底，按来源标注可信度</td>
+</tr>
+<tr>
+<td>我在杭州 &#x2F; 杭州天气</td>
+<td>无依据</td>
+<td>按城市出准确天气，30 分钟内记住</td>
+</tr>
+<tr>
+<td>明天呢（报过杭州后）</td>
+<td>无依据瞎猜</td>
+<td>复用杭州，无需再问</td>
+</tr>
+<tr>
+<td>明天适合钓鱼吗</td>
+<td>无依据瞎猜</td>
+<td>有真实温度&#x2F;湿度&#x2F;风作为判断依据</td>
+</tr>
+</tbody></table>
+<p>成本与延迟：时间注入零外部依赖、零延迟；天气首次 ~1.5-3s（坐标直查天气最快，地理编码或 IP 定位次之），命中缓存 0ms；且只有”问天气 &#x2F; 会话含城市 &#x2F; 短跟进”才触发。因为懒加载 + 四张 TTL 缓存，<strong>绝大多数对话请求完全无感</strong>，ip-api 45 次&#x2F;分限速从未打满。</p>
+<h2 id="七、演进方向"><a href="#七、演进方向" class="headerlink" title="七、演进方向"></a>七、演进方向</h2><ol>
+<li><strong>函数调用（MCP 化）</strong>：把 <code>get_context_info</code> 做成真正的 function calling，模型按需调用、可追问用户地点，配合流式 tool_calls 处理——这也是第 09 篇 MCP Server 的天然落点</li>
+<li><strong>高德 IP 定位</strong>：免费 ip-api 对部分国内 IP 仍有偏差，可升级高德 IP 定位 API（个人认证 5000 次&#x2F;天）作为 IP 兜底层，精度大幅提升且无需用户授权</li>
+<li><strong>多数据源可插拔</strong>：代码里做成 provider 抽象，需要精度时可换和风&#x2F;心知（Vercel 环境变量注入 key）</li>
+<li><strong>更多实时信息</strong>：博客最近更新、评论区热帖、钓点当前潮汐&#x2F;气压——同一套”上下文注入 + 懒加载 + 缓存 + 降级”框架直接复用</li>
+</ol>
+<h2 id="八、小结"><a href="#八、小结" class="headerlink" title="八、小结"></a>八、小结</h2><p>这次改造最大的收获不是”能报天气了”，而是两个可复用的模式：<strong>把”实时信息”当一等公民注入 system prompt</strong>，用懒加载控制成本、用 TTL 缓存兜底限速、用超时降级保住核心对话；以及**”多层定位 + 引导式纠偏”**——浏览器坐标 &#x2F; 用户报的城市 &#x2F; IP 记忆 &#x2F; IP 兜底四级级联，模型主动坦白”按 IP 定位可能不准”并询问用户，把定位的主动权交还给最清楚自己位置的人。这也是 ByteBot 从”静态知识问答”走向”实时感知助手”的第一步——第 12 篇的 ByteBot v2 架构图上，又多了一个”实时上下文层”。</p>
+
+    </div>
+
+    
+    
+    
+    
+    <div class="post-blog-card" style="margin:1.5em auto 0;padding:.5em .8em;border:1px solid #e8e8e8;border-radius:6px;background:var(--card-bg-color,#fff);display:flex;align-items:center;max-width:400px">
+  <div style="flex:1;min-width:0;text-align:left">
+    <div style="font-size:.8em;font-weight:700;color:#555">ByteFisher</div>
+    <div style="font-size:.68em;color:#999;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">分享编程技术 · 记录钓鱼乐趣</div>
+  </div>
+  <img src="/images/wechat-qcode.webp" alt="扫码关注" style="width:60px;height:60px;border-radius:3px;margin:0 10px;flex-shrink:0">
+  <div style="padding:3px 10px;border:1px solid #fc6423;border-radius:3px;color:#fc6423;font-size:.7em;white-space:nowrap;flex-shrink:0">▸ 扫码关注 ◂</div>
+</div>
+
+    <div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2026/11/08/ByteFisher-AI工程化深度实战-12-综合实战-ByteBot-v2重构/" class="related-post-item" title="ByteFisher AI 工程化深度实战（十二）：综合实战——ByteBot v2 重构"><span class="related-post-title">ByteFisher AI 工程化深度实战（十二）：综合实战——ByteBot v2 重构</span><span class="related-post-date">2026-11-08</span><span class="related-post-desc">本系列收官篇。汇总第1~11篇改造，给出 ByteBot v2 完整架构（混合检索 + 上下文压缩 + 结构化输出 + 多级降级 + 全链路可观测 + 评测闭环），附改造前后质量、成本、延迟对比数据与未来演进方向。</span></a><a href="/2026/11/01/ByteFisher-AI工程化深度实战-11-可观测性与评测/" class="related-post-item" title="ByteFisher AI 工程化深度实战（十一）：LLM 应用可观测性与评测"><span class="related-post-title">ByteFisher AI 工程化深度实战（十一）：LLM 应用可观测性与评测</span><span class="related-post-date">2026-11-01</span><span class="related-post-desc">本系列第11篇。为 ByteBot 接入 Langfuse 全链路追踪，讲解 trace/span 埋点、Prompt 版本管理、效果回归测试与异常告警，把第2~10篇的优化全部变成可度量指标，并给出博客真实请求的追踪示例。</span></a><a href="/2026/10/25/ByteFisher-AI工程化深度实战-10-多Agent编排工程化/" class="related-post-item" title="ByteFisher AI 工程化深度实战（十）：多 Agent 编排工程化"><span class="related-post-title">ByteFisher AI 工程化深度实战（十）：多 Agent 编排工程化</span><span class="related-post-date">2026-10-25</span><span class="related-post-desc">本系列第10篇。把钓鱼日记流水线升级为多 Agent 编排的生产级系统，深入工作流拆分、失败恢复、并行调度、成本与延迟平衡，用真实流水线数据对比单 Agent 与多 Agent。</span></a><a href="/2026/10/18/ByteFisher-AI工程化深度实战-09-自研MCP-Server实战/" class="related-post-item" title="ByteFisher AI 工程化深度实战（九）：自研 MCP Server 实战"><span class="related-post-title">ByteFisher AI 工程化深度实战（九）：自研 MCP Server 实战</span><span class="related-post-date">2026-10-18</span><span class="related-post-desc">本系列第9篇。精读 MCP 协议（JSON-RPC、tools/resources/prompts 三类原语、stdio 与 HTTP 传输），自研一个连接博客数据的 MCP Server（TiDB 鱼获统计、文章检索、Hexo 草稿生成），并接入 Claude/Cursor 演示。</span></a><a href="/2026/10/11/ByteFisher-AI工程化深度实战-08-Agent框架源码剖析-CrewAI/" class="related-post-item" title="ByteFisher AI 工程化深度实战（八）：Agent 框架源码剖析——CrewAI"><span class="related-post-title">ByteFisher AI 工程化深度实战（八）：Agent 框架源码剖析——CrewAI</span><span class="related-post-date">2026-10-11</span><span class="related-post-desc">本系列第8篇。剖析 CrewAI 的 Agent/Task/Crew/Process 编排模型，与 LangGraph 用同一"钓鱼日记生成"场景对比，讲解角色协作框架的取舍，并把 tools/douyin-blog 的串行流程改写为 Crew 协作。</span></a><a href="/2026/10/04/ByteFisher-AI工程化深度实战-07-Agent框架源码剖析-LangGraph/" class="related-post-item" title="ByteFisher AI 工程化深度实战（七）：Agent 框架源码剖析——LangGraph"><span class="related-post-title">ByteFisher AI 工程化深度实战（七）：Agent 框架源码剖析——LangGraph</span><span class="related-post-date">2026-10-04</span><span class="related-post-desc">本系列第7篇。深入 LangGraph 源码，逐层拆解状态图模型、节点执行机制、检查点持久化与流式执行原理，并用一个"钓鱼日记鱼获数据提取 Agent"展示真实落地。</span></a></div></div>
+    <div class="series-nav"><div class="series-nav-title">ByteFisher AI工程化深度实战教程 系列</div><div class="series-nav-progress">第 13/13 篇</div><div class="series-nav-links"><a href="/2026/11/08/ByteFisher-AI工程化深度实战-12-综合实战-ByteBot-v2重构/" class="series-nav-prev">ByteFisher AI 工程化深度实战（十二）：综合实战——ByteBot v2 重构</a></div></div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/%E6%95%99%E7%A8%8B/" rel="tag"># 教程</a>
+              <a href="/tags/series-ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B/" rel="tag"># series:ByteFisher AI工程化深度实战教程</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/11/08/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-12-%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98-ByteBot-v2%E9%87%8D%E6%9E%84/" rel="prev" title="ByteFisher AI 工程化深度实战（十二）：综合实战——ByteBot v2 重构">
+      <i class="fa fa-chevron-left"></i> ByteFisher AI 工程化深度实战（十二）：综合实战——ByteBot v2 重构
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+  <div class="post-share">
+    <span class="post-share-label">分享：</span>
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2026%2F11%2F15%2FByteFisher-AI%25E5%25B7%25A5%25E7%25A8%258B%25E5%258C%2596%25E6%25B7%25B1%25E5%25BA%25A6%25E5%25AE%259E%25E6%2588%2598-13-ByteBot%25E5%25AE%259E%25E6%2597%25B6%25E4%25B8%258A%25E4%25B8%258B%25E6%2596%2587%25E6%25B3%25A8%25E5%2585%25A5%25E5%25AE%259E%25E6%2588%2598%2F&amp;title=ByteFisher%20AI%20%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%EF%BC%9AByteBot%20%E5%AE%9E%E6%97%B6%E4%B8%8A%E4%B8%8B%E6%96%87%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98%E2%80%94%E2%80%94%E6%97%B6%E9%97%B4%E4%B8%8E%E5%A4%A9%E6%B0%94" target="_blank" rel="noopener" title="分享到微博">
+      <i class="fab fa-weibo"></i>
+    </a>
+    <a href="#" onclick="navigator.clipboard.writeText(location.href);var t=this;t.innerHTML='<i class=fa fa-check></i>';setTimeout(function(){t.innerHTML='<i class=fa fa-link></i>'},1500);return false" title="复制链接">
+      <i class="fa fa-link"></i>
+    </a>
+  </div>
+
+  
+  <div class="post-author-bio">
+    <div class="post-author-avatar">
+      <img src="/images/avatar2.gif" alt="淡水鱼">
+    </div>
+    <div class="post-author-info">
+      <div class="post-author-name">淡水鱼</div>
+      <div class="post-author-desc">钓鱼爱好者 &amp; Unity 游戏开发者，分享编程技术与钓鱼经验。</div>
+      <div class="post-author-links">
+        <a href="https://github.com/grj1981" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="/atom.xml" title="RSS 订阅"><i class="fa fa-rss"></i></a>
+        <a href="mailto:271623821@qq.com" title="联系我"><i class="fa fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+          </div>
+          
+    <div class="comments" id="waline-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%97%9B%E7%82%B9%E4%B8%8E%E7%9B%AE%E6%A0%87"><span class="nav-number">1.</span> <span class="nav-text">一、痛点与目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%96%B9%E6%A1%88%E9%80%89%E5%9E%8B%EF%BC%9A%E6%B3%A8%E5%85%A5-vs-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">二、方案选型：注入 vs 函数调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%95%B4%E4%BD%93%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.</span> <span class="nav-text">三、整体设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.</span> <span class="nav-text">四、核心实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E6%97%B6%E9%97%B4%EF%BC%9AIntl-%E6%97%B6%E5%8C%BA%E6%A0%BC%E5%BC%8F%E5%8C%96%EF%BC%88%E5%90%AB%E4%B8%80%E4%B8%AA%E5%9D%91%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 时间：Intl 时区格式化（含一个坑）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-IP-%E8%A7%A3%E6%9E%90%E4%B8%8E%E8%BF%87%E6%BB%A4"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 IP 解析与过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E5%AE%9A%E4%BD%8D-%E5%A4%A9%E6%B0%94%EF%BC%88%E5%8F%8C%E5%85%8D%E8%B4%B9%E6%BA%90%EF%BC%8C%E6%97%A0%E9%9C%80-key%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 定位 + 天气（双免费源，无需 key）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E6%87%92%E5%8A%A0%E8%BD%BD%EF%BC%9A%E5%85%B3%E9%94%AE%E8%AF%8D%E8%A7%A6%E5%8F%91"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 懒加载：关键词触发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-%E5%AF%B9%E8%AF%9D%E5%BC%95%E5%AF%BC%EF%BC%9A%E5%9F%8E%E5%B8%82%E8%AF%86%E5%88%AB%E4%B8%8E%E5%9C%B0%E7%90%86%E7%BC%96%E7%A0%81"><span class="nav-number">4.5.</span> <span class="nav-text">4.5 对话引导：城市识别与地理编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-TTL-%E7%BC%93%E5%AD%98%E4%B8%8E%E9%99%8D%E7%BA%A7"><span class="nav-number">4.6.</span> <span class="nav-text">4.7 TTL 缓存与降级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AE%9A%E4%BD%8D%EF%BC%9A%E5%89%8D%E7%AB%AF%E5%9D%90%E6%A0%87-%E5%90%8E%E7%AB%AF%E5%9D%90%E6%A0%87%E8%B7%AF%E5%BE%84"><span class="nav-number">4.7.</span> <span class="nav-text">4.6 浏览器定位：前端坐标 + 后端坐标路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-8-%E6%B3%A8%E5%85%A5%E7%82%B9%EF%BC%9Asystem-prompt-%E5%AE%9E%E6%97%B6%E4%BF%A1%E6%81%AF%E6%AE%B5"><span class="nav-number">4.8.</span> <span class="nav-text">4.8 注入点：system prompt 实时信息段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%B5%8B%E8%AF%95%E9%AA%8C%E8%AF%81"><span class="nav-number">5.</span> <span class="nav-text">五、测试验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E7%BA%BF%E4%B8%8A%E6%95%88%E6%9E%9C"><span class="nav-number">6.</span> <span class="nav-text">六、线上效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E6%BC%94%E8%BF%9B%E6%96%B9%E5%90%91"><span class="nav-number">7.</span> <span class="nav-text">七、演进方向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E5%B0%8F%E7%BB%93"><span class="nav-number">8.</span> <span class="nav-text">八、小结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">298</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+      <div class="site-state-item site-state-tutorials">
+        <a href="/tutorials/">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">教程</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe id="music-player" allow="autoplay; encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.webp">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2023 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+        
+<div class="site-stats-count">
+      <span class="post-meta-item" id="site_stats_container_uv">
+        <span class="post-meta-item-icon">
+          <i class="fa fa-user"></i>
+        </span>
+        <span class="site-uv" title="总访客量">
+          <span id="site_stats_value_uv">-</span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+      <span class="post-meta-item" id="site_stats_container_pv">
+        <span class="post-meta-item-icon">
+          <i class="fa fa-eye"></i>
+        </span>
+        <span class="site-pv" title="总访问量">
+          <span id="site_stats_value_pv">-</span>
+      </span>
+    </span>
+  <script src="/js/site-stats.js?v=20260730-site-stats-proxy"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+if (!window.matchMedia('(max-width: 767px)').matches) {
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: true,
+  scrollTo : !CONFIG.bookmark.enable
+});
+window._pjax = pjax;
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  NexT.boot.registerEvents();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition(true);
+
+  document.querySelectorAll('.post-block, .pagination, .comments').forEach(function(el) {
+    if (parseFloat(el.style.opacity) === 0) {
+      el.style.opacity = 1;
+    }
+  });
+});
+}
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+    
+
+  
+
+    
+
+    </div>
+
+<link rel="preload" as="style" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css"></noscript>
+<script data-pjax>
+(function() {
+  // 抑制第三方扩展的 notice.avoidance 报错
+  window.addEventListener('error', function(e) {
+    if (e.message && e.message.indexOf('notice.avoidance') !== -1) {
+      e.preventDefault();
+      e.stopPropagation();
+      return true;
+    }
+  });
+
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+
+  function updateCounts() {
+    var countEls = document.querySelectorAll('.waline-visitor-count');
+    if (!countEls.length) return;
+    countEls.forEach(function(el) {
+      var p = el.getAttribute('data-path');
+      if (!p) return;
+      var url = decodeURIComponent(p);
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(json) {
+          if (json && json.data && json.data[0] && json.data[0].time != null) {
+            el.innerText = json.data[0].time;
+          }
+        }).catch(function(){});
+    });
+  }
+
+  var el = document.querySelector('#waline-comments');
+  if (el) {
+    updateCounts();
+    NexT.utils.loadComments(el, function() {
+      NexT.utils.getScript('//unpkg.com/@waline/client@2.15.8/dist/waline.js', function() {
+        Waline.init({
+          el: '#waline-comments',
+          serverURL: 'https://waline.bytefisher.top/',
+          path: location.pathname,
+          lang: 'zh-CN' || 'zh-CN',
+          meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
+          requiredMeta: ["nick"] || ['nick'],
+          placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
+          avatar: 'retro' || 'retro',
+          pageSize: 10 || 10,
+          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
+        });
+        var pathEl = document.querySelector('.waline-visitor-count');
+        var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
+        fetch(baseURL + '/api/article', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: postPath })
+        }).finally(function() {
+          setTimeout(updateCounts, 300);
+        });
+      }, window.Waline);
+    });
+  } else {
+    updateCounts();
+  }
+
+  // Fallback for delayed Waline rendering
+  setTimeout(updateCounts, 2000);
+})();
+</script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+  <div class="douyin-player-status" aria-live="polite"></div>
+  <a class="douyin-fallback-link" href="#" target="_blank" rel="noopener noreferrer">打开抖音原页</a>
+</div>
+
+<link rel="stylesheet" type="text/css" href="/css/douyin-modal.css?v=douyin-20260907-layout-fix">
+<script src="/js/douyin-modal.js?v=douyin-20260907-layout-fix" async></script>
+<script src="/js/hero-typing.js" async></script>
+
+<link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
+<script data-pjax>
+(function() {
+  if (document.querySelector('a[data-lightbox]')) {
+    if (!window._lightboxLoaded) {
+      window._lightboxLoaded = true;
+      var s = document.createElement('script');
+      s.src = '/js/lightbox-plus-jquery.min.js';
+      document.body.appendChild(s);
+    }
+  }
+})();
+</script>
+
+<button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
+  <i class="fa fa-moon-o"></i>
+  <i class="fa fa-sun-o"></i>
+</button>
+<script src="/js/darkmode-toggle.js" async></script>
+
+<script data-pjax>
+(function() {
+  function loadAI() {
+    if (window._aiLoaded) return;
+    window._aiLoaded = true;
+    var aiVersion = 'bytebot-20260819-browser-loc';
+    var scripts = ['/js/lib/marked.min.js', '/js/lib/purify.min.js', '/js/ai-assistant.js?v=' + aiVersion];
+    function loadNext() {
+      if (!scripts.length) return;
+      var s = document.createElement('script');
+      s.src = scripts.shift();
+      s.onload = s.onerror = loadNext;
+      document.body.appendChild(s);
+    }
+    loadNext();
+  }
+  if (document.readyState === 'complete') {
+    setTimeout(loadAI, 500);
+  } else {
+    window.addEventListener('load', function() { setTimeout(loadAI, 500); });
+  }
+})();
+</script>
+
+<script data-pjax>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?v=20260730-site-stats-proxy', {
+    updateViaCache: 'none'
+  }).then(function(reg) {
+    reg.update(); // Force SW update check on each page load
+  });
+}
+</script>
+
+<script src="/js/douyin-pagination.js?v=douyin-20260907-layout-fix" async></script>
+<script src="/js/hot-posts-widget.js" async></script>
+
+<div id="mobile-music-player" class="mobile-music-player" aria-hidden="true"></div>
+<link rel="stylesheet" type="text/css" href="/css/mobile-music.css">
+<script src="/js/mobile-music.js" async></script>
+
+</body>
+</html>
