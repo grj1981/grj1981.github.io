@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
 
@@ -40,7 +40,7 @@
 <meta property="og:description" content="Linux&#x2F;macOS系统下在提交代码时自动将CRLF转换为LF Windows系统下在提交代码时自动将LF转换为CRLF">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-16T15:27:48.000Z">
-<meta property="article:modified_time" content="2026-11-16T10:42:46.064Z">
+<meta property="article:modified_time" content="2026-11-16T11:04:45.259Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="IT">
 <meta property="article:tag" content="git操作">
@@ -49,7 +49,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2023/05/16/git%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"git相关操作整理","description":"Linux/macOS系统下在提交代码时自动将CRLF转换为LF Windows系统下在提交代码时自动将LF转换为CRLF","url":"https://www.bytefisher.top/2023/05/16/git相关操作整理/","datePublished":"2023-05-16T15:27:48.000Z","dateModified":"2026-11-16T10:42:46.064Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/05/16/git相关操作整理/"},"keywords":"IT, git操作"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"git相关操作整理","description":"Linux/macOS系统下在提交代码时自动将CRLF转换为LF Windows系统下在提交代码时自动将LF转换为CRLF","url":"https://www.bytefisher.top/2023/05/16/git相关操作整理/","datePublished":"2023-05-16T15:27:48.000Z","dateModified":"2026-11-16T11:04:45.259Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/05/16/git相关操作整理/"},"keywords":"IT, git操作"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"博客实战","item":"https://www.bytefisher.top/categories/博客实战/"},{"@type":"ListItem","position":3,"name":"git相关操作整理"}]}</script>
 
 
@@ -378,7 +378,7 @@
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>打开github，在头像下面点击settings，再点击SSH and GPG keys，新建一个SSH，名字随便。将输出的内容复制到框中，点击确定保存。</p>
-<p>输入ssh -T <a href="mailto:&#x67;&#x69;&#116;&#x40;&#x67;&#x69;&#x74;&#104;&#x75;&#x62;&#x2e;&#99;&#x6f;&#x6d;">git@github.com</a>，如果出现你的用户名，验证成功。</p>
+<p>输入ssh -T <a href="mailto:&#x67;&#x69;&#116;&#64;&#103;&#105;&#116;&#x68;&#x75;&#x62;&#46;&#99;&#x6f;&#x6d;">git@github.com</a>，如果出现你的用户名，验证成功。</p>
 <p>打开博客根目录下的_config.yml文件，这是博客的配置文件，在这里你可以修改与博客相关的各种信息。</p>
 <p>修改最后一行的配置：</p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">	type: git</span><br><span class="line">	repository: https://github.com/godweiyang/godweiyang.github.io</span><br><span class="line">	branch: master</span><br></pre></td></tr></table></figure>
@@ -804,59 +804,76 @@ window.addEventListener('pjax:success', () => {
     }
   });
 
+  // 评论容器只存在于文章/留言页；列表页不再触发任何 Waline 请求
+  var el = document.querySelector('#waline-comments');
+  if (!el) return;
+
   var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
 
-  function updateCounts() {
+  function normalizePath(value) {
+    var path = String(value || '');
+    try {
+      path = decodeURIComponent(path);
+    } catch (e) {}
+    if (!path) return '/';
+    if (path.charAt(path.length - 1) !== '/') path += '/';
+    return path;
+  }
+
+  function getPostPath() {
+    var pathEl = document.querySelector('.waline-visitor-count');
+    var raw = pathEl && pathEl.getAttribute('data-path');
+    return normalizePath(raw || location.pathname);
+  }
+
+  function updateCount(postPath) {
     var countEls = document.querySelectorAll('.waline-visitor-count');
     if (!countEls.length) return;
-    countEls.forEach(function(el) {
-      var p = el.getAttribute('data-path');
-      if (!p) return;
-      var url = decodeURIComponent(p);
-      fetch(baseURL + '/api/article?path=' + encodeURIComponent(url) + '&type=time')
+    countEls.forEach(function(countEl) {
+      var raw = countEl.getAttribute('data-path');
+      if (!raw) return;
+      var path = normalizePath(raw);
+      if (path !== postPath) return;
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(path) + '&type=time')
         .then(function(r) { return r.ok ? r.json() : null; })
         .then(function(json) {
           if (json && json.data && json.data[0] && json.data[0].time != null) {
-            el.innerText = json.data[0].time;
+            countEl.innerText = json.data[0].time;
           }
         }).catch(function(){});
     });
   }
 
-  var el = document.querySelector('#waline-comments');
-  if (el) {
-    updateCounts();
-    NexT.utils.loadComments(el, function() {
-      NexT.utils.getScript('//unpkg.com/@waline/client@2.15.8/dist/waline.js', function() {
-        Waline.init({
-          el: '#waline-comments',
-          serverURL: 'https://waline.bytefisher.top/',
-          path: location.pathname,
-          lang: 'zh-CN' || 'zh-CN',
-          meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
-          requiredMeta: ["nick"] || ['nick'],
-          placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
-          avatar: 'retro' || 'retro',
-          pageSize: 10 || 10,
-          emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
-        });
-        var pathEl = document.querySelector('.waline-visitor-count');
-        var postPath = pathEl && pathEl.getAttribute('data-path') ? decodeURIComponent(pathEl.getAttribute('data-path')) : location.pathname;
-        fetch(baseURL + '/api/article', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ path: postPath })
-        }).finally(function() {
-          setTimeout(updateCounts, 300);
-        });
-      }, window.Waline);
-    });
-  } else {
-    updateCounts();
-  }
+  var postPath = getPostPath();
 
-  // Fallback for delayed Waline rendering
-  setTimeout(updateCounts, 2000);
+  // 记录阅读量（只发一次，不阻塞评论区懒加载）
+  fetch(baseURL + '/api/article', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ path: postPath })
+  }).then(function() {
+    updateCount(postPath);
+  }).catch(function() {
+    updateCount(postPath);
+  });
+
+  // 评论区滚动到可见范围内才加载，减少无谓的评论请求
+  NexT.utils.loadComments(el, function() {
+    NexT.utils.getScript('//unpkg.com/@waline/client@2.15.8/dist/waline.js', function() {
+      Waline.init({
+        el: '#waline-comments',
+        serverURL: 'https://waline.bytefisher.top/',
+        path: location.pathname,
+        lang: 'zh-CN' || 'zh-CN',
+        meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
+        requiredMeta: ["nick"] || ['nick'],
+        placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
+        avatar: 'retro' || 'retro',
+        pageSize: 10 || 10,
+        emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
+      });
+    }, window.Waline);
+  });
 })();
 </script>
 <!-- 抖音视频弹窗 -->
