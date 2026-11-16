@@ -1,4 +1,4 @@
-// Fast footer statistics with a static snapshot and async event reporting.
+// Fast footer statistics with a static snapshot and batched visit reporting.
 'use strict';
 
 (function() {
@@ -10,12 +10,18 @@
   var TIMEOUT_MS = 4000;
   var EVENT_TIMEOUT_MS = 10000;
   var CACHE_TTL_MS = 10 * 60 * 1000;
-  var REFRESH_INTERVAL_MS = 10 * 60 * 1000;
+  var REFRESH_INTERVAL_MS = 30 * 60 * 1000;
+  var BATCH_SIZE = 5;
+  var MAX_BATCH_VIEWS = 20;
+  var FLUSH_DELAY_MS = 15000;
+  var MAX_PENDING_VIEWS = 50;
   var authoritativeStats = null;
   var pendingPv = 0;
-  var pendingUv = 0;
+  var pendingUvIncrement = 0;
+  var pendingBatch = [];
+  var flushTimer = null;
+  var flushing = false;
   var fallbackVisitorId = null;
-  var eventQueue = Promise.resolve();
 
   function getCounter(id) {
     return document.getElementById(id);
@@ -99,7 +105,7 @@
   function renderCurrentStats() {
     if (!authoritativeStats) return;
 
-    setText('site_stats_value_uv', formatNumber(authoritativeStats.uv + pendingUv));
+    setText('site_stats_value_uv', formatNumber(authoritativeStats.uv + pendingUvIncrement));
     setText('site_stats_value_pv', formatNumber(authoritativeStats.pv + pendingPv));
   }
 
@@ -175,61 +181,88 @@
   }
 
   function createVisitEvent() {
-    var visitor = getVisitorIdentity();
     return {
-      visitor: visitor.id,
       view: randomId(),
-      path: location.pathname,
-      uvIncrement: visitor.isNew ? 1 : 0
+      path: location.pathname
     };
   }
 
-  function getEventBody(event) {
-    return new URLSearchParams({
-      visitor: event.visitor,
-      view: event.view,
-      path: event.path
-    }).toString();
+  function scheduleFlush() {
+    if (flushTimer || flushing || !pendingBatch.length) return;
+    flushTimer = setTimeout(function() {
+      flushTimer = null;
+      flushBatch(false);
+    }, FLUSH_DELAY_MS);
   }
 
-  function addPendingEvent(event) {
-    event.pending = true;
-    pendingPv += 1;
-    pendingUv += event.uvIncrement;
+  function settleBatch(count, uvCount) {
+    pendingPv = Math.max(0, pendingPv - count);
+    pendingUvIncrement = Math.max(0, pendingUvIncrement - uvCount);
     renderCurrentStats();
   }
 
-  function settlePendingEvent(event) {
-    if (!event.pending) return;
-    event.pending = false;
-    pendingPv = Math.max(0, pendingPv - 1);
-    pendingUv = Math.max(0, pendingUv - event.uvIncrement);
+  function requeueBatch(batch, uvCount) {
+    pendingBatch = batch.concat(pendingBatch);
+    pendingUvIncrement = Math.max(pendingUvIncrement, uvCount);
+    if (pendingBatch.length > MAX_PENDING_VIEWS) {
+      var overflow = pendingBatch.length - MAX_PENDING_VIEWS;
+      pendingBatch = pendingBatch.slice(overflow);
+      pendingPv = Math.max(0, pendingPv - overflow);
+    }
     renderCurrentStats();
+    scheduleFlush();
   }
 
-  function queueBeacon(event) {
-    if (!navigator.sendBeacon || !window.Blob) return false;
-    return navigator.sendBeacon(
-      EVENT_URL,
-      new Blob([getEventBody(event)], {
-        type: 'application/x-www-form-urlencoded;charset=UTF-8'
+  function buildBatchBody(batch) {
+    return JSON.stringify({
+      visitor: getVisitorIdentity().id,
+      views: batch.map(function(event) {
+        return { view: event.view, path: event.path };
       })
-    );
+    });
   }
 
-  function sendVisitEvent(event) {
+  function flushBatch(useBeacon) {
+    if (flushing || !pendingBatch.length) return;
+
+    if (flushTimer) {
+      clearTimeout(flushTimer);
+      flushTimer = null;
+    }
+
+    var batch = pendingBatch.slice(0, MAX_BATCH_VIEWS);
+    var batchUv = pendingUvIncrement;
+    var body = buildBatchBody(batch);
+    pendingBatch = pendingBatch.slice(MAX_BATCH_VIEWS);
+
+    if (useBeacon && navigator.sendBeacon && window.Blob) {
+      try {
+        var queued = navigator.sendBeacon(
+          EVENT_URL,
+          new Blob([body], { type: 'application/json;charset=UTF-8' })
+        );
+        if (queued) {
+          settleBatch(batch.length, batchUv);
+          if (pendingBatch.length) flushBatch(true);
+          return;
+        }
+      } catch (error) {}
+    }
+
+    flushing = true;
+    var flushAgain = false;
     var controller = window.AbortController ? new AbortController() : null;
     var timer = controller ? setTimeout(function() {
       controller.abort();
     }, EVENT_TIMEOUT_MS) : null;
 
-    return fetch(EVENT_URL, {
+    fetch(EVENT_URL, {
       method: 'POST',
       keepalive: true,
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        'Content-Type': 'application/json;charset=UTF-8'
       },
-      body: getEventBody(event),
+      body: body,
       signal: controller ? controller.signal : undefined
     })
       .then(function(res) {
@@ -237,47 +270,43 @@
         return res.json();
       })
       .then(function(payload) {
-        settlePendingEvent(event);
+        settleBatch(batch.length, batchUv);
         if (payload && !payload.errno && payload.data &&
             payload.data.pv != null && payload.data.uv != null) {
           setAuthoritativeStats(payload.data, true);
-          return;
         }
-        return refreshStats(true);
+        flushAgain = pendingBatch.length >= BATCH_SIZE;
       })
       .catch(function(error) {
-        if (queueBeacon(event)) {
-          return new Promise(function(resolve) {
-            setTimeout(resolve, 1500);
-          }).then(function() {
-            return refreshStats(true);
-          }).finally(function() {
-            settlePendingEvent(event);
-          });
-        }
-
-        settlePendingEvent(event);
+        requeueBatch(batch, batchUv);
         console.warn('Site stats event unavailable:', error);
-        return refreshStats(true);
       })
       .finally(function() {
         if (timer) clearTimeout(timer);
+        flushing = false;
+        if (flushAgain) {
+          flushBatch(false);
+        } else {
+          scheduleFlush();
+        }
       });
   }
 
-  function postVisitEvent() {
+  function queueVisitEvent() {
     if (isLocalPreview()) return;
 
-    var event = createVisitEvent();
-    addPendingEvent(event);
-    eventQueue = eventQueue
-      .then(function() {
-        return sendVisitEvent(event);
-      })
-      .catch(function(error) {
-        settlePendingEvent(event);
-        console.warn('Site stats event queue failed:', error);
-      });
+    var visitor = getVisitorIdentity();
+    if (visitor.isNew) pendingUvIncrement = 1;
+
+    pendingBatch.push(createVisitEvent());
+    pendingPv += 1;
+    renderCurrentStats();
+
+    if (pendingBatch.length >= BATCH_SIZE) {
+      flushBatch(false);
+    } else {
+      scheduleFlush();
+    }
   }
 
   function loadPageStats() {
@@ -291,15 +320,22 @@
       fetchSnapshot();
     }
 
-    if (!isLocalPreview()) {
-      postVisitEvent();
-    }
+    queueVisitEvent();
   }
 
   function bindPjax() {
     if (window.__bytefisherSiteStatsBound) return;
     window.__bytefisherSiteStatsBound = true;
     window.addEventListener('pjax:success', loadPageStats);
+  }
+
+  function bindFlushEvents() {
+    window.addEventListener('pagehide', function() {
+      flushBatch(true);
+    });
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'hidden') flushBatch(true);
+    });
   }
 
   function startAutoRefresh() {
@@ -312,6 +348,7 @@
   function init() {
     loadPageStats();
     bindPjax();
+    bindFlushEvents();
     startAutoRefresh();
   }
 
