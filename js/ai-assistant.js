@@ -54,7 +54,7 @@
     if (err && err.name === 'AbortError') return null;
     if (!response) return '网络连接失败，请检查网络后重试';
     var s = response.status;
-    if (s === 429) return '服务忙，请稍后再试 🐟';
+    if (s === 429) return '今日额度已用完，明天再来 🐟';
     if (s === 504) return '回答超时了，请简化问题后重试';
     if (s === 401 || s === 403) return '服务配置异常，请联系站长';
     if (s >= 500) return '服务暂时不可用，请稍后重试';
