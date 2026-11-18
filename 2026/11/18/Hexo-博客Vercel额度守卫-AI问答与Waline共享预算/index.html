@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="preconnect" href="https://fonts.loli.net">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://img.bytefisher.top">
+  <link rel="preconnect" href="https://waline.bytefisher.top">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#37c6c0">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#37c6c0">
+
+<meta http-equiv="Permissions-Policy" content="encrypted-media=*">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="codeva-7SG6ROHyTg">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"></noscript>
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.bytefisher.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":true,"nav":null,"activeClass":"waline"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net unpkg.com hm.baidu.com *.amap.com music.163.com static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.loli.net unpkg.com; img-src 'self' https: data:; font-src 'self' https: fonts.loli.net; connect-src 'self' https://api.bytefisher.top https://waline.bytefisher.top hm.baidu.com *.amap.com unpkg.com; worker-src 'self' blob:; frame-src music.163.com open.douyin.com *.taptap.cn; media-src 'self';">
+
+  <meta name="description" content="Vercel Hobby 的 4 小时 Active CPU 额度被 AI 问答、Waline 评论和访问统计共同消耗，额度告警邮件越来越频繁。本文记录从批量上报、懒加载评论到 TiDB 共享预算守卫的完整过程：一条原子 UPDATE 如何同时管住两个 Vercel 项目，以及上线时踩到的 Waline ESM 坑。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 博客 Vercel 额度守卫：AI 问答与 Waline 的共享预算实战">
+<meta property="og:url" content="https://www.bytefisher.top/2026/11/18/Hexo-%E5%8D%9A%E5%AE%A2Vercel%E9%A2%9D%E5%BA%A6%E5%AE%88%E5%8D%AB-AI%E9%97%AE%E7%AD%94%E4%B8%8EWaline%E5%85%B1%E4%BA%AB%E9%A2%84%E7%AE%97/">
+<meta property="og:site_name" content="ByteFisher">
+<meta property="og:description" content="Vercel Hobby 的 4 小时 Active CPU 额度被 AI 问答、Waline 评论和访问统计共同消耗，额度告警邮件越来越频繁。本文记录从批量上报、懒加载评论到 TiDB 共享预算守卫的完整过程：一条原子 UPDATE 如何同时管住两个 Vercel 项目，以及上线时踩到的 Waline ESM 坑。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-11-18T12:00:00.000Z">
+<meta property="article:modified_time" content="2026-11-18T22:54:29.185Z">
+<meta property="article:author" content="淡水鱼">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Serverless">
+<meta property="article:tag" content="TiDB">
+<meta property="article:tag" content="Vercel">
+<meta property="article:tag" content="Waline">
+<meta property="article:tag" content="series:Hexo博客搭建">
+<meta property="article:tag" content="性能优化">
+<meta property="article:tag" content="额度管理">
+<meta name="twitter:card" content="summary">
+  <meta name="keywords" content="Vercel Hobby, Active CPU, 函数额度, Serverless 限流, 共享预算, Waline, ByteBot, TiDB, Hexo, 博客优化, 429, Retry-After, ByteFisher">
+
+<link rel="canonical" href="https://www.bytefisher.top/2026/11/18/Hexo-%E5%8D%9A%E5%AE%A2Vercel%E9%A2%9D%E5%BA%A6%E5%AE%88%E5%8D%AB-AI%E9%97%AE%E7%AD%94%E4%B8%8EWaline%E5%85%B1%E4%BA%AB%E9%A2%84%E7%AE%97/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo 博客 Vercel 额度守卫：AI 问答与 Waline 的共享预算实战","description":"Vercel Hobby 的 4 小时 Active CPU 额度被 AI 问答、Waline 评论和访问统计共同消耗，额度告警邮件越来越频繁。本文记录从批量上报、懒加载评论到 TiDB 共享预算守卫的完整过程：一条原子 UPDATE 如何同时管住两个 Vercel 项目，以及上线时踩到的 Waline ESM 坑。","url":"https://www.bytefisher.top/2026/11/18/Hexo-博客Vercel额度守卫-AI问答与Waline共享预算/","datePublished":"2026-11-18T12:00:00.000Z","dateModified":"2026-11-18T22:54:29.185Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/11/18/Hexo-博客Vercel额度守卫-AI问答与Waline共享预算/"},"keywords":"series:Hexo博客搭建, Hexo, Waline, Vercel, Serverless, TiDB, 性能优化, 额度管理"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"博客实战","item":"https://www.bytefisher.top/categories/博客实战/"},{"@type":"ListItem","position":3,"name":"Hexo 博客 Vercel 额度守卫：AI 问答与 Waline 的共享预算实战"}]}</script>
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Hexo 博客 Vercel 额度守卫：AI 问答与 Waline 的共享预算实战 | ByteFisher</title>
+  
+
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dc50e0997d43c3a8dbf2afdb3fdff233";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#37c6c0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<link rel="alternate" href="/atom.xml" title="ByteFisher" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ByteFisher</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">钓鱼爱好者的编程世界</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-tutorials">
+
+    <a href="/tutorials/" rel="section"><i class="fa fa-book fa-fw"></i>教程<span class="badge">10</span></a>
+
+  </li>
+        <li class="menu-item menu-item-fish">
+
+    <a href="/fish/" rel="section"><i class="fa fa-fish fa-fw"></i>钓鱼专题<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-aigames">
+
+    <a href="/ai-games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>小游戏<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-douyin">
+
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">78</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>编程&钓技<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">300</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">66</span></a>
+
+  </li>
+        <li class="menu-item menu-item-guestbook">
+
+    <a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>rss</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/grj1981" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.bytefisher.top/2026/11/18/Hexo-%E5%8D%9A%E5%AE%A2Vercel%E9%A2%9D%E5%BA%A6%E5%AE%88%E5%8D%AB-AI%E9%97%AE%E7%AD%94%E4%B8%8EWaline%E5%85%B1%E4%BA%AB%E9%A2%84%E7%AE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.webp">
+      <meta itemprop="name" content="淡水鱼">
+      <meta itemprop="description" content="ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ByteFisher">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo 博客 Vercel 额度守卫：AI 问答与 Waline 的共享预算实战
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-11-18 20:00:00" itemprop="dateCreated datePublished" datetime="2026-11-18T20:00:00+08:00">2026-11-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98/" itemprop="url" rel="index"><span itemprop="name">博客实战</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Waline：</span>
+    
+    <a title="waline" href="/2026/11/18/Hexo-%E5%8D%9A%E5%AE%A2Vercel%E9%A2%9D%E5%BA%A6%E5%AE%88%E5%8D%AB-AI%E9%97%AE%E7%AD%94%E4%B8%8EWaline%E5%85%B1%E4%BA%AB%E9%A2%84%E7%AE%97/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-visitor-count" data-path="/2026/11/18/Hexo-%E5%8D%9A%E5%AE%A2Vercel%E9%A2%9D%E5%BA%A6%E5%AE%88%E5%8D%AB-AI%E9%97%AE%E7%AD%94%E4%B8%8EWaline%E5%85%B1%E4%BA%AB%E9%A2%84%E7%AE%97/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">Vercel Hobby 的 4 小时 Active CPU 额度被 AI 问答、Waline 评论和访问统计共同消耗，额度告警邮件越来越频繁。本文记录从批量上报、懒加载评论到 TiDB 共享预算守卫的完整过程：一条原子 UPDATE 如何同时管住两个 Vercel 项目，以及上线时踩到的 Waline ESM 坑。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言：告警邮件一封接一封"><a href="#前言：告警邮件一封接一封" class="headerlink" title="前言：告警邮件一封接一封"></a>前言：告警邮件一封接一封</h2><p>后台的 Active CPU 用量停在 3 小时 44 分，距离 Hobby 的 4 小时额度只剩 16 分钟。那几天 Vercel 的额度告警邮件一封接一封，但项目还没有被 pause。</p>
+<p>没有 pause 不代表安全。按 Vercel 文档，Hobby 超出 Fluid Compute 额度后，生产部署可能进入 <code>503 DEPLOYMENT_PAUSED</code>，而且不会自己恢复；要么等 30 天，要么联系支持或升级 Pro。对一个静态博客来说，这个代价太高了。</p>
+<p>ByteFisher 博客主体是 Hexo 生成的静态页面，但仍有三个动态入口在跑 Vercel Functions：</p>
+<ul>
+<li><strong>ByteBot</strong>：AI 问答，流式调用 DeepSeek。</li>
+<li><strong>Waline</strong>：评论、文章阅读计数。</li>
+<li><strong>访问统计</strong>：站点 PV&#x2F;UV 上报。</li>
+</ul>
+<p>更关键的是，ByteBot 和 Waline 是两个独立的 Vercel 项目，却挂在同一个 Hobby 账号下。Vercel 的免费额度是团队级的，两个项目共享同一个 4 小时。告警邮件只会告诉你“总量快超了”，不会告诉你“是聊天、评论还是统计用掉的”。</p>
+<p>既然算不清谁用的，就做总账。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="一、先算账：4-小时到底是什么"><a href="#一、先算账：4-小时到底是什么" class="headerlink" title="一、先算账：4 小时到底是什么"></a>一、先算账：4 小时到底是什么</h2><p>Vercel Hobby 的 Fluid Compute 额度主要看三项：</p>
+<table>
+<thead>
+<tr>
+<th>资源</th>
+<th>Hobby 额度</th>
+<th>我们当时的情况</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Active CPU</td>
+<td>4 小时&#x2F;月</td>
+<td>3 小时 44 分，接近红线</td>
+</tr>
+<tr>
+<td>Invocations</td>
+<td>100 万&#x2F;月</td>
+<td>远未到</td>
+</tr>
+<tr>
+<td>Provisioned Memory</td>
+<td>360 GB-hrs&#x2F;月</td>
+<td>未单独细算</td>
+</tr>
+</tbody></table>
+<p>真正先撞线的是 <strong>Active CPU</strong>，不是调用次数。</p>
+<p>Active CPU 只在你自己的代码真正执行时计费。等 DeepSeek 返回、等 TiDB 查询、等网络 I&#x2F;O 的时间不算 CPU；但函数实例的内存仍然按存活时间计费。所以一个“等模型回答”的聊天请求，CPU 可能不高，但内存会持续占用；而 Waline 的评论列表、统计写入这类请求，单次 CPU 反而更密集。</p>
+<p>这也意味着：不能简单假设“AI 问答是唯一元凶”。聊天、评论、统计都在同一个池子里，告警邮件又不按功能拆分，唯一稳妥的办法是给整个池子加一个总预算，再把各功能的用量记录下来。</p>
+<p>参考：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://vercel.com/docs/functions/usage-and-pricing">Vercel Fluid compute pricing</a></li>
+<li><a target="_blank" rel="noopener" href="https://vercel.com/docs/limits">Vercel Limits</a></li>
+<li><a target="_blank" rel="noopener" href="https://vercel.com/kb/guide/why-is-my-account-deployment-blocked">Why has my account or deployment been paused?</a></li>
+</ul>
+<hr>
+<h2 id="二、止血：先把函数调用降下来"><a href="#二、止血：先把函数调用降下来" class="headerlink" title="二、止血：先把函数调用降下来"></a>二、止血：先把函数调用降下来</h2><p>在加预算之前，先做了一轮“降调用”。预算守卫是最后一道闸门，但如果请求本身能少发，闸门压力会小很多。</p>
+<h3 id="2-1-访问统计：从每页一次改成批量上报"><a href="#2-1-访问统计：从每页一次改成批量上报" class="headerlink" title="2.1 访问统计：从每页一次改成批量上报"></a>2.1 访问统计：从每页一次改成批量上报</h3><p>原来的统计脚本每打开一个页面就发一次事件请求。现在改成批量队列：</p>
+<ul>
+<li>攒够 5 条立即发；</li>
+<li>不够 5 条，15 秒后发；</li>
+<li>单批最多 20 条；</li>
+<li>页面隐藏或离开时用 <code>sendBeacon</code> 兜底；</li>
+<li>前端统计快照刷新间隔从 10 分钟放宽到 30 分钟。</li>
+</ul>
+<p>核心常量在 <code>source/js/site-stats.js</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="variable constant_">BATCH_SIZE</span> = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">var</span> <span class="variable constant_">MAX_BATCH_VIEWS</span> = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">var</span> <span class="variable constant_">FLUSH_DELAY_MS</span> = <span class="number">15000</span>;</span><br><span class="line"><span class="keyword">var</span> <span class="variable constant_">MAX_PENDING_VIEWS</span> = <span class="number">50</span>;</span><br><span class="line"><span class="keyword">var</span> <span class="variable constant_">REFRESH_INTERVAL_MS</span> = <span class="number">30</span> * <span class="number">60</span> * <span class="number">1000</span>;</span><br></pre></td></tr></table></figure>
+
+<p>服务端 <code>api/site-stats-event.js</code> 相应支持 <code>views[]</code> 数组，并在一个事务里批量写入。这样同样的访问量，函数调用次数和 Active CPU 都会下降。</p>
+<h3 id="2-2-Waline：列表页不再请求计数"><a href="#2-2-Waline：列表页不再请求计数" class="headerlink" title="2.2 Waline：列表页不再请求计数"></a>2.2 Waline：列表页不再请求计数</h3><p>以前列表页、归档页也会加载 Waline，并请求文章计数。现在只有文章页和留言页才初始化评论：</p>
+<ul>
+<li>列表页直接跳过 Waline 脚本；</li>
+<li>文章页只发一次阅读计数 POST；</li>
+<li>评论脚本通过 <code>NexT.utils.loadComments</code> 延迟到评论区进入视口再加载；</li>
+<li>阅读计数只更新当前文章，不再重复请求。</li>
+</ul>
+<p>这一轮改动在 <code>themes/next/layout/_third-party/comments/waline.swig</code> 里，效果很直接：列表页不再产生 Waline 函数调用，文章页的请求次数也可控了。</p>
+<h3 id="2-3-Chat：先校验，再决定是否进入重逻辑"><a href="#2-3-Chat：先校验，再决定是否进入重逻辑" class="headerlink" title="2.3 Chat：先校验，再决定是否进入重逻辑"></a>2.3 Chat：先校验，再决定是否进入重逻辑</h3><p><code>api/chat.js</code> 在调用 DeepSeek 之前会做这些检查：</p>
+<ul>
+<li>Origin 是否来自博客域名；</li>
+<li>是否显式要求流式（<code>stream: true</code>）；</li>
+<li>消息数量、单条长度、总长度是否超限；</li>
+<li>DeepSeek API Key 是否存在。</li>
+</ul>
+<p>非法请求、非流式请求、跨域请求会在进入预算和上游调用之前被拒绝。这样攻击者不能靠一堆无效请求把额度烧光。</p>
+<p>但优化只能降低斜率，不能给出上限。真正需要的是“今天最多用多少”的硬约束。</p>
+<hr>
+<h2 id="三、方案选型：为什么是共享预算表"><a href="#三、方案选型：为什么是共享预算表" class="headerlink" title="三、方案选型：为什么是共享预算表"></a>三、方案选型：为什么是共享预算表</h2><h3 id="3-1-先排除几个方案"><a href="#3-1-先排除几个方案" class="headerlink" title="3.1 先排除几个方案"></a>3.1 先排除几个方案</h3><p><strong>per-IP 限流</strong>：能挡住单个 IP 的滥用，但挡不住分布式请求、代理池和 NAT 后的正常用户；而且 Vercel 额度是全局的，per-IP 限流不能保证总量不超。</p>
+<p><strong>Vercel WAF &#x2F; Rate Limit</strong>：平台层能力更靠前，但 Hobby 计划的能力和配额有限，而且它按请求计数，不知道“聊天一次”和“计数一次”的成本差异。</p>
+<p><strong>Upstash Redis &#x2F; Vercel KV</strong>：做限流很合适，但会引入新的服务和密钥；这个博客已经有 TiDB，单表原子更新足够，没必要再加一个组件。</p>
+<p><strong>升级 Pro</strong>：这是最彻底的方案，但对个人博客来说，先用免费额度把边界管好更划算。等访问量真的上来，再升级不迟。</p>
+<h3 id="3-2-选-TiDB-单表共享预算"><a href="#3-2-选-TiDB-单表共享预算" class="headerlink" title="3.2 选 TiDB 单表共享预算"></a>3.2 选 TiDB 单表共享预算</h3><p>最终方案是：在已有的 TiDB 里建一张 <code>bytefisher_usage_budget</code>，两个 Vercel 项目都读写同一张表。</p>
+<ul>
+<li>一天一行，记录当天总用量和分项用量；</li>
+<li>每次 API 请求先尝试“扣预算”；</li>
+<li>扣得动就放行，扣不动就返回 429；</li>
+<li>数据库异常时 fail-open，不让预算系统成为新的故障点。</li>
+</ul>
+<p>为什么是 6 分钟&#x2F;天？</p>
+<p>4 小时按 30 天平均是 8 分钟&#x2F;天。直接吃满 8 分钟没有任何缓冲，任何一次构建、重试或异常都会把总量推过线。把预算定在 <strong>6 分钟&#x2F;天（360000ms）</strong>，30 天合计 3 小时，给 4 小时额度留出 1 小时缓冲。</p>
+<p>这不是精确计费，而是一条政策线。权重可以按实际观测调整，但总量必须可控。</p>
+<h3 id="3-3-共享预算的取舍"><a href="#3-3-共享预算的取舍" class="headerlink" title="3.3 共享预算的取舍"></a>3.3 共享预算的取舍</h3><p>共享预算保证“总账不超”，但也会带来一个副作用：如果 ByteBot 一天内被刷爆，Waline 评论也会一起被 429。</p>
+<p>这是有意的取舍。免费额度是团队级的，如果两个项目各自为政，最后一定是总量超标。表里保留 <code>chat_ms</code> 和 <code>waline_ms</code> 两列，先做可见性；以后如果确实需要，可以在 <code>consume</code> 里加功能级上限。</p>
+<p>另外，<code>BUDGET_ENFORCE=false</code> 可以进入观察模式：只记录、不拦截。更稳妥的上线方式是先观察 3 天，确认权重和实际用量接近，再打开强制。这次因为额度只剩 16 分钟，直接开了强制。</p>
+<hr>
+<h2 id="四、数据模型：一天一行"><a href="#四、数据模型：一天一行" class="headerlink" title="四、数据模型：一天一行"></a>四、数据模型：一天一行</h2><p>表结构如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> bytefisher_usage_budget (</span><br><span class="line">  <span class="keyword">day</span>        <span class="type">CHAR</span>(<span class="number">10</span>)     <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  used_ms    <span class="type">INT</span> UNSIGNED <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>,</span><br><span class="line">  requests   <span class="type">INT</span> UNSIGNED <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>,</span><br><span class="line">  chat_ms    <span class="type">INT</span> UNSIGNED <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>,</span><br><span class="line">  waline_ms  <span class="type">INT</span> UNSIGNED <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>,</span><br><span class="line">  updated_at <span class="type">TIMESTAMP</span>    <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span></span><br><span class="line">                          <span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="built_in">CURRENT_TIMESTAMP</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (<span class="keyword">day</span>)</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4;</span><br></pre></td></tr></table></figure>
+
+<p>几个设计点：</p>
+<ul>
+<li><strong>不做每请求日志</strong>。每次请求写一行会把小表变成大表，增加 TiDB 写入和查询成本；预算只需要当天聚合值。</li>
+<li><strong>按天一行</strong>。主键就是日期，更新和查询都只命中一行，锁冲突很小。</li>
+<li><strong>分项列</strong>。<code>chat_ms</code> 和 <code>waline_ms</code> 用来观察各功能占比；<code>requests</code> 用来判断请求量级。</li>
+<li><strong>自动建表</strong>。每个函数实例第一次用到时执行 <code>CREATE TABLE IF NOT EXISTS</code>，用 <code>schemaPromise</code> 避免并发重复 DDL；失败后 5 分钟内不再重试，避免数据库故障时反复打 DDL。</li>
+</ul>
+<p>日期必须按中国时区计算，不能依赖 Vercel 服务器的 UTC：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">CST_OFFSET_MS</span> = <span class="number">8</span> * <span class="number">3600</span> * <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getBudgetDay</span>(<span class="params">now</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> shifted = <span class="keyword">new</span> <span class="title class_">Date</span>((now || <span class="keyword">new</span> <span class="title class_">Date</span>()).<span class="title function_">getTime</span>() + <span class="variable constant_">CST_OFFSET_MS</span>);</span><br><span class="line">  <span class="keyword">return</span> shifted.<span class="title function_">toISOString</span>().<span class="title function_">slice</span>(<span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getResetAt</span>(<span class="params">now</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> shifted = <span class="keyword">new</span> <span class="title class_">Date</span>((now || <span class="keyword">new</span> <span class="title class_">Date</span>()).<span class="title function_">getTime</span>() + <span class="variable constant_">CST_OFFSET_MS</span>);</span><br><span class="line">  <span class="keyword">const</span> next = <span class="title class_">Date</span>.<span class="title function_">UTC</span>(</span><br><span class="line">    shifted.<span class="title function_">getUTCFullYear</span>(),</span><br><span class="line">    shifted.<span class="title function_">getUTCMonth</span>(),</span><br><span class="line">    shifted.<span class="title function_">getUTCDate</span>() + <span class="number">1</span></span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Date</span>(next - <span class="variable constant_">CST_OFFSET_MS</span>).<span class="title function_">toISOString</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样每天 00:00（Asia&#x2F;Shanghai）翻篇，<code>Retry-After</code> 也能算出“距离明天还有多少秒”。</p>
+<hr>
+<h2 id="五、核心算法：一条原子-UPDATE"><a href="#五、核心算法：一条原子-UPDATE" class="headerlink" title="五、核心算法：一条原子 UPDATE"></a>五、核心算法：一条原子 UPDATE</h2><p>预算按“功能类型”扣费，每种类型有一个权重：</p>
+<table>
+<thead>
+<tr>
+<th>kind</th>
+<th>权重（ms）</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>chat</code></td>
+<td>300</td>
+<td>一次 AI 问答</td>
+</tr>
+<tr>
+<td><code>waline_article</code></td>
+<td>20</td>
+<td>文章阅读计数写入</td>
+</tr>
+<tr>
+<td><code>waline_count</code></td>
+<td>10</td>
+<td>文章计数读取</td>
+</tr>
+<tr>
+<td><code>waline_comment_list</code></td>
+<td>20</td>
+<td>评论列表</td>
+</tr>
+<tr>
+<td><code>waline_comment_post</code></td>
+<td>25</td>
+<td>发表评论</td>
+</tr>
+<tr>
+<td><code>waline_other</code></td>
+<td>15</td>
+<td>其他 Waline API</td>
+</tr>
+</tbody></table>
+<p>权重不是 Vercel 的真实计费值，而是预算单位。实际 Active CPU 无法在代码里精确拿到，先按经验估值，再用 Vercel 后台数据校准。权重可以用 <code>BUDGET_WEIGHT_&lt;KIND&gt;_MS</code> 覆盖，不需要改代码。</p>
+<p>核心 SQL 只有一条：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> bytefisher_usage_budget</span><br><span class="line"><span class="keyword">SET</span> used_ms <span class="operator">=</span> used_ms <span class="operator">+</span> ?,</span><br><span class="line">    requests <span class="operator">=</span> requests <span class="operator">+</span> <span class="number">1</span>,</span><br><span class="line">    chat_ms <span class="operator">=</span> chat_ms <span class="operator">+</span> ?</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">day</span> <span class="operator">=</span> ? <span class="keyword">AND</span> used_ms <span class="operator">+</span> ? <span class="operator">&lt;=</span> ?</span><br></pre></td></tr></table></figure>
+
+<p>执行后看 <code>affectedRows</code>：</p>
+<ul>
+<li><code>1</code>：预算够，扣费成功，放行；</li>
+<li><code>0</code>：预算不够（或当天行不存在），拒绝。</li>
+</ul>
+<p>为什么不先 <code>SELECT used_ms</code> 再 <code>UPDATE</code>？因为两个并发请求可能同时读到“还没超”，然后都更新成功，总额就超了。把判断条件放进 <code>UPDATE ... WHERE</code>，由数据库保证同一行的原子性，才能真正做到“不超”。</p>
+<p>拒绝时再查一次 <code>used_ms</code>，用于返回当前用量和 <code>Retry-After</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [rows] = <span class="keyword">await</span> pool.<span class="title function_">execute</span>(</span><br><span class="line">  <span class="string">&#x27;SELECT used_ms FROM bytefisher_usage_budget WHERE day = ? LIMIT 1&#x27;</span>,</span><br><span class="line">  [day]</span><br><span class="line">);</span><br><span class="line"><span class="keyword">const</span> usedMs = <span class="title class_">Number</span>(rows &amp;&amp; rows[<span class="number">0</span>] ? rows[<span class="number">0</span>].<span class="property">used_ms</span> : <span class="number">0</span>) || <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> &#123;</span><br><span class="line">  <span class="attr">allowed</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">usedMs</span>: usedMs,</span><br><span class="line">  <span class="attr">retryAfter</span>: <span class="title class_">Math</span>.<span class="title function_">max</span>(</span><br><span class="line">    <span class="number">1</span>,</span><br><span class="line">    <span class="title class_">Math</span>.<span class="title function_">ceil</span>((<span class="keyword">new</span> <span class="title class_">Date</span>(resetAt).<span class="title function_">getTime</span>() - <span class="title class_">Date</span>.<span class="title function_">now</span>()) / <span class="number">1000</span>)</span><br><span class="line">  )</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>当天行用 <code>INSERT IGNORE</code> 懒创建，并用一个 7 天的内存缓存避免每次请求都执行插入：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!insertedDays.<span class="title function_">has</span>(day)) &#123;</span><br><span class="line">  <span class="keyword">await</span> pool.<span class="title function_">execute</span>(</span><br><span class="line">    <span class="string">&#x27;INSERT IGNORE INTO bytefisher_usage_budget (day) VALUES (?)&#x27;</span>,</span><br><span class="line">    [day]</span><br><span class="line">  );</span><br><span class="line">  insertedDays.<span class="title function_">add</span>(day);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后是 fail-open。预算查询依赖 TiDB；如果数据库短暂不可用，不应该让聊天和评论一起挂掉：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">catch</span> (error) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;Usage budget error:&#x27;</span>, error.<span class="property">message</span>);</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">allowed</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">degraded</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">usedMs</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="attr">retryAfter</span>: <span class="number">0</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代价是数据库故障期间额度可能被继续消耗，但可用性优先。日志和 <code>degraded</code> 标记会留下排查线索。</p>
+<hr>
+<h2 id="六、接入-Chat：预算放在校验之后"><a href="#六、接入-Chat：预算放在校验之后" class="headerlink" title="六、接入 Chat：预算放在校验之后"></a>六、接入 Chat：预算放在校验之后</h2><p><code>api/chat.js</code> 的处理顺序很重要：</p>
+<ol>
+<li>设置 CORS 头；</li>
+<li><code>OPTIONS</code> 直接返回 204；</li>
+<li>只允许 POST；</li>
+<li>校验 Origin；</li>
+<li>要求 <code>stream: true</code>；</li>
+<li>清洗消息（最多 12 条、单条 4000 字符、总长 12000）；</li>
+<li>检查 DeepSeek API Key；</li>
+<li>扣预算；</li>
+<li>构建 RAG 上下文；</li>
+<li>调用 DeepSeek 并转发 SSE。</li>
+</ol>
+<p>预算放在第 8 步，而不是最前面。原因很简单：非法请求、非流式请求、跨域请求不应该消耗额度。否则攻击者不需要真正用上 AI，只要不断发无效请求就能把预算打空。</p>
+<p>扣费代码很克制：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gate = <span class="keyword">await</span> <span class="title function_">consumeBudget</span>(<span class="string">&#x27;chat&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span> (!gate.<span class="property">allowed</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">sendBudgetExceeded</span>(res, gate);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>超限时返回标准 JSON：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;error&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span> <span class="string">&quot;budget_exceeded&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;message&quot;</span><span class="punctuation">:</span> <span class="string">&quot;今日 AI 额度已用完，明天再来&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;retryAt&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2026-11-18T16:00:00.000Z&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>同时设置：</p>
+<ul>
+<li><code>Retry-After</code>：距离次日 00:00 CST 的秒数；</li>
+<li><code>Cache-Control: no-store</code>：避免 429 被浏览器或 CDN 缓存。</li>
+</ul>
+<p>前端在 <code>source/js/ai-assistant.js</code> 里把 429 单独识别，显示“今日额度已用完，明天再来”，而不是笼统的“网络错误”。</p>
+<p>CORS 不是鉴权。非浏览器客户端可以伪造 Origin，所以 Origin 校验只解决浏览器侧的体验问题，真正守住额度的是预算表。</p>
+<hr>
+<h2 id="七、接入-Waline：给评论系统加一层-wrapper"><a href="#七、接入-Waline：给评论系统加一层-wrapper" class="headerlink" title="七、接入 Waline：给评论系统加一层 wrapper"></a>七、接入 Waline：给评论系统加一层 wrapper</h2><p>Waline 的入口是 <code>index.cjs</code>。它原本直接导出 <code>Application({...})</code> 的返回值，现在外面包了一层预算守卫：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Application</span> = <span class="built_in">require</span>(<span class="string">&#x27;@waline/vercel&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="title class_">Application</span>(&#123;</span><br><span class="line">  <span class="attr">plugins</span>: [],</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">postSave</span>(<span class="params">comment</span>) &#123;</span><br><span class="line">    <span class="comment">// 评论保存后的钩子</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">withBudgetGuard</span>(<span class="params">walineApp</span>) &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; createHandler &#125; = <span class="built_in">require</span>(<span class="string">&#x27;./lib/create-handler&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> &#123; consume &#125; = <span class="built_in">require</span>(<span class="string">&#x27;./lib/usage-budget&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">createHandler</span>(walineApp, consume);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;Usage budget guard disabled:&#x27;</span>, error);</span><br><span class="line">    <span class="keyword">return</span> walineApp;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title function_">withBudgetGuard</span>(app);</span><br></pre></td></tr></table></figure>
+
+<p>守卫自身加载失败时，直接退回原始 Waline app。预算系统是附加保护，不能因为 <code>lib/</code> 里的一个问题让整个评论系统起不来。</p>
+<p><code>lib/create-handler.js</code> 只对 API 请求计费：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">classifyRequest</span>(<span class="params">req</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> path = <span class="title class_">String</span>(req.<span class="property">url</span> || <span class="string">&#x27;&#x27;</span>).<span class="title function_">split</span>(<span class="string">&#x27;?&#x27;</span>)[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">if</span> (path.<span class="title function_">indexOf</span>(<span class="string">&#x27;/api/article&#x27;</span>) === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> req.<span class="property">method</span> === <span class="string">&#x27;GET&#x27;</span> ? <span class="string">&#x27;waline_count&#x27;</span> : <span class="string">&#x27;waline_article&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (path.<span class="title function_">indexOf</span>(<span class="string">&#x27;/api/comment&#x27;</span>) === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> req.<span class="property">method</span> === <span class="string">&#x27;POST&#x27;</span></span><br><span class="line">      ? <span class="string">&#x27;waline_comment_post&#x27;</span></span><br><span class="line">      : <span class="string">&#x27;waline_comment_list&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&#x27;waline_other&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>规则：</p>
+<ul>
+<li>只处理 <code>/api/</code> 开头的请求；</li>
+<li><code>OPTIONS</code> 预检不计费；</li>
+<li>静态资源、<code>robots.txt</code>、Waline 管理页不计费；</li>
+<li>超限返回 <code>{ errno: 429, errmsg: &#39;今日评论额度已用完，明天再来&#39; }</code>；</li>
+<li>设置 <code>Retry-After</code>、<code>Vary: Origin</code>、<code>Cache-Control: no-store</code>。</li>
+</ul>
+<p><code>vercel.json</code> 里给 <code>index.cjs</code> 加了 <code>includeFiles: [&quot;lib/**&quot;]</code>，确保预算模块被一起打包进函数。两个仓库各自维护一份预算逻辑，Waline 侧保留了一行 <code>SYNC</code> 注释，提醒改动时和 BlogCode 同步。</p>
+<hr>
+<h2 id="八、测试：不要用生产额度试错"><a href="#八、测试：不要用生产额度试错" class="headerlink" title="八、测试：不要用生产额度试错"></a>八、测试：不要用生产额度试错</h2><p>预算逻辑最怕两件事：并发下超扣、数据库故障时把业务打死。所以先写测试，再上线。</p>
+<p><code>tests/usage-budget.test.js</code> 用一个假 pool 模拟 SQL，覆盖：</p>
+<ul>
+<li>额度内允许；</li>
+<li>超限拒绝并返回 <code>retryAfter</code>；</li>
+<li>数据库故障 fail-open；</li>
+<li>观察模式记录但不拦截；</li>
+<li>CST 跨日边界；</li>
+<li>未知 kind 直接抛错，不拼 SQL。</li>
+</ul>
+<p><code>tests/chat-budget.test.js</code> 验证：</p>
+<ul>
+<li>429 时不会调用上游；</li>
+<li>非流式请求在扣预算之前被拒绝；</li>
+<li>生产环境非法 Origin 在扣预算之前被拒绝；</li>
+<li>缺少用户消息在扣预算之前被拒绝。</li>
+</ul>
+<p>Waline 侧同样有分类、委托、OPTIONS 和非 API 请求不计费的测试。</p>
+<p>结果：</p>
+<ul>
+<li>BlogCode 全量测试 71&#x2F;71；</li>
+<li>Waline 预算相关测试 10&#x2F;10；</li>
+<li>本地 Node 25 + 真实 TiDB：<code>/api/comment</code> 返回 200，预算表写入后恢复测试数据；</li>
+<li>生产 smoke test：非流式返回 400、非法 Origin 返回 403、GET 返回 405、OPTIONS 返回 204；Waline 修复后根路径、<code>/api/article</code>、<code>/api/comment</code> 均返回 200。</li>
+</ul>
+<p>联调当天预算表里的一行记录（包含几次测试请求）：</p>
+<table>
+<thead>
+<tr>
+<th>day</th>
+<th>used_ms</th>
+<th>requests</th>
+<th>chat_ms</th>
+<th>waline_ms</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2026-11-18</td>
+<td>390</td>
+<td>6</td>
+<td>300</td>
+<td>90</td>
+</tr>
+</tbody></table>
+<p>数字不大，但它证明了两件事：聊天和评论确实在同一个池子里扣费；预算表能把“谁用了多少”变得可见。</p>
+<hr>
+<h2 id="九、上线插曲：Waline-的-ESM-雪崩"><a href="#九、上线插曲：Waline-的-ESM-雪崩" class="headerlink" title="九、上线插曲：Waline 的 ESM 雪崩"></a>九、上线插曲：Waline 的 ESM 雪崩</h2><p>预算守卫上线时，Waline 项目先炸了一次。</p>
+<p>项目初始部署在 2026 年 5 月 7 日，那时 <code>@waline/vercel@latest</code> 还是 1.39.3，依赖是 CommonJS。11 月 17 日重新部署时，<code>latest</code> 已经走到 1.43.4，依赖链变成了 ESM：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Error: require() of ES Module</span><br><span class="line">/var/task/node_modules/@mdit/plugin-emoji/dist/index.js</span><br><span class="line">from /var/task/node_modules/@waline/vercel/src/service/markdown/index.js</span><br><span class="line">not supported.</span><br></pre></td></tr></table></figure>
+
+<p>Waline 内部用 <code>require()</code> 加载 <code>@mdit/plugin-emoji</code>，但这个包在 1.43.4 里已经是纯 ESM。Vercel 的 Node 24 运行时没有像本地 Node 那样接受 <code>require(ESM)</code>，函数在启动阶段就崩了，所有请求返回 <code>FUNCTION_INVOCATION_FAILED</code>。</p>
+<p>尝试过：</p>
+<ul>
+<li>设置 <code>NODE_OPTIONS=--experimental-require-module</code>；</li>
+<li>设置 <code>VERCEL_USE_BYTECODE_CACHING=0</code>；</li>
+<li>多次 Dashboard Redeploy。</li>
+</ul>
+<p>仍然 500。链式 Redeploy 是否真正应用了运行时参数、旧字节码是否被复用，很难确认。与其继续赌运行时 flag，不如直接回到已知可用的依赖形态。</p>
+<p>最后把 <code>@waline/vercel</code> 固定到 <strong>1.40.3</strong>：</p>
+<ul>
+<li>1.40.3 是最后一个全 CJS 依赖的版本；</li>
+<li>它使用 <code>@mdit/plugin-sub/sup/katex/mathjax</code> 的 <code>*-cjs.0</code> 版本；</li>
+<li>emoji 走 <code>markdown-it-emoji</code>，没有 ESM 的 <code>@mdit/plugin-emoji</code>；</li>
+<li>它自带 <code>jsdom ^19</code>，所以移除了之前为 1.43.4 加的 <code>jsdom</code> override。</li>
+</ul>
+<p>重新生成 lockfile、提交、触发一次全新的 Git 部署后，Waline 恢复 200。1.41.x 之后仍然使用 ESM 版 <code>@mdit</code>，1.43.7 也一样，所以这不是“升级到最新”能解决的问题。</p>
+<p>这次踩坑的教训：</p>
+<ul>
+<li>平台显示的 Node 版本号，不等于完整的 Node 行为；</li>
+<li>CJS 老项目升级依赖，要验证 <code>require(ESM)</code>，不能只看本地 <code>node -v</code>；</li>
+<li>Dashboard Redeploy 不等于全新构建，必要时用新的 Git 提交触发部署；</li>
+<li>对关键服务，精确锁版本比 <code>latest</code> 可靠。</li>
+</ul>
+<hr>
+<h2 id="十、结果与反思"><a href="#十、结果与反思" class="headerlink" title="十、结果与反思"></a>十、结果与反思</h2><p>预算守卫上线后，最直接的变化不是“用户被限制了”，而是“额度终于可解释了”。</p>
+<ul>
+<li>6 分钟&#x2F;天，30 天合计 3 小时，相对 4 小时留出 1 小时缓冲；</li>
+<li>聊天、评论、统计共享一张表，不会再出现“每个项目都以为自己还有 4 小时”；</li>
+<li>429 有明确文案和 <code>Retry-After</code>，用户知道什么时候再来；</li>
+<li>预算表里的 <code>chat_ms</code> &#x2F; <code>waline_ms</code> 能看出功能占比，后续可以按真实数据调权重；</li>
+<li>告警邮件不再是唯一信号，每天的表就是一条可读的用量曲线。</li>
+</ul>
+<p>做对的地方：</p>
+<ul>
+<li>用原子 <code>UPDATE</code> 而不是“先查再改”，并发下不会超扣；</li>
+<li>先校验再扣费，非法请求不能烧预算；</li>
+<li>数据库故障 fail-open，预算系统不成为新的单点；</li>
+<li>两个项目共享预算，符合 Vercel 团队级额度的现实；</li>
+<li>预算逻辑有单测，关键路径可以回归。</li>
+</ul>
+<p>还能改进的地方：</p>
+<ul>
+<li>上线前先跑 3 天观察模式，确认权重和真实 Active CPU 的偏差；</li>
+<li>加 per-IP 令牌桶，先挡单点滥用，再让全局预算兜底；</li>
+<li>用量到 80% 时主动告警，而不是等 Vercel 发邮件；</li>
+<li>用 Vercel 后台的实际用量校准权重，而不是长期凭经验；</li>
+<li>如果访问量继续增长，Pro 或把统计迁到 Cloudflare Worker 都是选项。</li>
+</ul>
+<p>免费额度不是无限的，但可以变成可预期的。预算守卫的价值，不是让用户少用，而是把“不可控的账单告警”变成一张每天能读懂的表格。</p>
+<hr>
+<p>相关文章：</p>
+<ul>
+<li><a href="/2026/05/21/Hexo-%E5%8D%9A%E5%AE%A2AI%E9%97%AE%E7%AD%94%E5%8A%A9%E6%89%8BByteBot%E5%85%A8%E6%A0%88%E5%AE%9E%E8%B7%B5/">Hexo 博客 AI 问答助手 ByteBot 全栈实践</a></li>
+<li><a href="/2026/07/30/Hexo-%E5%8D%9A%E5%AE%A2%E8%AE%BF%E9%97%AE%E8%AE%A1%E6%95%B0%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E5%AE%9E%E5%BD%95-TiDB%E5%85%A8%E6%A0%88%E6%96%B9%E6%A1%88%E4%B8%8E%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%B8%A9%E5%9D%91%E8%AE%B0/">Hexo 博客访问计数系统搭建实录：TiDB 全栈方案与移动端踩坑记</a></li>
+<li><a href="/2026/05/15/Hexo-%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E6%B7%B1%E5%BA%A6%E8%BF%81%E7%A7%BB-%E4%BB%8ELeanCloud%E5%88%B0TiDB%20Cloud%E5%85%A8%E8%AE%B0%E5%BD%95/">Hexo 博客评论系统深度迁移：从 LeanCloud 到 TiDB Cloud</a></li>
+</ul>
+<p>完整代码位置：</p>
+<ul>
+<li><code>shared/usage-budget.js</code></li>
+<li><code>api/chat.js</code></li>
+<li><code>tests/usage-budget.test.js</code></li>
+<li><code>tests/chat-budget.test.js</code></li>
+<li><code>themes/next/layout/_third-party/comments/waline.swig</code></li>
+<li><code>source/js/site-stats.js</code></li>
+<li>Waline 仓库：<code>index.cjs</code>、<code>lib/usage-budget.js</code>、<code>lib/create-handler.js</code></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+    
+    <div class="post-blog-card" style="margin:1.5em auto 0;padding:.5em .8em;border:1px solid #e8e8e8;border-radius:6px;background:var(--card-bg-color,#fff);display:flex;align-items:center;max-width:400px">
+  <div style="flex:1;min-width:0;text-align:left">
+    <div style="font-size:.8em;font-weight:700;color:#555">ByteFisher</div>
+    <div style="font-size:.68em;color:#999;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">分享编程技术 · 记录钓鱼乐趣</div>
+  </div>
+  <img src="/images/wechat-qcode.webp" alt="扫码关注" style="width:60px;height:60px;border-radius:3px;margin:0 10px;flex-shrink:0">
+  <div style="padding:3px 10px;border:1px solid #fc6423;border-radius:3px;color:#fc6423;font-size:.7em;white-space:nowrap;flex-shrink:0">▸ 扫码关注 ◂</div>
+</div>
+
+    <div class="related-posts"><div class="related-posts-title">相关文章</div><div class="related-posts-list"><a href="/2026/05/15/Hexo-博客评论系统深度迁移-从LeanCloud到TiDB Cloud全记录/" class="related-post-item" title="Hexo 博客评论系统深度迁移：从 LeanCloud 到 TiDB Cloud"><span class="related-post-title">Hexo 博客评论系统深度迁移：从 LeanCloud 到 TiDB Cloud</span><span class="related-post-date">2026-05-15</span><span class="related-post-desc">Hexo、Waline、TiDB: ByteFisher 博客的评论系统使用 Waline（部署于 Vercel） + LeanCloud（国内版）的组合已运行一年多，积累了 19 条评论和 137 篇文章阅读计数。</span></a><a href="/2026/07/30/Hexo-博客访问计数系统搭建实录-TiDB全栈方案与移动端踩坑记/" class="related-post-item" title="Hexo 博客访问计数系统搭建实录：TiDB 全栈方案与移动端踩坑记"><span class="related-post-title">Hexo 博客访问计数系统搭建实录：TiDB 全栈方案与移动端踩坑记</span><span class="related-post-date">2026-07-30</span><span class="related-post-desc">不蒜子三天两头 503，LeanCloud 国际版延迟 300ms+，商业方案数据不在自己手里——干脆自建。本文从数据库设计到前端统计脚本，从构建时快照到移动端请求拦截，完整记录一套自建博客访问计数系统的技术选型、架构设计和踩坑修复过程。</span></a><a href="/2026/05/21/Hexo-博客AI问答助手ByteBot全栈实践/" class="related-post-item" title="Hexo 博客 AI 问答助手 ByteBot 全栈实践：从流式响应到 RAG 增强"><span class="related-post-title">Hexo 博客 AI 问答助手 ByteBot 全栈实践：从流式响应到 RAG 增强</span><span class="related-post-date">2026-05-21</span><span class="related-post-desc">Hexo、AI、DeepSeek: ByteBot 是 ByteFisher 博客的 AI 问答助手，基于 DeepSeek API + Vercel Serverless 构建，为博客访问者提供智能问答服务。本文详细记录从最初的基础问答到全功能生产级助手的完整技术实现过程。</span></a><a href="/2026/05/09/Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移/" class="related-post-item" title="Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移"><span class="related-post-title">Hexo 博客三项基础修复：RSS 订阅 + Sitemap + Waline 评论系统迁移</span><span class="related-post-date">2026-05-09</span><span class="related-post-desc">ByteFisher 博客使用 Hexo 8.1.1 + NexT 7.8.0 主题，运行在 GitHub Pages 上，目前已发布 91 篇文章。最近对博客进行了一次全面的代码审查，发现三个高优先级的硬性问题： | 问题 | 影响 | 严重程度 | |------|------|-----...</span></a><a href="/2026/06/12/Hexo-博客收口型优化实战-信息架构重组与内容治理全记录/" class="related-post-item" title="Hexo 博客收口型优化实战：信息架构重组与内容治理全记录"><span class="related-post-title">Hexo 博客收口型优化实战：信息架构重组与内容治理全记录</span><span class="related-post-date">2026-06-12</span><span class="related-post-desc">ByteFisher 博客上线2年后迎来"收口型"优化——不追求新功能，而是对信息架构、SEO 质量、废弃资产和基础设施做系统性清理。记录首页改为内容入口矩阵、14+ 篇文章 description 批量重写、旧图床链接清零、tools 目录瘦身等全部过程。</span></a><a href="/2026/05/31/VSCode-OpenCode-DeepSeek-博客文章全自动开发流水线实战/" class="related-post-item" title="VSCode + OpenCode + DeepSeek：博客文章全自动开发流水线实战"><span class="related-post-title">VSCode + OpenCode + DeepSeek：博客文章全自动开发流水线实战</span><span class="related-post-date">2026-05-31</span><span class="related-post-desc">本文详细介绍如何使用 VSCode + OpenCode + DeepSeek 构建博客文章全自动开发流水线，涵盖 AI 辅助写作、GitHub Actions 自动部署、微信公众号自动同步等完整工作流。从提示词配置到 Tools 调用，从 CI/CD 到内容分发，一次编写，多平台发布。</span></a></div></div>
+    <div class="series-nav"><div class="series-nav-title">Hexo博客搭建 系列</div><div class="series-nav-progress">第 16/16 篇</div><div class="series-nav-links"><a href="/2026/07/30/Hexo-博客访问计数系统搭建实录-TiDB全栈方案与移动端踩坑记/" class="series-nav-prev">Hexo 博客访问计数系统搭建实录：TiDB 全栈方案与移动端踩坑记</a></div></div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/series-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag"># series:Hexo博客搭建</a>
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/Waline/" rel="tag"># Waline</a>
+              <a href="/tags/Vercel/" rel="tag"># Vercel</a>
+              <a href="/tags/Serverless/" rel="tag"># Serverless</a>
+              <a href="/tags/TiDB/" rel="tag"># TiDB</a>
+              <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag"># 性能优化</a>
+              <a href="/tags/%E9%A2%9D%E5%BA%A6%E7%AE%A1%E7%90%86/" rel="tag"># 额度管理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/11/15/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-13-ByteBot%E5%AE%9E%E6%97%B6%E4%B8%8A%E4%B8%8B%E6%96%87%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98/" rel="prev" title="ByteFisher AI 工程化深度实战（十三）：ByteBot 实时上下文注入实战——时间与天气">
+      <i class="fa fa-chevron-left"></i> ByteFisher AI 工程化深度实战（十三）：ByteBot 实时上下文注入实战——时间与天气
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+  <div class="post-share">
+    <span class="post-share-label">分享：</span>
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.bytefisher.top%2F2026%2F11%2F18%2FHexo-%25E5%258D%259A%25E5%25AE%25A2Vercel%25E9%25A2%259D%25E5%25BA%25A6%25E5%25AE%2588%25E5%258D%25AB-AI%25E9%2597%25AE%25E7%25AD%2594%25E4%25B8%258EWaline%25E5%2585%25B1%25E4%25BA%25AB%25E9%25A2%2584%25E7%25AE%2597%2F&amp;title=Hexo%20%E5%8D%9A%E5%AE%A2%20Vercel%20%E9%A2%9D%E5%BA%A6%E5%AE%88%E5%8D%AB%EF%BC%9AAI%20%E9%97%AE%E7%AD%94%E4%B8%8E%20Waline%20%E7%9A%84%E5%85%B1%E4%BA%AB%E9%A2%84%E7%AE%97%E5%AE%9E%E6%88%98" target="_blank" rel="noopener" title="分享到微博">
+      <i class="fab fa-weibo"></i>
+    </a>
+    <a href="#" onclick="navigator.clipboard.writeText(location.href);var t=this;t.innerHTML='<i class=fa fa-check></i>';setTimeout(function(){t.innerHTML='<i class=fa fa-link></i>'},1500);return false" title="复制链接">
+      <i class="fa fa-link"></i>
+    </a>
+  </div>
+
+  
+  <div class="post-author-bio">
+    <div class="post-author-avatar">
+      <img src="/images/avatar2.gif" alt="淡水鱼">
+    </div>
+    <div class="post-author-info">
+      <div class="post-author-name">淡水鱼</div>
+      <div class="post-author-desc">钓鱼爱好者 &amp; Unity 游戏开发者，分享编程技术与钓鱼经验。</div>
+      <div class="post-author-links">
+        <a href="https://github.com/grj1981" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="/atom.xml" title="RSS 订阅"><i class="fa fa-rss"></i></a>
+        <a href="mailto:271623821@qq.com" title="联系我"><i class="fa fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+          </div>
+          
+    <div class="comments" id="waline-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+	  
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E5%91%8A%E8%AD%A6%E9%82%AE%E4%BB%B6%E4%B8%80%E5%B0%81%E6%8E%A5%E4%B8%80%E5%B0%81"><span class="nav-number">1.</span> <span class="nav-text">前言：告警邮件一封接一封</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%85%88%E7%AE%97%E8%B4%A6%EF%BC%9A4-%E5%B0%8F%E6%97%B6%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">2.</span> <span class="nav-text">一、先算账：4 小时到底是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%AD%A2%E8%A1%80%EF%BC%9A%E5%85%88%E6%8A%8A%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E9%99%8D%E4%B8%8B%E6%9D%A5"><span class="nav-number">3.</span> <span class="nav-text">二、止血：先把函数调用降下来</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E8%AE%BF%E9%97%AE%E7%BB%9F%E8%AE%A1%EF%BC%9A%E4%BB%8E%E6%AF%8F%E9%A1%B5%E4%B8%80%E6%AC%A1%E6%94%B9%E6%88%90%E6%89%B9%E9%87%8F%E4%B8%8A%E6%8A%A5"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 访问统计：从每页一次改成批量上报</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Waline%EF%BC%9A%E5%88%97%E8%A1%A8%E9%A1%B5%E4%B8%8D%E5%86%8D%E8%AF%B7%E6%B1%82%E8%AE%A1%E6%95%B0"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Waline：列表页不再请求计数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Chat%EF%BC%9A%E5%85%88%E6%A0%A1%E9%AA%8C%EF%BC%8C%E5%86%8D%E5%86%B3%E5%AE%9A%E6%98%AF%E5%90%A6%E8%BF%9B%E5%85%A5%E9%87%8D%E9%80%BB%E8%BE%91"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 Chat：先校验，再决定是否进入重逻辑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%96%B9%E6%A1%88%E9%80%89%E5%9E%8B%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%85%B1%E4%BA%AB%E9%A2%84%E7%AE%97%E8%A1%A8"><span class="nav-number">4.</span> <span class="nav-text">三、方案选型：为什么是共享预算表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%85%88%E6%8E%92%E9%99%A4%E5%87%A0%E4%B8%AA%E6%96%B9%E6%A1%88"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 先排除几个方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E9%80%89-TiDB-%E5%8D%95%E8%A1%A8%E5%85%B1%E4%BA%AB%E9%A2%84%E7%AE%97"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 选 TiDB 单表共享预算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E5%85%B1%E4%BA%AB%E9%A2%84%E7%AE%97%E7%9A%84%E5%8F%96%E8%88%8D"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 共享预算的取舍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%EF%BC%9A%E4%B8%80%E5%A4%A9%E4%B8%80%E8%A1%8C"><span class="nav-number">5.</span> <span class="nav-text">四、数据模型：一天一行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%A0%B8%E5%BF%83%E7%AE%97%E6%B3%95%EF%BC%9A%E4%B8%80%E6%9D%A1%E5%8E%9F%E5%AD%90-UPDATE"><span class="nav-number">6.</span> <span class="nav-text">五、核心算法：一条原子 UPDATE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E6%8E%A5%E5%85%A5-Chat%EF%BC%9A%E9%A2%84%E7%AE%97%E6%94%BE%E5%9C%A8%E6%A0%A1%E9%AA%8C%E4%B9%8B%E5%90%8E"><span class="nav-number">7.</span> <span class="nav-text">六、接入 Chat：预算放在校验之后</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E6%8E%A5%E5%85%A5-Waline%EF%BC%9A%E7%BB%99%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E5%8A%A0%E4%B8%80%E5%B1%82-wrapper"><span class="nav-number">8.</span> <span class="nav-text">七、接入 Waline：给评论系统加一层 wrapper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E6%B5%8B%E8%AF%95%EF%BC%9A%E4%B8%8D%E8%A6%81%E7%94%A8%E7%94%9F%E4%BA%A7%E9%A2%9D%E5%BA%A6%E8%AF%95%E9%94%99"><span class="nav-number">9.</span> <span class="nav-text">八、测试：不要用生产额度试错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E3%80%81%E4%B8%8A%E7%BA%BF%E6%8F%92%E6%9B%B2%EF%BC%9AWaline-%E7%9A%84-ESM-%E9%9B%AA%E5%B4%A9"><span class="nav-number">10.</span> <span class="nav-text">九、上线插曲：Waline 的 ESM 雪崩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E3%80%81%E7%BB%93%E6%9E%9C%E4%B8%8E%E5%8F%8D%E6%80%9D"><span class="nav-number">11.</span> <span class="nav-text">十、结果与反思</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="淡水鱼"
+      src="/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">淡水鱼</p>
+  <div class="site-description" itemprop="description">ByteFisher 是一个融合编程技术与钓鱼生活的个人博客，分享 Unity3D 游戏开发、C# 编程教程、Hexo 博客搭建技巧和真实的野钓日记。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">300</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+      <div class="site-state-item site-state-tutorials">
+        <a href="/tutorials/">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">教程</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/grj1981/grj1981.github.io.git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;grj1981&#x2F;grj1981.github.io.git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:271623821@qq.com" title="E-Mail → mailto:271623821@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.bytefisher.top/" title="Blog → https:&#x2F;&#x2F;www.bytefisher.top"><i class="fa fa-blog fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  <iframe id="music-player" allow="autoplay; encrypted-media" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=0&id=8510938521&auto=1&height=32"></iframe>
+	  <div class="wechat_OA">
+		<span>欢迎关注我的公众号</span>
+		<!-- 这里添加你的二维码图片 -->
+		<img src ="/images/wechat-qcode.webp">
+	  </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2023 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡水鱼</span>
+</div>
+        
+<div class="site-stats-count">
+      <span class="post-meta-item" id="site_stats_container_uv">
+        <span class="post-meta-item-icon">
+          <i class="fa fa-user"></i>
+        </span>
+        <span class="site-uv" title="总访客量">
+          <span id="site_stats_value_uv">-</span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+      <span class="post-meta-item" id="site_stats_container_pv">
+        <span class="post-meta-item-icon">
+          <i class="fa fa-eye"></i>
+        </span>
+        <span class="site-pv" title="总访问量">
+          <span id="site_stats_value_pv">-</span>
+      </span>
+    </span>
+  <script src="/js/site-stats.js?v=20261116-site-stats-batch"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+if (!window.matchMedia('(max-width: 767px)').matches) {
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: true,
+  scrollTo : !CONFIG.bookmark.enable
+});
+window._pjax = pjax;
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  NexT.boot.registerEvents();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition(true);
+
+  document.querySelectorAll('.post-block, .pagination, .comments').forEach(function(el) {
+    if (parseFloat(el.style.opacity) === 0) {
+      el.style.opacity = 1;
+    }
+  });
+});
+}
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+    
+
+  
+
+    
+
+    </div>
+
+<link rel="preload" as="style" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="//unpkg.com/@waline/client@2.15.8/dist/waline.css"></noscript>
+<script data-pjax>
+(function() {
+  // 抑制第三方扩展的 notice.avoidance 报错
+  window.addEventListener('error', function(e) {
+    if (e.message && e.message.indexOf('notice.avoidance') !== -1) {
+      e.preventDefault();
+      e.stopPropagation();
+      return true;
+    }
+  });
+
+  // 评论容器只存在于文章/留言页；列表页不再触发任何 Waline 请求
+  var el = document.querySelector('#waline-comments');
+  if (!el) return;
+
+  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
+
+  function normalizePath(value) {
+    var path = String(value || '');
+    try {
+      path = decodeURIComponent(path);
+    } catch (e) {}
+    if (!path) return '/';
+    if (path.charAt(path.length - 1) !== '/') path += '/';
+    return path;
+  }
+
+  function getPostPath() {
+    var pathEl = document.querySelector('.waline-visitor-count');
+    var raw = pathEl && pathEl.getAttribute('data-path');
+    return normalizePath(raw || location.pathname);
+  }
+
+  function updateCount(postPath) {
+    var countEls = document.querySelectorAll('.waline-visitor-count');
+    if (!countEls.length) return;
+    countEls.forEach(function(countEl) {
+      var raw = countEl.getAttribute('data-path');
+      if (!raw) return;
+      var path = normalizePath(raw);
+      if (path !== postPath) return;
+      fetch(baseURL + '/api/article?path=' + encodeURIComponent(path) + '&type=time')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(json) {
+          if (json && json.data && json.data[0] && json.data[0].time != null) {
+            countEl.innerText = json.data[0].time;
+          }
+        }).catch(function(){});
+    });
+  }
+
+  var postPath = getPostPath();
+
+  // 记录阅读量（只发一次，不阻塞评论区懒加载）
+  fetch(baseURL + '/api/article', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ path: postPath })
+  }).then(function() {
+    updateCount(postPath);
+  }).catch(function() {
+    updateCount(postPath);
+  });
+
+  // 评论区滚动到可见范围内才加载，减少无谓的评论请求
+  NexT.utils.loadComments(el, function() {
+    NexT.utils.getScript('//unpkg.com/@waline/client@2.15.8/dist/waline.js', function() {
+      Waline.init({
+        el: '#waline-comments',
+        serverURL: 'https://waline.bytefisher.top/',
+        path: location.pathname,
+        lang: 'zh-CN' || 'zh-CN',
+        meta: ["nick","mail","link"] || ['nick', 'mail', 'link'],
+        requiredMeta: ["nick"] || ['nick'],
+        placeholder: "输入你的评论\n填写昵称和邮箱才能发布评论哦！\n收到回复时会邮件通知你 🎣",
+        avatar: 'retro' || 'retro',
+        pageSize: 10 || 10,
+        emoji: ["//unpkg.com/@waline/emojis@1.2.0/weibo"] || ['//unpkg.com/@waline/emojis@1.2.0/weibo']
+      });
+    }, window.Waline);
+  });
+})();
+</script>
+<!-- 抖音视频弹窗 -->
+<div id="douyin-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <span class="nav-btn prev-btn">&#10094;</span>
+    <span class="nav-btn next-btn">&#10095;</span>
+    <iframe id="douyin-player" frameborder="0" scrolling="no" allowfullscreen allow="autoplay" referrerpolicy="unsafe-url"></iframe>
+  </div>
+  <div class="douyin-player-status" aria-live="polite"></div>
+  <a class="douyin-fallback-link" href="#" target="_blank" rel="noopener noreferrer">打开抖音原页</a>
+</div>
+
+<link rel="stylesheet" type="text/css" href="/css/douyin-modal.css?v=douyin-20260907-layout-fix">
+<script src="/js/douyin-modal.js?v=douyin-20260907-layout-fix" async></script>
+<script src="/js/hero-typing.js" async></script>
+
+<link rel="stylesheet" type="text/css" href="/css/lightbox.min.css">
+<script data-pjax>
+(function() {
+  if (document.querySelector('a[data-lightbox]')) {
+    if (!window._lightboxLoaded) {
+      window._lightboxLoaded = true;
+      var s = document.createElement('script');
+      s.src = '/js/lightbox-plus-jquery.min.js';
+      document.body.appendChild(s);
+    }
+  }
+})();
+</script>
+
+<button id="darkmode-toggle" class="darkmode-toggle-btn" title="切换深色模式">
+  <i class="fa fa-moon-o"></i>
+  <i class="fa fa-sun-o"></i>
+</button>
+<script src="/js/darkmode-toggle.js" async></script>
+
+<script data-pjax>
+(function() {
+  function loadAI() {
+    if (window._aiLoaded) return;
+    window._aiLoaded = true;
+    var aiVersion = 'bytebot-20260819-browser-loc';
+    var scripts = ['/js/lib/marked.min.js', '/js/lib/purify.min.js', '/js/ai-assistant.js?v=' + aiVersion];
+    function loadNext() {
+      if (!scripts.length) return;
+      var s = document.createElement('script');
+      s.src = scripts.shift();
+      s.onload = s.onerror = loadNext;
+      document.body.appendChild(s);
+    }
+    loadNext();
+  }
+  if (document.readyState === 'complete') {
+    setTimeout(loadAI, 500);
+  } else {
+    window.addEventListener('load', function() { setTimeout(loadAI, 500); });
+  }
+})();
+</script>
+
+<script data-pjax>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?v=20261116-site-stats-batch', {
+    updateViaCache: 'none'
+  }).then(function(reg) {
+    reg.update(); // Force SW update check on each page load
+  });
+}
+</script>
+
+<script src="/js/douyin-pagination.js?v=douyin-20260907-layout-fix" async></script>
+<script src="/js/hot-posts-widget.js" async></script>
+
+<div id="mobile-music-player" class="mobile-music-player" aria-hidden="true"></div>
+<link rel="stylesheet" type="text/css" href="/css/mobile-music.css">
+<script src="/js/mobile-music.js" async></script>
+
+</body>
+</html>
