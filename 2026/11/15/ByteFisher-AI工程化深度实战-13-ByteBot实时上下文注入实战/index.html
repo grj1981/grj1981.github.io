@@ -40,7 +40,7 @@
 <meta property="og:description" content="前 12 篇收官后的第一篇实战补遗。ByteBot 此前没有实时感知能力，用户问&quot;现在几点&quot;&quot;今天天气&quot;只能靠模型猜甚至编造，且 IP 定位常常不准。本篇用上下文注入（system prompt 实时信息段）+ 对话引导 + 浏览器定位三层方案：Intl 时区时间、IP 定位 + Open-Meteo 免费天气、预置城市表识别用户报出的城市并按 IP 记住 30 分钟、navigator.geol">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-11-18T05:14:17.053Z">
+<meta property="article:modified_time" content="2026-11-18T05:14:40.585Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="series:ByteFisher AI工程化深度实战教程">
@@ -50,7 +50,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2026/11/15/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-13-ByteBot%E5%AE%9E%E6%97%B6%E4%B8%8A%E4%B8%8B%E6%96%87%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"ByteFisher AI 工程化深度实战（十三）：ByteBot 实时上下文注入实战——时间与天气","description":"前 12 篇收官后的第一篇实战补遗。ByteBot 此前没有实时感知能力，用户问\\\"现在几点\\\"\\\"今天天气\\\"只能靠模型猜甚至编造，且 IP 定位常常不准。本篇用上下文注入（system prompt 实时信息段）+ 对话引导 + 浏览器定位三层方案：Intl 时区时间、IP 定位 + Open-Meteo 免费天气、预置城市表识别用户报出的城市并按 IP 记住 30 分钟、navigator.","url":"https://www.bytefisher.top/2026/11/15/ByteFisher-AI工程化深度实战-13-ByteBot实时上下文注入实战/","datePublished":"2026-11-14T16:00:00.000Z","dateModified":"2026-11-18T05:14:17.053Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/11/15/ByteFisher-AI工程化深度实战-13-ByteBot实时上下文注入实战/"},"keywords":"AI, 教程, series:ByteFisher AI工程化深度实战教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"ByteFisher AI 工程化深度实战（十三）：ByteBot 实时上下文注入实战——时间与天气","description":"前 12 篇收官后的第一篇实战补遗。ByteBot 此前没有实时感知能力，用户问\\\"现在几点\\\"\\\"今天天气\\\"只能靠模型猜甚至编造，且 IP 定位常常不准。本篇用上下文注入（system prompt 实时信息段）+ 对话引导 + 浏览器定位三层方案：Intl 时区时间、IP 定位 + Open-Meteo 免费天气、预置城市表识别用户报出的城市并按 IP 记住 30 分钟、navigator.","url":"https://www.bytefisher.top/2026/11/15/ByteFisher-AI工程化深度实战-13-ByteBot实时上下文注入实战/","datePublished":"2026-11-14T16:00:00.000Z","dateModified":"2026-11-18T05:14:40.585Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/11/15/ByteFisher-AI工程化深度实战-13-ByteBot实时上下文注入实战/"},"keywords":"AI, 教程, series:ByteFisher AI工程化深度实战教程"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"AI","item":"https://www.bytefisher.top/categories/AI/"},{"@type":"ListItem","position":3,"name":"ByteFisher AI 工程化深度实战（十三）：ByteBot 实时上下文注入实战——时间与天气"}]}</script>
 
 
