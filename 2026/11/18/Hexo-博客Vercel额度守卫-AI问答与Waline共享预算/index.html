@@ -40,7 +40,7 @@
 <meta property="og:description" content="Vercel Hobby 的 4 小时 Active CPU 额度被 AI 问答、Waline 评论和访问统计共同消耗，额度告警邮件越来越频繁。本文记录从批量上报、懒加载评论到 TiDB 共享预算守卫的完整过程：一条原子 UPDATE 如何同时管住两个 Vercel 项目，以及上线时踩到的 Waline ESM 坑。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-18T12:00:00.000Z">
-<meta property="article:modified_time" content="2026-11-22T21:40:29.718Z">
+<meta property="article:modified_time" content="2026-11-23T02:44:31.782Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Serverless">
@@ -55,7 +55,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2026/11/18/Hexo-%E5%8D%9A%E5%AE%A2Vercel%E9%A2%9D%E5%BA%A6%E5%AE%88%E5%8D%AB-AI%E9%97%AE%E7%AD%94%E4%B8%8EWaline%E5%85%B1%E4%BA%AB%E9%A2%84%E7%AE%97/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo 博客 Vercel 额度守卫：AI 问答与 Waline 的共享预算实战","description":"Vercel Hobby 的 4 小时 Active CPU 额度被 AI 问答、Waline 评论和访问统计共同消耗，额度告警邮件越来越频繁。本文记录从批量上报、懒加载评论到 TiDB 共享预算守卫的完整过程：一条原子 UPDATE 如何同时管住两个 Vercel 项目，以及上线时踩到的 Waline ESM 坑。","url":"https://www.bytefisher.top/2026/11/18/Hexo-博客Vercel额度守卫-AI问答与Waline共享预算/","datePublished":"2026-11-18T12:00:00.000Z","dateModified":"2026-11-22T21:40:29.718Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/11/18/Hexo-博客Vercel额度守卫-AI问答与Waline共享预算/"},"keywords":"series:Hexo博客搭建, Hexo, Waline, Vercel, Serverless, TiDB, 性能优化, 额度管理"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo 博客 Vercel 额度守卫：AI 问答与 Waline 的共享预算实战","description":"Vercel Hobby 的 4 小时 Active CPU 额度被 AI 问答、Waline 评论和访问统计共同消耗，额度告警邮件越来越频繁。本文记录从批量上报、懒加载评论到 TiDB 共享预算守卫的完整过程：一条原子 UPDATE 如何同时管住两个 Vercel 项目，以及上线时踩到的 Waline ESM 坑。","url":"https://www.bytefisher.top/2026/11/18/Hexo-博客Vercel额度守卫-AI问答与Waline共享预算/","datePublished":"2026-11-18T12:00:00.000Z","dateModified":"2026-11-23T02:44:31.782Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/11/18/Hexo-博客Vercel额度守卫-AI问答与Waline共享预算/"},"keywords":"series:Hexo博客搭建, Hexo, Waline, Vercel, Serverless, TiDB, 性能优化, 额度管理"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"博客实战","item":"https://www.bytefisher.top/categories/博客实战/"},{"@type":"ListItem","position":3,"name":"Hexo 博客 Vercel 额度守卫：AI 问答与 Waline 的共享预算实战"}]}</script>
 
 
@@ -178,7 +178,7 @@
   </li>
         <li class="menu-item menu-item-douyin">
 
-    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">79</span></a>
+    <a href="/douyin/" rel="section"><i class="fa fa-play-circle fa-fw"></i>抖音作品<span class="badge">80</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -188,7 +188,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">302</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">303</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -693,8 +693,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2026/11/15/ByteFisher-AI%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98-13-ByteBot%E5%AE%9E%E6%97%B6%E4%B8%8A%E4%B8%8B%E6%96%87%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98/" rel="prev" title="ByteFisher AI 工程化深度实战（十三）：ByteBot 实时上下文注入实战——时间与天气">
-      <i class="fa fa-chevron-left"></i> ByteFisher AI 工程化深度实战（十三）：ByteBot 实时上下文注入实战——时间与天气
+    <a href="/2026/11/15/2026-11-15-%E9%92%93%E9%B1%BC%E6%97%A5%E8%AE%B0-%E8%80%81%E6%9D%BF%E8%AF%B4%E6%88%91%E9%92%A9%E5%B0%8F%E8%A6%81%E5%88%87%E7%BA%BF%E7%BB%93%E6%9E%9C%E7%9C%9F%E6%9D%A5%E9%B2%A4%E9%B1%BC%E4%BA%86/" rel="prev" title="老板说我钩小要切线，结果真来鲤鱼了">
+      <i class="fa fa-chevron-left"></i> 老板说我钩小要切线，结果真来鲤鱼了
     </a></div>
       <div class="post-nav-item">
     <a href="/2026/11/22/ByteFisher-%E7%A8%8B%E5%BA%8F%E5%91%98%E9%92%93%E9%B1%BC%E8%87%AA%E5%8A%A8%E5%8C%96-01-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%8A%E9%92%93%E9%B1%BC%E5%86%85%E5%AE%B9%E5%81%9A%E6%88%90%E6%B5%81%E6%B0%B4%E7%BA%BF/" rel="next" title="程序员钓鱼自动化（一）：为什么把钓鱼内容做成流水线">
@@ -803,7 +803,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">302</span>
+          <span class="site-state-item-count">303</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
