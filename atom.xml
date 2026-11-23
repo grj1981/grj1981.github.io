@@ -11,7 +11,7 @@
   <rights>All rights reserved 2026, 淡水鱼</rights>
   <subtitle>钓鱼爱好者的编程世界</subtitle>
   <title>ByteFisher</title>
-  <updated>2026-11-23T06:37:48.956Z</updated>
+  <updated>2026-11-23T07:10:29.085Z</updated>
   <entry>
     <author>
       <name>淡水鱼</name>
@@ -25,7 +25,7 @@
     <published>2026-11-21T16:00:00.000Z</published>
     <summary>本系列第1篇，共12篇。从&quot;出钓一次要花三四小时做内容&quot;的真实痛点出发，拆解我博客上真实运行的钓鱼内容流水线：速记、日记母版、视频方案、发布回填、数据复盘五个阶段，四个 Python 脚本与三份数据资产如何衔接，并给出整个系列 12 篇的路线图。</summary>
     <title>程序员钓鱼自动化（一）：为什么把钓鱼内容做成流水线</title>
-    <updated>2026-11-23T06:37:48.956Z</updated>
+    <updated>2026-11-23T07:10:29.085Z</updated>
   </entry>
   <entry>
     <author>
@@ -45,7 +45,7 @@
     <published>2026-11-18T12:00:00.000Z</published>
     <summary>Vercel Hobby 的 4 小时 Active CPU 额度被 AI 问答、Waline 评论和访问统计共同消耗，额度告警邮件越来越频繁。本文记录从批量上报、懒加载评论到 TiDB 共享预算守卫的完整过程：一条原子 UPDATE 如何同时管住两个 Vercel 项目，以及上线时踩到的 Waline ESM 坑。</summary>
     <title>Hexo 博客 Vercel 额度守卫：AI 问答与 Waline 的共享预算实战</title>
-    <updated>2026-11-23T06:37:48.962Z</updated>
+    <updated>2026-11-23T07:10:29.091Z</updated>
   </entry>
   <entry>
     <author>
@@ -60,7 +60,7 @@
     <published>2026-11-15T13:00:00.000Z</published>
     <summary>周五刚放鱼，今天价格回落到20块，我又杀回三一水库钓小红尾。细线小钩拉饵抽频率，老板笑我等着切线，结果下午真来了一条一斤的鲤鱼，软竿细线遛了几分钟才投降。</summary>
     <title>老板说我钩小要切线，结果真来鲤鱼了</title>
-    <updated>2026-11-23T06:37:48.953Z</updated>
+    <updated>2026-11-23T07:10:29.082Z</updated>
   </entry>
   <entry>
     <author>
@@ -75,7 +75,7 @@
     <published>2026-11-14T16:00:00.000Z</published>
     <summary>前 12 篇收官后的第一篇实战补遗。ByteBot 此前没有实时感知能力，用户问&quot;现在几点&quot;&quot;今天天气&quot;只能靠模型猜甚至编造，且 IP 定位常常不准。本篇用上下文注入（system prompt 实时信息段）+ 对话引导 + 浏览器定位三层方案：Intl 时区时间、IP 定位 + Open-Meteo 免费天气、预置城市表识别用户报出的城市并按 IP 记住 30 分钟、navigator.geolocation 浏览器坐标定位、懒加载关键词与短跟进触发、TTL 缓存、超时降级，并给出注入 vs 函数调用选型对比与完整测试验证。</summary>
     <title>ByteFisher AI 工程化深度实战（十三）：ByteBot 实时上下文注入实战——时间与天气</title>
-    <updated>2026-11-23T06:37:48.954Z</updated>
+    <updated>2026-11-23T07:10:29.083Z</updated>
   </entry>
   <entry>
     <author>
@@ -90,7 +90,7 @@
     <published>2026-11-14T13:00:00.000Z</published>
     <summary>2026年11月14日花碑水库野钓日记：黄金钓位被占，改搓饵避鲢鳙，第二竿意外中鲤鱼，随后鲢鳙连竿闹窝，下午收获一斤多红尾鲴，单尾破个人纪录。</summary>
     <title>第二竿就中鲤鱼，然后鲢鳙把我整不会了</title>
-    <updated>2026-11-23T06:37:48.953Z</updated>
+    <updated>2026-11-23T07:10:29.082Z</updated>
   </entry>
   <entry>
     <author>
@@ -105,7 +105,7 @@
     <published>2026-11-08T13:00:00.000Z</published>
     <summary>阴天14度，雨后三一水库人不多。我放弃鲤鱼专攻小红尾，15尺枯法师抽频率找到鱼层连竿二十余尾，中途遭遇大鱼把2号袖钩拉直跑鱼，收竿前换12尺短竿又补了十来尾，全部放流。</summary>
     <title>0.2子线没切，钩子先投了降</title>
-    <updated>2026-11-23T06:37:48.953Z</updated>
+    <updated>2026-11-23T07:10:29.082Z</updated>
   </entry>
   <entry>
     <author>
@@ -120,7 +120,7 @@
     <published>2026-11-07T16:00:00.000Z</published>
     <summary>本系列收官篇。汇总第1~11篇改造，给出 ByteBot v2 完整架构（混合检索 + 上下文压缩 + 结构化输出 + 多级降级 + 全链路可观测 + 评测闭环），附改造前后质量、成本、延迟对比数据与未来演进方向。</summary>
     <title>ByteFisher AI 工程化深度实战（十二）：综合实战——ByteBot v2 重构</title>
-    <updated>2026-11-23T06:37:48.954Z</updated>
+    <updated>2026-11-23T07:10:29.083Z</updated>
   </entry>
   <entry>
     <author>
@@ -135,7 +135,7 @@
     <published>2026-11-07T13:00:00.000Z</published>
     <summary>周六花碑水库复仇战，上午被隔壁大哥的七条鲤鱼压得喘不过气，我却在鲢鳙堆里泡了三小时。午饭后换粗子线、放慢节奏，下午鲤鱼准时进窝，连竿五尾，算是把上周收竿切线那口气顺回来了。</summary>
     <title>复仇战打成翻身仗：花碑水库的鲤鱼下午才上班</title>
-    <updated>2026-11-23T06:37:48.953Z</updated>
+    <updated>2026-11-23T07:10:29.082Z</updated>
   </entry>
   <entry>
     <author>
@@ -150,7 +150,7 @@
     <published>2026-11-01T13:00:00.000Z</published>
     <summary>花碑水库，水位回升带来希望，却先遭小鲢鳙连番闹窝。换钩改饵调整战术，午后终于等来真实鱼口，收获3斤鲤鱼一尾，收竿时却被大鱼切线。</summary>
     <title>花碑水库的鲤鱼复仇战：从鲢鳙闹窝到子线被切</title>
-    <updated>2026-11-23T06:37:48.953Z</updated>
+    <updated>2026-11-23T07:10:29.082Z</updated>
   </entry>
   <entry>
     <author>
@@ -165,7 +165,7 @@
     <published>2026-10-31T16:00:00.000Z</published>
     <summary>本系列第11篇。为 ByteBot 接入 Langfuse 全链路追踪，讲解 trace/span 埋点、Prompt 版本管理、效果回归测试与异常告警，把第2~10篇的优化全部变成可度量指标，并给出博客真实请求的追踪示例。</summary>
     <title>ByteFisher AI 工程化深度实战（十一）：LLM 应用可观测性与评测</title>
-    <updated>2026-11-23T06:37:48.954Z</updated>
+    <updated>2026-11-23T07:10:29.083Z</updated>
   </entry>
   <entry>
     <author>
@@ -180,7 +180,7 @@
     <published>2026-10-24T16:00:00.000Z</published>
     <summary>本系列第10篇。把钓鱼日记流水线升级为多 Agent 编排的生产级系统，深入工作流拆分、失败恢复、并行调度、成本与延迟平衡，用真实流水线数据对比单 Agent 与多 Agent。</summary>
     <title>ByteFisher AI 工程化深度实战（十）：多 Agent 编排工程化</title>
-    <updated>2026-11-23T06:37:48.954Z</updated>
+    <updated>2026-11-23T07:10:29.083Z</updated>
   </entry>
   <entry>
     <author>
@@ -195,7 +195,7 @@
     <published>2026-10-24T13:00:00.000Z</published>
     <summary>阴天18度的三一水库，开局半小时就擒下半斤大板鲫，本以为要爆护，结果长竿抛了一上午再无一口，换短竿钓粘米苦守三小时，最终只添几条小奶鲫，收获惨淡却心态平和。</summary>
     <title>半斤大鲫开局，然后就没有然后了</title>
-    <updated>2026-11-23T06:37:48.953Z</updated>
+    <updated>2026-11-23T07:10:29.082Z</updated>
   </entry>
   <entry>
     <author>
@@ -210,7 +210,7 @@
     <published>2026-10-18T13:00:00.000Z</published>
     <summary>10月18日三一水库，阴天18度，继续验证短竿细线小钩思路。开局小钩拉饵钓底有口打不到，改钓离底10公分连中红尾30+；下午换0.2子线2号细地袖粘米守底，鲫鱼口明显变多，连出双尾，收两斤鲫鱼，最大3两。</summary>
     <title>三一水库验证局：从0.4到0.2，把鲫鱼的口磨出来</title>
-    <updated>2026-11-23T06:37:48.953Z</updated>
+    <updated>2026-11-23T07:10:29.081Z</updated>
   </entry>
   <entry>
     <author>
@@ -225,7 +225,7 @@
     <published>2026-10-17T16:00:00.000Z</published>
     <summary>本系列第9篇。精读 MCP 协议（JSON-RPC、tools/resources/prompts 三类原语、stdio 与 HTTP 传输），自研一个连接博客数据的 MCP Server（TiDB 鱼获统计、文章检索、Hexo 草稿生成），并接入 Claude/Cursor 演示。</summary>
     <title>ByteFisher AI 工程化深度实战（九）：自研 MCP Server 实战</title>
-    <updated>2026-11-23T06:37:48.954Z</updated>
+    <updated>2026-11-23T07:10:29.083Z</updated>
   </entry>
   <entry>
     <author>
@@ -240,7 +240,7 @@
     <published>2026-10-17T13:00:00.000Z</published>
     <summary>老板放话“这两天不好钓”，我靠短竿细线两套方案轮换，从两小时没口到红尾鲫鱼双收，鱼获两斤全部放流。</summary>
     <title>从空军预警到双尾收场，我靠两套方案翻了盘</title>
-    <updated>2026-11-23T06:37:48.953Z</updated>
+    <updated>2026-11-23T07:10:29.081Z</updated>
   </entry>
   <entry>
     <author>
@@ -255,7 +255,7 @@
     <published>2026-10-11T13:00:00.000Z</published>
     <summary>开局两小时无口，经历粘米、搓饵、拉饵三次调整，从红尾到小奶鲫连竿，最终鱼获全放流，收获一份水边的治愈。</summary>
     <title>三一水库的Debug日志：从空军到连竿</title>
-    <updated>2026-11-23T06:37:48.953Z</updated>
+    <updated>2026-11-23T07:10:29.081Z</updated>
   </entry>
   <entry>
     <author>
@@ -270,7 +270,7 @@
     <published>2026-10-10T16:00:00.000Z</published>
     <summary>本系列第8篇。剖析 CrewAI 的 Agent/Task/Crew/Process 编排模型，与 LangGraph 用同一&quot;钓鱼日记生成&quot;场景对比，讲解角色协作框架的取舍，并把 tools/douyin-blog 的串行流程改写为 Crew 协作。</summary>
     <title>ByteFisher AI 工程化深度实战（八）：Agent 框架源码剖析——CrewAI</title>
-    <updated>2026-11-23T06:37:48.954Z</updated>
+    <updated>2026-11-23T07:10:29.083Z</updated>
   </entry>
   <entry>
     <author>
@@ -288,7 +288,7 @@
     <published>2026-10-07T13:00:00.000Z</published>
     <summary>2026年10月7日三一水库野钓日记：换6.3米长竿守鲤鱼，搓饵意外中三斤鲢鳙，全程视频记录却两回合轻松上岸；午饭前取下运动相机，偏偏钓获全天唯一目标鱼小鲤鱼，遗憾没拍到。</summary>
     <title>三一水库长竿守鲤记：一条没发力的鲢鳙，和一顿被中断的午饭</title>
-    <updated>2026-11-23T06:37:48.953Z</updated>
+    <updated>2026-11-23T07:10:29.081Z</updated>
   </entry>
   <entry>
     <author>
@@ -303,7 +303,7 @@
     <published>2026-10-05T13:00:00.000Z</published>
     <summary>2026年10月5日小雨天，花碑水库降温鱼口稀少，我守了一整天只钓上五条无效鲢鳙，下午老板补鱼也无济于事，真正空军的一天，却意外收获了一份平常心。</summary>
     <title>小雨天守花碑水库，五条鲢鳙换一场治愈的空军</title>
-    <updated>2026-11-23T06:37:48.952Z</updated>
+    <updated>2026-11-23T07:10:29.081Z</updated>
   </entry>
   <entry>
     <author>
@@ -318,6 +318,6 @@
     <published>2026-10-03T16:00:00.000Z</published>
     <summary>本系列第7篇。深入 LangGraph 源码，逐层拆解状态图模型、节点执行机制、检查点持久化与流式执行原理，并用一个&quot;钓鱼日记鱼获数据提取 Agent&quot;展示真实落地。</summary>
     <title>ByteFisher AI 工程化深度实战（七）：Agent 框架源码剖析——LangGraph</title>
-    <updated>2026-11-23T06:37:48.954Z</updated>
+    <updated>2026-11-23T07:10:29.083Z</updated>
   </entry>
 </feed>
