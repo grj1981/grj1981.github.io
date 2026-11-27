@@ -5,8 +5,10 @@
   var API_URL = '/api/site-stats';
   var EVENT_URL = '/api/site-stats-event';
   var SNAPSHOT_URL = '/api/site-stats-local.json';
+  var PREVIEW_API_URL = 'https://api.bytefisher.top/api/site-stats';
   var VISITOR_KEY = 'bytefisher_site_visitor';
   var LAST_STATS_KEY = 'bytefisher_site_stats';
+  var PREVIEW_KEY = 'bytefisher_stats_preview';
   var TIMEOUT_MS = 4000;
   var EVENT_TIMEOUT_MS = 10000;
   var CACHE_TTL_MS = 10 * 60 * 1000;
@@ -77,6 +79,24 @@
     return location.hostname === 'localhost' ||
       location.hostname === '127.0.0.1' ||
       location.hostname === '[::1]';
+  }
+
+  function isPreviewEnabled() {
+    if (!isLocalPreview()) return false;
+    try {
+      var flag = new URLSearchParams(location.search || '').get('stats-preview');
+      if (flag === '0') {
+        sessionStorage.setItem(PREVIEW_KEY, '0');
+        return false;
+      }
+      if (flag === '1') {
+        sessionStorage.removeItem(PREVIEW_KEY);
+        return true;
+      }
+      return sessionStorage.getItem(PREVIEW_KEY) !== '0';
+    } catch (error) {
+      return true;
+    }
   }
 
   function readLastStats() {
@@ -156,6 +176,7 @@
     var timer = controller ? setTimeout(function() {
       controller.abort();
     }, TIMEOUT_MS) : null;
+    if (timer && timer.unref) timer.unref();
 
     return fetch(API_URL, {
       method: 'GET',
@@ -180,10 +201,65 @@
       });
   }
 
+  function loadPreviewStats() {
+    var path = normalizePath(location.pathname);
+    var url = PREVIEW_API_URL + '?path=' + encodeURIComponent(path);
+    var controller = window.AbortController ? new AbortController() : null;
+    var timer = controller ? setTimeout(function() {
+      controller.abort();
+    }, TIMEOUT_MS) : null;
+    if (timer && timer.unref) timer.unref();
+
+    return fetch(url, {
+      method: 'GET',
+      cache: 'no-store',
+      signal: controller ? controller.signal : undefined
+    })
+      .then(function(res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function(payload) {
+        if (!payload || payload.errno || !payload.data) {
+          throw new Error('Invalid preview response');
+        }
+        setAuthoritativeStats(payload.data, false);
+        if (payload.data.paths) dispatchPathCounts(payload.data.paths);
+      })
+      .catch(function(error) {
+        console.warn('Local preview stats unavailable:', error);
+        fetchSnapshot();
+      })
+      .finally(function() {
+        if (timer) clearTimeout(timer);
+      });
+  }
+
+  function normalizePath(value) {
+    var path = String(value || '');
+    try {
+      path = decodeURIComponent(path);
+    } catch (error) {}
+    if (!path) return '/';
+    path = path.replace(/\/index\.html$/, '/');
+    if (path.charAt(path.length - 1) !== '/') path += '/';
+    return path;
+  }
+
+  function dispatchPathCounts(paths) {
+    if (!paths || typeof paths !== 'object') return;
+    window.__bytefisherPathCounts = paths;
+    try {
+      window.dispatchEvent(new CustomEvent('bytefisher:pathview', {
+        detail: { paths: paths }
+      }));
+    } catch (error) {}
+  }
+
   function createVisitEvent() {
     return {
       view: randomId(),
-      path: location.pathname
+      path: normalizePath(location.pathname)
     };
   }
 
@@ -193,6 +269,7 @@
       flushTimer = null;
       flushBatch(false);
     }, FLUSH_DELAY_MS);
+    if (flushTimer && flushTimer.unref) flushTimer.unref();
   }
 
   function settleBatch(count, uvCount) {
@@ -255,6 +332,7 @@
     var timer = controller ? setTimeout(function() {
       controller.abort();
     }, EVENT_TIMEOUT_MS) : null;
+    if (timer && timer.unref) timer.unref();
 
     fetch(EVENT_URL, {
       method: 'POST',
@@ -271,9 +349,13 @@
       })
       .then(function(payload) {
         settleBatch(batch.length, batchUv);
-        if (payload && !payload.errno && payload.data &&
-            payload.data.pv != null && payload.data.uv != null) {
-          setAuthoritativeStats(payload.data, true);
+        if (payload && !payload.errno && payload.data) {
+          if (payload.data.pv != null && payload.data.uv != null) {
+            setAuthoritativeStats(payload.data, true);
+          }
+          if (payload.data.paths) {
+            dispatchPathCounts(payload.data.paths);
+          }
         }
         flushAgain = pendingBatch.length >= BATCH_SIZE;
       })
@@ -313,14 +395,28 @@
     showContainer('site_stats_container_uv');
     showContainer('site_stats_container_pv');
 
+    if (isPreviewEnabled()) {
+      loadPreviewStats();
+      return;
+    }
+
     var cached = readLastStats();
-    if (cached) {
+    if (isCacheFresh(cached)) {
       setAuthoritativeStats(cached, false);
     } else {
       fetchSnapshot();
     }
 
     queueVisitEvent();
+
+    // 文章页首屏立即上报一次，尽快拿到该文章的实时阅读数
+    if (
+      pendingBatch.length &&
+      typeof document.querySelector === 'function' &&
+      document.querySelector('.waline-visitor-count')
+    ) {
+      flushBatch(false);
+    }
   }
 
   function bindPjax() {
@@ -340,9 +436,15 @@
 
   function startAutoRefresh() {
     if (window.__bytefisherStatsTimer) return;
-    window.__bytefisherStatsTimer = setInterval(function() {
+    var timer = setInterval(function() {
+      if (isPreviewEnabled()) {
+        loadPreviewStats();
+        return;
+      }
       if (!isLocalPreview() && pendingPv === 0) refreshStats(true);
     }, REFRESH_INTERVAL_MS);
+    if (timer && timer.unref) timer.unref();
+    window.__bytefisherStatsTimer = timer;
   }
 
   function init() {

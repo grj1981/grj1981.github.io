@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://img.bytefisher.top/album/screenshots/HiKoygV.webp">
 <meta property="og:image" content="https://img.bytefisher.top/album/screenshots/HiKoKKl.webp">
 <meta property="article:published_time" content="2023-06-29T10:04:52.000Z">
-<meta property="article:modified_time" content="2026-11-27T00:29:24.144Z">
+<meta property="article:modified_time" content="2026-11-27T05:17:26.674Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="Hexo博客搭建">
 <meta property="article:tag" content="Next订阅微信公众号">
@@ -53,7 +53,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2023/06/29/Next%E4%B8%BB%E9%A2%98%E6%96%B0%E5%A2%9E%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E4%BA%8C%E7%BB%B4%E7%A0%81/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Next主题新增微信公众号二维码","description":"Next订阅微信公众号、Hexo博客搭建: 从公众号管理后台下载公众号二维码图片，如下图所示。将选中的图片放入主题目录下的./themes/next/source/images/目录中，并将图片改名为wechat-qcode.jpg。","url":"https://www.bytefisher.top/2023/06/29/Next主题新增微信公众号二维码/","datePublished":"2023-06-29T10:04:52.000Z","dateModified":"2026-11-27T00:29:24.144Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/06/29/Next主题新增微信公众号二维码/"},"keywords":"series:Hexo博客搭建, Hexo博客搭建, Next订阅微信公众号"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Next主题新增微信公众号二维码","description":"Next订阅微信公众号、Hexo博客搭建: 从公众号管理后台下载公众号二维码图片，如下图所示。将选中的图片放入主题目录下的./themes/next/source/images/目录中，并将图片改名为wechat-qcode.jpg。","url":"https://www.bytefisher.top/2023/06/29/Next主题新增微信公众号二维码/","datePublished":"2023-06-29T10:04:52.000Z","dateModified":"2026-11-27T05:17:26.674Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2023/06/29/Next主题新增微信公众号二维码/"},"keywords":"series:Hexo博客搭建, Hexo博客搭建, Next订阅微信公众号"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"博客实战","item":"https://www.bytefisher.top/categories/博客实战/"},{"@type":"ListItem","position":3,"name":"Next主题新增微信公众号二维码"}]}</script>
 
 
@@ -559,7 +559,7 @@
           <span id="site_stats_value_pv">-</span>
       </span>
     </span>
-  <script src="/js/site-stats.js?v=20261116-site-stats-batch"></script>
+  <script src="/js/site-stats.js?v=20261127-site-stats-preview"></script>
 </div>
 
 
@@ -734,54 +734,40 @@ window.addEventListener('pjax:success', () => {
   var el = document.querySelector('#waline-comments');
   if (!el) return;
 
-  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
-
   function normalizePath(value) {
     var path = String(value || '');
     try {
       path = decodeURIComponent(path);
     } catch (e) {}
     if (!path) return '/';
+    path = path.replace(/\/index\.html$/, '/');
     if (path.charAt(path.length - 1) !== '/') path += '/';
     return path;
   }
 
-  function getPostPath() {
-    var pathEl = document.querySelector('.waline-visitor-count');
-    var raw = pathEl && pathEl.getAttribute('data-path');
-    return normalizePath(raw || location.pathname);
-  }
-
-  function updateCount(postPath) {
+  function renderPathCount(paths) {
+    if (!paths) return;
     var countEls = document.querySelectorAll('.waline-visitor-count');
     if (!countEls.length) return;
     countEls.forEach(function(countEl) {
       var raw = countEl.getAttribute('data-path');
-      if (!raw) return;
-      var path = normalizePath(raw);
-      if (path !== postPath) return;
-      fetch(baseURL + '/api/article?path=' + encodeURIComponent(path) + '&type=time')
-        .then(function(r) { return r.ok ? r.json() : null; })
-        .then(function(json) {
-          if (json && json.data && json.data[0] && json.data[0].time != null) {
-            countEl.innerText = json.data[0].time;
-          }
-        }).catch(function(){});
+      var path = normalizePath(raw || location.pathname);
+      if (paths[path] != null) {
+        countEl.innerText = paths[path];
+      }
     });
   }
 
-  var postPath = getPostPath();
-
-  // 记录阅读量（只发一次，不阻塞评论区懒加载）
-  fetch(baseURL + '/api/article', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ path: postPath })
-  }).then(function() {
-    updateCount(postPath);
-  }).catch(function() {
-    updateCount(postPath);
-  });
+  // 阅读量由 site-stats 批量上报后回传，不再请求 Waline
+  if (!window.__bytefisherPathViewBound) {
+    window.__bytefisherPathViewBound = true;
+    window.addEventListener('bytefisher:pathview', function(event) {
+      if (event && event.detail) renderPathCount(event.detail.paths);
+    });
+  }
+  if (window.__bytefisherPathCounts) {
+    renderPathCount(window.__bytefisherPathCounts);
+  }
 
   // 评论区滚动到可见范围内才加载，减少无谓的评论请求
   NexT.utils.loadComments(el, function() {
@@ -864,7 +850,7 @@ window.addEventListener('pjax:success', () => {
 
 <script data-pjax>
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?v=20261116-site-stats-batch', {
+  navigator.serviceWorker.register('/sw.js?v=20261127-site-stats-preview', {
     updateViaCache: 'none'
   }).then(function(reg) {
     reg.update(); // Force SW update check on each page load

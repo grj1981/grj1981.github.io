@@ -40,7 +40,7 @@
 <meta property="og:description" content="本文详细讲解标准库与文件 I&#x2F;O，涵盖Lua、教程等核心知识点。「Lua基础教程」系列第14篇，共15篇。适合Lua脚本语言学习者。附完整代码示例与实战技巧。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-06-14T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-11-27T00:29:24.144Z">
+<meta property="article:modified_time" content="2026-11-27T05:17:26.674Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="Lua">
 <meta property="article:tag" content="series:Lua基础教程">
@@ -50,7 +50,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2025/06/14/Lua%E6%95%99%E7%A8%8B-14-%E6%A0%87%E5%87%86%E5%BA%93%E4%B8%8E%E6%96%87%E4%BB%B6IO/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"标准库与文件 I/O","description":"本文详细讲解标准库与文件 I/O，涵盖Lua、教程等核心知识点。「Lua基础教程」系列第14篇，共15篇。适合Lua脚本语言学习者。附完整代码示例与实战技巧。","url":"https://www.bytefisher.top/2025/06/14/Lua教程-14-标准库与文件IO/","datePublished":"2025-06-14T00:00:00.000Z","dateModified":"2026-11-27T00:29:24.144Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/06/14/Lua教程-14-标准库与文件IO/"},"keywords":"教程, Lua, series:Lua基础教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"标准库与文件 I/O","description":"本文详细讲解标准库与文件 I/O，涵盖Lua、教程等核心知识点。「Lua基础教程」系列第14篇，共15篇。适合Lua脚本语言学习者。附完整代码示例与实战技巧。","url":"https://www.bytefisher.top/2025/06/14/Lua教程-14-标准库与文件IO/","datePublished":"2025-06-14T00:00:00.000Z","dateModified":"2026-11-27T05:17:26.674Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2025/06/14/Lua教程-14-标准库与文件IO/"},"keywords":"教程, Lua, series:Lua基础教程"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"Lua","item":"https://www.bytefisher.top/categories/Lua/"},{"@type":"ListItem","position":3,"name":"标准库与文件 I/O"}]}</script>
 
 
@@ -688,7 +688,7 @@
           <span id="site_stats_value_pv">-</span>
       </span>
     </span>
-  <script src="/js/site-stats.js?v=20261116-site-stats-batch"></script>
+  <script src="/js/site-stats.js?v=20261127-site-stats-preview"></script>
 </div>
 
 
@@ -863,54 +863,40 @@ window.addEventListener('pjax:success', () => {
   var el = document.querySelector('#waline-comments');
   if (!el) return;
 
-  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
-
   function normalizePath(value) {
     var path = String(value || '');
     try {
       path = decodeURIComponent(path);
     } catch (e) {}
     if (!path) return '/';
+    path = path.replace(/\/index\.html$/, '/');
     if (path.charAt(path.length - 1) !== '/') path += '/';
     return path;
   }
 
-  function getPostPath() {
-    var pathEl = document.querySelector('.waline-visitor-count');
-    var raw = pathEl && pathEl.getAttribute('data-path');
-    return normalizePath(raw || location.pathname);
-  }
-
-  function updateCount(postPath) {
+  function renderPathCount(paths) {
+    if (!paths) return;
     var countEls = document.querySelectorAll('.waline-visitor-count');
     if (!countEls.length) return;
     countEls.forEach(function(countEl) {
       var raw = countEl.getAttribute('data-path');
-      if (!raw) return;
-      var path = normalizePath(raw);
-      if (path !== postPath) return;
-      fetch(baseURL + '/api/article?path=' + encodeURIComponent(path) + '&type=time')
-        .then(function(r) { return r.ok ? r.json() : null; })
-        .then(function(json) {
-          if (json && json.data && json.data[0] && json.data[0].time != null) {
-            countEl.innerText = json.data[0].time;
-          }
-        }).catch(function(){});
+      var path = normalizePath(raw || location.pathname);
+      if (paths[path] != null) {
+        countEl.innerText = paths[path];
+      }
     });
   }
 
-  var postPath = getPostPath();
-
-  // 记录阅读量（只发一次，不阻塞评论区懒加载）
-  fetch(baseURL + '/api/article', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ path: postPath })
-  }).then(function() {
-    updateCount(postPath);
-  }).catch(function() {
-    updateCount(postPath);
-  });
+  // 阅读量由 site-stats 批量上报后回传，不再请求 Waline
+  if (!window.__bytefisherPathViewBound) {
+    window.__bytefisherPathViewBound = true;
+    window.addEventListener('bytefisher:pathview', function(event) {
+      if (event && event.detail) renderPathCount(event.detail.paths);
+    });
+  }
+  if (window.__bytefisherPathCounts) {
+    renderPathCount(window.__bytefisherPathCounts);
+  }
 
   // 评论区滚动到可见范围内才加载，减少无谓的评论请求
   NexT.utils.loadComments(el, function() {
@@ -993,7 +979,7 @@ window.addEventListener('pjax:success', () => {
 
 <script data-pjax>
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?v=20261116-site-stats-batch', {
+  navigator.serviceWorker.register('/sw.js?v=20261127-site-stats-preview', {
     updateViaCache: 'none'
   }).then(function(reg) {
     reg.update(); // Force SW update check on each page load

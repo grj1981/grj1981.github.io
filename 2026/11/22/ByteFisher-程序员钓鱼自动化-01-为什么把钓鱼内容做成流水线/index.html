@@ -40,7 +40,7 @@
 <meta property="og:description" content="本系列第1篇，共12篇。从&quot;出钓一次要花三四小时做内容&quot;的真实痛点出发，拆解我博客上真实运行的钓鱼内容流水线：速记、日记母版、视频方案、发布回填、数据复盘五个阶段，四个 Python 脚本与三份数据资产如何衔接，并给出整个系列 12 篇的路线图。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-21T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-11-27T00:29:24.134Z">
+<meta property="article:modified_time" content="2026-11-27T05:17:26.667Z">
 <meta property="article:author" content="淡水鱼">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="series:程序员钓鱼自动化教程">
@@ -50,7 +50,7 @@
 
 <link rel="canonical" href="https://www.bytefisher.top/2026/11/22/ByteFisher-%E7%A8%8B%E5%BA%8F%E5%91%98%E9%92%93%E9%B1%BC%E8%87%AA%E5%8A%A8%E5%8C%96-01-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%8A%E9%92%93%E9%B1%BC%E5%86%85%E5%AE%B9%E5%81%9A%E6%88%90%E6%B5%81%E6%B0%B4%E7%BA%BF/">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"程序员钓鱼自动化（一）：为什么把钓鱼内容做成流水线","description":"本系列第1篇，共12篇。从\\\"出钓一次要花三四小时做内容\\\"的真实痛点出发，拆解我博客上真实运行的钓鱼内容流水线：速记、日记母版、视频方案、发布回填、数据复盘五个阶段，四个 Python 脚本与三份数据资产如何衔接，并给出整个系列 12 篇的路线图。","url":"https://www.bytefisher.top/2026/11/22/ByteFisher-程序员钓鱼自动化-01-为什么把钓鱼内容做成流水线/","datePublished":"2026-11-21T16:00:00.000Z","dateModified":"2026-11-27T00:29:24.134Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/11/22/ByteFisher-程序员钓鱼自动化-01-为什么把钓鱼内容做成流水线/"},"keywords":"AI, 教程, series:程序员钓鱼自动化教程"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"程序员钓鱼自动化（一）：为什么把钓鱼内容做成流水线","description":"本系列第1篇，共12篇。从\\\"出钓一次要花三四小时做内容\\\"的真实痛点出发，拆解我博客上真实运行的钓鱼内容流水线：速记、日记母版、视频方案、发布回填、数据复盘五个阶段，四个 Python 脚本与三份数据资产如何衔接，并给出整个系列 12 篇的路线图。","url":"https://www.bytefisher.top/2026/11/22/ByteFisher-程序员钓鱼自动化-01-为什么把钓鱼内容做成流水线/","datePublished":"2026-11-21T16:00:00.000Z","dateModified":"2026-11-27T05:17:26.667Z","author":{"@type":"Person","name":"淡水鱼"},"publisher":{"@type":"Organization","name":"ByteFisher","logo":{"@type":"ImageObject","url":"https://www.bytefisher.top/images/avatar.webp"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.bytefisher.top/2026/11/22/ByteFisher-程序员钓鱼自动化-01-为什么把钓鱼内容做成流水线/"},"keywords":"AI, 教程, series:程序员钓鱼自动化教程"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ByteFisher","item":"https://www.bytefisher.top"},{"@type":"ListItem","position":2,"name":"AI","item":"https://www.bytefisher.top/categories/AI/"},{"@type":"ListItem","position":3,"name":"程序员钓鱼自动化（一）：为什么把钓鱼内容做成流水线"}]}</script>
 
 
@@ -657,7 +657,7 @@
           <span id="site_stats_value_pv">-</span>
       </span>
     </span>
-  <script src="/js/site-stats.js?v=20261116-site-stats-batch"></script>
+  <script src="/js/site-stats.js?v=20261127-site-stats-preview"></script>
 </div>
 
 
@@ -832,54 +832,40 @@ window.addEventListener('pjax:success', () => {
   var el = document.querySelector('#waline-comments');
   if (!el) return;
 
-  var baseURL = 'https://waline.bytefisher.top/'.replace(/\/+$/, '');
-
   function normalizePath(value) {
     var path = String(value || '');
     try {
       path = decodeURIComponent(path);
     } catch (e) {}
     if (!path) return '/';
+    path = path.replace(/\/index\.html$/, '/');
     if (path.charAt(path.length - 1) !== '/') path += '/';
     return path;
   }
 
-  function getPostPath() {
-    var pathEl = document.querySelector('.waline-visitor-count');
-    var raw = pathEl && pathEl.getAttribute('data-path');
-    return normalizePath(raw || location.pathname);
-  }
-
-  function updateCount(postPath) {
+  function renderPathCount(paths) {
+    if (!paths) return;
     var countEls = document.querySelectorAll('.waline-visitor-count');
     if (!countEls.length) return;
     countEls.forEach(function(countEl) {
       var raw = countEl.getAttribute('data-path');
-      if (!raw) return;
-      var path = normalizePath(raw);
-      if (path !== postPath) return;
-      fetch(baseURL + '/api/article?path=' + encodeURIComponent(path) + '&type=time')
-        .then(function(r) { return r.ok ? r.json() : null; })
-        .then(function(json) {
-          if (json && json.data && json.data[0] && json.data[0].time != null) {
-            countEl.innerText = json.data[0].time;
-          }
-        }).catch(function(){});
+      var path = normalizePath(raw || location.pathname);
+      if (paths[path] != null) {
+        countEl.innerText = paths[path];
+      }
     });
   }
 
-  var postPath = getPostPath();
-
-  // 记录阅读量（只发一次，不阻塞评论区懒加载）
-  fetch(baseURL + '/api/article', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ path: postPath })
-  }).then(function() {
-    updateCount(postPath);
-  }).catch(function() {
-    updateCount(postPath);
-  });
+  // 阅读量由 site-stats 批量上报后回传，不再请求 Waline
+  if (!window.__bytefisherPathViewBound) {
+    window.__bytefisherPathViewBound = true;
+    window.addEventListener('bytefisher:pathview', function(event) {
+      if (event && event.detail) renderPathCount(event.detail.paths);
+    });
+  }
+  if (window.__bytefisherPathCounts) {
+    renderPathCount(window.__bytefisherPathCounts);
+  }
 
   // 评论区滚动到可见范围内才加载，减少无谓的评论请求
   NexT.utils.loadComments(el, function() {
@@ -962,7 +948,7 @@ window.addEventListener('pjax:success', () => {
 
 <script data-pjax>
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?v=20261116-site-stats-batch', {
+  navigator.serviceWorker.register('/sw.js?v=20261127-site-stats-preview', {
     updateViaCache: 'none'
   }).then(function(reg) {
     reg.update(); // Force SW update check on each page load
