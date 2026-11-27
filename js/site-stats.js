@@ -99,6 +99,18 @@
     }
   }
 
+  function isArticlePage() {
+    var type = null;
+    if (typeof document.querySelector === 'function') {
+      var content = document.querySelector('.content');
+      type = content && content.getAttribute
+        ? content.getAttribute('data-page-type')
+        : null;
+    }
+    if (type) return type === 'post';
+    return !!(window.CONFIG && window.CONFIG.page && window.CONFIG.page.isPost);
+  }
+
   function readLastStats() {
     try {
       var payload = JSON.parse(localStorage.getItem(LAST_STATS_KEY) || '');
@@ -348,14 +360,15 @@
         return res.json();
       })
       .then(function(payload) {
+        if (!payload || payload.errno || !payload.data) {
+          throw new Error('Site stats event rejected');
+        }
         settleBatch(batch.length, batchUv);
-        if (payload && !payload.errno && payload.data) {
-          if (payload.data.pv != null && payload.data.uv != null) {
-            setAuthoritativeStats(payload.data, true);
-          }
-          if (payload.data.paths) {
-            dispatchPathCounts(payload.data.paths);
-          }
+        if (payload.data.pv != null && payload.data.uv != null) {
+          setAuthoritativeStats(payload.data, true);
+        }
+        if (payload.data.paths) {
+          dispatchPathCounts(payload.data.paths);
         }
         flushAgain = pendingBatch.length >= BATCH_SIZE;
       })
@@ -410,11 +423,7 @@
     queueVisitEvent();
 
     // 文章页首屏立即上报一次，尽快拿到该文章的实时阅读数
-    if (
-      pendingBatch.length &&
-      typeof document.querySelector === 'function' &&
-      document.querySelector('.waline-visitor-count')
-    ) {
+    if (pendingBatch.length && isArticlePage()) {
       flushBatch(false);
     }
   }

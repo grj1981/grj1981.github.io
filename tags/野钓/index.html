@@ -243,7 +243,7 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content tag" data-page-type="page">
             
 
   
@@ -493,7 +493,7 @@
           <span id="site_stats_value_pv">-</span>
       </span>
     </span>
-  <script src="/js/site-stats.js?v=20261127-site-stats-preview"></script>
+  <script src="/js/site-stats.js?v=20261127-site-stats-ack"></script>
 </div>
 
 
@@ -784,7 +784,7 @@ window.addEventListener('pjax:success', () => {
 
 <script data-pjax>
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?v=20261127-site-stats-preview', {
+  navigator.serviceWorker.register('/sw.js?v=20261127-site-stats-ack', {
     updateViaCache: 'none'
   }).then(function(reg) {
     reg.update(); // Force SW update check on each page load

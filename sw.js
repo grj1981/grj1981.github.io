@@ -1,5 +1,5 @@
 // Stable cache version: bump this value when cache behavior or core assets change.
-var CACHE_VERSION = '20261127-site-stats-preview';
+var CACHE_VERSION = '20261127-site-stats-ack';
 var CACHE_PREFIX = 'bytefisher-';
 var CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
 var urlsToCache = [
